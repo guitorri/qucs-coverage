@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/dataset.h</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/dataset.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">2</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">0</td>
@@ -130,8 +137,8 @@
 <span class="lineNum">      59 </span>                :            :   void printVariable (qucs::vector *, FILE *);
 <a name="60"><span class="lineNum">      60 </span>                :            :   qucs::vector * findDependency (const char *);</a>
 <a name="61"><span class="lineNum">      61 </span>                :            :   qucs::vector * findVariable (const char *);</a>
-<span class="lineNum">      62 </span>                :<span class="lineCov">        180 :   qucs::vector * getDependencies (void) { return dependencies; }</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">        180 :   qucs::vector * getVariables (void) { return variables; }</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">        206 :   qucs::vector * getDependencies (void) { return dependencies; }</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">        206 :   qucs::vector * getVariables (void) { return variables; }</span>
 <span class="lineNum">      64 </span>                :            :   int isDependency (qucs::vector *);
 <span class="lineNum">      65 </span>                :            :   int isVariable (qucs::vector *);
 <span class="lineNum">      66 </span>                :            :   qucs::vector * findOrigin (char *);

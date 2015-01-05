@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/acsolver.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/acsolver.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">89</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">60.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">71</td>
@@ -113,13 +120,13 @@
 <span class="lineNum">      42 </span>                :            : namespace qucs {
 <a name="43"><span class="lineNum">      43 </span>                :            : </a>
 <span class="lineNum">      44 </span>                :            : // Constructor creates an unnamed instance of the acsolver class.
-<span class="lineNum">      45 </span>                :<span class="lineCov">         16 : acsolver::acsolver () : nasolver&lt;nr_complex_t&gt; () {</span>
-<span class="lineNum">      46 </span>                :<span class="lineCov">         16 :   swp = NULL;</span>
-<span class="lineNum">      47 </span>                :<span class="lineCov">         16 :   type = ANALYSIS_AC;</span>
-<span class="lineNum">      48 </span>                :<span class="lineCov">         16 :   setDescription (&quot;AC&quot;);</span>
-<span class="lineNum">      49 </span>                :<span class="lineCov">         16 :   xn = NULL;</span>
-<span class="lineNum">      50 </span>                :<span class="lineCov">         16 :   noise = 0;</span>
-<span class="lineNum">      51 </span>                :<span class="lineCov">         16 : }</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">         18 : acsolver::acsolver () : nasolver&lt;nr_complex_t&gt; () {</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">         18 :   swp = NULL;</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">         18 :   type = ANALYSIS_AC;</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">         18 :   setDescription (&quot;AC&quot;);</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">         18 :   xn = NULL;</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">         18 :   noise = 0;</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">         18 : }</span>
 <a name="52"><span class="lineNum">      52 </span>                :            : </a>
 <span class="lineNum">      53 </span>                :            : // Constructor creates a named instance of the acsolver class.
 <span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 : acsolver::acsolver (char * n) : nasolver&lt;nr_complex_t&gt; (n) {</span>
@@ -131,13 +138,13 @@
 <span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="61"><span class="lineNum">      61 </span>                :            : </a>
 <span class="lineNum">      62 </span>                :            : // Destructor deletes the acsolver class object.
-<span class="lineNum">      63 </span>                :<span class="lineCov">         16 : acsolver::~acsolver () {</span>
-<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 0 was taken 16 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 16 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         16 :   if (swp) delete swp;</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 16 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      63 </span>                :<span class="lineCov">         18 : acsolver::~acsolver () {</span>
+<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         18 :   if (swp) delete swp;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
-<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 12 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         16 :   if (xn) delete xn;</span>
+<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchCov" title="Branch 1 was taken 12 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         18 :   if (xn) delete xn;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
-<span class="lineNum">      66 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 16 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         32 : }</span>
+<span class="lineNum">      66 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 18 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         36 : }</span>
 <span class="lineNum">      67 </span>                :            : 
 <a name="68"><span class="lineNum">      68 </span>                :            : /* The copy constructor creates a new instance of the acsolver class</a>
 <span class="lineNum">      69 </span>                :            :    based on the given acsolver object. */
@@ -153,27 +160,27 @@
 <span class="lineNum">      75 </span>                :            : 
 <a name="76"><span class="lineNum">      76 </span>                :            : /* This is the AC netlist solver.  It prepares the circuit list for</a>
 <span class="lineNum">      77 </span>                :            :    each requested frequency and solves it then. */
-<span class="lineNum">      78 </span>                :<span class="lineCov">        138 : int acsolver::solve (void) {</span>
-<span class="lineNum">      79 </span>                :<span class="lineCov">        138 :   runs++;</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">        149 : int acsolver::solve (void) {</span>
+<span class="lineNum">      79 </span>                :<span class="lineCov">        149 :   runs++;</span>
 <span class="lineNum">      80 </span>                :            : 
 <span class="lineNum">      81 </span>                :            :   // run additional noise analysis ?
-<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 1 was taken 22 times"> + </span><span class="branchCov" title="Branch 2 was taken 116 times"> + </span>]:<span class="lineCov">        138 :   noise = !strcmp (getPropertyString (&quot;Noise&quot;), &quot;yes&quot;) ? 1 : 0;</span>
+<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 1 was taken 33 times"> + </span><span class="branchCov" title="Branch 2 was taken 116 times"> + </span>]:<span class="lineCov">        149 :   noise = !strcmp (getPropertyString (&quot;Noise&quot;), &quot;yes&quot;) ? 1 : 0;</span>
 <span class="lineNum">      83 </span>                :            : 
 <span class="lineNum">      84 </span>                :            :   // create frequency sweep if necessary
-<span class="lineNum">      85 </span>        [<span class="branchCov" title="Branch 0 was taken 16 times"> + </span><span class="branchCov" title="Branch 1 was taken 122 times"> + </span>]:<span class="lineCov">        138 :   if (swp == NULL) {</span>
-<span class="lineNum">      86 </span>                :<span class="lineCov">         16 :     swp = createSweep (&quot;acfrequency&quot;);</span>
+<span class="lineNum">      85 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 131 times"> + </span>]:<span class="lineCov">        149 :   if (swp == NULL) {</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">         18 :     swp = createSweep (&quot;acfrequency&quot;);</span>
 <span class="lineNum">      87 </span>                :            :   }
 <span class="lineNum">      88 </span>                :            : 
 <span class="lineNum">      89 </span>                :            :   // initialize node voltages, first guess for non-linear circuits and
 <span class="lineNum">      90 </span>                :            :   // generate extra circuits if necessary
-<span class="lineNum">      91 </span>                :<span class="lineCov">        138 :   init ();</span>
-<span class="lineNum">      92 </span>                :<span class="lineCov">        138 :   setCalculation ((calculate_func_t) &amp;calc);</span>
-<span class="lineNum">      93 </span>                :<span class="lineCov">        138 :   solve_pre ();</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">        149 :   init ();</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">        149 :   setCalculation ((calculate_func_t) &amp;calc);</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        149 :   solve_pre ();</span>
 <span class="lineNum">      94 </span>                :            : 
-<span class="lineNum">      95 </span>                :<span class="lineCov">        138 :   swp-&gt;reset ();</span>
-<span class="lineNum">      96 </span>        [<span class="branchCov" title="Branch 1 was taken 5661 times"> + </span><span class="branchCov" title="Branch 2 was taken 138 times"> + </span>]:<span class="lineCov">       5799 :   for (int i = 0; i &lt; swp-&gt;getSize (); i++) {</span>
-<span class="lineNum">      97 </span>                :<span class="lineCov">       5661 :     freq = swp-&gt;next ();</span>
-<span class="lineNum">      98 </span>        [<span class="branchCov" title="Branch 0 was taken 2741 times"> + </span><span class="branchCov" title="Branch 1 was taken 2920 times"> + </span>]:<span class="lineCov">       5661 :     if (progress) logprogressbar (i, swp-&gt;getSize (), 40);</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">        149 :   swp-&gt;reset ();</span>
+<span class="lineNum">      96 </span>        [<span class="branchCov" title="Branch 1 was taken 6662 times"> + </span><span class="branchCov" title="Branch 2 was taken 149 times"> + </span>]:<span class="lineCov">       6811 :   for (int i = 0; i &lt; swp-&gt;getSize (); i++) {</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">       6662 :     freq = swp-&gt;next ();</span>
+<span class="lineNum">      98 </span>        [<span class="branchCov" title="Branch 0 was taken 2832 times"> + </span><span class="branchCov" title="Branch 1 was taken 3830 times"> + </span>]:<span class="lineCov">       6662 :     if (progress) logprogressbar (i, swp-&gt;getSize (), 40);</span>
 <span class="lineNum">      99 </span>                :            : 
 <span class="lineNum">     100 </span>                :            : #if DEBUG &amp;&amp; 0
 <span class="lineNum">     101 </span>                :            :     logprint (LOG_STATUS, &quot;NOTIFY: %s: solving netlist for f = %e\n&quot;,
@@ -181,131 +188,131 @@
 <span class="lineNum">     103 </span>                :            : #endif
 <span class="lineNum">     104 </span>                :            : 
 <span class="lineNum">     105 </span>                :            :     // start the linear solver
-<span class="lineNum">     106 </span>                :<span class="lineCov">       5661 :     eqnAlgo = ALGO_LU_DECOMPOSITION;</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">       5661 :     solve_linear ();</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">       6662 :     eqnAlgo = ALGO_LU_DECOMPOSITION;</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">       6662 :     solve_linear ();</span>
 <span class="lineNum">     108 </span>                :            : 
 <span class="lineNum">     109 </span>                :            :     // compute noise if requested
-<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchCov" title="Branch 1 was taken 3659 times"> + </span>]:<span class="lineCov">       5661 :     if (noise) solve_noise ();</span>
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchCov" title="Branch 1 was taken 3659 times"> + </span>]:<span class="lineCov">       6662 :     if (noise) solve_noise ();</span>
 <span class="lineNum">     111 </span>                :            : 
 <span class="lineNum">     112 </span>                :            :     // save results
-<span class="lineNum">     113 </span>                :<span class="lineCov">       5661 :     saveAllResults (freq);</span>
+<span class="lineNum">     113 </span>                :<span class="lineCov">       6662 :     saveAllResults (freq);</span>
 <span class="lineNum">     114 </span>                :            :   }
-<span class="lineNum">     115 </span>                :<span class="lineCov">        138 :   solve_post ();</span>
-<span class="lineNum">     116 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 126 times"> + </span>]:<span class="lineCov">        138 :   if (progress) logprogressclear (40);</span>
-<span class="lineNum">     117 </span>                :<span class="lineCov">        138 :   return 0;</span>
+<span class="lineNum">     115 </span>                :<span class="lineCov">        149 :   solve_post ();</span>
+<span class="lineNum">     116 </span>        [<span class="branchCov" title="Branch 0 was taken 13 times"> + </span><span class="branchCov" title="Branch 1 was taken 136 times"> + </span>]:<span class="lineCov">        149 :   if (progress) logprogressclear (40);</span>
+<span class="lineNum">     117 </span>                :<span class="lineCov">        149 :   return 0;</span>
 <span class="lineNum">     118 </span>                :            : }
 <span class="lineNum">     119 </span>                :            : 
 <a name="120"><span class="lineNum">     120 </span>                :            : /* Goes through the list of circuit objects and runs its calcAC()</a>
 <span class="lineNum">     121 </span>                :            :    function. */
-<span class="lineNum">     122 </span>                :<span class="lineCov">       5661 : void acsolver::calc (acsolver * self) {</span>
-<span class="lineNum">     123 </span>                :<span class="lineCov">       5661 :   circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
-<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 1 was taken 60689 times"> + </span><span class="branchCov" title="Branch 2 was taken 5661 times"> + </span>]:<span class="lineCov">      66350 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
-<span class="lineNum">     125 </span>                :<span class="lineCov">      60689 :     c-&gt;calcAC (self-&gt;freq);</span>
-<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchCov" title="Branch 1 was taken 43581 times"> + </span>]:<span class="lineCov">      60689 :     if (self-&gt;noise) c-&gt;calcNoiseAC (self-&gt;freq);</span>
+<span class="lineNum">     122 </span>                :<span class="lineCov">       6662 : void acsolver::calc (acsolver * self) {</span>
+<span class="lineNum">     123 </span>                :<span class="lineCov">       6662 :   circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
+<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 1 was taken 69243 times"> + </span><span class="branchCov" title="Branch 2 was taken 6662 times"> + </span>]:<span class="lineCov">      75905 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">      69243 :     c-&gt;calcAC (self-&gt;freq);</span>
+<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchCov" title="Branch 1 was taken 43581 times"> + </span>]:<span class="lineCov">      69243 :     if (self-&gt;noise) c-&gt;calcNoiseAC (self-&gt;freq);</span>
 <span class="lineNum">     127 </span>                :            :   }
-<span class="lineNum">     128 </span>                :<span class="lineCov">       5661 : }</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">       6662 : }</span>
 <span class="lineNum">     129 </span>                :            : 
 <a name="130"><span class="lineNum">     130 </span>                :            : /* Goes through the list of circuit objects and runs its initAC()</a>
 <span class="lineNum">     131 </span>                :            :    function. */
-<span class="lineNum">     132 </span>                :<span class="lineCov">        138 : void acsolver::init (void) {</span>
-<span class="lineNum">     133 </span>                :<span class="lineCov">        138 :   circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     134 </span>        [<span class="branchCov" title="Branch 1 was taken 1159 times"> + </span><span class="branchCov" title="Branch 2 was taken 138 times"> + </span>]:<span class="lineCov">       1297 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
-<span class="lineNum">     135 </span>        [<span class="branchCov" title="Branch 1 was taken 26 times"> + </span><span class="branchCov" title="Branch 2 was taken 1133 times"> + </span>]:<span class="lineCov">       1159 :     if (c-&gt;isNonLinear ()) c-&gt;calcOperatingPoints ();</span>
-<span class="lineNum">     136 </span>                :<span class="lineCov">       1159 :     c-&gt;initAC ();</span>
-<span class="lineNum">     137 </span>        [<span class="branchCov" title="Branch 0 was taken 188 times"> + </span><span class="branchCov" title="Branch 1 was taken 971 times"> + </span>]:<span class="lineCov">       1159 :     if (noise) c-&gt;initNoiseAC ();</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">        149 : void acsolver::init (void) {</span>
+<span class="lineNum">     133 </span>                :<span class="lineCov">        149 :   circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     134 </span>        [<span class="branchCov" title="Branch 1 was taken 1253 times"> + </span><span class="branchCov" title="Branch 2 was taken 149 times"> + </span>]:<span class="lineCov">       1402 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
+<span class="lineNum">     135 </span>        [<span class="branchCov" title="Branch 1 was taken 26 times"> + </span><span class="branchCov" title="Branch 2 was taken 1227 times"> + </span>]:<span class="lineCov">       1253 :     if (c-&gt;isNonLinear ()) c-&gt;calcOperatingPoints ();</span>
+<span class="lineNum">     136 </span>                :<span class="lineCov">       1253 :     c-&gt;initAC ();</span>
+<span class="lineNum">     137 </span>        [<span class="branchCov" title="Branch 0 was taken 282 times"> + </span><span class="branchCov" title="Branch 1 was taken 971 times"> + </span>]:<span class="lineCov">       1253 :     if (noise) c-&gt;initNoiseAC ();</span>
 <span class="lineNum">     138 </span>                :            :   }
-<span class="lineNum">     139 </span>                :<span class="lineCov">        138 : }</span>
+<span class="lineNum">     139 </span>                :<span class="lineCov">        149 : }</span>
 <span class="lineNum">     140 </span>                :            : 
 <a name="141"><span class="lineNum">     141 </span>                :            : /* This function saves the results of a single solve() functionality</a>
 <span class="lineNum">     142 </span>                :            :    (for the given frequency) into the output dataset. */
-<span class="lineNum">     143 </span>                :<span class="lineCov">       5661 : void acsolver::saveAllResults (nr_double_t freq) {</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">       6662 : void acsolver::saveAllResults (nr_double_t freq) {</span>
 <span class="lineNum">     144 </span>                :            :   qucs::vector * f;
 <span class="lineNum">     145 </span>                :            :   // add current frequency to the dependency of the output dataset
-<span class="lineNum">     146 </span>        [<span class="branchCov" title="Branch 1 was taken 16 times"> + </span><span class="branchCov" title="Branch 2 was taken 5645 times"> + </span>]:<span class="lineCov">       5661 :   if ((f = data-&gt;findDependency (&quot;acfrequency&quot;)) == NULL) {</span>
-<span class="lineNum">     147 </span>        [<span class="branchCov" title="Branch 1 was taken 16 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         16 :     f = new qucs::vector (&quot;acfrequency&quot;);</span>
-<span class="lineNum">     148 </span>                :<span class="lineCov">         16 :     data-&gt;addDependency (f);</span>
+<span class="lineNum">     146 </span>        [<span class="branchCov" title="Branch 1 was taken 18 times"> + </span><span class="branchCov" title="Branch 2 was taken 6644 times"> + </span>]:<span class="lineCov">       6662 :   if ((f = data-&gt;findDependency (&quot;acfrequency&quot;)) == NULL) {</span>
+<span class="lineNum">     147 </span>        [<span class="branchCov" title="Branch 1 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         18 :     f = new qucs::vector (&quot;acfrequency&quot;);</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">         18 :     data-&gt;addDependency (f);</span>
 <span class="lineNum">     149 </span>                :            :   }
-<span class="lineNum">     150 </span>[<span class="branchCov" title="Branch 0 was taken 3075 times"> + </span><span class="branchCov" title="Branch 1 was taken 2586 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 3075 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       5661 :   if (runs == 1) f-&gt;add (freq);</span>
-<span class="lineNum">     151 </span>                :<span class="lineCov">       5661 :   saveResults (&quot;v&quot;, &quot;i&quot;, 0, f);</span>
+<span class="lineNum">     150 </span>[<span class="branchCov" title="Branch 0 was taken 3257 times"> + </span><span class="branchCov" title="Branch 1 was taken 3405 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 3257 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       6662 :   if (runs == 1) f-&gt;add (freq);</span>
+<span class="lineNum">     151 </span>                :<span class="lineCov">       6662 :   saveResults (&quot;v&quot;, &quot;i&quot;, 0, f);</span>
 <span class="lineNum">     152 </span>                :            : 
 <span class="lineNum">     153 </span>                :            :   // additionally save noise results if requested
-<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchCov" title="Branch 1 was taken 3659 times"> + </span>]:<span class="lineCov">       5661 :   if (noise) {</span>
-<span class="lineNum">     155 </span>                :<span class="lineCov">       2002 :     saveNoiseResults (f);</span>
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchCov" title="Branch 1 was taken 3659 times"> + </span>]:<span class="lineCov">       6662 :   if (noise) {</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">       3003 :     saveNoiseResults (f);</span>
 <span class="lineNum">     156 </span>                :            :   }
-<span class="lineNum">     157 </span>                :<span class="lineCov">       5661 : }</span>
+<span class="lineNum">     157 </span>                :<span class="lineCov">       6662 : }</span>
 <span class="lineNum">     158 </span>                :            : 
 <a name="159"><span class="lineNum">     159 </span>                :            : /* The function computes the final noise results and puts them into</a>
 <span class="lineNum">     160 </span>                :            :    the output dataset. */
-<span class="lineNum">     161 </span>                :<span class="lineCov">       2002 : void acsolver::saveNoiseResults (qucs::vector * f) {</span>
-<span class="lineNum">     162 </span>                :<span class="lineCov">       2002 :   int N = countNodes ();</span>
-<span class="lineNum">     163 </span>                :<span class="lineCov">       2002 :   int M = countVoltageSources ();</span>
-<span class="lineNum">     164 </span>        [<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchCov" title="Branch 1 was taken 2002 times"> + </span>]:<span class="lineCov">      19110 :   for (int r = 0; r &lt; N + M; r++) {</span>
+<span class="lineNum">     161 </span>                :<span class="lineCov">       3003 : void acsolver::saveNoiseResults (qucs::vector * f) {</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">       3003 :   int N = countNodes ();</span>
+<span class="lineNum">     163 </span>                :<span class="lineCov">       3003 :   int M = countVoltageSources ();</span>
+<span class="lineNum">     164 </span>        [<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchCov" title="Branch 1 was taken 3003 times"> + </span>]:<span class="lineCov">      28665 :   for (int r = 0; r &lt; N + M; r++) {</span>
 <span class="lineNum">     165 </span>                :            :     // renormalise the results
-<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 3 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      17108 :     x-&gt;set (r, fabs (xn-&gt;get (r) * sqrt (kB * T0)));</span>
+<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 3 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      25662 :     x-&gt;set (r, fabs (xn-&gt;get (r) * sqrt (kB * T0)));</span>
 <span class="lineNum">     167 </span>                :            :   }
 <span class="lineNum">     168 </span>                :            : 
 <span class="lineNum">     169 </span>                :            :   // apply probe data
-<span class="lineNum">     170 </span>                :<span class="lineCov">       2002 :   circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 1 was taken 17108 times"> + </span><span class="branchCov" title="Branch 2 was taken 2002 times"> + </span>]:<span class="lineCov">      19110 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
-<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 1 was taken 15288 times"> + </span><span class="branchCov" title="Branch 2 was taken 1820 times"> + </span>]:<span class="lineCov">      17108 :     if (!c-&gt;isProbe ()) continue;</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">       3003 :   circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 1 was taken 25662 times"> + </span><span class="branchCov" title="Branch 2 was taken 3003 times"> + </span>]:<span class="lineCov">      28665 :   for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
+<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 1 was taken 22932 times"> + </span><span class="branchCov" title="Branch 2 was taken 2730 times"> + </span>]:<span class="lineCov">      25662 :     if (!c-&gt;isProbe ()) continue;</span>
 <span class="lineNum">     173 </span>                :            :     int np, nn;
 <span class="lineNum">     174 </span>                :            :     nr_double_t vp, vn;
-<span class="lineNum">     175 </span>                :<span class="lineCov">       1820 :     np = getNodeNr (c-&gt;getNode (NODE_1)-&gt;getName ());</span>
-<span class="lineNum">     176 </span>        [<span class="branchCov" title="Branch 0 was taken 1820 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1820 :     vp = np &gt; 0 ? xn-&gt;get (np - 1) : 0.0;</span>
-<span class="lineNum">     177 </span>                :<span class="lineCov">       1820 :     nn = getNodeNr (c-&gt;getNode (NODE_2)-&gt;getName ());</span>
-<span class="lineNum">     178 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1820 times"> + </span>]:<span class="lineCov">       1820 :     vn = nn &gt; 0 ? xn-&gt;get (nn - 1) : 0.0;</span>
-<span class="lineNum">     179 </span>                :<span class="lineCov">       1820 :     c-&gt;setOperatingPoint (&quot;Vr&quot;, fabs ((vp - vn) * sqrt (kB * T0)));</span>
-<span class="lineNum">     180 </span>                :<span class="lineCov">       1820 :     c-&gt;setOperatingPoint (&quot;Vi&quot;, 0.0);</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">       2730 :     np = getNodeNr (c-&gt;getNode (NODE_1)-&gt;getName ());</span>
+<span class="lineNum">     176 </span>        [<span class="branchCov" title="Branch 0 was taken 2730 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2730 :     vp = np &gt; 0 ? xn-&gt;get (np - 1) : 0.0;</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">       2730 :     nn = getNodeNr (c-&gt;getNode (NODE_2)-&gt;getName ());</span>
+<span class="lineNum">     178 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 2730 times"> + </span>]:<span class="lineCov">       2730 :     vn = nn &gt; 0 ? xn-&gt;get (nn - 1) : 0.0;</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">       2730 :     c-&gt;setOperatingPoint (&quot;Vr&quot;, fabs ((vp - vn) * sqrt (kB * T0)));</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">       2730 :     c-&gt;setOperatingPoint (&quot;Vi&quot;, 0.0);</span>
 <span class="lineNum">     181 </span>                :            :   }
 <span class="lineNum">     182 </span>                :            : 
-<span class="lineNum">     183 </span>                :<span class="lineCov">       2002 :   saveResults (&quot;vn&quot;, &quot;in&quot;, 0, f);</span>
-<span class="lineNum">     184 </span>                :<span class="lineCov">       2002 : }</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">       3003 :   saveResults (&quot;vn&quot;, &quot;in&quot;, 0, f);</span>
+<span class="lineNum">     184 </span>                :<span class="lineCov">       3003 : }</span>
 <span class="lineNum">     185 </span>                :            : 
 <a name="186"><span class="lineNum">     186 </span>                :            : /* This function runs the AC noise analysis.  It saves its results in</a>
 <span class="lineNum">     187 </span>                :            :    the 'xn' vector. */
-<span class="lineNum">     188 </span>                :<span class="lineCov">       2002 : void acsolver::solve_noise (void) {</span>
-<span class="lineNum">     189 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   int N = countNodes ();</span>
-<span class="lineNum">     190 </span>                :<span class="lineCov">       2002 :   int M = countVoltageSources ();</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">       3003 : void acsolver::solve_noise (void) {</span>
+<span class="lineNum">     189 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   int N = countNodes ();</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">       3003 :   int M = countVoltageSources ();</span>
 <span class="lineNum">     191 </span>                :            : 
 <span class="lineNum">     192 </span>                :            :   // save usual AC results
-<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   tvector&lt;nr_complex_t&gt; xsave = *x;</span>
+<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   tvector&lt;nr_complex_t&gt; xsave = *x;</span>
 <span class="lineNum">     194 </span>                :            : 
 <span class="lineNum">     195 </span>                :            :   // create the Cy matrix
-<span class="lineNum">     196 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   createNoiseMatrix ();</span>
+<span class="lineNum">     196 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   createNoiseMatrix ();</span>
 <span class="lineNum">     197 </span>                :            :   // create noise result vector if necessary
-<span class="lineNum">     198 </span>[<span class="branchCov" title="Branch 0 was taken 4 times"> + </span><span class="branchCov" title="Branch 1 was taken 1998 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       2002 :   if (xn == NULL) xn = new tvector&lt;nr_double_t&gt; (N + M);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]
+<span class="lineNum">     198 </span>[<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchCov" title="Branch 1 was taken 2997 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       3003 :   if (xn == NULL) xn = new tvector&lt;nr_double_t&gt; (N + M);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]
 <span class="lineNum">     199 </span>                :            : 
 <span class="lineNum">     200 </span>                :            :   // temporary result vector for transimpedances
-<span class="lineNum">     201 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   tvector&lt;nr_complex_t&gt; zn = tvector&lt;nr_complex_t&gt; (N + M);</span>
+<span class="lineNum">     201 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   tvector&lt;nr_complex_t&gt; zn = tvector&lt;nr_complex_t&gt; (N + M);</span>
 <span class="lineNum">     202 </span>                :            : 
 <span class="lineNum">     203 </span>                :            :   // create the MNA matrix once again and LU decompose the adjoint matrix
-<span class="lineNum">     204 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   createMatrix ();</span>
-<span class="lineNum">     205 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   A-&gt;transpose ();</span>
-<span class="lineNum">     206 </span>                :<span class="lineCov">       2002 :   eqnAlgo = ALGO_LU_FACTORIZATION_CROUT;</span>
-<span class="lineNum">     207 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   runMNA ();</span>
+<span class="lineNum">     204 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   createMatrix ();</span>
+<span class="lineNum">     205 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   A-&gt;transpose ();</span>
+<span class="lineNum">     206 </span>                :<span class="lineCov">       3003 :   eqnAlgo = ALGO_LU_FACTORIZATION_CROUT;</span>
+<span class="lineNum">     207 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   runMNA ();</span>
 <span class="lineNum">     208 </span>                :            : 
 <span class="lineNum">     209 </span>                :            :   // ensure skipping LU decomposition
-<span class="lineNum">     210 </span>                :<span class="lineCov">       2002 :   updateMatrix = 0;</span>
-<span class="lineNum">     211 </span>                :<span class="lineCov">       2002 :   convHelper = CONV_None;</span>
-<span class="lineNum">     212 </span>                :<span class="lineCov">       2002 :   eqnAlgo = ALGO_LU_SUBSTITUTION_CROUT;</span>
+<span class="lineNum">     210 </span>                :<span class="lineCov">       3003 :   updateMatrix = 0;</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">       3003 :   convHelper = CONV_None;</span>
+<span class="lineNum">     212 </span>                :<span class="lineCov">       3003 :   eqnAlgo = ALGO_LU_SUBSTITUTION_CROUT;</span>
 <span class="lineNum">     213 </span>                :            : 
 <span class="lineNum">     214 </span>                :            :   // compute noise voltage for each node (and voltage source)
-<span class="lineNum">     215 </span>        [<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchCov" title="Branch 1 was taken 2002 times"> + </span>]:<span class="lineCov">      19110 :   for (int i = 0; i &lt; N + M; i++) {</span>
-<span class="lineNum">     216 </span>        [<span class="branchCov" title="Branch 3 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      17108 :     z-&gt;set (0); z-&gt;set (i, -1); // modify right hand side appropriately</span>
-<span class="lineNum">     217 </span>        [<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      17108 :     runMNA ();                  // solve</span>
-<span class="lineNum">     218 </span>        [<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      17108 :     zn = *x;                    // save transimpedance vector</span>
+<span class="lineNum">     215 </span>        [<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchCov" title="Branch 1 was taken 3003 times"> + </span>]:<span class="lineCov">      28665 :   for (int i = 0; i &lt; N + M; i++) {</span>
+<span class="lineNum">     216 </span>        [<span class="branchCov" title="Branch 3 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      25662 :     z-&gt;set (0); z-&gt;set (i, -1); // modify right hand side appropriately</span>
+<span class="lineNum">     217 </span>        [<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      25662 :     runMNA ();                  // solve</span>
+<span class="lineNum">     218 </span>        [<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      25662 :     zn = *x;                    // save transimpedance vector</span>
 <span class="lineNum">     219 </span>                :            : 
 <span class="lineNum">     220 </span>                :            :     // compute actual noise voltage
-<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 0 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      17108 :     xn-&gt;set (i, sqrt (real (scalar (zn * (*C), conj (zn)))));</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 12 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>][<span class="branchCov" title="Branch 15 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>]
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 19 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 20 was not taken"> - </span>][<span class="branchCov" title="Branch 22 was taken 17108 times"> + </span><span class="branchNoCov" title="Branch 23 was not taken"> - </span>]
+<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 0 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      25662 :     xn-&gt;set (i, sqrt (real (scalar (zn * (*C), conj (zn)))));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 12 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>][<span class="branchCov" title="Branch 15 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 19 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 20 was not taken"> - </span>][<span class="branchCov" title="Branch 22 was taken 25662 times"> + </span><span class="branchNoCov" title="Branch 23 was not taken"> - </span>]
 <span class="lineNum">     222 </span>                :            :   }
 <span class="lineNum">     223 </span>                :            : 
 <span class="lineNum">     224 </span>                :            :   // restore usual AC results
-<span class="lineNum">     225 </span>        [<span class="branchCov" title="Branch 0 was taken 2002 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2002 :   *x = xsave;</span>
-<span class="lineNum">     226 </span>                :<span class="lineCov">       2002 : }</span>
+<span class="lineNum">     225 </span>        [<span class="branchCov" title="Branch 0 was taken 3003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3003 :   *x = xsave;</span>
+<span class="lineNum">     226 </span>                :<span class="lineCov">       3003 : }</span>
 <span class="lineNum">     227 </span>                :            : 
 <span class="lineNum">     228 </span>                :            : // properties
 <span class="lineNum">     229 </span>                :            : PROP_REQ [] = {

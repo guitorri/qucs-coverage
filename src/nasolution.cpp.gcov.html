@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/nasolution.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/nasolution.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">27</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">66.7 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">16</td>
@@ -104,8 +111,8 @@
 <span class="lineNum">      33 </span>                :            : 
 <a name="34"><span class="lineNum">      34 </span>                :            : // Constructor creates an instance of the nasolution class.</a>
 <span class="lineNum">      35 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      36 </span>                :<span class="lineCov">         89 : nasolution&lt;nr_type_t&gt;::nasolution () {</span>
-<span class="lineNum">      37 </span>                :<span class="lineCov">         89 : }</span>
+<span class="lineNum">      36 </span>                :<span class="lineCov">        103 : nasolution&lt;nr_type_t&gt;::nasolution () {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">        103 : }</span>
 <span class="lineNum">      38 </span>                :            : 
 <span class="lineNum">      39 </span>                :            : /* This copy constructor creates a instance of the nasolution class based
 <a name="40"><span class="lineNum">      40 </span>                :            :    on the given nasolution. */</a>
@@ -116,36 +123,36 @@
 <span class="lineNum">      45 </span>                :            : 
 <a name="46"><span class="lineNum">      46 </span>                :            : // Destructor deletes a nasolution object.</a>
 <span class="lineNum">      47 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      48 </span>                :<span class="lineCov">         89 : nasolution&lt;nr_type_t&gt;::~nasolution () {</span>
-<span class="lineNum">      49 </span>        [<span class="branchCov" title="Branch 0 was taken 89 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         89 :   clear ();</span>
-<span class="lineNum">      50 </span>                :<span class="lineCov">         89 : }</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">        103 : nasolution&lt;nr_type_t&gt;::~nasolution () {</span>
+<span class="lineNum">      49 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   clear ();</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">        103 : }</span>
 <span class="lineNum">      51 </span>                :            : 
 <a name="52"><span class="lineNum">      52 </span>                :            : // Resets the nasolution object.</a>
 <span class="lineNum">      53 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      54 </span>                :<span class="lineCov">        140 : void nasolution&lt;nr_type_t&gt;::clear (void) {</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">        140 :   entries.clear ();</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">        140 : }</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">        167 : void nasolution&lt;nr_type_t&gt;::clear (void) {</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">        167 :   entries.clear ();</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        167 : }</span>
 <span class="lineNum">      57 </span>                :            : 
 <a name="58"><span class="lineNum">      58 </span>                :            : // Adds a new solution entry into the nasolution list.</a>
 <span class="lineNum">      59 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      60 </span>                :<span class="lineCov">        563 : void nasolution&lt;nr_type_t&gt;::add (char * n, nr_type_t value, int current) {</span>
-<span class="lineNum">      61 </span>        [<span class="branchCov" title="Branch 1 was taken 563 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        563 :   naentry&lt;nr_type_t&gt; * entry = new naentry&lt;nr_type_t&gt; (n, value, current);</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">        563 :   entries.add (n, entry);</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">        563 : }</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">        706 : void nasolution&lt;nr_type_t&gt;::add (char * n, nr_type_t value, int current) {</span>
+<span class="lineNum">      61 </span>        [<span class="branchCov" title="Branch 1 was taken 706 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        706 :   naentry&lt;nr_type_t&gt; * entry = new naentry&lt;nr_type_t&gt; (n, value, current);</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">        706 :   entries.add (n, entry);</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">        706 : }</span>
 <span class="lineNum">      64 </span>                :            : 
 <a name="65"><span class="lineNum">      65 </span>                :            : // Finds the given nasolution entry in the list.</a>
 <span class="lineNum">      66 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      67 </span>                :<span class="lineCov">        568 : naentry&lt;nr_type_t&gt; * nasolution&lt;nr_type_t&gt;::find (char * n, int current) {</span>
-<span class="lineNum">      68 </span>[<span class="branchCov" title="Branch 0 was taken 568 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 5628 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       5628 :   for (valuelistiterator&lt; naentry&lt;nr_type_t&gt; &gt; it (entries); *it; ++it) {</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 5614 times"> + </span><span class="branchCov" title="Branch 8 was taken 14 times"> + </span>]
-<span class="lineNum">      69 </span>                :<span class="lineCov">       5614 :     naentry&lt;nr_type_t&gt; * na = it.currentVal ();</span>
-<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 0 was taken 3073 times"> + </span><span class="branchCov" title="Branch 1 was taken 2541 times"> + </span>]:<span class="lineCov">       5614 :     if (na-&gt;current == current) {</span>
-<span class="lineNum">      71 </span>[<span class="branchCov" title="Branch 0 was taken 3073 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 3073 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       3073 :       if (na-&gt;n &amp;&amp; n &amp;&amp; !strcmp (na-&gt;n, n))</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 554 times"> + </span><span class="branchCov" title="Branch 5 was taken 2519 times"> + </span>]
-<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 1 was taken 14 times"> + </span><span class="branchCov" title="Branch 2 was taken 554 times"> + </span>]:<span class="lineCov">        568 :         return na;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">        711 : naentry&lt;nr_type_t&gt; * nasolution&lt;nr_type_t&gt;::find (char * n, int current) {</span>
+<span class="lineNum">      68 </span>[<span class="branchCov" title="Branch 0 was taken 711 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 7175 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       7175 :   for (valuelistiterator&lt; naentry&lt;nr_type_t&gt; &gt; it (entries); *it; ++it) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 7161 times"> + </span><span class="branchCov" title="Branch 8 was taken 14 times"> + </span>]
+<span class="lineNum">      69 </span>                :<span class="lineCov">       7161 :     naentry&lt;nr_type_t&gt; * na = it.currentVal ();</span>
+<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 0 was taken 3891 times"> + </span><span class="branchCov" title="Branch 1 was taken 3270 times"> + </span>]:<span class="lineCov">       7161 :     if (na-&gt;current == current) {</span>
+<span class="lineNum">      71 </span>[<span class="branchCov" title="Branch 0 was taken 3891 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 3891 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       3891 :       if (na-&gt;n &amp;&amp; n &amp;&amp; !strcmp (na-&gt;n, n))</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 697 times"> + </span><span class="branchCov" title="Branch 5 was taken 3194 times"> + </span>]
+<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 1 was taken 14 times"> + </span><span class="branchCov" title="Branch 2 was taken 697 times"> + </span>]:<span class="lineCov">        711 :         return na;</span>
 <span class="lineNum">      73 </span>                :            :     }
 <span class="lineNum">      74 </span>                :            :   }
-<span class="lineNum">      75 </span>                :<span class="lineCov">        568 :   return NULL;</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">        711 :   return NULL;</span>
 <span class="lineNum">      76 </span>                :            : }
 <span class="lineNum">      77 </span>                :            : 
 <span class="lineNum">      78 </span>                :            : // Constructor creates an instance of the naentry class.
@@ -158,11 +165,11 @@
 <span class="lineNum">      85 </span>                :            : 
 <a name="86"><span class="lineNum">      86 </span>                :            : // Constructor creates an instance of the naentry class.</a>
 <span class="lineNum">      87 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      88 </span>                :<span class="lineCov">        563 : naentry&lt;nr_type_t&gt;::naentry (char * na, nr_type_t val, int cur) {</span>
-<span class="lineNum">      89 </span>                :<span class="lineCov">        563 :   value = val;</span>
-<span class="lineNum">      90 </span>        [<span class="branchCov" title="Branch 0 was taken 563 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        563 :   n = na ? strdup (na) : NULL;</span>
-<span class="lineNum">      91 </span>                :<span class="lineCov">        563 :   current = cur;</span>
-<span class="lineNum">      92 </span>                :<span class="lineCov">        563 : }</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">        706 : naentry&lt;nr_type_t&gt;::naentry (char * na, nr_type_t val, int cur) {</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">        706 :   value = val;</span>
+<span class="lineNum">      90 </span>        [<span class="branchCov" title="Branch 0 was taken 706 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        706 :   n = na ? strdup (na) : NULL;</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">        706 :   current = cur;</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">        706 : }</span>
 <span class="lineNum">      93 </span>                :            : 
 <span class="lineNum">      94 </span>                :            : /* This copy constructor creates a instance of the naentry class based
 <a name="95"><span class="lineNum">      95 </span>                :            :    on the given naentry. */</a>
@@ -175,9 +182,9 @@
 <span class="lineNum">     102 </span>                :            : 
 <a name="103"><span class="lineNum">     103 </span>                :            : // Destructor deletes a naentry object.</a>
 <span class="lineNum">     104 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     105 </span>                :<span class="lineCov">        563 : naentry&lt;nr_type_t&gt;::~naentry () {</span>
-<span class="lineNum">     106 </span>        [<span class="branchCov" title="Branch 0 was taken 563 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        563 :   if (n) free (n);</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">        563 : }</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">        706 : naentry&lt;nr_type_t&gt;::~naentry () {</span>
+<span class="lineNum">     106 </span>        [<span class="branchCov" title="Branch 0 was taken 706 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        706 :   if (n) free (n);</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">        706 : }</span>
 <span class="lineNum">     108 </span>                :            : 
 <span class="lineNum">     109 </span>                :            : } // namespace qucs
 </pre>

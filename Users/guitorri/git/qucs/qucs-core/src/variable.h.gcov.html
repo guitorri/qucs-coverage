@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -139,7 +139,7 @@
 <span class="lineNum">      61 </span>                :            :   variable ();
 <a name="62"><span class="lineNum">      62 </span>                :            :   variable (const char * const n);</a>
 <span class="lineNum">      63 </span>                :            :   variable (const variable &amp;);
-<span class="lineNum">      64 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 135 times"> + </span>]:<span class="lineCov">        270 :   virtual ~variable () = default;</span>
+<span class="lineNum">      64 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 165 times"> + </span>]:<span class="lineCov">        330 :   virtual ~variable () = default;</span>
 <span class="lineNum">      65 </span>                :            : 
 <span class="lineNum">      66 </span>                :            :   //! Sets the name of the variable
 <span class="lineNum">      67 </span>                :            :   void setName (const char * const n) {
@@ -147,17 +147,17 @@
 <span class="lineNum">      69 </span>                :            :   };
 <a name="70"><span class="lineNum">      70 </span>                :            : </a>
 <span class="lineNum">      71 </span>                :            :   //! Returns the name of the variable.
-<span class="lineNum">      72 </span>                :<span class="lineCov">      88439 :   const char * getName (void) const {</span>
-<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">      88439 :     return this-&gt;name.c_str();</span></a>
+<span class="lineNum">      72 </span>                :<span class="lineCov">     101100 :   const char * getName (void) const {</span>
+<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">     101100 :     return this-&gt;name.c_str();</span></a>
 <a name="74"><span class="lineNum">      74 </span>                :            :   };</a>
-<span class="lineNum">      75 </span>                :<span class="lineCov">        135 :   void setNext (variable * const v) { next = v; }</span>
-<span class="lineNum">      76 </span>                :<span class="lineCov">      34118 :   variable * getNext (void) const { return next; }</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">        165 :   void setNext (variable * const v) { next = v; }</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">      41249 :   variable * getNext (void) const { return next; }</span>
 <a name="77"><span class="lineNum">      77 </span>                :            : </a>
 <span class="lineNum">      78 </span>                :            :   void setType (const int t) { type = t; }
-<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">     592020 :   int getType (void) const { return type; }</span></a>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">     646644 :   int getType (void) const { return type; }</span></a>
 <a name="80"><span class="lineNum">      80 </span>                :            : </a>
-<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">        137 :   void setConstant (eqn::constant * const c) { type = VAR_CONSTANT; value.c = c; }</span></a>
-<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">     579410 :   eqn::constant * getConstant (void) const { return value.c; }</span></a>
+<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">        168 :   void setConstant (eqn::constant * const c) { type = VAR_CONSTANT; value.c = c; }</span></a>
+<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">     629871 :   eqn::constant * getConstant (void) const { return value.c; }</span></a>
 <a name="83"><span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 :   void setReference (eqn::reference * const r) { type = VAR_REFERENCE; value.r = r; }</span></a>
 <a name="84"><span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :   eqn::reference * getReference (void) const { return value.r; }</span></a>
 <a name="85"><span class="lineNum">      85 </span>                :<span class="lineCov">          3 :   void setSubstrate (substrate * const s) { type = VAR_SUBSTRATE; value.s = s; }</span></a>
@@ -167,7 +167,7 @@
 <span class="lineNum">      89 </span>                :            :   void setAnalysis (analysis * const a) { type = VAR_ANALYSIS; value.a = a; }
 <a name="90"><span class="lineNum">      90 </span>                :            :   analysis * getAnalysis (void) const { return this-&gt;value.a; }</a>
 <a name="91"><span class="lineNum">      91 </span>                :            :   const char * toString (void);</a>
-<span class="lineNum">      92 </span>                :<span class="lineCov">         69 :   void setPassing (const bool p) { this-&gt;pass = p; }</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">         84 :   void setPassing (const bool p) { this-&gt;pass = p; }</span>
 <span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :   bool getPassing (void) const { return this-&gt;pass; }</span>
 <span class="lineNum">      94 </span>                :            : 
 <span class="lineNum">      95 </span>                :            :  private:

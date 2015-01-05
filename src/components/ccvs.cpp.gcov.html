@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/ccvs.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/components/ccvs.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">38</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryMed">75.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">29</td>
@@ -102,10 +109,10 @@
 <span class="lineNum">      31 </span>                :            : 
 <a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
 <span class="lineNum">      33 </span>                :            : 
-<span class="lineNum">      34 </span>                :<span class="lineCov">          6 : ccvs::ccvs () : circuit (4) {</span>
-<span class="lineNum">      35 </span>                :<span class="lineCov">          6 :   type = CIR_CCVS;</span>
-<span class="lineNum">      36 </span>  [<span class="branchCov" title="Branch 0 was taken 6 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          6 :   setVoltageSources (2);</span>
-<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">          6 : }</span></a>
+<span class="lineNum">      34 </span>                :<span class="lineCov">          9 : ccvs::ccvs () : circuit (4) {</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">          9 :   type = CIR_CCVS;</span>
+<span class="lineNum">      36 </span>  [<span class="branchCov" title="Branch 0 was taken 9 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          9 :   setVoltageSources (2);</span>
+<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">          9 : }</span></a>
 <span class="lineNum">      38 </span>                :            : 
 <span class="lineNum">      39 </span>                :<span class="lineNoCov">          0 : void ccvs::calcSP (nr_double_t frequency) {</span>
 <span class="lineNum">      40 </span>                :            : 
@@ -125,39 +132,39 @@
 <span class="lineNum">      54 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_4, NODE_3, 0.0); setS (NODE_4, NODE_4, 0.0);</span>
 <a name="55"><span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      56 </span>                :            : 
-<span class="lineNum">      57 </span>                :<span class="lineCov">         80 : void ccvs::initDC (void) {</span>
-<span class="lineNum">      58 </span>                :<span class="lineCov">         80 :   allocMatrixMNA ();</span>
-<span class="lineNum">      59 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setB (NODE_1, VSRC_1, +1.0); setB (NODE_2, VSRC_1, +0.0);</span>
-<span class="lineNum">      60 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setB (NODE_3, VSRC_1, +0.0); setB (NODE_4, VSRC_1, -1.0);</span>
-<span class="lineNum">      61 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setB (NODE_1, VSRC_2, +0.0); setB (NODE_2, VSRC_2, -1.0);</span>
-<span class="lineNum">      62 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setB (NODE_3, VSRC_2, +1.0); setB (NODE_4, VSRC_2, +0.0);</span>
-<span class="lineNum">      63 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setC (VSRC_1, NODE_1, +0.0); setC (VSRC_1, NODE_2, +1.0);</span>
-<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setC (VSRC_1, NODE_3, -1.0); setC (VSRC_1, NODE_4, +0.0);</span>
-<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setC (VSRC_2, NODE_1, +1.0); setC (VSRC_2, NODE_2, +0.0);</span>
-<span class="lineNum">      66 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setC (VSRC_2, NODE_3, +0.0); setC (VSRC_2, NODE_4, -1.0);</span>
-<span class="lineNum">      67 </span>        [<span class="branchCov" title="Branch 2 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         80 :   setD (VSRC_1, VSRC_1, - getPropertyDouble (&quot;G&quot;));</span>
-<span class="lineNum">      68 </span>        [<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         80 :   setD (VSRC_2, VSRC_2, 0.0);</span>
-<span class="lineNum">      69 </span>[<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         80 :   setD (VSRC_1, VSRC_2, 0.0); setD (VSRC_2, VSRC_1, 0.0);</span>
-<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         80 :   setE (VSRC_1, 0.0);</span>
-<span class="lineNum">      71 </span>        [<span class="branchCov" title="Branch 1 was taken 80 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         80 :   setE (VSRC_2, 0.0);</span>
-<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">         80 : }</span></a>
+<span class="lineNum">      57 </span>                :<span class="lineCov">        120 : void ccvs::initDC (void) {</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">        120 :   allocMatrixMNA ();</span>
+<span class="lineNum">      59 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setB (NODE_1, VSRC_1, +1.0); setB (NODE_2, VSRC_1, +0.0);</span>
+<span class="lineNum">      60 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setB (NODE_3, VSRC_1, +0.0); setB (NODE_4, VSRC_1, -1.0);</span>
+<span class="lineNum">      61 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setB (NODE_1, VSRC_2, +0.0); setB (NODE_2, VSRC_2, -1.0);</span>
+<span class="lineNum">      62 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setB (NODE_3, VSRC_2, +1.0); setB (NODE_4, VSRC_2, +0.0);</span>
+<span class="lineNum">      63 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setC (VSRC_1, NODE_1, +0.0); setC (VSRC_1, NODE_2, +1.0);</span>
+<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setC (VSRC_1, NODE_3, -1.0); setC (VSRC_1, NODE_4, +0.0);</span>
+<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setC (VSRC_2, NODE_1, +1.0); setC (VSRC_2, NODE_2, +0.0);</span>
+<span class="lineNum">      66 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setC (VSRC_2, NODE_3, +0.0); setC (VSRC_2, NODE_4, -1.0);</span>
+<span class="lineNum">      67 </span>        [<span class="branchCov" title="Branch 2 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        120 :   setD (VSRC_1, VSRC_1, - getPropertyDouble (&quot;G&quot;));</span>
+<span class="lineNum">      68 </span>        [<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        120 :   setD (VSRC_2, VSRC_2, 0.0);</span>
+<span class="lineNum">      69 </span>[<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        120 :   setD (VSRC_1, VSRC_2, 0.0); setD (VSRC_2, VSRC_1, 0.0);</span>
+<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        120 :   setE (VSRC_1, 0.0);</span>
+<span class="lineNum">      71 </span>        [<span class="branchCov" title="Branch 1 was taken 120 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        120 :   setE (VSRC_2, 0.0);</span>
+<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">        120 : }</span></a>
 <span class="lineNum">      73 </span>                :            : 
-<span class="lineNum">      74 </span>                :<span class="lineCov">         20 : void ccvs::initAC (void) {</span>
-<span class="lineNum">      75 </span>                :<span class="lineCov">         20 :   initDC ();</span>
-<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">         20 : }</span></a>
+<span class="lineNum">      74 </span>                :<span class="lineCov">         30 : void ccvs::initAC (void) {</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">         30 :   initDC ();</span>
+<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">         30 : }</span></a>
 <span class="lineNum">      77 </span>                :            : 
-<span class="lineNum">      78 </span>                :<span class="lineCov">       1820 : void ccvs::calcAC (nr_double_t frequency) {</span>
-<span class="lineNum">      79 </span>        [<span class="branchCov" title="Branch 0 was taken 1820 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1820 :   nr_double_t t = getPropertyDouble (&quot;T&quot;);</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">       2730 : void ccvs::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">      79 </span>        [<span class="branchCov" title="Branch 0 was taken 2730 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       2730 :   nr_double_t t = getPropertyDouble (&quot;T&quot;);</span>
 <span class="lineNum">      80 </span>                :            :   nr_complex_t g = qucs::polar (getPropertyDouble (&quot;G&quot;),
-<span class="lineNum">      81 </span>[<span class="branchCov" title="Branch 0 was taken 1820 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1820 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1820 :                           - 2.0 * M_PI * frequency * t);</span>
-<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 1 was taken 1820 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">       1820 :   setD (VSRC_1, VSRC_1, -g);</span>
-<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">       1820 : }</span></a>
+<span class="lineNum">      81 </span>[<span class="branchCov" title="Branch 0 was taken 2730 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 2730 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       2730 :                           - 2.0 * M_PI * frequency * t);</span>
+<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 1 was taken 2730 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">       2730 :   setD (VSRC_1, VSRC_1, -g);</span>
+<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">       2730 : }</span></a>
 <span class="lineNum">      84 </span>                :            : 
-<span class="lineNum">      85 </span>                :<span class="lineCov">         20 : void ccvs::initTR (void) {</span>
-<span class="lineNum">      86 </span>                :<span class="lineCov">         20 :   nr_double_t t = getPropertyDouble (&quot;T&quot;);</span>
-<span class="lineNum">      87 </span>                :<span class="lineCov">         20 :   initDC ();</span>
-<span class="lineNum">      88 </span>                :<span class="lineCov">         20 :   deleteHistory ();</span>
-<span class="lineNum">      89 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 20 times"> + </span>]:<span class="lineCov">         20 :   if (t &gt; 0.0) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">         30 : void ccvs::initTR (void) {</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">         30 :   nr_double_t t = getPropertyDouble (&quot;T&quot;);</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">         30 :   initDC ();</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">         30 :   deleteHistory ();</span>
+<span class="lineNum">      89 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">         30 :   if (t &gt; 0.0) {</span>
 <span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 :     setHistory (true);</span>
 <span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :     initHistory (t);</span>
 <span class="lineNum">      92 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setC (VSRC_2, NODE_1, +0.0); setC (VSRC_2, NODE_2, +1.0);</span>
@@ -166,17 +173,17 @@
 <span class="lineNum">      95 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setC (VSRC_1, NODE_3, +0.0); setC (VSRC_1, NODE_4, -1.0);</span>
 <span class="lineNum">      96 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setD (VSRC_1, VSRC_1, 0.0);</span>
 <span class="lineNum">      97 </span>                :            :   }
-<a name="98"><span class="lineNum">      98 </span>                :<span class="lineCov">         20 : }</span></a>
+<a name="98"><span class="lineNum">      98 </span>                :<span class="lineCov">         30 : }</span></a>
 <span class="lineNum">      99 </span>                :            : 
-<span class="lineNum">     100 </span>                :<span class="lineCov">     128128 : void ccvs::calcTR (nr_double_t t) {</span>
-<span class="lineNum">     101 </span>                :<span class="lineCov">     128128 :   nr_double_t T = getPropertyDouble (&quot;T&quot;);</span>
-<span class="lineNum">     102 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 128128 times"> + </span>]:<span class="lineCov">     128128 :   if (T &gt; 0.0) {</span>
+<span class="lineNum">     100 </span>                :<span class="lineCov">     192192 : void ccvs::calcTR (nr_double_t t) {</span>
+<span class="lineNum">     101 </span>                :<span class="lineCov">     192192 :   nr_double_t T = getPropertyDouble (&quot;T&quot;);</span>
+<span class="lineNum">     102 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 192192 times"> + </span>]:<span class="lineCov">     192192 :   if (T &gt; 0.0) {</span>
 <span class="lineNum">     103 </span>                :<span class="lineNoCov">          0 :     T = t - T;</span>
 <span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :     nr_double_t g = getPropertyDouble (&quot;G&quot;);</span>
 <span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :     nr_double_t i = getJ (VSRC_1, T);</span>
 <span class="lineNum">     106 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setE (VSRC_2, g * i);</span>
 <span class="lineNum">     107 </span>                :            :   }
-<span class="lineNum">     108 </span>                :<span class="lineCov">     128128 : }</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">     192192 : }</span>
 <span class="lineNum">     109 </span>                :            : 
 <span class="lineNum">     110 </span>                :            : // properties
 <span class="lineNum">     111 </span>                :            : PROP_REQ [] = {

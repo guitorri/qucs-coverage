@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/exceptionstack.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/exceptionstack.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">23</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">66.7 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">7</td>
@@ -108,12 +115,12 @@
 <span class="lineNum">      37 </span>                :            : using namespace qucs;
 <a name="38"><span class="lineNum">      38 </span>                :            : </a>
 <span class="lineNum">      39 </span>                :            : // Global exception stack.
-<span class="lineNum">      40 </span>                :<span class="lineCov">         94 : exceptionstack qucs::estack;</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">        107 : exceptionstack qucs::estack;</span>
 <a name="41"><span class="lineNum">      41 </span>                :            : </a>
 <span class="lineNum">      42 </span>                :            : // Constructor creates an instance of the exception stack class.
-<span class="lineNum">      43 </span>                :<span class="lineCov">         94 : exceptionstack::exceptionstack () {</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">         94 :   root = NULL;</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">         94 : }</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">        107 : exceptionstack::exceptionstack () {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">        107 :   root = NULL;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">        107 : }</span>
 <span class="lineNum">      46 </span>                :            : 
 <a name="47"><span class="lineNum">      47 </span>                :            : /* This copy constructor creates a instance of the exception stack</a>
 <span class="lineNum">      48 </span>                :            :    class based on the given exception stack. */
@@ -130,14 +137,14 @@
 <span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="60"><span class="lineNum">      60 </span>                :            : </a>
 <span class="lineNum">      61 </span>                :            : // Destructor deletes an instance of the exception stack class.
-<span class="lineNum">      62 </span>                :<span class="lineCov">         94 : exceptionstack::~exceptionstack () {</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">        107 : exceptionstack::~exceptionstack () {</span>
 <span class="lineNum">      63 </span>                :            :   exception * next;
-<span class="lineNum">      64 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 94 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         94 :   while (root) {</span>
+<span class="lineNum">      64 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 107 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        107 :   while (root) {</span>
 <span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :     next = root-&gt;getNext ();</span>
 <span class="lineNum">      66 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete root;</span>
 <span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :     root = next;</span>
 <span class="lineNum">      68 </span>                :            :   }
-<span class="lineNum">      69 </span>                :<span class="lineCov">         94 : }</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">        107 : }</span>
 <a name="70"><span class="lineNum">      70 </span>                :            : </a>
 <span class="lineNum">      71 </span>                :            : // The function pushes a new exception onto the exception stack.
 <span class="lineNum">      72 </span>                :<span class="lineCov">         82 : void exceptionstack::push (exception * e) {</span>
@@ -157,22 +164,22 @@
 <span class="lineNum">      86 </span>                :            : }
 <a name="87"><span class="lineNum">      87 </span>                :            : </a>
 <span class="lineNum">      88 </span>                :            : // The function returns the top exception.
-<span class="lineNum">      89 </span>                :<span class="lineCov">    1433117 : exception * exceptionstack::top (void) {</span>
-<span class="lineNum">      90 </span>                :<span class="lineCov">    1433117 :   return root;</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">    1671125 : exception * exceptionstack::top (void) {</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">    1671125 :   return root;</span>
 <span class="lineNum">      91 </span>                :            : }
 <span class="lineNum">      92 </span>                :            : 
 <a name="93"><span class="lineNum">      93 </span>                :            : /* This function prints the complete exception stack and removes each</a>
 <span class="lineNum">      94 </span>                :            :    exception from the stack. */
-<span class="lineNum">      95 </span>                :<span class="lineCov">         91 : void exceptionstack::print (const char * prefix) {</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">        104 : void exceptionstack::print (const char * prefix) {</span>
 <span class="lineNum">      96 </span>                :            :   exception * next;
-<span class="lineNum">      97 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 91 times"> + </span>]:<span class="lineCov">         91 :   if (root)</span>
+<span class="lineNum">      97 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 104 times"> + </span>]:<span class="lineCov">        104 :   if (root)</span>
 <span class="lineNum">      98 </span>                :            :     logprint (LOG_ERROR, &quot;%s%sexception stack\n&quot;,
 <span class="lineNum">      99 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :               prefix ? prefix : &quot;&quot;, prefix ? &quot; &quot; : &quot;&quot;);</span>
-<span class="lineNum">     100 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 91 times"> + </span>]:<span class="lineCov">         91 :   while ((next = top ()) != NULL) {</span>
+<span class="lineNum">     100 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 104 times"> + </span>]:<span class="lineCov">        104 :   while ((next = top ()) != NULL) {</span>
 <span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;  %03d: %s\n&quot;, next-&gt;getCode (), next-&gt;getText ());</span>
 <a name="102"><span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 :     pop ();</span></a>
 <span class="lineNum">     103 </span>                :            :   }
-<span class="lineNum">     104 </span>[<span class="branchCov" title="Branch 1 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        373 : }</span>
+<span class="lineNum">     104 </span>[<span class="branchCov" title="Branch 1 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        425 : }</span>
 </pre>
       </td>
     </tr>

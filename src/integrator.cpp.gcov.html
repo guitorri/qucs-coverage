@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/integrator.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/integrator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">18</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">50.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">4</td>
@@ -111,13 +118,13 @@
 <span class="lineNum">      40 </span>                :            : namespace qucs {
 <a name="41"><span class="lineNum">      41 </span>                :            : </a>
 <span class="lineNum">      42 </span>                :            : // Constructor creates an unnamed instance of the integrator class.
-<span class="lineNum">      43 </span>                :<span class="lineCov">     125862 : integrator::integrator () : states&lt;nr_double_t&gt; () {</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">     125862 :   coefficients = NULL;</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">     125862 :   order = 0;</span>
-<span class="lineNum">      46 </span>                :<span class="lineCov">     125862 :   state = 0;</span>
-<span class="lineNum">      47 </span>                :<span class="lineCov">     125862 :   integrate_func = NULL;</span>
-<span class="lineNum">      48 </span>                :<span class="lineCov">     125862 :   conductor_func = NULL;</span>
-<span class="lineNum">      49 </span>                :<span class="lineCov">     125862 : }</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">     125988 : integrator::integrator () : states&lt;nr_double_t&gt; () {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">     125988 :   coefficients = NULL;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">     125988 :   order = 0;</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">     125988 :   state = 0;</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">     125988 :   integrate_func = NULL;</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">     125988 :   conductor_func = NULL;</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">     125988 : }</span>
 <span class="lineNum">      50 </span>                :            : 
 <a name="51"><span class="lineNum">      51 </span>                :            : /* The copy constructor creates a new instance based on the given</a>
 <span class="lineNum">      52 </span>                :            :    integrator object. */
@@ -130,23 +137,23 @@
 <span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="60"><span class="lineNum">      60 </span>                :            : </a>
 <span class="lineNum">      61 </span>                :            : // Destructor deletes a integrator object.
-<span class="lineNum">      62 </span>                :<span class="lineCov">     125862 : integrator::~integrator () {</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">     125862 : }</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">     125988 : integrator::~integrator () {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">     125988 : }</span>
 <span class="lineNum">      64 </span>                :            : 
 <a name="65"><span class="lineNum">      65 </span>                :            : /* The function evaluates the state of the integration-using component</a>
 <span class="lineNum">      66 </span>                :            :    and runs the appropriate integrator function. */
-<span class="lineNum">      67 </span>                :<span class="lineCov">    1443110 : void integrator::integrate (int qstate, nr_double_t cap, nr_double_t&amp; geq,</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">    1462316 : void integrator::integrate (int qstate, nr_double_t cap, nr_double_t&amp; geq,</span>
 <span class="lineNum">      68 </span>                :            :                             nr_double_t&amp; ceq) {
-<span class="lineNum">      69 </span>                :<span class="lineCov">    1443110 :   int cstate = qstate + 1;</span>
-<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 0 was taken 6711 times"> + </span><span class="branchCov" title="Branch 1 was taken 1436399 times"> + </span>]:<span class="lineCov">    1443110 :   if (state &amp; MODE_INIT) fillState (qstate, getState (qstate));</span>
-<span class="lineNum">      71 </span>                :<span class="lineCov">    1443110 :   (*integrate_func) (this, qstate, cap, geq, ceq);</span>
-<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 6711 times"> + </span><span class="branchCov" title="Branch 1 was taken 1436399 times"> + </span>]:<span class="lineCov">    1443110 :   if (state &amp; MODE_INIT) fillState (cstate, getState (cstate));</span>
-<span class="lineNum">      73 </span>                :<span class="lineCov">    1443110 : }</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">    1462316 :   int cstate = qstate + 1;</span>
+<span class="lineNum">      70 </span>        [<span class="branchCov" title="Branch 0 was taken 7503 times"> + </span><span class="branchCov" title="Branch 1 was taken 1454813 times"> + </span>]:<span class="lineCov">    1462316 :   if (state &amp; MODE_INIT) fillState (qstate, getState (qstate));</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">    1462316 :   (*integrate_func) (this, qstate, cap, geq, ceq);</span>
+<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 7503 times"> + </span><span class="branchCov" title="Branch 1 was taken 1454813 times"> + </span>]:<span class="lineCov">    1462316 :   if (state &amp; MODE_INIT) fillState (cstate, getState (cstate));</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">    1462316 : }</span>
 <a name="74"><span class="lineNum">      74 </span>                :            : </a>
 <span class="lineNum">      75 </span>                :            : /* This function runs the appropriate conductor function. */
-<span class="lineNum">      76 </span>                :<span class="lineCov">      71104 : void integrator::conductor (nr_double_t cap, nr_double_t&amp; geq) {</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">      71104 :   (*conductor_func) (this, cap, geq);</span>
-<span class="lineNum">      78 </span>                :<span class="lineCov">      71104 : }</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">      72850 : void integrator::conductor (nr_double_t cap, nr_double_t&amp; geq) {</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">      72850 :   (*conductor_func) (this, cap, geq);</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">      72850 : }</span>
 <span class="lineNum">      79 </span>                :            : 
 <span class="lineNum">      80 </span>                :            : } // namespace qucs
 </pre>

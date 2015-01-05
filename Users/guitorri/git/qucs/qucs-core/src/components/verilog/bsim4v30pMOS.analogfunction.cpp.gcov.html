@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -2862,18 +2862,18 @@
 <span class="lineNum">    2764 </span>                :            : /*
 <a name="2765"><span class="lineNum">    2765 </span>                :            :  * analog function: get_vjm</a>
 <span class="lineNum">    2766 </span>                :            :  */
-<span class="lineNum">    2767 </span>                :<span class="lineCov">       3000 : double bsim4v30pMOS_get_vjm (double nvtm, double ijth, double isb, double xexpbv)</span>
+<span class="lineNum">    2767 </span>                :<span class="lineCov">       4000 : double bsim4v30pMOS_get_vjm (double nvtm, double ijth, double isb, double xexpbv)</span>
 <span class="lineNum">    2768 </span>                :            : {
-<span class="lineNum">    2769 </span>                :<span class="lineCov">       3000 : double get_vjm=0.0;</span>
-<span class="lineNum">    2770 </span>                :<span class="lineCov">       3000 : double tb=0.0;</span>
-<span class="lineNum">    2771 </span>                :<span class="lineCov">       3000 : double tc=0.0;</span>
-<span class="lineNum">    2772 </span>                :<span class="lineCov">       3000 : double evjmovnv=0.0;</span>
-<span class="lineNum">    2773 </span>                :<span class="lineCov">       3000 : {tc=xexpbv;</span>
-<span class="lineNum">    2774 </span>                :<span class="lineCov">       3000 : tb=((1.0+(ijth/isb))-tc);</span>
-<span class="lineNum">    2775 </span>                :<span class="lineCov">       3000 : evjmovnv=(0.5*(tb+_sqrt(((tb*tb)+(4.0*tc)))));</span>
-<span class="lineNum">    2776 </span>                :<span class="lineCov">       3000 : get_vjm=(nvtm*_logE(evjmovnv));</span>
+<span class="lineNum">    2769 </span>                :<span class="lineCov">       4000 : double get_vjm=0.0;</span>
+<span class="lineNum">    2770 </span>                :<span class="lineCov">       4000 : double tb=0.0;</span>
+<span class="lineNum">    2771 </span>                :<span class="lineCov">       4000 : double tc=0.0;</span>
+<span class="lineNum">    2772 </span>                :<span class="lineCov">       4000 : double evjmovnv=0.0;</span>
+<span class="lineNum">    2773 </span>                :<span class="lineCov">       4000 : {tc=xexpbv;</span>
+<span class="lineNum">    2774 </span>                :<span class="lineCov">       4000 : tb=((1.0+(ijth/isb))-tc);</span>
+<span class="lineNum">    2775 </span>                :<span class="lineCov">       4000 : evjmovnv=(0.5*(tb+_sqrt(((tb*tb)+(4.0*tc)))));</span>
+<span class="lineNum">    2776 </span>                :<span class="lineCov">       4000 : get_vjm=(nvtm*_logE(evjmovnv));</span>
 <span class="lineNum">    2777 </span>                :            : }
-<a name="2778"><span class="lineNum">    2778 </span>                :<span class="lineCov">       3000 : return get_vjm;</span></a>
+<a name="2778"><span class="lineNum">    2778 </span>                :<span class="lineCov">       4000 : return get_vjm;</span></a>
 <span class="lineNum">    2779 </span>                :            : }
 <span class="lineNum">    2780 </span>                :<span class="lineNoCov">          0 : double bsim4v30pMOS_d_get_vjm (double nvtm, double ijth, double isb, double xexpbv, double d_nvtm, double d_ijth, double d_isb, double d_xexpbv)</span>
 <span class="lineNum">    2781 </span>                :            : {

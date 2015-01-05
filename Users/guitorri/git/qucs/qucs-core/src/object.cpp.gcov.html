@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">21</td>
@@ -118,122 +118,122 @@
 <span class="lineNum">      40 </span>                :            : namespace qucs {
 <a name="41"><span class="lineNum">      41 </span>                :            : </a>
 <span class="lineNum">      42 </span>                :            : // Constructor creates an unnamed instance of the object class.
-<span class="lineNum">      43 </span>                :<span class="lineCov">     475752 : object::object () {</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">     475752 :   name = NULL;</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">     475752 :   prev = next = NULL;</span>
-<span class="lineNum">      46 </span>                :<span class="lineCov">     475752 :   prop = NULL;</span>
-<span class="lineNum">      47 </span>                :<span class="lineCov">     475752 : }</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">     476253 : object::object () {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">     476253 :   name = NULL;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">     476253 :   prev = next = NULL;</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">     476253 :   prop = NULL;</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">     476253 : }</span>
 <a name="48"><span class="lineNum">      48 </span>                :            : </a>
 <span class="lineNum">      49 </span>                :            : // This constructor creates a named instance of the object class.
-<span class="lineNum">      50 </span>                :<span class="lineCov">       1292 : object::object (const char * n) {</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">       1492 : object::object (const char * n) {</span>
 <span class="lineNum">      51 </span>                :            :   // create a copy of the character array pointed to by n
 <span class="lineNum">      52 </span>                :            :   // and get a pointer to the copy using strdup
-<span class="lineNum">      53 </span>                :<span class="lineCov">       1292 :   name = strdup (n);</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">       1292 :   prev = next = NULL;</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">       1292 :   prop = NULL;</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">       1292 : }</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">       1492 :   name = strdup (n);</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">       1492 :   prev = next = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">       1492 :   prop = NULL;</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">       1492 : }</span>
 <span class="lineNum">      57 </span>                :            : 
 <a name="58"><span class="lineNum">      58 </span>                :            : /* This copy constructor creates a instance of the object class based</a>
 <span class="lineNum">      59 </span>                :            :    on the given object. */
-<span class="lineNum">      60 </span>                :<span class="lineCov">       9153 : object::object (const object &amp; o) {</span>
-<span class="lineNum">      61 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 3 was taken 424 times"> + </span><span class="branchCov" title="Branch 4 was taken 8729 times"> + </span>]:<span class="lineCov">       9153 :   name = o.name ? strdup (o.name) : NULL;</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">       9153 :   next = o.next;</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">       9153 :   prev = o.prev;</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">       9153 :   copyProperties (o.prop);</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">       9153 : }</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">       9223 : object::object (const object &amp; o) {</span>
+<span class="lineNum">      61 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 3 was taken 483 times"> + </span><span class="branchCov" title="Branch 4 was taken 8740 times"> + </span>]:<span class="lineCov">       9223 :   name = o.name ? strdup (o.name) : NULL;</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">       9223 :   next = o.next;</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">       9223 :   prev = o.prev;</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">       9223 :   copyProperties (o.prop);</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">       9223 : }</span>
 <a name="66"><span class="lineNum">      66 </span>                :            : </a>
 <span class="lineNum">      67 </span>                :            : // Destructor deletes an instance of the object class.
-<span class="lineNum">      68 </span>                :<span class="lineCov">     486192 : object::~object () {</span>
-<span class="lineNum">      69 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 2 was taken 476061 times"> + </span><span class="branchCov" title="Branch 3 was taken 10131 times"> + </span>]:<span class="lineCov">     486192 :   if (name) free (name);</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">     486192 :   deleteProperties ();</span>
-<span class="lineNum">      71 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 486192 times"> + </span>]:<span class="lineCov">     486192 : }</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">     486962 : object::~object () {</span>
+<span class="lineNum">      69 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 2 was taken 476756 times"> + </span><span class="branchCov" title="Branch 3 was taken 10206 times"> + </span>]:<span class="lineCov">     486962 :   if (name) free (name);</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">     486962 :   deleteProperties ();</span>
+<span class="lineNum">      71 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 486962 times"> + </span>]:<span class="lineCov">     486962 : }</span>
 <a name="72"><span class="lineNum">      72 </span>                :            : </a>
 <span class="lineNum">      73 </span>                :            : // Sets the name of the object.
-<span class="lineNum">      74 </span>                :<span class="lineCov">     502410 : void object::setName (const char * const n) {</span>
-<span class="lineNum">      75 </span>        [<span class="branchCov" title="Branch 0 was taken 28065 times"> + </span><span class="branchCov" title="Branch 1 was taken 474345 times"> + </span>]:<span class="lineCov">     502410 :   if (name) free (name);</span>
-<span class="lineNum">      76 </span>        [<span class="branchCov" title="Branch 0 was taken 502410 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     502410 :   name = n ? strdup (n) : NULL;</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">     502410 : }</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">     511553 : void object::setName (const char * const n) {</span>
+<span class="lineNum">      75 </span>        [<span class="branchCov" title="Branch 0 was taken 36772 times"> + </span><span class="branchCov" title="Branch 1 was taken 474781 times"> + </span>]:<span class="lineCov">     511553 :   if (name) free (name);</span>
+<span class="lineNum">      76 </span>        [<span class="branchCov" title="Branch 0 was taken 511553 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     511553 :   name = n ? strdup (n) : NULL;</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">     511553 : }</span>
 <a name="78"><span class="lineNum">      78 </span>                :            : </a>
 <span class="lineNum">      79 </span>                :            : // The function adds a complete property to the object property list.
-<span class="lineNum">      80 </span>                :<span class="lineCov">      11368 : void object::addProperty (property * const p) {</span>
-<span class="lineNum">      81 </span>                :<span class="lineCov">      11368 :   p-&gt;setNext (prop);</span>
-<span class="lineNum">      82 </span>                :<span class="lineCov">      11368 :   prop = p;</span>
-<span class="lineNum">      83 </span>                :<span class="lineCov">      11368 : }</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">      12857 : void object::addProperty (property * const p) {</span>
+<span class="lineNum">      81 </span>                :<span class="lineCov">      12857 :   p-&gt;setNext (prop);</span>
+<span class="lineNum">      82 </span>                :<span class="lineCov">      12857 :   prop = p;</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">      12857 : }</span>
 <span class="lineNum">      84 </span>                :            : 
 <a name="85"><span class="lineNum">      85 </span>                :            : /* This function adds a property consisting of a key and a string</a>
 <span class="lineNum">      86 </span>                :            :    value to the object. */
-<span class="lineNum">      87 </span>                :<span class="lineCov">        781 : property * object::addProperty (const char * const n, const char * const val) {</span>
-<span class="lineNum">      88 </span>[<span class="branchCov" title="Branch 1 was taken 781 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 781 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        781 :   property * p = new property (n, val);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 8 was taken 781 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span>][<span class="branchCov" title="Branch 11 was taken 781 times"> + </span><span class="branchNoCov" title="Branch 12 was not taken"> - </span>]
-<span class="lineNum">      89 </span>                :<span class="lineCov">        781 :   addProperty (p);</span>
-<span class="lineNum">      90 </span>                :<span class="lineCov">        781 :   return p;</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">        894 : property * object::addProperty (const char * const n, const char * const val) {</span>
+<span class="lineNum">      88 </span>[<span class="branchCov" title="Branch 1 was taken 894 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 894 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        894 :   property * p = new property (n, val);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 8 was taken 894 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span>][<span class="branchCov" title="Branch 11 was taken 894 times"> + </span><span class="branchNoCov" title="Branch 12 was not taken"> - </span>]
+<span class="lineNum">      89 </span>                :<span class="lineCov">        894 :   addProperty (p);</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">        894 :   return p;</span>
 <span class="lineNum">      91 </span>                :            : }
 <span class="lineNum">      92 </span>                :            : 
 <a name="93"><span class="lineNum">      93 </span>                :            : /* This function sets the specified property consisting of a key and a</a>
 <span class="lineNum">      94 </span>                :            :    string value in the object. */
-<span class="lineNum">      95 </span>                :<span class="lineCov">       6414 : void object::setProperty (const char * const n, const char * const val) {</span>
-<span class="lineNum">      96 </span>                :<span class="lineCov">       6414 :   property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">      97 </span>        [<span class="branchCov" title="Branch 0 was taken 6348 times"> + </span><span class="branchCov" title="Branch 1 was taken 66 times"> + </span>]:<span class="lineCov">       6414 :   if (p != NULL)</span>
-<span class="lineNum">      98 </span>[<span class="branchCov" title="Branch 1 was taken 6348 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 6348 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       6348 :     p-&gt;set (val);</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">       8132 : void object::setProperty (const char * const n, const char * const val) {</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">       8132 :   property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">      97 </span>        [<span class="branchCov" title="Branch 0 was taken 8056 times"> + </span><span class="branchCov" title="Branch 1 was taken 76 times"> + </span>]:<span class="lineCov">       8132 :   if (p != NULL)</span>
+<span class="lineNum">      98 </span>[<span class="branchCov" title="Branch 1 was taken 8056 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 8056 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       8056 :     p-&gt;set (val);</span>
 <span class="lineNum">      99 </span>                :            :   else
-<span class="lineNum">     100 </span>                :<span class="lineCov">         66 :     addProperty (n, val);</span>
-<span class="lineNum">     101 </span>                :<span class="lineCov">       6414 : }</span>
+<span class="lineNum">     100 </span>                :<span class="lineCov">         76 :     addProperty (n, val);</span>
+<span class="lineNum">     101 </span>                :<span class="lineCov">       8132 : }</span>
 <span class="lineNum">     102 </span>                :            : 
 <a name="103"><span class="lineNum">     103 </span>                :            : /* This function adds a property consisting of a key and a double</a>
 <span class="lineNum">     104 </span>                :            :    value to the object. */
-<span class="lineNum">     105 </span>                :<span class="lineCov">      10496 : property * object::addProperty (const char * const n, const nr_double_t val) {</span>
-<span class="lineNum">     106 </span>[<span class="branchCov" title="Branch 1 was taken 10496 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 10496 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      10496 :   property * p = new property (n, val);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 10496 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
-<span class="lineNum">     107 </span>                :<span class="lineCov">      10496 :   addProperty (p);</span>
-<span class="lineNum">     108 </span>                :<span class="lineCov">      10496 :   return p;</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">      11850 : property * object::addProperty (const char * const n, const nr_double_t val) {</span>
+<span class="lineNum">     106 </span>[<span class="branchCov" title="Branch 1 was taken 11850 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 11850 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      11850 :   property * p = new property (n, val);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 11850 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     107 </span>                :<span class="lineCov">      11850 :   addProperty (p);</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">      11850 :   return p;</span>
 <span class="lineNum">     109 </span>                :            : }
 <span class="lineNum">     110 </span>                :            : 
 <a name="111"><span class="lineNum">     111 </span>                :            : /* This function sets the specified property consisting of a key and a</a>
 <span class="lineNum">     112 </span>                :            :    double value in the object. */
-<span class="lineNum">     113 </span>                :<span class="lineCov">     316369 : void object::setProperty (const char * const n, const nr_double_t val) {</span>
-<span class="lineNum">     114 </span>                :<span class="lineCov">     316369 :   property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     115 </span>        [<span class="branchCov" title="Branch 0 was taken 314676 times"> + </span><span class="branchCov" title="Branch 1 was taken 1693 times"> + </span>]:<span class="lineCov">     316369 :   if (p != NULL)</span>
-<span class="lineNum">     116 </span>                :<span class="lineCov">     314676 :     p-&gt;set (val);</span>
+<span class="lineNum">     113 </span>                :<span class="lineCov">     364887 : void object::setProperty (const char * const n, const nr_double_t val) {</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">     364887 :   property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     115 </span>        [<span class="branchCov" title="Branch 0 was taken 363038 times"> + </span><span class="branchCov" title="Branch 1 was taken 1849 times"> + </span>]:<span class="lineCov">     364887 :   if (p != NULL)</span>
+<span class="lineNum">     116 </span>                :<span class="lineCov">     363038 :     p-&gt;set (val);</span>
 <span class="lineNum">     117 </span>                :            :   else
-<span class="lineNum">     118 </span>                :<span class="lineCov">       1693 :     addProperty (n, val);</span>
-<span class="lineNum">     119 </span>                :<span class="lineCov">     316369 : }</span>
+<span class="lineNum">     118 </span>                :<span class="lineCov">       1849 :     addProperty (n, val);</span>
+<span class="lineNum">     119 </span>                :<span class="lineCov">     364887 : }</span>
 <span class="lineNum">     120 </span>                :            : 
 <span class="lineNum">     121 </span>                :            : /* Th function sets the specified property consisting of a key and a
 <a name="122"><span class="lineNum">     122 </span>                :            :    double value in the object.  The property is marked a scalability</a>
 <span class="lineNum">     123 </span>                :            :    property. */
-<span class="lineNum">     124 </span>                :<span class="lineCov">     301248 : void object::setScaledProperty (const char * const n, const nr_double_t val) {</span>
+<span class="lineNum">     124 </span>                :<span class="lineCov">     345690 : void object::setScaledProperty (const char * const n, const nr_double_t val) {</span>
 <span class="lineNum">     125 </span>                :            :   char prop[64];
-<span class="lineNum">     126 </span>                :<span class="lineCov">     301248 :   sprintf (prop, &quot;Scaled:%s&quot;, n);</span>
-<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 0 was taken 301248 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     301248 :   setProperty (prop, val);</span>
-<span class="lineNum">     128 </span>                :<span class="lineCov">     301248 : }</span>
+<span class="lineNum">     126 </span>                :<span class="lineCov">     345690 :   sprintf (prop, &quot;Scaled:%s&quot;, n);</span>
+<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 0 was taken 345690 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     345690 :   setProperty (prop, val);</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">     345690 : }</span>
 <span class="lineNum">     129 </span>                :            : 
 <a name="130"><span class="lineNum">     130 </span>                :            : /* This function adds a property consisting of a key and a variable</a>
 <span class="lineNum">     131 </span>                :            :    value to the object. */
-<span class="lineNum">     132 </span>                :<span class="lineCov">         91 : property * object::addProperty (const char * n, variable * const val) {</span>
-<span class="lineNum">     133 </span>[<span class="branchCov" title="Branch 1 was taken 91 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 91 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         91 :   property * p = new property (n, val);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 91 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
-<span class="lineNum">     134 </span>                :<span class="lineCov">         91 :   addProperty (p);</span>
-<span class="lineNum">     135 </span>                :<span class="lineCov">         91 :   return p;</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">        113 : property * object::addProperty (const char * n, variable * const val) {</span>
+<span class="lineNum">     133 </span>[<span class="branchCov" title="Branch 1 was taken 113 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 113 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        113 :   property * p = new property (n, val);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 113 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     134 </span>                :<span class="lineCov">        113 :   addProperty (p);</span>
+<span class="lineNum">     135 </span>                :<span class="lineCov">        113 :   return p;</span>
 <span class="lineNum">     136 </span>                :            : }
 <span class="lineNum">     137 </span>                :            : 
 <span class="lineNum">     138 </span>                :            : /* Returns the requested property value which has been previously
 <a name="139"><span class="lineNum">     139 </span>                :            :    added as its vector representation.  If there is no such property</a>
 <span class="lineNum">     140 </span>                :            :    the function returns NULL. */
-<span class="lineNum">     141 </span>                :<span class="lineCov">       7273 : qucs::vector * object::getPropertyVector (const char * const n) const {</span>
-<span class="lineNum">     142 </span>                :<span class="lineCov">       7273 :   const property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     143 </span>        [<span class="branchCov" title="Branch 0 was taken 7273 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7273 :   if (p != NULL)</span>
-<span class="lineNum">     144 </span>                :<span class="lineCov">       7273 :     return p-&gt;getVector ();</span>
-<span class="lineNum">     145 </span>                :<span class="lineCov">       7273 :   return NULL;</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">       7274 : qucs::vector * object::getPropertyVector (const char * const n) const {</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">       7274 :   const property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     143 </span>        [<span class="branchCov" title="Branch 0 was taken 7274 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7274 :   if (p != NULL)</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">       7274 :     return p-&gt;getVector ();</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">       7274 :   return NULL;</span>
 <span class="lineNum">     146 </span>                :            : }
 <span class="lineNum">     147 </span>                :            : 
 <span class="lineNum">     148 </span>                :            : /* Returns the requested property value which has been previously
 <a name="149"><span class="lineNum">     149 </span>                :            :    added as its text representation.  If there is no such property the</a>
 <span class="lineNum">     150 </span>                :            :    function returns NULL. */
-<span class="lineNum">     151 </span>                :<span class="lineCov">     101081 : const char * object::getPropertyString (const char * const n) const {</span>
-<span class="lineNum">     152 </span>                :<span class="lineCov">     101081 :   const property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 101081 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     101081 :   if (p != NULL)</span>
-<span class="lineNum">     154 </span>                :<span class="lineCov">     101081 :     return p-&gt;getString ();</span>
-<span class="lineNum">     155 </span>                :<span class="lineCov">     101081 :   return NULL;</span>
+<span class="lineNum">     151 </span>                :<span class="lineCov">     112661 : const char * object::getPropertyString (const char * const n) const {</span>
+<span class="lineNum">     152 </span>                :<span class="lineCov">     112661 :   const property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 112661 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     112661 :   if (p != NULL)</span>
+<span class="lineNum">     154 </span>                :<span class="lineCov">     112661 :     return p-&gt;getString ();</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">     112661 :   return NULL;</span>
 <span class="lineNum">     156 </span>                :            : }
 <span class="lineNum">     157 </span>                :            : 
 <a name="158"><span class="lineNum">     158 </span>                :            : /* Returns the requested property reference variable name.  If there</a>
@@ -248,75 +248,75 @@
 <span class="lineNum">     167 </span>                :            : /* Returns the requested property value which has been previously
 <a name="168"><span class="lineNum">     168 </span>                :            :    added as its double representation.  If there is no such property</a>
 <span class="lineNum">     169 </span>                :            :    the function returns zero. */
-<span class="lineNum">     170 </span>                :<span class="lineCov">   11083162 : nr_double_t object::getPropertyDouble (const char * const n) const {</span>
-<span class="lineNum">     171 </span>                :<span class="lineCov">   11083162 :   const property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 11072659 times"> + </span><span class="branchCov" title="Branch 1 was taken 10503 times"> + </span>]:<span class="lineCov">   11083162 :   if (p != NULL)</span>
-<span class="lineNum">     173 </span>                :<span class="lineCov">   11072659 :     return p-&gt;getDouble ();</span>
-<span class="lineNum">     174 </span>                :<span class="lineCov">   11083162 :   return 0.0;</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">   12259868 : nr_double_t object::getPropertyDouble (const char * const n) const {</span>
+<span class="lineNum">     171 </span>                :<span class="lineCov">   12259868 :   const property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 12245865 times"> + </span><span class="branchCov" title="Branch 1 was taken 14003 times"> + </span>]:<span class="lineCov">   12259868 :   if (p != NULL)</span>
+<span class="lineNum">     173 </span>                :<span class="lineCov">   12245865 :     return p-&gt;getDouble ();</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">   12259868 :   return 0.0;</span>
 <span class="lineNum">     175 </span>                :            : }
 <span class="lineNum">     176 </span>                :            : 
 <span class="lineNum">     177 </span>                :            : /* The functions returns the requested (scalability) property value
 <a name="178"><span class="lineNum">     178 </span>                :            :    which has been previously added.  If there is no such scaled</a>
 <span class="lineNum">     179 </span>                :            :    property the function returns the standard property or zero. */
-<span class="lineNum">     180 </span>                :<span class="lineCov">    5475662 : nr_double_t object::getScaledProperty (const char * const n) const{</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">    6026058 : nr_double_t object::getScaledProperty (const char * const n) const{</span>
 <span class="lineNum">     181 </span>                :            :   char txt[64];
-<span class="lineNum">     182 </span>                :<span class="lineCov">    5475662 :   sprintf (txt, &quot;Scaled:%s&quot;, n);</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">    6026058 :   sprintf (txt, &quot;Scaled:%s&quot;, n);</span>
 <span class="lineNum">     183 </span>                :            :   // try to find scaled property
-<span class="lineNum">     184 </span>        [<span class="branchCov" title="Branch 0 was taken 5475662 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5475662 :   const property * p = prop-&gt;findProperty (txt);</span>
-<span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 5271912 times"> + </span><span class="branchCov" title="Branch 1 was taken 203750 times"> + </span>]:<span class="lineCov">    5475662 :   if (p != NULL)</span>
-<span class="lineNum">     186 </span>        [<span class="branchCov" title="Branch 0 was taken 5271912 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5271912 :     return p-&gt;getDouble ();</span>
+<span class="lineNum">     184 </span>        [<span class="branchCov" title="Branch 0 was taken 6026058 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    6026058 :   const property * p = prop-&gt;findProperty (txt);</span>
+<span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 5809862 times"> + </span><span class="branchCov" title="Branch 1 was taken 216196 times"> + </span>]:<span class="lineCov">    6026058 :   if (p != NULL)</span>
+<span class="lineNum">     186 </span>        [<span class="branchCov" title="Branch 0 was taken 5809862 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5809862 :     return p-&gt;getDouble ();</span>
 <span class="lineNum">     187 </span>                :            :   // default to standard property
-<span class="lineNum">     188 </span>        [<span class="branchCov" title="Branch 0 was taken 203750 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5475662 :   return getPropertyDouble (n);</span>
+<span class="lineNum">     188 </span>        [<span class="branchCov" title="Branch 0 was taken 216196 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    6026058 :   return getPropertyDouble (n);</span>
 <span class="lineNum">     189 </span>                :            : }
 <span class="lineNum">     190 </span>                :            : 
 <span class="lineNum">     191 </span>                :            : /* Returns the requested property value which has been previously
 <a name="192"><span class="lineNum">     192 </span>                :            :    added as its integer representation.  If there is no such property</a>
 <span class="lineNum">     193 </span>                :            :    the function returns zero. */
-<span class="lineNum">     194 </span>                :<span class="lineCov">     331896 : int object::getPropertyInteger (const char * const n) const {</span>
-<span class="lineNum">     195 </span>                :<span class="lineCov">     331896 :   const property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     196 </span>        [<span class="branchCov" title="Branch 0 was taken 331896 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     331896 :   if (p != NULL)</span>
-<span class="lineNum">     197 </span>                :<span class="lineCov">     331896 :     return p-&gt;getInteger ();</span>
-<span class="lineNum">     198 </span>                :<span class="lineCov">     331896 :   return 0;</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">     370805 : int object::getPropertyInteger (const char * const n) const {</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">     370805 :   const property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     196 </span>        [<span class="branchCov" title="Branch 0 was taken 370805 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     370805 :   if (p != NULL)</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">     370805 :     return p-&gt;getInteger ();</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">     370805 :   return 0;</span>
 <span class="lineNum">     199 </span>                :            : }
 <span class="lineNum">     200 </span>                :            : 
 <a name="201"><span class="lineNum">     201 </span>                :            : /* The function checks whether the object has got a certain property</a>
 <span class="lineNum">     202 </span>                :            :    value.  If so it returns non-zero, otherwise it returns zero. */
-<span class="lineNum">     203 </span>                :<span class="lineCov">     368751 : bool object::hasProperty (const char * const n) const {</span>
-<span class="lineNum">     204 </span>[<span class="branchCov" title="Branch 0 was taken 368751 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 17180 times"> + </span><span class="branchCov" title="Branch 4 was taken 351571 times"> + </span>]:<span class="lineCov">     368751 :   return (prop &amp;&amp; prop-&gt;findProperty (n)) ? true : false;</span>
+<span class="lineNum">     203 </span>                :<span class="lineCov">     382246 : bool object::hasProperty (const char * const n) const {</span>
+<span class="lineNum">     204 </span>[<span class="branchCov" title="Branch 0 was taken 382246 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 21001 times"> + </span><span class="branchCov" title="Branch 4 was taken 361245 times"> + </span>]:<span class="lineCov">     382246 :   return (prop &amp;&amp; prop-&gt;findProperty (n)) ? true : false;</span>
 <span class="lineNum">     205 </span>                :            : }
 <span class="lineNum">     206 </span>                :            : 
 <span class="lineNum">     207 </span>                :            : /* The function checks whether the object has got a certain property
 <a name="208"><span class="lineNum">     208 </span>                :            :    value and if this has its default value.  If so it returns  non-zero,</a>
 <span class="lineNum">     209 </span>                :            :    otherwise it returns zero. */
-<span class="lineNum">     210 </span>                :<span class="lineCov">       3374 : bool object::isPropertyGiven (const char * const n) const {</span>
-<span class="lineNum">     211 </span>        [<span class="branchCov" title="Branch 0 was taken 3374 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3374 :   if (prop != NULL) {</span>
-<span class="lineNum">     212 </span>                :<span class="lineCov">       3374 :     const property * p = prop-&gt;findProperty (n);</span>
-<span class="lineNum">     213 </span>[<span class="branchCov" title="Branch 0 was taken 3374 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 24 times"> + </span><span class="branchCov" title="Branch 4 was taken 3350 times"> + </span>]:<span class="lineCov">       3374 :     if (p != NULL &amp;&amp; !p-&gt;isDefault ())</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 24 times"> + </span><span class="branchCov" title="Branch 6 was taken 3350 times"> + </span>]
+<span class="lineNum">     210 </span>                :<span class="lineCov">       3950 : bool object::isPropertyGiven (const char * const n) const {</span>
+<span class="lineNum">     211 </span>        [<span class="branchCov" title="Branch 0 was taken 3950 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       3950 :   if (prop != NULL) {</span>
+<span class="lineNum">     212 </span>                :<span class="lineCov">       3950 :     const property * p = prop-&gt;findProperty (n);</span>
+<span class="lineNum">     213 </span>[<span class="branchCov" title="Branch 0 was taken 3950 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 24 times"> + </span><span class="branchCov" title="Branch 4 was taken 3926 times"> + </span>]:<span class="lineCov">       3950 :     if (p != NULL &amp;&amp; !p-&gt;isDefault ())</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 24 times"> + </span><span class="branchCov" title="Branch 6 was taken 3926 times"> + </span>]
 <span class="lineNum">     214 </span>                :<span class="lineCov">         24 :       return true;</span>
 <span class="lineNum">     215 </span>                :            :   }
-<span class="lineNum">     216 </span>                :<span class="lineCov">       3374 :   return false;</span>
+<span class="lineNum">     216 </span>                :<span class="lineCov">       3950 :   return false;</span>
 <span class="lineNum">     217 </span>                :            : }
 <span class="lineNum">     218 </span>                :            : 
 <a name="219"><span class="lineNum">     219 </span>                :            : /* This function copies all properties in the given property list into</a>
 <span class="lineNum">     220 </span>                :            :    an object. */
-<span class="lineNum">     221 </span>                :<span class="lineCov">       9153 : void object::copyProperties (property * org) {</span>
-<span class="lineNum">     222 </span>                :<span class="lineCov">       9153 :   prop = NULL;</span>
-<span class="lineNum">     223 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 9153 times"> + </span>]:<span class="lineCov">       9153 :   while (org != NULL) {</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">       9223 : void object::copyProperties (property * org) {</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">       9223 :   prop = NULL;</span>
+<span class="lineNum">     223 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 9223 times"> + </span>]:<span class="lineCov">       9223 :   while (org != NULL) {</span>
 <span class="lineNum">     224 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     addProperty (new property (*org));</span>
 <span class="lineNum">     225 </span>                :<span class="lineNoCov">          0 :     org = org-&gt;getNext ();</span>
 <span class="lineNum">     226 </span>                :            :   }
-<span class="lineNum">     227 </span>                :<span class="lineCov">       9153 : }</span>
+<span class="lineNum">     227 </span>                :<span class="lineCov">       9223 : }</span>
 <a name="228"><span class="lineNum">     228 </span>                :            : </a>
 <span class="lineNum">     229 </span>                :            : // Deletes all properties of an object.
-<span class="lineNum">     230 </span>                :<span class="lineCov">     486192 : void object::deleteProperties (void) {</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">     486962 : void object::deleteProperties (void) {</span>
 <span class="lineNum">     231 </span>                :            :   property * n;
-<span class="lineNum">     232 </span>        [<span class="branchCov" title="Branch 0 was taken 11368 times"> + </span><span class="branchCov" title="Branch 1 was taken 486192 times"> + </span>]:<span class="lineCov">     497560 :   for (property * p = prop; p != NULL; p = n) {</span>
-<span class="lineNum">     233 </span>                :<span class="lineCov">      11368 :     n = p-&gt;getNext ();</span>
-<span class="lineNum">     234 </span>        [<span class="branchCov" title="Branch 0 was taken 11368 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      11368 :     delete p;</span>
+<span class="lineNum">     232 </span>        [<span class="branchCov" title="Branch 0 was taken 12857 times"> + </span><span class="branchCov" title="Branch 1 was taken 486962 times"> + </span>]:<span class="lineCov">     499819 :   for (property * p = prop; p != NULL; p = n) {</span>
+<span class="lineNum">     233 </span>                :<span class="lineCov">      12857 :     n = p-&gt;getNext ();</span>
+<span class="lineNum">     234 </span>        [<span class="branchCov" title="Branch 0 was taken 12857 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      12857 :     delete p;</span>
 <span class="lineNum">     235 </span>                :            :   }
-<span class="lineNum">     236 </span>                :<span class="lineCov">     486192 :   prop = NULL;</span>
-<span class="lineNum">     237 </span>                :<span class="lineCov">     486192 : }</span>
+<span class="lineNum">     236 </span>                :<span class="lineCov">     486962 :   prop = NULL;</span>
+<span class="lineNum">     237 </span>                :<span class="lineCov">     486962 : }</span>
 <a name="238"><span class="lineNum">     238 </span>                :            : </a>
 <span class="lineNum">     239 </span>                :            : // The function returns the number of properties in the object.
 <span class="lineNum">     240 </span>                :<span class="lineNoCov">          0 : int object::countProperties (void) const {</span>

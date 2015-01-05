@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/property.h</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/property.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">0</td>
@@ -121,8 +128,8 @@
 <span class="lineNum">      50 </span>                :            :   property (const std::string &amp;, variable *);
 <a name="51"><span class="lineNum">      51 </span>                :            :   property (const property &amp;);</a>
 <a name="52"><span class="lineNum">      52 </span>                :            :   virtual ~property ();</a>
-<span class="lineNum">      53 </span>                :<span class="lineCov">  343533382 :   property * getNext (void) const { return next; }</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">      11368 :   void setNext (property * p) { next = p; }</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">  398276913 :   property * getNext (void) const { return next; }</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">      12857 :   void setNext (property * p) { next = p; }</span>
 <span class="lineNum">      55 </span>                :            : 
 <span class="lineNum">      56 </span>                :            :   //! Sets the name of the property.
 <span class="lineNum">      57 </span>                :            :   void setName (const std::string &amp;n) {
@@ -130,8 +137,8 @@
 <span class="lineNum">      59 </span>                :            :   };
 <a name="60"><span class="lineNum">      60 </span>                :            : </a>
 <span class="lineNum">      61 </span>                :            :   //! Returns the name of the property.
-<span class="lineNum">      62 </span>                :<span class="lineCov">  360648413 :   std::string getName (void) const {</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">  360648413 :     return this-&gt;name;</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">  417206568 :   std::string getName (void) const {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">  417206568 :     return this-&gt;name;</span>
 <span class="lineNum">      64 </span>                :            :   }
 <span class="lineNum">      65 </span>                :            : 
 <span class="lineNum">      66 </span>                :            :   qucs::vector * getVector (void) const;
@@ -145,8 +152,8 @@
 <span class="lineNum">      74 </span>                :            :   void set (variable *);
 <a name="75"><span class="lineNum">      75 </span>                :            :   property * findProperty (const char * const);</a>
 <a name="76"><span class="lineNum">      76 </span>                :            :   std::string toString (void) const;</a>
-<span class="lineNum">      77 </span>                :<span class="lineCov">       3374 :   bool isDefault (void) const { return def; }</span>
-<span class="lineNum">      78 </span>                :<span class="lineCov">        467 :   void setDefault (bool d) { def = d; }</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">       3950 :   bool isDefault (void) const { return def; }</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">        545 :   void setDefault (bool d) { def = d; }</span>
 <span class="lineNum">      79 </span>                :            : 
 <span class="lineNum">      80 </span>                :            :  private:
 <span class="lineNum">      81 </span>                :            :   bool def;

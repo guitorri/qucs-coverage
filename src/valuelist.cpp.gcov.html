@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/valuelist.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/valuelist.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">19</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">41.3 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">19</td>
@@ -104,10 +111,10 @@
 <span class="lineNum">      33 </span>                :            : 
 <a name="34"><span class="lineNum">      34 </span>                :            : // Constructor creates an instance of the valuelist class.</a>
 <span class="lineNum">      35 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">      36 </span>                :<span class="lineCov">     251813 : valuelist&lt;type_t&gt;::valuelist () {</span>
-<span class="lineNum">      37 </span>                :<span class="lineCov">     251813 :   size = 0;</span>
-<span class="lineNum">      38 </span>                :<span class="lineCov">     251813 :   last = root = NULL;</span>
-<span class="lineNum">      39 </span>                :<span class="lineCov">     251813 : }</span>
+<span class="lineNum">      36 </span>                :<span class="lineCov">     252079 : valuelist&lt;type_t&gt;::valuelist () {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">     252079 :   size = 0;</span>
+<span class="lineNum">      38 </span>                :<span class="lineCov">     252079 :   last = root = NULL;</span>
+<span class="lineNum">      39 </span>                :<span class="lineCov">     252079 : }</span>
 <span class="lineNum">      40 </span>                :            : 
 <span class="lineNum">      41 </span>                :            : /* This copy constructor creates a instance of the valuelist class based
 <a name="42"><span class="lineNum">      42 </span>                :            :    on the given valuelist. */</a>
@@ -122,36 +129,36 @@
 <span class="lineNum">      51 </span>                :            : 
 <a name="52"><span class="lineNum">      52 </span>                :            : // Destructor deletes a valuelist object.</a>
 <span class="lineNum">      53 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">      54 </span>                :<span class="lineCov">     251813 : valuelist&lt;type_t&gt;::~valuelist () {</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">     251813 :   clear ();</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">     251813 : }</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">     252079 : valuelist&lt;type_t&gt;::~valuelist () {</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">     252079 :   clear ();</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">     252079 : }</span>
 <span class="lineNum">      57 </span>                :            : 
 <a name="58"><span class="lineNum">      58 </span>                :            : // Resets the value list.</a>
 <span class="lineNum">      59 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">      60 </span>                :<span class="lineCov">     251953 : void valuelist&lt;type_t&gt;::clear (void) {</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">     252246 : void valuelist&lt;type_t&gt;::clear (void) {</span>
 <span class="lineNum">      61 </span>                :            :   valentry&lt;type_t&gt; * next;
-<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 1719 times"> + </span><span class="branchCov" title="Branch 1 was taken 251953 times"> + </span>]:<span class="lineCov">     253672 :   while (root) {</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">       1719 :     next = root-&gt;next;</span>
-<span class="lineNum">      64 </span>        [<span class="branchCov" title="Branch 0 was taken 1719 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1719 :     delete root;</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">       1719 :     root = next;</span>
+<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 1922 times"> + </span><span class="branchCov" title="Branch 1 was taken 252246 times"> + </span>]:<span class="lineCov">     254168 :   while (root) {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">       1922 :     next = root-&gt;next;</span>
+<span class="lineNum">      64 </span>        [<span class="branchCov" title="Branch 0 was taken 1922 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1922 :     delete root;</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">       1922 :     root = next;</span>
 <span class="lineNum">      66 </span>                :            :   }
-<span class="lineNum">      67 </span>                :<span class="lineCov">     251953 :   size = 0;</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">     251953 :   last = NULL;</span>
-<span class="lineNum">      69 </span>                :<span class="lineCov">     251953 : }</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">     252246 :   size = 0;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">     252246 :   last = NULL;</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">     252246 : }</span>
 <span class="lineNum">      70 </span>                :            : 
 <a name="71"><span class="lineNum">      71 </span>                :            : // Puts a new entry at the beginning of the value list.</a>
 <span class="lineNum">      72 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">      73 </span>                :<span class="lineCov">       1719 : void valuelist&lt;type_t&gt;::add (const char * n, type_t * ptr) {</span>
-<span class="lineNum">      74 </span>                :<span class="lineCov">       1719 :   valentry&lt;type_t&gt; * entry = new valentry&lt;type_t&gt; ();</span>
-<span class="lineNum">      75 </span>        [<span class="branchCov" title="Branch 0 was taken 1556 times"> + </span><span class="branchCov" title="Branch 1 was taken 163 times"> + </span>]:<span class="lineCov">       1719 :   if (root) root-&gt;prev = entry;</span>
-<span class="lineNum">      76 </span>                :<span class="lineCov">       1719 :   entry-&gt;key = strdup (n);</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">       1719 :   entry-&gt;value = ptr;</span>
-<span class="lineNum">      78 </span>                :<span class="lineCov">       1719 :   entry-&gt;next = root;</span>
-<span class="lineNum">      79 </span>                :<span class="lineCov">       1719 :   entry-&gt;prev = NULL;</span>
-<span class="lineNum">      80 </span>                :<span class="lineCov">       1719 :   root = entry;</span>
-<span class="lineNum">      81 </span>        [<span class="branchCov" title="Branch 0 was taken 163 times"> + </span><span class="branchCov" title="Branch 1 was taken 1556 times"> + </span>]:<span class="lineCov">       1719 :   if (!last) last = root;</span>
-<span class="lineNum">      82 </span>                :<span class="lineCov">       1719 :   size++;</span>
-<span class="lineNum">      83 </span>                :<span class="lineCov">       1719 : }</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">       1922 : void valuelist&lt;type_t&gt;::add (const char * n, type_t * ptr) {</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">       1922 :   valentry&lt;type_t&gt; * entry = new valentry&lt;type_t&gt; ();</span>
+<span class="lineNum">      75 </span>        [<span class="branchCov" title="Branch 0 was taken 1737 times"> + </span><span class="branchCov" title="Branch 1 was taken 185 times"> + </span>]:<span class="lineCov">       1922 :   if (root) root-&gt;prev = entry;</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">       1922 :   entry-&gt;key = strdup (n);</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">       1922 :   entry-&gt;value = ptr;</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">       1922 :   entry-&gt;next = root;</span>
+<span class="lineNum">      79 </span>                :<span class="lineCov">       1922 :   entry-&gt;prev = NULL;</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">       1922 :   root = entry;</span>
+<span class="lineNum">      81 </span>        [<span class="branchCov" title="Branch 0 was taken 185 times"> + </span><span class="branchCov" title="Branch 1 was taken 1737 times"> + </span>]:<span class="lineCov">       1922 :   if (!last) last = root;</span>
+<span class="lineNum">      82 </span>                :<span class="lineCov">       1922 :   size++;</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">       1922 : }</span>
 <span class="lineNum">      84 </span>                :            : 
 <a name="85"><span class="lineNum">      85 </span>                :            : // Appends a new entry at the end of the value list.</a>
 <span class="lineNum">      86 </span>                :            : template &lt;class type_t&gt;
@@ -221,25 +228,25 @@
 <span class="lineNum">     150 </span>                :            : 
 <a name="151"><span class="lineNum">     151 </span>                :            : // Returns the value associated with the given key.</a>
 <span class="lineNum">     152 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     153 </span>                :<span class="lineCov">    6208653 : type_t * valuelist&lt;type_t&gt;::get (const char * n) {</span>
-<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 48076244 times"> + </span><span class="branchCov" title="Branch 1 was taken 1156 times"> + </span>]:<span class="lineCov">   48077400 :   for (valentry&lt;type_t&gt; * p = root; p != NULL; p = p-&gt;next) {</span>
-<span class="lineNum">     155 </span>        [<span class="branchCov" title="Branch 0 was taken 6207497 times"> + </span><span class="branchCov" title="Branch 1 was taken 41868747 times"> + </span>]:<span class="lineCov">   48076244 :     if (!strcmp (p-&gt;key, n)) return p-&gt;value;</span>
+<span class="lineNum">     153 </span>                :<span class="lineCov">    6341813 : type_t * valuelist&lt;type_t&gt;::get (const char * n) {</span>
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 48783883 times"> + </span><span class="branchCov" title="Branch 1 was taken 1216 times"> + </span>]:<span class="lineCov">   48785099 :   for (valentry&lt;type_t&gt; * p = root; p != NULL; p = p-&gt;next) {</span>
+<span class="lineNum">     155 </span>        [<span class="branchCov" title="Branch 0 was taken 6340597 times"> + </span><span class="branchCov" title="Branch 1 was taken 42443286 times"> + </span>]:<span class="lineCov">   48783883 :     if (!strcmp (p-&gt;key, n)) return p-&gt;value;</span>
 <span class="lineNum">     156 </span>                :            :   }
-<span class="lineNum">     157 </span>                :<span class="lineCov">    6208653 :   return NULL;</span>
+<span class="lineNum">     157 </span>                :<span class="lineCov">    6341813 :   return NULL;</span>
 <span class="lineNum">     158 </span>                :            : }
 <span class="lineNum">     159 </span>                :            : 
 <a name="160"><span class="lineNum">     160 </span>                :            : // Constructor for value list iterator.</a>
 <span class="lineNum">     161 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     162 </span>                :<span class="lineCov">        568 : valuelistiterator&lt;type_t&gt;::valuelistiterator (valuelist&lt;type_t&gt; &amp; v) {</span>
-<span class="lineNum">     163 </span>                :<span class="lineCov">        568 :   _valuelist = &amp;v;</span>
-<span class="lineNum">     164 </span>                :<span class="lineCov">        568 :   toLast ();</span>
-<span class="lineNum">     165 </span>                :<span class="lineCov">        568 :   toFirst ();</span>
-<span class="lineNum">     166 </span>                :<span class="lineCov">        568 : }</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">        711 : valuelistiterator&lt;type_t&gt;::valuelistiterator (valuelist&lt;type_t&gt; &amp; v) {</span>
+<span class="lineNum">     163 </span>                :<span class="lineCov">        711 :   _valuelist = &amp;v;</span>
+<span class="lineNum">     164 </span>                :<span class="lineCov">        711 :   toLast ();</span>
+<span class="lineNum">     165 </span>                :<span class="lineCov">        711 :   toFirst ();</span>
+<span class="lineNum">     166 </span>                :<span class="lineCov">        711 : }</span>
 <span class="lineNum">     167 </span>                :            : 
 <a name="168"><span class="lineNum">     168 </span>                :            : // Destructor for value list iterator.</a>
 <span class="lineNum">     169 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     170 </span>                :<span class="lineCov">        568 : valuelistiterator&lt;type_t&gt;::~valuelistiterator () {</span>
-<span class="lineNum">     171 </span>                :<span class="lineCov">        568 : }</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">        711 : valuelistiterator&lt;type_t&gt;::~valuelistiterator () {</span>
+<span class="lineNum">     171 </span>                :<span class="lineCov">        711 : }</span>
 <span class="lineNum">     172 </span>                :            : 
 <span class="lineNum">     173 </span>                :            : // Returns number of items this iterator operates on.
 <span class="lineNum">     174 </span>                :            : template &lt;class type_t&gt;
@@ -249,23 +256,23 @@
 <span class="lineNum">     178 </span>                :            : 
 <a name="179"><span class="lineNum">     179 </span>                :            : // Sets the current to the first item in the iterator list.</a>
 <span class="lineNum">     180 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     181 </span>                :<span class="lineCov">        568 : char * valuelistiterator&lt;type_t&gt;::toFirst (void) {</span>
-<span class="lineNum">     182 </span>                :<span class="lineCov">        568 :   _current = _first = _valuelist-&gt;root;</span>
-<span class="lineNum">     183 </span>[<span class="branchCov" title="Branch 0 was taken 554 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        568 :   return _current ? _current-&gt;key : NULL;</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">        711 : char * valuelistiterator&lt;type_t&gt;::toFirst (void) {</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">        711 :   _current = _first = _valuelist-&gt;root;</span>
+<span class="lineNum">     183 </span>[<span class="branchCov" title="Branch 0 was taken 697 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        711 :   return _current ? _current-&gt;key : NULL;</span>
 <span class="lineNum">     184 </span>                :            : }
 <span class="lineNum">     185 </span>                :            : 
 <a name="186"><span class="lineNum">     186 </span>                :            : // Sets the current to the last item in the iterator list.</a>
 <span class="lineNum">     187 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     188 </span>                :<span class="lineCov">        568 : char * valuelistiterator&lt;type_t&gt;::toLast (void) {</span>
-<span class="lineNum">     189 </span>                :<span class="lineCov">        568 :   _current = _last = _valuelist-&gt;last;</span>
-<span class="lineNum">     190 </span>[<span class="branchCov" title="Branch 0 was taken 554 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        568 :   return _current ? _current-&gt;key : NULL;</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">        711 : char * valuelistiterator&lt;type_t&gt;::toLast (void) {</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">        711 :   _current = _last = _valuelist-&gt;last;</span>
+<span class="lineNum">     190 </span>[<span class="branchCov" title="Branch 0 was taken 697 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        711 :   return _current ? _current-&gt;key : NULL;</span>
 <span class="lineNum">     191 </span>                :            : }
 <span class="lineNum">     192 </span>                :            : 
 <a name="193"><span class="lineNum">     193 </span>                :            : // Makes the succeeding item current and returns the new current item.</a>
 <span class="lineNum">     194 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     195 </span>                :<span class="lineCov">       5060 : char * valuelistiterator&lt;type_t&gt;::operator++ (void) {</span>
-<span class="lineNum">     196 </span>                :<span class="lineCov">       5060 :   _current = _current-&gt;next;</span>
-<span class="lineNum">     197 </span>[<span class="branchCov" title="Branch 0 was taken 5060 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       5060 :   return _current ? _current-&gt;key : NULL;</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">       6464 : char * valuelistiterator&lt;type_t&gt;::operator++ (void) {</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">       6464 :   _current = _current-&gt;next;</span>
+<span class="lineNum">     197 </span>[<span class="branchCov" title="Branch 0 was taken 6464 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       6464 :   return _current ? _current-&gt;key : NULL;</span>
 <span class="lineNum">     198 </span>                :            : }
 <span class="lineNum">     199 </span>                :            : 
 <span class="lineNum">     200 </span>                :            : // Makes the preceding item current and returns the new current item.
@@ -277,8 +284,8 @@
 <span class="lineNum">     206 </span>                :            : 
 <a name="207"><span class="lineNum">     207 </span>                :            : // Returns the current iterator item.</a>
 <span class="lineNum">     208 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     209 </span>                :<span class="lineCov">       5628 : char * valuelistiterator&lt;type_t&gt;::current (void) {</span>
-<span class="lineNum">     210 </span>[<span class="branchCov" title="Branch 0 was taken 5614 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       5628 :   return _current ? _current-&gt;key : NULL;</span>
+<span class="lineNum">     209 </span>                :<span class="lineCov">       7175 : char * valuelistiterator&lt;type_t&gt;::current (void) {</span>
+<span class="lineNum">     210 </span>[<span class="branchCov" title="Branch 0 was taken 7161 times"> + </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       7175 :   return _current ? _current-&gt;key : NULL;</span>
 <span class="lineNum">     211 </span>                :            : }
 <span class="lineNum">     212 </span>                :            : 
 <a name="213"><span class="lineNum">     213 </span>                :            : // Returns the current iterator items key.</a>
@@ -289,8 +296,8 @@
 <span class="lineNum">     218 </span>                :            : 
 <a name="219"><span class="lineNum">     219 </span>                :            : // Returns the current iterator items value.</a>
 <span class="lineNum">     220 </span>                :            : template &lt;class type_t&gt;
-<span class="lineNum">     221 </span>                :<span class="lineCov">       5614 : type_t * valuelistiterator&lt;type_t&gt;::currentVal (void) {</span>
-<span class="lineNum">     222 </span>[<span class="branchCov" title="Branch 0 was taken 5614 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       5614 :   return _current ? _current-&gt;value : NULL;</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">       7161 : type_t * valuelistiterator&lt;type_t&gt;::currentVal (void) {</span>
+<span class="lineNum">     222 </span>[<span class="branchCov" title="Branch 0 was taken 7161 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       7161 :   return _current ? _current-&gt;value : NULL;</span>
 <span class="lineNum">     223 </span>                :            : }
 <span class="lineNum">     224 </span>                :            : 
 <span class="lineNum">     225 </span>                :            : // Returns the first iterator item.

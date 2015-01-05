@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/variable.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/variable.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">28.6 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">5</td>
@@ -117,28 +124,28 @@
 <span class="lineNum">      46 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="47"><span class="lineNum">      47 </span>                :            : </a>
 <span class="lineNum">      48 </span>                :            : // This constructor creates a named instance of the variable class.
-<span class="lineNum">      49 </span>                :<span class="lineCov">         74 : variable::variable (const char * const n) {</span>
-<span class="lineNum">      50 </span>[<span class="branchCov" title="Branch 0 was taken 74 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 74 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         74 :   name = n ? std::string(n) : std::string();</span>
-<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchCov" title="Branch 9 was taken 74 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 13 was taken 74 times"> + </span><span class="branchNoCov" title="Branch 14 was not taken"> - </span>]
+<span class="lineNum">      49 </span>                :<span class="lineCov">         90 : variable::variable (const char * const n) {</span>
+<span class="lineNum">      50 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         90 :   name = n ? std::string(n) : std::string();</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchCov" title="Branch 9 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 13 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 14 was not taken"> - </span>]
 <span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 17 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>][<span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 29 was not executed"> # </span><span class="branchNoExec" title="Branch 30 was not executed"> # </span>][<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>]
 <span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 37 was not executed"> # </span><span class="branchNoExec" title="Branch 38 was not executed"> # </span>]
-<span class="lineNum">      51 </span>                :<span class="lineCov">         74 :   next = NULL;</span>
-<span class="lineNum">      52 </span>                :<span class="lineCov">         74 :   type = VAR_UNKNOWN;</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">         74 :   pass = true;</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">         74 : }</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">         90 :   next = NULL;</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">         90 :   type = VAR_UNKNOWN;</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">         90 :   pass = true;</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">         90 : }</span>
 <span class="lineNum">      55 </span>                :            : 
 <a name="56"><span class="lineNum">      56 </span>                :            : /* This copy constructor creates a instance of the variable class based</a>
 <span class="lineNum">      57 </span>                :            :    on the given variable. */
-<span class="lineNum">      58 </span>                :<span class="lineCov">         66 : variable::variable (const variable &amp; o) {</span>
-<span class="lineNum">      59 </span>  [<span class="branchCov" title="Branch 0 was taken 66 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         66 :   this-&gt;name = o.name;</span>
-<span class="lineNum">      60 </span>                :<span class="lineCov">         66 :   type = o.type;</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">         66 :   next = o.next;</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">         66 :   pass = o.pass;</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">         66 :   value = o.value;</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">         66 : }</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">         81 : variable::variable (const variable &amp; o) {</span>
+<span class="lineNum">      59 </span>  [<span class="branchCov" title="Branch 0 was taken 81 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         81 :   this-&gt;name = o.name;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">         81 :   type = o.type;</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">         81 :   next = o.next;</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">         81 :   pass = o.pass;</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">         81 :   value = o.value;</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">         81 : }</span>
 <span class="lineNum">      65 </span>                :            : 
 <a name="66"><span class="lineNum">      66 </span>                :            : </a>
 <span class="lineNum">      67 </span>                :            : // Creates textual representation of a variable.

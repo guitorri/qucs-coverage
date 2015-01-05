@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/vac.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/components/vac.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">49</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryMed">88.9 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">9</td>
@@ -102,11 +109,11 @@
 <span class="lineNum">      31 </span>                :            : 
 <a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
 <span class="lineNum">      33 </span>                :            : 
-<span class="lineNum">      34 </span>                :<span class="lineCov">         41 : vac::vac () : circuit (2) {</span>
-<span class="lineNum">      35 </span>                :<span class="lineCov">         41 :   type = CIR_VAC;</span>
-<span class="lineNum">      36 </span>                :<span class="lineCov">         41 :   setVSource (true);</span>
-<span class="lineNum">      37 </span>  [<span class="branchCov" title="Branch 0 was taken 41 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         41 :   setVoltageSources (1);</span>
-<a name="38"><span class="lineNum">      38 </span>                :<span class="lineCov">         41 : }</span></a>
+<span class="lineNum">      34 </span>                :<span class="lineCov">         47 : vac::vac () : circuit (2) {</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">         47 :   type = CIR_VAC;</span>
+<span class="lineNum">      36 </span>                :<span class="lineCov">         47 :   setVSource (true);</span>
+<span class="lineNum">      37 </span>  [<span class="branchCov" title="Branch 0 was taken 47 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         47 :   setVoltageSources (1);</span>
+<a name="38"><span class="lineNum">      38 </span>                :<span class="lineCov">         47 : }</span></a>
 <span class="lineNum">      39 </span>                :            : 
 <span class="lineNum">      40 </span>                :<span class="lineCov">          1 : void vac::initSP (void) {</span>
 <span class="lineNum">      41 </span>                :<span class="lineCov">          1 :   allocMatrixS ();</span>
@@ -116,33 +123,33 @@
 <span class="lineNum">      45 </span>        [<span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          1 :   setS (NODE_2, NODE_2, 0.0);</span>
 <a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">          1 : }</span></a>
 <span class="lineNum">      47 </span>                :            : 
-<span class="lineNum">      48 </span>                :<span class="lineCov">        277 : void vac::initDC (void) {</span>
-<span class="lineNum">      49 </span>                :<span class="lineCov">        277 :   allocMatrixMNA ();</span>
-<span class="lineNum">      50 </span>                :<span class="lineCov">        277 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
-<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">        277 : }</span></a>
+<span class="lineNum">      48 </span>                :<span class="lineCov">        329 : void vac::initDC (void) {</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">        329 :   allocMatrixMNA ();</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">        329 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">        329 : }</span></a>
 <span class="lineNum">      52 </span>                :            : 
-<span class="lineNum">      53 </span>                :<span class="lineCov">        139 : void vac::initAC (void) {</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">        139 :   initDC ();</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">        139 :   nr_double_t a = getPropertyDouble (&quot;U&quot;);</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">        139 :   nr_double_t p = getPropertyDouble (&quot;Phase&quot;);</span>
-<span class="lineNum">      57 </span>                :<span class="lineCov">        139 :   setE (VSRC_1, qucs::polar (a, rad (p)));</span>
-<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">        139 : }</span></a>
+<span class="lineNum">      53 </span>                :<span class="lineCov">        150 : void vac::initAC (void) {</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">        150 :   initDC ();</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">        150 :   nr_double_t a = getPropertyDouble (&quot;U&quot;);</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        150 :   nr_double_t p = getPropertyDouble (&quot;Phase&quot;);</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">        150 :   setE (VSRC_1, qucs::polar (a, rad (p)));</span>
+<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">        150 : }</span></a>
 <span class="lineNum">      59 </span>                :            : 
-<span class="lineNum">      60 </span>                :<span class="lineCov">         42 : void vac::initTR (void) {</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">         42 :   initDC ();</span>
-<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">         42 : }</span></a>
+<span class="lineNum">      60 </span>                :<span class="lineCov">         55 : void vac::initTR (void) {</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">         55 :   initDC ();</span>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">         55 : }</span></a>
 <span class="lineNum">      63 </span>                :            : 
-<span class="lineNum">      64 </span>                :<span class="lineCov">     230449 : void vac::calcTR (nr_double_t t) {</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">     230449 :   nr_double_t f = getPropertyDouble (&quot;f&quot;);</span>
-<span class="lineNum">      66 </span>                :<span class="lineCov">     230449 :   nr_double_t p = getPropertyDouble (&quot;Phase&quot;);</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">     230449 :   nr_double_t d = getPropertyDouble (&quot;Theta&quot;);</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">     230449 :   nr_double_t a = getPropertyDouble (&quot;U&quot;);</span>
-<span class="lineNum">      69 </span>                :<span class="lineCov">     230449 :   nr_double_t s = getNet()-&gt;getSrcFactor ();</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">     230449 :   nr_double_t o = 2 * M_PI * f;</span>
-<span class="lineNum">      71 </span>                :<span class="lineCov">     230449 :   nr_double_t T = p / f / 360;</span>
-<span class="lineNum">      72 </span>                :<span class="lineCov">     230449 :   nr_double_t u = s * a * std::exp (-(t + T) * d * f) * std::sin (o * t + rad (p));</span>
-<span class="lineNum">      73 </span>        [<span class="branchCov" title="Branch 1 was taken 230449 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     230449 :   setE (VSRC_1, u);</span>
-<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">     230449 : }</span></a>
+<span class="lineNum">      64 </span>                :<span class="lineCov">     304080 : void vac::calcTR (nr_double_t t) {</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">     304080 :   nr_double_t f = getPropertyDouble (&quot;f&quot;);</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">     304080 :   nr_double_t p = getPropertyDouble (&quot;Phase&quot;);</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">     304080 :   nr_double_t d = getPropertyDouble (&quot;Theta&quot;);</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">     304080 :   nr_double_t a = getPropertyDouble (&quot;U&quot;);</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">     304080 :   nr_double_t s = getNet()-&gt;getSrcFactor ();</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">     304080 :   nr_double_t o = 2 * M_PI * f;</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">     304080 :   nr_double_t T = p / f / 360;</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">     304080 :   nr_double_t u = s * a * std::exp (-(t + T) * d * f) * std::sin (o * t + rad (p));</span>
+<span class="lineNum">      73 </span>        [<span class="branchCov" title="Branch 1 was taken 304080 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     304080 :   setE (VSRC_1, u);</span>
+<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">     304080 : }</span></a>
 <span class="lineNum">      75 </span>                :            : 
 <span class="lineNum">      76 </span>                :<span class="lineCov">          1 : void vac::initHB (void) {</span>
 <span class="lineNum">      77 </span>                :<span class="lineCov">          1 :   setVoltageSources (1);</span>

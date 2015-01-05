@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/matvec.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/matvec.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">48</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">9.6 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">40</td>
@@ -230,10 +237,10 @@
 <span class="lineNum">     145 </span>                :            :    row and column indices as well.  The caller is responsible to
 <a name="146"><span class="lineNum">     146 </span>                :            :    'free()' the returned string.  If the vectors name does not match</a>
 <span class="lineNum">     147 </span>                :            :    the pattern the function returns NULL. */
-<span class="lineNum">     148 </span>                :<span class="lineCov">       1073 : char * matvec::isMatrixVector (char * n, int&amp; r, int&amp; c) {</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">       1218 : char * matvec::isMatrixVector (char * n, int&amp; r, int&amp; c) {</span>
 <span class="lineNum">     149 </span>                :            :   char * p; int len;
-<span class="lineNum">     150 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1073 times"> + </span>]:<span class="lineCov">       1073 :   if (n == NULL) return NULL;              // nothing todo here</span>
-<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchCov" title="Branch 1 was taken 889 times"> + </span>]:<span class="lineCov">       1073 :   if ((p = strchr (n, '[')) != NULL) {     // find first '['</span>
+<span class="lineNum">     150 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1218 times"> + </span>]:<span class="lineCov">       1218 :   if (n == NULL) return NULL;              // nothing todo here</span>
+<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchCov" title="Branch 1 was taken 1034 times"> + </span>]:<span class="lineCov">       1218 :   if ((p = strchr (n, '[')) != NULL) {     // find first '['</span>
 <span class="lineNum">     152 </span>                :<span class="lineCov">        184 :     r = atoi (p + 1) - 1;                  // get first index</span>
 <span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        184 :     if ((p = strchr (p, ',')) != NULL) {   // find the ','</span>
 <span class="lineNum">     154 </span>                :<span class="lineCov">        184 :       c = atoi (p + 1) - 1;                // get second index</span>
@@ -250,7 +257,7 @@
 <span class="lineNum">     165 </span>                :            :       }
 <span class="lineNum">     166 </span>                :            :     }
 <span class="lineNum">     167 </span>                :            :   }
-<span class="lineNum">     168 </span>                :<span class="lineCov">       1073 :   return NULL;</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">       1218 :   return NULL;</span>
 <span class="lineNum">     169 </span>                :            : }
 <span class="lineNum">     170 </span>                :            : 
 <span class="lineNum">     171 </span>                :            : /* This function looks through the vector list given in `data' to find

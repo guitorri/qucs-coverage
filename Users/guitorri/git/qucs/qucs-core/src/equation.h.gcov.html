@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -144,29 +144,29 @@
 <span class="lineNum">      66 </span>                :            :   node (int);
 <a name="67"><span class="lineNum">      67 </span>                :            :   node (const node &amp;);</a>
 <a name="68"><span class="lineNum">      68 </span>                :            :   virtual ~node ();</a>
-<span class="lineNum">      69 </span>                :<span class="lineCov">    2561192 :   node * getNext (void) { return next; }</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">     225419 :   void setNext (node * n) { next = n; }</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">    2938301 :   node * getNext (void) { return next; }</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">     257171 :   void setNext (node * n) { next = n; }</span>
 <span class="lineNum">      71 </span>                :            :   int count (void);
 <span class="lineNum">      72 </span>                :            :   void append (node *);
 <span class="lineNum">      73 </span>                :            :   void appendNodes (node *);
 <span class="lineNum">      74 </span>                :            :   void setDependencies (strlist *);
 <a name="75"><span class="lineNum">      75 </span>                :            :   strlist * getDependencies (void);</a>
 <span class="lineNum">      76 </span>                :            :   void setDataDependencies (strlist *);
-<span class="lineNum">      77 </span>                :<span class="lineCov">     112906 :   strlist * getDataDependencies (void) { return dataDependencies; }</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">     128660 :   strlist * getDataDependencies (void) { return dataDependencies; }</span>
 <a name="78"><span class="lineNum">      78 </span>                :            :   void setDropDependencies (strlist * deps) { dropDependencies = deps; }</a>
 <a name="79"><span class="lineNum">      79 </span>                :            :   void addDropDependencies (char *);</a>
-<span class="lineNum">      80 </span>                :<span class="lineCov">     112167 :   strlist * getDropDependencies (void) { return dropDependencies; }</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">     127879 :   strlist * getDropDependencies (void) { return dropDependencies; }</span>
 <span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 :   void setPrepDependencies (strlist * deps) { prepDependencies = deps; }</span>
 <a name="82"><span class="lineNum">      82 </span>                :            :   void addPrepDependencies (char *);</a>
 <span class="lineNum">      83 </span>                :            :   void appendPrepDependencies (strlist *);
-<span class="lineNum">      84 </span>                :<span class="lineCov">     112180 :   strlist * getPrepDependencies (void) { return prepDependencies; }</span>
+<span class="lineNum">      84 </span>                :<span class="lineCov">     127892 :   strlist * getPrepDependencies (void) { return prepDependencies; }</span>
 <span class="lineNum">      85 </span>                :            :   strlist * recurseDependencies (checker *, strlist *);
 <a name="86"><span class="lineNum">      86 </span>                :            :   node * get (int);</a>
 <a name="87"><span class="lineNum">      87 </span>                :            :   constant * getResult (int);</a>
-<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">     285551 :   int getType (void) { return type; }</span></a>
-<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">      21868 :   int getTag (void) { return tag; }</span></a>
-<span class="lineNum">      90 </span>                :<span class="lineCov">     117604 :   void setType (int tag) { type = tag; }</span>
-<span class="lineNum">      91 </span>                :<span class="lineCov">     929202 :   constant * getResult (void) { return res; }</span>
+<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">     327343 :   int getType (void) { return type; }</span></a>
+<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">      24487 :   int getTag (void) { return tag; }</span></a>
+<span class="lineNum">      90 </span>                :<span class="lineCov">     133762 :   void setType (int tag) { type = tag; }</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">    1060112 :   constant * getResult (void) { return res; }</span>
 <span class="lineNum">      92 </span>                :            :   nr_double_t getResultDouble (void);
 <span class="lineNum">      93 </span>                :            :   nr_complex_t getResultComplex (void);
 <span class="lineNum">      94 </span>                :            :   qucs::vector getResultVector (void);
@@ -180,7 +180,7 @@
 <a name="102"><span class="lineNum">     102 </span>                :            : </a>
 <a name="103"><span class="lineNum">     103 </span>                :            :   /* These functions should be overloaded by derivative classes. */</a>
 <a name="104"><span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :   virtual void print (void) { }</span></a>
-<a name="105"><span class="lineNum">     105 </span>                :<span class="lineCov">     113139 :   virtual void addDependencies (strlist *) { }</span></a>
+<a name="105"><span class="lineNum">     105 </span>                :<span class="lineCov">     129356 :   virtual void addDependencies (strlist *) { }</span></a>
 <a name="106"><span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 :   virtual int evalType (void) { return type; }</span></a>
 <a name="107"><span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 :   virtual char * toString (void) { return txt; }</span></a>
 <a name="108"><span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :   virtual constant * evaluate (void) { return res; }</span></a>
@@ -353,7 +353,7 @@
 <span class="lineNum">     275 </span>                :            :   void collectDependencies (void);
 <a name="276"><span class="lineNum">     276 </span>                :            :   void collectDependencies (node *);</a>
 <span class="lineNum">     277 </span>                :            :   void setEquations (node *);
-<span class="lineNum">     278 </span>                :<span class="lineCov">      50274 :   node * getEquations (void) { return equations; }</span>
+<span class="lineNum">     278 </span>                :<span class="lineCov">      56901 :   node * getEquations (void) { return equations; }</span>
 <span class="lineNum">     279 </span>                :            :   void list (void);
 <span class="lineNum">     280 </span>                :            :   int findUndefined (int);
 <span class="lineNum">     281 </span>                :            :   static const char * tag2key (int);
@@ -386,7 +386,7 @@
 <span class="lineNum">     308 </span>                :            :   nr_double_t getDouble (const char *const) const;
 <a name="309"><span class="lineNum">     309 </span>                :            :   void setDouble (const char *const, nr_double_t);</a>
 <span class="lineNum">     310 </span>                :            :   qucs::vector getVector (const char * const) const;
-<span class="lineNum">     311 </span>                :<span class="lineCov">      20668 :   void setDefinitions (struct definition_t * d) { defs = d; }</span>
+<span class="lineNum">     311 </span>                :<span class="lineCov">      23303 :   void setDefinitions (struct definition_t * d) { defs = d; }</span>
 <span class="lineNum">     312 </span>                :            :   struct definition_t * getDefinitions (void) { return defs; }
 <span class="lineNum">     313 </span>                :            :   node * findProperty (char *);
 <span class="lineNum">     314 </span>                :            : 
@@ -404,9 +404,9 @@
 <span class="lineNum">     326 </span>                :            : public:
 <a name="327"><span class="lineNum">     327 </span>                :            :   solver (checker *);</a>
 <a name="328"><span class="lineNum">     328 </span>                :            :   ~solver ();</a>
-<a name="329"><span class="lineNum">     329 </span>                :<span class="lineCov">      20567 :   void setEquations (node * eqn) { equations = eqn; }</span></a>
-<span class="lineNum">     330 </span>                :<span class="lineCov">      20567 :   node * getEquations (void) { return equations; }</span>
-<span class="lineNum">     331 </span>                :<span class="lineCov">      20567 :   void setData (dataset * d) { data = d; }</span>
+<a name="329"><span class="lineNum">     329 </span>                :<span class="lineCov">      23187 :   void setEquations (node * eqn) { equations = eqn; }</span></a>
+<span class="lineNum">     330 </span>                :<span class="lineCov">      23187 :   node * getEquations (void) { return equations; }</span>
+<span class="lineNum">     331 </span>                :<span class="lineCov">      23187 :   void setData (dataset * d) { data = d; }</span>
 <span class="lineNum">     332 </span>                :            :   dataset * getDataset (void) { return data; }
 <span class="lineNum">     333 </span>                :            :   void evaluate (void);
 <span class="lineNum">     334 </span>                :            :   node * addEquationData (qucs::vector *, bool ref = false);

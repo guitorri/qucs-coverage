@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/trsolver.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/trsolver.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">353</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">30</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryMed">81.1 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">176</td>
@@ -132,17 +139,17 @@
 <span class="lineNum">      61 </span>                :            : using namespace transient;
 <a name="62"><span class="lineNum">      62 </span>                :            : </a>
 <span class="lineNum">      63 </span>                :            : // Constructor creates an unnamed instance of the trsolver class.
-<span class="lineNum">      64 </span>                :<span class="lineCov">         34 : trsolver::trsolver ()</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">         34 :     : nasolver&lt;nr_double_t&gt; (), states&lt;nr_double_t&gt; ()</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">         38 : trsolver::trsolver ()</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">         38 :     : nasolver&lt;nr_double_t&gt; (), states&lt;nr_double_t&gt; ()</span>
 <span class="lineNum">      66 </span>                :            : {
-<span class="lineNum">      67 </span>                :<span class="lineCov">         34 :     swp = NULL;</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">         34 :     type = ANALYSIS_TRANSIENT;</span>
-<span class="lineNum">      69 </span>                :<span class="lineCov">         34 :     setDescription (&quot;transient&quot;);</span>
-<span class="lineNum">      70 </span>[<span class="branchCov" title="Branch 0 was taken 272 times"> + </span><span class="branchCov" title="Branch 1 was taken 34 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        306 :     for (int i = 0; i &lt; 8; i++) solution[i] = NULL;</span>
-<span class="lineNum">      71 </span>                :<span class="lineCov">         34 :     tHistory = NULL;</span>
-<span class="lineNum">      72 </span>                :<span class="lineCov">         34 :     relaxTSR = false;</span>
-<span class="lineNum">      73 </span>                :<span class="lineCov">         34 :     initialDC = true;</span>
-<span class="lineNum">      74 </span>                :<span class="lineCov">         34 : }</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">         38 :     swp = NULL;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">         38 :     type = ANALYSIS_TRANSIENT;</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">         38 :     setDescription (&quot;transient&quot;);</span>
+<span class="lineNum">      70 </span>[<span class="branchCov" title="Branch 0 was taken 304 times"> + </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        342 :     for (int i = 0; i &lt; 8; i++) solution[i] = NULL;</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">         38 :     tHistory = NULL;</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">         38 :     relaxTSR = false;</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">         38 :     initialDC = true;</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">         38 : }</span>
 <a name="75"><span class="lineNum">      75 </span>                :            : </a>
 <span class="lineNum">      76 </span>                :            : // Constructor creates a named instance of the trsolver class.
 <span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 : trsolver::trsolver (char * n)</span>
@@ -158,21 +165,21 @@
 <span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="88"><span class="lineNum">      88 </span>                :            : </a>
 <span class="lineNum">      89 </span>                :            : // Destructor deletes the trsolver class object.
-<span class="lineNum">      90 </span>                :<span class="lineCov">         34 : trsolver::~trsolver ()</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">         38 : trsolver::~trsolver ()</span>
 <span class="lineNum">      91 </span>                :            : {
-<span class="lineNum">      92 </span>[<span class="branchCov" title="Branch 0 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         34 :     if (swp) delete swp;</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      92 </span>[<span class="branchCov" title="Branch 0 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         38 :     if (swp) delete swp;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
-<span class="lineNum">      93 </span>[<span class="branchCov" title="Branch 0 was taken 272 times"> + </span><span class="branchCov" title="Branch 1 was taken 34 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        306 :     for (int i = 0; i &lt; 8; i++)</span>
+<span class="lineNum">      93 </span>[<span class="branchCov" title="Branch 0 was taken 304 times"> + </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        342 :     for (int i = 0; i &lt; 8; i++)</span>
 <span class="lineNum">      94 </span>                :            :     {
-<span class="lineNum">      95 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 272 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        272 :         if (solution[i] != NULL)</span>
+<span class="lineNum">      95 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 304 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        304 :         if (solution[i] != NULL)</span>
 <span class="lineNum">      96 </span>                :            :         {
 <span class="lineNum">      97 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :             delete solution[i];</span>
 <span class="lineNum">      98 </span>                :            :         }
 <span class="lineNum">      99 </span>                :            :     }
-<span class="lineNum">     100 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 34 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         34 :     if (tHistory) delete tHistory;</span>
+<span class="lineNum">     100 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         38 :     if (tHistory) delete tHistory;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
-<span class="lineNum">     101 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 34 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         68 : }</span>
+<span class="lineNum">     101 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 38 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         76 : }</span>
 <span class="lineNum">     102 </span>                :            : 
 <a name="103"><span class="lineNum">     103 </span>                :            : /* The copy constructor creates a new instance of the trsolver class</a>
 <span class="lineNum">     104 </span>                :            :    based on the given trsolver object. */
@@ -191,31 +198,31 @@
 <span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="114"><span class="lineNum">     114 </span>                :            : </a>
 <span class="lineNum">     115 </span>                :            : // This function creates the time sweep if necessary.
-<span class="lineNum">     116 </span>                :<span class="lineCov">         52 : void trsolver::initSteps (void)</span>
+<span class="lineNum">     116 </span>                :<span class="lineCov">         65 : void trsolver::initSteps (void)</span>
 <span class="lineNum">     117 </span>                :            : {
-<span class="lineNum">     118 </span>[<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 34 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         52 :     if (swp != NULL) delete swp;</span>
-<span class="lineNum">     119 </span>                :<span class="lineCov">         52 :     swp = createSweep (&quot;time&quot;);</span>
-<span class="lineNum">     120 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     118 </span>[<span class="branchCov" title="Branch 0 was taken 27 times"> + </span><span class="branchCov" title="Branch 1 was taken 38 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 27 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         65 :     if (swp != NULL) delete swp;</span>
+<span class="lineNum">     119 </span>                :<span class="lineCov">         65 :     swp = createSweep (&quot;time&quot;);</span>
+<span class="lineNum">     120 </span>                :<span class="lineCov">         65 : }</span>
 <a name="121"><span class="lineNum">     121 </span>                :            : </a>
 <span class="lineNum">     122 </span>                :            : // Performs the initial DC analysis.
-<span class="lineNum">     123 </span>                :<span class="lineCov">         51 : int trsolver::dcAnalysis (void)</span>
+<span class="lineNum">     123 </span>                :<span class="lineCov">         64 : int trsolver::dcAnalysis (void)</span>
 <span class="lineNum">     124 </span>                :            : {
-<span class="lineNum">     125 </span>                :<span class="lineCov">         51 :     int error = 0;</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">         64 :     int error = 0;</span>
 <span class="lineNum">     126 </span>                :            : 
 <span class="lineNum">     127 </span>                :            :     // First calculate a initial state using the non-linear DC analysis.
-<span class="lineNum">     128 </span>                :<span class="lineCov">         51 :     setDescription (&quot;initial DC&quot;);</span>
-<span class="lineNum">     129 </span>                :<span class="lineCov">         51 :     initDC ();</span>
-<span class="lineNum">     130 </span>                :<span class="lineCov">         51 :     setCalculation ((calculate_func_t) &amp;calcDC);</span>
-<span class="lineNum">     131 </span>                :<span class="lineCov">         51 :     solve_pre ();</span>
-<span class="lineNum">     132 </span>                :<span class="lineCov">         51 :     applyNodeset ();</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">         64 :     setDescription (&quot;initial DC&quot;);</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">         64 :     initDC ();</span>
+<span class="lineNum">     130 </span>                :<span class="lineCov">         64 :     setCalculation ((calculate_func_t) &amp;calcDC);</span>
+<span class="lineNum">     131 </span>                :<span class="lineCov">         64 :     solve_pre ();</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">         64 :     applyNodeset ();</span>
 <span class="lineNum">     133 </span>                :            : 
 <span class="lineNum">     134 </span>                :            :     // Run the DC solver once.
 <span class="lineNum">     135 </span>                :            :     try_running ()
 <span class="lineNum">     136 </span>                :            :     {
-<span class="lineNum">     137 </span>                :<span class="lineCov">         51 :         error = solve_nonlinear ();</span>
+<span class="lineNum">     137 </span>                :<span class="lineCov">         64 :         error = solve_nonlinear ();</span>
 <span class="lineNum">     138 </span>                :            :     }
 <span class="lineNum">     139 </span>                :            :     // Appropriate exception handling.
-<span class="lineNum">     140 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 51 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         51 :     catch_exception ()</span>
+<span class="lineNum">     140 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 64 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         64 :     catch_exception ()</span>
 <span class="lineNum">     141 </span>                :            :     {
 <span class="lineNum">     142 </span>                :            :     case EXCEPTION_NO_CONVERGENCE:
 <span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :         pop_exception ();</span>
@@ -234,40 +241,40 @@
 <span class="lineNum">     156 </span>                :            :     }
 <span class="lineNum">     157 </span>                :            : 
 <span class="lineNum">     158 </span>                :            :     // Save the DC solution.
-<span class="lineNum">     159 </span>                :<span class="lineCov">         51 :     storeSolution ();</span>
+<span class="lineNum">     159 </span>                :<span class="lineCov">         64 :     storeSolution ();</span>
 <span class="lineNum">     160 </span>                :            : 
 <span class="lineNum">     161 </span>                :            :     // Cleanup nodal analysis solver.
-<span class="lineNum">     162 </span>                :<span class="lineCov">         51 :     solve_post ();</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">         64 :     solve_post ();</span>
 <span class="lineNum">     163 </span>                :            : 
 <span class="lineNum">     164 </span>                :            :     // Really failed to find initial DC solution?
-<span class="lineNum">     165 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 51 times"> + </span>]:<span class="lineCov">         51 :     if (error)</span>
+<span class="lineNum">     165 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 64 times"> + </span>]:<span class="lineCov">         64 :     if (error)</span>
 <span class="lineNum">     166 </span>                :            :     {
 <span class="lineNum">     167 </span>                :            :         logprint (LOG_ERROR, &quot;ERROR: %s: %s analysis failed\n&quot;,
 <span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :                   getName (), getDescription ());</span>
 <span class="lineNum">     169 </span>                :            :     }
-<span class="lineNum">     170 </span>                :<span class="lineCov">         51 :     return error;</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">         64 :     return error;</span>
 <span class="lineNum">     171 </span>                :            : }
 <span class="lineNum">     172 </span>                :            : 
 <a name="173"><span class="lineNum">     173 </span>                :            : /* This is the transient netlist solver.  It prepares the circuit list</a>
 <span class="lineNum">     174 </span>                :            :    for each requested time and solves it then. */
-<span class="lineNum">     175 </span>                :<span class="lineCov">         52 : int trsolver::solve (void)</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">         65 : int trsolver::solve (void)</span>
 <span class="lineNum">     176 </span>                :            : {
 <span class="lineNum">     177 </span>                :            :     nr_double_t time, saveCurrent;
-<span class="lineNum">     178 </span>                :<span class="lineCov">         52 :     int error = 0, convError = 0;</span>
-<span class="lineNum">     179 </span>                :<span class="lineCov">         52 :     const char * const solver = getPropertyString (&quot;Solver&quot;);</span>
-<span class="lineNum">     180 </span>                :<span class="lineCov">         52 :     relaxTSR = !strcmp (getPropertyString (&quot;relaxTSR&quot;), &quot;yes&quot;) ? true : false;</span>
-<span class="lineNum">     181 </span>                :<span class="lineCov">         52 :     initialDC = !strcmp (getPropertyString (&quot;initialDC&quot;), &quot;yes&quot;) ? true : false;</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">         65 :     int error = 0, convError = 0;</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">         65 :     const char * const solver = getPropertyString (&quot;Solver&quot;);</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">         65 :     relaxTSR = !strcmp (getPropertyString (&quot;relaxTSR&quot;), &quot;yes&quot;) ? true : false;</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">         65 :     initialDC = !strcmp (getPropertyString (&quot;initialDC&quot;), &quot;yes&quot;) ? true : false;</span>
 <span class="lineNum">     182 </span>                :            : 
-<span class="lineNum">     183 </span>                :<span class="lineCov">         52 :     runs++;</span>
-<span class="lineNum">     184 </span>                :<span class="lineCov">         52 :     saveCurrent = current = 0;</span>
-<span class="lineNum">     185 </span>                :<span class="lineCov">         52 :     stepDelta = -1;</span>
-<span class="lineNum">     186 </span>                :<span class="lineCov">         52 :     converged = 0;</span>
-<span class="lineNum">     187 </span>                :<span class="lineCov">         52 :     fixpoint = 0;</span>
-<span class="lineNum">     188 </span>                :<span class="lineCov">         52 :     statRejected = statSteps = statIterations = statConvergence = 0;</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">         65 :     runs++;</span>
+<span class="lineNum">     184 </span>                :<span class="lineCov">         65 :     saveCurrent = current = 0;</span>
+<span class="lineNum">     185 </span>                :<span class="lineCov">         65 :     stepDelta = -1;</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">         65 :     converged = 0;</span>
+<span class="lineNum">     187 </span>                :<span class="lineCov">         65 :     fixpoint = 0;</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">         65 :     statRejected = statSteps = statIterations = statConvergence = 0;</span>
 <span class="lineNum">     189 </span>                :            : 
 <span class="lineNum">     190 </span>                :            :     // Choose a solver.
-<span class="lineNum">     191 </span>        [<span class="branchCov" title="Branch 0 was taken 52 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         52 :     if (!strcmp (solver, &quot;CroutLU&quot;))</span>
-<span class="lineNum">     192 </span>                :<span class="lineCov">         52 :         eqnAlgo = ALGO_LU_DECOMPOSITION;</span>
+<span class="lineNum">     191 </span>        [<span class="branchCov" title="Branch 0 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         65 :     if (!strcmp (solver, &quot;CroutLU&quot;))</span>
+<span class="lineNum">     192 </span>                :<span class="lineCov">         65 :         eqnAlgo = ALGO_LU_DECOMPOSITION;</span>
 <span class="lineNum">     193 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (!strcmp (solver, &quot;DoolittleLU&quot;))</span>
 <span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :         eqnAlgo = ALGO_LU_DECOMPOSITION_DOOLITTLE;</span>
 <span class="lineNum">     195 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (!strcmp (solver, &quot;HouseholderQR&quot;))</span>
@@ -278,51 +285,51 @@
 <span class="lineNum">     200 </span>                :<span class="lineNoCov">          0 :         eqnAlgo = ALGO_SV_DECOMPOSITION;</span>
 <span class="lineNum">     201 </span>                :            : 
 <span class="lineNum">     202 </span>                :            :     // Perform initial DC analysis.
-<span class="lineNum">     203 </span>        [<span class="branchCov" title="Branch 0 was taken 51 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         52 :     if (initialDC)</span>
+<span class="lineNum">     203 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         65 :     if (initialDC)</span>
 <span class="lineNum">     204 </span>                :            :     {
-<span class="lineNum">     205 </span>                :<span class="lineCov">         51 :         error = dcAnalysis ();</span>
-<span class="lineNum">     206 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 51 times"> + </span>]:<span class="lineCov">         51 :         if (error)</span>
+<span class="lineNum">     205 </span>                :<span class="lineCov">         64 :         error = dcAnalysis ();</span>
+<span class="lineNum">     206 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 64 times"> + </span>]:<span class="lineCov">         64 :         if (error)</span>
 <span class="lineNum">     207 </span>                :<span class="lineNoCov">          0 :             return -1;</span>
 <span class="lineNum">     208 </span>                :            :     }
 <span class="lineNum">     209 </span>                :            : 
 <span class="lineNum">     210 </span>                :            :     // Initialize transient analysis.
-<span class="lineNum">     211 </span>                :<span class="lineCov">         52 :     setDescription (&quot;transient&quot;);</span>
-<span class="lineNum">     212 </span>                :<span class="lineCov">         52 :     initTR ();</span>
-<span class="lineNum">     213 </span>                :<span class="lineCov">         52 :     setCalculation ((calculate_func_t) &amp;calcTR);</span>
-<span class="lineNum">     214 </span>                :<span class="lineCov">         52 :     solve_pre ();</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">         65 :     setDescription (&quot;transient&quot;);</span>
+<span class="lineNum">     212 </span>                :<span class="lineCov">         65 :     initTR ();</span>
+<span class="lineNum">     213 </span>                :<span class="lineCov">         65 :     setCalculation ((calculate_func_t) &amp;calcTR);</span>
+<span class="lineNum">     214 </span>                :<span class="lineCov">         65 :     solve_pre ();</span>
 <span class="lineNum">     215 </span>                :            : 
 <span class="lineNum">     216 </span>                :            :     // Create time sweep if necessary.
-<span class="lineNum">     217 </span>                :<span class="lineCov">         52 :     initSteps ();</span>
-<span class="lineNum">     218 </span>                :<span class="lineCov">         52 :     swp-&gt;reset ();</span>
+<span class="lineNum">     217 </span>                :<span class="lineCov">         65 :     initSteps ();</span>
+<span class="lineNum">     218 </span>                :<span class="lineCov">         65 :     swp-&gt;reset ();</span>
 <span class="lineNum">     219 </span>                :            : 
 <span class="lineNum">     220 </span>                :            :     // Recall the DC solution.
-<span class="lineNum">     221 </span>                :<span class="lineCov">         52 :     recallSolution ();</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">         65 :     recallSolution ();</span>
 <span class="lineNum">     222 </span>                :            : 
 <span class="lineNum">     223 </span>                :            :     // Apply the nodesets and adjust previous solutions.
-<span class="lineNum">     224 </span>                :<span class="lineCov">         52 :     applyNodeset (false);</span>
-<span class="lineNum">     225 </span>                :<span class="lineCov">         52 :     fillSolution (x);</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">         65 :     applyNodeset (false);</span>
+<span class="lineNum">     225 </span>                :<span class="lineCov">         65 :     fillSolution (x);</span>
 <span class="lineNum">     226 </span>                :            : 
 <span class="lineNum">     227 </span>                :            :     // Tell integrators to be initialized.
-<span class="lineNum">     228 </span>                :<span class="lineCov">         52 :     setMode (MODE_INIT);</span>
+<span class="lineNum">     228 </span>                :<span class="lineCov">         65 :     setMode (MODE_INIT);</span>
 <span class="lineNum">     229 </span>                :            : 
-<span class="lineNum">     230 </span>                :<span class="lineCov">         52 :     int running = 0;</span>
-<span class="lineNum">     231 </span>                :<span class="lineCov">         52 :     rejected = 0;</span>
-<span class="lineNum">     232 </span>                :<span class="lineCov">         52 :     delta /= 10;</span>
-<span class="lineNum">     233 </span>                :<span class="lineCov">         52 :     fillState (dState, delta);</span>
-<span class="lineNum">     234 </span>                :<span class="lineCov">         52 :     adjustOrder (1);</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">         65 :     int running = 0;</span>
+<span class="lineNum">     231 </span>                :<span class="lineCov">         65 :     rejected = 0;</span>
+<span class="lineNum">     232 </span>                :<span class="lineCov">         65 :     delta /= 10;</span>
+<span class="lineNum">     233 </span>                :<span class="lineCov">         65 :     fillState (dState, delta);</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">         65 :     adjustOrder (1);</span>
 <span class="lineNum">     235 </span>                :            : 
 <span class="lineNum">     236 </span>                :            :     // Start to sweep through time.
-<span class="lineNum">     237 </span>        [<span class="branchCov" title="Branch 1 was taken 31874 times"> + </span><span class="branchCov" title="Branch 2 was taken 52 times"> + </span>]:<span class="lineCov">      31926 :     for (int i = 0; i &lt; swp-&gt;getSize (); i++)</span>
+<span class="lineNum">     237 </span>        [<span class="branchCov" title="Branch 1 was taken 43177 times"> + </span><span class="branchCov" title="Branch 2 was taken 65 times"> + </span>]:<span class="lineCov">      43242 :     for (int i = 0; i &lt; swp-&gt;getSize (); i++)</span>
 <span class="lineNum">     238 </span>                :            :     {
-<span class="lineNum">     239 </span>                :<span class="lineCov">      31874 :         time = swp-&gt;next ();</span>
-<span class="lineNum">     240 </span>        [<span class="branchCov" title="Branch 0 was taken 11874 times"> + </span><span class="branchCov" title="Branch 1 was taken 20000 times"> + </span>]:<span class="lineCov">      31874 :         if (progress) logprogressbar (i, swp-&gt;getSize (), 40);</span>
+<span class="lineNum">     239 </span>                :<span class="lineCov">      43177 :         time = swp-&gt;next ();</span>
+<span class="lineNum">     240 </span>        [<span class="branchCov" title="Branch 0 was taken 13177 times"> + </span><span class="branchCov" title="Branch 1 was taken 30000 times"> + </span>]:<span class="lineCov">      43177 :         if (progress) logprogressbar (i, swp-&gt;getSize (), 40);</span>
 <span class="lineNum">     241 </span>                :            : 
 <span class="lineNum">     242 </span>                :            : #if DEBUG &amp;&amp; 0
 <span class="lineNum">     243 </span>                :            :         logprint (LOG_STATUS, &quot;NOTIFY: %s: solving netlist for t = %e\n&quot;,
 <span class="lineNum">     244 </span>                :            :                   getName (), (double) time);
 <span class="lineNum">     245 </span>                :            : #endif
 <span class="lineNum">     246 </span>                :            : 
-<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 145815 times"> + </span><span class="branchCov" title="Branch 1 was taken 31874 times"> + </span>]:<span class="lineCov">     177689 :         do // while (saveCurrent &lt; time), i.e. until a requested breakpoint is hit</span>
+<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 171308 times"> + </span><span class="branchCov" title="Branch 1 was taken 43177 times"> + </span>]:<span class="lineCov">     214485 :         do // while (saveCurrent &lt; time), i.e. until a requested breakpoint is hit</span>
 <span class="lineNum">     248 </span>                :            :         {
 <span class="lineNum">     249 </span>                :            : #if STEPDEBUG
 <span class="lineNum">     250 </span>                :            :             if (delta == deltaMin)
@@ -337,17 +344,17 @@
 <span class="lineNum">     259 </span>                :            : #endif
 <span class="lineNum">     260 </span>                :            :             // updates the integrator coefficients, and updates the array of prev
 <span class="lineNum">     261 </span>                :            :             // 8 deltas with the new delta for this step
-<span class="lineNum">     262 </span>                :<span class="lineCov">     177689 :             updateCoefficients (delta);</span>
+<span class="lineNum">     262 </span>                :<span class="lineCov">     214485 :             updateCoefficients (delta);</span>
 <span class="lineNum">     263 </span>                :            : 
 <span class="lineNum">     264 </span>                :            :             // Run predictor to get a start value for the solution vector for
 <span class="lineNum">     265 </span>                :            :             // the successive iterative corrector process
-<span class="lineNum">     266 </span>                :<span class="lineCov">     177689 :             error += predictor ();</span>
+<span class="lineNum">     266 </span>                :<span class="lineCov">     214485 :             error += predictor ();</span>
 <span class="lineNum">     267 </span>                :            : 
 <span class="lineNum">     268 </span>                :            :             // restart Newton iteration
-<span class="lineNum">     269 </span>        [<span class="branchCov" title="Branch 0 was taken 16565 times"> + </span><span class="branchCov" title="Branch 1 was taken 161124 times"> + </span>]:<span class="lineCov">     177689 :             if (rejected)</span>
+<span class="lineNum">     269 </span>        [<span class="branchCov" title="Branch 0 was taken 22030 times"> + </span><span class="branchCov" title="Branch 1 was taken 192455 times"> + </span>]:<span class="lineCov">     214485 :             if (rejected)</span>
 <span class="lineNum">     270 </span>                :            :             {
-<span class="lineNum">     271 </span>                :<span class="lineCov">      16565 :                 restart ();      // restart non-linear devices</span>
-<span class="lineNum">     272 </span>                :<span class="lineCov">      16565 :                 rejected = 0;</span>
+<span class="lineNum">     271 </span>                :<span class="lineCov">      22030 :                 restart ();      // restart non-linear devices</span>
+<span class="lineNum">     272 </span>                :<span class="lineCov">      22030 :                 rejected = 0;</span>
 <span class="lineNum">     273 </span>                :            :             }
 <span class="lineNum">     274 </span>                :            : 
 <span class="lineNum">     275 </span>                :            :             // Run corrector process with appropriate exception handling.
@@ -355,9 +362,9 @@
 <span class="lineNum">     277 </span>                :            :             // process until a certain error tolerance has been reached.
 <span class="lineNum">     278 </span>                :            :             try_running () // #defined as:    do {
 <span class="lineNum">     279 </span>                :            :             {
-<span class="lineNum">     280 </span>                :<span class="lineCov">     177689 :                 error += corrector ();</span>
+<span class="lineNum">     280 </span>                :<span class="lineCov">     214485 :                 error += corrector ();</span>
 <span class="lineNum">     281 </span>                :            :             }
-<span class="lineNum">     282 </span>[<span class="branchCov" title="Branch 1 was taken 65 times"> + </span><span class="branchCov" title="Branch 2 was taken 177624 times"> + </span>][<span class="branchCov" title="Branch 5 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     177689 :             catch_exception () // #defined as:   } while (0); if (estack.top ()) switch (estack.top()-&gt;getCode ())</span>
+<span class="lineNum">     282 </span>[<span class="branchCov" title="Branch 1 was taken 65 times"> + </span><span class="branchCov" title="Branch 2 was taken 214420 times"> + </span>][<span class="branchCov" title="Branch 5 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     214485 :             catch_exception () // #defined as:   } while (0); if (estack.top ()) switch (estack.top()-&gt;getCode ())</span>
 <span class="lineNum">     283 </span>                :            :             {
 <span class="lineNum">     284 </span>                :            :             case EXCEPTION_NO_CONVERGENCE:
 <span class="lineNum">     285 </span>                :<span class="lineCov">         65 :                 pop_exception ();</span>
@@ -398,13 +405,13 @@
 <span class="lineNum">     320 </span>                :<span class="lineCov">         65 :                 break;</span>
 <span class="lineNum">     321 </span>                :            :             }
 <span class="lineNum">     322 </span>                :            :             // return if any errors occured other than convergence failure
-<span class="lineNum">     323 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 177689 times"> + </span>]:<span class="lineCov">     177689 :             if (error) return -1;</span>
+<span class="lineNum">     323 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 214485 times"> + </span>]:<span class="lineCov">     214485 :             if (error) return -1;</span>
 <span class="lineNum">     324 </span>                :            : 
 <span class="lineNum">     325 </span>                :            :             // if the step was rejected, the solution loop is restarted here
-<span class="lineNum">     326 </span>        [<span class="branchCov" title="Branch 0 was taken 65 times"> + </span><span class="branchCov" title="Branch 1 was taken 177624 times"> + </span>]:<span class="lineCov">     177689 :             if (rejected) continue;</span>
+<span class="lineNum">     326 </span>        [<span class="branchCov" title="Branch 0 was taken 65 times"> + </span><span class="branchCov" title="Branch 1 was taken 214420 times"> + </span>]:<span class="lineCov">     214485 :             if (rejected) continue;</span>
 <span class="lineNum">     327 </span>                :            : 
 <span class="lineNum">     328 </span>                :            :             // check whether Jacobian matrix is still non-singular
-<span class="lineNum">     329 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 177624 times"> + </span>]:<span class="lineCov">     177624 :             if (!A-&gt;isFinite ())</span>
+<span class="lineNum">     329 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 214420 times"> + </span>]:<span class="lineCov">     214420 :             if (!A-&gt;isFinite ())</span>
 <span class="lineNum">     330 </span>                :            :             {
 <span class="lineNum">     331 </span>                :            :                 logprint (LOG_ERROR, &quot;ERROR: %s: Jacobian singular at t = %.3e, &quot;
 <span class="lineNum">     332 </span>                :            :                           &quot;aborting %s analysis\n&quot;, getName (), (double) current,
@@ -413,38 +420,38 @@
 <span class="lineNum">     335 </span>                :            :             }
 <span class="lineNum">     336 </span>                :            : 
 <span class="lineNum">     337 </span>                :            :             // Update statistics and no more damped Newton-Raphson.
-<span class="lineNum">     338 </span>                :<span class="lineCov">     177624 :             statIterations += iterations;</span>
-<span class="lineNum">     339 </span>        [<span class="branchCov" title="Branch 0 was taken 177494 times"> + </span><span class="branchCov" title="Branch 1 was taken 130 times"> + </span>]:<span class="lineCov">     177624 :             if (--convError &lt; 0) convHelper = 0;</span>
+<span class="lineNum">     338 </span>                :<span class="lineCov">     214420 :             statIterations += iterations;</span>
+<span class="lineNum">     339 </span>        [<span class="branchCov" title="Branch 0 was taken 214290 times"> + </span><span class="branchCov" title="Branch 1 was taken 130 times"> + </span>]:<span class="lineCov">     214420 :             if (--convError &lt; 0) convHelper = 0;</span>
 <span class="lineNum">     340 </span>                :            : 
 <span class="lineNum">     341 </span>                :            :             // Now advance in time or not...
-<span class="lineNum">     342 </span>        [<span class="branchCov" title="Branch 0 was taken 177520 times"> + </span><span class="branchCov" title="Branch 1 was taken 104 times"> + </span>]:<span class="lineCov">     177624 :             if (running &gt; 1)</span>
+<span class="lineNum">     342 </span>        [<span class="branchCov" title="Branch 0 was taken 214290 times"> + </span><span class="branchCov" title="Branch 1 was taken 130 times"> + </span>]:<span class="lineCov">     214420 :             if (running &gt; 1)</span>
 <span class="lineNum">     343 </span>                :            :             {
-<span class="lineNum">     344 </span>                :<span class="lineCov">     177520 :                 adjustDelta (time);</span>
-<span class="lineNum">     345 </span>                :<span class="lineCov">     177520 :                 adjustOrder ();</span>
+<span class="lineNum">     344 </span>                :<span class="lineCov">     214290 :                 adjustDelta (time);</span>
+<span class="lineNum">     345 </span>                :<span class="lineCov">     214290 :                 adjustOrder ();</span>
 <span class="lineNum">     346 </span>                :            :             }
 <span class="lineNum">     347 </span>                :            :             else
 <span class="lineNum">     348 </span>                :            :             {
-<span class="lineNum">     349 </span>                :<span class="lineCov">        104 :                 fillStates ();</span>
-<span class="lineNum">     350 </span>                :<span class="lineCov">        104 :                 nextStates ();</span>
-<span class="lineNum">     351 </span>                :<span class="lineCov">        104 :                 rejected = 0;</span>
+<span class="lineNum">     349 </span>                :<span class="lineCov">        130 :                 fillStates ();</span>
+<span class="lineNum">     350 </span>                :<span class="lineCov">        130 :                 nextStates ();</span>
+<span class="lineNum">     351 </span>                :<span class="lineCov">        130 :                 rejected = 0;</span>
 <span class="lineNum">     352 </span>                :            :             }
 <span class="lineNum">     353 </span>                :            : 
-<span class="lineNum">     354 </span>                :<span class="lineCov">     177624 :             saveCurrent = current;</span>
-<span class="lineNum">     355 </span>                :<span class="lineCov">     177624 :             current += delta;</span>
-<span class="lineNum">     356 </span>                :<span class="lineCov">     177624 :             running++;</span>
-<span class="lineNum">     357 </span>                :<span class="lineCov">     177624 :             converged++;</span>
+<span class="lineNum">     354 </span>                :<span class="lineCov">     214420 :             saveCurrent = current;</span>
+<span class="lineNum">     355 </span>                :<span class="lineCov">     214420 :             current += delta;</span>
+<span class="lineNum">     356 </span>                :<span class="lineCov">     214420 :             running++;</span>
+<span class="lineNum">     357 </span>                :<span class="lineCov">     214420 :             converged++;</span>
 <span class="lineNum">     358 </span>                :            : 
 <span class="lineNum">     359 </span>                :            :             // Tell integrators to be running.
-<span class="lineNum">     360 </span>                :<span class="lineCov">     177624 :             setMode (MODE_NONE);</span>
+<span class="lineNum">     360 </span>                :<span class="lineCov">     214420 :             setMode (MODE_NONE);</span>
 <span class="lineNum">     361 </span>                :            : 
 <span class="lineNum">     362 </span>                :            :             // Initialize or update history.
-<span class="lineNum">     363 </span>        [<span class="branchCov" title="Branch 0 was taken 177572 times"> + </span><span class="branchCov" title="Branch 1 was taken 52 times"> + </span>]:<span class="lineCov">     177624 :             if (running &gt; 1)</span>
+<span class="lineNum">     363 </span>        [<span class="branchCov" title="Branch 0 was taken 214355 times"> + </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">     214420 :             if (running &gt; 1)</span>
 <span class="lineNum">     364 </span>                :            :             {
-<span class="lineNum">     365 </span>                :<span class="lineCov">     177572 :                 updateHistory (saveCurrent);</span>
+<span class="lineNum">     365 </span>                :<span class="lineCov">     214355 :                 updateHistory (saveCurrent);</span>
 <span class="lineNum">     366 </span>                :            :             }
 <span class="lineNum">     367 </span>                :            :             else
 <span class="lineNum">     368 </span>                :            :             {
-<span class="lineNum">     369 </span>                :<span class="lineCov">         52 :                 initHistory (saveCurrent);</span>
+<span class="lineNum">     369 </span>                :<span class="lineCov">         65 :                 initHistory (saveCurrent);</span>
 <span class="lineNum">     370 </span>                :            :             }
 <span class="lineNum">     371 </span>                :            :         }
 <span class="lineNum">     372 </span>                :            :         while (saveCurrent &lt; time); // Hit a requested time point?
@@ -458,36 +465,36 @@
 <span class="lineNum">     380 </span>                :            : #if BREAKPOINTS
 <span class="lineNum">     381 </span>                :            :         saveAllResults (saveCurrent);
 <span class="lineNum">     382 </span>                :            : #else
-<span class="lineNum">     383 </span>                :<span class="lineCov">      31874 :         saveAllResults (time);</span>
+<span class="lineNum">     383 </span>                :<span class="lineCov">      43177 :         saveAllResults (time);</span>
 <span class="lineNum">     384 </span>                :            : #endif
 <span class="lineNum">     385 </span>                :            :     } // for (int i = 0; i &lt; swp-&gt;getSize (); i++)
 <span class="lineNum">     386 </span>                :            : 
-<span class="lineNum">     387 </span>                :<span class="lineCov">         52 :     solve_post ();</span>
-<span class="lineNum">     388 </span>        [<span class="branchCov" title="Branch 0 was taken 32 times"> + </span><span class="branchCov" title="Branch 1 was taken 20 times"> + </span>]:<span class="lineCov">         52 :     if (progress) logprogressclear (40);</span>
+<span class="lineNum">     387 </span>                :<span class="lineCov">         65 :     solve_post ();</span>
+<span class="lineNum">     388 </span>        [<span class="branchCov" title="Branch 0 was taken 35 times"> + </span><span class="branchCov" title="Branch 1 was taken 30 times"> + </span>]:<span class="lineCov">         65 :     if (progress) logprogressclear (40);</span>
 <span class="lineNum">     389 </span>                :            :     logprint (LOG_STATUS, &quot;NOTIFY: %s: average time-step %g, %d rejections\n&quot;,
-<span class="lineNum">     390 </span>                :<span class="lineCov">         52 :               getName (), (double) (saveCurrent / statSteps), statRejected);</span>
+<span class="lineNum">     390 </span>                :<span class="lineCov">         65 :               getName (), (double) (saveCurrent / statSteps), statRejected);</span>
 <span class="lineNum">     391 </span>                :            :     logprint (LOG_STATUS, &quot;NOTIFY: %s: average NR-iterations %g, &quot;
 <span class="lineNum">     392 </span>                :            :               &quot;%d non-convergences\n&quot;, getName (),
-<span class="lineNum">     393 </span>                :<span class="lineCov">         52 :               (double) statIterations / statSteps, statConvergence);</span>
+<span class="lineNum">     393 </span>                :<span class="lineCov">         65 :               (double) statIterations / statSteps, statConvergence);</span>
 <span class="lineNum">     394 </span>                :            : 
 <span class="lineNum">     395 </span>                :            :     // cleanup
-<span class="lineNum">     396 </span>                :<span class="lineCov">         52 :     deinitTR ();</span>
-<span class="lineNum">     397 </span>                :<span class="lineCov">         52 :     return 0;</span>
+<span class="lineNum">     396 </span>                :<span class="lineCov">         65 :     deinitTR ();</span>
+<span class="lineNum">     397 </span>                :<span class="lineCov">         65 :     return 0;</span>
 <span class="lineNum">     398 </span>                :            : }
 <a name="399"><span class="lineNum">     399 </span>                :            : </a>
 <span class="lineNum">     400 </span>                :            : // The function initializes the history.
-<span class="lineNum">     401 </span>                :<span class="lineCov">         52 : void trsolver::initHistory (nr_double_t t)</span>
+<span class="lineNum">     401 </span>                :<span class="lineCov">         65 : void trsolver::initHistory (nr_double_t t)</span>
 <span class="lineNum">     402 </span>                :            : {
 <span class="lineNum">     403 </span>                :            :     // initialize time vector
-<span class="lineNum">     404 </span>        [<span class="branchCov" title="Branch 1 was taken 52 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         52 :     tHistory = new history ();</span>
-<span class="lineNum">     405 </span>                :<span class="lineCov">         52 :     tHistory-&gt;append (t);</span>
-<span class="lineNum">     406 </span>                :<span class="lineCov">         52 :     tHistory-&gt;self ();</span>
+<span class="lineNum">     404 </span>        [<span class="branchCov" title="Branch 1 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         65 :     tHistory = new history ();</span>
+<span class="lineNum">     405 </span>                :<span class="lineCov">         65 :     tHistory-&gt;append (t);</span>
+<span class="lineNum">     406 </span>                :<span class="lineCov">         65 :     tHistory-&gt;self ();</span>
 <span class="lineNum">     407 </span>                :            :     // initialize circuit histories
-<span class="lineNum">     408 </span>                :<span class="lineCov">         52 :     nr_double_t age = 0.0;</span>
-<span class="lineNum">     409 </span>                :<span class="lineCov">         52 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     410 </span>        [<span class="branchCov" title="Branch 1 was taken 598 times"> + </span><span class="branchCov" title="Branch 2 was taken 52 times"> + </span>]:<span class="lineCov">        650 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     408 </span>                :<span class="lineCov">         65 :     nr_double_t age = 0.0;</span>
+<span class="lineNum">     409 </span>                :<span class="lineCov">         65 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     410 </span>        [<span class="branchCov" title="Branch 1 was taken 740 times"> + </span><span class="branchCov" title="Branch 2 was taken 65 times"> + </span>]:<span class="lineCov">        805 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     411 </span>                :            :     {
-<span class="lineNum">     412 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 598 times"> + </span>]:<span class="lineCov">        598 :         if (c-&gt;hasHistory ())</span>
+<span class="lineNum">     412 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 740 times"> + </span>]:<span class="lineCov">        740 :         if (c-&gt;hasHistory ())</span>
 <span class="lineNum">     413 </span>                :            :         {
 <span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 :             c-&gt;applyHistory (tHistory);</span>
 <span class="lineNum">     415 </span>                :<span class="lineNoCov">          0 :             saveHistory (c);</span>
@@ -498,26 +505,26 @@
 <span class="lineNum">     420 </span>                :            :         }
 <span class="lineNum">     421 </span>                :            :     }
 <span class="lineNum">     422 </span>                :            :     // set maximum required age for all circuits
-<span class="lineNum">     423 </span>                :<span class="lineCov">         52 :     tHistory-&gt;setAge (age);</span>
-<span class="lineNum">     424 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     423 </span>                :<span class="lineCov">         65 :     tHistory-&gt;setAge (age);</span>
+<span class="lineNum">     424 </span>                :<span class="lineCov">         65 : }</span>
 <span class="lineNum">     425 </span>                :            : 
 <a name="426"><span class="lineNum">     426 </span>                :            : /* The following function updates the histories for the circuits which</a>
 <span class="lineNum">     427 </span>                :            :    requested them. */
-<span class="lineNum">     428 </span>                :<span class="lineCov">     177572 : void trsolver::updateHistory (nr_double_t t)</span>
+<span class="lineNum">     428 </span>                :<span class="lineCov">     214355 : void trsolver::updateHistory (nr_double_t t)</span>
 <span class="lineNum">     429 </span>                :            : {
-<span class="lineNum">     430 </span>        [<span class="branchCov" title="Branch 1 was taken 161084 times"> + </span><span class="branchCov" title="Branch 2 was taken 16488 times"> + </span>]:<span class="lineCov">     177572 :     if (t &gt; tHistory-&gt;last ())</span>
+<span class="lineNum">     430 </span>        [<span class="branchCov" title="Branch 1 was taken 192404 times"> + </span><span class="branchCov" title="Branch 2 was taken 21951 times"> + </span>]:<span class="lineCov">     214355 :     if (t &gt; tHistory-&gt;last ())</span>
 <span class="lineNum">     431 </span>                :            :     {
 <span class="lineNum">     432 </span>                :            :         // update time vector
-<span class="lineNum">     433 </span>                :<span class="lineCov">     161084 :         tHistory-&gt;append (t);</span>
+<span class="lineNum">     433 </span>                :<span class="lineCov">     192404 :         tHistory-&gt;append (t);</span>
 <span class="lineNum">     434 </span>                :            :         // update circuit histories
-<span class="lineNum">     435 </span>                :<span class="lineCov">     161084 :         circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     436 </span>        [<span class="branchCov" title="Branch 1 was taken 1509628 times"> + </span><span class="branchCov" title="Branch 2 was taken 161084 times"> + </span>]:<span class="lineCov">    1670712 :         for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     435 </span>                :<span class="lineCov">     192404 :         circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     436 </span>        [<span class="branchCov" title="Branch 1 was taken 1789367 times"> + </span><span class="branchCov" title="Branch 2 was taken 192404 times"> + </span>]:<span class="lineCov">    1981771 :         for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     437 </span>                :            :         {
-<span class="lineNum">     438 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 1509628 times"> + </span>]:<span class="lineCov">    1509628 :             if (c-&gt;hasHistory ()) saveHistory (c);</span>
+<span class="lineNum">     438 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 1789367 times"> + </span>]:<span class="lineCov">    1789367 :             if (c-&gt;hasHistory ()) saveHistory (c);</span>
 <span class="lineNum">     439 </span>                :            :         }
-<span class="lineNum">     440 </span>                :<span class="lineCov">     161084 :         tHistory-&gt;drop ();</span>
+<span class="lineNum">     440 </span>                :<span class="lineCov">     192404 :         tHistory-&gt;drop ();</span>
 <span class="lineNum">     441 </span>                :            :     }
-<span class="lineNum">     442 </span>                :<span class="lineCov">     177572 : }</span>
+<span class="lineNum">     442 </span>                :<span class="lineCov">     214355 : }</span>
 <a name="443"><span class="lineNum">     443 </span>                :            : </a>
 <span class="lineNum">     444 </span>                :            : // Stores node voltages and branch currents in the given circuits history.
 <span class="lineNum">     445 </span>                :<span class="lineNoCov">          0 : void trsolver::saveHistory (circuit * c)</span>
@@ -551,76 +558,76 @@
 <span class="lineNum">     473 </span>                :            : 
 <a name="474"><span class="lineNum">     474 </span>                :            : /* This function predicts a start value for the solution vector for</a>
 <span class="lineNum">     475 </span>                :            :    the successive iterative corrector process. */
-<span class="lineNum">     476 </span>                :<span class="lineCov">     177689 : int trsolver::predictor (void)</span>
+<span class="lineNum">     476 </span>                :<span class="lineCov">     214485 : int trsolver::predictor (void)</span>
 <span class="lineNum">     477 </span>                :            : {
-<span class="lineNum">     478 </span>                :<span class="lineCov">     177689 :     int error = 0;</span>
-<span class="lineNum">     479 </span>  [<span class="branchCov" title="Branch 0 was taken 1671 times"> + </span><span class="branchCov" title="Branch 1 was taken 175859 times"> + </span><span class="branchCov" title="Branch 2 was taken 159 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     177689 :     switch (predType)</span>
+<span class="lineNum">     478 </span>                :<span class="lineCov">     214485 :     int error = 0;</span>
+<span class="lineNum">     479 </span>  [<span class="branchCov" title="Branch 0 was taken 1671 times"> + </span><span class="branchCov" title="Branch 1 was taken 212616 times"> + </span><span class="branchCov" title="Branch 2 was taken 198 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     214485 :     switch (predType)</span>
 <span class="lineNum">     480 </span>                :            :     {
 <span class="lineNum">     481 </span>                :            :     case INTEGRATOR_GEAR: // explicit GEAR
 <span class="lineNum">     482 </span>                :<span class="lineCov">       1671 :         predictGear ();</span>
 <span class="lineNum">     483 </span>                :<span class="lineCov">       1671 :         break;</span>
 <span class="lineNum">     484 </span>                :            :     case INTEGRATOR_ADAMSBASHFORD: // ADAMS-BASHFORD
-<span class="lineNum">     485 </span>                :<span class="lineCov">     175859 :         predictBashford ();</span>
-<span class="lineNum">     486 </span>                :<span class="lineCov">     175859 :         break;</span>
+<span class="lineNum">     485 </span>                :<span class="lineCov">     212616 :         predictBashford ();</span>
+<span class="lineNum">     486 </span>                :<span class="lineCov">     212616 :         break;</span>
 <span class="lineNum">     487 </span>                :            :     case INTEGRATOR_EULER: // FORWARD EULER
-<span class="lineNum">     488 </span>                :<span class="lineCov">        159 :         predictEuler ();</span>
-<span class="lineNum">     489 </span>                :<span class="lineCov">        159 :         break;</span>
+<span class="lineNum">     488 </span>                :<span class="lineCov">        198 :         predictEuler ();</span>
+<span class="lineNum">     489 </span>                :<span class="lineCov">        198 :         break;</span>
 <span class="lineNum">     490 </span>                :            :     default:
 <span class="lineNum">     491 </span>                :<span class="lineNoCov">          0 :         *x = *SOL (1);  // This is too a simple predictor...</span>
 <span class="lineNum">     492 </span>                :<span class="lineNoCov">          0 :         break;</span>
 <span class="lineNum">     493 </span>                :            :     }
-<span class="lineNum">     494 </span>                :<span class="lineCov">     177689 :     saveSolution ();</span>
-<span class="lineNum">     495 </span>                :<span class="lineCov">     177689 :     *SOL (0) = *x;</span>
-<span class="lineNum">     496 </span>                :<span class="lineCov">     177689 :     return error;</span>
+<span class="lineNum">     494 </span>                :<span class="lineCov">     214485 :     saveSolution ();</span>
+<span class="lineNum">     495 </span>                :<span class="lineCov">     214485 :     *SOL (0) = *x;</span>
+<span class="lineNum">     496 </span>                :<span class="lineCov">     214485 :     return error;</span>
 <span class="lineNum">     497 </span>                :            : }
 <a name="498"><span class="lineNum">     498 </span>                :            : </a>
 <span class="lineNum">     499 </span>                :            : // Stores the given vector into all the solution vectors.
-<span class="lineNum">     500 </span>                :<span class="lineCov">         52 : void trsolver::fillSolution (tvector&lt;nr_double_t&gt; * s)</span>
+<span class="lineNum">     500 </span>                :<span class="lineCov">         65 : void trsolver::fillSolution (tvector&lt;nr_double_t&gt; * s)</span>
 <span class="lineNum">     501 </span>                :            : {
-<span class="lineNum">     502 </span>        [<span class="branchCov" title="Branch 2 was taken 416 times"> + </span><span class="branchCov" title="Branch 3 was taken 52 times"> + </span>]:<span class="lineCov">        468 :     for (int i = 0; i &lt; 8; i++) *SOL (i) = *s;</span>
-<span class="lineNum">     503 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     502 </span>        [<span class="branchCov" title="Branch 2 was taken 520 times"> + </span><span class="branchCov" title="Branch 3 was taken 65 times"> + </span>]:<span class="lineCov">        585 :     for (int i = 0; i &lt; 8; i++) *SOL (i) = *s;</span>
+<span class="lineNum">     503 </span>                :<span class="lineCov">         65 : }</span>
 <span class="lineNum">     504 </span>                :            : 
 <a name="505"><span class="lineNum">     505 </span>                :            : /* The function predicts the successive solution vector using the</a>
 <span class="lineNum">     506 </span>                :            :    explicit Adams-Bashford integration formula. */
-<span class="lineNum">     507 </span>                :<span class="lineCov">     175859 : void trsolver::predictBashford (void)</span>
+<span class="lineNum">     507 </span>                :<span class="lineCov">     212616 : void trsolver::predictBashford (void)</span>
 <span class="lineNum">     508 </span>                :            : {
-<span class="lineNum">     509 </span>                :<span class="lineCov">     175859 :     int N = countNodes ();</span>
-<span class="lineNum">     510 </span>                :<span class="lineCov">     175859 :     int M = countVoltageSources ();</span>
+<span class="lineNum">     509 </span>                :<span class="lineCov">     212616 :     int N = countNodes ();</span>
+<span class="lineNum">     510 </span>                :<span class="lineCov">     212616 :     int M = countVoltageSources ();</span>
 <span class="lineNum">     511 </span>                :            :     nr_double_t xn, dd, hn;
 <span class="lineNum">     512 </span>                :            : 
 <span class="lineNum">     513 </span>                :            :     // go through each solution
-<span class="lineNum">     514 </span>        [<span class="branchCov" title="Branch 0 was taken 1560595 times"> + </span><span class="branchCov" title="Branch 1 was taken 175859 times"> + </span>]:<span class="lineCov">    1736454 :     for (int r = 0; r &lt; N + M; r++)</span>
+<span class="lineNum">     514 </span>        [<span class="branchCov" title="Branch 0 was taken 1884702 times"> + </span><span class="branchCov" title="Branch 1 was taken 212616 times"> + </span>]:<span class="lineCov">    2097318 :     for (int r = 0; r &lt; N + M; r++)</span>
 <span class="lineNum">     515 </span>                :            :     {
-<span class="lineNum">     516 </span>                :<span class="lineCov">    1560595 :         xn = predCoeff[0] * SOL(1)-&gt;get (r); // a0 coefficient</span>
-<span class="lineNum">     517 </span>        [<span class="branchCov" title="Branch 0 was taken 3121190 times"> + </span><span class="branchCov" title="Branch 1 was taken 1560595 times"> + </span>]:<span class="lineCov">    4681785 :         for (int o = 1; o &lt;= predOrder; o++)</span>
+<span class="lineNum">     516 </span>                :<span class="lineCov">    1884702 :         xn = predCoeff[0] * SOL(1)-&gt;get (r); // a0 coefficient</span>
+<span class="lineNum">     517 </span>        [<span class="branchCov" title="Branch 0 was taken 3769404 times"> + </span><span class="branchCov" title="Branch 1 was taken 1884702 times"> + </span>]:<span class="lineCov">    5654106 :         for (int o = 1; o &lt;= predOrder; o++)</span>
 <span class="lineNum">     518 </span>                :            :         {
-<span class="lineNum">     519 </span>                :<span class="lineCov">    3121190 :             hn = getState (dState, o);         // previous time-step</span>
+<span class="lineNum">     519 </span>                :<span class="lineCov">    3769404 :             hn = getState (dState, o);         // previous time-step</span>
 <span class="lineNum">     520 </span>                :            :             // divided differences
-<span class="lineNum">     521 </span>                :<span class="lineCov">    3121190 :             dd = (SOL(o)-&gt;get (r) - SOL(o + 1)-&gt;get (r)) / hn;</span>
-<span class="lineNum">     522 </span>                :<span class="lineCov">    3121190 :             xn += predCoeff[o] * dd;           // b0, b1, ... coefficients</span>
+<span class="lineNum">     521 </span>                :<span class="lineCov">    3769404 :             dd = (SOL(o)-&gt;get (r) - SOL(o + 1)-&gt;get (r)) / hn;</span>
+<span class="lineNum">     522 </span>                :<span class="lineCov">    3769404 :             xn += predCoeff[o] * dd;           // b0, b1, ... coefficients</span>
 <span class="lineNum">     523 </span>                :            :         }
-<span class="lineNum">     524 </span>                :<span class="lineCov">    1560595 :         x-&gt;set (r, xn);                      // save prediction</span>
+<span class="lineNum">     524 </span>                :<span class="lineCov">    1884702 :         x-&gt;set (r, xn);                      // save prediction</span>
 <span class="lineNum">     525 </span>                :            :     }
-<span class="lineNum">     526 </span>                :<span class="lineCov">     175859 : }</span>
+<span class="lineNum">     526 </span>                :<span class="lineCov">     212616 : }</span>
 <span class="lineNum">     527 </span>                :            : 
 <span class="lineNum">     528 </span>                :            : /* The function predicts the successive solution vector using the
 <a name="529"><span class="lineNum">     529 </span>                :            :    explicit forward Euler integration formula.  Actually this is</a>
 <span class="lineNum">     530 </span>                :            :    Adams-Bashford order 1. */
-<span class="lineNum">     531 </span>                :<span class="lineCov">        159 : void trsolver::predictEuler (void)</span>
+<span class="lineNum">     531 </span>                :<span class="lineCov">        198 : void trsolver::predictEuler (void)</span>
 <span class="lineNum">     532 </span>                :            : {
-<span class="lineNum">     533 </span>                :<span class="lineCov">        159 :     int N = countNodes ();</span>
-<span class="lineNum">     534 </span>                :<span class="lineCov">        159 :     int M = countVoltageSources ();</span>
+<span class="lineNum">     533 </span>                :<span class="lineCov">        198 :     int N = countNodes ();</span>
+<span class="lineNum">     534 </span>                :<span class="lineCov">        198 :     int M = countVoltageSources ();</span>
 <span class="lineNum">     535 </span>                :            :     nr_double_t xn, dd, hn;
 <span class="lineNum">     536 </span>                :            : 
-<span class="lineNum">     537 </span>        [<span class="branchCov" title="Branch 0 was taken 1725 times"> + </span><span class="branchCov" title="Branch 1 was taken 159 times"> + </span>]:<span class="lineCov">       1884 :     for (int r = 0; r &lt; N + M; r++)</span>
+<span class="lineNum">     537 </span>        [<span class="branchCov" title="Branch 0 was taken 2154 times"> + </span><span class="branchCov" title="Branch 1 was taken 198 times"> + </span>]:<span class="lineCov">       2352 :     for (int r = 0; r &lt; N + M; r++)</span>
 <span class="lineNum">     538 </span>                :            :     {
-<span class="lineNum">     539 </span>                :<span class="lineCov">       1725 :         xn = predCoeff[0] * SOL(1)-&gt;get (r);</span>
-<span class="lineNum">     540 </span>                :<span class="lineCov">       1725 :         hn = getState (dState, 1);</span>
-<span class="lineNum">     541 </span>                :<span class="lineCov">       1725 :         dd = (SOL(1)-&gt;get (r) - SOL(2)-&gt;get (r)) / hn;</span>
-<span class="lineNum">     542 </span>                :<span class="lineCov">       1725 :         xn += predCoeff[1] * dd;</span>
-<span class="lineNum">     543 </span>                :<span class="lineCov">       1725 :         x-&gt;set (r, xn);</span>
+<span class="lineNum">     539 </span>                :<span class="lineCov">       2154 :         xn = predCoeff[0] * SOL(1)-&gt;get (r);</span>
+<span class="lineNum">     540 </span>                :<span class="lineCov">       2154 :         hn = getState (dState, 1);</span>
+<span class="lineNum">     541 </span>                :<span class="lineCov">       2154 :         dd = (SOL(1)-&gt;get (r) - SOL(2)-&gt;get (r)) / hn;</span>
+<span class="lineNum">     542 </span>                :<span class="lineCov">       2154 :         xn += predCoeff[1] * dd;</span>
+<span class="lineNum">     543 </span>                :<span class="lineCov">       2154 :         x-&gt;set (r, xn);</span>
 <span class="lineNum">     544 </span>                :            :     }
-<span class="lineNum">     545 </span>                :<span class="lineCov">        159 : }</span>
+<span class="lineNum">     545 </span>                :<span class="lineCov">        198 : }</span>
 <span class="lineNum">     546 </span>                :            : 
 <a name="547"><span class="lineNum">     547 </span>                :            : /* The function predicts the successive solution vector using the</a>
 <span class="lineNum">     548 </span>                :            :    explicit Gear integration formula. */
@@ -645,365 +652,365 @@
 <span class="lineNum">     567 </span>                :            : 
 <a name="568"><span class="lineNum">     568 </span>                :            : /* The function iterates through the solutions of the integration</a>
 <span class="lineNum">     569 </span>                :            :    process until a certain error tolerance has been reached. */
-<span class="lineNum">     570 </span>                :<span class="lineCov">     177689 : int trsolver::corrector (void)</span>
+<span class="lineNum">     570 </span>                :<span class="lineCov">     214485 : int trsolver::corrector (void)</span>
 <span class="lineNum">     571 </span>                :            : {
-<span class="lineNum">     572 </span>                :<span class="lineCov">     177689 :     int error = 0;</span>
-<span class="lineNum">     573 </span>                :<span class="lineCov">     177689 :     error += solve_nonlinear ();</span>
-<span class="lineNum">     574 </span>                :<span class="lineCov">     177689 :     return error;</span>
+<span class="lineNum">     572 </span>                :<span class="lineCov">     214485 :     int error = 0;</span>
+<span class="lineNum">     573 </span>                :<span class="lineCov">     214485 :     error += solve_nonlinear ();</span>
+<span class="lineNum">     574 </span>                :<span class="lineCov">     214485 :     return error;</span>
 <span class="lineNum">     575 </span>                :            : }
 <a name="576"><span class="lineNum">     576 </span>                :            : </a>
 <span class="lineNum">     577 </span>                :            : // The function advances one more time-step.
-<span class="lineNum">     578 </span>                :<span class="lineCov">     161124 : void trsolver::nextStates (void)</span>
+<span class="lineNum">     578 </span>                :<span class="lineCov">     192455 : void trsolver::nextStates (void)</span>
 <span class="lineNum">     579 </span>                :            : {
-<span class="lineNum">     580 </span>                :<span class="lineCov">     161124 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     581 </span>        [<span class="branchCov" title="Branch 1 was taken 1510105 times"> + </span><span class="branchCov" title="Branch 2 was taken 161124 times"> + </span>]:<span class="lineCov">    1671229 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     580 </span>                :<span class="lineCov">     192455 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     581 </span>        [<span class="branchCov" title="Branch 1 was taken 1789972 times"> + </span><span class="branchCov" title="Branch 2 was taken 192455 times"> + </span>]:<span class="lineCov">    1982427 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     582 </span>                :            :     {
 <span class="lineNum">     583 </span>                :            :         // for each circuit get the next state
-<span class="lineNum">     584 </span>                :<span class="lineCov">    1510105 :         c-&gt;nextState ();</span>
+<span class="lineNum">     584 </span>                :<span class="lineCov">    1789972 :         c-&gt;nextState ();</span>
 <span class="lineNum">     585 </span>                :            :     }
 <span class="lineNum">     586 </span>                :            : 
-<span class="lineNum">     587 </span>                :<span class="lineCov">     161124 :     *SOL (0) = *x; // save current solution</span>
-<span class="lineNum">     588 </span>                :<span class="lineCov">     161124 :     nextState ();</span>
-<span class="lineNum">     589 </span>                :<span class="lineCov">     161124 :     statSteps++;</span>
-<span class="lineNum">     590 </span>                :<span class="lineCov">     161124 : }</span>
+<span class="lineNum">     587 </span>                :<span class="lineCov">     192455 :     *SOL (0) = *x; // save current solution</span>
+<span class="lineNum">     588 </span>                :<span class="lineCov">     192455 :     nextState ();</span>
+<span class="lineNum">     589 </span>                :<span class="lineCov">     192455 :     statSteps++;</span>
+<span class="lineNum">     590 </span>                :<span class="lineCov">     192455 : }</span>
 <span class="lineNum">     591 </span>                :            : 
 <span class="lineNum">     592 </span>                :            : /* This function stores the current state of each circuit into all
 <span class="lineNum">     593 </span>                :            :    other states as well.  It is useful for higher order integration
 <a name="594"><span class="lineNum">     594 </span>                :            :    methods in order to initialize the states after the initial</a>
 <span class="lineNum">     595 </span>                :            :    transient solution. */
-<span class="lineNum">     596 </span>                :<span class="lineCov">        104 : void trsolver::fillStates (void)</span>
+<span class="lineNum">     596 </span>                :<span class="lineCov">        130 : void trsolver::fillStates (void)</span>
 <span class="lineNum">     597 </span>                :            : {
-<span class="lineNum">     598 </span>                :<span class="lineCov">        104 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     599 </span>        [<span class="branchCov" title="Branch 1 was taken 1196 times"> + </span><span class="branchCov" title="Branch 2 was taken 104 times"> + </span>]:<span class="lineCov">       1300 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     598 </span>                :<span class="lineCov">        130 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     599 </span>        [<span class="branchCov" title="Branch 1 was taken 1480 times"> + </span><span class="branchCov" title="Branch 2 was taken 130 times"> + </span>]:<span class="lineCov">       1610 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     600 </span>                :            :     {
-<span class="lineNum">     601 </span>        [<span class="branchCov" title="Branch 1 was taken 1136 times"> + </span><span class="branchCov" title="Branch 2 was taken 1196 times"> + </span>]:<span class="lineCov">       2332 :         for (int s = 0; s &lt; c-&gt;getStates (); s++)</span>
-<span class="lineNum">     602 </span>                :<span class="lineCov">       1136 :             c-&gt;fillState (s, c-&gt;getState (s));</span>
+<span class="lineNum">     601 </span>        [<span class="branchCov" title="Branch 1 was taken 1228 times"> + </span><span class="branchCov" title="Branch 2 was taken 1480 times"> + </span>]:<span class="lineCov">       2708 :         for (int s = 0; s &lt; c-&gt;getStates (); s++)</span>
+<span class="lineNum">     602 </span>                :<span class="lineCov">       1228 :             c-&gt;fillState (s, c-&gt;getState (s));</span>
 <span class="lineNum">     603 </span>                :            :     }
-<span class="lineNum">     604 </span>                :<span class="lineCov">        104 : }</span>
+<span class="lineNum">     604 </span>                :<span class="lineCov">        130 : }</span>
 <a name="605"><span class="lineNum">     605 </span>                :            : </a>
 <span class="lineNum">     606 </span>                :            : // The function modifies the circuit lists integrator mode.
-<span class="lineNum">     607 </span>                :<span class="lineCov">     177676 : void trsolver::setMode (int state)</span>
+<span class="lineNum">     607 </span>                :<span class="lineCov">     214485 : void trsolver::setMode (int state)</span>
 <span class="lineNum">     608 </span>                :            : {
-<span class="lineNum">     609 </span>                :<span class="lineCov">     177676 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     610 </span>        [<span class="branchCov" title="Branch 1 was taken 1661425 times"> + </span><span class="branchCov" title="Branch 2 was taken 177676 times"> + </span>]:<span class="lineCov">    1839101 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
-<span class="lineNum">     611 </span>                :<span class="lineCov">    1661425 :         c-&gt;setMode (state);</span>
-<span class="lineNum">     612 </span>                :<span class="lineCov">     177676 : }</span>
+<span class="lineNum">     609 </span>                :<span class="lineCov">     214485 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     610 </span>        [<span class="branchCov" title="Branch 1 was taken 1985496 times"> + </span><span class="branchCov" title="Branch 2 was taken 214485 times"> + </span>]:<span class="lineCov">    2199981 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     611 </span>                :<span class="lineCov">    1985496 :         c-&gt;setMode (state);</span>
+<span class="lineNum">     612 </span>                :<span class="lineCov">     214485 : }</span>
 <a name="613"><span class="lineNum">     613 </span>                :            : </a>
 <span class="lineNum">     614 </span>                :            : // The function passes the time delta array to the circuit list.
-<span class="lineNum">     615 </span>                :<span class="lineCov">         52 : void trsolver::setDelta (void)</span>
+<span class="lineNum">     615 </span>                :<span class="lineCov">         65 : void trsolver::setDelta (void)</span>
 <span class="lineNum">     616 </span>                :            : {
-<span class="lineNum">     617 </span>                :<span class="lineCov">         52 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     618 </span>        [<span class="branchCov" title="Branch 1 was taken 598 times"> + </span><span class="branchCov" title="Branch 2 was taken 52 times"> + </span>]:<span class="lineCov">        650 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
-<span class="lineNum">     619 </span>                :<span class="lineCov">        598 :         c-&gt;setDelta (deltas);</span>
-<span class="lineNum">     620 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     617 </span>                :<span class="lineCov">         65 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     618 </span>        [<span class="branchCov" title="Branch 1 was taken 740 times"> + </span><span class="branchCov" title="Branch 2 was taken 65 times"> + </span>]:<span class="lineCov">        805 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     619 </span>                :<span class="lineCov">        740 :         c-&gt;setDelta (deltas);</span>
+<span class="lineNum">     620 </span>                :<span class="lineCov">         65 : }</span>
 <span class="lineNum">     621 </span>                :            : 
 <a name="622"><span class="lineNum">     622 </span>                :            : /* This function tries to adapt the current time-step according to the</a>
 <span class="lineNum">     623 </span>                :            :    global truncation error. */
-<span class="lineNum">     624 </span>                :<span class="lineCov">     177520 : void trsolver::adjustDelta (nr_double_t t)</span>
+<span class="lineNum">     624 </span>                :<span class="lineCov">     214290 : void trsolver::adjustDelta (nr_double_t t)</span>
 <span class="lineNum">     625 </span>                :            : {
-<span class="lineNum">     626 </span>                :<span class="lineCov">     177520 :     deltaOld = delta;</span>
-<span class="lineNum">     627 </span>                :<span class="lineCov">     177520 :     delta = checkDelta ();</span>
-<span class="lineNum">     628 </span>        [<span class="branchCov" title="Branch 0 was taken 68808 times"> + </span><span class="branchCov" title="Branch 1 was taken 108712 times"> + </span>]:<span class="lineCov">     177520 :     if (delta &gt; deltaMax) delta = deltaMax;</span>
-<span class="lineNum">     629 </span>        [<span class="branchCov" title="Branch 0 was taken 2392 times"> + </span><span class="branchCov" title="Branch 1 was taken 175128 times"> + </span>]:<span class="lineCov">     177520 :     if (delta &lt; deltaMin) delta = deltaMin;</span>
+<span class="lineNum">     626 </span>                :<span class="lineCov">     214290 :     deltaOld = delta;</span>
+<span class="lineNum">     627 </span>                :<span class="lineCov">     214290 :     delta = checkDelta ();</span>
+<span class="lineNum">     628 </span>        [<span class="branchCov" title="Branch 0 was taken 72875 times"> + </span><span class="branchCov" title="Branch 1 was taken 141415 times"> + </span>]:<span class="lineCov">     214290 :     if (delta &gt; deltaMax) delta = deltaMax;</span>
+<span class="lineNum">     629 </span>        [<span class="branchCov" title="Branch 0 was taken 2392 times"> + </span><span class="branchCov" title="Branch 1 was taken 211898 times"> + </span>]:<span class="lineCov">     214290 :     if (delta &lt; deltaMin) delta = deltaMin;</span>
 <span class="lineNum">     630 </span>                :            : 
 <span class="lineNum">     631 </span>                :            :     // delta correction in order to hit exact breakpoint
-<span class="lineNum">     632 </span>                :<span class="lineCov">     177520 :     int good = 0;</span>
-<span class="lineNum">     633 </span>        [<span class="branchCov" title="Branch 0 was taken 175911 times"> + </span><span class="branchCov" title="Branch 1 was taken 1609 times"> + </span>]:<span class="lineCov">     177520 :     if (!relaxTSR)   // relaxed step raster?</span>
+<span class="lineNum">     632 </span>                :<span class="lineCov">     214290 :     int good = 0;</span>
+<span class="lineNum">     633 </span>        [<span class="branchCov" title="Branch 0 was taken 212681 times"> + </span><span class="branchCov" title="Branch 1 was taken 1609 times"> + </span>]:<span class="lineCov">     214290 :     if (!relaxTSR)   // relaxed step raster?</span>
 <span class="lineNum">     634 </span>                :            :     {
-<span class="lineNum">     635 </span>[<span class="branchCov" title="Branch 0 was taken 6873 times"> + </span><span class="branchCov" title="Branch 1 was taken 169038 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 6616 times"> + </span><span class="branchCov" title="Branch 3 was taken 257 times"> + </span>]:<span class="lineCov">     175911 :         if (!statConvergence || converged &gt; 64)   /* Is this a good guess? */</span>
+<span class="lineNum">     635 </span>[<span class="branchCov" title="Branch 0 was taken 6873 times"> + </span><span class="branchCov" title="Branch 1 was taken 205808 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 6616 times"> + </span><span class="branchCov" title="Branch 3 was taken 257 times"> + </span>]:<span class="lineCov">     212681 :         if (!statConvergence || converged &gt; 64)   /* Is this a good guess? */</span>
 <span class="lineNum">     636 </span>                :            :         {
 <span class="lineNum">     637 </span>                :            :             // check next breakpoint
-<span class="lineNum">     638 </span>        [<span class="branchCov" title="Branch 0 was taken 42958 times"> + </span><span class="branchCov" title="Branch 1 was taken 132696 times"> + </span>]:<span class="lineCov">     175654 :             if (stepDelta &gt; 0.0)</span>
+<span class="lineNum">     638 </span>        [<span class="branchCov" title="Branch 0 was taken 59546 times"> + </span><span class="branchCov" title="Branch 1 was taken 152878 times"> + </span>]:<span class="lineCov">     212424 :             if (stepDelta &gt; 0.0)</span>
 <span class="lineNum">     639 </span>                :            :             {
 <span class="lineNum">     640 </span>                :            :                 // restore last valid delta
-<span class="lineNum">     641 </span>                :<span class="lineCov">      42958 :                 delta = stepDelta;</span>
-<span class="lineNum">     642 </span>                :<span class="lineCov">      42958 :                 stepDelta = -1.0;</span>
+<span class="lineNum">     641 </span>                :<span class="lineCov">      59546 :                 delta = stepDelta;</span>
+<span class="lineNum">     642 </span>                :<span class="lineCov">      59546 :                 stepDelta = -1.0;</span>
 <span class="lineNum">     643 </span>                :            :             }
 <span class="lineNum">     644 </span>                :            :             else
 <span class="lineNum">     645 </span>                :            :             {
-<span class="lineNum">     646 </span>[<span class="branchCov" title="Branch 0 was taken 43111 times"> + </span><span class="branchCov" title="Branch 1 was taken 89585 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 42958 times"> + </span><span class="branchCov" title="Branch 3 was taken 153 times"> + </span>]:<span class="lineCov">     132696 :                 if (delta &gt; (t - current) &amp;&amp; t &gt; current)</span>
+<span class="lineNum">     646 </span>[<span class="branchCov" title="Branch 0 was taken 59750 times"> + </span><span class="branchCov" title="Branch 1 was taken 93128 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 59546 times"> + </span><span class="branchCov" title="Branch 3 was taken 204 times"> + </span>]:<span class="lineCov">     152878 :                 if (delta &gt; (t - current) &amp;&amp; t &gt; current)</span>
 <span class="lineNum">     647 </span>                :            :                 {
 <span class="lineNum">     648 </span>                :            :                     // save last valid delta and set exact step
-<span class="lineNum">     649 </span>                :<span class="lineCov">      42958 :                     stepDelta = deltaOld;</span>
-<span class="lineNum">     650 </span>                :<span class="lineCov">      42958 :                     delta = t - current;</span>
-<span class="lineNum">     651 </span>                :<span class="lineCov">      42958 :                     good = 1;</span>
+<span class="lineNum">     649 </span>                :<span class="lineCov">      59546 :                     stepDelta = deltaOld;</span>
+<span class="lineNum">     650 </span>                :<span class="lineCov">      59546 :                     delta = t - current;</span>
+<span class="lineNum">     651 </span>                :<span class="lineCov">      59546 :                     good = 1;</span>
 <span class="lineNum">     652 </span>                :            :                 }
 <span class="lineNum">     653 </span>                :            :                 else
 <span class="lineNum">     654 </span>                :            :                 {
-<span class="lineNum">     655 </span>                :<span class="lineCov">      89738 :                     stepDelta = -1.0;</span>
+<span class="lineNum">     655 </span>                :<span class="lineCov">      93332 :                     stepDelta = -1.0;</span>
 <span class="lineNum">     656 </span>                :            :                 }
 <span class="lineNum">     657 </span>                :            :             }
-<span class="lineNum">     658 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 175654 times"> + </span>]:<span class="lineCov">     175654 :             if (delta &gt; deltaMax) delta = deltaMax;</span>
-<span class="lineNum">     659 </span>        [<span class="branchCov" title="Branch 0 was taken 2412 times"> + </span><span class="branchCov" title="Branch 1 was taken 173242 times"> + </span>]:<span class="lineCov">     175654 :             if (delta &lt; deltaMin) delta = deltaMin;</span>
+<span class="lineNum">     658 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 212424 times"> + </span>]:<span class="lineCov">     212424 :             if (delta &gt; deltaMax) delta = deltaMax;</span>
+<span class="lineNum">     659 </span>        [<span class="branchCov" title="Branch 0 was taken 2416 times"> + </span><span class="branchCov" title="Branch 1 was taken 210008 times"> + </span>]:<span class="lineCov">     212424 :             if (delta &lt; deltaMin) delta = deltaMin;</span>
 <span class="lineNum">     660 </span>                :            :         }
 <span class="lineNum">     661 </span>                :            :     }
 <span class="lineNum">     662 </span>                :            : 
 <span class="lineNum">     663 </span>                :            :     // usual delta correction
-<span class="lineNum">     664 </span>[<span class="branchCov" title="Branch 0 was taken 40503 times"> + </span><span class="branchCov" title="Branch 1 was taken 137017 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 24003 times"> + </span><span class="branchCov" title="Branch 3 was taken 16500 times"> + </span>]:<span class="lineCov">     177520 :     if (delta &gt; 0.9 * deltaOld || good)   // accept current delta</span>
+<span class="lineNum">     664 </span>[<span class="branchCov" title="Branch 0 was taken 55400 times"> + </span><span class="branchCov" title="Branch 1 was taken 158890 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 33435 times"> + </span><span class="branchCov" title="Branch 3 was taken 21965 times"> + </span>]:<span class="lineCov">     214290 :     if (delta &gt; 0.9 * deltaOld || good)   // accept current delta</span>
 <span class="lineNum">     665 </span>                :            :     {
-<span class="lineNum">     666 </span>                :<span class="lineCov">     161020 :         nextStates ();</span>
-<span class="lineNum">     667 </span>                :<span class="lineCov">     161020 :         rejected = 0;</span>
+<span class="lineNum">     666 </span>                :<span class="lineCov">     192325 :         nextStates ();</span>
+<span class="lineNum">     667 </span>                :<span class="lineCov">     192325 :         rejected = 0;</span>
 <span class="lineNum">     668 </span>                :            : #if STEPDEBUG
 <span class="lineNum">     669 </span>                :            :         logprint (LOG_STATUS,
 <span class="lineNum">     670 </span>                :            :                   &quot;DEBUG: delta accepted at t = %.3e, h = %.3e\n&quot;,
 <span class="lineNum">     671 </span>                :            :                   (double) current, (double) delta);
 <span class="lineNum">     672 </span>                :            : #endif
 <span class="lineNum">     673 </span>                :            :     }
-<span class="lineNum">     674 </span>        [<span class="branchCov" title="Branch 0 was taken 16500 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      16500 :     else if (deltaOld &gt; delta)   // reject current delta</span>
+<span class="lineNum">     674 </span>        [<span class="branchCov" title="Branch 0 was taken 21965 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      21965 :     else if (deltaOld &gt; delta)   // reject current delta</span>
 <span class="lineNum">     675 </span>                :            :     {
-<span class="lineNum">     676 </span>                :<span class="lineCov">      16500 :         rejected++;</span>
-<span class="lineNum">     677 </span>                :<span class="lineCov">      16500 :         statRejected++;</span>
+<span class="lineNum">     676 </span>                :<span class="lineCov">      21965 :         rejected++;</span>
+<span class="lineNum">     677 </span>                :<span class="lineCov">      21965 :         statRejected++;</span>
 <span class="lineNum">     678 </span>                :            : #if STEPDEBUG
 <span class="lineNum">     679 </span>                :            :         logprint (LOG_STATUS,
 <span class="lineNum">     680 </span>                :            :                   &quot;DEBUG: delta rejected at t = %.3e, h = %.3e\n&quot;,
 <span class="lineNum">     681 </span>                :            :                   (double) current, (double) delta);
 <span class="lineNum">     682 </span>                :            : #endif
-<span class="lineNum">     683 </span>        [<span class="branchCov" title="Branch 0 was taken 16500 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      16500 :         if (current &gt; 0) current -= deltaOld;</span>
+<span class="lineNum">     683 </span>        [<span class="branchCov" title="Branch 0 was taken 21965 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      21965 :         if (current &gt; 0) current -= deltaOld;</span>
 <span class="lineNum">     684 </span>                :            :     }
 <span class="lineNum">     685 </span>                :            :     else
 <span class="lineNum">     686 </span>                :            :     {
 <span class="lineNum">     687 </span>                :<span class="lineNoCov">          0 :         nextStates ();</span>
 <span class="lineNum">     688 </span>                :<span class="lineNoCov">          0 :         rejected = 0;</span>
 <span class="lineNum">     689 </span>                :            :     }
-<span class="lineNum">     690 </span>                :<span class="lineCov">     177520 : }</span>
+<span class="lineNum">     690 </span>                :<span class="lineCov">     214290 : }</span>
 <span class="lineNum">     691 </span>                :            : 
 <a name="692"><span class="lineNum">     692 </span>                :            : /* The function can be used to increase the current order of the</a>
 <span class="lineNum">     693 </span>                :            :    integration method or to reduce it. */
-<span class="lineNum">     694 </span>                :<span class="lineCov">     177586 : void trsolver::adjustOrder (int reduce)</span>
+<span class="lineNum">     694 </span>                :<span class="lineCov">     214369 : void trsolver::adjustOrder (int reduce)</span>
 <span class="lineNum">     695 </span>                :            : {
-<span class="lineNum">     696 </span>[<span class="branchCov" title="Branch 0 was taken 54 times"> + </span><span class="branchCov" title="Branch 1 was taken 177532 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchCov" title="Branch 3 was taken 51 times"> + </span>]:<span class="lineCov">     177586 :     if ((corrOrder &lt; corrMaxOrder &amp;&amp; !rejected) || reduce)</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 66 times"> + </span><span class="branchCov" title="Branch 5 was taken 177469 times"> + </span>]
+<span class="lineNum">     696 </span>[<span class="branchCov" title="Branch 0 was taken 67 times"> + </span><span class="branchCov" title="Branch 1 was taken 214302 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchCov" title="Branch 3 was taken 64 times"> + </span>]:<span class="lineCov">     214369 :     if ((corrOrder &lt; corrMaxOrder &amp;&amp; !rejected) || reduce)</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 79 times"> + </span><span class="branchCov" title="Branch 5 was taken 214226 times"> + </span>]
 <span class="lineNum">     697 </span>                :            :     {
-<span class="lineNum">     698 </span>        [<span class="branchCov" title="Branch 0 was taken 66 times"> + </span><span class="branchCov" title="Branch 1 was taken 51 times"> + </span>]:<span class="lineCov">        117 :         if (reduce)</span>
+<span class="lineNum">     698 </span>        [<span class="branchCov" title="Branch 0 was taken 79 times"> + </span><span class="branchCov" title="Branch 1 was taken 64 times"> + </span>]:<span class="lineCov">        143 :         if (reduce)</span>
 <span class="lineNum">     699 </span>                :            :         {
-<span class="lineNum">     700 </span>                :<span class="lineCov">         66 :             corrOrder = 1;</span>
+<span class="lineNum">     700 </span>                :<span class="lineCov">         79 :             corrOrder = 1;</span>
 <span class="lineNum">     701 </span>                :            :         }
-<span class="lineNum">     702 </span>        [<span class="branchCov" title="Branch 0 was taken 51 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         51 :         else if (!rejected)</span>
+<span class="lineNum">     702 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         64 :         else if (!rejected)</span>
 <span class="lineNum">     703 </span>                :            :         {
-<span class="lineNum">     704 </span>                :<span class="lineCov">         51 :             corrOrder++;</span>
+<span class="lineNum">     704 </span>                :<span class="lineCov">         64 :             corrOrder++;</span>
 <span class="lineNum">     705 </span>                :            :         }
 <span class="lineNum">     706 </span>                :            : 
 <span class="lineNum">     707 </span>                :            :         // adjust type and order of corrector and predictor
-<span class="lineNum">     708 </span>                :<span class="lineCov">        117 :         corrType = correctorType (CMethod, corrOrder);</span>
-<span class="lineNum">     709 </span>                :<span class="lineCov">        117 :         predType = predictorType (corrType, corrOrder, predOrder);</span>
+<span class="lineNum">     708 </span>                :<span class="lineCov">        143 :         corrType = correctorType (CMethod, corrOrder);</span>
+<span class="lineNum">     709 </span>                :<span class="lineCov">        143 :         predType = predictorType (corrType, corrOrder, predOrder);</span>
 <span class="lineNum">     710 </span>                :            : 
 <span class="lineNum">     711 </span>                :            :         // apply new corrector method and order to each circuit
-<span class="lineNum">     712 </span>                :<span class="lineCov">        117 :         circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     713 </span>        [<span class="branchCov" title="Branch 1 was taken 1378 times"> + </span><span class="branchCov" title="Branch 2 was taken 117 times"> + </span>]:<span class="lineCov">       1495 :         for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     712 </span>                :<span class="lineCov">        143 :         circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     713 </span>        [<span class="branchCov" title="Branch 1 was taken 1662 times"> + </span><span class="branchCov" title="Branch 2 was taken 143 times"> + </span>]:<span class="lineCov">       1805 :         for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     714 </span>                :            :         {
-<span class="lineNum">     715 </span>                :<span class="lineCov">       1378 :             c-&gt;setOrder (corrOrder);</span>
-<span class="lineNum">     716 </span>                :<span class="lineCov">       1378 :             setIntegrationMethod (c, corrType);</span>
+<span class="lineNum">     715 </span>                :<span class="lineCov">       1662 :             c-&gt;setOrder (corrOrder);</span>
+<span class="lineNum">     716 </span>                :<span class="lineCov">       1662 :             setIntegrationMethod (c, corrType);</span>
 <span class="lineNum">     717 </span>                :            :         }
 <span class="lineNum">     718 </span>                :            :     }
-<span class="lineNum">     719 </span>                :<span class="lineCov">     177586 : }</span>
+<span class="lineNum">     719 </span>                :<span class="lineCov">     214369 : }</span>
 <span class="lineNum">     720 </span>                :            : 
 <a name="721"><span class="lineNum">     721 </span>                :            : /* Goes through the list of circuit objects and runs its calcDC()</a>
 <span class="lineNum">     722 </span>                :            :    function. */
-<span class="lineNum">     723 </span>                :<span class="lineCov">        233 : void trsolver::calcDC (trsolver * self)</span>
+<span class="lineNum">     723 </span>                :<span class="lineCov">        267 : void trsolver::calcDC (trsolver * self)</span>
 <span class="lineNum">     724 </span>                :            : {
-<span class="lineNum">     725 </span>                :<span class="lineCov">        233 :     circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
-<span class="lineNum">     726 </span>        [<span class="branchCov" title="Branch 1 was taken 3630 times"> + </span><span class="branchCov" title="Branch 2 was taken 233 times"> + </span>]:<span class="lineCov">       3863 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     725 </span>                :<span class="lineCov">        267 :     circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
+<span class="lineNum">     726 </span>        [<span class="branchCov" title="Branch 1 was taken 4258 times"> + </span><span class="branchCov" title="Branch 2 was taken 267 times"> + </span>]:<span class="lineCov">       4525 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     727 </span>                :            :     {
-<span class="lineNum">     728 </span>                :<span class="lineCov">       3630 :         c-&gt;calcDC ();</span>
+<span class="lineNum">     728 </span>                :<span class="lineCov">       4258 :         c-&gt;calcDC ();</span>
 <span class="lineNum">     729 </span>                :            :     }
-<span class="lineNum">     730 </span>                :<span class="lineCov">        233 : }</span>
+<span class="lineNum">     730 </span>                :<span class="lineCov">        267 : }</span>
 <span class="lineNum">     731 </span>                :            : 
 <a name="732"><span class="lineNum">     732 </span>                :            : /* Goes through the list of circuit objects and runs its calcTR()</a>
 <span class="lineNum">     733 </span>                :            :    function. */
-<span class="lineNum">     734 </span>                :<span class="lineCov">     409945 : void trsolver::calcTR (trsolver * self)</span>
+<span class="lineNum">     734 </span>                :<span class="lineCov">     483576 : void trsolver::calcTR (trsolver * self)</span>
 <span class="lineNum">     735 </span>                :            : {
-<span class="lineNum">     736 </span>                :<span class="lineCov">     409945 :     circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
-<span class="lineNum">     737 </span>        [<span class="branchCov" title="Branch 1 was taken 4015134 times"> + </span><span class="branchCov" title="Branch 2 was taken 409945 times"> + </span>]:<span class="lineCov">    4425079 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     736 </span>                :<span class="lineCov">     483576 :     circuit * root = self-&gt;getNet()-&gt;getRoot ();</span>
+<span class="lineNum">     737 </span>        [<span class="branchCov" title="Branch 1 was taken 4664669 times"> + </span><span class="branchCov" title="Branch 2 was taken 483576 times"> + </span>]:<span class="lineCov">    5148245 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     738 </span>                :            :     {
-<span class="lineNum">     739 </span>                :<span class="lineCov">    4015134 :         c-&gt;calcTR (self-&gt;current);</span>
+<span class="lineNum">     739 </span>                :<span class="lineCov">    4664669 :         c-&gt;calcTR (self-&gt;current);</span>
 <span class="lineNum">     740 </span>                :            :     }
-<span class="lineNum">     741 </span>                :<span class="lineCov">     409945 : }</span>
+<span class="lineNum">     741 </span>                :<span class="lineCov">     483576 : }</span>
 <span class="lineNum">     742 </span>                :            : 
 <a name="743"><span class="lineNum">     743 </span>                :            : /* Goes through the list of non-linear circuit objects and runs its</a>
 <span class="lineNum">     744 </span>                :            :    restartDC() function. */
-<span class="lineNum">     745 </span>                :<span class="lineCov">      16565 : void trsolver::restart (void)</span>
+<span class="lineNum">     745 </span>                :<span class="lineCov">      22030 : void trsolver::restart (void)</span>
 <span class="lineNum">     746 </span>                :            : {
-<span class="lineNum">     747 </span>                :<span class="lineCov">      16565 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     748 </span>        [<span class="branchCov" title="Branch 1 was taken 151618 times"> + </span><span class="branchCov" title="Branch 2 was taken 16565 times"> + </span>]:<span class="lineCov">     168183 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     747 </span>                :<span class="lineCov">      22030 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     748 </span>        [<span class="branchCov" title="Branch 1 was taken 195680 times"> + </span><span class="branchCov" title="Branch 2 was taken 22030 times"> + </span>]:<span class="lineCov">     217710 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     749 </span>                :            :     {
-<span class="lineNum">     750 </span>        [<span class="branchCov" title="Branch 1 was taken 14105 times"> + </span><span class="branchCov" title="Branch 2 was taken 137513 times"> + </span>]:<span class="lineCov">     151618 :         if (c-&gt;isNonLinear ()) c-&gt;restartDC ();</span>
+<span class="lineNum">     750 </span>        [<span class="branchCov" title="Branch 1 was taken 14105 times"> + </span><span class="branchCov" title="Branch 2 was taken 181575 times"> + </span>]:<span class="lineCov">     195680 :         if (c-&gt;isNonLinear ()) c-&gt;restartDC ();</span>
 <span class="lineNum">     751 </span>                :            :     }
-<span class="lineNum">     752 </span>                :<span class="lineCov">      16565 : }</span>
+<span class="lineNum">     752 </span>                :<span class="lineCov">      22030 : }</span>
 <span class="lineNum">     753 </span>                :            : 
 <a name="754"><span class="lineNum">     754 </span>                :            : /* Goes through the list of circuit objects and runs its initDC()</a>
 <span class="lineNum">     755 </span>                :            :    function. */
-<span class="lineNum">     756 </span>                :<span class="lineCov">         51 : void trsolver::initDC (void)</span>
+<span class="lineNum">     756 </span>                :<span class="lineCov">         64 : void trsolver::initDC (void)</span>
 <span class="lineNum">     757 </span>                :            : {
-<span class="lineNum">     758 </span>                :<span class="lineCov">         51 :     circuit * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     759 </span>        [<span class="branchCov" title="Branch 1 was taken 560 times"> + </span><span class="branchCov" title="Branch 2 was taken 51 times"> + </span>]:<span class="lineCov">        611 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     758 </span>                :<span class="lineCov">         64 :     circuit * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     759 </span>        [<span class="branchCov" title="Branch 1 was taken 702 times"> + </span><span class="branchCov" title="Branch 2 was taken 64 times"> + </span>]:<span class="lineCov">        766 :     for (circuit * c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
 <span class="lineNum">     760 </span>                :            :     {
-<span class="lineNum">     761 </span>                :<span class="lineCov">        560 :         c-&gt;initDC ();</span>
+<span class="lineNum">     761 </span>                :<span class="lineCov">        702 :         c-&gt;initDC ();</span>
 <span class="lineNum">     762 </span>                :            :     }
-<span class="lineNum">     763 </span>                :<span class="lineCov">         51 : }</span>
+<span class="lineNum">     763 </span>                :<span class="lineCov">         64 : }</span>
 <span class="lineNum">     764 </span>                :            : 
 <a name="765"><span class="lineNum">     765 </span>                :            : /* Goes through the list of circuit objects and runs its initTR()</a>
 <span class="lineNum">     766 </span>                :            :    function. */
-<span class="lineNum">     767 </span>                :<span class="lineCov">         52 : void trsolver::initTR (void)</span>
+<span class="lineNum">     767 </span>                :<span class="lineCov">         65 : void trsolver::initTR (void)</span>
 <span class="lineNum">     768 </span>                :            : {
-<span class="lineNum">     769 </span>                :<span class="lineCov">         52 :     const char * const IMethod = getPropertyString (&quot;IntegrationMethod&quot;);</span>
-<span class="lineNum">     770 </span>                :<span class="lineCov">         52 :     nr_double_t start = getPropertyDouble (&quot;Start&quot;);</span>
-<span class="lineNum">     771 </span>                :<span class="lineCov">         52 :     nr_double_t stop = getPropertyDouble (&quot;Stop&quot;);</span>
-<span class="lineNum">     772 </span>                :<span class="lineCov">         52 :     nr_double_t points = getPropertyDouble (&quot;Points&quot;);</span>
+<span class="lineNum">     769 </span>                :<span class="lineCov">         65 :     const char * const IMethod = getPropertyString (&quot;IntegrationMethod&quot;);</span>
+<span class="lineNum">     770 </span>                :<span class="lineCov">         65 :     nr_double_t start = getPropertyDouble (&quot;Start&quot;);</span>
+<span class="lineNum">     771 </span>                :<span class="lineCov">         65 :     nr_double_t stop = getPropertyDouble (&quot;Stop&quot;);</span>
+<span class="lineNum">     772 </span>                :<span class="lineCov">         65 :     nr_double_t points = getPropertyDouble (&quot;Points&quot;);</span>
 <span class="lineNum">     773 </span>                :            : 
 <span class="lineNum">     774 </span>                :            :     // fetch corrector integration method and determine predicor method
-<span class="lineNum">     775 </span>                :<span class="lineCov">         52 :     corrMaxOrder = getPropertyInteger (&quot;Order&quot;);</span>
-<span class="lineNum">     776 </span>                :<span class="lineCov">         52 :     corrType = CMethod = correctorType (IMethod, corrMaxOrder);</span>
-<span class="lineNum">     777 </span>                :<span class="lineCov">         52 :     predType = PMethod = predictorType (CMethod, corrMaxOrder, predMaxOrder);</span>
-<span class="lineNum">     778 </span>                :<span class="lineCov">         52 :     corrOrder = corrMaxOrder;</span>
-<span class="lineNum">     779 </span>                :<span class="lineCov">         52 :     predOrder = predMaxOrder;</span>
+<span class="lineNum">     775 </span>                :<span class="lineCov">         65 :     corrMaxOrder = getPropertyInteger (&quot;Order&quot;);</span>
+<span class="lineNum">     776 </span>                :<span class="lineCov">         65 :     corrType = CMethod = correctorType (IMethod, corrMaxOrder);</span>
+<span class="lineNum">     777 </span>                :<span class="lineCov">         65 :     predType = PMethod = predictorType (CMethod, corrMaxOrder, predMaxOrder);</span>
+<span class="lineNum">     778 </span>                :<span class="lineCov">         65 :     corrOrder = corrMaxOrder;</span>
+<span class="lineNum">     779 </span>                :<span class="lineCov">         65 :     predOrder = predMaxOrder;</span>
 <span class="lineNum">     780 </span>                :            : 
 <span class="lineNum">     781 </span>                :            :     // initialize step values
-<span class="lineNum">     782 </span>                :<span class="lineCov">         52 :     delta = getPropertyDouble (&quot;InitialStep&quot;);</span>
-<span class="lineNum">     783 </span>                :<span class="lineCov">         52 :     deltaMin = getPropertyDouble (&quot;MinStep&quot;);</span>
-<span class="lineNum">     784 </span>                :<span class="lineCov">         52 :     deltaMax = getPropertyDouble (&quot;MaxStep&quot;);</span>
-<span class="lineNum">     785 </span>        [<span class="branchCov" title="Branch 0 was taken 49 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">         52 :     if (deltaMax == 0.0)</span>
-<span class="lineNum">     786 </span>        [<span class="branchCov" title="Branch 0 was taken 34 times"> + </span><span class="branchCov" title="Branch 1 was taken 15 times"> + </span>]:<span class="lineCov">         49 :         deltaMax = MIN ((stop - start) / (points - 1), stop / 200);</span>
-<span class="lineNum">     787 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 52 times"> + </span>]:<span class="lineCov">         52 :     if (deltaMin == 0.0)</span>
+<span class="lineNum">     782 </span>                :<span class="lineCov">         65 :     delta = getPropertyDouble (&quot;InitialStep&quot;);</span>
+<span class="lineNum">     783 </span>                :<span class="lineCov">         65 :     deltaMin = getPropertyDouble (&quot;MinStep&quot;);</span>
+<span class="lineNum">     784 </span>                :<span class="lineCov">         65 :     deltaMax = getPropertyDouble (&quot;MaxStep&quot;);</span>
+<span class="lineNum">     785 </span>        [<span class="branchCov" title="Branch 0 was taken 62 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">         65 :     if (deltaMax == 0.0)</span>
+<span class="lineNum">     786 </span>        [<span class="branchCov" title="Branch 0 was taken 45 times"> + </span><span class="branchCov" title="Branch 1 was taken 17 times"> + </span>]:<span class="lineCov">         62 :         deltaMax = MIN ((stop - start) / (points - 1), stop / 200);</span>
+<span class="lineNum">     787 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">         65 :     if (deltaMin == 0.0)</span>
 <span class="lineNum">     788 </span>                :<span class="lineNoCov">          0 :         deltaMin = NR_TINY * 10 * deltaMax;</span>
-<span class="lineNum">     789 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 52 times"> + </span>]:<span class="lineCov">         52 :     if (delta == 0.0)</span>
+<span class="lineNum">     789 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">         65 :     if (delta == 0.0)</span>
 <span class="lineNum">     790 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         delta = MIN (stop / 200, deltaMax) / 10;</span>
-<span class="lineNum">     791 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 49 times"> + </span>]:<span class="lineCov">         52 :     if (delta &lt; deltaMin) delta = deltaMin;</span>
-<span class="lineNum">     792 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 49 times"> + </span>]:<span class="lineCov">         52 :     if (delta &gt; deltaMax) delta = deltaMax;</span>
+<span class="lineNum">     791 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 62 times"> + </span>]:<span class="lineCov">         65 :     if (delta &lt; deltaMin) delta = deltaMin;</span>
+<span class="lineNum">     792 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 62 times"> + </span>]:<span class="lineCov">         65 :     if (delta &gt; deltaMax) delta = deltaMax;</span>
 <span class="lineNum">     793 </span>                :            : 
 <span class="lineNum">     794 </span>                :            :     // initialize step history
-<span class="lineNum">     795 </span>                :<span class="lineCov">         52 :     setStates (2);</span>
-<span class="lineNum">     796 </span>                :<span class="lineCov">         52 :     initStates ();</span>
+<span class="lineNum">     795 </span>                :<span class="lineCov">         65 :     setStates (2);</span>
+<span class="lineNum">     796 </span>                :<span class="lineCov">         65 :     initStates ();</span>
 <span class="lineNum">     797 </span>                :            :     // initialise the history of states, setting them all to 'delta'
-<span class="lineNum">     798 </span>                :<span class="lineCov">         52 :     fillState (dState, delta);</span>
+<span class="lineNum">     798 </span>                :<span class="lineCov">         65 :     fillState (dState, delta);</span>
 <span class="lineNum">     799 </span>                :            : 
 <span class="lineNum">     800 </span>                :            :     // copy the initialised states to the 'deltas' array
-<span class="lineNum">     801 </span>                :<span class="lineCov">         52 :     saveState (dState, deltas);</span>
+<span class="lineNum">     801 </span>                :<span class="lineCov">         65 :     saveState (dState, deltas);</span>
 <span class="lineNum">     802 </span>                :            :     // copy the deltas to all the circuits
-<span class="lineNum">     803 </span>                :<span class="lineCov">         52 :     setDelta ();</span>
+<span class="lineNum">     803 </span>                :<span class="lineCov">         65 :     setDelta ();</span>
 <span class="lineNum">     804 </span>                :            :     // set the initial corrector and predictor coefficients
-<span class="lineNum">     805 </span>                :<span class="lineCov">         52 :     calcCorrectorCoeff (corrType, corrOrder, corrCoeff, deltas);</span>
-<span class="lineNum">     806 </span>                :<span class="lineCov">         52 :     calcPredictorCoeff (predType, predOrder, predCoeff, deltas);</span>
+<span class="lineNum">     805 </span>                :<span class="lineCov">         65 :     calcCorrectorCoeff (corrType, corrOrder, corrCoeff, deltas);</span>
+<span class="lineNum">     806 </span>                :<span class="lineCov">         65 :     calcPredictorCoeff (predType, predOrder, predCoeff, deltas);</span>
 <span class="lineNum">     807 </span>                :            : 
 <span class="lineNum">     808 </span>                :            :     // initialize history of solution vectors (solutions)
-<span class="lineNum">     809 </span>        [<span class="branchCov" title="Branch 0 was taken 416 times"> + </span><span class="branchCov" title="Branch 1 was taken 52 times"> + </span>]:<span class="lineCov">        468 :     for (int i = 0; i &lt; 8; i++)</span>
+<span class="lineNum">     809 </span>        [<span class="branchCov" title="Branch 0 was taken 520 times"> + </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">        585 :     for (int i = 0; i &lt; 8; i++)</span>
 <span class="lineNum">     810 </span>                :            :     {
 <span class="lineNum">     811 </span>                :            :         // solution contains the last sets of node voltages and branch
 <span class="lineNum">     812 </span>                :            :         // currents at each of the last 8 'deltas'.
 <span class="lineNum">     813 </span>                :            :         // Note for convenience the definition:
 <span class="lineNum">     814 </span>                :            :         //   #define SOL(state) (solution[(int) getState (sState, (state))])
 <span class="lineNum">     815 </span>                :            :         // is provided and used elsewhere to update the solutions
-<span class="lineNum">     816 </span>                :<span class="lineCov">        416 :         solution[i] = new tvector&lt;nr_double_t&gt;;</span>
-<span class="lineNum">     817 </span>                :<span class="lineCov">        416 :         setState (sState, (nr_double_t) i, i);</span>
+<span class="lineNum">     816 </span>                :<span class="lineCov">        520 :         solution[i] = new tvector&lt;nr_double_t&gt;;</span>
+<span class="lineNum">     817 </span>                :<span class="lineCov">        520 :         setState (sState, (nr_double_t) i, i);</span>
 <span class="lineNum">     818 </span>                :            :     }
 <span class="lineNum">     819 </span>                :            : 
 <span class="lineNum">     820 </span>                :            :     // tell circuits about the transient analysis
-<span class="lineNum">     821 </span>                :<span class="lineCov">         52 :     circuit *c, * root = subnet-&gt;getRoot ();</span>
-<span class="lineNum">     822 </span>        [<span class="branchCov" title="Branch 1 was taken 598 times"> + </span><span class="branchCov" title="Branch 2 was taken 52 times"> + </span>]:<span class="lineCov">        650 :     for (c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
-<span class="lineNum">     823 </span>                :<span class="lineCov">        598 :         initCircuitTR (c);</span>
+<span class="lineNum">     821 </span>                :<span class="lineCov">         65 :     circuit *c, * root = subnet-&gt;getRoot ();</span>
+<span class="lineNum">     822 </span>        [<span class="branchCov" title="Branch 1 was taken 740 times"> + </span><span class="branchCov" title="Branch 2 was taken 65 times"> + </span>]:<span class="lineCov">        805 :     for (c = root; c != NULL; c = (circuit *) c-&gt;getNext ())</span>
+<span class="lineNum">     823 </span>                :<span class="lineCov">        740 :         initCircuitTR (c);</span>
 <span class="lineNum">     824 </span>                :            :     // also initialize created circuits
-<span class="lineNum">     825 </span>        [<span class="branchCov" title="Branch 1 was taken 52 times"> + </span><span class="branchCov" title="Branch 2 was taken 52 times"> + </span>]:<span class="lineCov">        104 :     for (c = root; c != NULL; c = (circuit *) c-&gt;getPrev ())</span>
-<span class="lineNum">     826 </span>                :<span class="lineCov">         52 :         initCircuitTR (c);</span>
-<span class="lineNum">     827 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     825 </span>        [<span class="branchCov" title="Branch 1 was taken 65 times"> + </span><span class="branchCov" title="Branch 2 was taken 65 times"> + </span>]:<span class="lineCov">        130 :     for (c = root; c != NULL; c = (circuit *) c-&gt;getPrev ())</span>
+<span class="lineNum">     826 </span>                :<span class="lineCov">         65 :         initCircuitTR (c);</span>
+<span class="lineNum">     827 </span>                :<span class="lineCov">         65 : }</span>
 <a name="828"><span class="lineNum">     828 </span>                :            : </a>
 <span class="lineNum">     829 </span>                :            : // This function cleans up some memory used by the transient analysis.
-<span class="lineNum">     830 </span>                :<span class="lineCov">         52 : void trsolver::deinitTR (void)</span>
+<span class="lineNum">     830 </span>                :<span class="lineCov">         65 : void trsolver::deinitTR (void)</span>
 <span class="lineNum">     831 </span>                :            : {
 <span class="lineNum">     832 </span>                :            :     // cleanup solutions
-<span class="lineNum">     833 </span>        [<span class="branchCov" title="Branch 0 was taken 416 times"> + </span><span class="branchCov" title="Branch 1 was taken 52 times"> + </span>]:<span class="lineCov">        468 :     for (int i = 0; i &lt; 8; i++)</span>
+<span class="lineNum">     833 </span>        [<span class="branchCov" title="Branch 0 was taken 520 times"> + </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">        585 :     for (int i = 0; i &lt; 8; i++)</span>
 <span class="lineNum">     834 </span>                :            :     {
-<span class="lineNum">     835 </span>        [<span class="branchCov" title="Branch 0 was taken 416 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        416 :         delete solution[i];</span>
-<span class="lineNum">     836 </span>                :<span class="lineCov">        416 :         solution[i] = NULL;</span>
+<span class="lineNum">     835 </span>        [<span class="branchCov" title="Branch 0 was taken 520 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        520 :         delete solution[i];</span>
+<span class="lineNum">     836 </span>                :<span class="lineCov">        520 :         solution[i] = NULL;</span>
 <span class="lineNum">     837 </span>                :            :     }
 <span class="lineNum">     838 </span>                :            :     // cleanup history
-<span class="lineNum">     839 </span>        [<span class="branchCov" title="Branch 0 was taken 52 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         52 :     if (tHistory)</span>
+<span class="lineNum">     839 </span>        [<span class="branchCov" title="Branch 0 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         65 :     if (tHistory)</span>
 <span class="lineNum">     840 </span>                :            :     {
-<span class="lineNum">     841 </span>        [<span class="branchCov" title="Branch 0 was taken 52 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         52 :         delete tHistory;</span>
-<span class="lineNum">     842 </span>                :<span class="lineCov">         52 :         tHistory = NULL;</span>
+<span class="lineNum">     841 </span>        [<span class="branchCov" title="Branch 0 was taken 65 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         65 :         delete tHistory;</span>
+<span class="lineNum">     842 </span>                :<span class="lineCov">         65 :         tHistory = NULL;</span>
 <span class="lineNum">     843 </span>                :            :     }
-<span class="lineNum">     844 </span>                :<span class="lineCov">         52 : }</span>
+<span class="lineNum">     844 </span>                :<span class="lineCov">         65 : }</span>
 <a name="845"><span class="lineNum">     845 </span>                :            : </a>
 <span class="lineNum">     846 </span>                :            : // The function initialize a single circuit.
-<span class="lineNum">     847 </span>                :<span class="lineCov">        650 : void trsolver::initCircuitTR (circuit * c)</span>
+<span class="lineNum">     847 </span>                :<span class="lineCov">        805 : void trsolver::initCircuitTR (circuit * c)</span>
 <span class="lineNum">     848 </span>                :            : {
-<span class="lineNum">     849 </span>                :<span class="lineCov">        650 :     c-&gt;initTR ();</span>
-<span class="lineNum">     850 </span>                :<span class="lineCov">        650 :     c-&gt;initStates ();</span>
-<span class="lineNum">     851 </span>                :<span class="lineCov">        650 :     c-&gt;setCoefficients (corrCoeff);</span>
-<span class="lineNum">     852 </span>                :<span class="lineCov">        650 :     c-&gt;setOrder (corrOrder);</span>
-<span class="lineNum">     853 </span>                :<span class="lineCov">        650 :     setIntegrationMethod (c, corrType);</span>
-<span class="lineNum">     854 </span>                :<span class="lineCov">        650 : }</span>
+<span class="lineNum">     849 </span>                :<span class="lineCov">        805 :     c-&gt;initTR ();</span>
+<span class="lineNum">     850 </span>                :<span class="lineCov">        805 :     c-&gt;initStates ();</span>
+<span class="lineNum">     851 </span>                :<span class="lineCov">        805 :     c-&gt;setCoefficients (corrCoeff);</span>
+<span class="lineNum">     852 </span>                :<span class="lineCov">        805 :     c-&gt;setOrder (corrOrder);</span>
+<span class="lineNum">     853 </span>                :<span class="lineCov">        805 :     setIntegrationMethod (c, corrType);</span>
+<span class="lineNum">     854 </span>                :<span class="lineCov">        805 : }</span>
 <span class="lineNum">     855 </span>                :            : 
 <a name="856"><span class="lineNum">     856 </span>                :            : /* This function saves the results of a single solve() functionality</a>
 <span class="lineNum">     857 </span>                :            :    (for the given timestamp) into the output dataset. */
-<span class="lineNum">     858 </span>                :<span class="lineCov">      31874 : void trsolver::saveAllResults (nr_double_t time)</span>
+<span class="lineNum">     858 </span>                :<span class="lineCov">      43177 : void trsolver::saveAllResults (nr_double_t time)</span>
 <span class="lineNum">     859 </span>                :            : {
 <span class="lineNum">     860 </span>                :            :     qucs::vector * t;
 <span class="lineNum">     861 </span>                :            :     // add current frequency to the dependency of the output dataset
-<span class="lineNum">     862 </span>        [<span class="branchCov" title="Branch 1 was taken 34 times"> + </span><span class="branchCov" title="Branch 2 was taken 31840 times"> + </span>]:<span class="lineCov">      31874 :     if ((t = data-&gt;findDependency (&quot;time&quot;)) == NULL)</span>
+<span class="lineNum">     862 </span>        [<span class="branchCov" title="Branch 1 was taken 38 times"> + </span><span class="branchCov" title="Branch 2 was taken 43139 times"> + </span>]:<span class="lineCov">      43177 :     if ((t = data-&gt;findDependency (&quot;time&quot;)) == NULL)</span>
 <span class="lineNum">     863 </span>                :            :     {
-<span class="lineNum">     864 </span>        [<span class="branchCov" title="Branch 1 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         34 :       t = new qucs::vector (&quot;time&quot;);</span>
-<span class="lineNum">     865 </span>                :<span class="lineCov">         34 :         data-&gt;addDependency (t);</span>
+<span class="lineNum">     864 </span>        [<span class="branchCov" title="Branch 1 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         38 :       t = new qucs::vector (&quot;time&quot;);</span>
+<span class="lineNum">     865 </span>                :<span class="lineCov">         38 :         data-&gt;addDependency (t);</span>
 <span class="lineNum">     866 </span>                :            :     }
-<span class="lineNum">     867 </span>[<span class="branchCov" title="Branch 0 was taken 13874 times"> + </span><span class="branchCov" title="Branch 1 was taken 18000 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 13874 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      31874 :     if (runs == 1) t-&gt;add (time);</span>
-<span class="lineNum">     868 </span>                :<span class="lineCov">      31874 :     saveResults (&quot;Vt&quot;, &quot;It&quot;, 0, t);</span>
-<span class="lineNum">     869 </span>                :<span class="lineCov">      31874 : }</span>
+<span class="lineNum">     867 </span>[<span class="branchCov" title="Branch 0 was taken 16177 times"> + </span><span class="branchCov" title="Branch 1 was taken 27000 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 16177 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      43177 :     if (runs == 1) t-&gt;add (time);</span>
+<span class="lineNum">     868 </span>                :<span class="lineCov">      43177 :     saveResults (&quot;Vt&quot;, &quot;It&quot;, 0, t);</span>
+<span class="lineNum">     869 </span>                :<span class="lineCov">      43177 : }</span>
 <span class="lineNum">     870 </span>                :            : 
 <span class="lineNum">     871 </span>                :            : /* This function is meant to adapt the current time-step the transient
 <a name="872"><span class="lineNum">     872 </span>                :            :    analysis advanced.  For the computation of the new time-step the</a>
 <span class="lineNum">     873 </span>                :            :    truncation error depending on the integration method is used. */
-<span class="lineNum">     874 </span>                :<span class="lineCov">     177520 : nr_double_t trsolver::checkDelta (void)</span>
+<span class="lineNum">     874 </span>                :<span class="lineCov">     214290 : nr_double_t trsolver::checkDelta (void)</span>
 <span class="lineNum">     875 </span>                :            : {
-<span class="lineNum">     876 </span>                :<span class="lineCov">     177520 :     nr_double_t LTEreltol = getPropertyDouble (&quot;LTEreltol&quot;);</span>
-<span class="lineNum">     877 </span>                :<span class="lineCov">     177520 :     nr_double_t LTEabstol = getPropertyDouble (&quot;LTEabstol&quot;);</span>
-<span class="lineNum">     878 </span>                :<span class="lineCov">     177520 :     nr_double_t LTEfactor = getPropertyDouble (&quot;LTEfactor&quot;);</span>
-<span class="lineNum">     879 </span>                :<span class="lineCov">     177520 :     nr_double_t dif, rel, tol, lte, q, n =  std::numeric_limits&lt;nr_double_t&gt;::max();</span>
-<span class="lineNum">     880 </span>                :<span class="lineCov">     177520 :     int N = countNodes ();</span>
-<span class="lineNum">     881 </span>                :<span class="lineCov">     177520 :     int M = countVoltageSources ();</span>
+<span class="lineNum">     876 </span>                :<span class="lineCov">     214290 :     nr_double_t LTEreltol = getPropertyDouble (&quot;LTEreltol&quot;);</span>
+<span class="lineNum">     877 </span>                :<span class="lineCov">     214290 :     nr_double_t LTEabstol = getPropertyDouble (&quot;LTEabstol&quot;);</span>
+<span class="lineNum">     878 </span>                :<span class="lineCov">     214290 :     nr_double_t LTEfactor = getPropertyDouble (&quot;LTEfactor&quot;);</span>
+<span class="lineNum">     879 </span>                :<span class="lineCov">     214290 :     nr_double_t dif, rel, tol, lte, q, n =  std::numeric_limits&lt;nr_double_t&gt;::max();</span>
+<span class="lineNum">     880 </span>                :<span class="lineCov">     214290 :     int N = countNodes ();</span>
+<span class="lineNum">     881 </span>                :<span class="lineCov">     214290 :     int M = countVoltageSources ();</span>
 <span class="lineNum">     882 </span>                :            : 
 <span class="lineNum">     883 </span>                :            :     // cec = corrector error constant
-<span class="lineNum">     884 </span>                :<span class="lineCov">     177520 :     nr_double_t cec = getCorrectorError (corrType, corrOrder);</span>
+<span class="lineNum">     884 </span>                :<span class="lineCov">     214290 :     nr_double_t cec = getCorrectorError (corrType, corrOrder);</span>
 <span class="lineNum">     885 </span>                :            :     // pec = predictor error constant
-<span class="lineNum">     886 </span>                :<span class="lineCov">     177520 :     nr_double_t pec = getPredictorError (predType, predOrder);</span>
+<span class="lineNum">     886 </span>                :<span class="lineCov">     214290 :     nr_double_t pec = getPredictorError (predType, predOrder);</span>
 <span class="lineNum">     887 </span>                :            : 
 <span class="lineNum">     888 </span>                :            :     // go through each solution
-<span class="lineNum">     889 </span>        [<span class="branchCov" title="Branch 0 was taken 1583691 times"> + </span><span class="branchCov" title="Branch 1 was taken 177520 times"> + </span>]:<span class="lineCov">    1761211 :     for (int r = 0; r &lt; N + M; r++)</span>
+<span class="lineNum">     889 </span>        [<span class="branchCov" title="Branch 0 was taken 1907941 times"> + </span><span class="branchCov" title="Branch 1 was taken 214290 times"> + </span>]:<span class="lineCov">    2122231 :     for (int r = 0; r &lt; N + M; r++)</span>
 <span class="lineNum">     890 </span>                :            :     {
 <span class="lineNum">     891 </span>                :            : 
 <span class="lineNum">     892 </span>                :            :         // skip real voltage sources
-<span class="lineNum">     893 </span>        [<span class="branchCov" title="Branch 0 was taken 654964 times"> + </span><span class="branchCov" title="Branch 1 was taken 928727 times"> + </span>]:<span class="lineCov">    1583691 :         if (r &gt;= N)</span>
+<span class="lineNum">     893 </span>        [<span class="branchCov" title="Branch 0 was taken 798433 times"> + </span><span class="branchCov" title="Branch 1 was taken 1109508 times"> + </span>]:<span class="lineCov">    1907941 :         if (r &gt;= N)</span>
 <span class="lineNum">     894 </span>                :            :         {
-<span class="lineNum">     895 </span>        [<span class="branchCov" title="Branch 2 was taken 346548 times"> + </span><span class="branchCov" title="Branch 3 was taken 308416 times"> + </span>]:<span class="lineCov">     654964 :             if (findVoltageSource(r - N)-&gt;isVSource ())</span>
-<span class="lineNum">     896 </span>                :<span class="lineCov">     346548 :                 continue;</span>
+<span class="lineNum">     895 </span>        [<span class="branchCov" title="Branch 2 was taken 421843 times"> + </span><span class="branchCov" title="Branch 3 was taken 376590 times"> + </span>]:<span class="lineCov">     798433 :             if (findVoltageSource(r - N)-&gt;isVSource ())</span>
+<span class="lineNum">     896 </span>                :<span class="lineCov">     421843 :                 continue;</span>
 <span class="lineNum">     897 </span>                :            :         }
 <span class="lineNum">     898 </span>                :            : 
-<span class="lineNum">     899 </span>                :<span class="lineCov">    1237143 :         dif = x-&gt;get (r) - SOL(0)-&gt;get (r);</span>
-<span class="lineNum">     900 </span>[<span class="branchCov" title="Branch 1 was taken 1237143 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 999713 times"> + </span><span class="branchCov" title="Branch 4 was taken 237430 times"> + </span>]:<span class="lineCov">    1237143 :         if (std::isfinite (dif) &amp;&amp; dif != 0)</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 999713 times"> + </span><span class="branchCov" title="Branch 6 was taken 237430 times"> + </span>]
+<span class="lineNum">     899 </span>                :<span class="lineCov">    1486098 :         dif = x-&gt;get (r) - SOL(0)-&gt;get (r);</span>
+<span class="lineNum">     900 </span>[<span class="branchCov" title="Branch 1 was taken 1486098 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1210811 times"> + </span><span class="branchCov" title="Branch 4 was taken 275287 times"> + </span>]:<span class="lineCov">    1486098 :         if (std::isfinite (dif) &amp;&amp; dif != 0)</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 1210811 times"> + </span><span class="branchCov" title="Branch 6 was taken 275287 times"> + </span>]
 <span class="lineNum">     901 </span>                :            :         {
 <span class="lineNum">     902 </span>                :            :             // use Milne' estimate for the local truncation error
-<span class="lineNum">     903 </span>        [<span class="branchCov" title="Branch 3 was taken 304586 times"> + </span><span class="branchCov" title="Branch 4 was taken 695127 times"> + </span>]:<span class="lineCov">     999713 :             rel = MAX (fabs (x-&gt;get (r)), fabs (SOL(0)-&gt;get (r)));</span>
-<span class="lineNum">     904 </span>                :<span class="lineCov">     999713 :             tol = LTEreltol * rel + LTEabstol;</span>
-<span class="lineNum">     905 </span>                :<span class="lineCov">     999713 :             lte = LTEfactor * (cec / (pec - cec)) * dif;</span>
-<span class="lineNum">     906 </span>                :<span class="lineCov">     999713 :             q =  delta * exp (log (fabs (tol / lte)) / (corrOrder + 1));</span>
-<span class="lineNum">     907 </span>        [<span class="branchCov" title="Branch 0 was taken 587799 times"> + </span><span class="branchCov" title="Branch 1 was taken 411914 times"> + </span>]:<span class="lineCov">     999713 :             n = MIN (n, q);</span>
+<span class="lineNum">     903 </span>        [<span class="branchCov" title="Branch 3 was taken 348101 times"> + </span><span class="branchCov" title="Branch 4 was taken 862710 times"> + </span>]:<span class="lineCov">    1210811 :             rel = MAX (fabs (x-&gt;get (r)), fabs (SOL(0)-&gt;get (r)));</span>
+<span class="lineNum">     904 </span>                :<span class="lineCov">    1210811 :             tol = LTEreltol * rel + LTEabstol;</span>
+<span class="lineNum">     905 </span>                :<span class="lineCov">    1210811 :             lte = LTEfactor * (cec / (pec - cec)) * dif;</span>
+<span class="lineNum">     906 </span>                :<span class="lineCov">    1210811 :             q =  delta * exp (log (fabs (tol / lte)) / (corrOrder + 1));</span>
+<span class="lineNum">     907 </span>        [<span class="branchCov" title="Branch 0 was taken 706396 times"> + </span><span class="branchCov" title="Branch 1 was taken 504415 times"> + </span>]:<span class="lineCov">    1210811 :             n = MIN (n, q);</span>
 <span class="lineNum">     908 </span>                :            :         }
 <span class="lineNum">     909 </span>                :            :     }
 <span class="lineNum">     910 </span>                :            : #if STEPDEBUG
 <span class="lineNum">     911 </span>                :            :     logprint (LOG_STATUS, &quot;DEBUG: delta according to local truncation &quot;
 <span class="lineNum">     912 </span>                :            :               &quot;error h = %.3e\n&quot;, (double) n);
 <span class="lineNum">     913 </span>                :            : #endif
-<span class="lineNum">     914 </span>[<span class="branchCov" title="Branch 0 was taken 120735 times"> + </span><span class="branchCov" title="Branch 1 was taken 56785 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 158310 times"> + </span><span class="branchCov" title="Branch 3 was taken 19210 times"> + </span>]:<span class="lineCov">     177520 :     delta = MIN ((n &gt; 1.9 * delta) ? 2 * delta : delta, n);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 113056 times"> + </span><span class="branchCov" title="Branch 5 was taken 45254 times"> + </span>]
-<span class="lineNum">     915 </span>                :<span class="lineCov">     177520 :     return delta;</span>
+<span class="lineNum">     914 </span>[<span class="branchCov" title="Branch 0 was taken 145926 times"> + </span><span class="branchCov" title="Branch 1 was taken 68364 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 191716 times"> + </span><span class="branchCov" title="Branch 3 was taken 22574 times"> + </span>]:<span class="lineCov">     214290 :     delta = MIN ((n &gt; 1.9 * delta) ? 2 * delta : delta, n);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 135085 times"> + </span><span class="branchCov" title="Branch 5 was taken 56631 times"> + </span>]
+<span class="lineNum">     915 </span>                :<span class="lineCov">     214290 :     return delta;</span>
 <span class="lineNum">     916 </span>                :            : }
 <a name="917"><span class="lineNum">     917 </span>                :            : </a>
 <span class="lineNum">     918 </span>                :            : // The function updates the integration coefficients.
-<span class="lineNum">     919 </span>                :<span class="lineCov">     177689 : void trsolver::updateCoefficients (nr_double_t delta)</span>
+<span class="lineNum">     919 </span>                :<span class="lineCov">     214485 : void trsolver::updateCoefficients (nr_double_t delta)</span>
 <span class="lineNum">     920 </span>                :            : {
-<span class="lineNum">     921 </span>                :<span class="lineCov">     177689 :     setState (dState, delta);</span>
-<span class="lineNum">     922 </span>                :<span class="lineCov">     177689 :     saveState (dState, deltas);</span>
-<span class="lineNum">     923 </span>                :<span class="lineCov">     177689 :     calcCorrectorCoeff (corrType, corrOrder, corrCoeff, deltas);</span>
-<span class="lineNum">     924 </span>                :<span class="lineCov">     177689 :     calcPredictorCoeff (predType, predOrder, predCoeff, deltas);</span>
-<span class="lineNum">     925 </span>                :<span class="lineCov">     177689 : }</span>
+<span class="lineNum">     921 </span>                :<span class="lineCov">     214485 :     setState (dState, delta);</span>
+<span class="lineNum">     922 </span>                :<span class="lineCov">     214485 :     saveState (dState, deltas);</span>
+<span class="lineNum">     923 </span>                :<span class="lineCov">     214485 :     calcCorrectorCoeff (corrType, corrOrder, corrCoeff, deltas);</span>
+<span class="lineNum">     924 </span>                :<span class="lineCov">     214485 :     calcPredictorCoeff (predType, predOrder, predCoeff, deltas);</span>
+<span class="lineNum">     925 </span>                :<span class="lineCov">     214485 : }</span>
 <span class="lineNum">     926 </span>                :            : 
 <span class="lineNum">     927 </span>                :            : // properties
 <span class="lineNum">     928 </span>                :            : PROP_REQ [] =

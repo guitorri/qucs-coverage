@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -140,15 +140,15 @@
 <span class="lineNum">      62 </span>                :            :     int  solve_linear (void);
 <a name="63"><span class="lineNum">      63 </span>                :            :     void solve_pre (void);</a>
 <a name="64"><span class="lineNum">      64 </span>                :            :     void solve_post (void);</a>
-<span class="lineNum">      65 </span>                :<span class="lineCov">        192 :     void setDescription (const char * n) { desc = n; }</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">        232 :     void setDescription (const char * n) { desc = n; }</span>
 <span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :     const char * getDescription (void) { return desc; }</span>
 <a name="67"><span class="lineNum">      67 </span>                :            :     void saveResults (const char *, const char *, int, qucs::vector * f = NULL);</a>
 <a name="68"><span class="lineNum">      68 </span>                :            :     typedef void (* calculate_func_t) (nasolver&lt;nr_type_t&gt; *);</a>
-<span class="lineNum">      69 </span>                :<span class="lineCov">      20157 :     void setCalculation (calculate_func_t f) { calculate_func = f; }</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">     575315 :     void calculate (void)</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">      22664 :     void setCalculation (calculate_func_t f) { calculate_func = f; }</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">     667760 :     void calculate (void)</span>
 <span class="lineNum">      71 </span>                :            :     {
-<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 575315 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     575315 :         if (calculate_func) (*calculate_func) (this);</span>
-<span class="lineNum">      73 </span>                :<span class="lineCov">     575315 :     }</span>
+<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 667760 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     667760 :         if (calculate_func) (*calculate_func) (this);</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">     667760 :     }</span>
 <span class="lineNum">      74 </span>                :            :     const char * getHelperDescription (void);
 <span class="lineNum">      75 </span>                :            : 
 <span class="lineNum">      76 </span>                :            :     //interface convenience functions

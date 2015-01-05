@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/eqnsys.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/eqnsys.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">89</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">14.9 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">114</td>
@@ -121,31 +128,31 @@
 <span class="lineNum">      50 </span>                :            : 
 <a name="51"><span class="lineNum">      51 </span>                :            : //! Constructor creates an unnamed instance of the eqnsys class.</a>
 <span class="lineNum">      52 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      53 </span>                :<span class="lineCov">     355584 : eqnsys&lt;nr_type_t&gt;::eqnsys () {</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">     355584 :   A = V = NULL;</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">     355584 :   B = X = NULL;</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">     355584 :   S = E = NULL;</span>
-<span class="lineNum">      57 </span>                :<span class="lineCov">     355584 :   T = R = NULL;</span>
-<span class="lineNum">      58 </span>                :<span class="lineCov">     355584 :   nPvt = NULL;</span>
-<span class="lineNum">      59 </span>                :<span class="lineCov">     355584 :   cMap = rMap = NULL;</span>
-<span class="lineNum">      60 </span>                :<span class="lineCov">     355584 :   update = 1;</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">     355584 :   pivoting = PIVOT_PARTIAL;</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">     355584 :   N = 0;</span>
-<span class="lineNum">      63 </span>                :<span class="lineCov">     355584 : }</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">     429216 : eqnsys&lt;nr_type_t&gt;::eqnsys () {</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">     429216 :   A = V = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">     429216 :   B = X = NULL;</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">     429216 :   S = E = NULL;</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">     429216 :   T = R = NULL;</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">     429216 :   nPvt = NULL;</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">     429216 :   cMap = rMap = NULL;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">     429216 :   update = 1;</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">     429216 :   pivoting = PIVOT_PARTIAL;</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">     429216 :   N = 0;</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">     429216 : }</span>
 <span class="lineNum">      64 </span>                :            : 
 <a name="65"><span class="lineNum">      65 </span>                :            : //! Destructor deletes the eqnsys class object.</a>
 <span class="lineNum">      66 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">      67 </span>                :<span class="lineCov">     355584 : eqnsys&lt;nr_type_t&gt;::~eqnsys () {</span>
-<span class="lineNum">      68 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 355584 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     355584 :   if (R != NULL) delete R;</span>
-<span class="lineNum">      69 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 355584 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     355584 :   if (T != NULL) delete T;</span>
-<span class="lineNum">      70 </span>[<span class="branchCov" title="Branch 0 was taken 179356 times"> + </span><span class="branchCov" title="Branch 1 was taken 176228 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 179356 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     355584 :   if (B != NULL) delete B;</span>
-<span class="lineNum">      71 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 355584 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     355584 :   if (S != NULL) delete S;</span>
-<span class="lineNum">      72 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 355584 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     355584 :   if (E != NULL) delete E;</span>
-<span class="lineNum">      73 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 355584 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     355584 :   if (V != NULL) delete V;</span>
-<span class="lineNum">      74 </span>[<span class="branchCov" title="Branch 0 was taken 179356 times"> + </span><span class="branchCov" title="Branch 1 was taken 176228 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 179356 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     355584 :   if (rMap != NULL) delete[] rMap;</span>
-<span class="lineNum">      75 </span>[<span class="branchCov" title="Branch 0 was taken 179356 times"> + </span><span class="branchCov" title="Branch 1 was taken 176228 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 179356 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     355584 :   if (cMap != NULL) delete[] cMap;</span>
-<span class="lineNum">      76 </span>[<span class="branchCov" title="Branch 0 was taken 179356 times"> + </span><span class="branchCov" title="Branch 1 was taken 176228 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 179356 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     355584 :   if (nPvt != NULL) delete[] nPvt;</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">     355584 : }</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">     429216 : eqnsys&lt;nr_type_t&gt;::~eqnsys () {</span>
+<span class="lineNum">      68 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 429216 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     429216 :   if (R != NULL) delete R;</span>
+<span class="lineNum">      69 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 429216 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     429216 :   if (T != NULL) delete T;</span>
+<span class="lineNum">      70 </span>[<span class="branchCov" title="Branch 0 was taken 216140 times"> + </span><span class="branchCov" title="Branch 1 was taken 213076 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 216140 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     429216 :   if (B != NULL) delete B;</span>
+<span class="lineNum">      71 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 429216 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     429216 :   if (S != NULL) delete S;</span>
+<span class="lineNum">      72 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 429216 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     429216 :   if (E != NULL) delete E;</span>
+<span class="lineNum">      73 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 429216 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     429216 :   if (V != NULL) delete V;</span>
+<span class="lineNum">      74 </span>[<span class="branchCov" title="Branch 0 was taken 216140 times"> + </span><span class="branchCov" title="Branch 1 was taken 213076 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 216140 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     429216 :   if (rMap != NULL) delete[] rMap;</span>
+<span class="lineNum">      75 </span>[<span class="branchCov" title="Branch 0 was taken 216140 times"> + </span><span class="branchCov" title="Branch 1 was taken 213076 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 216140 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     429216 :   if (cMap != NULL) delete[] cMap;</span>
+<span class="lineNum">      76 </span>[<span class="branchCov" title="Branch 0 was taken 216140 times"> + </span><span class="branchCov" title="Branch 1 was taken 213076 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 216140 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     429216 :   if (nPvt != NULL) delete[] nPvt;</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">     429216 : }</span>
 <span class="lineNum">      78 </span>                :            : 
 <span class="lineNum">      79 </span>                :            : /*! The copy constructor creates a new instance of the eqnsys class
 <a name="80"><span class="lineNum">      80 </span>                :            :    based on the given eqnsys object. */</a>
@@ -169,37 +176,37 @@
 <span class="lineNum">      98 </span>                :            :    vector.  The reference pointer to the X vector is going to be the
 <a name="99"><span class="lineNum">      99 </span>                :            :    solution vector.  The B vector will be locally copied. */</a>
 <span class="lineNum">     100 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     101 </span>                :<span class="lineCov">     764479 : void eqnsys&lt;nr_type_t&gt;::passEquationSys (tmatrix&lt;nr_type_t&gt; * nA,</span>
+<span class="lineNum">     101 </span>                :<span class="lineCov">     903249 : void eqnsys&lt;nr_type_t&gt;::passEquationSys (tmatrix&lt;nr_type_t&gt; * nA,</span>
 <span class="lineNum">     102 </span>                :            :                                          tvector&lt;nr_type_t&gt; * refX,
 <span class="lineNum">     103 </span>                :            :                                          tvector&lt;nr_type_t&gt; * nB) {
-<span class="lineNum">     104 </span>        [<span class="branchCov" title="Branch 0 was taken 747371 times"> + </span><span class="branchCov" title="Branch 1 was taken 17108 times"> + </span>]:<span class="lineCov">     764479 :   if (nA != NULL) {</span>
-<span class="lineNum">     105 </span>                :<span class="lineCov">     747371 :     A = nA;</span>
-<span class="lineNum">     106 </span>                :<span class="lineCov">     747371 :     update = 1;</span>
-<span class="lineNum">     107 </span>        [<span class="branchCov" title="Branch 1 was taken 179367 times"> + </span><span class="branchCov" title="Branch 2 was taken 568004 times"> + </span>]:<span class="lineCov">     747371 :     if (N != A-&gt;getCols ()) {</span>
-<span class="lineNum">     108 </span>                :<span class="lineCov">     179367 :       N = A-&gt;getCols ();</span>
-<span class="lineNum">     109 </span>[<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 179356 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     179367 :       if (cMap) delete[] cMap; cMap = new int[N];</span>
-<span class="lineNum">     110 </span>[<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 179356 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     179367 :       if (rMap) delete[] rMap; rMap = new int[N];</span>
-<span class="lineNum">     111 </span>[<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchCov" title="Branch 1 was taken 179356 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     179367 :       if (nPvt) delete[] nPvt; nPvt = new nr_double_t[N];</span>
+<span class="lineNum">     104 </span>        [<span class="branchCov" title="Branch 0 was taken 877587 times"> + </span><span class="branchCov" title="Branch 1 was taken 25662 times"> + </span>]:<span class="lineCov">     903249 :   if (nA != NULL) {</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">     877587 :     A = nA;</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">     877587 :     update = 1;</span>
+<span class="lineNum">     107 </span>        [<span class="branchCov" title="Branch 1 was taken 216152 times"> + </span><span class="branchCov" title="Branch 2 was taken 661435 times"> + </span>]:<span class="lineCov">     877587 :     if (N != A-&gt;getCols ()) {</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">     216152 :       N = A-&gt;getCols ();</span>
+<span class="lineNum">     109 </span>[<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 216140 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     216152 :       if (cMap) delete[] cMap; cMap = new int[N];</span>
+<span class="lineNum">     110 </span>[<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 216140 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     216152 :       if (rMap) delete[] rMap; rMap = new int[N];</span>
+<span class="lineNum">     111 </span>[<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 216140 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     216152 :       if (nPvt) delete[] nPvt; nPvt = new nr_double_t[N];</span>
 <span class="lineNum">     112 </span>                :            :     }
 <span class="lineNum">     113 </span>                :            :   }
 <span class="lineNum">     114 </span>                :            :   else {
-<span class="lineNum">     115 </span>                :<span class="lineCov">      17108 :     update = 0;</span>
+<span class="lineNum">     115 </span>                :<span class="lineCov">      25662 :     update = 0;</span>
 <span class="lineNum">     116 </span>                :            :   }
-<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 0 was taken 585123 times"> + </span><span class="branchCov" title="Branch 1 was taken 179356 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 585123 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     764479 :   if (B != NULL) delete B;</span>
-<span class="lineNum">     118 </span>        [<span class="branchCov" title="Branch 1 was taken 764479 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     764479 :   B = new tvector&lt;nr_type_t&gt; (*nB);</span>
-<span class="lineNum">     119 </span>                :<span class="lineCov">     764479 :   X = refX;</span>
-<span class="lineNum">     120 </span>                :<span class="lineCov">     764479 : }</span>
+<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 0 was taken 687109 times"> + </span><span class="branchCov" title="Branch 1 was taken 216140 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 687109 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     903249 :   if (B != NULL) delete B;</span>
+<span class="lineNum">     118 </span>        [<span class="branchCov" title="Branch 1 was taken 903249 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     903249 :   B = new tvector&lt;nr_type_t&gt; (*nB);</span>
+<span class="lineNum">     119 </span>                :<span class="lineCov">     903249 :   X = refX;</span>
+<span class="lineNum">     120 </span>                :<span class="lineCov">     903249 : }</span>
 <span class="lineNum">     121 </span>                :            : 
 <span class="lineNum">     122 </span>                :            : /*! Depending on the algorithm applied to the equation system solver
 <span class="lineNum">     123 </span>                :            :    the function stores the solution of the system into the matrix
 <a name="124"><span class="lineNum">     124 </span>                :            :    pointed to by the X matrix reference. */</a>
 <span class="lineNum">     125 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     126 </span>                :<span class="lineCov">     764479 : void eqnsys&lt;nr_type_t&gt;::solve (void) {</span>
+<span class="lineNum">     126 </span>                :<span class="lineCov">     903249 : void eqnsys&lt;nr_type_t&gt;::solve (void) {</span>
 <span class="lineNum">     127 </span>                :            : #if DEBUG &amp;&amp; 0
 <span class="lineNum">     128 </span>                :            :   time_t t = time (NULL);
 <span class="lineNum">     129 </span>                :            : #endif
-<span class="lineNum">     130 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 745331 times"> + </span> :<span class="lineCov">     764479 :   switch (algo) {</span>
-<span class="lineNum">         </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 2004 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 17144 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span> 
+<span class="lineNum">     130 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 874546 times"> + </span> :<span class="lineCov">     903249 :   switch (algo) {</span>
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 3005 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 25698 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span> 
 <span class="lineNum">         </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchNoCov" title="Branch 11 was not taken"> - </span><span class="branchNoCov" title="Branch 12 was not taken"> - </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">         </span>         <span class="branchNoCov" title="Branch 14 was not taken"> - </span><span class="branchNoCov" title="Branch 15 was not taken"> - </span>]
 <span class="lineNum">     131 </span>                :            :   case ALGO_INVERSE:
@@ -212,20 +219,20 @@
 <span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :     solve_gauss_jordan ();</span>
 <span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :     break;</span>
 <span class="lineNum">     140 </span>                :            :   case ALGO_LU_DECOMPOSITION_CROUT:
-<span class="lineNum">     141 </span>                :<span class="lineCov">     745331 :     solve_lu_crout ();</span>
-<span class="lineNum">     142 </span>                :<span class="lineCov">     745331 :     break;</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">     874546 :     solve_lu_crout ();</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">     874546 :     break;</span>
 <span class="lineNum">     143 </span>                :            :   case ALGO_LU_DECOMPOSITION_DOOLITTLE:
 <span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :     solve_lu_doolittle ();</span>
 <span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :     break;</span>
 <span class="lineNum">     146 </span>                :            :   case ALGO_LU_FACTORIZATION_CROUT:
-<span class="lineNum">     147 </span>                :<span class="lineCov">       2004 :     factorize_lu_crout ();</span>
-<span class="lineNum">     148 </span>                :<span class="lineCov">       2004 :     break;</span>
+<span class="lineNum">     147 </span>                :<span class="lineCov">       3005 :     factorize_lu_crout ();</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">       3005 :     break;</span>
 <span class="lineNum">     149 </span>                :            :   case ALGO_LU_FACTORIZATION_DOOLITTLE:
 <span class="lineNum">     150 </span>                :<span class="lineNoCov">          0 :     factorize_lu_doolittle ();</span>
 <span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 :     break;</span>
 <span class="lineNum">     152 </span>                :            :   case ALGO_LU_SUBSTITUTION_CROUT:
-<span class="lineNum">     153 </span>                :<span class="lineCov">      17144 :     substitute_lu_crout ();</span>
-<span class="lineNum">     154 </span>                :<span class="lineCov">      17144 :     break;</span>
+<span class="lineNum">     153 </span>                :<span class="lineCov">      25698 :     substitute_lu_crout ();</span>
+<span class="lineNum">     154 </span>                :<span class="lineCov">      25698 :     break;</span>
 <span class="lineNum">     155 </span>                :            :   case ALGO_LU_SUBSTITUTION_DOOLITTLE:
 <span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :     substitute_lu_doolittle ();</span>
 <span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :     break;</span>
@@ -252,7 +259,7 @@
 <span class="lineNum">     178 </span>                :            :   logprint (LOG_STATUS, &quot;NOTIFY: %dx%d eqnsys solved in %ld seconds\n&quot;,
 <span class="lineNum">     179 </span>                :            :             A-&gt;getRows (), A-&gt;getCols (), time (NULL) - t);
 <span class="lineNum">     180 </span>                :            : #endif
-<span class="lineNum">     181 </span>                :<span class="lineCov">     764479 : }</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">     903249 : }</span>
 <span class="lineNum">     182 </span>                :            : 
 <a name="183"><span class="lineNum">     183 </span>                :            : /*! Simple matrix inversion is used to solve the equation system. */</a>
 <span class="lineNum">     184 </span>                :            : template &lt;class nr_type_t&gt;
@@ -375,17 +382,17 @@
 <span class="lineNum">     287 </span>                :            :    the left hand side (the A matrix) does not change but the right
 <a name="288"><span class="lineNum">     288 </span>                :            :    hand side (the B vector) only. */</a>
 <span class="lineNum">     289 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     290 </span>                :<span class="lineCov">     745331 : void eqnsys&lt;nr_type_t&gt;::solve_lu_crout (void) {</span>
+<span class="lineNum">     290 </span>                :<span class="lineCov">     874546 : void eqnsys&lt;nr_type_t&gt;::solve_lu_crout (void) {</span>
 <span class="lineNum">     291 </span>                :            : 
 <span class="lineNum">     292 </span>                :            :   // skip decomposition if requested
-<span class="lineNum">     293 </span>        [<span class="branchCov" title="Branch 0 was taken 745331 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     745331 :   if (update) {</span>
+<span class="lineNum">     293 </span>        [<span class="branchCov" title="Branch 0 was taken 874546 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     874546 :   if (update) {</span>
 <span class="lineNum">     294 </span>                :            :     // perform LU composition
-<span class="lineNum">     295 </span>                :<span class="lineCov">     745331 :     factorize_lu_crout ();</span>
+<span class="lineNum">     295 </span>                :<span class="lineCov">     874546 :     factorize_lu_crout ();</span>
 <span class="lineNum">     296 </span>                :            :   }
 <span class="lineNum">     297 </span>                :            : 
 <span class="lineNum">     298 </span>                :            :   // finally solve the equation system
-<span class="lineNum">     299 </span>                :<span class="lineCov">     745331 :   substitute_lu_crout ();</span>
-<span class="lineNum">     300 </span>                :<span class="lineCov">     745331 : }</span>
+<span class="lineNum">     299 </span>                :<span class="lineCov">     874546 :   substitute_lu_crout ();</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">     874546 : }</span>
 <span class="lineNum">     301 </span>                :            : 
 <a name="302"><span class="lineNum">     302 </span>                :            : /*! The other LU decomposition. */</a>
 <span class="lineNum">     303 </span>                :            : template &lt;class nr_type_t&gt;
@@ -406,49 +413,49 @@
 <span class="lineNum">     318 </span>                :            :    definition).  The function performs the actual LU decomposition of
 <a name="319"><span class="lineNum">     319 </span>                :            :    the matrix A using (implicit) partial row pivoting. */</a>
 <span class="lineNum">     320 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     321 </span>                :<span class="lineCov">     747335 : void eqnsys&lt;nr_type_t&gt;::factorize_lu_crout (void) {</span>
+<span class="lineNum">     321 </span>                :<span class="lineCov">     877551 : void eqnsys&lt;nr_type_t&gt;::factorize_lu_crout (void) {</span>
 <span class="lineNum">     322 </span>                :            :   nr_double_t d, MaxPivot;
-<span class="lineNum">     323 </span>                :<span class="lineCov">       7676 :   nr_type_t f;</span>
+<span class="lineNum">     323 </span>                :<span class="lineCov">       9678 :   nr_type_t f;</span>
 <span class="lineNum">     324 </span>                :            :   int k, c, r, pivot;
 <span class="lineNum">     325 </span>                :            : 
 <span class="lineNum">     326 </span>                :            :   // initialize pivot exchange table
-<span class="lineNum">     327 </span>        [<span class="branchCov" title="Branch 0 was taken 4910175 times"> + </span><span class="branchCov" title="Branch 1 was taken 747335 times"> + </span>]:<span class="lineCov">    5657510 :   for (r = 0; r &lt; N; r++) {</span>
-<span class="lineNum">     328 </span>        [<span class="branchCov" title="Branch 0 was taken 49601931 times"> + </span><span class="branchCov" title="Branch 1 was taken 4910175 times"> + </span>]:<span class="lineCov">   54512106 :     for (MaxPivot = 0, c = 0; c &lt; N; c++)</span>
-<span class="lineNum">     329 </span>[<span class="branchCov" title="Branch 0 was taken 773573 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 121264 times"> + </span><span class="branchCov" title="Branch 5 was taken 652309 times"> + </span>]:<span class="lineCov">   49601931 :       if ((d = abs (A_(r, c))) &gt; MaxPivot)</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 7399336 times"> + </span><span class="branchCov" title="Branch 3 was taken 41429022 times"> + </span>]
-<span class="lineNum">     330 </span>                :<span class="lineCov">    7520600 :         MaxPivot = d;</span>
-<span class="lineNum">     331 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4910175 times"> + </span>]:<span class="lineCov">    4910175 :     if (MaxPivot &lt;= 0) MaxPivot = NR_TINY;</span>
-<span class="lineNum">     332 </span>                :<span class="lineCov">    4910175 :     nPvt[r] = 1 / MaxPivot;</span>
-<span class="lineNum">     333 </span>                :<span class="lineCov">    4910175 :     rMap[r] = r;</span>
+<span class="lineNum">     327 </span>        [<span class="branchCov" title="Branch 0 was taken 5851967 times"> + </span><span class="branchCov" title="Branch 1 was taken 877551 times"> + </span>]:<span class="lineCov">    6729518 :   for (r = 0; r &lt; N; r++) {</span>
+<span class="lineNum">     328 </span>        [<span class="branchCov" title="Branch 0 was taken 59400815 times"> + </span><span class="branchCov" title="Branch 1 was taken 5851967 times"> + </span>]:<span class="lineCov">   65252782 :     for (MaxPivot = 0, c = 0; c &lt; N; c++)</span>
+<span class="lineNum">     329 </span>[<span class="branchCov" title="Branch 0 was taken 923905 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 148746 times"> + </span><span class="branchCov" title="Branch 5 was taken 775159 times"> + </span>]:<span class="lineCov">   59400815 :       if ((d = abs (A_(r, c))) &gt; MaxPivot)</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 8821242 times"> + </span><span class="branchCov" title="Branch 3 was taken 49655668 times"> + </span>]
+<span class="lineNum">     330 </span>                :<span class="lineCov">    8969988 :         MaxPivot = d;</span>
+<span class="lineNum">     331 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 5851967 times"> + </span>]:<span class="lineCov">    5851967 :     if (MaxPivot &lt;= 0) MaxPivot = NR_TINY;</span>
+<span class="lineNum">     332 </span>                :<span class="lineCov">    5851967 :     nPvt[r] = 1 / MaxPivot;</span>
+<span class="lineNum">     333 </span>                :<span class="lineCov">    5851967 :     rMap[r] = r;</span>
 <span class="lineNum">     334 </span>                :            :   }
 <span class="lineNum">     335 </span>                :            : 
 <span class="lineNum">     336 </span>                :            :   // decompose the matrix into L (lower) and U (upper) matrix
-<span class="lineNum">     337 </span>        [<span class="branchCov" title="Branch 0 was taken 4910175 times"> + </span><span class="branchCov" title="Branch 1 was taken 747335 times"> + </span>]:<span class="lineCov">    5657510 :   for (c = 0; c &lt; N; c++) {</span>
+<span class="lineNum">     337 </span>        [<span class="branchCov" title="Branch 0 was taken 5851967 times"> + </span><span class="branchCov" title="Branch 1 was taken 877551 times"> + </span>]:<span class="lineCov">    6729518 :   for (c = 0; c &lt; N; c++) {</span>
 <span class="lineNum">     338 </span>                :            :     // upper matrix entries
-<span class="lineNum">     339 </span>[<span class="branchCov" title="Branch 0 was taken 351259 times"> + </span><span class="branchCov" title="Branch 1 was taken 71055 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 21994619 times"> + </span><span class="branchCov" title="Branch 1 was taken 4839120 times"> + </span>]:<span class="lineCov">   27256053 :     for (r = 0; r &lt; c; r++) {</span>
-<span class="lineNum">     340 </span>        [<span class="branchCov" title="Branch 0 was taken 351259 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   22345878 :       f = A_(r, c);</span>
-<span class="lineNum">     341 </span>[<span class="branchCov" title="Branch 0 was taken 1255450 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1255450 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">  127069618 :       for (k = 0; k &lt; r; k++) f -= A_(r, k) * A_(k, c);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1255450 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1255450 times"> + </span><span class="branchCov" title="Branch 11 was taken 351259 times"> + </span>]
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 103468290 times"> + </span><span class="branchCov" title="Branch 3 was taken 21994619 times"> + </span>]
-<span class="lineNum">     342 </span>[<span class="branchCov" title="Branch 0 was taken 351259 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 351259 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   22345878 :       A_(r, c) = f / A_(r, r);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 351259 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     339 </span>[<span class="branchCov" title="Branch 0 was taken 417871 times"> + </span><span class="branchCov" title="Branch 1 was taken 88163 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 26356553 times"> + </span><span class="branchCov" title="Branch 1 was taken 5763804 times"> + </span>]:<span class="lineCov">   32626391 :     for (r = 0; r &lt; c; r++) {</span>
+<span class="lineNum">     340 </span>        [<span class="branchCov" title="Branch 0 was taken 417871 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   26774424 :       f = A_(r, c);</span>
+<span class="lineNum">     341 </span>[<span class="branchCov" title="Branch 0 was taken 1409058 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1409058 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">  155872495 :       for (k = 0; k &lt; r; k++) f -= A_(r, k) * A_(k, c);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1409058 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1409058 times"> + </span><span class="branchCov" title="Branch 11 was taken 417871 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 127689013 times"> + </span><span class="branchCov" title="Branch 3 was taken 26356553 times"> + </span>]
+<span class="lineNum">     342 </span>[<span class="branchCov" title="Branch 0 was taken 417871 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 417871 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   26774424 :       A_(r, c) = f / A_(r, r);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 417871 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
 <span class="lineNum">     343 </span>                :            :     }
 <span class="lineNum">     344 </span>                :            :     // lower matrix entries
-<span class="lineNum">     345 </span>        [<span class="branchCov" title="Branch 0 was taken 27256053 times"> + </span><span class="branchCov" title="Branch 1 was taken 4910175 times"> + </span>]:<span class="lineCov">   32166228 :     for (MaxPivot = 0, pivot = r; r &lt; N; r++) {</span>
-<span class="lineNum">     346 </span>        [<span class="branchCov" title="Branch 0 was taken 422314 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   27256053 :       f = A_(r, c);</span>
-<span class="lineNum">     347 </span>[<span class="branchCov" title="Branch 0 was taken 1606709 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1606709 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">  154325671 :       for (k = 0; k &lt; c; k++) f -= A_(r, k) * A_(k, c);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1606709 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1606709 times"> + </span><span class="branchCov" title="Branch 11 was taken 422314 times"> + </span>]
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 125462909 times"> + </span><span class="branchCov" title="Branch 3 was taken 26833739 times"> + </span>]
-<span class="lineNum">     348 </span>        [<span class="branchCov" title="Branch 0 was taken 422314 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   27256053 :       A_(r, c) = f;</span>
+<span class="lineNum">     345 </span>        [<span class="branchCov" title="Branch 0 was taken 32626391 times"> + </span><span class="branchCov" title="Branch 1 was taken 5851967 times"> + </span>]:<span class="lineCov">   38478358 :     for (MaxPivot = 0, pivot = r; r &lt; N; r++) {</span>
+<span class="lineNum">     346 </span>        [<span class="branchCov" title="Branch 0 was taken 506034 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   32626391 :       f = A_(r, c);</span>
+<span class="lineNum">     347 </span>[<span class="branchCov" title="Branch 0 was taken 1826929 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1826929 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">  188498886 :       for (k = 0; k &lt; c; k++) f -= A_(r, k) * A_(k, c);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1826929 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1826929 times"> + </span><span class="branchCov" title="Branch 11 was taken 506034 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 154045566 times"> + </span><span class="branchCov" title="Branch 3 was taken 32120357 times"> + </span>]
+<span class="lineNum">     348 </span>        [<span class="branchCov" title="Branch 0 was taken 506034 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">   32626391 :       A_(r, c) = f;</span>
 <span class="lineNum">     349 </span>                :            :       // larger pivot ?
-<span class="lineNum">     350 </span>[<span class="branchCov" title="Branch 1 was taken 112703 times"> + </span><span class="branchCov" title="Branch 2 was taken 309611 times"> + </span>][<span class="branchCov" title="Branch 1 was taken 6659200 times"> + </span><span class="branchCov" title="Branch 2 was taken 20174539 times"> + </span>]:<span class="lineCov">   27256053 :       if ((d = nPvt[r] * abs (f)) &gt; MaxPivot) {</span>
-<span class="lineNum">     351 </span>                :<span class="lineCov">    6771903 :         MaxPivot = d;</span>
-<span class="lineNum">     352 </span>                :<span class="lineCov">    6771903 :         pivot = r;</span>
+<span class="lineNum">     350 </span>[<span class="branchCov" title="Branch 1 was taken 139912 times"> + </span><span class="branchCov" title="Branch 2 was taken 366122 times"> + </span>][<span class="branchCov" title="Branch 1 was taken 8065726 times"> + </span><span class="branchCov" title="Branch 2 was taken 24054631 times"> + </span>]:<span class="lineCov">   32626391 :       if ((d = nPvt[r] * abs (f)) &gt; MaxPivot) {</span>
+<span class="lineNum">     351 </span>                :<span class="lineCov">    8205638 :         MaxPivot = d;</span>
+<span class="lineNum">     352 </span>                :<span class="lineCov">    8205638 :         pivot = r;</span>
 <span class="lineNum">     353 </span>                :            :       }
 <span class="lineNum">     354 </span>                :            :     }
 <span class="lineNum">     355 </span>                :            : 
 <span class="lineNum">     356 </span>                :            :     // check pivot element and throw appropriate exception
-<span class="lineNum">     357 </span>        [<span class="branchCov" title="Branch 0 was taken 17 times"> + </span><span class="branchCov" title="Branch 1 was taken 4910158 times"> + </span>]:<span class="lineCov">    4910175 :     if (MaxPivot &lt;= 0) {</span>
+<span class="lineNum">     357 </span>        [<span class="branchCov" title="Branch 0 was taken 17 times"> + </span><span class="branchCov" title="Branch 1 was taken 5851950 times"> + </span>]:<span class="lineCov">    5851967 :     if (MaxPivot &lt;= 0) {</span>
 <span class="lineNum">     358 </span>                :            : #if LU_FAILURE
 <span class="lineNum">     359 </span>                :            :       qucs::exception * e = new qucs::exception (EXCEPTION_PIVOT);
 <span class="lineNum">     360 </span>                :            :       e-&gt;setText (&quot;no pivot != 0 found during Crout LU decomposition&quot;);
@@ -464,16 +471,16 @@
 <span class="lineNum">     368 </span>                :            : 
 <span class="lineNum">     369 </span>                :            :     // swap matrix rows if necessary and remember that step in the
 <span class="lineNum">     370 </span>                :            :     // exchange table
-<span class="lineNum">     371 </span>        [<span class="branchCov" title="Branch 0 was taken 1795728 times"> + </span><span class="branchCov" title="Branch 1 was taken 3114447 times"> + </span>]:<span class="lineCov">    4910175 :     if (c != pivot) {</span>
-<span class="lineNum">     372 </span>        [<span class="branchCov" title="Branch 0 was taken 34383 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    1795728 :       A-&gt;exchangeRows (c, pivot);</span>
-<span class="lineNum">     373 </span>                :<span class="lineCov">    1795728 :       Swap (int, rMap[c], rMap[pivot]);</span>
-<span class="lineNum">     374 </span>                :<span class="lineCov">    1795728 :       Swap (nr_double_t, nPvt[c], nPvt[pivot]);</span>
+<span class="lineNum">     371 </span>        [<span class="branchCov" title="Branch 0 was taken 2224451 times"> + </span><span class="branchCov" title="Branch 1 was taken 3627516 times"> + </span>]:<span class="lineCov">    5851967 :     if (c != pivot) {</span>
+<span class="lineNum">     372 </span>        [<span class="branchCov" title="Branch 0 was taken 43756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    2224451 :       A-&gt;exchangeRows (c, pivot);</span>
+<span class="lineNum">     373 </span>                :<span class="lineCov">    2224451 :       Swap (int, rMap[c], rMap[pivot]);</span>
+<span class="lineNum">     374 </span>                :<span class="lineCov">    2224451 :       Swap (nr_double_t, nPvt[c], nPvt[pivot]);</span>
 <span class="lineNum">     375 </span>                :            :     }
 <span class="lineNum">     376 </span>                :            :   }
 <span class="lineNum">     377 </span>                :            : #if LU_FAILURE
 <span class="lineNum">     378 </span>                :            :  fail:
 <span class="lineNum">     379 </span>                :            : #endif
-<span class="lineNum">     380 </span>                :<span class="lineCov">     747335 : }</span>
+<span class="lineNum">     380 </span>                :<span class="lineCov">     877551 : }</span>
 <span class="lineNum">     381 </span>                :            : 
 <span class="lineNum">     382 </span>                :            : /*! This function decomposes the left hand matrix into an upper U and
 <span class="lineNum">     383 </span>                :            :    lower L matrix.  The algorithm is called LU decomposition
@@ -559,30 +566,30 @@
 <span class="lineNum">     455 </span>                :            :    substitutions using the LU decomposed matrix (Crout's definition -
 <a name="456"><span class="lineNum">     456 </span>                :            :    Uii are ones).  */</a>
 <span class="lineNum">     457 </span>                :            : template &lt;class nr_type_t&gt;
-<span class="lineNum">     458 </span>                :<span class="lineCov">     762475 : void eqnsys&lt;nr_type_t&gt;::substitute_lu_crout (void) {</span>
-<span class="lineNum">     459 </span>                :<span class="lineCov">      22816 :   nr_type_t f;</span>
+<span class="lineNum">     458 </span>                :<span class="lineCov">     900244 : void eqnsys&lt;nr_type_t&gt;::substitute_lu_crout (void) {</span>
+<span class="lineNum">     459 </span>                :<span class="lineCov">      32371 :   nr_type_t f;</span>
 <span class="lineNum">     460 </span>                :            :   int i, c;
 <span class="lineNum">     461 </span>                :            : 
 <span class="lineNum">     462 </span>                :            :   // forward substitution in order to solve LY = B
-<span class="lineNum">     463 </span>[<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchCov" title="Branch 1 was taken 22816 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 4839120 times"> + </span><span class="branchCov" title="Branch 1 was taken 739659 times"> + </span>]:<span class="lineCov">    5806945 :   for (i = 0; i &lt; N; i++) {</span>
-<span class="lineNum">     464 </span>        [<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5044470 :     f = B_(rMap[i]);</span>
-<span class="lineNum">     465 </span>[<span class="branchCov" title="Branch 0 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   27937215 :     for (c = 0; c &lt; i; c++) f -= A_(i, c) * X_(c);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 898126 times"> + </span><span class="branchCov" title="Branch 11 was taken 205350 times"> + </span>]
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 21994619 times"> + </span><span class="branchCov" title="Branch 3 was taken 4839120 times"> + </span>]
-<span class="lineNum">     466 </span>[<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">    5044470 :     X_(i) = f / A_(i, i);</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     463 </span>[<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchCov" title="Branch 1 was taken 32371 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 5763804 times"> + </span><span class="branchCov" title="Branch 1 was taken 867873 times"> + </span>]:<span class="lineCov">    6953118 :   for (i = 0; i &lt; N; i++) {</span>
+<span class="lineNum">     464 </span>        [<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    6052874 :     f = B_(rMap[i]);</span>
+<span class="lineNum">     465 </span>[<span class="branchCov" title="Branch 0 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   33637883 :     for (c = 0; c &lt; i; c++) f -= A_(i, c) * X_(c);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1228456 times"> + </span><span class="branchCov" title="Branch 11 was taken 289070 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 26356553 times"> + </span><span class="branchCov" title="Branch 3 was taken 5763804 times"> + </span>]
+<span class="lineNum">     466 </span>[<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">    6052874 :     X_(i) = f / A_(i, i);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
 <span class="lineNum">     467 </span>                :            :   }
 <span class="lineNum">     468 </span>                :            : 
 <span class="lineNum">     469 </span>                :            :   // backward substitution in order to solve UX = Y
-<span class="lineNum">     470 </span>[<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchCov" title="Branch 1 was taken 22816 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 4839120 times"> + </span><span class="branchCov" title="Branch 1 was taken 739659 times"> + </span>]:<span class="lineCov">    5806945 :   for (i = N - 1; i &gt;= 0; i--) {</span>
-<span class="lineNum">     471 </span>        [<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5044470 :     f = X_(i);</span>
-<span class="lineNum">     472 </span>[<span class="branchCov" title="Branch 0 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   27937215 :     for (c = i + 1; c &lt; N; c++) f -= A_(i, c) * X_(c);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 898126 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 898126 times"> + </span><span class="branchCov" title="Branch 11 was taken 205350 times"> + </span>]
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 21994619 times"> + </span><span class="branchCov" title="Branch 3 was taken 4839120 times"> + </span>]
+<span class="lineNum">     470 </span>[<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchCov" title="Branch 1 was taken 32371 times"> + </span>][<span class="branchCov" title="Branch 0 was taken 5763804 times"> + </span><span class="branchCov" title="Branch 1 was taken 867873 times"> + </span>]:<span class="lineCov">    6953118 :   for (i = N - 1; i &gt;= 0; i--) {</span>
+<span class="lineNum">     471 </span>        [<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    6052874 :     f = X_(i);</span>
+<span class="lineNum">     472 </span>[<span class="branchCov" title="Branch 0 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">   33637883 :     for (c = i + 1; c &lt; N; c++) f -= A_(i, c) * X_(c);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 1228456 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 10 was taken 1228456 times"> + </span><span class="branchCov" title="Branch 11 was taken 289070 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 2 was taken 26356553 times"> + </span><span class="branchCov" title="Branch 3 was taken 5763804 times"> + </span>]
 <span class="lineNum">     473 </span>                :            :     // remember that the Uii diagonal are ones only in Crout's definition
-<span class="lineNum">     474 </span>        [<span class="branchCov" title="Branch 0 was taken 205350 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5044470 :     X_(i) = f;</span>
+<span class="lineNum">     474 </span>        [<span class="branchCov" title="Branch 0 was taken 289070 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    6052874 :     X_(i) = f;</span>
 <span class="lineNum">     475 </span>                :            :   }
-<span class="lineNum">     476 </span>                :<span class="lineCov">     762475 : }</span>
+<span class="lineNum">     476 </span>                :<span class="lineCov">     900244 : }</span>
 <span class="lineNum">     477 </span>                :            : 
 <span class="lineNum">     478 </span>                :            : /*! The function is used in order to run the forward and backward
 <span class="lineNum">     479 </span>                :            :    substitutions using the LU decomposed matrix (Doolittle's

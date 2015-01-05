@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/vector.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/vector.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">274</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">52</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">32.1 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">184</td>
@@ -118,25 +125,25 @@
 <span class="lineNum">      47 </span>                :            : namespace qucs {
 <a name="48"><span class="lineNum">      48 </span>                :            : </a>
 <span class="lineNum">      49 </span>                :            : // Constructor creates an unnamed instance of the vector class.
-<span class="lineNum">      50 </span>                :<span class="lineCov">        126 : vector::vector () : object () {</span>
-<span class="lineNum">      51 </span>                :<span class="lineCov">        126 :   capacity = size = 0;</span>
-<span class="lineNum">      52 </span>                :<span class="lineCov">        126 :   data = NULL;</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">        126 :   dependencies = NULL;</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">        126 :   origin = NULL;</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">        126 :   requested = 0;</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">        126 : }</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">        146 : vector::vector () : object () {</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">        146 :   capacity = size = 0;</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">        146 :   data = NULL;</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">        146 :   dependencies = NULL;</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">        146 :   origin = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">        146 :   requested = 0;</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        146 : }</span>
 <span class="lineNum">      57 </span>                :            : 
 <a name="58"><span class="lineNum">      58 </span>                :            : /* Constructor creates an unnamed instance of the vector class with a</a>
 <span class="lineNum">      59 </span>                :            :    given initial size. */
-<span class="lineNum">      60 </span>                :<span class="lineCov">        146 : vector::vector (int s) : object () {</span>
-<span class="lineNum">      61 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 146 times"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        146 :   assert (s &gt;= 0);</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">        146 :   capacity = size = s;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">        174 : vector::vector (int s) : object () {</span>
+<span class="lineNum">      61 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 174 times"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        174 :   assert (s &gt;= 0);</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">        174 :   capacity = size = s;</span>
 <span class="lineNum">      63 </span>                :            :   data = s &gt; 0 ? (nr_complex_t *)
-<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 0 was taken 146 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        146 :     calloc (capacity, sizeof (nr_complex_t)) : NULL;</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">        146 :   dependencies = NULL;</span>
-<span class="lineNum">      66 </span>                :<span class="lineCov">        146 :   origin = NULL;</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">        146 :   requested = 0;</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">        146 : }</span>
+<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 0 was taken 174 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        174 :     calloc (capacity, sizeof (nr_complex_t)) : NULL;</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">        174 :   dependencies = NULL;</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">        174 :   origin = NULL;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">        174 :   requested = 0;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">        174 : }</span>
 <span class="lineNum">      69 </span>                :            : 
 <a name="70"><span class="lineNum">      70 </span>                :            : /* Constructor creates an unnamed instance of the vector class with a</a>
 <span class="lineNum">      71 </span>                :            :    given initial size and content. */
@@ -152,13 +159,13 @@
 <span class="lineNum">      81 </span>                :<span class="lineCov">       1070 : }</span>
 <a name="82"><span class="lineNum">      82 </span>                :            : </a>
 <span class="lineNum">      83 </span>                :            : // Constructor creates an named instance of the vector class.
-<span class="lineNum">      84 </span>                :<span class="lineCov">        981 : vector::vector (const char * n) : object (n) {</span>
-<span class="lineNum">      85 </span>                :<span class="lineCov">        981 :   capacity = size = 0;</span>
-<span class="lineNum">      86 </span>                :<span class="lineCov">        981 :   data = NULL;</span>
-<span class="lineNum">      87 </span>                :<span class="lineCov">        981 :   dependencies = NULL;</span>
-<span class="lineNum">      88 </span>                :<span class="lineCov">        981 :   origin = NULL;</span>
-<span class="lineNum">      89 </span>                :<span class="lineCov">        981 :   requested = 0;</span>
-<span class="lineNum">      90 </span>                :<span class="lineCov">        981 : }</span>
+<span class="lineNum">      84 </span>                :<span class="lineCov">       1126 : vector::vector (const char * n) : object (n) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">       1126 :   capacity = size = 0;</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">       1126 :   data = NULL;</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">       1126 :   dependencies = NULL;</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">       1126 :   origin = NULL;</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">       1126 :   requested = 0;</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">       1126 : }</span>
 <span class="lineNum">      91 </span>                :            : 
 <a name="92"><span class="lineNum">      92 </span>                :            : /* This constructor creates a named instance of the vector class with</a>
 <span class="lineNum">      93 </span>                :            :    a given initial size. */
@@ -174,69 +181,69 @@
 <span class="lineNum">     103 </span>                :            : 
 <a name="104"><span class="lineNum">     104 </span>                :            : /* The copy constructor creates a new instance based on the given</a>
 <span class="lineNum">     105 </span>                :            :    vector object. */
-<span class="lineNum">     106 </span>                :<span class="lineCov">       9153 : vector::vector (const vector &amp; v) : object (v) {</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">       9153 :   size = v.size;</span>
-<span class="lineNum">     108 </span>                :<span class="lineCov">       9153 :   capacity = v.capacity;</span>
-<span class="lineNum">     109 </span>                :<span class="lineCov">       9153 :   data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
-<span class="lineNum">     110 </span>                :<span class="lineCov">       9153 :   memcpy (data, v.data, sizeof (nr_complex_t) * size);</span>
-<span class="lineNum">     111 </span>[<span class="branchCov" title="Branch 0 was taken 262 times"> + </span><span class="branchCov" title="Branch 1 was taken 8891 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 262 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       9153 :   dependencies = v.dependencies ? new strlist (*v.dependencies) : NULL;</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 262 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     106 </span>                :<span class="lineCov">       9223 : vector::vector (const vector &amp; v) : object (v) {</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">       9223 :   size = v.size;</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">       9223 :   capacity = v.capacity;</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">       9223 :   data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">       9223 :   memcpy (data, v.data, sizeof (nr_complex_t) * size);</span>
+<span class="lineNum">     111 </span>[<span class="branchCov" title="Branch 0 was taken 292 times"> + </span><span class="branchCov" title="Branch 1 was taken 8931 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 292 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       9223 :   dependencies = v.dependencies ? new strlist (*v.dependencies) : NULL;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 292 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>][<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>]
-<span class="lineNum">     112 </span>[<span class="branchCov" title="Branch 0 was taken 281 times"> + </span><span class="branchCov" title="Branch 1 was taken 8872 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 281 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       9153 :   origin = v.origin ? strdup (v.origin) : NULL;</span>
+<span class="lineNum">     112 </span>[<span class="branchCov" title="Branch 0 was taken 316 times"> + </span><span class="branchCov" title="Branch 1 was taken 8907 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 316 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       9223 :   origin = v.origin ? strdup (v.origin) : NULL;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
-<span class="lineNum">     113 </span>                :<span class="lineCov">       9153 :   requested = v.requested;</span>
-<span class="lineNum">     114 </span>                :<span class="lineCov">       9153 : }</span>
+<span class="lineNum">     113 </span>                :<span class="lineCov">       9223 :   requested = v.requested;</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">       9223 : }</span>
 <span class="lineNum">     115 </span>                :            : 
 <span class="lineNum">     116 </span>                :            : /* The assignment copy constructor creates a new instance based on the
 <a name="117"><span class="lineNum">     117 </span>                :            :    given vector object.  It copies the data only and leaves any other</a>
 <span class="lineNum">     118 </span>                :            :    properties untouched. */
-<span class="lineNum">     119 </span>                :<span class="lineCov">         38 : const vector&amp; vector::operator=(const vector &amp; v) {</span>
-<span class="lineNum">     120 </span>        [<span class="branchCov" title="Branch 0 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         38 :   if (&amp;v != this) {</span>
-<span class="lineNum">     121 </span>                :<span class="lineCov">         38 :     size = v.size;</span>
-<span class="lineNum">     122 </span>                :<span class="lineCov">         38 :     capacity = v.capacity;</span>
-<span class="lineNum">     123 </span>        [<span class="branchCov" title="Branch 0 was taken 5 times"> + </span><span class="branchCov" title="Branch 1 was taken 33 times"> + </span>]:<span class="lineCov">         38 :     if (data) { free (data); data = NULL; }</span>
-<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 0 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         38 :     if (capacity &gt; 0) {</span>
-<span class="lineNum">     125 </span>                :<span class="lineCov">         38 :       data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
-<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 38 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         38 :       if (size &gt; 0) memcpy (data, v.data, sizeof (nr_complex_t) * size);</span>
+<span class="lineNum">     119 </span>                :<span class="lineCov">         42 : const vector&amp; vector::operator=(const vector &amp; v) {</span>
+<span class="lineNum">     120 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         42 :   if (&amp;v != this) {</span>
+<span class="lineNum">     121 </span>                :<span class="lineCov">         42 :     size = v.size;</span>
+<span class="lineNum">     122 </span>                :<span class="lineCov">         42 :     capacity = v.capacity;</span>
+<span class="lineNum">     123 </span>        [<span class="branchCov" title="Branch 0 was taken 5 times"> + </span><span class="branchCov" title="Branch 1 was taken 37 times"> + </span>]:<span class="lineCov">         42 :     if (data) { free (data); data = NULL; }</span>
+<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         42 :     if (capacity &gt; 0) {</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">         42 :       data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
+<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 42 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         42 :       if (size &gt; 0) memcpy (data, v.data, sizeof (nr_complex_t) * size);</span>
 <span class="lineNum">     127 </span>                :            :     }
 <span class="lineNum">     128 </span>                :            :   }
-<span class="lineNum">     129 </span>                :<span class="lineCov">         38 :   return *this;</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">         42 :   return *this;</span>
 <span class="lineNum">     130 </span>                :            : }
 <a name="131"><span class="lineNum">     131 </span>                :            : </a>
 <span class="lineNum">     132 </span>                :            : // Destructor deletes a vector object.
-<span class="lineNum">     133 </span>                :<span class="lineCov">      11471 : vector::~vector () {</span>
-<span class="lineNum">     134 </span>[<span class="branchCov" title="Branch 0 was taken 11471 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      11471 :   if (data) free (data);</span>
-<span class="lineNum">     135 </span>[<span class="branchCov" title="Branch 0 was taken 1046 times"> + </span><span class="branchCov" title="Branch 1 was taken 10425 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1046 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      11471 :   if (dependencies) delete dependencies;</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 1046 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     133 </span>                :<span class="lineCov">      11733 : vector::~vector () {</span>
+<span class="lineNum">     134 </span>[<span class="branchCov" title="Branch 0 was taken 11733 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      11733 :   if (data) free (data);</span>
+<span class="lineNum">     135 </span>[<span class="branchCov" title="Branch 0 was taken 1198 times"> + </span><span class="branchCov" title="Branch 1 was taken 10535 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1198 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      11733 :   if (dependencies) delete dependencies;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 1198 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>][<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
-<span class="lineNum">     136 </span>[<span class="branchCov" title="Branch 0 was taken 1193 times"> + </span><span class="branchCov" title="Branch 1 was taken 10278 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      11471 :   if (origin) free (origin);</span>
-<span class="lineNum">     137 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 11471 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">      12780 : }</span>
+<span class="lineNum">     136 </span>[<span class="branchCov" title="Branch 0 was taken 1367 times"> + </span><span class="branchCov" title="Branch 1 was taken 10366 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      11733 :   if (origin) free (origin);</span>
+<span class="lineNum">     137 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 11733 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">      13229 : }</span>
 <a name="138"><span class="lineNum">     138 </span>                :            : </a>
 <span class="lineNum">     139 </span>                :            : // Returns data dependencies.
-<span class="lineNum">     140 </span>                :<span class="lineCov">      72050 : strlist * vector::getDependencies (void) {</span>
-<span class="lineNum">     141 </span>                :<span class="lineCov">      72050 :   return dependencies;</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">      90296 : strlist * vector::getDependencies (void) {</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">      90296 :   return dependencies;</span>
 <span class="lineNum">     142 </span>                :            : }
 <a name="143"><span class="lineNum">     143 </span>                :            : </a>
 <span class="lineNum">     144 </span>                :            : // Sets the data dependencies.
-<span class="lineNum">     145 </span>                :<span class="lineCov">        802 : void vector::setDependencies (strlist * s) {</span>
-<span class="lineNum">     146 </span>[<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 784 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        802 :   if (dependencies) delete dependencies;</span>
-<span class="lineNum">     147 </span>                :<span class="lineCov">        802 :   dependencies = s;</span>
-<span class="lineNum">     148 </span>                :<span class="lineCov">        802 : }</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">        927 : void vector::setDependencies (strlist * s) {</span>
+<span class="lineNum">     146 </span>[<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchCov" title="Branch 1 was taken 906 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        927 :   if (dependencies) delete dependencies;</span>
+<span class="lineNum">     147 </span>                :<span class="lineCov">        927 :   dependencies = s;</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">        927 : }</span>
 <span class="lineNum">     149 </span>                :            : 
 <span class="lineNum">     150 </span>                :            : /* The function appends a new complex data item to the end of the
 <a name="151"><span class="lineNum">     151 </span>                :            :    vector and ensures that the vector can hold the increasing number</a>
 <span class="lineNum">     152 </span>                :            :    of data items. */
-<span class="lineNum">     153 </span>                :<span class="lineCov">     466466 : void vector::add (nr_complex_t c) {</span>
-<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 1074 times"> + </span><span class="branchCov" title="Branch 1 was taken 465392 times"> + </span>]:<span class="lineCov">     466466 :   if (data == NULL) {</span>
-<span class="lineNum">     155 </span>                :<span class="lineCov">       1074 :     size = 0; capacity = 64;</span>
-<span class="lineNum">     156 </span>                :<span class="lineCov">       1074 :     data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
+<span class="lineNum">     153 </span>                :<span class="lineCov">     602265 : void vector::add (nr_complex_t c) {</span>
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 1235 times"> + </span><span class="branchCov" title="Branch 1 was taken 601030 times"> + </span>]:<span class="lineCov">     602265 :   if (data == NULL) {</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">       1235 :     size = 0; capacity = 64;</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">       1235 :     data = (nr_complex_t *) malloc (sizeof (nr_complex_t) * capacity);</span>
 <span class="lineNum">     157 </span>                :            :   }
-<span class="lineNum">     158 </span>        [<span class="branchCov" title="Branch 0 was taken 1895 times"> + </span><span class="branchCov" title="Branch 1 was taken 463497 times"> + </span>]:<span class="lineCov">     465392 :   else if (size &gt;= capacity) {</span>
-<span class="lineNum">     159 </span>                :<span class="lineCov">       1895 :     capacity *= 2;</span>
-<span class="lineNum">     160 </span>                :<span class="lineCov">       1895 :     data = (nr_complex_t *) realloc (data, sizeof (nr_complex_t) * capacity);</span>
+<span class="lineNum">     158 </span>        [<span class="branchCov" title="Branch 0 was taken 2236 times"> + </span><span class="branchCov" title="Branch 1 was taken 598794 times"> + </span>]:<span class="lineCov">     601030 :   else if (size &gt;= capacity) {</span>
+<span class="lineNum">     159 </span>                :<span class="lineCov">       2236 :     capacity *= 2;</span>
+<span class="lineNum">     160 </span>                :<span class="lineCov">       2236 :     data = (nr_complex_t *) realloc (data, sizeof (nr_complex_t) * capacity);</span>
 <span class="lineNum">     161 </span>                :            :   }
-<span class="lineNum">     162 </span>                :<span class="lineCov">     466466 :   data[size++] = c;</span>
-<span class="lineNum">     163 </span>                :<span class="lineCov">     466466 : }</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">     602265 :   data[size++] = c;</span>
+<span class="lineNum">     163 </span>                :<span class="lineCov">     602265 : }</span>
 <a name="164"><span class="lineNum">     164 </span>                :            : </a>
 <span class="lineNum">     165 </span>                :            : /* This function appends the given vector to the vector. */
 <span class="lineNum">     166 </span>                :<span class="lineNoCov">          0 : void vector::add (vector * v) {</span>
@@ -254,21 +261,21 @@
 <span class="lineNum">     178 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="179"><span class="lineNum">     179 </span>                :            : </a>
 <span class="lineNum">     180 </span>                :            : // Returns the complex data item at the given position.
-<span class="lineNum">     181 </span>                :<span class="lineCov">     654280 : nr_complex_t vector::get (int i) {</span>
-<span class="lineNum">     182 </span>                :<span class="lineCov">     654280 :   return data[i];</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">     830476 : nr_complex_t vector::get (int i) {</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">     830476 :   return data[i];</span>
 <a name="183"><span class="lineNum">     183 </span>                :            : }</a>
 <span class="lineNum">     184 </span>                :            : 
-<span class="lineNum">     185 </span>                :<span class="lineCov">      99581 : void vector::set (nr_double_t d, int i) {</span>
-<span class="lineNum">     186 </span>                :<span class="lineCov">      99581 :   data[i] = nr_complex_t (d);</span>
-<a name="187"><span class="lineNum">     187 </span>                :<span class="lineCov">      99581 : }</span></a>
+<span class="lineNum">     185 </span>                :<span class="lineCov">     124038 : void vector::set (nr_double_t d, int i) {</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">     124038 :   data[i] = nr_complex_t (d);</span>
+<a name="187"><span class="lineNum">     187 </span>                :<span class="lineCov">     124038 : }</span></a>
 <span class="lineNum">     188 </span>                :            : 
-<span class="lineNum">     189 </span>                :<span class="lineCov">       8760 : void vector::set (const nr_complex_t z, int i) {</span>
-<span class="lineNum">     190 </span>                :<span class="lineCov">       8760 :   data[i] = nr_complex_t (z);</span>
-<span class="lineNum">     191 </span>                :<span class="lineCov">       8760 : }</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">      10862 : void vector::set (const nr_complex_t z, int i) {</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">      10862 :   data[i] = nr_complex_t (z);</span>
+<span class="lineNum">     191 </span>                :<span class="lineCov">      10862 : }</span>
 <a name="192"><span class="lineNum">     192 </span>                :            : </a>
 <span class="lineNum">     193 </span>                :            : // The function returns the current size of the vector.
-<span class="lineNum">     194 </span>                :<span class="lineCov">     586937 : int vector::getSize (void) const {</span>
-<span class="lineNum">     195 </span>                :<span class="lineCov">     586937 :   return size;</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">     751446 : int vector::getSize (void) const {</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">     751446 :   return size;</span>
 <a name="196"><span class="lineNum">     196 </span>                :            : }</a>
 <span class="lineNum">     197 </span>                :            : 
 <span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 : int vector::checkSizes (vector v1, vector v2) {</span>
@@ -403,10 +410,10 @@
 <span class="lineNum">     327 </span>                :<span class="lineNoCov">          0 :   return result;</span>
 <a name="328"><span class="lineNum">     328 </span>                :            : }</a>
 <span class="lineNum">     329 </span>                :            : 
-<span class="lineNum">     330 </span>                :<span class="lineCov">         18 : vector abs (vector v) {</span>
-<span class="lineNum">     331 </span>                :<span class="lineCov">         18 :   vector result (v);</span>
-<span class="lineNum">     332 </span>        [<span class="branchCov" title="Branch 4 was taken 25528 times"> + </span><span class="branchCov" title="Branch 5 was taken 18 times"> + </span>]:<span class="lineCov">      25546 :   for (int i = 0; i &lt; v.getSize (); i++) result.set (abs (v.get (i)), i);</span>
-<span class="lineNum">     333 </span>                :<span class="lineCov">         18 :   return result;</span>
+<span class="lineNum">     330 </span>                :<span class="lineCov">         26 : vector abs (vector v) {</span>
+<span class="lineNum">     331 </span>                :<span class="lineCov">         26 :   vector result (v);</span>
+<span class="lineNum">     332 </span>        [<span class="branchCov" title="Branch 4 was taken 38042 times"> + </span><span class="branchCov" title="Branch 5 was taken 26 times"> + </span>]:<span class="lineCov">      38068 :   for (int i = 0; i &lt; v.getSize (); i++) result.set (abs (v.get (i)), i);</span>
+<span class="lineNum">     333 </span>                :<span class="lineCov">         26 :   return result;</span>
 <a name="334"><span class="lineNum">     334 </span>                :            : }</a>
 <span class="lineNum">     335 </span>                :            : 
 <span class="lineNum">     336 </span>                :<span class="lineNoCov">          0 : vector norm (vector v) {</span>
@@ -523,10 +530,10 @@
 <span class="lineNum">     447 </span>                :<span class="lineNoCov">          0 :   return res;</span>
 <a name="448"><span class="lineNum">     448 </span>                :            : }</a>
 <span class="lineNum">     449 </span>                :            : 
-<span class="lineNum">     450 </span>                :<span class="lineCov">          6 : vector sin (vector v) {</span>
-<span class="lineNum">     451 </span>                :<span class="lineCov">          6 :   vector result (v);</span>
-<span class="lineNum">     452 </span>[<span class="branchCov" title="Branch 1 was taken 4204 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 4204 times"> + </span><span class="branchCov" title="Branch 7 was taken 6 times"> + </span>]:<span class="lineCov">       4210 :   for (int i = 0; i &lt; v.getSize (); i++) result.set (sin (v.get (i)), i);</span>
-<span class="lineNum">     453 </span>                :<span class="lineCov">          6 :   return result;</span>
+<span class="lineNum">     450 </span>                :<span class="lineCov">          9 : vector sin (vector v) {</span>
+<span class="lineNum">     451 </span>                :<span class="lineCov">          9 :   vector result (v);</span>
+<span class="lineNum">     452 </span>[<span class="branchCov" title="Branch 1 was taken 6306 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 6306 times"> + </span><span class="branchCov" title="Branch 7 was taken 9 times"> + </span>]:<span class="lineCov">       6315 :   for (int i = 0; i &lt; v.getSize (); i++) result.set (sin (v.get (i)), i);</span>
+<span class="lineNum">     453 </span>                :<span class="lineCov">          9 :   return result;</span>
 <a name="454"><span class="lineNum">     454 </span>                :            : }</a>
 <span class="lineNum">     455 </span>                :            : 
 <span class="lineNum">     456 </span>                :<span class="lineNoCov">          0 : vector asin (vector v) {</span>
@@ -777,11 +784,11 @@
 <span class="lineNum">     694 </span>                :<span class="lineCov">         10 :   return result;</span>
 <a name="695"><span class="lineNum">     695 </span>                :            : }</a>
 <span class="lineNum">     696 </span>                :            : 
-<span class="lineNum">     697 </span>                :<span class="lineCov">         14 : vector vector::operator-=(vector v) {</span>
-<span class="lineNum">     698 </span>                :<span class="lineCov">         14 :   int i, n, len = v.getSize ();</span>
-<span class="lineNum">     699 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 14 times"> + </span>]:<span class="lineCov">         14 :   assert (size % len == 0);</span>
-<span class="lineNum">     700 </span>[<span class="branchCov" title="Branch 2 was taken 32 times"> + </span><span class="branchCov" title="Branch 3 was taken 25202 times"> + </span>][<span class="branchCov" title="Branch 4 was taken 25234 times"> + </span><span class="branchCov" title="Branch 5 was taken 14 times"> + </span>]:<span class="lineCov">      25248 :   for (i = n = 0; i &lt; size; i++) { data[i] -= v (n); if (++n &gt;= len) n = 0; }</span>
-<span class="lineNum">     701 </span>                :<span class="lineCov">         14 :   return *this;</span>
+<span class="lineNum">     697 </span>                :<span class="lineCov">         18 : vector vector::operator-=(vector v) {</span>
+<span class="lineNum">     698 </span>                :<span class="lineCov">         18 :   int i, n, len = v.getSize ();</span>
+<span class="lineNum">     699 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :   assert (size % len == 0);</span>
+<span class="lineNum">     700 </span>[<span class="branchCov" title="Branch 2 was taken 45 times"> + </span><span class="branchCov" title="Branch 3 was taken 36695 times"> + </span>][<span class="branchCov" title="Branch 4 was taken 36740 times"> + </span><span class="branchCov" title="Branch 5 was taken 18 times"> + </span>]:<span class="lineCov">      36758 :   for (i = n = 0; i &lt; size; i++) { data[i] -= v (n); if (++n &gt;= len) n = 0; }</span>
+<span class="lineNum">     701 </span>                :<span class="lineCov">         18 :   return *this;</span>
 <a name="702"><span class="lineNum">     702 </span>                :            : }</a>
 <span class="lineNum">     703 </span>                :            : 
 <span class="lineNum">     704 </span>                :<span class="lineNoCov">          0 : vector vector::operator-=(const nr_complex_t c) {</span>
@@ -789,24 +796,24 @@
 <span class="lineNum">     706 </span>                :<span class="lineNoCov">          0 :   return *this;</span>
 <a name="707"><span class="lineNum">     707 </span>                :            : }</a>
 <span class="lineNum">     708 </span>                :            : 
-<span class="lineNum">     709 </span>                :<span class="lineCov">         10 : vector vector::operator-=(const nr_double_t d) {</span>
-<span class="lineNum">     710 </span>        [<span class="branchCov" title="Branch 1 was taken 2274 times"> + </span><span class="branchCov" title="Branch 2 was taken 10 times"> + </span>]:<span class="lineCov">       2284 :   for (int i = 0; i &lt; size; i++) data[i] -= d;</span>
-<span class="lineNum">     711 </span>                :<span class="lineCov">         10 :   return *this;</span>
+<span class="lineNum">     709 </span>                :<span class="lineCov">         14 : vector vector::operator-=(const nr_double_t d) {</span>
+<span class="lineNum">     710 </span>        [<span class="branchCov" title="Branch 1 was taken 3286 times"> + </span><span class="branchCov" title="Branch 2 was taken 14 times"> + </span>]:<span class="lineCov">       3300 :   for (int i = 0; i &lt; size; i++) data[i] -= d;</span>
+<span class="lineNum">     711 </span>                :<span class="lineCov">         14 :   return *this;</span>
 <a name="712"><span class="lineNum">     712 </span>                :            : }</a>
 <span class="lineNum">     713 </span>                :            : 
-<span class="lineNum">     714 </span>                :<span class="lineCov">         14 : vector operator-(vector v1, vector v2) {</span>
-<span class="lineNum">     715 </span>                :<span class="lineCov">         14 :   int len1 = v1.getSize (), len2 = v2.getSize ();</span>
-<span class="lineNum">     716 </span>                :<span class="lineCov">         14 :   vector result;</span>
-<span class="lineNum">     717 </span>        [<span class="branchCov" title="Branch 0 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         14 :   if (len1 &gt;= len2) {</span>
-<span class="lineNum">     718 </span>                :<span class="lineCov">         14 :     result  = v1;</span>
-<span class="lineNum">     719 </span>[<span class="branchCov" title="Branch 0 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         14 :     result -= v2;</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     714 </span>                :<span class="lineCov">         18 : vector operator-(vector v1, vector v2) {</span>
+<span class="lineNum">     715 </span>                :<span class="lineCov">         18 :   int len1 = v1.getSize (), len2 = v2.getSize ();</span>
+<span class="lineNum">     716 </span>                :<span class="lineCov">         18 :   vector result;</span>
+<span class="lineNum">     717 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         18 :   if (len1 &gt;= len2) {</span>
+<span class="lineNum">     718 </span>                :<span class="lineCov">         18 :     result  = v1;</span>
+<span class="lineNum">     719 </span>[<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         18 :     result -= v2;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
 <span class="lineNum">     720 </span>                :            :   } else {
 <span class="lineNum">     721 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     result  = -v2;</span>
 <span class="lineNum">     722 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     result += v1;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
 <span class="lineNum">     723 </span>                :            :   }
-<span class="lineNum">     724 </span>                :<span class="lineCov">         14 :   return result;</span>
+<span class="lineNum">     724 </span>                :<span class="lineCov">         18 :   return result;</span>
 <a name="725"><span class="lineNum">     725 </span>                :            : }</a>
 <span class="lineNum">     726 </span>                :            : 
 <span class="lineNum">     727 </span>                :<span class="lineNoCov">          0 : vector operator-(vector v, const nr_complex_t c) {</span>
@@ -815,10 +822,10 @@
 <span class="lineNum">     730 </span>                :<span class="lineNoCov">          0 :   return result;</span>
 <a name="731"><span class="lineNum">     731 </span>                :            : }</a>
 <span class="lineNum">     732 </span>                :            : 
-<span class="lineNum">     733 </span>                :<span class="lineCov">         10 : vector operator-(vector v, const nr_double_t d) {</span>
-<span class="lineNum">     734 </span>                :<span class="lineCov">         10 :   vector result (v);</span>
-<span class="lineNum">     735 </span>[<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 10 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         10 :   result -= d;</span>
-<span class="lineNum">     736 </span>                :<span class="lineCov">         10 :   return result;</span>
+<span class="lineNum">     733 </span>                :<span class="lineCov">         14 : vector operator-(vector v, const nr_double_t d) {</span>
+<span class="lineNum">     734 </span>                :<span class="lineCov">         14 :   vector result (v);</span>
+<span class="lineNum">     735 </span>[<span class="branchCov" title="Branch 0 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         14 :   result -= d;</span>
+<span class="lineNum">     736 </span>                :<span class="lineCov">         14 :   return result;</span>
 <a name="737"><span class="lineNum">     737 </span>                :            : }</a>
 <span class="lineNum">     738 </span>                :            : 
 <span class="lineNum">     739 </span>                :<span class="lineNoCov">          0 : vector operator-(const nr_complex_t c, vector v) {</span>
@@ -845,9 +852,9 @@
 <span class="lineNum">     760 </span>                :<span class="lineNoCov">          0 :   return *this;</span>
 <a name="761"><span class="lineNum">     761 </span>                :            : }</a>
 <span class="lineNum">     762 </span>                :            : 
-<span class="lineNum">     763 </span>                :<span class="lineCov">         21 : vector vector::operator*=(const nr_double_t d) {</span>
-<span class="lineNum">     764 </span>        [<span class="branchCov" title="Branch 1 was taken 9485 times"> + </span><span class="branchCov" title="Branch 2 was taken 21 times"> + </span>]:<span class="lineCov">       9506 :   for (int i = 0; i &lt; size; i++) data[i] *= d;</span>
-<span class="lineNum">     765 </span>                :<span class="lineCov">         21 :   return *this;</span>
+<span class="lineNum">     763 </span>                :<span class="lineCov">         25 : vector vector::operator*=(const nr_double_t d) {</span>
+<span class="lineNum">     764 </span>        [<span class="branchCov" title="Branch 1 was taken 11987 times"> + </span><span class="branchCov" title="Branch 2 was taken 25 times"> + </span>]:<span class="lineCov">      12012 :   for (int i = 0; i &lt; size; i++) data[i] *= d;</span>
+<span class="lineNum">     765 </span>                :<span class="lineCov">         25 :   return *this;</span>
 <a name="766"><span class="lineNum">     766 </span>                :            : }</a>
 <span class="lineNum">     767 </span>                :            : 
 <span class="lineNum">     768 </span>                :<span class="lineNoCov">          0 : vector operator*(vector v1, vector v2) {</span>
@@ -871,18 +878,18 @@
 <span class="lineNum">     784 </span>                :<span class="lineNoCov">          0 :   return result;</span>
 <a name="785"><span class="lineNum">     785 </span>                :            : }</a>
 <span class="lineNum">     786 </span>                :            : 
-<span class="lineNum">     787 </span>                :<span class="lineCov">         21 : vector operator*(vector v, const nr_double_t d) {</span>
-<span class="lineNum">     788 </span>                :<span class="lineCov">         21 :   vector result (v);</span>
-<span class="lineNum">     789 </span>[<span class="branchCov" title="Branch 0 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         21 :   result *= d;</span>
-<span class="lineNum">     790 </span>                :<span class="lineCov">         21 :   return result;</span>
+<span class="lineNum">     787 </span>                :<span class="lineCov">         25 : vector operator*(vector v, const nr_double_t d) {</span>
+<span class="lineNum">     788 </span>                :<span class="lineCov">         25 :   vector result (v);</span>
+<span class="lineNum">     789 </span>[<span class="branchCov" title="Branch 0 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         25 :   result *= d;</span>
+<span class="lineNum">     790 </span>                :<span class="lineCov">         25 :   return result;</span>
 <a name="791"><span class="lineNum">     791 </span>                :            : }</a>
 <span class="lineNum">     792 </span>                :            : 
 <span class="lineNum">     793 </span>                :<span class="lineNoCov">          0 : vector operator*(const nr_complex_t c, vector v) {</span>
 <span class="lineNum">     794 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return v * c;</span>
 <a name="795"><span class="lineNum">     795 </span>                :            : }</a>
 <span class="lineNum">     796 </span>                :            : 
-<span class="lineNum">     797 </span>                :<span class="lineCov">         21 : vector operator*(const nr_double_t d, vector v) {</span>
-<span class="lineNum">     798 </span>        [<span class="branchCov" title="Branch 1 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         21 :   return v * d;</span>
+<span class="lineNum">     797 </span>                :<span class="lineCov">         25 : vector operator*(const nr_double_t d, vector v) {</span>
+<span class="lineNum">     798 </span>        [<span class="branchCov" title="Branch 1 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         25 :   return v * d;</span>
 <a name="799"><span class="lineNum">     799 </span>                :            : }</a>
 <span class="lineNum">     800 </span>                :            : 
 <span class="lineNum">     801 </span>                :<span class="lineCov">       1083 : vector vector::operator/=(vector v) {</span>
@@ -1004,14 +1011,14 @@
 <span class="lineNum">     912 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="913"><span class="lineNum">     913 </span>                :            : </a>
 <span class="lineNum">     914 </span>                :            : // Sets the origin (the analysis) of the vector.
-<span class="lineNum">     915 </span>                :<span class="lineCov">        912 : void vector::setOrigin (char * n) {</span>
-<span class="lineNum">     916 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 912 times"> + </span>]:<span class="lineCov">        912 :   if (origin) free (origin);</span>
-<span class="lineNum">     917 </span>        [<span class="branchCov" title="Branch 0 was taken 912 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        912 :   origin = n ? strdup (n) : NULL;</span>
-<span class="lineNum">     918 </span>                :<span class="lineCov">        912 : }</span>
+<span class="lineNum">     915 </span>                :<span class="lineCov">       1051 : void vector::setOrigin (char * n) {</span>
+<span class="lineNum">     916 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1051 times"> + </span>]:<span class="lineCov">       1051 :   if (origin) free (origin);</span>
+<span class="lineNum">     917 </span>        [<span class="branchCov" title="Branch 0 was taken 1051 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1051 :   origin = n ? strdup (n) : NULL;</span>
+<span class="lineNum">     918 </span>                :<span class="lineCov">       1051 : }</span>
 <a name="919"><span class="lineNum">     919 </span>                :            : </a>
 <span class="lineNum">     920 </span>                :            : // Returns the origin (the analysis) of the vector.
-<span class="lineNum">     921 </span>                :<span class="lineCov">      68180 : char * vector::getOrigin (void) {</span>
-<span class="lineNum">     922 </span>                :<span class="lineCov">      68180 :   return origin;</span>
+<span class="lineNum">     921 </span>                :<span class="lineCov">      85863 : char * vector::getOrigin (void) {</span>
+<span class="lineNum">     922 </span>                :<span class="lineCov">      85863 :   return origin;</span>
 <span class="lineNum">     923 </span>                :            : }
 <span class="lineNum">     924 </span>                :            : 
 <a name="925"><span class="lineNum">     925 </span>                :            : /* The function returns the number of entries with the given value</a>
@@ -1042,47 +1049,47 @@
 <span class="lineNum">     949 </span>                :            : /* The function creates a linear stepped vector of values starting at
 <a name="950"><span class="lineNum">     950 </span>                :            :    the given start value, ending with the given stop value and</a>
 <span class="lineNum">     951 </span>                :            :    containing points elements. */
-<span class="lineNum">     952 </span>                :<span class="lineCov">        108 : vector linspace (nr_double_t start, nr_double_t stop, int points) {</span>
-<span class="lineNum">     953 </span>                :<span class="lineCov">        108 :   vector result (points);</span>
-<span class="lineNum">     954 </span>                :<span class="lineCov">        108 :   nr_double_t val, step = (stop - start) / (points - 1);</span>
-<span class="lineNum">     955 </span>        [<span class="branchCov" title="Branch 0 was taken 48321 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>]:<span class="lineCov">      48429 :   for (int i = 0; i &lt; points; i++) {</span>
-<span class="lineNum">     956 </span>                :<span class="lineCov">      48321 :     val = start + (i * step);</span>
-<span class="lineNum">     957 </span>[<span class="branchCov" title="Branch 0 was taken 48213 times"> + </span><span class="branchCov" title="Branch 1 was taken 108 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchCov" title="Branch 3 was taken 48210 times"> + </span>]:<span class="lineCov">      48321 :     if (i != 0 &amp;&amp; fabs (val) &lt; fabs (step) / 4 &amp;&amp; fabs (val) &lt; std::numeric_limits&lt;nr_double_t&gt;::epsilon())</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchCov" title="Branch 7 was taken 3 times"> + </span><span class="branchCov" title="Branch 8 was taken 48318 times"> + </span>]
-<span class="lineNum">     958 </span>                :<span class="lineCov">          3 :       val = 0.0;</span>
-<span class="lineNum">     959 </span>                :<span class="lineCov">      48321 :     result.set (val, i);</span>
+<span class="lineNum">     952 </span>                :<span class="lineCov">        134 : vector linspace (nr_double_t start, nr_double_t stop, int points) {</span>
+<span class="lineNum">     953 </span>                :<span class="lineCov">        134 :   vector result (points);</span>
+<span class="lineNum">     954 </span>                :<span class="lineCov">        134 :   nr_double_t val, step = (stop - start) / (points - 1);</span>
+<span class="lineNum">     955 </span>        [<span class="branchCov" title="Branch 0 was taken 60082 times"> + </span><span class="branchCov" title="Branch 1 was taken 134 times"> + </span>]:<span class="lineCov">      60216 :   for (int i = 0; i &lt; points; i++) {</span>
+<span class="lineNum">     956 </span>                :<span class="lineCov">      60082 :     val = start + (i * step);</span>
+<span class="lineNum">     957 </span>[<span class="branchCov" title="Branch 0 was taken 59948 times"> + </span><span class="branchCov" title="Branch 1 was taken 134 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 4 times"> + </span><span class="branchCov" title="Branch 3 was taken 59944 times"> + </span>]:<span class="lineCov">      60082 :     if (i != 0 &amp;&amp; fabs (val) &lt; fabs (step) / 4 &amp;&amp; fabs (val) &lt; std::numeric_limits&lt;nr_double_t&gt;::epsilon())</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchCov" title="Branch 7 was taken 4 times"> + </span><span class="branchCov" title="Branch 8 was taken 60078 times"> + </span>]
+<span class="lineNum">     958 </span>                :<span class="lineCov">          4 :       val = 0.0;</span>
+<span class="lineNum">     959 </span>                :<span class="lineCov">      60082 :     result.set (val, i);</span>
 <span class="lineNum">     960 </span>                :            :   }
-<span class="lineNum">     961 </span>                :<span class="lineCov">        108 :   return result;</span>
+<span class="lineNum">     961 </span>                :<span class="lineCov">        134 :   return result;</span>
 <span class="lineNum">     962 </span>                :            : }
 <span class="lineNum">     963 </span>                :            : 
 <span class="lineNum">     964 </span>                :            : /* The function creates a logarithmic stepped vector of values
 <a name="965"><span class="lineNum">     965 </span>                :            :    starting at the given start value, ending with the given stop value</a>
 <span class="lineNum">     966 </span>                :            :    and containing points elements. */
-<span class="lineNum">     967 </span>                :<span class="lineCov">         23 : vector logspace (nr_double_t start, nr_double_t stop, int points) {</span>
-<span class="lineNum">     968 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 23 times"> + </span>]:<span class="lineCov">         23 :   assert (start * stop &gt; 0);</span>
-<span class="lineNum">     969 </span>                :<span class="lineCov">         23 :   vector result (points);</span>
+<span class="lineNum">     967 </span>                :<span class="lineCov">         25 : vector logspace (nr_double_t start, nr_double_t stop, int points) {</span>
+<span class="lineNum">     968 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 25 times"> + </span>]:<span class="lineCov">         25 :   assert (start * stop &gt; 0);</span>
+<span class="lineNum">     969 </span>                :<span class="lineCov">         25 :   vector result (points);</span>
 <span class="lineNum">     970 </span>                :            :   nr_double_t step, first, last, d;
 <span class="lineNum">     971 </span>                :            : 
 <span class="lineNum">     972 </span>                :            :   // ensure the last value being larger than the first
-<span class="lineNum">     973 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 23 times"> + </span>]:<span class="lineCov">         23 :   if (fabs (start) &gt; fabs (stop)) {</span>
+<span class="lineNum">     973 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 25 times"> + </span>]:<span class="lineCov">         25 :   if (fabs (start) &gt; fabs (stop)) {</span>
 <span class="lineNum">     974 </span>                :<span class="lineNoCov">          0 :     first = fabs (stop);</span>
 <span class="lineNum">     975 </span>                :<span class="lineNoCov">          0 :     last = fabs (start);</span>
 <span class="lineNum">     976 </span>                :            :   }
 <span class="lineNum">     977 </span>                :            :   else {
-<span class="lineNum">     978 </span>                :<span class="lineCov">         23 :     first = fabs (start);</span>
-<span class="lineNum">     979 </span>                :<span class="lineCov">         23 :     last = fabs (stop);</span>
+<span class="lineNum">     978 </span>                :<span class="lineCov">         25 :     first = fabs (start);</span>
+<span class="lineNum">     979 </span>                :<span class="lineCov">         25 :     last = fabs (stop);</span>
 <span class="lineNum">     980 </span>                :            :   }
 <span class="lineNum">     981 </span>                :            :   // check direction and sign of values
-<span class="lineNum">     982 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 23 times"> + </span>]:<span class="lineCov">         23 :   d = fabs (start) &gt; fabs (stop) ? -1 : 1;</span>
+<span class="lineNum">     982 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 25 times"> + </span>]:<span class="lineCov">         25 :   d = fabs (start) &gt; fabs (stop) ? -1 : 1;</span>
 <span class="lineNum">     983 </span>                :            :   // compute logarithmic step size
-<span class="lineNum">     984 </span>                :<span class="lineCov">         23 :   step = (::log (last) - ::log (first)) / (points - 1);</span>
-<span class="lineNum">     985 </span>        [<span class="branchCov" title="Branch 0 was taken 7223 times"> + </span><span class="branchCov" title="Branch 1 was taken 23 times"> + </span>]:<span class="lineCov">       7246 :   for (int i = 0, j = points - 1; i &lt; points; i++, j--) {</span>
-<span class="lineNum">     986 </span>        [<span class="branchCov" title="Branch 0 was taken 7223 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7223 :     if (d &gt; 0)</span>
-<span class="lineNum">     987 </span>                :<span class="lineCov">       7223 :       result.set (start * ::exp (step * i), i);</span>
+<span class="lineNum">     984 </span>                :<span class="lineCov">         25 :   step = (::log (last) - ::log (first)) / (points - 1);</span>
+<span class="lineNum">     985 </span>        [<span class="branchCov" title="Branch 0 was taken 7405 times"> + </span><span class="branchCov" title="Branch 1 was taken 25 times"> + </span>]:<span class="lineCov">       7430 :   for (int i = 0, j = points - 1; i &lt; points; i++, j--) {</span>
+<span class="lineNum">     986 </span>        [<span class="branchCov" title="Branch 0 was taken 7405 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7405 :     if (d &gt; 0)</span>
+<span class="lineNum">     987 </span>                :<span class="lineCov">       7405 :       result.set (start * ::exp (step * i), i);</span>
 <span class="lineNum">     988 </span>                :            :     else
 <span class="lineNum">     989 </span>                :<span class="lineNoCov">          0 :       result.set (stop * ::exp (step * i), j);</span>
 <span class="lineNum">     990 </span>                :            :   }
-<span class="lineNum">     991 </span>                :<span class="lineCov">         23 :   return result;</span>
+<span class="lineNum">     991 </span>                :<span class="lineCov">         25 :   return result;</span>
 <a name="992"><span class="lineNum">     992 </span>                :            : }</a>
 <span class="lineNum">     993 </span>                :            : 
 <span class="lineNum">     994 </span>                :<span class="lineNoCov">          0 : vector cumsum (vector v) {</span>

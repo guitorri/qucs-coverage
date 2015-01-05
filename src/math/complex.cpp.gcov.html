@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/math/complex.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/math/complex.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">23</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">16.4 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">6</td>
@@ -134,8 +141,8 @@
 <span class="lineNum">      63 </span>                :            :     \param[in] z complex angle
 <a name="64"><span class="lineNum">      64 </span>                :            :     \return sine of z</a>
 <span class="lineNum">      65 </span>                :            : */
-<span class="lineNum">      66 </span>                :<span class="lineCov">       4204 : nr_complex_t sin (const nr_complex_t z) {</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">       4204 :     return std::sin (z);</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">       6306 : nr_complex_t sin (const nr_complex_t z) {</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">       6306 :     return std::sin (z);</span>
 <span class="lineNum">      68 </span>                :            : }
 <span class="lineNum">      69 </span>                :            : 
 <span class="lineNum">      70 </span>                :            : 
@@ -621,12 +628,12 @@
 <span class="lineNum">     548 </span>                :            :    \param[in] ang Angle
 <a name="549"><span class="lineNum">     549 </span>                :            :    \return complex number in rectangular form</a>
 <span class="lineNum">     550 </span>                :            : */
-<span class="lineNum">     551 </span>                :<span class="lineCov">       7959 : nr_complex_t polar (const nr_double_t mag, const nr_double_t ang )</span>
+<span class="lineNum">     551 </span>                :<span class="lineCov">       8880 : nr_complex_t polar (const nr_double_t mag, const nr_double_t ang )</span>
 <span class="lineNum">     552 </span>                :            : {
 <span class="lineNum">     553 </span>                :            : #ifdef HAVE_CXX_COMPLEX_POLAR_COMPLEX
 <span class="lineNum">     554 </span>                :            :     return std::polar (mag, ang);
 <span class="lineNum">     555 </span>                :            : #else
-<span class="lineNum">     556 </span>                :<span class="lineCov">       7959 :     return nr_complex_t (mag * cos (ang), mag * sin (ang));</span>
+<span class="lineNum">     556 </span>                :<span class="lineCov">       8880 :     return nr_complex_t (mag * cos (ang), mag * sin (ang));</span>
 <span class="lineNum">     557 </span>                :            : #endif
 <span class="lineNum">     558 </span>                :            : }
 <span class="lineNum">     559 </span>                :            : 

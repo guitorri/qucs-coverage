@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -133,28 +133,28 @@
 <span class="lineNum">      55 </span>                :            : using namespace qucs;
 <a name="56"><span class="lineNum">      56 </span>                :            : </a>
 <span class="lineNum">      57 </span>                :            : /*! \todo replace environement name root by &quot;/&quot; in order to be filesystem compatible */
-<span class="lineNum">      58 </span>                :<span class="lineCov">         94 : int main (int argc, char ** argv) {</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">        107 : int main (int argc, char ** argv) {</span>
 <span class="lineNum">      59 </span>                :            : 
-<span class="lineNum">      60 </span>                :<span class="lineCov">         94 :   char * infile = NULL;</span>
-<span class="lineNum">      61 </span>                :<span class="lineCov">         94 :   char * outfile = NULL;</span>
-<span class="lineNum">      62 </span>                :<span class="lineCov">         94 :   char * projPath = NULL;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">        107 :   char * infile = NULL;</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">        107 :   char * outfile = NULL;</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">        107 :   char * projPath = NULL;</span>
 <span class="lineNum">      63 </span>                :            :   net * subnet;
 <span class="lineNum">      64 </span>                :            :   input * in;
 <span class="lineNum">      65 </span>                :            :   circuit * gnd;
 <span class="lineNum">      66 </span>                :            :   dataset * out;
 <span class="lineNum">      67 </span>                :            :   environment * root;
-<span class="lineNum">      68 </span>                :<span class="lineCov">         94 :   int listing = 0;</span>
-<span class="lineNum">      69 </span>                :<span class="lineCov">         94 :   int ret = 0;</span>
-<span class="lineNum">      70 </span>                :<span class="lineCov">         94 :   int dynamicLoad = 0;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">        107 :   int listing = 0;</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">        107 :   int ret = 0;</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">        107 :   int dynamicLoad = 0;</span>
 <span class="lineNum">      71 </span>                :            : 
-<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         94 :   std::list&lt;std::string&gt; vamodules;</span>
+<span class="lineNum">      72 </span>        [<span class="branchCov" title="Branch 0 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        107 :   std::list&lt;std::string&gt; vamodules;</span>
 <span class="lineNum">      73 </span>                :            : 
-<span class="lineNum">      74 </span>        [<span class="branchCov" title="Branch 0 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         94 :   loginit ();</span>
-<span class="lineNum">      75 </span>                :<span class="lineCov">         94 :   ::srand (::time (NULL));</span>
+<span class="lineNum">      74 </span>        [<span class="branchCov" title="Branch 0 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        107 :   loginit ();</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">        107 :   ::srand (::time (NULL));</span>
 <span class="lineNum">      76 </span>                :            : 
 <span class="lineNum">      77 </span>                :            :   // check program arguments
-<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 0 was taken 158 times"> + </span><span class="branchCov" title="Branch 1 was taken 91 times"> + </span>]:<span class="lineCov">        249 :   for (int i = 1; i &lt; argc; i++) {</span>
-<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 0 was taken 155 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 155 times"> + </span>]:<span class="lineCov">        158 :     if (!strcmp (argv[i], &quot;-v&quot;) || !strcmp (argv[i], &quot;--version&quot;)) {</span>
+<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 0 was taken 171 times"> + </span><span class="branchCov" title="Branch 1 was taken 104 times"> + </span>]:<span class="lineCov">        275 :   for (int i = 1; i &lt; argc; i++) {</span>
+<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 0 was taken 168 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 168 times"> + </span>]:<span class="lineCov">        171 :     if (!strcmp (argv[i], &quot;-v&quot;) || !strcmp (argv[i], &quot;--version&quot;)) {</span>
 <span class="lineNum">      80 </span>                :            :       fprintf (stdout,
 <span class="lineNum">      81 </span>                :            : #ifdef GIT
 <span class="lineNum">      82 </span>                :            :         &quot;Qucsator &quot; PACKAGE_VERSION &quot; (&quot; GIT &quot;) \n&quot;
@@ -171,7 +171,7 @@
 <span class="lineNum">      93 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :         &quot;PARTICULAR PURPOSE.\n&quot;);</span>
 <span class="lineNum">      94 </span>                :<span class="lineCov">          3 :       return 0;</span>
 <span class="lineNum">      95 </span>                :            :     }
-<span class="lineNum">      96 </span>[<span class="branchCov" title="Branch 0 was taken 155 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 155 times"> + </span>]:<span class="lineCov">        155 :     if (!strcmp (argv[i], &quot;-h&quot;) || !strcmp (argv[i], &quot;--help&quot;)) {</span>
+<span class="lineNum">      96 </span>[<span class="branchCov" title="Branch 0 was taken 168 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 168 times"> + </span>]:<span class="lineCov">        168 :     if (!strcmp (argv[i], &quot;-h&quot;) || !strcmp (argv[i], &quot;--help&quot;)) {</span>
 <span class="lineNum">      97 </span>                :            :       fprintf (stdout,
 <span class="lineNum">      98 </span>                :            :         &quot;Usage: %s [OPTION]...\n\n&quot;
 <span class="lineNum">      99 </span>                :            :         &quot;  -h, --help     display this help and exit\n&quot;
@@ -189,8 +189,8 @@
 <span class="lineNum">     111 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         &quot;\nReport bugs to &lt;&quot; PACKAGE_BUGREPORT &quot;&gt;.\n&quot;, argv[0]);</span>
 <span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :       return 0;</span>
 <span class="lineNum">     113 </span>                :            :     }
-<span class="lineNum">     114 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">        155 :     else if (!strcmp (argv[i], &quot;-i&quot;)) {</span>
-<span class="lineNum">     115 </span>                :<span class="lineCov">         90 :       infile = argv[++i];</span>
+<span class="lineNum">     114 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchCov" title="Branch 1 was taken 65 times"> + </span>]:<span class="lineCov">        168 :     else if (!strcmp (argv[i], &quot;-i&quot;)) {</span>
+<span class="lineNum">     115 </span>                :<span class="lineCov">        103 :       infile = argv[++i];</span>
 <span class="lineNum">     116 </span>                :            :     }
 <span class="lineNum">     117 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         65 :     else if (!strcmp (argv[i], &quot;-o&quot;)) {</span>
 <span class="lineNum">     118 </span>                :<span class="lineCov">         64 :       outfile = argv[++i];</span>
@@ -223,11 +223,11 @@
 <span class="lineNum">     145 </span>                :            :   }
 <span class="lineNum">     146 </span>                :            : 
 <span class="lineNum">     147 </span>                :            :   // create static modules
-<span class="lineNum">     148 </span>        [<span class="branchCov" title="Branch 0 was taken 91 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         91 :   module::registerModules ();</span>
+<span class="lineNum">     148 </span>        [<span class="branchCov" title="Branch 0 was taken 104 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        104 :   module::registerModules ();</span>
 <span class="lineNum">     149 </span>                :            : 
 <span class="lineNum">     150 </span>                :            : #if DEBUG
 <span class="lineNum">     151 </span>                :            :   // emit C-code for available definitions if requested and exit
-<span class="lineNum">     152 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         91 :   if (listing) {</span>
+<span class="lineNum">     152 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        104 :   if (listing) {</span>
 <span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :     module::print ();</span>
 <span class="lineNum">     154 </span>                :<span class="lineCov">          1 :     return ret;</span>
 <span class="lineNum">     155 </span>                :            :   }
@@ -235,24 +235,24 @@
 <span class="lineNum">     157 </span>                :            : 
 <span class="lineNum">     158 </span>                :            :   // look for dynamic libs, load and register them
 <span class="lineNum">     159 </span>                :            :   // \todo, keep this way of loading or keep only annotated netlist?
-<span class="lineNum">     160 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (dynamicLoad) {</span>
+<span class="lineNum">     160 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :   if (dynamicLoad) {</span>
 <span class="lineNum">     161 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     module::registerDynamicModules (projPath, vamodules);</span>
 <span class="lineNum">     162 </span>                :            :   }
 <span class="lineNum">     163 </span>                :            : 
 <span class="lineNum">     164 </span>                :            :   else { //no argument, look into netlist
 <span class="lineNum">     165 </span>                :            : 
-<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         90 :     std::string sLine = &quot;&quot;;</span>
-<span class="lineNum">     167 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :     std::ifstream file;</span>
+<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        103 :     std::string sLine = &quot;&quot;;</span>
+<span class="lineNum">     167 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :     std::ifstream file;</span>
 <span class="lineNum">     168 </span>                :            : 
-<span class="lineNum">     169 </span>        [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         90 :     std::string projPathNet =&quot;&quot;;</span>
-<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         90 :     std::string projVaMoules = &quot;&quot;;</span>
+<span class="lineNum">     169 </span>        [<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        103 :     std::string projPathNet =&quot;&quot;;</span>
+<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        103 :     std::string projVaMoules = &quot;&quot;;</span>
 <span class="lineNum">     171 </span>                :            : 
-<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :     file.open(infile);</span>
+<span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :     file.open(infile);</span>
 <span class="lineNum">     173 </span>                :            : 
-<span class="lineNum">     174 </span>[<span class="branchCov" title="Branch 0 was taken 1418 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1328 times"> + </span><span class="branchCov" title="Branch 4 was taken 90 times"> + </span>]:<span class="lineCov">       1418 :     while (!file.eof()) {</span>
-<span class="lineNum">     175 </span>        [<span class="branchCov" title="Branch 0 was taken 1328 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1328 :         getline(file, sLine);</span>
+<span class="lineNum">     174 </span>[<span class="branchCov" title="Branch 0 was taken 1609 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 1506 times"> + </span><span class="branchCov" title="Branch 4 was taken 103 times"> + </span>]:<span class="lineCov">       1609 :     while (!file.eof()) {</span>
+<span class="lineNum">     175 </span>        [<span class="branchCov" title="Branch 0 was taken 1506 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1506 :         getline(file, sLine);</span>
 <span class="lineNum">     176 </span>                :            : 
-<span class="lineNum">     177 </span>[<span class="branchCov" title="Branch 0 was taken 1328 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1328 times"> + </span>]:<span class="lineCov">       1328 :         if (sLine.find(&quot;--path&quot;) != std::string::npos) {</span>
+<span class="lineNum">     177 </span>[<span class="branchCov" title="Branch 0 was taken 1506 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1506 times"> + </span>]:<span class="lineCov">       1506 :         if (sLine.find(&quot;--path&quot;) != std::string::npos) {</span>
 <span class="lineNum">     178 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :             std::cout &lt;&lt; sLine &lt;&lt; std::endl;</span>
 <span class="lineNum">     179 </span>                :            : 
 <span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 :             size_t pos = 0;</span>
@@ -269,7 +269,7 @@
 <span class="lineNum">     191 </span>                :            : 
 <span class="lineNum">     192 </span>                :            :         }
 <span class="lineNum">     193 </span>                :            : 
-<span class="lineNum">     194 </span>[<span class="branchCov" title="Branch 0 was taken 1328 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1328 times"> + </span>]:<span class="lineCov">       1328 :         if (sLine.find(&quot;--module&quot;) != std::string::npos) {</span>
+<span class="lineNum">     194 </span>[<span class="branchCov" title="Branch 0 was taken 1506 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1506 times"> + </span>]:<span class="lineCov">       1506 :         if (sLine.find(&quot;--module&quot;) != std::string::npos) {</span>
 <span class="lineNum">     195 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :             std::cout &lt;&lt; sLine &lt;&lt; std::endl;</span>
 <span class="lineNum">     196 </span>                :            : 
 <span class="lineNum">     197 </span>                :<span class="lineNoCov">          0 :             size_t pos = 0;</span>
@@ -291,69 +291,69 @@
 <span class="lineNum">     212 </span>                :            :         }
 <span class="lineNum">     213 </span>                :            :     }
 <span class="lineNum">     214 </span>                :            : 
-<span class="lineNum">     215 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         90 :     module::registerDynamicModules ((char*)projPathNet.c_str(), vamodules);</span>
-<span class="lineNum">     216 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         90 :     file.close();</span>
+<span class="lineNum">     215 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        103 :     module::registerDynamicModules ((char*)projPathNet.c_str(), vamodules);</span>
+<span class="lineNum">     216 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        103 :     file.close();</span>
 <span class="lineNum">     217 </span>                :            :   }
 <span class="lineNum">     218 </span>                :            : 
 <span class="lineNum">     219 </span>                :            : 
 <span class="lineNum">     220 </span>                :            :   // create root environment
-<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         90 :   root = new environment (std::string(&quot;root&quot;));</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        103 :   root = new environment (std::string(&quot;root&quot;));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
 <span class="lineNum">     222 </span>                :            : 
 <span class="lineNum">     223 </span>                :            :   // create netlist object and input
-<span class="lineNum">     224 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         90 :   subnet = new net (&quot;subnet&quot;);</span>
-<span class="lineNum">     225 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   in = infile ? new input (infile) : new input ();</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     224 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        103 :   subnet = new net (&quot;subnet&quot;);</span>
+<span class="lineNum">     225 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :   in = infile ? new input (infile) : new input ();</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
 <span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
 <span class="lineNum">     226 </span>                :            : 
 <span class="lineNum">     227 </span>                :            :   // pass root environment to netlist object and input
-<span class="lineNum">     228 </span>                :<span class="lineCov">         90 :   subnet-&gt;setEnv (root);</span>
-<span class="lineNum">     229 </span>                :<span class="lineCov">         90 :   in-&gt;setEnv (root);</span>
+<span class="lineNum">     228 </span>                :<span class="lineCov">        103 :   subnet-&gt;setEnv (root);</span>
+<span class="lineNum">     229 </span>                :<span class="lineCov">        103 :   in-&gt;setEnv (root);</span>
 <span class="lineNum">     230 </span>                :            : 
 <span class="lineNum">     231 </span>                :            :   // get input netlist
-<span class="lineNum">     232 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (in-&gt;netlist (subnet) != 0) {</span>
+<span class="lineNum">     232 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 103 times"> + </span>]:<span class="lineCov">        103 :   if (in-&gt;netlist (subnet) != 0) {</span>
 <span class="lineNum">     233 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (netlist_check) {</span>
 <span class="lineNum">     234 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       logprint (LOG_STATUS, &quot;checker notice, netlist check FAILED\n&quot;);</span>
 <span class="lineNum">     235 </span>                :            :     }
 <span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :     return -1;</span>
 <span class="lineNum">     237 </span>                :            :   }
-<span class="lineNum">     238 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (netlist_check) {</span>
+<span class="lineNum">     238 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :   if (netlist_check) {</span>
 <span class="lineNum">     239 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     logprint (LOG_STATUS, &quot;checker notice, netlist OK\n&quot;);</span>
 <span class="lineNum">     240 </span>                :<span class="lineNoCov">          0 :     return 0;</span>
 <span class="lineNum">     241 </span>                :            :   }
 <span class="lineNum">     242 </span>                :            : 
 <span class="lineNum">     243 </span>                :            :   // attach a ground to the netlist
-<span class="lineNum">     244 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         90 :   gnd = new ground ();</span>
-<span class="lineNum">     245 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   gnd-&gt;setNode (0, &quot;gnd&quot;);</span>
-<span class="lineNum">     246 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   gnd-&gt;setName (&quot;GND&quot;);</span>
-<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   subnet-&gt;insertCircuit (gnd);</span>
+<span class="lineNum">     244 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        103 :   gnd = new ground ();</span>
+<span class="lineNum">     245 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   gnd-&gt;setNode (0, &quot;gnd&quot;);</span>
+<span class="lineNum">     246 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   gnd-&gt;setName (&quot;GND&quot;);</span>
+<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   subnet-&gt;insertCircuit (gnd);</span>
 <span class="lineNum">     248 </span>                :            : 
 <span class="lineNum">     249 </span>                :            :   // analyse the netlist
-<span class="lineNum">     250 </span>                :<span class="lineCov">         90 :   int err = 0;</span>
-<span class="lineNum">     251 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   out = subnet-&gt;runAnalysis (err);</span>
-<span class="lineNum">     252 </span>                :<span class="lineCov">         90 :   ret |= err;</span>
+<span class="lineNum">     250 </span>                :<span class="lineCov">        103 :   int err = 0;</span>
+<span class="lineNum">     251 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   out = subnet-&gt;runAnalysis (err);</span>
+<span class="lineNum">     252 </span>                :<span class="lineCov">        103 :   ret |= err;</span>
 <span class="lineNum">     253 </span>                :            : 
 <span class="lineNum">     254 </span>                :            :   // evaluate output dataset
-<span class="lineNum">     255 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   ret |= root-&gt;equationSolver (out);</span>
-<span class="lineNum">     256 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   out-&gt;setFile (outfile);</span>
-<span class="lineNum">     257 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   out-&gt;print ();</span>
+<span class="lineNum">     255 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   ret |= root-&gt;equationSolver (out);</span>
+<span class="lineNum">     256 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   out-&gt;setFile (outfile);</span>
+<span class="lineNum">     257 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   out-&gt;print ();</span>
 <span class="lineNum">     258 </span>                :            : 
-<span class="lineNum">     259 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   estack.print (&quot;uncaught&quot;);</span>
+<span class="lineNum">     259 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   estack.print (&quot;uncaught&quot;);</span>
 <span class="lineNum">     260 </span>                :            : 
-<span class="lineNum">     261 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   delete subnet;</span>
-<span class="lineNum">     262 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   delete in;</span>
-<span class="lineNum">     263 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   delete out;</span>
-<span class="lineNum">     264 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   delete root;</span>
+<span class="lineNum">     261 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :   delete subnet;</span>
+<span class="lineNum">     262 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :   delete in;</span>
+<span class="lineNum">     263 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :   delete out;</span>
+<span class="lineNum">     264 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :   delete root;</span>
 <span class="lineNum">     265 </span>                :            : 
 <span class="lineNum">     266 </span>                :            :   // delete static modules and dynamic modules
-<span class="lineNum">     267 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   module::unregisterModules ();</span>
+<span class="lineNum">     267 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   module::unregisterModules ();</span>
 <span class="lineNum">     268 </span>                :            : 
 <span class="lineNum">     269 </span>                :            :   // close all the dynamic libs if any opened
-<span class="lineNum">     270 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   module::closeDynamicLibs();</span>
+<span class="lineNum">     270 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   module::closeDynamicLibs();</span>
 <span class="lineNum">     271 </span>                :            : 
-<a name="272"><span class="lineNum">     272 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   netlist_destroy_env ();</span></a>
-<span class="lineNum">     273 </span>                :<span class="lineCov">         94 :   return ret;</span>
-<span class="lineNum">     274 </span>[<span class="branchCov" title="Branch 1 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        282 : }</span>
+<a name="272"><span class="lineNum">     272 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :   netlist_destroy_env ();</span></a>
+<span class="lineNum">     273 </span>                :<span class="lineCov">        107 :   return ret;</span>
+<span class="lineNum">     274 </span>[<span class="branchCov" title="Branch 1 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 107 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        321 : }</span>
 </pre>
       </td>
     </tr>

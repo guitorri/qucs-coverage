@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -109,10 +109,10 @@
 <span class="lineNum">      31 </span>                :            : 
 <a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
 <span class="lineNum">      33 </span>                :            : 
-<span class="lineNum">      34 </span>                :<span class="lineCov">         11 : idc::idc () : circuit (2) {</span>
-<span class="lineNum">      35 </span>                :<span class="lineCov">         11 :   type = CIR_IDC;</span>
-<span class="lineNum">      36 </span>                :<span class="lineCov">         11 :   setISource (true);</span>
-<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">         11 : }</span></a>
+<span class="lineNum">      34 </span>                :<span class="lineCov">         13 : idc::idc () : circuit (2) {</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">         13 :   type = CIR_IDC;</span>
+<span class="lineNum">      36 </span>                :<span class="lineCov">         13 :   setISource (true);</span>
+<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">         13 : }</span></a>
 <span class="lineNum">      38 </span>                :            : 
 <span class="lineNum">      39 </span>                :<span class="lineNoCov">          0 : void idc::initSP (void) {</span>
 <span class="lineNum">      40 </span>                :<span class="lineNoCov">          0 :   allocMatrixS ();</span>
@@ -122,17 +122,17 @@
 <span class="lineNum">      44 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_2, NODE_2, 1.0);</span>
 <a name="45"><span class="lineNum">      45 </span>                :<span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      46 </span>                :            : 
-<span class="lineNum">      47 </span>                :<span class="lineCov">      15141 : void idc::initDC (void) {</span>
-<span class="lineNum">      48 </span>                :<span class="lineCov">      15141 :   nr_double_t i = getPropertyDouble (&quot;I&quot;);</span>
-<span class="lineNum">      49 </span>                :<span class="lineCov">      15141 :   allocMatrixMNA ();</span>
-<span class="lineNum">      50 </span>[<span class="branchCov" title="Branch 1 was taken 15141 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 15141 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">      15141 :   setI (NODE_1, +i); setI (NODE_2, -i);</span>
-<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">      15141 : }</span></a>
+<span class="lineNum">      47 </span>                :<span class="lineCov">      16185 : void idc::initDC (void) {</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">      16185 :   nr_double_t i = getPropertyDouble (&quot;I&quot;);</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">      16185 :   allocMatrixMNA ();</span>
+<span class="lineNum">      50 </span>[<span class="branchCov" title="Branch 1 was taken 16185 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 16185 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">      16185 :   setI (NODE_1, +i); setI (NODE_2, -i);</span>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">      16185 : }</span></a>
 <span class="lineNum">      52 </span>                :            : 
-<span class="lineNum">      53 </span>                :<span class="lineCov">     145509 : void idc::calcDC (void) {</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">     145509 :   nr_double_t i = getPropertyDouble (&quot;I&quot;);</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">     145509 :   nr_double_t f = getNet()-&gt;getSrcFactor ();</span>
-<span class="lineNum">      56 </span>[<span class="branchCov" title="Branch 1 was taken 145509 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 145509 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     145509 :   setI (NODE_1, +i * f); setI (NODE_2, -i * f);</span>
-<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">     145509 : }</span></a>
+<span class="lineNum">      53 </span>                :<span class="lineCov">     159434 : void idc::calcDC (void) {</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">     159434 :   nr_double_t i = getPropertyDouble (&quot;I&quot;);</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">     159434 :   nr_double_t f = getNet()-&gt;getSrcFactor ();</span>
+<span class="lineNum">      56 </span>[<span class="branchCov" title="Branch 1 was taken 159434 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 159434 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     159434 :   setI (NODE_1, +i * f); setI (NODE_2, -i * f);</span>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">     159434 : }</span></a>
 <span class="lineNum">      58 </span>                :            : 
 <span class="lineNum">      59 </span>                :<span class="lineCov">          1 : void idc::initAC (void) {</span>
 <span class="lineNum">      60 </span>                :<span class="lineCov">          1 :   allocMatrixMNA ();</span>

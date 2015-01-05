@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -134,82 +134,82 @@
 <span class="lineNum">      56 </span>                :            : 
 <a name="57"><span class="lineNum">      57 </span>                :            : </a>
 <span class="lineNum">      58 </span>                :            : // Constructor creates a named instance of the environment class.
-<span class="lineNum">      59 </span>                :<span class="lineCov">        191 : environment::environment (const std::string &amp; p_name) :</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">        219 : environment::environment (const std::string &amp; p_name) :</span>
 <span class="lineNum">      60 </span>                :            :   name(p_name),
-<span class="lineNum">      61 </span>[<span class="branchCov" title="Branch 1 was taken 191 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]:<span class="lineCov">        191 :   children()</span>
+<span class="lineNum">      61 </span>[<span class="branchCov" title="Branch 1 was taken 219 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]:<span class="lineCov">        219 :   children()</span>
 <span class="lineNum">      62 </span>                :            : {
-<span class="lineNum">      63 </span>                :<span class="lineCov">        191 :   root = NULL;</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">        191 :   solvee = NULL;</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">        191 :   checkee = NULL;</span>
-<span class="lineNum">      66 </span>                :<span class="lineCov">        191 :   defs = NULL;</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">        191 :   iscopy = false;</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">        191 : }</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">        219 :   root = NULL;</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">        219 :   solvee = NULL;</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">        219 :   checkee = NULL;</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">        219 :   defs = NULL;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">        219 :   iscopy = false;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">        219 : }</span>
 <span class="lineNum">      69 </span>                :            : 
 <a name="70"><span class="lineNum">      70 </span>                :            : /* The copy constructor creates a new instance of the environment</a>
 <span class="lineNum">      71 </span>                :            :    class based on the given environment object. */
-<span class="lineNum">      72 </span>[<span class="branchCov" title="Branch 1 was taken 19 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineCov">         19 : environment::environment (const environment &amp; e)  {</span>
-<span class="lineNum">      73 </span>[<span class="branchCov" title="Branch 0 was taken 19 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         19 :   this-&gt;name = e.name;</span>
-<span class="lineNum">      74 </span>[<span class="branchCov" title="Branch 0 was taken 19 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         19 :   copyVariables (e.root);</span>
-<span class="lineNum">      75 </span>                :<span class="lineCov">         19 :   solvee = e.solvee;</span>
-<span class="lineNum">      76 </span>                :<span class="lineCov">         19 :   checkee = e.checkee;</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">         19 :   defs = e.defs;</span>
-<span class="lineNum">      78 </span>                :<span class="lineCov">         19 :   iscopy = true;</span>
-<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 0 was taken 19 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 19 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         19 :   children = std::list&lt;environment *&gt;();</span>
+<span class="lineNum">      72 </span>[<span class="branchCov" title="Branch 1 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineCov">         23 : environment::environment (const environment &amp; e)  {</span>
+<span class="lineNum">      73 </span>[<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         23 :   this-&gt;name = e.name;</span>
+<span class="lineNum">      74 </span>[<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">         23 :   copyVariables (e.root);</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">         23 :   solvee = e.solvee;</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">         23 :   checkee = e.checkee;</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">         23 :   defs = e.defs;</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">         23 :   iscopy = true;</span>
+<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         23 :   children = std::list&lt;environment *&gt;();</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
-<span class="lineNum">      80 </span>                :<span class="lineCov">         19 : }</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">         23 : }</span>
 <span class="lineNum">      81 </span>                :            : 
 <a name="82"><span class="lineNum">      82 </span>                :            : /* Very alike the copy constructor the function copies the content of</a>
 <span class="lineNum">      83 </span>                :            :    the given environment into the calling environment. */
-<span class="lineNum">      84 </span>                :<span class="lineCov">         90 : void environment::copy (const environment &amp; e) {</span>
-<span class="lineNum">      85 </span>                :<span class="lineCov">         90 :   this-&gt;name = e.name;</span>
-<span class="lineNum">      86 </span>                :<span class="lineCov">         90 :   deleteVariables ();</span>
-<span class="lineNum">      87 </span>                :<span class="lineCov">         90 :   copyVariables (e.root);</span>
-<span class="lineNum">      88 </span>                :<span class="lineCov">         90 :   solvee = e.solvee;</span>
-<span class="lineNum">      89 </span>                :<span class="lineCov">         90 :   checkee = e.checkee;</span>
-<span class="lineNum">      90 </span>                :<span class="lineCov">         90 :   defs = e.defs;</span>
-<span class="lineNum">      91 </span>                :<span class="lineCov">         90 :   iscopy = true;</span>
-<span class="lineNum">      92 </span>        [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         90 :   children = std::list&lt;environment *&gt;();</span>
-<span class="lineNum">      93 </span>                :<span class="lineCov">         90 : }</span>
+<span class="lineNum">      84 </span>                :<span class="lineCov">        103 : void environment::copy (const environment &amp; e) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">        103 :   this-&gt;name = e.name;</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">        103 :   deleteVariables ();</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">        103 :   copyVariables (e.root);</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">        103 :   solvee = e.solvee;</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">        103 :   checkee = e.checkee;</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">        103 :   defs = e.defs;</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">        103 :   iscopy = true;</span>
+<span class="lineNum">      92 </span>        [<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        103 :   children = std::list&lt;environment *&gt;();</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">        103 : }</span>
 <a name="94"><span class="lineNum">      94 </span>                :            : </a>
 <span class="lineNum">      95 </span>                :            : // Destructor deletes the environment object.
-<span class="lineNum">      96 </span>                :<span class="lineCov">        210 : environment::~environment () {</span>
-<span class="lineNum">      97 </span>[<span class="branchCov" title="Branch 0 was taken 210 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        210 :   deleteVariables ();</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">        242 : environment::~environment () {</span>
+<span class="lineNum">      97 </span>[<span class="branchCov" title="Branch 0 was taken 242 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        242 :   deleteVariables ();</span>
 <span class="lineNum">      98 </span>                :            :   // delete solver and checker if this is not just a reference
-<span class="lineNum">      99 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchCov" title="Branch 1 was taken 109 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        210 :   if (!iscopy) {</span>
-<span class="lineNum">     100 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        101 :     if (solvee)</span>
-<span class="lineNum">     101 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        101 :       delete solvee;</span>
+<span class="lineNum">      99 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchCov" title="Branch 1 was taken 126 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        242 :   if (!iscopy) {</span>
+<span class="lineNum">     100 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        116 :     if (solvee)</span>
+<span class="lineNum">     101 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        116 :       delete solvee;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
-<span class="lineNum">     102 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        101 :     if (checkee) {</span>
-<span class="lineNum">     103 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        101 :       checkee-&gt;setEquations (NULL);</span>
-<span class="lineNum">     104 </span>[<span class="branchCov" title="Branch 0 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 101 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        101 :       delete checkee;</span>
+<span class="lineNum">     102 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        116 :     if (checkee) {</span>
+<span class="lineNum">     103 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">        116 :       checkee-&gt;setEquations (NULL);</span>
+<span class="lineNum">     104 </span>[<span class="branchCov" title="Branch 0 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 116 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        116 :       delete checkee;</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
 <span class="lineNum">     105 </span>                :            :     }
 <span class="lineNum">     106 </span>                :            :   }
 <span class="lineNum">     107 </span>                :            :   // delete children
-<span class="lineNum">     108 </span>[<span class="branchCov" title="Branch 4 was taken 30 times"> + </span><span class="branchCov" title="Branch 5 was taken 210 times"> + </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]:<span class="lineCov">        240 :   for (auto it = children.begin(); it != children.end(); ++it) {</span>
-<span class="lineNum">     109 </span>                :<span class="lineCov">         30 :     environment * etmp = *it;</span>
-<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 30 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         30 :     delete etmp;</span>
-<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 2 was taken 30 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">     108 </span>[<span class="branchCov" title="Branch 4 was taken 36 times"> + </span><span class="branchCov" title="Branch 5 was taken 242 times"> + </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]:<span class="lineCov">        278 :   for (auto it = children.begin(); it != children.end(); ++it) {</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">         36 :     environment * etmp = *it;</span>
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 36 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         36 :     delete etmp;</span>
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 2 was taken 36 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
 <span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
 <span class="lineNum">     111 </span>                :            :   }
-<span class="lineNum">     112 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 210 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        420 : }</span>
+<span class="lineNum">     112 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 242 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        484 : }</span>
 <span class="lineNum">     113 </span>                :            : 
 <span class="lineNum">     114 </span>                :            : 
 <a name="115"><span class="lineNum">     115 </span>                :            : /* This function copies all variables in the given variable list into</a>
 <span class="lineNum">     116 </span>                :            :    an environment. */
-<span class="lineNum">     117 </span>                :<span class="lineCov">        109 : void environment::copyVariables (variable * org) {</span>
+<span class="lineNum">     117 </span>                :<span class="lineCov">        126 : void environment::copyVariables (variable * org) {</span>
 <span class="lineNum">     118 </span>                :            :   variable * var;
-<span class="lineNum">     119 </span>                :<span class="lineCov">        109 :   root = NULL;</span>
-<span class="lineNum">     120 </span>        [<span class="branchCov" title="Branch 0 was taken 66 times"> + </span><span class="branchCov" title="Branch 1 was taken 109 times"> + </span>]:<span class="lineCov">        175 :   while (org != NULL) {</span>
+<span class="lineNum">     119 </span>                :<span class="lineCov">        126 :   root = NULL;</span>
+<span class="lineNum">     120 </span>        [<span class="branchCov" title="Branch 0 was taken 81 times"> + </span><span class="branchCov" title="Branch 1 was taken 126 times"> + </span>]:<span class="lineCov">        207 :   while (org != NULL) {</span>
 <span class="lineNum">     121 </span>                :            :     // copy variable (references only)
-<span class="lineNum">     122 </span>        [<span class="branchCov" title="Branch 1 was taken 66 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         66 :     var = new variable (*org);</span>
+<span class="lineNum">     122 </span>        [<span class="branchCov" title="Branch 1 was taken 81 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         81 :     var = new variable (*org);</span>
 <span class="lineNum">     123 </span>                :            :     constant * c; reference * r;
 <span class="lineNum">     124 </span>                :            :     // depending on variable type copy values too
-<span class="lineNum">     125 </span>  [<span class="branchCov" title="Branch 1 was taken 66 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         66 :     switch (var-&gt;getType ()) {</span>
+<span class="lineNum">     125 </span>  [<span class="branchCov" title="Branch 1 was taken 81 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         81 :     switch (var-&gt;getType ()) {</span>
 <span class="lineNum">     126 </span>                :            :     case VAR_CONSTANT:
-<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 2 was taken 66 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         66 :       c = new constant (*(var-&gt;getConstant ()));</span>
-<span class="lineNum">     128 </span>                :<span class="lineCov">         66 :       var-&gt;setConstant (c);</span>
-<span class="lineNum">     129 </span>                :<span class="lineCov">         66 :       break;</span>
+<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 2 was taken 81 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         81 :       c = new constant (*(var-&gt;getConstant ()));</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">         81 :       var-&gt;setConstant (c);</span>
+<span class="lineNum">     129 </span>                :<span class="lineCov">         81 :       break;</span>
 <span class="lineNum">     130 </span>                :            :     case VAR_VALUE:
 <span class="lineNum">     131 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       c = new constant (*(org-&gt;getValue ()));</span>
 <span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :       var-&gt;setValue (c);</span>
@@ -220,19 +220,19 @@
 <span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :       var-&gt;setReference (r);</span>
 <span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :       break;</span>
 <span class="lineNum">     139 </span>                :            :     }
-<span class="lineNum">     140 </span>                :<span class="lineCov">         66 :     var-&gt;setNext (root);</span>
-<span class="lineNum">     141 </span>                :<span class="lineCov">         66 :     root = var;</span>
-<span class="lineNum">     142 </span>                :<span class="lineCov">         66 :     org = org-&gt;getNext ();</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">         81 :     var-&gt;setNext (root);</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">         81 :     root = var;</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">         81 :     org = org-&gt;getNext ();</span>
 <span class="lineNum">     143 </span>                :            :   }
-<span class="lineNum">     144 </span>                :<span class="lineCov">        109 : }</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">        126 : }</span>
 <a name="145"><span class="lineNum">     145 </span>                :            : </a>
 <span class="lineNum">     146 </span>                :            : // Deletes all variable in the environment.
-<span class="lineNum">     147 </span>                :<span class="lineCov">        300 : void environment::deleteVariables (void) {</span>
+<span class="lineNum">     147 </span>                :<span class="lineCov">        345 : void environment::deleteVariables (void) {</span>
 <span class="lineNum">     148 </span>                :            :   variable * n;
-<span class="lineNum">     149 </span>        [<span class="branchCov" title="Branch 0 was taken 135 times"> + </span><span class="branchCov" title="Branch 1 was taken 300 times"> + </span>]:<span class="lineCov">        435 :   for (variable * var = root; var != NULL; var = n) {</span>
-<span class="lineNum">     150 </span>                :<span class="lineCov">        135 :     n = var-&gt;getNext ();</span>
-<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 1 was taken 132 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">        135 :     if (var-&gt;getType () == VAR_CONSTANT)</span>
-<span class="lineNum">     152 </span>        [<span class="branchCov" title="Branch 1 was taken 132 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        132 :       delete var-&gt;getConstant ();</span>
+<span class="lineNum">     149 </span>        [<span class="branchCov" title="Branch 0 was taken 165 times"> + </span><span class="branchCov" title="Branch 1 was taken 345 times"> + </span>]:<span class="lineCov">        510 :   for (variable * var = root; var != NULL; var = n) {</span>
+<span class="lineNum">     150 </span>                :<span class="lineCov">        165 :     n = var-&gt;getNext ();</span>
+<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 1 was taken 162 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">        165 :     if (var-&gt;getType () == VAR_CONSTANT)</span>
+<span class="lineNum">     152 </span>        [<span class="branchCov" title="Branch 1 was taken 162 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        162 :       delete var-&gt;getConstant ();</span>
 <span class="lineNum">     153 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">          3 :     else if (var-&gt;getType () == VAR_VALUE)</span>
 <span class="lineNum">     154 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       delete var-&gt;getValue ();</span>
 <span class="lineNum">     155 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :     else if (var-&gt;getType () == VAR_SUBSTRATE)</span>
@@ -242,42 +242,42 @@
 <span class="lineNum">     159 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (c) delete c;</span>
 <span class="lineNum">     160 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       delete var-&gt;getReference ();</span>
 <span class="lineNum">     161 </span>                :            :     }
-<span class="lineNum">     162 </span>        [<span class="branchCov" title="Branch 0 was taken 135 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        135 :     delete var;</span>
+<span class="lineNum">     162 </span>        [<span class="branchCov" title="Branch 0 was taken 165 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        165 :     delete var;</span>
 <span class="lineNum">     163 </span>                :            :   }
-<span class="lineNum">     164 </span>                :<span class="lineCov">        300 :   root = NULL;</span>
-<span class="lineNum">     165 </span>                :<span class="lineCov">        300 : }</span>
+<span class="lineNum">     164 </span>                :<span class="lineCov">        345 :   root = NULL;</span>
+<span class="lineNum">     165 </span>                :<span class="lineCov">        345 : }</span>
 <a name="166"><span class="lineNum">     166 </span>                :            : </a>
 <span class="lineNum">     167 </span>                :            : /* This function adds a variable to the environment. */
-<span class="lineNum">     168 </span>                :<span class="lineCov">         69 : void environment::addVariable (variable * const var, const bool pass) {</span>
-<span class="lineNum">     169 </span>                :<span class="lineCov">         69 :   var-&gt;setNext (root);</span>
-<span class="lineNum">     170 </span>                :<span class="lineCov">         69 :   var-&gt;setPassing (pass);</span>
-<span class="lineNum">     171 </span>                :<span class="lineCov">         69 :   this-&gt;root = var;</span>
-<span class="lineNum">     172 </span>                :<span class="lineCov">         69 : }</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">         84 : void environment::addVariable (variable * const var, const bool pass) {</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">         84 :   var-&gt;setNext (root);</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">         84 :   var-&gt;setPassing (pass);</span>
+<span class="lineNum">     171 </span>                :<span class="lineCov">         84 :   this-&gt;root = var;</span>
+<span class="lineNum">     172 </span>                :<span class="lineCov">         84 : }</span>
 <span class="lineNum">     173 </span>                :            : 
 <a name="174"><span class="lineNum">     174 </span>                :            : /* This function looks for the variable name in the environment and</a>
 <span class="lineNum">     175 </span>                :            :    returns it if possible.  Otherwise the function returns NULL. */
-<span class="lineNum">     176 </span>                :<span class="lineCov">      20380 : variable * environment::getVariable (const char * const n) const {</span>
-<span class="lineNum">     177 </span>        [<span class="branchCov" title="Branch 1 was taken 26609 times"> + </span><span class="branchCov" title="Branch 2 was taken 21 times"> + </span>]:<span class="lineCov">      26630 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
-<span class="lineNum">     178 </span>        [<span class="branchCov" title="Branch 1 was taken 26609 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      26609 :     if (var-&gt;getType () != VAR_VALUE)</span>
-<span class="lineNum">     179 </span>        [<span class="branchCov" title="Branch 1 was taken 20359 times"> + </span><span class="branchCov" title="Branch 2 was taken 6250 times"> + </span>]:<span class="lineCov">      26609 :       if (!strcmp (var-&gt;getName (), n))</span>
-<span class="lineNum">     180 </span>                :<span class="lineCov">      20359 :         return var;</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">      22955 : variable * environment::getVariable (const char * const n) const {</span>
+<span class="lineNum">     177 </span>        [<span class="branchCov" title="Branch 1 was taken 31248 times"> + </span><span class="branchCov" title="Branch 2 was taken 22 times"> + </span>]:<span class="lineCov">      31270 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
+<span class="lineNum">     178 </span>        [<span class="branchCov" title="Branch 1 was taken 31248 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      31248 :     if (var-&gt;getType () != VAR_VALUE)</span>
+<span class="lineNum">     179 </span>        [<span class="branchCov" title="Branch 1 was taken 22933 times"> + </span><span class="branchCov" title="Branch 2 was taken 8315 times"> + </span>]:<span class="lineCov">      31248 :       if (!strcmp (var-&gt;getName (), n))</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">      22933 :         return var;</span>
 <span class="lineNum">     181 </span>                :            :   }
-<span class="lineNum">     182 </span>                :<span class="lineCov">      20380 :   return NULL;</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">      22955 :   return NULL;</span>
 <span class="lineNum">     183 </span>                :            : }
 <a name="184"><span class="lineNum">     184 </span>                :            : </a>
 <span class="lineNum">     185 </span>                :            : // The function runs the equation checker for this environment.
-<span class="lineNum">     186 </span>                :<span class="lineCov">        101 : int environment::equationChecker (const int noundefined) const {</span>
-<span class="lineNum">     187 </span>                :<span class="lineCov">        101 :   checkee-&gt;setDefinitions (defs);</span>
-<span class="lineNum">     188 </span>                :<span class="lineCov">        101 :   return checkee-&gt;check (noundefined);</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">        116 : int environment::equationChecker (const int noundefined) const {</span>
+<span class="lineNum">     187 </span>                :<span class="lineCov">        116 :   checkee-&gt;setDefinitions (defs);</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">        116 :   return checkee-&gt;check (noundefined);</span>
 <span class="lineNum">     189 </span>                :            : }
 <a name="190"><span class="lineNum">     190 </span>                :            : </a>
 <span class="lineNum">     191 </span>                :            : // The function runs the equation solver for this environment.
-<span class="lineNum">     192 </span>                :<span class="lineCov">      20567 : int environment::equationSolver (dataset * const data) {</span>
-<span class="lineNum">     193 </span>                :<span class="lineCov">      20567 :   checkee-&gt;setDefinitions (defs);</span>
-<span class="lineNum">     194 </span>                :<span class="lineCov">      20567 :   solvee-&gt;setEquations (checkee-&gt;getEquations ());</span>
-<span class="lineNum">     195 </span>                :<span class="lineCov">      20567 :   int err = solvee-&gt;solve (data);</span>
-<span class="lineNum">     196 </span>                :<span class="lineCov">      20567 :   checkee-&gt;setEquations (solvee-&gt;getEquations ());</span>
-<span class="lineNum">     197 </span>                :<span class="lineCov">      20567 :   return err;</span>
+<span class="lineNum">     192 </span>                :<span class="lineCov">      23187 : int environment::equationSolver (dataset * const data) {</span>
+<span class="lineNum">     193 </span>                :<span class="lineCov">      23187 :   checkee-&gt;setDefinitions (defs);</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">      23187 :   solvee-&gt;setEquations (checkee-&gt;getEquations ());</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">      23187 :   int err = solvee-&gt;solve (data);</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">      23187 :   checkee-&gt;setEquations (solvee-&gt;getEquations ());</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">      23187 :   return err;</span>
 <span class="lineNum">     198 </span>                :            : }
 <span class="lineNum">     199 </span>                :            : 
 <span class="lineNum">     200 </span>                :            : // The function runs the equation solver for this environment without
@@ -294,59 +294,59 @@
 <span class="lineNum">     211 </span>                :            : /* The function solves the equations of the current environment object
 <a name="212"><span class="lineNum">     212 </span>                :            :    as well as these of its children, updates the variables and passes</a>
 <span class="lineNum">     213 </span>                :            :    the arguments to each children. */
-<span class="lineNum">     214 </span>                :<span class="lineCov">      20477 : int environment::runSolver (void) {</span>
-<span class="lineNum">     215 </span>                :<span class="lineCov">      20477 :   int ret = 0;</span>
+<span class="lineNum">     214 </span>                :<span class="lineCov">      23084 : int environment::runSolver (void) {</span>
+<span class="lineNum">     215 </span>                :<span class="lineCov">      23084 :   int ret = 0;</span>
 <span class="lineNum">     216 </span>                :            : 
 <span class="lineNum">     217 </span>                :            :   // solve equations in current environment
-<span class="lineNum">     218 </span>                :<span class="lineCov">      20477 :   ret |= equationSolver (NULL);</span>
-<span class="lineNum">     219 </span>                :<span class="lineCov">      20477 :   fetchConstants ();</span>
+<span class="lineNum">     218 </span>                :<span class="lineCov">      23084 :   ret |= equationSolver (NULL);</span>
+<span class="lineNum">     219 </span>                :<span class="lineCov">      23084 :   fetchConstants ();</span>
 <span class="lineNum">     220 </span>                :            : 
 <span class="lineNum">     221 </span>                :            :   // cycle through children
-<span class="lineNum">     222 </span>        [<span class="branchCov" title="Branch 4 was taken 214 times"> + </span><span class="branchCov" title="Branch 5 was taken 20477 times"> + </span>]:<span class="lineCov">      20691 :   for(auto it = children.begin(); it != children.end(); ++it) {</span>
+<span class="lineNum">     222 </span>        [<span class="branchCov" title="Branch 4 was taken 282 times"> + </span><span class="branchCov" title="Branch 5 was taken 23084 times"> + </span>]:<span class="lineCov">      23366 :   for(auto it = children.begin(); it != children.end(); ++it) {</span>
 <span class="lineNum">     223 </span>                :            :     // pass constants to solver
-<span class="lineNum">     224 </span>        [<span class="branchCov" title="Branch 1 was taken 214 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        214 :     (*it)-&gt;passConstants ();</span>
+<span class="lineNum">     224 </span>        [<span class="branchCov" title="Branch 1 was taken 282 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        282 :     (*it)-&gt;passConstants ();</span>
 <span class="lineNum">     225 </span>                :            :     // pass references
-<span class="lineNum">     226 </span>        [<span class="branchCov" title="Branch 1 was taken 214 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        214 :     (*it)-&gt;updateReferences (this);</span>
+<span class="lineNum">     226 </span>        [<span class="branchCov" title="Branch 1 was taken 282 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        282 :     (*it)-&gt;updateReferences (this);</span>
 <span class="lineNum">     227 </span>                :            :     // actually run the solver
-<span class="lineNum">     228 </span>        [<span class="branchCov" title="Branch 1 was taken 214 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        214 :     ret |= (*it)-&gt;runSolver ();</span>
+<span class="lineNum">     228 </span>        [<span class="branchCov" title="Branch 1 was taken 282 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        282 :     ret |= (*it)-&gt;runSolver ();</span>
 <span class="lineNum">     229 </span>                :            : #if 0
 <span class="lineNum">     230 </span>                :            :     // save local results
 <span class="lineNum">     231 </span>                :            :     (*it)-&gt;saveResults ();
 <span class="lineNum">     232 </span>                :            : #endif
 <span class="lineNum">     233 </span>                :            :   }
 <span class="lineNum">     234 </span>                :            : 
-<span class="lineNum">     235 </span>                :<span class="lineCov">      20477 :   return ret;</span>
+<span class="lineNum">     235 </span>                :<span class="lineCov">      23084 :   return ret;</span>
 <span class="lineNum">     236 </span>                :            : }
 <span class="lineNum">     237 </span>                :            : 
 <span class="lineNum">     238 </span>                :            : /* Passes the constants of the environment to the equation solver.
 <a name="239"><span class="lineNum">     239 </span>                :            :    This is necessary since equally typed environments use the same</a>
 <span class="lineNum">     240 </span>                :            :    equation checker and solver. */
-<span class="lineNum">     241 </span>                :<span class="lineCov">        214 : void environment::passConstants (void) {</span>
-<span class="lineNum">     242 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 214 times"> + </span>]:<span class="lineCov">        214 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
+<span class="lineNum">     241 </span>                :<span class="lineCov">        282 : void environment::passConstants (void) {</span>
+<span class="lineNum">     242 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 282 times"> + </span>]:<span class="lineCov">        282 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
 <span class="lineNum">     243 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (var-&gt;getPassing () &amp;&amp; var-&gt;getType () == VAR_CONSTANT) {</span>
 <span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
 <span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 :       constant * c = var-&gt;getConstant ();</span>
 <span class="lineNum">     245 </span>                :<span class="lineNoCov">          0 :       setDouble (var-&gt;getName (), c-&gt;d);</span>
 <span class="lineNum">     246 </span>                :            :     }
 <span class="lineNum">     247 </span>                :            :   }
-<span class="lineNum">     248 </span>                :<span class="lineCov">        214 : }</span>
+<span class="lineNum">     248 </span>                :<span class="lineCov">        282 : }</span>
 <a name="249"><span class="lineNum">     249 </span>                :            : </a>
 <span class="lineNum">     250 </span>                :            : /* Fetches the values of variables from the equation solver. */
-<span class="lineNum">     251 </span>                :<span class="lineCov">      20477 : void environment::fetchConstants (void) {</span>
-<span class="lineNum">     252 </span>        [<span class="branchCov" title="Branch 1 was taken 27667 times"> + </span><span class="branchCov" title="Branch 2 was taken 20477 times"> + </span>]:<span class="lineCov">      48144 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
-<span class="lineNum">     253 </span>        [<span class="branchCov" title="Branch 1 was taken 27664 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">      27667 :     if (var-&gt;getType () == VAR_CONSTANT) {</span>
-<span class="lineNum">     254 </span>                :<span class="lineCov">      27664 :       constant * c = var-&gt;getConstant ();</span>
-<span class="lineNum">     255 </span>     [<span class="branchCov" title="Branch 1 was taken 27664 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      27664 :       switch (c-&gt;getType ()) {</span>
+<span class="lineNum">     251 </span>                :<span class="lineCov">      23084 : void environment::fetchConstants (void) {</span>
+<span class="lineNum">     252 </span>        [<span class="branchCov" title="Branch 1 was taken 32688 times"> + </span><span class="branchCov" title="Branch 2 was taken 23084 times"> + </span>]:<span class="lineCov">      55772 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
+<span class="lineNum">     253 </span>        [<span class="branchCov" title="Branch 1 was taken 32685 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">      32688 :     if (var-&gt;getType () == VAR_CONSTANT) {</span>
+<span class="lineNum">     254 </span>                :<span class="lineCov">      32685 :       constant * c = var-&gt;getConstant ();</span>
+<span class="lineNum">     255 </span>     [<span class="branchCov" title="Branch 1 was taken 32685 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      32685 :       switch (c-&gt;getType ()) {</span>
 <span class="lineNum">     256 </span>                :            :       case TAG_DOUBLE:
-<span class="lineNum">     257 </span>                :<span class="lineCov">      27664 :         c-&gt;d = getDouble (var-&gt;getName ());</span>
-<span class="lineNum">     258 </span>                :<span class="lineCov">      27664 :         break;</span>
+<span class="lineNum">     257 </span>                :<span class="lineCov">      32685 :         c-&gt;d = getDouble (var-&gt;getName ());</span>
+<span class="lineNum">     258 </span>                :<span class="lineCov">      32685 :         break;</span>
 <span class="lineNum">     259 </span>                :            :       case TAG_VECTOR:
 <span class="lineNum">     260 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         *c-&gt;v = getVector (var-&gt;getName ());</span>
-<span class="lineNum">     261 </span>                :<span class="lineCov">      27664 :         break;</span>
+<span class="lineNum">     261 </span>                :<span class="lineCov">      32685 :         break;</span>
 <span class="lineNum">     262 </span>                :            :       }
 <span class="lineNum">     263 </span>                :            :     }
 <span class="lineNum">     264 </span>                :            :   }
-<span class="lineNum">     265 </span>                :<span class="lineCov">      20477 : }</span>
+<span class="lineNum">     265 </span>                :<span class="lineCov">      23084 : }</span>
 <span class="lineNum">     266 </span>                :            : 
 <span class="lineNum">     267 </span>                :            : /* Looks through the environment variables for a given variable name
 <a name="268"><span class="lineNum">     268 </span>                :            :    being a saved value and returns the variable pointer or NULL if</a>
@@ -406,8 +406,8 @@
 <span class="lineNum">     321 </span>                :            :    found the variable gets resolved in the upper (parent) environment
 <a name="322"><span class="lineNum">     322 </span>                :            :    and the value put into the result of the reference as well as into</a>
 <span class="lineNum">     323 </span>                :            :    the equation checker of the current environment. */
-<span class="lineNum">     324 </span>                :<span class="lineCov">        214 : void environment::updateReferences (environment * up) {</span>
-<span class="lineNum">     325 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 214 times"> + </span>]:<span class="lineCov">        214 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
+<span class="lineNum">     324 </span>                :<span class="lineCov">        282 : void environment::updateReferences (environment * up) {</span>
+<span class="lineNum">     325 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 282 times"> + </span>]:<span class="lineCov">        282 :   for (variable * var = root; var != NULL; var = var-&gt;getNext ()) {</span>
 <span class="lineNum">     326 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (var-&gt;getType () == VAR_REFERENCE) {</span>
 <span class="lineNum">     327 </span>                :<span class="lineNoCov">          0 :       reference * r = var-&gt;getReference ();</span>
 <span class="lineNum">     328 </span>                :            :       // possible because no self-referring subcircuit types possible
@@ -417,7 +417,7 @@
 <span class="lineNum">     332 </span>                :<span class="lineNoCov">          0 :       setDouble (var-&gt;getName (), d);</span>
 <span class="lineNum">     333 </span>                :            :     }
 <span class="lineNum">     334 </span>                :            :   }
-<span class="lineNum">     335 </span>                :<span class="lineCov">        214 : }</span>
+<span class="lineNum">     335 </span>                :<span class="lineCov">        282 : }</span>
 <a name="336"><span class="lineNum">     336 </span>                :            : </a>
 <span class="lineNum">     337 </span>                :            : // Returns vector of an assignment in the equation checker.
 <span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 : qucs::vector environment::getVector (const char * const ident) const {</span>
@@ -425,14 +425,14 @@
 <span class="lineNum">     340 </span>                :            : }
 <a name="341"><span class="lineNum">     341 </span>                :            : </a>
 <span class="lineNum">     342 </span>                :            : // Returns double value of an assignment in the equation checker.
-<span class="lineNum">     343 </span>                :<span class="lineCov">      27664 : nr_double_t environment::getDouble (const char * const ident) const {</span>
-<span class="lineNum">     344 </span>                :<span class="lineCov">      27664 :   return checkee-&gt;getDouble (ident);</span>
+<span class="lineNum">     343 </span>                :<span class="lineCov">      32685 : nr_double_t environment::getDouble (const char * const ident) const {</span>
+<span class="lineNum">     344 </span>                :<span class="lineCov">      32685 :   return checkee-&gt;getDouble (ident);</span>
 <span class="lineNum">     345 </span>                :            : }
 <a name="346"><span class="lineNum">     346 </span>                :            : </a>
 <span class="lineNum">     347 </span>                :            : // Sets the double value of an assignment in the equation checker.
-<span class="lineNum">     348 </span>                :<span class="lineCov">      20200 : void environment::setDouble (const char * const ident, const nr_double_t val) {</span>
-<span class="lineNum">     349 </span>                :<span class="lineCov">      20200 :   checkee-&gt;setDouble (ident, val);</span>
-<span class="lineNum">     350 </span>                :<span class="lineCov">      20200 : }</span>
+<span class="lineNum">     348 </span>                :<span class="lineCov">      22739 : void environment::setDouble (const char * const ident, const nr_double_t val) {</span>
+<span class="lineNum">     349 </span>                :<span class="lineCov">      22739 :   checkee-&gt;setDouble (ident, val);</span>
+<span class="lineNum">     350 </span>                :<span class="lineCov">      22739 : }</span>
 <a name="351"><span class="lineNum">     351 </span>                :            : </a>
 <span class="lineNum">     352 </span>                :            : // Return double value of a variable in the environment.
 <span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 : nr_double_t environment::getDoubleConstant (const char * const ident) const {</span>
@@ -446,14 +446,14 @@
 <span class="lineNum">     360 </span>                :            : }
 <a name="361"><span class="lineNum">     361 </span>                :            : </a>
 <span class="lineNum">     362 </span>                :            : // Sets the double value of a variable in the environment.
-<span class="lineNum">     363 </span>                :<span class="lineCov">      20200 : void environment::setDoubleConstant (const char * const ident, nr_double_t val) {</span>
-<span class="lineNum">     364 </span>                :<span class="lineCov">      20200 :   variable * var = getVariable (ident);</span>
-<span class="lineNum">     365 </span>[<span class="branchCov" title="Branch 0 was taken 20200 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 20200 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      20200 :   if (var != NULL &amp;&amp; var-&gt;getType () == VAR_CONSTANT) {</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 20200 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]
-<span class="lineNum">     366 </span>                :<span class="lineCov">      20200 :     constant * c = var-&gt;getConstant ();</span>
-<span class="lineNum">     367 </span>                :<span class="lineCov">      20200 :     c-&gt;d = val;</span>
+<span class="lineNum">     363 </span>                :<span class="lineCov">      22739 : void environment::setDoubleConstant (const char * const ident, nr_double_t val) {</span>
+<span class="lineNum">     364 </span>                :<span class="lineCov">      22739 :   variable * var = getVariable (ident);</span>
+<span class="lineNum">     365 </span>[<span class="branchCov" title="Branch 0 was taken 22739 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 22739 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">      22739 :   if (var != NULL &amp;&amp; var-&gt;getType () == VAR_CONSTANT) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 22739 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]
+<span class="lineNum">     366 </span>                :<span class="lineCov">      22739 :     constant * c = var-&gt;getConstant ();</span>
+<span class="lineNum">     367 </span>                :<span class="lineCov">      22739 :     c-&gt;d = val;</span>
 <span class="lineNum">     368 </span>                :            :   }
-<span class="lineNum">     369 </span>                :<span class="lineCov">      20200 : }</span>
+<span class="lineNum">     369 </span>                :<span class="lineCov">      22739 : }</span>
 <a name="370"><span class="lineNum">     370 </span>                :            : </a>
 <span class="lineNum">     371 </span>                :            : // Returns the referenced value of a variable in the environment.
 <span class="lineNum">     372 </span>                :<span class="lineNoCov">          0 : char * environment::getDoubleReference (const char * const ident) const {</span>

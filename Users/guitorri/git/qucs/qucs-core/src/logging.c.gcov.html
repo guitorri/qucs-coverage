@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -112,23 +112,23 @@
 <span class="lineNum">      34 </span>                :            : 
 <a name="35"><span class="lineNum">      35 </span>                :            : /* This function prints the given messages format and the appropriate</a>
 <span class="lineNum">      36 </span>                :            :    arguments to a FILE stream depending on the given log level. */
-<span class="lineNum">      37 </span>                :<span class="lineCov">     150589 : void logprint (int level, const char * format, ...) {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">     176189 : void logprint (int level, const char * format, ...) {</span>
 <span class="lineNum">      38 </span>                :            :   FILE * f;
 <span class="lineNum">      39 </span>                :            :   va_list args;
 <span class="lineNum">      40 </span>                :            : 
-<span class="lineNum">      41 </span>        [<span class="branchCov" title="Branch 0 was taken 120422 times"> + </span><span class="branchCov" title="Branch 1 was taken 30167 times"> + </span>]:<span class="lineCov">     150589 :   f = level == LOG_STATUS ? file_status : file_error;</span>
-<span class="lineNum">      42 </span>        [<span class="branchCov" title="Branch 0 was taken 150589 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     150589 :   if (f != NULL) {</span>
-<span class="lineNum">      43 </span>                :<span class="lineCov">     150589 :     va_start (args, format);</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">     150589 :     vfprintf (f, format, args);</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">     150589 :     va_end (args);</span>
-<span class="lineNum">      46 </span>                :<span class="lineCov">     150589 :     fflush (f);</span>
+<span class="lineNum">      41 </span>        [<span class="branchCov" title="Branch 0 was taken 135988 times"> + </span><span class="branchCov" title="Branch 1 was taken 40201 times"> + </span>]:<span class="lineCov">     176189 :   f = level == LOG_STATUS ? file_status : file_error;</span>
+<span class="lineNum">      42 </span>        [<span class="branchCov" title="Branch 0 was taken 176189 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     176189 :   if (f != NULL) {</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">     176189 :     va_start (args, format);</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">     176189 :     vfprintf (f, format, args);</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">     176189 :     va_end (args);</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">     176189 :     fflush (f);</span>
 <span class="lineNum">      47 </span>                :            :   }
-<span class="lineNum">      48 </span>                :<span class="lineCov">     150589 : }</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">     176189 : }</span>
 <a name="49"><span class="lineNum">      49 </span>                :            : </a>
 <span class="lineNum">      50 </span>                :            : /* Initialization of the logging interface. */
-<span class="lineNum">      51 </span>                :<span class="lineCov">         94 : void loginit (void) {</span>
-<span class="lineNum">      52 </span>                :<span class="lineCov">         94 :   file_error = file_status = stderr;</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">         94 : }</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">        107 : void loginit (void) {</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">        107 :   file_error = file_status = stderr;</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">        107 : }</span>
 <span class="lineNum">      54 </span>                :            : 
 <span class="lineNum">      55 </span>                :            : /* Both of the log level dependent FILE streams. */
 <span class="lineNum">      56 </span>                :            : FILE * file_status = NULL;
@@ -138,11 +138,11 @@
 <span class="lineNum">      60 </span>                :            : int progressbar_last = 0;
 <a name="61"><span class="lineNum">      61 </span>                :            : </a>
 <span class="lineNum">      62 </span>                :            : /* Print a tiny progress-bar depending on the arguments. */
-<span class="lineNum">      63 </span>                :<span class="lineCov">      33221 : void logprogressbar (nr_double_t current, nr_double_t final, int points) {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">      34696 : void logprogressbar (nr_double_t current, nr_double_t final, int points) {</span>
 <span class="lineNum">      64 </span>                :            :   int i;
-<span class="lineNum">      65 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 33221 times"> + </span>]:<span class="lineCov">      33221 :   if (progressbar_enable) {</span>
+<span class="lineNum">      65 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 34696 times"> + </span>]:<span class="lineCov">      34696 :   if (progressbar_enable) {</span>
 <span class="lineNum">      66 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (((int) (current * 100 / final)) == progressbar_last &amp;&amp; current)</span>
-<span class="lineNum">      67 </span>                :<span class="lineCov">      33221 :       return;</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">      34696 :       return;</span>
 <span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     progressbar_last = (int) (current * 100 / final);</span>
 <span class="lineNum">      69 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (progressbar_gui) {</span>
 <span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :       logprint (LOG_STATUS, &quot;\t%02d\r&quot;, progressbar_last);</span>
@@ -165,14 +165,14 @@
 <span class="lineNum">      87 </span>                :            : int progressbar_gui = 0;
 <a name="88"><span class="lineNum">      88 </span>                :            : </a>
 <span class="lineNum">      89 </span>                :            : /* Clears up the progress bar if requested. */
-<span class="lineNum">      90 </span>                :<span class="lineCov">         92 : void logprogressclear (int points) {</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">        105 : void logprogressclear (int points) {</span>
 <span class="lineNum">      91 </span>                :            :   int i;
-<span class="lineNum">      92 </span>                :<span class="lineCov">         92 :   progressbar_last = 0;</span>
-<span class="lineNum">      93 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 92 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         92 :   if (progressbar_enable &amp;&amp; !progressbar_gui) {</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">        105 :   progressbar_last = 0;</span>
+<span class="lineNum">      93 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 105 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        105 :   if (progressbar_enable &amp;&amp; !progressbar_gui) {</span>
 <span class="lineNum">      94 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (i = 0; i &lt; points + 15; i++) logprint (LOG_STATUS, &quot; &quot;);</span>
 <span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_STATUS, &quot;\r&quot;);</span>
 <span class="lineNum">      96 </span>                :            :   }
-<span class="lineNum">      97 </span>                :<span class="lineCov">         92 : }</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">        105 : }</span>
 </pre>
       </td>
     </tr>

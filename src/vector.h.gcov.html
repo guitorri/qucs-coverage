@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/vector.h</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/vector.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">0</td>
@@ -135,8 +142,8 @@
 <span class="lineNum">      64 </span>                :            :   void set (const nr_complex_t, int);
 <a name="65"><span class="lineNum">      65 </span>                :            :   int getSize (void) const;</a>
 <a name="66"><span class="lineNum">      66 </span>                :            :   int checkSizes (vector, vector);</a>
-<span class="lineNum">      67 </span>                :<span class="lineCov">       2146 :   int getRequested (void) { return requested; }</span>
-<span class="lineNum">      68 </span>                :<span class="lineCov">       1165 :   void setRequested (int n) { requested = n; }</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">       2436 :   int getRequested (void) { return requested; }</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">       1310 :   void setRequested (int n) { requested = n; }</span>
 <span class="lineNum">      69 </span>                :            :   void reverse (void);
 <span class="lineNum">      70 </span>                :            :   strlist * getDependencies (void);
 <span class="lineNum">      71 </span>                :            :   void setDependencies (strlist *);
@@ -289,7 +296,7 @@
 <span class="lineNum">     218 </span>                :            : 
 <a name="219"><span class="lineNum">     219 </span>                :            :   // easy accessor operators</a>
 <span class="lineNum">     220 </span>                :            :   nr_complex_t  operator () (int i) const { return data[i]; }
-<span class="lineNum">     221 </span>                :<span class="lineCov">     314984 :   nr_complex_t&amp; operator () (int i) { return data[i]; }</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">     326490 :   nr_complex_t&amp; operator () (int i) { return data[i]; }</span>
 <span class="lineNum">     222 </span>                :            : 
 <span class="lineNum">     223 </span>                :            :  private:
 <span class="lineNum">     224 </span>                :            :   int requested;

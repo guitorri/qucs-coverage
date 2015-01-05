@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/history.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/history.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">20.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">1</td>
@@ -131,10 +138,10 @@
 <span class="lineNum">      60 </span>                :            : 
 <a name="61"><span class="lineNum">      61 </span>                :            : /* This function drops those values in the history which are older</a>
 <span class="lineNum">      62 </span>                :            :    than the specified age of the history instance. */
-<span class="lineNum">      63 </span>                :<span class="lineCov">     161136 : void history::drop (void) {</span>
-<span class="lineNum">      64 </span>                :<span class="lineCov">     161136 :   nr_double_t f = this-&gt;first ();</span>
-<span class="lineNum">      65 </span>                :<span class="lineCov">     161136 :   nr_double_t l = this-&gt;last ();</span>
-<span class="lineNum">      66 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 161136 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     161136 :   if (age &gt; 0.0 &amp;&amp; l - f &gt; age) {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">     192469 : void history::drop (void) {</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">     192469 :   nr_double_t f = this-&gt;first ();</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">     192469 :   nr_double_t l = this-&gt;last ();</span>
+<span class="lineNum">      66 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 192469 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     192469 :   if (age &gt; 0.0 &amp;&amp; l - f &gt; age) {</span>
 <span class="lineNum">      67 </span>                :            :     unsigned int r;
 <span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     unsigned int i = this-&gt;leftidx ();</span>
 <span class="lineNum">      69 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (r = 0; i &lt; this-&gt;t-&gt;size (); r++, i++)</span>
@@ -146,7 +153,7 @@
 <span class="lineNum">      75 </span>                :            :       /* erase the first r value */
 <span class="lineNum">      76 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineNoCov">          0 :       this-&gt;values-&gt;erase(this-&gt;values-&gt;begin(),this-&gt;values-&gt;begin()+r);</span>
 <span class="lineNum">      77 </span>                :            :   }
-<span class="lineNum">      78 </span>                :<span class="lineCov">     161136 : }</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">     192469 : }</span>
 <span class="lineNum">      79 </span>                :            : 
 <a name="80"><span class="lineNum">      80 </span>                :            : /* Interpolates a value using 2 left side and 2 right side values if</a>
 <span class="lineNum">      81 </span>                :            :    possible. */

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -127,19 +127,19 @@
 <span class="lineNum">      49 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="50"><span class="lineNum">      50 </span>                :            : </a>
 <span class="lineNum">      51 </span>                :            : // Constructor creates a named instance of the sweep class.
-<span class="lineNum">      52 </span>                :<span class="lineCov">        131 : sweep::sweep (const char * n) : object (n) {</span>
-<span class="lineNum">      53 </span>                :<span class="lineCov">        131 :   type = SWEEP_UNKNOWN;</span>
-<span class="lineNum">      54 </span>                :<span class="lineCov">        131 :   data = NULL;</span>
-<span class="lineNum">      55 </span>                :<span class="lineCov">        131 :   size = 0;</span>
-<span class="lineNum">      56 </span>                :<span class="lineCov">        131 :   txt = NULL;</span>
-<span class="lineNum">      57 </span>                :<span class="lineCov">        131 :   counter = 0;</span>
-<span class="lineNum">      58 </span>                :<span class="lineCov">        131 : }</span>
+<span class="lineNum">      52 </span>                :<span class="lineCov">        160 : sweep::sweep (const char * n) : object (n) {</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">        160 :   type = SWEEP_UNKNOWN;</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">        160 :   data = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">        160 :   size = 0;</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        160 :   txt = NULL;</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">        160 :   counter = 0;</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">        160 : }</span>
 <a name="59"><span class="lineNum">      59 </span>                :            : </a>
 <span class="lineNum">      60 </span>                :            : // Destructor deletes the sweep class object.
-<span class="lineNum">      61 </span>                :<span class="lineCov">        131 : sweep::~sweep () {</span>
-<span class="lineNum">      62 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 2 was taken 131 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        131 :   if (data) free (data);</span>
-<span class="lineNum">      63 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 131 times"> + </span>]:<span class="lineCov">        131 :   if (txt) free (txt);</span>
-<span class="lineNum">      64 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 131 times"> + </span>]:<span class="lineCov">        131 : }</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">        160 : sweep::~sweep () {</span>
+<span class="lineNum">      62 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchCov" title="Branch 2 was taken 160 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        160 :   if (data) free (data);</span>
+<span class="lineNum">      63 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 160 times"> + </span>]:<span class="lineCov">        160 :   if (txt) free (txt);</span>
+<span class="lineNum">      64 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 160 times"> + </span>]:<span class="lineCov">        160 : }</span>
 <span class="lineNum">      65 </span>                :            : 
 <a name="66"><span class="lineNum">      66 </span>                :            : /* The copy constructor creates a new instance of the sweep class</a>
 <span class="lineNum">      67 </span>                :            :    based on the given sweep object. */
@@ -155,36 +155,36 @@
 <span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="78"><span class="lineNum">      78 </span>                :            : </a>
 <span class="lineNum">      79 </span>                :            : // The function returns the value at the given position.
-<span class="lineNum">      80 </span>                :<span class="lineCov">         45 : nr_double_t sweep::get (int idx) {</span>
-<span class="lineNum">      81 </span>[<span class="branchCov" title="Branch 0 was taken 45 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 45 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         45 :   assert (idx &gt;= 0 &amp;&amp; idx &lt; size &amp;&amp; data != NULL);</span>
-<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 45 times"> + </span>][<span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 45 times"> + </span>]
-<span class="lineNum">      82 </span>                :<span class="lineCov">         45 :   return data[idx];</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">         59 : nr_double_t sweep::get (int idx) {</span>
+<span class="lineNum">      81 </span>[<span class="branchCov" title="Branch 0 was taken 59 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 59 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         59 :   assert (idx &gt;= 0 &amp;&amp; idx &lt; size &amp;&amp; data != NULL);</span>
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 59 times"> + </span>][<span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 59 times"> + </span>]
+<span class="lineNum">      82 </span>                :<span class="lineCov">         59 :   return data[idx];</span>
 <span class="lineNum">      83 </span>                :            : }
 <a name="84"><span class="lineNum">      84 </span>                :            : </a>
 <span class="lineNum">      85 </span>                :            : // The function sets the given value at the given position.
-<span class="lineNum">      86 </span>                :<span class="lineCov">      54698 : void sweep::set (int idx, nr_double_t val) {</span>
-<span class="lineNum">      87 </span>[<span class="branchCov" title="Branch 0 was taken 54698 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 54698 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      54698 :   assert (idx &gt;= 0 &amp;&amp; idx &lt; size &amp;&amp; data != NULL);</span>
-<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 54698 times"> + </span>][<span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 54698 times"> + </span>]
-<span class="lineNum">      88 </span>                :<span class="lineCov">      54698 :   data[idx] = val;</span>
-<span class="lineNum">      89 </span>                :<span class="lineCov">      54698 : }</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">      66645 : void sweep::set (int idx, nr_double_t val) {</span>
+<span class="lineNum">      87 </span>[<span class="branchCov" title="Branch 0 was taken 66645 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 66645 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      66645 :   assert (idx &gt;= 0 &amp;&amp; idx &lt; size &amp;&amp; data != NULL);</span>
+<span class="lineNum">         </span>[<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 66645 times"> + </span>][<span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchCov" title="Branch 7 was taken 66645 times"> + </span>]
+<span class="lineNum">      88 </span>                :<span class="lineCov">      66645 :   data[idx] = val;</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">      66645 : }</span>
 <span class="lineNum">      90 </span>                :            : 
 <span class="lineNum">      91 </span>                :            : /* This function modifies the current size of the sweep.  If the the
 <a name="92"><span class="lineNum">      92 </span>                :            :    new number of points is larger than the current one it zeroes the</a>
 <span class="lineNum">      93 </span>                :            :    new elements. */
-<span class="lineNum">      94 </span>                :<span class="lineCov">        131 : void sweep::setSize (int points) {</span>
-<span class="lineNum">      95 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 131 times"> + </span>]:<span class="lineCov">        131 :   assert (points &gt; 0);</span>
-<span class="lineNum">      96 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 131 times"> + </span>]:<span class="lineCov">        131 :   if (data != NULL) {</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">        160 : void sweep::setSize (int points) {</span>
+<span class="lineNum">      95 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 160 times"> + </span>]:<span class="lineCov">        160 :   assert (points &gt; 0);</span>
+<span class="lineNum">      96 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 160 times"> + </span>]:<span class="lineCov">        160 :   if (data != NULL) {</span>
 <span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 :     data = (nr_double_t *) realloc (data, sizeof (nr_double_t) * points);</span>
 <span class="lineNum">      98 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (points &gt; size)</span>
 <span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :       memset (&amp;data[size], 0, sizeof (nr_double_t) * (points - size));</span>
 <span class="lineNum">     100 </span>                :            :   }
 <span class="lineNum">     101 </span>                :            :   else {
-<span class="lineNum">     102 </span>                :<span class="lineCov">        131 :     data = (nr_double_t *) malloc (sizeof (nr_double_t) * points);</span>
-<span class="lineNum">     103 </span>                :<span class="lineCov">        131 :     memset (data, 0, sizeof (nr_double_t) * points);</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">        160 :     data = (nr_double_t *) malloc (sizeof (nr_double_t) * points);</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">        160 :     memset (data, 0, sizeof (nr_double_t) * points);</span>
 <span class="lineNum">     104 </span>                :            :   }
-<span class="lineNum">     105 </span>                :<span class="lineCov">        131 :   size = points;</span>
-<span class="lineNum">     106 </span>                :<span class="lineCov">        131 :   counter = 0;</span>
-<span class="lineNum">     107 </span>                :<span class="lineCov">        131 : }</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">        160 :   size = points;</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">        160 :   counter = 0;</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">        160 : }</span>
 <a name="108"><span class="lineNum">     108 </span>                :            : </a>
 <span class="lineNum">     109 </span>                :            : // The function creates a string representation of the sweep definition.
 <span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 : char * sweep::toString (void) {</span>
@@ -217,12 +217,12 @@
 <span class="lineNum">     137 </span>                :            : 
 <a name="138"><span class="lineNum">     138 </span>                :            : /* The function returns the current sweep value and afterwards steps</a>
 <span class="lineNum">     139 </span>                :            :    one value forward.  It wraps around at the end of sweep. */
-<span class="lineNum">     140 </span>                :<span class="lineCov">      63473 : nr_double_t sweep::next (void) {</span>
-<span class="lineNum">     141 </span>                :<span class="lineCov">      63473 :   nr_double_t res = data[counter];</span>
-<span class="lineNum">     142 </span>        [<span class="branchCov" title="Branch 0 was taken 346 times"> + </span><span class="branchCov" title="Branch 1 was taken 63127 times"> + </span>]:<span class="lineCov">      63473 :   if (++counter &gt;= size) counter = 0;</span>
-<span class="lineNum">     143 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 63473 times"> + </span>]:<span class="lineCov">      63473 :   if (size == 1)</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">      78302 : nr_double_t sweep::next (void) {</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">      78302 :   nr_double_t res = data[counter];</span>
+<span class="lineNum">     142 </span>        [<span class="branchCov" title="Branch 0 was taken 415 times"> + </span><span class="branchCov" title="Branch 1 was taken 77887 times"> + </span>]:<span class="lineCov">      78302 :   if (++counter &gt;= size) counter = 0;</span>
+<span class="lineNum">     143 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 78302 times"> + </span>]:<span class="lineCov">      78302 :   if (size == 1)</span>
 <span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :     return parent-&gt;getPropertyDouble (&quot;Values&quot;);</span>
-<span class="lineNum">     145 </span>                :<span class="lineCov">      63473 :   return res;</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">      78302 :   return res;</span>
 <span class="lineNum">     146 </span>                :            : }
 <span class="lineNum">     147 </span>                :            : 
 <span class="lineNum">     148 </span>                :            : /* This function returns the sweep value before the current value and
@@ -239,23 +239,23 @@
 <span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="160"><span class="lineNum">     160 </span>                :            : </a>
 <span class="lineNum">     161 </span>                :            : // Constructor creates a named instance of the linsweep class.
-<span class="lineNum">     162 </span>                :<span class="lineCov">        105 : linsweep::linsweep (const char * n) : sweep (n) {</span>
-<span class="lineNum">     163 </span>                :<span class="lineCov">        105 :   type = SWEEP_LINEAR;</span>
-<span class="lineNum">     164 </span>                :<span class="lineCov">        105 : }</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">        131 : linsweep::linsweep (const char * n) : sweep (n) {</span>
+<span class="lineNum">     163 </span>                :<span class="lineCov">        131 :   type = SWEEP_LINEAR;</span>
+<span class="lineNum">     164 </span>                :<span class="lineCov">        131 : }</span>
 <span class="lineNum">     165 </span>                :            : 
 <span class="lineNum">     166 </span>                :            : /* This function creates a linear stepped vector of values starting at
 <a name="167"><span class="lineNum">     167 </span>                :            :    the given start value, ending with the given stop value and</a>
 <span class="lineNum">     168 </span>                :            :    containing points elements. */
-<span class="lineNum">     169 </span>                :<span class="lineCov">        105 : void linsweep::create (nr_double_t start, nr_double_t stop, int points) {</span>
-<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 0 was taken 105 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        105 :   vector v = linspace (start, stop, points);</span>
-<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 0 was taken 105 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        105 :   setSize (points);</span>
-<span class="lineNum">     172 </span>[<span class="branchCov" title="Branch 0 was taken 47463 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 47463 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      47568 :   for (int i = 0; i &lt; points; i++) set (i, real (v.get (i)));</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 47463 times"> + </span><span class="branchCov" title="Branch 8 was taken 105 times"> + </span>][<span class="branchCov" title="Branch 9 was taken 105 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
-<span class="lineNum">     173 </span>                :<span class="lineCov">        105 : }</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">        131 : void linsweep::create (nr_double_t start, nr_double_t stop, int points) {</span>
+<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 0 was taken 131 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        131 :   vector v = linspace (start, stop, points);</span>
+<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 0 was taken 131 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        131 :   setSize (points);</span>
+<span class="lineNum">     172 </span>[<span class="branchCov" title="Branch 0 was taken 59224 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 59224 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      59355 :   for (int i = 0; i &lt; points; i++) set (i, real (v.get (i)));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 59224 times"> + </span><span class="branchCov" title="Branch 8 was taken 131 times"> + </span>][<span class="branchCov" title="Branch 9 was taken 131 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     173 </span>                :<span class="lineCov">        131 : }</span>
 <a name="174"><span class="lineNum">     174 </span>                :            : </a>
 <span class="lineNum">     175 </span>                :            : // Destructor deletes the linsweep class object.
-<span class="lineNum">     176 </span>                :<span class="lineCov">        105 : linsweep::~linsweep () {</span>
-<span class="lineNum">     177 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 105 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        210 : }</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">        131 : linsweep::~linsweep () {</span>
+<span class="lineNum">     177 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 131 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        262 : }</span>
 <a name="178"><span class="lineNum">     178 </span>                :            : </a>
 <span class="lineNum">     179 </span>                :            : // Constructor creates an unnamed instance of the logsweep class.
 <span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 : logsweep::logsweep () : sweep () {</span>
@@ -263,23 +263,23 @@
 <span class="lineNum">     182 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="183"><span class="lineNum">     183 </span>                :            : </a>
 <span class="lineNum">     184 </span>                :            : // Constructor creates a named instance of the logsweep class.
-<span class="lineNum">     185 </span>                :<span class="lineCov">         23 : logsweep::logsweep (const char * n) : sweep (n) {</span>
-<span class="lineNum">     186 </span>                :<span class="lineCov">         23 :   type = SWEEP_LOGARITHMIC;</span>
-<span class="lineNum">     187 </span>                :<span class="lineCov">         23 : }</span>
+<span class="lineNum">     185 </span>                :<span class="lineCov">         25 : logsweep::logsweep (const char * n) : sweep (n) {</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">         25 :   type = SWEEP_LOGARITHMIC;</span>
+<span class="lineNum">     187 </span>                :<span class="lineCov">         25 : }</span>
 <span class="lineNum">     188 </span>                :            : 
 <span class="lineNum">     189 </span>                :            : /* This function creates a logarithmic stepped vector of values
 <a name="190"><span class="lineNum">     190 </span>                :            :    starting at the given start value, ending with the given stop value</a>
 <span class="lineNum">     191 </span>                :            :    and containing points elements. */
-<span class="lineNum">     192 </span>                :<span class="lineCov">         23 : void logsweep::create (nr_double_t start, nr_double_t stop, int points) {</span>
-<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         23 :   vector v = logspace (start, stop, points);</span>
-<span class="lineNum">     194 </span>        [<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         23 :   setSize (points);</span>
-<span class="lineNum">     195 </span>[<span class="branchCov" title="Branch 0 was taken 7223 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 7223 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       7246 :   for (int i = 0; i &lt; points; i++) set (i, real (v.get (i)));</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 7223 times"> + </span><span class="branchCov" title="Branch 8 was taken 23 times"> + </span>][<span class="branchCov" title="Branch 9 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
-<span class="lineNum">     196 </span>                :<span class="lineCov">         23 : }</span>
+<span class="lineNum">     192 </span>                :<span class="lineCov">         25 : void logsweep::create (nr_double_t start, nr_double_t stop, int points) {</span>
+<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         25 :   vector v = logspace (start, stop, points);</span>
+<span class="lineNum">     194 </span>        [<span class="branchCov" title="Branch 0 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         25 :   setSize (points);</span>
+<span class="lineNum">     195 </span>[<span class="branchCov" title="Branch 0 was taken 7405 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 7405 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       7430 :   for (int i = 0; i &lt; points; i++) set (i, real (v.get (i)));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 7405 times"> + </span><span class="branchCov" title="Branch 8 was taken 25 times"> + </span>][<span class="branchCov" title="Branch 9 was taken 25 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     196 </span>                :<span class="lineCov">         25 : }</span>
 <a name="197"><span class="lineNum">     197 </span>                :            : </a>
 <span class="lineNum">     198 </span>                :            : // Destructor deletes the logsweep class object.
-<span class="lineNum">     199 </span>                :<span class="lineCov">         23 : logsweep::~logsweep () {</span>
-<span class="lineNum">     200 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 23 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         46 : }</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">         25 : logsweep::~logsweep () {</span>
+<span class="lineNum">     200 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 25 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">         50 : }</span>
 <a name="201"><span class="lineNum">     201 </span>                :            : </a>
 <span class="lineNum">     202 </span>                :            : // Constructor creates an unnamed instance of the consweep class.
 <span class="lineNum">     203 </span>                :<span class="lineNoCov">          0 : consweep::consweep () : sweep () {</span>
@@ -308,20 +308,20 @@
 <span class="lineNum">     226 </span>                :<span class="lineNoCov">          0 : }</span>
 <a name="227"><span class="lineNum">     227 </span>                :            : </a>
 <span class="lineNum">     228 </span>                :            : // Constructor creates a named instance of the lstsweep class.
-<span class="lineNum">     229 </span>                :<span class="lineCov">          3 : lstsweep::lstsweep (const char * n) : sweep (n) {</span>
-<span class="lineNum">     230 </span>                :<span class="lineCov">          3 :   type = SWEEP_LIST;</span>
-<span class="lineNum">     231 </span>                :<span class="lineCov">          3 : }</span>
+<span class="lineNum">     229 </span>                :<span class="lineCov">          4 : lstsweep::lstsweep (const char * n) : sweep (n) {</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">          4 :   type = SWEEP_LIST;</span>
+<span class="lineNum">     231 </span>                :<span class="lineCov">          4 : }</span>
 <span class="lineNum">     232 </span>                :            : 
 <span class="lineNum">     233 </span>                :            : /* This function creates arbitrary values in a sweep containing points
 <a name="234"><span class="lineNum">     234 </span>                :            :    elements.  The actual values must be assigned using the set()</a>
 <span class="lineNum">     235 </span>                :            :    function. */
-<span class="lineNum">     236 </span>                :<span class="lineCov">          3 : void lstsweep::create (int points) {</span>
-<span class="lineNum">     237 </span>                :<span class="lineCov">          3 :   setSize (points);</span>
-<span class="lineNum">     238 </span>                :<span class="lineCov">          3 : }</span>
+<span class="lineNum">     236 </span>                :<span class="lineCov">          4 : void lstsweep::create (int points) {</span>
+<span class="lineNum">     237 </span>                :<span class="lineCov">          4 :   setSize (points);</span>
+<span class="lineNum">     238 </span>                :<span class="lineCov">          4 : }</span>
 <a name="239"><span class="lineNum">     239 </span>                :            : </a>
 <span class="lineNum">     240 </span>                :            : // Destructor deletes the lstsweep class object.
-<span class="lineNum">     241 </span>                :<span class="lineCov">          3 : lstsweep::~lstsweep () {</span>
-<span class="lineNum">     242 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 3 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">          6 : }</span>
+<span class="lineNum">     241 </span>                :<span class="lineCov">          4 : lstsweep::~lstsweep () {</span>
+<span class="lineNum">     242 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 4 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">          8 : }</span>
 <span class="lineNum">     243 </span>                :            : 
 <span class="lineNum">     244 </span>                :            : } // namespace qucs
 </pre>

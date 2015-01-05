@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/devices/bjt.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/components/devices/bjt.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">388</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">17</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryMed">81.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">173</td>
@@ -111,10 +118,10 @@
 <span class="lineNum">      40 </span>                :            : using namespace qucs;
 <a name="41"><span class="lineNum">      41 </span>                :            : using namespace qucs::device;</a>
 <span class="lineNum">      42 </span>                :            : 
-<span class="lineNum">      43 </span>                :<span class="lineCov">         46 : bjt::bjt () : circuit (4) {</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">         46 :   cbcx = rb = re = rc = NULL;</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">         46 :   type = CIR_BJT;</span>
-<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">         46 : }</span></a>
+<span class="lineNum">      43 </span>                :<span class="lineCov">         51 : bjt::bjt () : circuit (4) {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">         51 :   cbcx = rb = re = rc = NULL;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">         51 :   type = CIR_BJT;</span>
+<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">         51 : }</span></a>
 <span class="lineNum">      47 </span>                :            : 
 <span class="lineNum">      48 </span>                :<span class="lineCov">        400 : void bjt::calcSP (nr_double_t frequency) {</span>
 <span class="lineNum">      49 </span>                :            :   // build admittance matrix and convert it to S-parameter matrix
@@ -240,71 +247,71 @@
 <span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :   return cy;</span>
 <a name="163"><span class="lineNum">     163 </span>                :            : }</a>
 <span class="lineNum">     164 </span>                :            : 
-<span class="lineNum">     165 </span>                :<span class="lineCov">       4998 : void bjt::initModel (void) {</span>
+<span class="lineNum">     165 </span>                :<span class="lineCov">       6480 : void bjt::initModel (void) {</span>
 <span class="lineNum">     166 </span>                :            :   // fetch necessary device properties
-<span class="lineNum">     167 </span>                :<span class="lineCov">       4998 :   nr_double_t T  = getPropertyDouble (&quot;Temp&quot;);</span>
-<span class="lineNum">     168 </span>                :<span class="lineCov">       4998 :   nr_double_t Tn = getPropertyDouble (&quot;Tnom&quot;);</span>
-<span class="lineNum">     169 </span>                :<span class="lineCov">       4998 :   nr_double_t A  = getPropertyDouble (&quot;Area&quot;);</span>
+<span class="lineNum">     167 </span>                :<span class="lineCov">       6480 :   nr_double_t T  = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">       6480 :   nr_double_t Tn = getPropertyDouble (&quot;Tnom&quot;);</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">       6480 :   nr_double_t A  = getPropertyDouble (&quot;Area&quot;);</span>
 <span class="lineNum">     170 </span>                :            : 
 <span class="lineNum">     171 </span>                :            :   // compute Is temperature and area dependency
-<span class="lineNum">     172 </span>                :<span class="lineCov">       4998 :   nr_double_t Is  = getPropertyDouble (&quot;Is&quot;);</span>
-<span class="lineNum">     173 </span>                :<span class="lineCov">       4998 :   nr_double_t Xti = getPropertyDouble (&quot;Xti&quot;);</span>
-<span class="lineNum">     174 </span>                :<span class="lineCov">       4998 :   nr_double_t Eg  = getPropertyDouble (&quot;Eg&quot;);</span>
+<span class="lineNum">     172 </span>                :<span class="lineCov">       6480 :   nr_double_t Is  = getPropertyDouble (&quot;Is&quot;);</span>
+<span class="lineNum">     173 </span>                :<span class="lineCov">       6480 :   nr_double_t Xti = getPropertyDouble (&quot;Xti&quot;);</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">       6480 :   nr_double_t Eg  = getPropertyDouble (&quot;Eg&quot;);</span>
 <span class="lineNum">     175 </span>                :            :   nr_double_t T1, T2, IsT;
-<span class="lineNum">     176 </span>                :<span class="lineCov">       4998 :   T2 = kelvin (T);</span>
-<span class="lineNum">     177 </span>                :<span class="lineCov">       4998 :   T1 = kelvin (Tn);</span>
-<span class="lineNum">     178 </span>                :<span class="lineCov">       4998 :   IsT = pnCurrent_T (T1, T2, Is, Eg, 1, Xti);</span>
-<span class="lineNum">     179 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Is&quot;, IsT * A);</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">       6480 :   T2 = kelvin (T);</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">       6480 :   T1 = kelvin (Tn);</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">       6480 :   IsT = pnCurrent_T (T1, T2, Is, Eg, 1, Xti);</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Is&quot;, IsT * A);</span>
 <span class="lineNum">     180 </span>                :            : 
 <span class="lineNum">     181 </span>                :            :   // compute Vje, Vjc and Vjs temperature dependencies
-<span class="lineNum">     182 </span>                :<span class="lineCov">       4998 :   nr_double_t Vje = getPropertyDouble (&quot;Vje&quot;);</span>
-<span class="lineNum">     183 </span>                :<span class="lineCov">       4998 :   nr_double_t Vjc = getPropertyDouble (&quot;Vjc&quot;);</span>
-<span class="lineNum">     184 </span>                :<span class="lineCov">       4998 :   nr_double_t Vjs = getPropertyDouble (&quot;Vjs&quot;);</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">       6480 :   nr_double_t Vje = getPropertyDouble (&quot;Vje&quot;);</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">       6480 :   nr_double_t Vjc = getPropertyDouble (&quot;Vjc&quot;);</span>
+<span class="lineNum">     184 </span>                :<span class="lineCov">       6480 :   nr_double_t Vjs = getPropertyDouble (&quot;Vjs&quot;);</span>
 <span class="lineNum">     185 </span>                :            :   nr_double_t VjeT, VjcT, VjsT;
-<span class="lineNum">     186 </span>                :<span class="lineCov">       4998 :   VjeT = pnPotential_T (T1,T2, Vje);</span>
-<span class="lineNum">     187 </span>                :<span class="lineCov">       4998 :   VjcT = pnPotential_T (T1,T2, Vjc);</span>
-<span class="lineNum">     188 </span>                :<span class="lineCov">       4998 :   VjsT = pnPotential_T (T1,T2, Vjs);</span>
-<span class="lineNum">     189 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Vje&quot;, VjeT);</span>
-<span class="lineNum">     190 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Vjc&quot;, VjcT);</span>
-<span class="lineNum">     191 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Vjs&quot;, VjsT);</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">       6480 :   VjeT = pnPotential_T (T1,T2, Vje);</span>
+<span class="lineNum">     187 </span>                :<span class="lineCov">       6480 :   VjcT = pnPotential_T (T1,T2, Vjc);</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">       6480 :   VjsT = pnPotential_T (T1,T2, Vjs);</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Vje&quot;, VjeT);</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Vjc&quot;, VjcT);</span>
+<span class="lineNum">     191 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Vjs&quot;, VjsT);</span>
 <span class="lineNum">     192 </span>                :            : 
 <span class="lineNum">     193 </span>                :            :   // compute Bf and Br temperature dependencies
-<span class="lineNum">     194 </span>                :<span class="lineCov">       4998 :   nr_double_t Bf  = getPropertyDouble (&quot;Bf&quot;);</span>
-<span class="lineNum">     195 </span>                :<span class="lineCov">       4998 :   nr_double_t Br  = getPropertyDouble (&quot;Br&quot;);</span>
-<span class="lineNum">     196 </span>                :<span class="lineCov">       4998 :   nr_double_t Xtb = getPropertyDouble (&quot;Xtb&quot;);</span>
-<span class="lineNum">     197 </span>                :<span class="lineCov">       4998 :   nr_double_t F = qucs::exp (Xtb * qucs::log (T2 / T1));</span>
-<span class="lineNum">     198 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Bf&quot;, Bf * F);</span>
-<span class="lineNum">     199 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Br&quot;, Br * F);</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">       6480 :   nr_double_t Bf  = getPropertyDouble (&quot;Bf&quot;);</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">       6480 :   nr_double_t Br  = getPropertyDouble (&quot;Br&quot;);</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">       6480 :   nr_double_t Xtb = getPropertyDouble (&quot;Xtb&quot;);</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">       6480 :   nr_double_t F = qucs::exp (Xtb * qucs::log (T2 / T1));</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Bf&quot;, Bf * F);</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Br&quot;, Br * F);</span>
 <span class="lineNum">     200 </span>                :            : 
 <span class="lineNum">     201 </span>                :            :   // compute Ise and Isc temperature and area dependencies
-<span class="lineNum">     202 </span>                :<span class="lineCov">       4998 :   nr_double_t Ise = getPropertyDouble (&quot;Ise&quot;);</span>
-<span class="lineNum">     203 </span>                :<span class="lineCov">       4998 :   nr_double_t Isc = getPropertyDouble (&quot;Isc&quot;);</span>
-<span class="lineNum">     204 </span>                :<span class="lineCov">       4998 :   nr_double_t Ne  = getPropertyDouble (&quot;Ne&quot;);</span>
-<span class="lineNum">     205 </span>                :<span class="lineCov">       4998 :   nr_double_t Nc  = getPropertyDouble (&quot;Nc&quot;);</span>
-<span class="lineNum">     206 </span>                :<span class="lineCov">       4998 :   nr_double_t G = qucs::log (IsT / Is);</span>
-<span class="lineNum">     207 </span>                :<span class="lineCov">       4998 :   nr_double_t F1 = qucs::exp (G / Ne);</span>
-<span class="lineNum">     208 </span>                :<span class="lineCov">       4998 :   nr_double_t F2 = qucs::exp (G / Nc);</span>
-<span class="lineNum">     209 </span>                :<span class="lineCov">       4998 :   Ise = Ise / F * F1;</span>
-<span class="lineNum">     210 </span>                :<span class="lineCov">       4998 :   Isc = Isc / F * F2;</span>
-<span class="lineNum">     211 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Ise&quot;, Ise * A);</span>
-<span class="lineNum">     212 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Isc&quot;, Isc * A);</span>
+<span class="lineNum">     202 </span>                :<span class="lineCov">       6480 :   nr_double_t Ise = getPropertyDouble (&quot;Ise&quot;);</span>
+<span class="lineNum">     203 </span>                :<span class="lineCov">       6480 :   nr_double_t Isc = getPropertyDouble (&quot;Isc&quot;);</span>
+<span class="lineNum">     204 </span>                :<span class="lineCov">       6480 :   nr_double_t Ne  = getPropertyDouble (&quot;Ne&quot;);</span>
+<span class="lineNum">     205 </span>                :<span class="lineCov">       6480 :   nr_double_t Nc  = getPropertyDouble (&quot;Nc&quot;);</span>
+<span class="lineNum">     206 </span>                :<span class="lineCov">       6480 :   nr_double_t G = qucs::log (IsT / Is);</span>
+<span class="lineNum">     207 </span>                :<span class="lineCov">       6480 :   nr_double_t F1 = qucs::exp (G / Ne);</span>
+<span class="lineNum">     208 </span>                :<span class="lineCov">       6480 :   nr_double_t F2 = qucs::exp (G / Nc);</span>
+<span class="lineNum">     209 </span>                :<span class="lineCov">       6480 :   Ise = Ise / F * F1;</span>
+<span class="lineNum">     210 </span>                :<span class="lineCov">       6480 :   Isc = Isc / F * F2;</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Ise&quot;, Ise * A);</span>
+<span class="lineNum">     212 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Isc&quot;, Isc * A);</span>
 <span class="lineNum">     213 </span>                :            : 
 <span class="lineNum">     214 </span>                :            :   // check unphysical parameters
-<span class="lineNum">     215 </span>                :<span class="lineCov">       4998 :   nr_double_t Nf = getPropertyDouble (&quot;Nf&quot;);</span>
-<span class="lineNum">     216 </span>                :<span class="lineCov">       4998 :   nr_double_t Nr = getPropertyDouble (&quot;Nr&quot;);</span>
-<span class="lineNum">     217 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (Nf &lt; 1.0) {</span>
+<span class="lineNum">     215 </span>                :<span class="lineCov">       6480 :   nr_double_t Nf = getPropertyDouble (&quot;Nf&quot;);</span>
+<span class="lineNum">     216 </span>                :<span class="lineCov">       6480 :   nr_double_t Nr = getPropertyDouble (&quot;Nr&quot;);</span>
+<span class="lineNum">     217 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (Nf &lt; 1.0) {</span>
 <span class="lineNum">     218 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Unphysical model parameter Nf = %g in &quot;
 <span class="lineNum">     219 </span>                :<span class="lineNoCov">          0 :               &quot;BJT `%s'\n&quot;, Nf, getName ());</span>
 <span class="lineNum">     220 </span>                :            :   }
-<span class="lineNum">     221 </span>        [<span class="branchCov" title="Branch 0 was taken 102 times"> + </span><span class="branchCov" title="Branch 1 was taken 4896 times"> + </span>]:<span class="lineCov">       4998 :   if (Nr &lt; 1.0) {</span>
+<span class="lineNum">     221 </span>        [<span class="branchCov" title="Branch 0 was taken 136 times"> + </span><span class="branchCov" title="Branch 1 was taken 6344 times"> + </span>]:<span class="lineCov">       6480 :   if (Nr &lt; 1.0) {</span>
 <span class="lineNum">     222 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Unphysical model parameter Nr = %g in &quot;
-<span class="lineNum">     223 </span>                :<span class="lineCov">        102 :               &quot;BJT `%s'\n&quot;, Nr, getName ());</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">        136 :               &quot;BJT `%s'\n&quot;, Nr, getName ());</span>
 <span class="lineNum">     224 </span>                :            :   }
-<span class="lineNum">     225 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (Ne &lt; 1.0) {</span>
+<span class="lineNum">     225 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (Ne &lt; 1.0) {</span>
 <span class="lineNum">     226 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Unphysical model parameter Ne = %g in &quot;
 <span class="lineNum">     227 </span>                :<span class="lineNoCov">          0 :               &quot;BJT `%s'\n&quot;, Ne, getName ());</span>
 <span class="lineNum">     228 </span>                :            :   }
-<span class="lineNum">     229 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (Nc &lt; 1.0) {</span>
+<span class="lineNum">     229 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (Nc &lt; 1.0) {</span>
 <span class="lineNum">     230 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Unphysical model parameter Nc = %g in &quot;
 <span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :               &quot;BJT `%s'\n&quot;, Nc, getName ());</span>
 <span class="lineNum">     232 </span>                :            :   }
@@ -313,153 +320,153 @@
 <span class="lineNum">     235 </span>                :            :    * which use negative values. Instead of failing, warn the user.
 <span class="lineNum">     236 </span>                :            :    * \todo Provide a way to silece such warnings
 <span class="lineNum">     237 </span>                :            :    */
-<span class="lineNum">     238 </span>                :<span class="lineCov">       4998 :   nr_double_t Vtf = getPropertyDouble (&quot;Vtf&quot;);</span>
-<span class="lineNum">     239 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (Vtf &lt; 0.0) {</span>
+<span class="lineNum">     238 </span>                :<span class="lineCov">       6480 :   nr_double_t Vtf = getPropertyDouble (&quot;Vtf&quot;);</span>
+<span class="lineNum">     239 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (Vtf &lt; 0.0) {</span>
 <span class="lineNum">     240 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Unphysical model parameter Vtf = %g in &quot;
 <span class="lineNum">     241 </span>                :<span class="lineNoCov">          0 :               &quot;BJT `%s'\n&quot;, Vtf, getName ());</span>
 <span class="lineNum">     242 </span>                :            :   }
 <span class="lineNum">     243 </span>                :            : 
 <span class="lineNum">     244 </span>                :            :   // compute Cje, Cjc and Cjs temperature and area dependencies
-<span class="lineNum">     245 </span>                :<span class="lineCov">       4998 :   nr_double_t Cje = getPropertyDouble (&quot;Cje&quot;);</span>
-<span class="lineNum">     246 </span>                :<span class="lineCov">       4998 :   nr_double_t Cjc = getPropertyDouble (&quot;Cjc&quot;);</span>
-<span class="lineNum">     247 </span>                :<span class="lineCov">       4998 :   nr_double_t Cjs = getPropertyDouble (&quot;Cjs&quot;);</span>
-<span class="lineNum">     248 </span>                :<span class="lineCov">       4998 :   nr_double_t Mje = getPropertyDouble (&quot;Mje&quot;);</span>
-<span class="lineNum">     249 </span>                :<span class="lineCov">       4998 :   nr_double_t Mjc = getPropertyDouble (&quot;Mjc&quot;);</span>
-<span class="lineNum">     250 </span>                :<span class="lineCov">       4998 :   nr_double_t Mjs = getPropertyDouble (&quot;Mjs&quot;);</span>
-<span class="lineNum">     251 </span>                :<span class="lineCov">       4998 :   Cje = pnCapacitance_T (T1, T2, Mje, VjeT / Vje, Cje);</span>
-<span class="lineNum">     252 </span>                :<span class="lineCov">       4998 :   Cjc = pnCapacitance_T (T1, T2, Mjc, VjcT / Vjc, Cjc);</span>
-<span class="lineNum">     253 </span>                :<span class="lineCov">       4998 :   Cjs = pnCapacitance_T (T1, T2, Mjs, VjsT / Vjs, Cjs);</span>
-<span class="lineNum">     254 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Cje&quot;, Cje * A);</span>
-<span class="lineNum">     255 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Cjc&quot;, Cjc * A);</span>
-<span class="lineNum">     256 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Cjs&quot;, Cjs * A);</span>
+<span class="lineNum">     245 </span>                :<span class="lineCov">       6480 :   nr_double_t Cje = getPropertyDouble (&quot;Cje&quot;);</span>
+<span class="lineNum">     246 </span>                :<span class="lineCov">       6480 :   nr_double_t Cjc = getPropertyDouble (&quot;Cjc&quot;);</span>
+<span class="lineNum">     247 </span>                :<span class="lineCov">       6480 :   nr_double_t Cjs = getPropertyDouble (&quot;Cjs&quot;);</span>
+<span class="lineNum">     248 </span>                :<span class="lineCov">       6480 :   nr_double_t Mje = getPropertyDouble (&quot;Mje&quot;);</span>
+<span class="lineNum">     249 </span>                :<span class="lineCov">       6480 :   nr_double_t Mjc = getPropertyDouble (&quot;Mjc&quot;);</span>
+<span class="lineNum">     250 </span>                :<span class="lineCov">       6480 :   nr_double_t Mjs = getPropertyDouble (&quot;Mjs&quot;);</span>
+<span class="lineNum">     251 </span>                :<span class="lineCov">       6480 :   Cje = pnCapacitance_T (T1, T2, Mje, VjeT / Vje, Cje);</span>
+<span class="lineNum">     252 </span>                :<span class="lineCov">       6480 :   Cjc = pnCapacitance_T (T1, T2, Mjc, VjcT / Vjc, Cjc);</span>
+<span class="lineNum">     253 </span>                :<span class="lineCov">       6480 :   Cjs = pnCapacitance_T (T1, T2, Mjs, VjsT / Vjs, Cjs);</span>
+<span class="lineNum">     254 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Cje&quot;, Cje * A);</span>
+<span class="lineNum">     255 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Cjc&quot;, Cjc * A);</span>
+<span class="lineNum">     256 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Cjs&quot;, Cjs * A);</span>
 <span class="lineNum">     257 </span>                :            : 
 <span class="lineNum">     258 </span>                :            :   // compute Rb, Rc, Re and Rbm area dependencies
-<span class="lineNum">     259 </span>                :<span class="lineCov">       4998 :   nr_double_t Rb  = getPropertyDouble (&quot;Rb&quot;);</span>
-<span class="lineNum">     260 </span>                :<span class="lineCov">       4998 :   nr_double_t Re  = getPropertyDouble (&quot;Re&quot;);</span>
-<span class="lineNum">     261 </span>                :<span class="lineCov">       4998 :   nr_double_t Rc  = getPropertyDouble (&quot;Rc&quot;);</span>
-<span class="lineNum">     262 </span>                :<span class="lineCov">       4998 :   nr_double_t Rbm = getPropertyDouble (&quot;Rbm&quot;);</span>
-<span class="lineNum">     263 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Rb&quot;, Rb / A);</span>
-<span class="lineNum">     264 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Re&quot;, Re / A);</span>
-<span class="lineNum">     265 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Rc&quot;, Rc / A);</span>
-<span class="lineNum">     266 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Rbm&quot;, Rbm / A);</span>
+<span class="lineNum">     259 </span>                :<span class="lineCov">       6480 :   nr_double_t Rb  = getPropertyDouble (&quot;Rb&quot;);</span>
+<span class="lineNum">     260 </span>                :<span class="lineCov">       6480 :   nr_double_t Re  = getPropertyDouble (&quot;Re&quot;);</span>
+<span class="lineNum">     261 </span>                :<span class="lineCov">       6480 :   nr_double_t Rc  = getPropertyDouble (&quot;Rc&quot;);</span>
+<span class="lineNum">     262 </span>                :<span class="lineCov">       6480 :   nr_double_t Rbm = getPropertyDouble (&quot;Rbm&quot;);</span>
+<span class="lineNum">     263 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Rb&quot;, Rb / A);</span>
+<span class="lineNum">     264 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Re&quot;, Re / A);</span>
+<span class="lineNum">     265 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Rc&quot;, Rc / A);</span>
+<span class="lineNum">     266 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Rbm&quot;, Rbm / A);</span>
 <span class="lineNum">     267 </span>                :            : 
 <span class="lineNum">     268 </span>                :            :   // compute Ikf, Ikr, Irb and Itf area dependencies
-<span class="lineNum">     269 </span>                :<span class="lineCov">       4998 :   nr_double_t Ikf = getPropertyDouble (&quot;Ikf&quot;);</span>
-<span class="lineNum">     270 </span>                :<span class="lineCov">       4998 :   nr_double_t Ikr = getPropertyDouble (&quot;Ikr&quot;);</span>
-<span class="lineNum">     271 </span>                :<span class="lineCov">       4998 :   nr_double_t Irb = getPropertyDouble (&quot;Irb&quot;);</span>
-<span class="lineNum">     272 </span>                :<span class="lineCov">       4998 :   nr_double_t Itf = getPropertyDouble (&quot;Itf&quot;);</span>
-<span class="lineNum">     273 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Ikf&quot;, Ikf * A);</span>
-<span class="lineNum">     274 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Ikr&quot;, Ikr * A);</span>
-<span class="lineNum">     275 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Irb&quot;, Irb * A);</span>
-<span class="lineNum">     276 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Itf&quot;, Itf * A);</span>
-<a name="277"><span class="lineNum">     277 </span>                :<span class="lineCov">       4998 : }</span></a>
+<span class="lineNum">     269 </span>                :<span class="lineCov">       6480 :   nr_double_t Ikf = getPropertyDouble (&quot;Ikf&quot;);</span>
+<span class="lineNum">     270 </span>                :<span class="lineCov">       6480 :   nr_double_t Ikr = getPropertyDouble (&quot;Ikr&quot;);</span>
+<span class="lineNum">     271 </span>                :<span class="lineCov">       6480 :   nr_double_t Irb = getPropertyDouble (&quot;Irb&quot;);</span>
+<span class="lineNum">     272 </span>                :<span class="lineCov">       6480 :   nr_double_t Itf = getPropertyDouble (&quot;Itf&quot;);</span>
+<span class="lineNum">     273 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Ikf&quot;, Ikf * A);</span>
+<span class="lineNum">     274 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Ikr&quot;, Ikr * A);</span>
+<span class="lineNum">     275 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Irb&quot;, Irb * A);</span>
+<span class="lineNum">     276 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Itf&quot;, Itf * A);</span>
+<a name="277"><span class="lineNum">     277 </span>                :<span class="lineCov">       6480 : }</span></a>
 <span class="lineNum">     278 </span>                :            : 
-<span class="lineNum">     279 </span>                :<span class="lineCov">       4998 : void bjt::initDC (void) {</span>
+<span class="lineNum">     279 </span>                :<span class="lineCov">       6480 : void bjt::initDC (void) {</span>
 <span class="lineNum">     280 </span>                :            : 
 <span class="lineNum">     281 </span>                :            :   // no transient analysis
-<span class="lineNum">     282 </span>                :<span class="lineCov">       4998 :   doTR = false;</span>
+<span class="lineNum">     282 </span>                :<span class="lineCov">       6480 :   doTR = false;</span>
 <span class="lineNum">     283 </span>                :            : 
 <span class="lineNum">     284 </span>                :            :   // allocate MNA matrices
-<span class="lineNum">     285 </span>                :<span class="lineCov">       4998 :   allocMatrixMNA ();</span>
+<span class="lineNum">     285 </span>                :<span class="lineCov">       6480 :   allocMatrixMNA ();</span>
 <span class="lineNum">     286 </span>                :            : 
 <span class="lineNum">     287 </span>                :            :   // initialize scalability
-<span class="lineNum">     288 </span>                :<span class="lineCov">       4998 :   initModel ();</span>
+<span class="lineNum">     288 </span>                :<span class="lineCov">       6480 :   initModel ();</span>
 <span class="lineNum">     289 </span>                :            : 
 <span class="lineNum">     290 </span>                :            :   // apply polarity of BJT
-<span class="lineNum">     291 </span>                :<span class="lineCov">       4998 :   const char * const type = getPropertyString (&quot;Type&quot;);</span>
-<span class="lineNum">     292 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 4995 times"> + </span>]:<span class="lineCov">       4998 :   pol = !strcmp (type, &quot;pnp&quot;) ? -1 : 1;</span>
+<span class="lineNum">     291 </span>                :<span class="lineCov">       6480 :   const char * const type = getPropertyString (&quot;Type&quot;);</span>
+<span class="lineNum">     292 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 6477 times"> + </span>]:<span class="lineCov">       6480 :   pol = !strcmp (type, &quot;pnp&quot;) ? -1 : 1;</span>
 <span class="lineNum">     293 </span>                :            : 
 <span class="lineNum">     294 </span>                :            :   // get simulation temperature
-<span class="lineNum">     295 </span>                :<span class="lineCov">       4998 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     295 </span>                :<span class="lineCov">       6480 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
 <span class="lineNum">     296 </span>                :            : 
 <span class="lineNum">     297 </span>                :            :   // initialize starting values
-<span class="lineNum">     298 </span>                :<span class="lineCov">       4998 :   restartDC ();</span>
+<span class="lineNum">     298 </span>                :<span class="lineCov">       6480 :   restartDC ();</span>
 <span class="lineNum">     299 </span>                :            : 
 <span class="lineNum">     300 </span>                :            :   // disable additional base-collector capacitance
-<span class="lineNum">     301 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (deviceEnabled (cbcx)) {</span>
+<span class="lineNum">     301 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (deviceEnabled (cbcx)) {</span>
 <span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 :     disableCapacitor (this, cbcx);</span>
 <span class="lineNum">     303 </span>                :            :   }
 <span class="lineNum">     304 </span>                :            : 
 <span class="lineNum">     305 </span>                :            :   // possibly insert series resistance at emitter
-<span class="lineNum">     306 </span>                :<span class="lineCov">       4998 :   nr_double_t Re = getScaledProperty (&quot;Re&quot;);</span>
-<span class="lineNum">     307 </span>        [<span class="branchCov" title="Branch 0 was taken 508 times"> + </span><span class="branchCov" title="Branch 1 was taken 4490 times"> + </span>]:<span class="lineCov">       4998 :   if (Re != 0.0) {</span>
+<span class="lineNum">     306 </span>                :<span class="lineCov">       6480 :   nr_double_t Re = getScaledProperty (&quot;Re&quot;);</span>
+<span class="lineNum">     307 </span>        [<span class="branchCov" title="Branch 0 was taken 542 times"> + </span><span class="branchCov" title="Branch 1 was taken 5938 times"> + </span>]:<span class="lineCov">       6480 :   if (Re != 0.0) {</span>
 <span class="lineNum">     308 </span>                :            :     // create additional circuit if necessary and reassign nodes
-<span class="lineNum">     309 </span>                :<span class="lineCov">        508 :     re = splitResistor (this, re, &quot;Re&quot;, &quot;emitter&quot;, NODE_E);</span>
-<span class="lineNum">     310 </span>                :<span class="lineCov">        508 :     re-&gt;setProperty (&quot;R&quot;, Re);</span>
-<span class="lineNum">     311 </span>                :<span class="lineCov">        508 :     re-&gt;setProperty (&quot;Temp&quot;, T);</span>
-<span class="lineNum">     312 </span>                :<span class="lineCov">        508 :     re-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
-<span class="lineNum">     313 </span>                :<span class="lineCov">        508 :     re-&gt;initDC ();</span>
+<span class="lineNum">     309 </span>                :<span class="lineCov">        542 :     re = splitResistor (this, re, &quot;Re&quot;, &quot;emitter&quot;, NODE_E);</span>
+<span class="lineNum">     310 </span>                :<span class="lineCov">        542 :     re-&gt;setProperty (&quot;R&quot;, Re);</span>
+<span class="lineNum">     311 </span>                :<span class="lineCov">        542 :     re-&gt;setProperty (&quot;Temp&quot;, T);</span>
+<span class="lineNum">     312 </span>                :<span class="lineCov">        542 :     re-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
+<span class="lineNum">     313 </span>                :<span class="lineCov">        542 :     re-&gt;initDC ();</span>
 <span class="lineNum">     314 </span>                :            :   }
 <span class="lineNum">     315 </span>                :            :   // no series resistance at emitter
 <span class="lineNum">     316 </span>                :            :   else {
-<span class="lineNum">     317 </span>                :<span class="lineCov">       4490 :     disableResistor (this, re, NODE_E);</span>
+<span class="lineNum">     317 </span>                :<span class="lineCov">       5938 :     disableResistor (this, re, NODE_E);</span>
 <span class="lineNum">     318 </span>                :            :   }
 <span class="lineNum">     319 </span>                :            : 
 <span class="lineNum">     320 </span>                :            :   // possibly insert series resistance at collector
-<span class="lineNum">     321 </span>                :<span class="lineCov">       4998 :   nr_double_t Rc = getScaledProperty (&quot;Rc&quot;);</span>
-<span class="lineNum">     322 </span>        [<span class="branchCov" title="Branch 0 was taken 2932 times"> + </span><span class="branchCov" title="Branch 1 was taken 2066 times"> + </span>]:<span class="lineCov">       4998 :   if (Rc != 0.0) {</span>
+<span class="lineNum">     321 </span>                :<span class="lineCov">       6480 :   nr_double_t Rc = getScaledProperty (&quot;Rc&quot;);</span>
+<span class="lineNum">     322 </span>        [<span class="branchCov" title="Branch 0 was taken 3774 times"> + </span><span class="branchCov" title="Branch 1 was taken 2706 times"> + </span>]:<span class="lineCov">       6480 :   if (Rc != 0.0) {</span>
 <span class="lineNum">     323 </span>                :            :     // create additional circuit if necessary and reassign nodes
-<span class="lineNum">     324 </span>                :<span class="lineCov">       2932 :     rc = splitResistor (this, rc, &quot;Rc&quot;, &quot;collector&quot;, NODE_C);</span>
-<span class="lineNum">     325 </span>                :<span class="lineCov">       2932 :     rc-&gt;setProperty (&quot;R&quot;, Rc);</span>
-<span class="lineNum">     326 </span>                :<span class="lineCov">       2932 :     rc-&gt;setProperty (&quot;Temp&quot;, T);</span>
-<span class="lineNum">     327 </span>                :<span class="lineCov">       2932 :     rc-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
-<span class="lineNum">     328 </span>                :<span class="lineCov">       2932 :     rc-&gt;initDC ();</span>
+<span class="lineNum">     324 </span>                :<span class="lineCov">       3774 :     rc = splitResistor (this, rc, &quot;Rc&quot;, &quot;collector&quot;, NODE_C);</span>
+<span class="lineNum">     325 </span>                :<span class="lineCov">       3774 :     rc-&gt;setProperty (&quot;R&quot;, Rc);</span>
+<span class="lineNum">     326 </span>                :<span class="lineCov">       3774 :     rc-&gt;setProperty (&quot;Temp&quot;, T);</span>
+<span class="lineNum">     327 </span>                :<span class="lineCov">       3774 :     rc-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
+<span class="lineNum">     328 </span>                :<span class="lineCov">       3774 :     rc-&gt;initDC ();</span>
 <span class="lineNum">     329 </span>                :            :   }
 <span class="lineNum">     330 </span>                :            :   // no series resistance at collector
 <span class="lineNum">     331 </span>                :            :   else {
-<span class="lineNum">     332 </span>                :<span class="lineCov">       2066 :     disableResistor (this, rc, NODE_C);</span>
+<span class="lineNum">     332 </span>                :<span class="lineCov">       2706 :     disableResistor (this, rc, NODE_C);</span>
 <span class="lineNum">     333 </span>                :            :   }
 <span class="lineNum">     334 </span>                :            : 
 <span class="lineNum">     335 </span>                :            :   // possibly insert base series resistance
-<span class="lineNum">     336 </span>                :<span class="lineCov">       4998 :   nr_double_t Rb  = getScaledProperty (&quot;Rb&quot;);</span>
-<span class="lineNum">     337 </span>                :<span class="lineCov">       4998 :   nr_double_t Rbm = getScaledProperty (&quot;Rbm&quot;);</span>
-<span class="lineNum">     338 </span>        [<span class="branchCov" title="Branch 0 was taken 4494 times"> + </span><span class="branchCov" title="Branch 1 was taken 504 times"> + </span>]:<span class="lineCov">       4998 :   if (Rbm &lt;= 0.0) Rbm = Rb; // Rbm defaults to Rb if zero</span>
-<span class="lineNum">     339 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4998 times"> + </span>]:<span class="lineCov">       4998 :   if (Rb &lt; Rbm)   Rbm = Rb; // Rbm must be less or equal Rb</span>
-<span class="lineNum">     340 </span>                :<span class="lineCov">       4998 :   setScaledProperty (&quot;Rbm&quot;, Rbm);</span>
-<span class="lineNum">     341 </span>        [<span class="branchCov" title="Branch 0 was taken 2936 times"> + </span><span class="branchCov" title="Branch 1 was taken 2062 times"> + </span>]:<span class="lineCov">       4998 :   if (Rbm != 0.0) {</span>
+<span class="lineNum">     336 </span>                :<span class="lineCov">       6480 :   nr_double_t Rb  = getScaledProperty (&quot;Rb&quot;);</span>
+<span class="lineNum">     337 </span>                :<span class="lineCov">       6480 :   nr_double_t Rbm = getScaledProperty (&quot;Rbm&quot;);</span>
+<span class="lineNum">     338 </span>        [<span class="branchCov" title="Branch 0 was taken 5942 times"> + </span><span class="branchCov" title="Branch 1 was taken 538 times"> + </span>]:<span class="lineCov">       6480 :   if (Rbm &lt;= 0.0) Rbm = Rb; // Rbm defaults to Rb if zero</span>
+<span class="lineNum">     339 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 6480 times"> + </span>]:<span class="lineCov">       6480 :   if (Rb &lt; Rbm)   Rbm = Rb; // Rbm must be less or equal Rb</span>
+<span class="lineNum">     340 </span>                :<span class="lineCov">       6480 :   setScaledProperty (&quot;Rbm&quot;, Rbm);</span>
+<span class="lineNum">     341 </span>        [<span class="branchCov" title="Branch 0 was taken 3778 times"> + </span><span class="branchCov" title="Branch 1 was taken 2702 times"> + </span>]:<span class="lineCov">       6480 :   if (Rbm != 0.0) {</span>
 <span class="lineNum">     342 </span>                :            :     // create additional circuit and reassign nodes
-<span class="lineNum">     343 </span>                :<span class="lineCov">       2936 :     rb = splitResistor (this, rb, &quot;Rbb&quot;, &quot;base&quot;, NODE_B);</span>
-<span class="lineNum">     344 </span>                :<span class="lineCov">       2936 :     rb-&gt;setProperty (&quot;R&quot;, Rb);</span>
-<span class="lineNum">     345 </span>                :<span class="lineCov">       2936 :     rb-&gt;setProperty (&quot;Temp&quot;, T);</span>
-<span class="lineNum">     346 </span>                :<span class="lineCov">       2936 :     rb-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
-<span class="lineNum">     347 </span>                :<span class="lineCov">       2936 :     rb-&gt;initDC ();</span>
+<span class="lineNum">     343 </span>                :<span class="lineCov">       3778 :     rb = splitResistor (this, rb, &quot;Rbb&quot;, &quot;base&quot;, NODE_B);</span>
+<span class="lineNum">     344 </span>                :<span class="lineCov">       3778 :     rb-&gt;setProperty (&quot;R&quot;, Rb);</span>
+<span class="lineNum">     345 </span>                :<span class="lineCov">       3778 :     rb-&gt;setProperty (&quot;Temp&quot;, T);</span>
+<span class="lineNum">     346 </span>                :<span class="lineCov">       3778 :     rb-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
+<span class="lineNum">     347 </span>                :<span class="lineCov">       3778 :     rb-&gt;initDC ();</span>
 <span class="lineNum">     348 </span>                :            :   }
 <span class="lineNum">     349 </span>                :            :   // no series resistance at base
 <span class="lineNum">     350 </span>                :            :   else {
-<span class="lineNum">     351 </span>                :<span class="lineCov">       2062 :     disableResistor (this, rb, NODE_B);</span>
-<span class="lineNum">     352 </span>                :<span class="lineCov">       2062 :     Rbb = 0.0;                 // set this operating point</span>
-<span class="lineNum">     353 </span>                :<span class="lineCov">       2062 :     setProperty (&quot;Xcjc&quot;, 1.0); // other than 1 is senseless here</span>
+<span class="lineNum">     351 </span>                :<span class="lineCov">       2702 :     disableResistor (this, rb, NODE_B);</span>
+<span class="lineNum">     352 </span>                :<span class="lineCov">       2702 :     Rbb = 0.0;                 // set this operating point</span>
+<span class="lineNum">     353 </span>                :<span class="lineCov">       2702 :     setProperty (&quot;Xcjc&quot;, 1.0); // other than 1 is senseless here</span>
 <span class="lineNum">     354 </span>                :            :   }
-<a name="355"><span class="lineNum">     355 </span>                :<span class="lineCov">       4998 : }</span></a>
+<a name="355"><span class="lineNum">     355 </span>                :<span class="lineCov">       6480 : }</span></a>
 <span class="lineNum">     356 </span>                :            : 
-<span class="lineNum">     357 </span>                :<span class="lineCov">       6895 : void bjt::restartDC (void) {</span>
+<span class="lineNum">     357 </span>                :<span class="lineCov">       8377 : void bjt::restartDC (void) {</span>
 <span class="lineNum">     358 </span>                :            :   // apply starting values to previous iteration values
-<span class="lineNum">     359 </span>[<span class="branchCov" title="Branch 1 was taken 6895 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 6895 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       6895 :   UbePrev = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
-<span class="lineNum">     360 </span>[<span class="branchCov" title="Branch 1 was taken 6895 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 6895 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       6895 :   UbcPrev = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
-<span class="lineNum">     361 </span>                :<span class="lineCov">       6895 : }</span>
+<span class="lineNum">     359 </span>[<span class="branchCov" title="Branch 1 was taken 8377 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 8377 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       8377 :   UbePrev = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
+<span class="lineNum">     360 </span>[<span class="branchCov" title="Branch 1 was taken 8377 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 8377 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">       8377 :   UbcPrev = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
+<span class="lineNum">     361 </span>                :<span class="lineCov">       8377 : }</span>
 <span class="lineNum">     362 </span>                :            : 
 <a name="363"><span class="lineNum">     363 </span>                :            : #define cexState 6 // extra excess phase state</a>
 <span class="lineNum">     364 </span>                :            : 
-<span class="lineNum">     365 </span>                :<span class="lineCov">     126485 : void bjt::calcDC (void) {</span>
+<span class="lineNum">     365 </span>                :<span class="lineCov">     145756 : void bjt::calcDC (void) {</span>
 <span class="lineNum">     366 </span>                :            : 
 <span class="lineNum">     367 </span>                :            :   // fetch device model parameters
-<span class="lineNum">     368 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Is   = getScaledProperty (&quot;Is&quot;);</span>
-<span class="lineNum">     369 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Nf   = getPropertyDouble (&quot;Nf&quot;);</span>
-<span class="lineNum">     370 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Nr   = getPropertyDouble (&quot;Nr&quot;);</span>
-<span class="lineNum">     371 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Vaf  = getPropertyDouble (&quot;Vaf&quot;);</span>
-<span class="lineNum">     372 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Var  = getPropertyDouble (&quot;Var&quot;);</span>
-<span class="lineNum">     373 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Ikf  = getScaledProperty (&quot;Ikf&quot;);</span>
-<span class="lineNum">     374 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Ikr  = getScaledProperty (&quot;Ikr&quot;);</span>
-<span class="lineNum">     375 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Bf   = getScaledProperty (&quot;Bf&quot;);</span>
-<span class="lineNum">     376 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Br   = getScaledProperty (&quot;Br&quot;);</span>
-<span class="lineNum">     377 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Ise  = getScaledProperty (&quot;Ise&quot;);</span>
-<span class="lineNum">     378 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Isc  = getScaledProperty (&quot;Isc&quot;);</span>
-<span class="lineNum">     379 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Ne   = getPropertyDouble (&quot;Ne&quot;);</span>
-<span class="lineNum">     380 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Nc   = getPropertyDouble (&quot;Nc&quot;);</span>
-<span class="lineNum">     381 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Rb   = getScaledProperty (&quot;Rb&quot;);</span>
-<span class="lineNum">     382 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Rbm  = getScaledProperty (&quot;Rbm&quot;);</span>
-<span class="lineNum">     383 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Irb  = getScaledProperty (&quot;Irb&quot;);</span>
-<span class="lineNum">     384 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t T    = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     368 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Is   = getScaledProperty (&quot;Is&quot;);</span>
+<span class="lineNum">     369 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Nf   = getPropertyDouble (&quot;Nf&quot;);</span>
+<span class="lineNum">     370 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Nr   = getPropertyDouble (&quot;Nr&quot;);</span>
+<span class="lineNum">     371 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Vaf  = getPropertyDouble (&quot;Vaf&quot;);</span>
+<span class="lineNum">     372 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Var  = getPropertyDouble (&quot;Var&quot;);</span>
+<span class="lineNum">     373 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Ikf  = getScaledProperty (&quot;Ikf&quot;);</span>
+<span class="lineNum">     374 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Ikr  = getScaledProperty (&quot;Ikr&quot;);</span>
+<span class="lineNum">     375 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Bf   = getScaledProperty (&quot;Bf&quot;);</span>
+<span class="lineNum">     376 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Br   = getScaledProperty (&quot;Br&quot;);</span>
+<span class="lineNum">     377 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Ise  = getScaledProperty (&quot;Ise&quot;);</span>
+<span class="lineNum">     378 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Isc  = getScaledProperty (&quot;Isc&quot;);</span>
+<span class="lineNum">     379 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Ne   = getPropertyDouble (&quot;Ne&quot;);</span>
+<span class="lineNum">     380 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Nc   = getPropertyDouble (&quot;Nc&quot;);</span>
+<span class="lineNum">     381 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Rb   = getScaledProperty (&quot;Rb&quot;);</span>
+<span class="lineNum">     382 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Rbm  = getScaledProperty (&quot;Rbm&quot;);</span>
+<span class="lineNum">     383 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Irb  = getScaledProperty (&quot;Irb&quot;);</span>
+<span class="lineNum">     384 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t T    = getPropertyDouble (&quot;Temp&quot;);</span>
 <span class="lineNum">     385 </span>                :            : 
 <span class="lineNum">     386 </span>                :            :   nr_double_t Ut, Q1, Q2;
 <span class="lineNum">     387 </span>                :            :   nr_double_t Iben, Ibcn, Ibei, Ibci, Ibc, gbe, gbc, gtiny;
@@ -467,28 +474,28 @@
 <span class="lineNum">     389 </span>                :            :   nr_double_t gm, go;
 <span class="lineNum">     390 </span>                :            : 
 <span class="lineNum">     391 </span>                :            :   // interpret zero as infinity for these model parameters
-<span class="lineNum">     392 </span>        [<span class="branchCov" title="Branch 0 was taken 42014 times"> + </span><span class="branchCov" title="Branch 1 was taken 84471 times"> + </span>]:<span class="lineCov">     126485 :   Ikf = Ikf &gt; 0 ? 1.0 / Ikf : 0;</span>
-<span class="lineNum">     393 </span>        [<span class="branchCov" title="Branch 0 was taken 21902 times"> + </span><span class="branchCov" title="Branch 1 was taken 104583 times"> + </span>]:<span class="lineCov">     126485 :   Ikr = Ikr &gt; 0 ? 1.0 / Ikr : 0;</span>
-<span class="lineNum">     394 </span>        [<span class="branchCov" title="Branch 0 was taken 73733 times"> + </span><span class="branchCov" title="Branch 1 was taken 52752 times"> + </span>]:<span class="lineCov">     126485 :   Vaf = Vaf &gt; 0 ? 1.0 / Vaf : 0;</span>
-<span class="lineNum">     395 </span>        [<span class="branchCov" title="Branch 0 was taken 21902 times"> + </span><span class="branchCov" title="Branch 1 was taken 104583 times"> + </span>]:<span class="lineCov">     126485 :   Var = Var &gt; 0 ? 1.0 / Var : 0;</span>
+<span class="lineNum">     392 </span>        [<span class="branchCov" title="Branch 0 was taken 50712 times"> + </span><span class="branchCov" title="Branch 1 was taken 95044 times"> + </span>]:<span class="lineCov">     145756 :   Ikf = Ikf &gt; 0 ? 1.0 / Ikf : 0;</span>
+<span class="lineNum">     393 </span>        [<span class="branchCov" title="Branch 0 was taken 23896 times"> + </span><span class="branchCov" title="Branch 1 was taken 121860 times"> + </span>]:<span class="lineCov">     145756 :   Ikr = Ikr &gt; 0 ? 1.0 / Ikr : 0;</span>
+<span class="lineNum">     394 </span>        [<span class="branchCov" title="Branch 0 was taken 93004 times"> + </span><span class="branchCov" title="Branch 1 was taken 52752 times"> + </span>]:<span class="lineCov">     145756 :   Vaf = Vaf &gt; 0 ? 1.0 / Vaf : 0;</span>
+<span class="lineNum">     395 </span>        [<span class="branchCov" title="Branch 0 was taken 23896 times"> + </span><span class="branchCov" title="Branch 1 was taken 121860 times"> + </span>]:<span class="lineCov">     145756 :   Var = Var &gt; 0 ? 1.0 / Var : 0;</span>
 <span class="lineNum">     396 </span>                :            : 
-<span class="lineNum">     397 </span>                :<span class="lineCov">     126485 :   T = kelvin (T);</span>
-<span class="lineNum">     398 </span>                :<span class="lineCov">     126485 :   Ut = T * kBoverQ;</span>
-<span class="lineNum">     399 </span>[<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     126485 :   Ube = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
-<span class="lineNum">     400 </span>[<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     126485 :   Ubc = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     397 </span>                :<span class="lineCov">     145756 :   T = kelvin (T);</span>
+<span class="lineNum">     398 </span>                :<span class="lineCov">     145756 :   Ut = T * kBoverQ;</span>
+<span class="lineNum">     399 </span>[<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     145756 :   Ube = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     400 </span>[<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     145756 :   Ubc = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
 <span class="lineNum">     401 </span>                :            : 
 <span class="lineNum">     402 </span>                :            :   // critical voltage necessary for bad start values
-<span class="lineNum">     403 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   UbeCrit = pnCriticalVoltage (Is, Nf * Ut);</span>
-<span class="lineNum">     404 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   UbcCrit = pnCriticalVoltage (Is, Nr * Ut);</span>
-<span class="lineNum">     405 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   UbePrev = Ube = pnVoltage (Ube, UbePrev, Ut * Nf, UbeCrit);</span>
-<span class="lineNum">     406 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   UbcPrev = Ubc = pnVoltage (Ubc, UbcPrev, Ut * Nr, UbcCrit);</span>
+<span class="lineNum">     403 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   UbeCrit = pnCriticalVoltage (Is, Nf * Ut);</span>
+<span class="lineNum">     404 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   UbcCrit = pnCriticalVoltage (Is, Nr * Ut);</span>
+<span class="lineNum">     405 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   UbePrev = Ube = pnVoltage (Ube, UbePrev, Ut * Nf, UbeCrit);</span>
+<span class="lineNum">     406 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   UbcPrev = Ubc = pnVoltage (Ubc, UbcPrev, Ut * Nr, UbcCrit);</span>
 <span class="lineNum">     407 </span>                :            : 
-<span class="lineNum">     408 </span>                :<span class="lineCov">     126485 :   Uce = Ube - Ubc;</span>
+<span class="lineNum">     408 </span>                :<span class="lineCov">     145756 :   Uce = Ube - Ubc;</span>
 <span class="lineNum">     409 </span>                :            : 
 <span class="lineNum">     410 </span>                :            :   // base-emitter diodes
-<span class="lineNum">     411 </span>        [<span class="branchCov" title="Branch 0 was taken 3016 times"> + </span><span class="branchCov" title="Branch 1 was taken 123469 times"> + </span>]:<span class="lineCov">     126485 :   gtiny = Ube &lt; - 10 * Ut * Nf ? (Is + Ise) : 0;</span>
+<span class="lineNum">     411 </span>        [<span class="branchCov" title="Branch 0 was taken 3016 times"> + </span><span class="branchCov" title="Branch 1 was taken 142740 times"> + </span>]:<span class="lineCov">     145756 :   gtiny = Ube &lt; - 10 * Ut * Nf ? (Is + Ise) : 0;</span>
 <span class="lineNum">     412 </span>                :            : #if 0
 <span class="lineNum">     413 </span>                :            :   If = pnCurrent (Ube, Is, Ut * Nf);
 <span class="lineNum">     414 </span>                :            :   Ibei = If / Bf;
@@ -499,18 +506,18 @@
 <span class="lineNum">     419 </span>                :            :   Ibe = Ibei + Iben + gtiny * Ube;
 <span class="lineNum">     420 </span>                :            :   gbe = gbei + gben + gtiny;
 <span class="lineNum">     421 </span>                :            : #else
-<span class="lineNum">     422 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   pnJunctionBIP (Ube, Is, Ut * Nf, If, gif);</span>
-<span class="lineNum">     423 </span>                :<span class="lineCov">     126485 :   Ibei = If / Bf;</span>
-<span class="lineNum">     424 </span>                :<span class="lineCov">     126485 :   gbei = gif / Bf;</span>
-<span class="lineNum">     425 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   pnJunctionBIP (Ube, Ise, Ut * Ne, Iben, gben);</span>
-<span class="lineNum">     426 </span>                :<span class="lineCov">     126485 :   Iben += gtiny * Ube;</span>
-<span class="lineNum">     427 </span>                :<span class="lineCov">     126485 :   gben += gtiny;</span>
-<span class="lineNum">     428 </span>                :<span class="lineCov">     126485 :   Ibe = Ibei + Iben;</span>
-<span class="lineNum">     429 </span>                :<span class="lineCov">     126485 :   gbe = gbei + gben;</span>
+<span class="lineNum">     422 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   pnJunctionBIP (Ube, Is, Ut * Nf, If, gif);</span>
+<span class="lineNum">     423 </span>                :<span class="lineCov">     145756 :   Ibei = If / Bf;</span>
+<span class="lineNum">     424 </span>                :<span class="lineCov">     145756 :   gbei = gif / Bf;</span>
+<span class="lineNum">     425 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   pnJunctionBIP (Ube, Ise, Ut * Ne, Iben, gben);</span>
+<span class="lineNum">     426 </span>                :<span class="lineCov">     145756 :   Iben += gtiny * Ube;</span>
+<span class="lineNum">     427 </span>                :<span class="lineCov">     145756 :   gben += gtiny;</span>
+<span class="lineNum">     428 </span>                :<span class="lineCov">     145756 :   Ibe = Ibei + Iben;</span>
+<span class="lineNum">     429 </span>                :<span class="lineCov">     145756 :   gbe = gbei + gben;</span>
 <span class="lineNum">     430 </span>                :            : #endif
 <span class="lineNum">     431 </span>                :            : 
 <span class="lineNum">     432 </span>                :            :   // base-collector diodes
-<span class="lineNum">     433 </span>        [<span class="branchCov" title="Branch 0 was taken 70593 times"> + </span><span class="branchCov" title="Branch 1 was taken 55892 times"> + </span>]:<span class="lineCov">     126485 :   gtiny = Ubc &lt; - 10 * Ut * Nr ? (Is + Isc) : 0;</span>
+<span class="lineNum">     433 </span>        [<span class="branchCov" title="Branch 0 was taken 81707 times"> + </span><span class="branchCov" title="Branch 1 was taken 64049 times"> + </span>]:<span class="lineCov">     145756 :   gtiny = Ubc &lt; - 10 * Ut * Nr ? (Is + Isc) : 0;</span>
 <span class="lineNum">     434 </span>                :            : #if 0
 <span class="lineNum">     435 </span>                :            :   Ir = pnCurrent (Ubc, Is, Ut * Nr);
 <span class="lineNum">     436 </span>                :            :   Ibci = Ir / Br;
@@ -521,77 +528,77 @@
 <span class="lineNum">     441 </span>                :            :   Ibc = Ibci + Ibcn + gtiny * Ubc;
 <span class="lineNum">     442 </span>                :            :   gbc = gbci + gbcn + gtiny;
 <span class="lineNum">     443 </span>                :            : #else
-<span class="lineNum">     444 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   pnJunctionBIP (Ubc, Is, Ut * Nr, Ir, gir);</span>
-<span class="lineNum">     445 </span>                :<span class="lineCov">     126485 :   Ibci = Ir / Br;</span>
-<span class="lineNum">     446 </span>                :<span class="lineCov">     126485 :   gbci = gir / Br;</span>
-<span class="lineNum">     447 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   pnJunctionBIP (Ubc, Isc, Ut * Nc, Ibcn, gbcn);</span>
-<span class="lineNum">     448 </span>                :<span class="lineCov">     126485 :   Ibcn += gtiny * Ubc;</span>
-<span class="lineNum">     449 </span>                :<span class="lineCov">     126485 :   gbcn += gtiny;</span>
-<span class="lineNum">     450 </span>                :<span class="lineCov">     126485 :   Ibc = Ibci + Ibcn;</span>
-<span class="lineNum">     451 </span>                :<span class="lineCov">     126485 :   gbc = gbci + gbcn;</span>
+<span class="lineNum">     444 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   pnJunctionBIP (Ubc, Is, Ut * Nr, Ir, gir);</span>
+<span class="lineNum">     445 </span>                :<span class="lineCov">     145756 :   Ibci = Ir / Br;</span>
+<span class="lineNum">     446 </span>                :<span class="lineCov">     145756 :   gbci = gir / Br;</span>
+<span class="lineNum">     447 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   pnJunctionBIP (Ubc, Isc, Ut * Nc, Ibcn, gbcn);</span>
+<span class="lineNum">     448 </span>                :<span class="lineCov">     145756 :   Ibcn += gtiny * Ubc;</span>
+<span class="lineNum">     449 </span>                :<span class="lineCov">     145756 :   gbcn += gtiny;</span>
+<span class="lineNum">     450 </span>                :<span class="lineCov">     145756 :   Ibc = Ibci + Ibcn;</span>
+<span class="lineNum">     451 </span>                :<span class="lineCov">     145756 :   gbc = gbci + gbcn;</span>
 <span class="lineNum">     452 </span>                :            : #endif
 <span class="lineNum">     453 </span>                :            : 
 <span class="lineNum">     454 </span>                :            :   // compute base charge quantities
-<span class="lineNum">     455 </span>                :<span class="lineCov">     126485 :   Q1 = 1 / (1 - Ubc * Vaf - Ube * Var);</span>
-<span class="lineNum">     456 </span>                :<span class="lineCov">     126485 :   Q2 = If * Ikf + Ir * Ikr;</span>
-<span class="lineNum">     457 </span>                :<span class="lineCov">     126485 :   nr_double_t SArg = 1.0 + 4.0 * Q2;</span>
-<span class="lineNum">     458 </span>[<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     126485 :   nr_double_t Sqrt = SArg &gt; 0 ? qucs::sqrt (SArg) : 1;</span>
-<span class="lineNum">     459 </span>                :<span class="lineCov">     126485 :   Qb = Q1 * (1 + Sqrt) / 2;</span>
-<span class="lineNum">     460 </span>                :<span class="lineCov">     126485 :   dQbdUbe = Q1 * (Qb * Var + gif * Ikf / Sqrt);</span>
-<span class="lineNum">     461 </span>                :<span class="lineCov">     126485 :   dQbdUbc = Q1 * (Qb * Vaf + gir * Ikr / Sqrt);</span>
+<span class="lineNum">     455 </span>                :<span class="lineCov">     145756 :   Q1 = 1 / (1 - Ubc * Vaf - Ube * Var);</span>
+<span class="lineNum">     456 </span>                :<span class="lineCov">     145756 :   Q2 = If * Ikf + Ir * Ikr;</span>
+<span class="lineNum">     457 </span>                :<span class="lineCov">     145756 :   nr_double_t SArg = 1.0 + 4.0 * Q2;</span>
+<span class="lineNum">     458 </span>[<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     145756 :   nr_double_t Sqrt = SArg &gt; 0 ? qucs::sqrt (SArg) : 1;</span>
+<span class="lineNum">     459 </span>                :<span class="lineCov">     145756 :   Qb = Q1 * (1 + Sqrt) / 2;</span>
+<span class="lineNum">     460 </span>                :<span class="lineCov">     145756 :   dQbdUbe = Q1 * (Qb * Var + gif * Ikf / Sqrt);</span>
+<span class="lineNum">     461 </span>                :<span class="lineCov">     145756 :   dQbdUbc = Q1 * (Qb * Vaf + gir * Ikr / Sqrt);</span>
 <span class="lineNum">     462 </span>                :            : 
 <span class="lineNum">     463 </span>                :            :   // during transient analysis only
-<span class="lineNum">     464 </span>        [<span class="branchCov" title="Branch 0 was taken 71104 times"> + </span><span class="branchCov" title="Branch 1 was taken 55381 times"> + </span>]:<span class="lineCov">     126485 :   if (doTR) {</span>
+<span class="lineNum">     464 </span>        [<span class="branchCov" title="Branch 0 was taken 72850 times"> + </span><span class="branchCov" title="Branch 1 was taken 72906 times"> + </span>]:<span class="lineCov">     145756 :   if (doTR) {</span>
 <span class="lineNum">     465 </span>                :            :     // calculate excess phase influence
-<span class="lineNum">     466 </span>                :<span class="lineCov">      71104 :     If /= Qb;</span>
-<span class="lineNum">     467 </span>        [<span class="branchCov" title="Branch 0 was taken 71104 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      71104 :     excessPhase (cexState, If, gif);</span>
-<span class="lineNum">     468 </span>                :<span class="lineCov">      71104 :     If *= Qb;</span>
+<span class="lineNum">     466 </span>                :<span class="lineCov">      72850 :     If /= Qb;</span>
+<span class="lineNum">     467 </span>        [<span class="branchCov" title="Branch 0 was taken 72850 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      72850 :     excessPhase (cexState, If, gif);</span>
+<span class="lineNum">     468 </span>                :<span class="lineCov">      72850 :     If *= Qb;</span>
 <span class="lineNum">     469 </span>                :            :   }
 <span class="lineNum">     470 </span>                :            : 
 <span class="lineNum">     471 </span>                :            :   // compute transfer current
-<span class="lineNum">     472 </span>                :<span class="lineCov">     126485 :   It = (If - Ir) / Qb;</span>
+<span class="lineNum">     472 </span>                :<span class="lineCov">     145756 :   It = (If - Ir) / Qb;</span>
 <span class="lineNum">     473 </span>                :            : 
 <span class="lineNum">     474 </span>                :            :   // compute forward and backward transconductance
-<span class="lineNum">     475 </span>                :<span class="lineCov">     126485 :   gitf = (+gif - It * dQbdUbe) / Qb;</span>
-<span class="lineNum">     476 </span>                :<span class="lineCov">     126485 :   gitr = (-gir - It * dQbdUbc) / Qb;</span>
+<span class="lineNum">     475 </span>                :<span class="lineCov">     145756 :   gitf = (+gif - It * dQbdUbe) / Qb;</span>
+<span class="lineNum">     476 </span>                :<span class="lineCov">     145756 :   gitr = (-gir - It * dQbdUbc) / Qb;</span>
 <span class="lineNum">     477 </span>                :            : 
 <span class="lineNum">     478 </span>                :            :   // compute old SPICE values
-<span class="lineNum">     479 </span>                :<span class="lineCov">     126485 :   go = -gitr;</span>
-<span class="lineNum">     480 </span>                :<span class="lineCov">     126485 :   gm = +gitf - go;</span>
-<span class="lineNum">     481 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   setOperatingPoint (&quot;gm&quot;, gm);</span>
-<span class="lineNum">     482 </span>        [<span class="branchCov" title="Branch 0 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     126485 :   setOperatingPoint (&quot;go&quot;, go);</span>
+<span class="lineNum">     479 </span>                :<span class="lineCov">     145756 :   go = -gitr;</span>
+<span class="lineNum">     480 </span>                :<span class="lineCov">     145756 :   gm = +gitf - go;</span>
+<span class="lineNum">     481 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   setOperatingPoint (&quot;gm&quot;, gm);</span>
+<span class="lineNum">     482 </span>        [<span class="branchCov" title="Branch 0 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     145756 :   setOperatingPoint (&quot;go&quot;, go);</span>
 <span class="lineNum">     483 </span>                :            : 
 <span class="lineNum">     484 </span>                :            :   // calculate current-dependent base resistance
-<span class="lineNum">     485 </span>        [<span class="branchCov" title="Branch 0 was taken 56203 times"> + </span><span class="branchCov" title="Branch 1 was taken 70282 times"> + </span>]:<span class="lineCov">     126485 :   if (Rbm != 0.0) {</span>
-<span class="lineNum">     486 </span>        [<span class="branchCov" title="Branch 0 was taken 7392 times"> + </span><span class="branchCov" title="Branch 1 was taken 48811 times"> + </span>]:<span class="lineCov">      56203 :     if (Irb != 0.0) {</span>
+<span class="lineNum">     485 </span>        [<span class="branchCov" title="Branch 0 was taken 64901 times"> + </span><span class="branchCov" title="Branch 1 was taken 80855 times"> + </span>]:<span class="lineCov">     145756 :   if (Rbm != 0.0) {</span>
+<span class="lineNum">     486 </span>        [<span class="branchCov" title="Branch 0 was taken 9386 times"> + </span><span class="branchCov" title="Branch 1 was taken 55515 times"> + </span>]:<span class="lineCov">      64901 :     if (Irb != 0.0) {</span>
 <span class="lineNum">     487 </span>                :            :       nr_double_t a, b, z;
-<span class="lineNum">     488 </span>                :<span class="lineCov">       7392 :       a = (Ibci + Ibcn + Ibei + Iben) / Irb;</span>
-<span class="lineNum">     489 </span>        [<span class="branchCov" title="Branch 0 was taken 6726 times"> + </span><span class="branchCov" title="Branch 1 was taken 666 times"> + </span>]:<span class="lineCov">       7392 :       a = MAX (a, NR_TINY); // enforce positive values</span>
-<span class="lineNum">     490 </span>[<span class="branchCov" title="Branch 0 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       7392 :       z = (qucs::sqrt (1 + 144 / sqr (M_PI) * a) - 1) / 24 * sqr (M_PI) / qucs::sqrt (a);</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
-<span class="lineNum">     491 </span>        [<span class="branchCov" title="Branch 0 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7392 :       b = qucs::tan (z);</span>
-<span class="lineNum">     492 </span>        [<span class="branchCov" title="Branch 0 was taken 7392 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       7392 :       Rbb = Rbm + 3 * (Rb - Rbm) * (b - z) / z / sqr (b);</span>
+<span class="lineNum">     488 </span>                :<span class="lineCov">       9386 :       a = (Ibci + Ibcn + Ibei + Iben) / Irb;</span>
+<span class="lineNum">     489 </span>        [<span class="branchCov" title="Branch 0 was taken 8683 times"> + </span><span class="branchCov" title="Branch 1 was taken 703 times"> + </span>]:<span class="lineCov">       9386 :       a = MAX (a, NR_TINY); // enforce positive values</span>
+<span class="lineNum">     490 </span>[<span class="branchCov" title="Branch 0 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       9386 :       z = (qucs::sqrt (1 + 144 / sqr (M_PI) * a) - 1) / 24 * sqr (M_PI) / qucs::sqrt (a);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     491 </span>        [<span class="branchCov" title="Branch 0 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       9386 :       b = qucs::tan (z);</span>
+<span class="lineNum">     492 </span>        [<span class="branchCov" title="Branch 0 was taken 9386 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       9386 :       Rbb = Rbm + 3 * (Rb - Rbm) * (b - z) / z / sqr (b);</span>
 <span class="lineNum">     493 </span>                :            :     }
 <span class="lineNum">     494 </span>                :            :     else {
-<span class="lineNum">     495 </span>                :<span class="lineCov">      48811 :       Rbb = Rbm + (Rb - Rbm) / Qb;</span>
+<span class="lineNum">     495 </span>                :<span class="lineCov">      55515 :       Rbb = Rbm + (Rb - Rbm) / Qb;</span>
 <span class="lineNum">     496 </span>                :            :     }
-<span class="lineNum">     497 </span>        [<span class="branchCov" title="Branch 0 was taken 56203 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      56203 :     rb-&gt;setScaledProperty (&quot;R&quot;, Rbb);</span>
-<span class="lineNum">     498 </span>        [<span class="branchCov" title="Branch 0 was taken 56203 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      56203 :     rb-&gt;calcDC ();</span>
+<span class="lineNum">     497 </span>        [<span class="branchCov" title="Branch 0 was taken 64901 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      64901 :     rb-&gt;setScaledProperty (&quot;R&quot;, Rbb);</span>
+<span class="lineNum">     498 </span>        [<span class="branchCov" title="Branch 0 was taken 64901 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      64901 :     rb-&gt;calcDC ();</span>
 <span class="lineNum">     499 </span>                :            :   }
 <span class="lineNum">     500 </span>                :            : 
 <span class="lineNum">     501 </span>                :            :   // compute autonomic current sources
-<span class="lineNum">     502 </span>                :<span class="lineCov">     126485 :   IeqB = Ibe - Ube * gbe;</span>
-<span class="lineNum">     503 </span>                :<span class="lineCov">     126485 :   IeqC = Ibc - Ubc * gbc;</span>
+<span class="lineNum">     502 </span>                :<span class="lineCov">     145756 :   IeqB = Ibe - Ube * gbe;</span>
+<span class="lineNum">     503 </span>                :<span class="lineCov">     145756 :   IeqC = Ibc - Ubc * gbc;</span>
 <span class="lineNum">     504 </span>                :            : #if NEWSGP
 <span class="lineNum">     505 </span>                :            :   IeqE = It - Ube * gitf - Ubc * gitr;
 <span class="lineNum">     506 </span>                :            : #else
-<span class="lineNum">     507 </span>                :<span class="lineCov">     126485 :   IeqE = It - Ube * gm - Uce * go;</span>
+<span class="lineNum">     507 </span>                :<span class="lineCov">     145756 :   IeqE = It - Ube * gm - Uce * go;</span>
 <span class="lineNum">     508 </span>                :            : #endif
-<span class="lineNum">     509 </span>                :<span class="lineCov">     126485 :   IeqS = 0;</span>
-<span class="lineNum">     510 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setI (NODE_B, (-IeqB - IeqC) * pol);</span>
-<span class="lineNum">     511 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setI (NODE_C, (+IeqC - IeqE - IeqS) * pol);</span>
-<span class="lineNum">     512 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setI (NODE_E, (+IeqB + IeqE) * pol);</span>
-<span class="lineNum">     513 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setI (NODE_S, (+IeqS) * pol);</span>
+<span class="lineNum">     509 </span>                :<span class="lineCov">     145756 :   IeqS = 0;</span>
+<span class="lineNum">     510 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setI (NODE_B, (-IeqB - IeqC) * pol);</span>
+<span class="lineNum">     511 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setI (NODE_C, (+IeqC - IeqE - IeqS) * pol);</span>
+<span class="lineNum">     512 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setI (NODE_E, (+IeqB + IeqE) * pol);</span>
+<span class="lineNum">     513 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setI (NODE_S, (+IeqS) * pol);</span>
 <span class="lineNum">     514 </span>                :            : 
 <span class="lineNum">     515 </span>                :            :   // apply admittance matrix elements
 <span class="lineNum">     516 </span>                :            : #if NEWSGP
@@ -612,114 +619,114 @@
 <span class="lineNum">     531 </span>                :            :   setY (NODE_S, NODE_E, 0);
 <span class="lineNum">     532 </span>                :            :   setY (NODE_S, NODE_S, 0);
 <span class="lineNum">     533 </span>                :            : #else
-<span class="lineNum">     534 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_B, NODE_B, gbc + gbe);</span>
-<span class="lineNum">     535 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_B, NODE_C, -gbc);</span>
-<span class="lineNum">     536 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_B, NODE_E, -gbe);</span>
-<span class="lineNum">     537 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_B, NODE_S, 0);</span>
-<span class="lineNum">     538 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_C, NODE_B, -gbc + gm);</span>
-<span class="lineNum">     539 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_C, NODE_C, go + gbc);</span>
-<span class="lineNum">     540 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_C, NODE_E, -go - gm);</span>
-<span class="lineNum">     541 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_C, NODE_S, 0);</span>
-<span class="lineNum">     542 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_E, NODE_B, -gbe - gm);</span>
-<span class="lineNum">     543 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_E, NODE_C, -go);</span>
-<span class="lineNum">     544 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_E, NODE_E, gbe + go + gm);</span>
-<span class="lineNum">     545 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_E, NODE_S, 0);</span>
-<span class="lineNum">     546 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_S, NODE_B, 0);</span>
-<span class="lineNum">     547 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_S, NODE_C, 0);</span>
-<span class="lineNum">     548 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_S, NODE_E, 0);</span>
-<span class="lineNum">     549 </span>        [<span class="branchCov" title="Branch 1 was taken 126485 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     126485 :   setY (NODE_S, NODE_S, 0);</span>
+<span class="lineNum">     534 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_B, NODE_B, gbc + gbe);</span>
+<span class="lineNum">     535 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_B, NODE_C, -gbc);</span>
+<span class="lineNum">     536 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_B, NODE_E, -gbe);</span>
+<span class="lineNum">     537 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_B, NODE_S, 0);</span>
+<span class="lineNum">     538 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_C, NODE_B, -gbc + gm);</span>
+<span class="lineNum">     539 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_C, NODE_C, go + gbc);</span>
+<span class="lineNum">     540 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_C, NODE_E, -go - gm);</span>
+<span class="lineNum">     541 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_C, NODE_S, 0);</span>
+<span class="lineNum">     542 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_E, NODE_B, -gbe - gm);</span>
+<span class="lineNum">     543 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_E, NODE_C, -go);</span>
+<span class="lineNum">     544 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_E, NODE_E, gbe + go + gm);</span>
+<span class="lineNum">     545 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_E, NODE_S, 0);</span>
+<span class="lineNum">     546 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_S, NODE_B, 0);</span>
+<span class="lineNum">     547 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_S, NODE_C, 0);</span>
+<span class="lineNum">     548 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_S, NODE_E, 0);</span>
+<span class="lineNum">     549 </span>        [<span class="branchCov" title="Branch 1 was taken 145756 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     145756 :   setY (NODE_S, NODE_S, 0);</span>
 <span class="lineNum">     550 </span>                :            : #endif
-<a name="551"><span class="lineNum">     551 </span>                :<span class="lineCov">     126485 : }</span></a>
+<a name="551"><span class="lineNum">     551 </span>                :<span class="lineCov">     145756 : }</span></a>
 <span class="lineNum">     552 </span>                :            : 
-<span class="lineNum">     553 </span>                :<span class="lineCov">      76054 : void bjt::saveOperatingPoints (void) {</span>
+<span class="lineNum">     553 </span>                :<span class="lineCov">      79278 : void bjt::saveOperatingPoints (void) {</span>
 <span class="lineNum">     554 </span>                :            :   nr_double_t Vbe, Vbc;
-<span class="lineNum">     555 </span>[<span class="branchCov" title="Branch 1 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      76054 :   Vbe = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
-<span class="lineNum">     556 </span>[<span class="branchCov" title="Branch 1 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      76054 :   Vbc = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
-<span class="lineNum">     557 </span>[<span class="branchCov" title="Branch 1 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 76054 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      76054 :   Ucs = real (getV (NODE_S) - getV (NODE_C)) * pol;</span>
-<span class="lineNum">     558 </span>                :<span class="lineCov">      76054 :   setOperatingPoint (&quot;Vbe&quot;, Vbe);</span>
-<span class="lineNum">     559 </span>                :<span class="lineCov">      76054 :   setOperatingPoint (&quot;Vbc&quot;, Vbc);</span>
-<span class="lineNum">     560 </span>                :<span class="lineCov">      76054 :   setOperatingPoint (&quot;Vce&quot;, Vbe - Vbc);</span>
-<span class="lineNum">     561 </span>                :<span class="lineCov">      76054 :   setOperatingPoint (&quot;Vcs&quot;, Ucs);</span>
-<span class="lineNum">     562 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 76054 times"> + </span>]:<span class="lineCov">      76054 :   if (deviceEnabled (cbcx)) {</span>
+<span class="lineNum">     555 </span>[<span class="branchCov" title="Branch 1 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      79278 :   Vbe = real (getV (NODE_B) - getV (NODE_E)) * pol;</span>
+<span class="lineNum">     556 </span>[<span class="branchCov" title="Branch 1 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      79278 :   Vbc = real (getV (NODE_B) - getV (NODE_C)) * pol;</span>
+<span class="lineNum">     557 </span>[<span class="branchCov" title="Branch 1 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 79278 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      79278 :   Ucs = real (getV (NODE_S) - getV (NODE_C)) * pol;</span>
+<span class="lineNum">     558 </span>                :<span class="lineCov">      79278 :   setOperatingPoint (&quot;Vbe&quot;, Vbe);</span>
+<span class="lineNum">     559 </span>                :<span class="lineCov">      79278 :   setOperatingPoint (&quot;Vbc&quot;, Vbc);</span>
+<span class="lineNum">     560 </span>                :<span class="lineCov">      79278 :   setOperatingPoint (&quot;Vce&quot;, Vbe - Vbc);</span>
+<span class="lineNum">     561 </span>                :<span class="lineCov">      79278 :   setOperatingPoint (&quot;Vcs&quot;, Ucs);</span>
+<span class="lineNum">     562 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 79278 times"> + </span>]:<span class="lineCov">      79278 :   if (deviceEnabled (cbcx)) {</span>
 <span class="lineNum">     563 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Ubx = real (cbcx-&gt;getV (NODE_1) - cbcx-&gt;getV (NODE_2)) * pol;</span>
 <span class="lineNum">     564 </span>                :<span class="lineNoCov">          0 :     setOperatingPoint (&quot;Vbx&quot;, Ubx);</span>
 <span class="lineNum">     565 </span>                :            :   }
-<a name="566"><span class="lineNum">     566 </span>                :<span class="lineCov">      76054 : }</span></a>
+<a name="566"><span class="lineNum">     566 </span>                :<span class="lineCov">      79278 : }</span></a>
 <span class="lineNum">     567 </span>                :            : 
-<span class="lineNum">     568 </span>                :<span class="lineCov">      71104 : void bjt::loadOperatingPoints (void) {</span>
-<span class="lineNum">     569 </span>                :<span class="lineCov">      71104 :   Ube = getOperatingPoint (&quot;Vbe&quot;);</span>
-<span class="lineNum">     570 </span>                :<span class="lineCov">      71104 :   Ubc = getOperatingPoint (&quot;Vbc&quot;);</span>
-<span class="lineNum">     571 </span>                :<span class="lineCov">      71104 :   Uce = getOperatingPoint (&quot;Vce&quot;);</span>
-<span class="lineNum">     572 </span>                :<span class="lineCov">      71104 :   Ucs = getOperatingPoint (&quot;Vcs&quot;);</span>
-<a name="573"><span class="lineNum">     573 </span>                :<span class="lineCov">      71104 : }</span></a>
+<span class="lineNum">     568 </span>                :<span class="lineCov">      72850 : void bjt::loadOperatingPoints (void) {</span>
+<span class="lineNum">     569 </span>                :<span class="lineCov">      72850 :   Ube = getOperatingPoint (&quot;Vbe&quot;);</span>
+<span class="lineNum">     570 </span>                :<span class="lineCov">      72850 :   Ubc = getOperatingPoint (&quot;Vbc&quot;);</span>
+<span class="lineNum">     571 </span>                :<span class="lineCov">      72850 :   Uce = getOperatingPoint (&quot;Vce&quot;);</span>
+<span class="lineNum">     572 </span>                :<span class="lineCov">      72850 :   Ucs = getOperatingPoint (&quot;Vcs&quot;);</span>
+<a name="573"><span class="lineNum">     573 </span>                :<span class="lineCov">      72850 : }</span></a>
 <span class="lineNum">     574 </span>                :            : 
-<span class="lineNum">     575 </span>                :<span class="lineCov">      71116 : void bjt::calcOperatingPoints (void) {</span>
+<span class="lineNum">     575 </span>                :<span class="lineCov">      72862 : void bjt::calcOperatingPoints (void) {</span>
 <span class="lineNum">     576 </span>                :            : 
 <span class="lineNum">     577 </span>                :            :   // fetch device model parameters
-<span class="lineNum">     578 </span>                :<span class="lineCov">      71116 :   nr_double_t Cje0 = getScaledProperty (&quot;Cje&quot;);</span>
-<span class="lineNum">     579 </span>                :<span class="lineCov">      71116 :   nr_double_t Vje  = getScaledProperty (&quot;Vje&quot;);</span>
-<span class="lineNum">     580 </span>                :<span class="lineCov">      71116 :   nr_double_t Mje  = getPropertyDouble (&quot;Mje&quot;);</span>
-<span class="lineNum">     581 </span>                :<span class="lineCov">      71116 :   nr_double_t Cjc0 = getScaledProperty (&quot;Cjc&quot;);</span>
-<span class="lineNum">     582 </span>                :<span class="lineCov">      71116 :   nr_double_t Vjc  = getScaledProperty (&quot;Vjc&quot;);</span>
-<span class="lineNum">     583 </span>                :<span class="lineCov">      71116 :   nr_double_t Mjc  = getPropertyDouble (&quot;Mjc&quot;);</span>
-<span class="lineNum">     584 </span>                :<span class="lineCov">      71116 :   nr_double_t Xcjc = getPropertyDouble (&quot;Xcjc&quot;);</span>
-<span class="lineNum">     585 </span>                :<span class="lineCov">      71116 :   nr_double_t Cjs0 = getScaledProperty (&quot;Cjs&quot;);</span>
-<span class="lineNum">     586 </span>                :<span class="lineCov">      71116 :   nr_double_t Vjs  = getScaledProperty (&quot;Vjs&quot;);</span>
-<span class="lineNum">     587 </span>                :<span class="lineCov">      71116 :   nr_double_t Mjs  = getPropertyDouble (&quot;Mjs&quot;);</span>
-<span class="lineNum">     588 </span>                :<span class="lineCov">      71116 :   nr_double_t Fc   = getPropertyDouble (&quot;Fc&quot;);</span>
-<span class="lineNum">     589 </span>                :<span class="lineCov">      71116 :   nr_double_t Vtf  = getPropertyDouble (&quot;Vtf&quot;);</span>
-<span class="lineNum">     590 </span>                :<span class="lineCov">      71116 :   nr_double_t Tf   = getPropertyDouble (&quot;Tf&quot;);</span>
-<span class="lineNum">     591 </span>                :<span class="lineCov">      71116 :   nr_double_t Xtf  = getPropertyDouble (&quot;Xtf&quot;);</span>
-<span class="lineNum">     592 </span>                :<span class="lineCov">      71116 :   nr_double_t Itf  = getScaledProperty (&quot;Itf&quot;);</span>
-<span class="lineNum">     593 </span>                :<span class="lineCov">      71116 :   nr_double_t Tr   = getPropertyDouble (&quot;Tr&quot;);</span>
+<span class="lineNum">     578 </span>                :<span class="lineCov">      72862 :   nr_double_t Cje0 = getScaledProperty (&quot;Cje&quot;);</span>
+<span class="lineNum">     579 </span>                :<span class="lineCov">      72862 :   nr_double_t Vje  = getScaledProperty (&quot;Vje&quot;);</span>
+<span class="lineNum">     580 </span>                :<span class="lineCov">      72862 :   nr_double_t Mje  = getPropertyDouble (&quot;Mje&quot;);</span>
+<span class="lineNum">     581 </span>                :<span class="lineCov">      72862 :   nr_double_t Cjc0 = getScaledProperty (&quot;Cjc&quot;);</span>
+<span class="lineNum">     582 </span>                :<span class="lineCov">      72862 :   nr_double_t Vjc  = getScaledProperty (&quot;Vjc&quot;);</span>
+<span class="lineNum">     583 </span>                :<span class="lineCov">      72862 :   nr_double_t Mjc  = getPropertyDouble (&quot;Mjc&quot;);</span>
+<span class="lineNum">     584 </span>                :<span class="lineCov">      72862 :   nr_double_t Xcjc = getPropertyDouble (&quot;Xcjc&quot;);</span>
+<span class="lineNum">     585 </span>                :<span class="lineCov">      72862 :   nr_double_t Cjs0 = getScaledProperty (&quot;Cjs&quot;);</span>
+<span class="lineNum">     586 </span>                :<span class="lineCov">      72862 :   nr_double_t Vjs  = getScaledProperty (&quot;Vjs&quot;);</span>
+<span class="lineNum">     587 </span>                :<span class="lineCov">      72862 :   nr_double_t Mjs  = getPropertyDouble (&quot;Mjs&quot;);</span>
+<span class="lineNum">     588 </span>                :<span class="lineCov">      72862 :   nr_double_t Fc   = getPropertyDouble (&quot;Fc&quot;);</span>
+<span class="lineNum">     589 </span>                :<span class="lineCov">      72862 :   nr_double_t Vtf  = getPropertyDouble (&quot;Vtf&quot;);</span>
+<span class="lineNum">     590 </span>                :<span class="lineCov">      72862 :   nr_double_t Tf   = getPropertyDouble (&quot;Tf&quot;);</span>
+<span class="lineNum">     591 </span>                :<span class="lineCov">      72862 :   nr_double_t Xtf  = getPropertyDouble (&quot;Xtf&quot;);</span>
+<span class="lineNum">     592 </span>                :<span class="lineCov">      72862 :   nr_double_t Itf  = getScaledProperty (&quot;Itf&quot;);</span>
+<span class="lineNum">     593 </span>                :<span class="lineCov">      72862 :   nr_double_t Tr   = getPropertyDouble (&quot;Tr&quot;);</span>
 <span class="lineNum">     594 </span>                :            : 
 <span class="lineNum">     595 </span>                :            :   nr_double_t Cbe, Cbci, Cbcx, Ccs;
 <span class="lineNum">     596 </span>                :            : 
 <span class="lineNum">     597 </span>                :            :   // interpret zero as infinity for that model parameter
-<span class="lineNum">     598 </span>        [<span class="branchCov" title="Branch 0 was taken 5238 times"> + </span><span class="branchCov" title="Branch 1 was taken 65878 times"> + </span>]:<span class="lineCov">      71116 :   Vtf = Vtf &gt; 0 ? 1.0 / Vtf : 0;</span>
+<span class="lineNum">     598 </span>        [<span class="branchCov" title="Branch 0 was taken 6984 times"> + </span><span class="branchCov" title="Branch 1 was taken 65878 times"> + </span>]:<span class="lineCov">      72862 :   Vtf = Vtf &gt; 0 ? 1.0 / Vtf : 0;</span>
 <span class="lineNum">     599 </span>                :            : 
 <span class="lineNum">     600 </span>                :            :   // depletion capacitance of base-emitter diode
-<span class="lineNum">     601 </span>                :<span class="lineCov">      71116 :   Cbe = pnCapacitance (Ube, Cje0, Vje, Mje, Fc);</span>
-<span class="lineNum">     602 </span>                :<span class="lineCov">      71116 :   Qbe = pnCharge (Ube, Cje0, Vje, Mje, Fc);</span>
+<span class="lineNum">     601 </span>                :<span class="lineCov">      72862 :   Cbe = pnCapacitance (Ube, Cje0, Vje, Mje, Fc);</span>
+<span class="lineNum">     602 </span>                :<span class="lineCov">      72862 :   Qbe = pnCharge (Ube, Cje0, Vje, Mje, Fc);</span>
 <span class="lineNum">     603 </span>                :            : 
 <span class="lineNum">     604 </span>                :            :   // diffusion capacitance of base-emitter diode
-<span class="lineNum">     605 </span>        [<span class="branchCov" title="Branch 0 was taken 71116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      71116 :   if (If != 0.0) {</span>
+<span class="lineNum">     605 </span>        [<span class="branchCov" title="Branch 0 was taken 72862 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      72862 :   if (If != 0.0) {</span>
 <span class="lineNum">     606 </span>                :            :     nr_double_t e, Tff, dTffdUbe, dTffdUbc, a;
-<span class="lineNum">     607 </span>                :<span class="lineCov">      71116 :     a = 1 / (1 + Itf / If);</span>
-<span class="lineNum">     608 </span>        [<span class="branchCov" title="Branch 0 was taken 71116 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      71116 :     e = 2 * qucs::exp (MIN (Ubc * Vtf, 709));</span>
-<span class="lineNum">     609 </span>                :<span class="lineCov">      71116 :     Tff = Tf * (1 + Xtf * sqr (a) * e);</span>
-<span class="lineNum">     610 </span>                :<span class="lineCov">      71116 :     dTffdUbe = Tf * Xtf * 2 * gif * Itf * cubic (a) / sqr (If) * e;</span>
-<span class="lineNum">     611 </span>                :<span class="lineCov">      71116 :     Cbe += (If * dTffdUbe + Tff * (gif - If / Qb * dQbdUbe)) / Qb;</span>
-<span class="lineNum">     612 </span>                :<span class="lineCov">      71116 :     Qbe += If * Tff / Qb;</span>
-<span class="lineNum">     613 </span>                :<span class="lineCov">      71116 :     dTffdUbc = Tf * Xtf * Vtf * sqr (a) * e;</span>
-<span class="lineNum">     614 </span>                :<span class="lineCov">      71116 :     dQbedUbc = If / Qb * (dTffdUbc - Tff / Qb * dQbdUbc);</span>
+<span class="lineNum">     607 </span>                :<span class="lineCov">      72862 :     a = 1 / (1 + Itf / If);</span>
+<span class="lineNum">     608 </span>        [<span class="branchCov" title="Branch 0 was taken 72862 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      72862 :     e = 2 * qucs::exp (MIN (Ubc * Vtf, 709));</span>
+<span class="lineNum">     609 </span>                :<span class="lineCov">      72862 :     Tff = Tf * (1 + Xtf * sqr (a) * e);</span>
+<span class="lineNum">     610 </span>                :<span class="lineCov">      72862 :     dTffdUbe = Tf * Xtf * 2 * gif * Itf * cubic (a) / sqr (If) * e;</span>
+<span class="lineNum">     611 </span>                :<span class="lineCov">      72862 :     Cbe += (If * dTffdUbe + Tff * (gif - If / Qb * dQbdUbe)) / Qb;</span>
+<span class="lineNum">     612 </span>                :<span class="lineCov">      72862 :     Qbe += If * Tff / Qb;</span>
+<span class="lineNum">     613 </span>                :<span class="lineCov">      72862 :     dTffdUbc = Tf * Xtf * Vtf * sqr (a) * e;</span>
+<span class="lineNum">     614 </span>                :<span class="lineCov">      72862 :     dQbedUbc = If / Qb * (dTffdUbc - Tff / Qb * dQbdUbc);</span>
 <span class="lineNum">     615 </span>                :            :   }
 <span class="lineNum">     616 </span>                :            : 
 <span class="lineNum">     617 </span>                :            :   // depletion and diffusion capacitance of base-collector diode
-<span class="lineNum">     618 </span>                :<span class="lineCov">      71116 :   Cbci = pnCapacitance (Ubc, Cjc0 * Xcjc, Vjc, Mjc, Fc) + Tr * gir;</span>
-<span class="lineNum">     619 </span>                :<span class="lineCov">      71116 :   Qbci = pnCharge (Ubc, Cjc0 * Xcjc, Vjc, Mjc, Fc) + Tr * Ir;</span>
+<span class="lineNum">     618 </span>                :<span class="lineCov">      72862 :   Cbci = pnCapacitance (Ubc, Cjc0 * Xcjc, Vjc, Mjc, Fc) + Tr * gir;</span>
+<span class="lineNum">     619 </span>                :<span class="lineCov">      72862 :   Qbci = pnCharge (Ubc, Cjc0 * Xcjc, Vjc, Mjc, Fc) + Tr * Ir;</span>
 <span class="lineNum">     620 </span>                :            : 
 <span class="lineNum">     621 </span>                :            :   // depletion and diffusion capacitance of external base-collector capacitor
-<span class="lineNum">     622 </span>                :<span class="lineCov">      71116 :   Cbcx = pnCapacitance (Ubx, Cjc0 * (1 - Xcjc), Vjc, Mjc, Fc);</span>
-<span class="lineNum">     623 </span>                :<span class="lineCov">      71116 :   Qbcx = pnCharge (Ubx, Cjc0 * (1 - Xcjc), Vjc, Mjc, Fc);</span>
+<span class="lineNum">     622 </span>                :<span class="lineCov">      72862 :   Cbcx = pnCapacitance (Ubx, Cjc0 * (1 - Xcjc), Vjc, Mjc, Fc);</span>
+<span class="lineNum">     623 </span>                :<span class="lineCov">      72862 :   Qbcx = pnCharge (Ubx, Cjc0 * (1 - Xcjc), Vjc, Mjc, Fc);</span>
 <span class="lineNum">     624 </span>                :            : 
 <span class="lineNum">     625 </span>                :            :   // depletion capacitance of collector-substrate diode
-<span class="lineNum">     626 </span>                :<span class="lineCov">      71116 :   Ccs = pnCapacitance (Ucs, Cjs0, Vjs, Mjs);</span>
-<span class="lineNum">     627 </span>                :<span class="lineCov">      71116 :   Qcs = pnCharge (Ucs, Cjs0, Vjs, Mjs);</span>
+<span class="lineNum">     626 </span>                :<span class="lineCov">      72862 :   Ccs = pnCapacitance (Ucs, Cjs0, Vjs, Mjs);</span>
+<span class="lineNum">     627 </span>                :<span class="lineCov">      72862 :   Qcs = pnCharge (Ucs, Cjs0, Vjs, Mjs);</span>
 <span class="lineNum">     628 </span>                :            : 
 <span class="lineNum">     629 </span>                :            :   // finally save the operating points
-<span class="lineNum">     630 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Cbe&quot;, Cbe);</span>
-<span class="lineNum">     631 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Cbci&quot;, Cbci);</span>
-<span class="lineNum">     632 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Cbcx&quot;, Cbcx);</span>
-<span class="lineNum">     633 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Ccs&quot;, Ccs);</span>
-<span class="lineNum">     634 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;gmf&quot;, gitf);</span>
-<span class="lineNum">     635 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;gmr&quot;, gitr);</span>
-<span class="lineNum">     636 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;gmu&quot;, gbci + gbcn);</span>
-<span class="lineNum">     637 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;gpi&quot;, gbei + gben);</span>
-<span class="lineNum">     638 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Rbb&quot;, Rbb);</span>
-<span class="lineNum">     639 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Ibe&quot;, Ibe);</span>
-<span class="lineNum">     640 </span>                :<span class="lineCov">      71116 :   setOperatingPoint (&quot;Ice&quot;, It);</span>
-<a name="641"><span class="lineNum">     641 </span>                :<span class="lineCov">      71116 : }</span></a>
+<span class="lineNum">     630 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Cbe&quot;, Cbe);</span>
+<span class="lineNum">     631 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Cbci&quot;, Cbci);</span>
+<span class="lineNum">     632 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Cbcx&quot;, Cbcx);</span>
+<span class="lineNum">     633 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Ccs&quot;, Ccs);</span>
+<span class="lineNum">     634 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;gmf&quot;, gitf);</span>
+<span class="lineNum">     635 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;gmr&quot;, gitr);</span>
+<span class="lineNum">     636 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;gmu&quot;, gbci + gbcn);</span>
+<span class="lineNum">     637 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;gpi&quot;, gbei + gben);</span>
+<span class="lineNum">     638 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Rbb&quot;, Rbb);</span>
+<span class="lineNum">     639 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Ibe&quot;, Ibe);</span>
+<span class="lineNum">     640 </span>                :<span class="lineCov">      72862 :   setOperatingPoint (&quot;Ice&quot;, It);</span>
+<a name="641"><span class="lineNum">     641 </span>                :<span class="lineCov">      72862 : }</span></a>
 <span class="lineNum">     642 </span>                :            : 
 <span class="lineNum">     643 </span>                :<span class="lineCov">          2 : void bjt::initSP (void) {</span>
 <span class="lineNum">     644 </span>                :<span class="lineCov">          2 :   allocMatrixS ();</span>
@@ -730,15 +737,15 @@
 <span class="lineNum">     649 </span>                :            :   }
 <a name="650"><span class="lineNum">     650 </span>                :<span class="lineCov">          2 : }</span></a>
 <span class="lineNum">     651 </span>                :            : 
-<span class="lineNum">     652 </span>                :<span class="lineCov">         36 : void bjt::processCbcx (void) {</span>
-<span class="lineNum">     653 </span>                :<span class="lineCov">         36 :   nr_double_t Xcjc = getPropertyDouble (&quot;Xcjc&quot;);</span>
-<span class="lineNum">     654 </span>                :<span class="lineCov">         36 :   nr_double_t Rbm  = getScaledProperty (&quot;Rbm&quot;);</span>
-<span class="lineNum">     655 </span>                :<span class="lineCov">         36 :   nr_double_t Cjc0 = getScaledProperty (&quot;Cjc&quot;);</span>
+<span class="lineNum">     652 </span>                :<span class="lineCov">         38 : void bjt::processCbcx (void) {</span>
+<span class="lineNum">     653 </span>                :<span class="lineCov">         38 :   nr_double_t Xcjc = getPropertyDouble (&quot;Xcjc&quot;);</span>
+<span class="lineNum">     654 </span>                :<span class="lineCov">         38 :   nr_double_t Rbm  = getScaledProperty (&quot;Rbm&quot;);</span>
+<span class="lineNum">     655 </span>                :<span class="lineCov">         38 :   nr_double_t Cjc0 = getScaledProperty (&quot;Cjc&quot;);</span>
 <span class="lineNum">     656 </span>                :            : 
 <span class="lineNum">     657 </span>                :            :   /* if necessary then insert external capacitance between internal
 <span class="lineNum">     658 </span>                :            :      collector node and external base node */
-<span class="lineNum">     659 </span>[<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 8 times"> + </span><span class="branchCov" title="Branch 3 was taken 2 times"> + </span>]:<span class="lineCov">         36 :   if (Rbm != 0.0 &amp;&amp; Cjc0 != 0.0 &amp;&amp; Xcjc != 1.0) {</span>
-<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 8 times"> + </span>]
+<span class="lineNum">     659 </span>[<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 10 times"> + </span><span class="branchCov" title="Branch 3 was taken 2 times"> + </span>]:<span class="lineCov">         38 :   if (Rbm != 0.0 &amp;&amp; Cjc0 != 0.0 &amp;&amp; Xcjc != 1.0) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 10 times"> + </span>]
 <span class="lineNum">     660 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (!deviceEnabled (cbcx)) {</span>
 <span class="lineNum">     661 </span>                :            :       cbcx = splitCapacitor (this, cbcx, &quot;Cbcx&quot;, rb-&gt;getNode (NODE_1),
 <span class="lineNum">     662 </span>                :<span class="lineNoCov">          0 :                              getNode (NODE_C));</span>
@@ -746,9 +753,9 @@
 <span class="lineNum">     664 </span>                :<span class="lineNoCov">          0 :     cbcx-&gt;setProperty (&quot;C&quot;, getOperatingPoint (&quot;Cbcx&quot;));</span>
 <span class="lineNum">     665 </span>                :            :   }
 <span class="lineNum">     666 </span>                :            :   else {
-<span class="lineNum">     667 </span>                :<span class="lineCov">         36 :     disableCapacitor (this, cbcx);</span>
+<span class="lineNum">     667 </span>                :<span class="lineCov">         38 :     disableCapacitor (this, cbcx);</span>
 <span class="lineNum">     668 </span>                :            :   }
-<a name="669"><span class="lineNum">     669 </span>                :<span class="lineCov">         36 : }</span></a>
+<a name="669"><span class="lineNum">     669 </span>                :<span class="lineCov">         38 : }</span></a>
 <span class="lineNum">     670 </span>                :            : 
 <span class="lineNum">     671 </span>                :<span class="lineCov">         10 : void bjt::initAC (void) {</span>
 <span class="lineNum">     672 </span>                :<span class="lineCov">         10 :   allocMatrixMNA ();</span>
@@ -777,35 +784,35 @@
 <span class="lineNum">     695 </span>                :            : #define qbxState 0 // external base-collector charge state
 <a name="696"><span class="lineNum">     696 </span>                :            : #define cbxState 1 // external base-collector current state</a>
 <span class="lineNum">     697 </span>                :            : 
-<span class="lineNum">     698 </span>                :<span class="lineCov">         24 : void bjt::initTR (void) {</span>
-<span class="lineNum">     699 </span>                :<span class="lineCov">         24 :   setStates (7);</span>
-<span class="lineNum">     700 </span>                :<span class="lineCov">         24 :   initDC ();</span>
-<span class="lineNum">     701 </span>                :<span class="lineCov">         24 :   doTR = true;</span>
+<span class="lineNum">     698 </span>                :<span class="lineCov">         26 : void bjt::initTR (void) {</span>
+<span class="lineNum">     699 </span>                :<span class="lineCov">         26 :   setStates (7);</span>
+<span class="lineNum">     700 </span>                :<span class="lineCov">         26 :   initDC ();</span>
+<span class="lineNum">     701 </span>                :<span class="lineCov">         26 :   doTR = true;</span>
 <span class="lineNum">     702 </span>                :            : 
 <span class="lineNum">     703 </span>                :            :   // handle external base-collector capacitance appropriately
-<span class="lineNum">     704 </span>                :<span class="lineCov">         24 :   processCbcx ();</span>
-<span class="lineNum">     705 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 24 times"> + </span>]:<span class="lineCov">         24 :   if (deviceEnabled (cbcx)) {</span>
+<span class="lineNum">     704 </span>                :<span class="lineCov">         26 :   processCbcx ();</span>
+<span class="lineNum">     705 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 26 times"> + </span>]:<span class="lineCov">         26 :   if (deviceEnabled (cbcx)) {</span>
 <span class="lineNum">     706 </span>                :<span class="lineNoCov">          0 :     cbcx-&gt;initTR ();</span>
 <span class="lineNum">     707 </span>                :<span class="lineNoCov">          0 :     cbcx-&gt;setProperty (&quot;Controlled&quot;, getName ());</span>
 <span class="lineNum">     708 </span>                :            :   }
-<a name="709"><span class="lineNum">     709 </span>                :<span class="lineCov">         24 : }</span></a>
+<a name="709"><span class="lineNum">     709 </span>                :<span class="lineCov">         26 : }</span></a>
 <span class="lineNum">     710 </span>                :            : 
-<span class="lineNum">     711 </span>                :<span class="lineCov">      71104 : void bjt::calcTR (nr_double_t t) {</span>
-<span class="lineNum">     712 </span>                :<span class="lineCov">      71104 :   calcDC ();</span>
-<span class="lineNum">     713 </span>                :<span class="lineCov">      71104 :   saveOperatingPoints ();</span>
-<span class="lineNum">     714 </span>                :<span class="lineCov">      71104 :   loadOperatingPoints ();</span>
-<span class="lineNum">     715 </span>                :<span class="lineCov">      71104 :   calcOperatingPoints ();</span>
+<span class="lineNum">     711 </span>                :<span class="lineCov">      72850 : void bjt::calcTR (nr_double_t t) {</span>
+<span class="lineNum">     712 </span>                :<span class="lineCov">      72850 :   calcDC ();</span>
+<span class="lineNum">     713 </span>                :<span class="lineCov">      72850 :   saveOperatingPoints ();</span>
+<span class="lineNum">     714 </span>                :<span class="lineCov">      72850 :   loadOperatingPoints ();</span>
+<span class="lineNum">     715 </span>                :<span class="lineCov">      72850 :   calcOperatingPoints ();</span>
 <span class="lineNum">     716 </span>                :            : 
-<span class="lineNum">     717 </span>                :<span class="lineCov">      71104 :   nr_double_t Cbe  = getOperatingPoint (&quot;Cbe&quot;);</span>
-<span class="lineNum">     718 </span>                :<span class="lineCov">      71104 :   nr_double_t Ccs  = getOperatingPoint (&quot;Ccs&quot;);</span>
-<span class="lineNum">     719 </span>                :<span class="lineCov">      71104 :   nr_double_t Cbci = getOperatingPoint (&quot;Cbci&quot;);</span>
-<span class="lineNum">     720 </span>                :<span class="lineCov">      71104 :   nr_double_t Cbcx = getOperatingPoint (&quot;Cbcx&quot;);</span>
+<span class="lineNum">     717 </span>                :<span class="lineCov">      72850 :   nr_double_t Cbe  = getOperatingPoint (&quot;Cbe&quot;);</span>
+<span class="lineNum">     718 </span>                :<span class="lineCov">      72850 :   nr_double_t Ccs  = getOperatingPoint (&quot;Ccs&quot;);</span>
+<span class="lineNum">     719 </span>                :<span class="lineCov">      72850 :   nr_double_t Cbci = getOperatingPoint (&quot;Cbci&quot;);</span>
+<span class="lineNum">     720 </span>                :<span class="lineCov">      72850 :   nr_double_t Cbcx = getOperatingPoint (&quot;Cbcx&quot;);</span>
 <span class="lineNum">     721 </span>                :            : 
 <span class="lineNum">     722 </span>                :            :   // handle Rbb and Cbcx appropriately
-<span class="lineNum">     723 </span>        [<span class="branchCov" title="Branch 0 was taken 33882 times"> + </span><span class="branchCov" title="Branch 1 was taken 37222 times"> + </span>]:<span class="lineCov">      71104 :   if (Rbb != 0.0) {</span>
-<span class="lineNum">     724 </span>                :<span class="lineCov">      33882 :     rb-&gt;setScaledProperty (&quot;R&quot;, Rbb);</span>
-<span class="lineNum">     725 </span>                :<span class="lineCov">      33882 :     rb-&gt;calcTR (t);</span>
-<span class="lineNum">     726 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 33882 times"> + </span>]:<span class="lineCov">      33882 :     if (deviceEnabled (cbcx)) {</span>
+<span class="lineNum">     723 </span>        [<span class="branchCov" title="Branch 0 was taken 35628 times"> + </span><span class="branchCov" title="Branch 1 was taken 37222 times"> + </span>]:<span class="lineCov">      72850 :   if (Rbb != 0.0) {</span>
+<span class="lineNum">     724 </span>                :<span class="lineCov">      35628 :     rb-&gt;setScaledProperty (&quot;R&quot;, Rbb);</span>
+<span class="lineNum">     725 </span>                :<span class="lineCov">      35628 :     rb-&gt;calcTR (t);</span>
+<span class="lineNum">     726 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 35628 times"> + </span>]:<span class="lineCov">      35628 :     if (deviceEnabled (cbcx)) {</span>
 <span class="lineNum">     727 </span>                :<span class="lineNoCov">          0 :       cbcx-&gt;clearI ();</span>
 <span class="lineNum">     728 </span>                :<span class="lineNoCov">          0 :       cbcx-&gt;clearY ();</span>
 <span class="lineNum">     729 </span>                :<span class="lineNoCov">          0 :       cbcx-&gt;transientCapacitance (qbxState, NODE_1, NODE_2, Cbcx, Ubx, Qbcx);</span>
@@ -813,43 +820,43 @@
 <span class="lineNum">     731 </span>                :            :   }
 <span class="lineNum">     732 </span>                :            : 
 <span class="lineNum">     733 </span>                :            :   // usual capacitances
-<span class="lineNum">     734 </span>                :<span class="lineCov">      71104 :   transientCapacitance (qbeState, NODE_B, NODE_E, Cbe, Ube, Qbe);</span>
-<span class="lineNum">     735 </span>                :<span class="lineCov">      71104 :   transientCapacitance (qbcState, NODE_B, NODE_C, Cbci, Ubc, Qbci);</span>
-<span class="lineNum">     736 </span>                :<span class="lineCov">      71104 :   transientCapacitance (qcsState, NODE_S, NODE_C, Ccs, Ucs, Qcs);</span>
+<span class="lineNum">     734 </span>                :<span class="lineCov">      72850 :   transientCapacitance (qbeState, NODE_B, NODE_E, Cbe, Ube, Qbe);</span>
+<span class="lineNum">     735 </span>                :<span class="lineCov">      72850 :   transientCapacitance (qbcState, NODE_B, NODE_C, Cbci, Ubc, Qbci);</span>
+<span class="lineNum">     736 </span>                :<span class="lineCov">      72850 :   transientCapacitance (qcsState, NODE_S, NODE_C, Ccs, Ucs, Qcs);</span>
 <span class="lineNum">     737 </span>                :            : 
 <span class="lineNum">     738 </span>                :            :   // trans-capacitances
-<span class="lineNum">     739 </span>                :<span class="lineCov">      71104 :   transientCapacitanceC (NODE_B, NODE_E, NODE_B, NODE_C, dQbedUbc, Ubc);</span>
-<a name="740"><span class="lineNum">     740 </span>                :<span class="lineCov">      71104 : }</span></a>
+<span class="lineNum">     739 </span>                :<span class="lineCov">      72850 :   transientCapacitanceC (NODE_B, NODE_E, NODE_B, NODE_C, dQbedUbc, Ubc);</span>
+<a name="740"><span class="lineNum">     740 </span>                :<span class="lineCov">      72850 : }</span></a>
 <span class="lineNum">     741 </span>                :            : 
-<span class="lineNum">     742 </span>                :<span class="lineCov">      71104 : void bjt::excessPhase (int istate, nr_double_t&amp; i, nr_double_t&amp; g) {</span>
+<span class="lineNum">     742 </span>                :<span class="lineCov">      72850 : void bjt::excessPhase (int istate, nr_double_t&amp; i, nr_double_t&amp; g) {</span>
 <span class="lineNum">     743 </span>                :            : 
 <span class="lineNum">     744 </span>                :            :   // fetch device properties
-<span class="lineNum">     745 </span>                :<span class="lineCov">      71104 :   nr_double_t Ptf = getPropertyDouble (&quot;Ptf&quot;);</span>
-<span class="lineNum">     746 </span>                :<span class="lineCov">      71104 :   nr_double_t Tf = getPropertyDouble (&quot;Tf&quot;);</span>
-<span class="lineNum">     747 </span>                :<span class="lineCov">      71104 :   nr_double_t td = rad (Ptf) * Tf;</span>
+<span class="lineNum">     745 </span>                :<span class="lineCov">      72850 :   nr_double_t Ptf = getPropertyDouble (&quot;Ptf&quot;);</span>
+<span class="lineNum">     746 </span>                :<span class="lineCov">      72850 :   nr_double_t Tf = getPropertyDouble (&quot;Tf&quot;);</span>
+<span class="lineNum">     747 </span>                :<span class="lineCov">      72850 :   nr_double_t td = rad (Ptf) * Tf;</span>
 <span class="lineNum">     748 </span>                :            : 
 <span class="lineNum">     749 </span>                :            :   // return if nothing todo
-<span class="lineNum">     750 </span>        [<span class="branchCov" title="Branch 0 was taken 65866 times"> + </span><span class="branchCov" title="Branch 1 was taken 5238 times"> + </span>]:<span class="lineCov">      76342 :   if (td == 0.0) return;</span>
+<span class="lineNum">     750 </span>        [<span class="branchCov" title="Branch 0 was taken 65866 times"> + </span><span class="branchCov" title="Branch 1 was taken 6984 times"> + </span>]:<span class="lineCov">      79834 :   if (td == 0.0) return;</span>
 <span class="lineNum">     751 </span>                :            : 
 <span class="lineNum">     752 </span>                :            :   // fill-in current history during initialization
-<span class="lineNum">     753 </span>        [<span class="branchCov" title="Branch 1 was taken 216 times"> + </span><span class="branchCov" title="Branch 2 was taken 5022 times"> + </span>]:<span class="lineCov">       5238 :   if (getMode () &amp; MODE_INIT) fillState (istate, i);</span>
+<span class="lineNum">     753 </span>        [<span class="branchCov" title="Branch 1 was taken 288 times"> + </span><span class="branchCov" title="Branch 2 was taken 6696 times"> + </span>]:<span class="lineCov">       6984 :   if (getMode () &amp; MODE_INIT) fillState (istate, i);</span>
 <span class="lineNum">     754 </span>                :            : 
 <span class="lineNum">     755 </span>                :            :   // calculate current coefficients C1, C2 and C3
-<span class="lineNum">     756 </span>                :<span class="lineCov">       5238 :   nr_double_t * delta = getDelta ();</span>
+<span class="lineNum">     756 </span>                :<span class="lineCov">       6984 :   nr_double_t * delta = getDelta ();</span>
 <span class="lineNum">     757 </span>                :            :   nr_double_t c3, c2, c1, dn, ra;
-<span class="lineNum">     758 </span>                :<span class="lineCov">       5238 :   c1 = delta[0] / td;</span>
-<span class="lineNum">     759 </span>                :<span class="lineCov">       5238 :   c2 = 3 * c1;</span>
-<span class="lineNum">     760 </span>                :<span class="lineCov">       5238 :   c1 = c2 * c1;</span>
-<span class="lineNum">     761 </span>                :<span class="lineCov">       5238 :   dn = 1 + c1 + c2;</span>
-<span class="lineNum">     762 </span>                :<span class="lineCov">       5238 :   c1 = c1 / dn;</span>
-<span class="lineNum">     763 </span>                :<span class="lineCov">       5238 :   ra = delta[0] / delta[1];</span>
-<span class="lineNum">     764 </span>                :<span class="lineCov">       5238 :   c2 = (1 + ra + c2) / dn;</span>
-<span class="lineNum">     765 </span>                :<span class="lineCov">       5238 :   c3 = ra / dn;</span>
+<span class="lineNum">     758 </span>                :<span class="lineCov">       6984 :   c1 = delta[0] / td;</span>
+<span class="lineNum">     759 </span>                :<span class="lineCov">       6984 :   c2 = 3 * c1;</span>
+<span class="lineNum">     760 </span>                :<span class="lineCov">       6984 :   c1 = c2 * c1;</span>
+<span class="lineNum">     761 </span>                :<span class="lineCov">       6984 :   dn = 1 + c1 + c2;</span>
+<span class="lineNum">     762 </span>                :<span class="lineCov">       6984 :   c1 = c1 / dn;</span>
+<span class="lineNum">     763 </span>                :<span class="lineCov">       6984 :   ra = delta[0] / delta[1];</span>
+<span class="lineNum">     764 </span>                :<span class="lineCov">       6984 :   c2 = (1 + ra + c2) / dn;</span>
+<span class="lineNum">     765 </span>                :<span class="lineCov">       6984 :   c3 = ra / dn;</span>
 <span class="lineNum">     766 </span>                :            : 
 <span class="lineNum">     767 </span>                :            :   // update and save current, update transconductance
-<span class="lineNum">     768 </span>                :<span class="lineCov">       5238 :   i = i * c1 + getState (istate, 1) * c2 - getState (istate, 2) * c3;</span>
-<span class="lineNum">     769 </span>                :<span class="lineCov">       5238 :   setState (istate, i);</span>
-<span class="lineNum">     770 </span>                :<span class="lineCov">       5238 :   g = g * c1;</span>
+<span class="lineNum">     768 </span>                :<span class="lineCov">       6984 :   i = i * c1 + getState (istate, 1) * c2 - getState (istate, 2) * c3;</span>
+<span class="lineNum">     769 </span>                :<span class="lineCov">       6984 :   setState (istate, i);</span>
+<span class="lineNum">     770 </span>                :<span class="lineCov">       6984 :   g = g * c1;</span>
 <span class="lineNum">     771 </span>                :            : }
 <span class="lineNum">     772 </span>                :            : 
 <span class="lineNum">     773 </span>                :            : // properties

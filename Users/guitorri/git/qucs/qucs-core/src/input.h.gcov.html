@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -117,14 +117,14 @@
 <span class="lineNum">      39 </span>                :            :   input (char *);
 <a name="40"><span class="lineNum">      40 </span>                :            :   ~input ();</a>
 <span class="lineNum">      41 </span>                :            :   int netlist (net *);
-<span class="lineNum">      42 </span>                :<span class="lineCov">         90 :   FILE * getFile (void) { return fd; }</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">        103 :   FILE * getFile (void) { return fd; }</span>
 <span class="lineNum">      43 </span>                :            :   void setFile (FILE * f) { fd = f; }
 <span class="lineNum">      44 </span>                :            :   void factory (void);
 <span class="lineNum">      45 </span>                :            :   circuit * createCircuit (char *);
 <span class="lineNum">      46 </span>                :            :   analysis * createAnalysis (char *);
 <a name="47"><span class="lineNum">      47 </span>                :            :   substrate * createSubstrate (char *);</a>
 <span class="lineNum">      48 </span>                :            :   environment * getEnv (void) { return env; }
-<span class="lineNum">      49 </span>                :<span class="lineCov">         90 :   void setEnv (environment * e) { env = e; }</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">        103 :   void setEnv (environment * e) { env = e; }</span>
 <span class="lineNum">      50 </span>                :            :   static void assignDefaultProperties (object *, struct define_t *);
 <span class="lineNum">      51 </span>                :            :   static qucs::vector * createVector (struct value_t *);
 <span class="lineNum">      52 </span>                :            : 

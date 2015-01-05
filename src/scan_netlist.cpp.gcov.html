@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/scan_netlist.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/scan_netlist.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">175</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">44.1 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">100</td>
@@ -1114,7 +1121,7 @@
 <span class="lineNum">    1043 </span>                :            : 
 <a name="1044"><span class="lineNum">    1044 </span>                :            : /** The main scanner function which does all the work.</a>
 <span class="lineNum">    1045 </span>                :            :  */
-<span class="lineNum">    1046 </span>                :<span class="lineCov">      45657 : YY_DECL</span>
+<span class="lineNum">    1046 </span>                :<span class="lineCov">      51575 : YY_DECL</span>
 <span class="lineNum">    1047 </span>                :            : {
 <span class="lineNum">    1048 </span>                :            :         register yy_state_type yy_current_state;
 <span class="lineNum">    1049 </span>                :            :         register char *yy_cp, *yy_bp;
@@ -1125,99 +1132,99 @@
 <span class="lineNum">    1054 </span>                :            : 
 <span class="lineNum">    1055 </span>                :            : #line 1056 &quot;scan_netlist.cpp&quot;
 <span class="lineNum">    1056 </span>                :            : 
-<span class="lineNum">    1057 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchCov" title="Branch 1 was taken 45567 times"> + </span>]:<span class="lineCov">      45657 :         if ( !(yy_init) )</span>
+<span class="lineNum">    1057 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchCov" title="Branch 1 was taken 51472 times"> + </span>]:<span class="lineCov">      51575 :         if ( !(yy_init) )</span>
 <span class="lineNum">    1058 </span>                :            :                 {
-<span class="lineNum">    1059 </span>                :<span class="lineCov">         90 :                 (yy_init) = 1;</span>
+<span class="lineNum">    1059 </span>                :<span class="lineCov">        103 :                 (yy_init) = 1;</span>
 <span class="lineNum">    1060 </span>                :            : 
 <span class="lineNum">    1061 </span>                :            : #ifdef YY_USER_INIT
 <span class="lineNum">    1062 </span>                :            :                 YY_USER_INIT;
 <span class="lineNum">    1063 </span>                :            : #endif
 <span class="lineNum">    1064 </span>                :            : 
-<span class="lineNum">    1065 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :                 if ( ! (yy_start) )</span>
-<span class="lineNum">    1066 </span>                :<span class="lineCov">         90 :                         (yy_start) = 1; /* first start state */</span>
+<span class="lineNum">    1065 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :                 if ( ! (yy_start) )</span>
+<span class="lineNum">    1066 </span>                :<span class="lineCov">        103 :                         (yy_start) = 1; /* first start state */</span>
 <span class="lineNum">    1067 </span>                :            : 
-<span class="lineNum">    1068 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :                 if ( ! netlist_in )</span>
+<span class="lineNum">    1068 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :                 if ( ! netlist_in )</span>
 <span class="lineNum">    1069 </span>                :<span class="lineNoCov">          0 :                         netlist_in = stdin;</span>
 <span class="lineNum">    1070 </span>                :            : 
-<span class="lineNum">    1071 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :                 if ( ! netlist_out )</span>
-<span class="lineNum">    1072 </span>                :<span class="lineCov">         90 :                         netlist_out = stdout;</span>
+<span class="lineNum">    1071 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :                 if ( ! netlist_out )</span>
+<span class="lineNum">    1072 </span>                :<span class="lineCov">        103 :                         netlist_out = stdout;</span>
 <span class="lineNum">    1073 </span>                :            : 
-<span class="lineNum">    1074 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         90 :                 if ( ! YY_CURRENT_BUFFER ) {</span>
-<span class="lineNum">    1075 </span>                :<span class="lineCov">         90 :                         netlist_ensure_buffer_stack ();</span>
-<span class="lineNum">    1076 </span>                :<span class="lineCov">         90 :                         YY_CURRENT_BUFFER_LVALUE =</span>
-<span class="lineNum">    1077 </span>                :<span class="lineCov">         90 :                                 netlist__create_buffer(netlist_in,YY_BUF_SIZE );</span>
+<span class="lineNum">    1074 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        103 :                 if ( ! YY_CURRENT_BUFFER ) {</span>
+<span class="lineNum">    1075 </span>                :<span class="lineCov">        103 :                         netlist_ensure_buffer_stack ();</span>
+<span class="lineNum">    1076 </span>                :<span class="lineCov">        103 :                         YY_CURRENT_BUFFER_LVALUE =</span>
+<span class="lineNum">    1077 </span>                :<span class="lineCov">        103 :                                 netlist__create_buffer(netlist_in,YY_BUF_SIZE );</span>
 <span class="lineNum">    1078 </span>                :            :                 }
 <span class="lineNum">    1079 </span>                :            : 
-<span class="lineNum">    1080 </span>                :<span class="lineCov">         90 :                 netlist__load_buffer_state( );</span>
+<span class="lineNum">    1080 </span>                :<span class="lineCov">        103 :                 netlist__load_buffer_state( );</span>
 <span class="lineNum">    1081 </span>                :            :                 }
 <span class="lineNum">    1082 </span>                :            : 
-<span class="lineNum">    1083 </span>                :<span class="lineCov">      65961 :         while ( 1 )             /* loops until end-of-file is reached */</span>
+<span class="lineNum">    1083 </span>                :<span class="lineCov">      74472 :         while ( 1 )             /* loops until end-of-file is reached */</span>
 <span class="lineNum">    1084 </span>                :            :                 {
-<span class="lineNum">    1085 </span>                :<span class="lineCov">      65961 :                 yy_cp = (yy_c_buf_p);</span>
+<span class="lineNum">    1085 </span>                :<span class="lineCov">      74472 :                 yy_cp = (yy_c_buf_p);</span>
 <span class="lineNum">    1086 </span>                :            : 
 <span class="lineNum">    1087 </span>                :            :                 /* Support of netlist_text. */
-<span class="lineNum">    1088 </span>                :<span class="lineCov">      65961 :                 *yy_cp = (yy_hold_char);</span>
+<span class="lineNum">    1088 </span>                :<span class="lineCov">      74472 :                 *yy_cp = (yy_hold_char);</span>
 <span class="lineNum">    1089 </span>                :            : 
 <span class="lineNum">    1090 </span>                :            :                 /* yy_bp points to the position in yy_ch_buf of the start of
 <span class="lineNum">    1091 </span>                :            :                  * the current run.
 <span class="lineNum">    1092 </span>                :            :                  */
-<span class="lineNum">    1093 </span>                :<span class="lineCov">      65961 :                 yy_bp = yy_cp;</span>
+<span class="lineNum">    1093 </span>                :<span class="lineCov">      74472 :                 yy_bp = yy_cp;</span>
 <span class="lineNum">    1094 </span>                :            : 
-<span class="lineNum">    1095 </span>                :<span class="lineCov">      65961 :                 yy_current_state = (yy_start);</span>
+<span class="lineNum">    1095 </span>                :<span class="lineCov">      74472 :                 yy_current_state = (yy_start);</span>
 <span class="lineNum">    1096 </span>                :            : yy_match:
-<span class="lineNum">    1097 </span>        [<span class="branchCov" title="Branch 0 was taken 93951 times"> + </span><span class="branchCov" title="Branch 1 was taken 66051 times"> + </span>]:<span class="lineCov">     160002 :                 do</span>
+<span class="lineNum">    1097 </span>        [<span class="branchCov" title="Branch 0 was taken 107073 times"> + </span><span class="branchCov" title="Branch 1 was taken 74575 times"> + </span>]:<span class="lineCov">     181648 :                 do</span>
 <span class="lineNum">    1098 </span>                :            :                         {
-<span class="lineNum">    1099 </span>                :<span class="lineCov">     160002 :                         register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];</span>
-<span class="lineNum">    1100 </span>        [<span class="branchCov" title="Branch 0 was taken 75204 times"> + </span><span class="branchCov" title="Branch 1 was taken 84798 times"> + </span>]:<span class="lineCov">     160002 :                         if ( yy_accept[yy_current_state] )</span>
+<span class="lineNum">    1099 </span>                :<span class="lineCov">     181648 :                         register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];</span>
+<span class="lineNum">    1100 </span>        [<span class="branchCov" title="Branch 0 was taken 85751 times"> + </span><span class="branchCov" title="Branch 1 was taken 95897 times"> + </span>]:<span class="lineCov">     181648 :                         if ( yy_accept[yy_current_state] )</span>
 <span class="lineNum">    1101 </span>                :            :                                 {
-<span class="lineNum">    1102 </span>                :<span class="lineCov">      75204 :                                 (yy_last_accepting_state) = yy_current_state;</span>
-<span class="lineNum">    1103 </span>                :<span class="lineCov">      75204 :                                 (yy_last_accepting_cpos) = yy_cp;</span>
+<span class="lineNum">    1102 </span>                :<span class="lineCov">      85751 :                                 (yy_last_accepting_state) = yy_current_state;</span>
+<span class="lineNum">    1103 </span>                :<span class="lineCov">      85751 :                                 (yy_last_accepting_cpos) = yy_cp;</span>
 <span class="lineNum">    1104 </span>                :            :                                 }
-<span class="lineNum">    1105 </span>        [<span class="branchCov" title="Branch 0 was taken 77466 times"> + </span><span class="branchCov" title="Branch 1 was taken 160002 times"> + </span>]:<span class="lineCov">     237468 :                         while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )</span>
+<span class="lineNum">    1105 </span>        [<span class="branchCov" title="Branch 0 was taken 88077 times"> + </span><span class="branchCov" title="Branch 1 was taken 181648 times"> + </span>]:<span class="lineCov">     269725 :                         while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )</span>
 <span class="lineNum">    1106 </span>                :            :                                 {
-<span class="lineNum">    1107 </span>                :<span class="lineCov">      77466 :                                 yy_current_state = (int) yy_def[yy_current_state];</span>
-<span class="lineNum">    1108 </span>        [<span class="branchCov" title="Branch 0 was taken 58385 times"> + </span><span class="branchCov" title="Branch 1 was taken 19081 times"> + </span>]:<span class="lineCov">      77466 :                                 if ( yy_current_state &gt;= 238 )</span>
-<span class="lineNum">    1109 </span>                :<span class="lineCov">      58385 :                                         yy_c = yy_meta[(unsigned int) yy_c];</span>
+<span class="lineNum">    1107 </span>                :<span class="lineCov">      88077 :                                 yy_current_state = (int) yy_def[yy_current_state];</span>
+<span class="lineNum">    1108 </span>        [<span class="branchCov" title="Branch 0 was taken 66613 times"> + </span><span class="branchCov" title="Branch 1 was taken 21464 times"> + </span>]:<span class="lineCov">      88077 :                                 if ( yy_current_state &gt;= 238 )</span>
+<span class="lineNum">    1109 </span>                :<span class="lineCov">      66613 :                                         yy_c = yy_meta[(unsigned int) yy_c];</span>
 <span class="lineNum">    1110 </span>                :            :                                 }
-<span class="lineNum">    1111 </span>                :<span class="lineCov">     160002 :                         yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];</span>
-<span class="lineNum">    1112 </span>                :<span class="lineCov">     160002 :                         ++yy_cp;</span>
+<span class="lineNum">    1111 </span>                :<span class="lineCov">     181648 :                         yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];</span>
+<span class="lineNum">    1112 </span>                :<span class="lineCov">     181648 :                         ++yy_cp;</span>
 <span class="lineNum">    1113 </span>                :            :                         }
-<span class="lineNum">    1114 </span>                :<span class="lineCov">     160002 :                 while ( yy_base[yy_current_state] != 856 );</span>
+<span class="lineNum">    1114 </span>                :<span class="lineCov">     181648 :                 while ( yy_base[yy_current_state] != 856 );</span>
 <span class="lineNum">    1115 </span>                :            : 
 <span class="lineNum">    1116 </span>                :            : yy_find_action:
-<span class="lineNum">    1117 </span>                :<span class="lineCov">      66051 :                 yy_act = yy_accept[yy_current_state];</span>
-<span class="lineNum">    1118 </span>        [<span class="branchCov" title="Branch 0 was taken 15278 times"> + </span><span class="branchCov" title="Branch 1 was taken 50773 times"> + </span>]:<span class="lineCov">      66051 :                 if ( yy_act == 0 )</span>
+<span class="lineNum">    1117 </span>                :<span class="lineCov">      74575 :                 yy_act = yy_accept[yy_current_state];</span>
+<span class="lineNum">    1118 </span>        [<span class="branchCov" title="Branch 0 was taken 17199 times"> + </span><span class="branchCov" title="Branch 1 was taken 57376 times"> + </span>]:<span class="lineCov">      74575 :                 if ( yy_act == 0 )</span>
 <span class="lineNum">    1119 </span>                :            :                         { /* have to back up */
-<span class="lineNum">    1120 </span>                :<span class="lineCov">      15278 :                         yy_cp = (yy_last_accepting_cpos);</span>
-<span class="lineNum">    1121 </span>                :<span class="lineCov">      15278 :                         yy_current_state = (yy_last_accepting_state);</span>
-<span class="lineNum">    1122 </span>                :<span class="lineCov">      15278 :                         yy_act = yy_accept[yy_current_state];</span>
+<span class="lineNum">    1120 </span>                :<span class="lineCov">      17199 :                         yy_cp = (yy_last_accepting_cpos);</span>
+<span class="lineNum">    1121 </span>                :<span class="lineCov">      17199 :                         yy_current_state = (yy_last_accepting_state);</span>
+<span class="lineNum">    1122 </span>                :<span class="lineCov">      17199 :                         yy_act = yy_accept[yy_current_state];</span>
 <span class="lineNum">    1123 </span>                :            :                         }
 <span class="lineNum">    1124 </span>                :            : 
-<span class="lineNum">    1125 </span>                :<span class="lineCov">      66051 :                 YY_DO_BEFORE_ACTION;</span>
+<span class="lineNum">    1125 </span>                :<span class="lineCov">      74575 :                 YY_DO_BEFORE_ACTION;</span>
 <span class="lineNum">    1126 </span>                :            : 
-<span class="lineNum">    1127 </span>[<span class="branchCov" title="Branch 0 was taken 65871 times"> + </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 21832 times"> + </span><span class="branchCov" title="Branch 3 was taken 44039 times"> + </span>]:<span class="lineCov">      66051 :                 if ( yy_act != YY_END_OF_BUFFER &amp;&amp; yy_rule_can_match_eol[yy_act] )</span>
+<span class="lineNum">    1127 </span>[<span class="branchCov" title="Branch 0 was taken 74369 times"> + </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 24691 times"> + </span><span class="branchCov" title="Branch 3 was taken 49678 times"> + </span>]:<span class="lineCov">      74575 :                 if ( yy_act != YY_END_OF_BUFFER &amp;&amp; yy_rule_can_match_eol[yy_act] )</span>
 <span class="lineNum">    1128 </span>                :            :                         {
 <span class="lineNum">    1129 </span>                :            :                         int yyl;
-<span class="lineNum">    1130 </span>        [<span class="branchCov" title="Branch 0 was taken 64773 times"> + </span><span class="branchCov" title="Branch 1 was taken 21832 times"> + </span>]:<span class="lineCov">      86605 :                         for ( yyl = 0; yyl &lt; netlist_leng; ++yyl )</span>
-<span class="lineNum">    1131 </span>        [<span class="branchCov" title="Branch 0 was taken 1238 times"> + </span><span class="branchCov" title="Branch 1 was taken 63535 times"> + </span>]:<span class="lineCov">      64773 :                                 if ( netlist_text[yyl] == '\n' )</span>
+<span class="lineNum">    1130 </span>        [<span class="branchCov" title="Branch 0 was taken 73896 times"> + </span><span class="branchCov" title="Branch 1 was taken 24691 times"> + </span>]:<span class="lineCov">      98587 :                         for ( yyl = 0; yyl &lt; netlist_leng; ++yyl )</span>
+<span class="lineNum">    1131 </span>        [<span class="branchCov" title="Branch 0 was taken 1403 times"> + </span><span class="branchCov" title="Branch 1 was taken 72493 times"> + </span>]:<span class="lineCov">      73896 :                                 if ( netlist_text[yyl] == '\n' )</span>
 <span class="lineNum">    1132 </span>                :            :                                            
-<span class="lineNum">    1133 </span>                :<span class="lineCov">       1238 :     netlist_lineno++;</span>
+<span class="lineNum">    1133 </span>                :<span class="lineCov">       1403 :     netlist_lineno++;</span>
 <span class="lineNum">    1134 </span>                :            : ;
 <span class="lineNum">    1135 </span>                :            :                         }
 <span class="lineNum">    1136 </span>                :            : 
 <span class="lineNum">    1137 </span>                :            : do_action:      /* This label is used only to access EOF actions. */
 <span class="lineNum">    1138 </span>                :            : 
-<span class="lineNum">    1139 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1566 times"> + </span><span class="branchCov" title="Branch 2 was taken 58 times"> + </span><span class="branchCov" title="Branch 3 was taken 11 times"> + </span> :<span class="lineCov">      66141 :                 switch ( yy_act )</span>
-<span class="lineNum">         </span><span class="branchCov" title="Branch 4 was taken 11 times"> + </span><span class="branchCov" title="Branch 5 was taken 4633 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 8 was taken 8156 times"> + </span> 
-<span class="lineNum">         </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 11 was taken 9285 times"> + </span><span class="branchCov" title="Branch 12 was taken 5 times"> + </span><span class="branchCov" title="Branch 13 was taken 5 times"> + </span> 
-<span class="lineNum">         </span><span class="branchCov" title="Branch 14 was taken 9 times"> + </span><span class="branchCov" title="Branch 15 was taken 153 times"> + </span><span class="branchCov" title="Branch 16 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 17 was not taken"> - </span><span class="branchCov" title="Branch 18 was taken 1090 times"> + </span> 
-<span class="lineNum">         </span><span class="branchCov" title="Branch 19 was taken 11309 times"> + </span><span class="branchCov" title="Branch 20 was taken 90 times"> + </span><span class="branchCov" title="Branch 21 was taken 9100 times"> + </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span><span class="branchCov" title="Branch 23 was taken 7565 times"> + </span> 
-<span class="lineNum">         </span><span class="branchCov" title="Branch 24 was taken 90 times"> + </span><span class="branchCov" title="Branch 25 was taken 9100 times"> + </span><span class="branchNoCov" title="Branch 26 was not taken"> - </span><span class="branchCov" title="Branch 27 was taken 1250 times"> + </span><span class="branchNoCov" title="Branch 28 was not taken"> - </span> 
-<span class="lineNum">         </span><span class="branchCov" title="Branch 29 was taken 840 times"> + </span><span class="branchNoCov" title="Branch 30 was not taken"> - </span><span class="branchNoCov" title="Branch 31 was not taken"> - </span><span class="branchNoCov" title="Branch 32 was not taken"> - </span><span class="branchNoCov" title="Branch 33 was not taken"> - </span> 
-<span class="lineNum">         </span><span class="branchNoCov" title="Branch 34 was not taken"> - </span><span class="branchNoCov" title="Branch 35 was not taken"> - </span><span class="branchCov" title="Branch 36 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 37 was not taken"> - </span><span class="branchNoCov" title="Branch 38 was not taken"> - </span> 
-<span class="lineNum">         </span><span class="branchNoCov" title="Branch 39 was not taken"> - </span><span class="branchCov" title="Branch 40 was taken 125 times"> + </span><span class="branchNoCov" title="Branch 41 was not taken"> - </span><span class="branchCov" title="Branch 42 was taken 385 times"> + </span><span class="branchNoCov" title="Branch 43 was not taken"> - </span> 
-<span class="lineNum">         </span><span class="branchNoCov" title="Branch 44 was not taken"> - </span><span class="branchCov" title="Branch 45 was taken 58 times"> + </span><span class="branchNoCov" title="Branch 46 was not taken"> - </span><span class="branchNoCov" title="Branch 47 was not taken"> - </span><span class="branchCov" title="Branch 48 was taken 90 times"> + </span> 
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 49 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 50 was not taken"> - </span>]
+<span class="lineNum">    1139 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1679 times"> + </span><span class="branchCov" title="Branch 2 was taken 68 times"> + </span><span class="branchCov" title="Branch 3 was taken 13 times"> + </span> :<span class="lineCov">      74678 :                 switch ( yy_act )</span>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 4 was taken 13 times"> + </span><span class="branchCov" title="Branch 5 was taken 5219 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 8 was taken 9232 times"> + </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchCov" title="Branch 11 was taken 10506 times"> + </span><span class="branchCov" title="Branch 12 was taken 6 times"> + </span><span class="branchCov" title="Branch 13 was taken 6 times"> + </span> 
+<span class="lineNum">         </span><span class="branchCov" title="Branch 14 was taken 12 times"> + </span><span class="branchCov" title="Branch 15 was taken 181 times"> + </span><span class="branchCov" title="Branch 16 was taken 1085 times"> + </span><span class="branchNoCov" title="Branch 17 was not taken"> - </span><span class="branchCov" title="Branch 18 was taken 1232 times"> + </span> 
+<span class="lineNum">         </span><span class="branchCov" title="Branch 19 was taken 12782 times"> + </span><span class="branchCov" title="Branch 20 was taken 103 times"> + </span><span class="branchCov" title="Branch 21 was taken 10299 times"> + </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span><span class="branchCov" title="Branch 23 was taken 8580 times"> + </span> 
+<span class="lineNum">         </span><span class="branchCov" title="Branch 24 was taken 103 times"> + </span><span class="branchCov" title="Branch 25 was taken 10299 times"> + </span><span class="branchNoCov" title="Branch 26 was not taken"> - </span><span class="branchCov" title="Branch 27 was taken 1329 times"> + </span><span class="branchNoCov" title="Branch 28 was not taken"> - </span> 
+<span class="lineNum">         </span><span class="branchCov" title="Branch 29 was taken 950 times"> + </span><span class="branchNoCov" title="Branch 30 was not taken"> - </span><span class="branchNoCov" title="Branch 31 was not taken"> - </span><span class="branchNoCov" title="Branch 32 was not taken"> - </span><span class="branchNoCov" title="Branch 33 was not taken"> - </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 34 was not taken"> - </span><span class="branchNoCov" title="Branch 35 was not taken"> - </span><span class="branchCov" title="Branch 36 was taken 21 times"> + </span><span class="branchNoCov" title="Branch 37 was not taken"> - </span><span class="branchNoCov" title="Branch 38 was not taken"> - </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 39 was not taken"> - </span><span class="branchCov" title="Branch 40 was taken 141 times"> + </span><span class="branchNoCov" title="Branch 41 was not taken"> - </span><span class="branchCov" title="Branch 42 was taken 442 times"> + </span><span class="branchNoCov" title="Branch 43 was not taken"> - </span> 
+<span class="lineNum">         </span><span class="branchNoCov" title="Branch 44 was not taken"> - </span><span class="branchCov" title="Branch 45 was taken 68 times"> + </span><span class="branchNoCov" title="Branch 46 was not taken"> - </span><span class="branchNoCov" title="Branch 47 was not taken"> - </span><span class="branchCov" title="Branch 48 was taken 103 times"> + </span> 
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 49 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 50 was not taken"> - </span>]
 <span class="lineNum">    1140 </span>                :            :         { /* beginning of action switch */
 <span class="lineNum">    1141 </span>                :            :                         case 0: /* must back up */
 <span class="lineNum">    1142 </span>                :            :                         /* undo the effects of YY_DO_BEFORE_ACTION */
@@ -1575,18 +1582,18 @@
 <span class="lineNum">    1494 </span>                :            : case YY_STATE_EOF(COMMENT):
 <span class="lineNum">    1495 </span>                :            : case YY_STATE_EOF(STR):
 <span class="lineNum">    1496 </span>                :            : case YY_STATE_EOF(EQN):
-<span class="lineNum">    1497 </span>                :<span class="lineCov">         90 :         yyterminate();</span>
+<span class="lineNum">    1497 </span>                :<span class="lineCov">        103 :         yyterminate();</span>
 <span class="lineNum">    1498 </span>                :            : 
 <span class="lineNum">    1499 </span>                :            :         case YY_END_OF_BUFFER:
 <span class="lineNum">    1500 </span>                :            :                 {
 <span class="lineNum">    1501 </span>                :            :                 /* Amount of text matched not including the EOB char. */
-<span class="lineNum">    1502 </span>                :<span class="lineCov">        180 :                 int yy_amount_of_matched_text = (int) (yy_cp - (yytext_ptr)) - 1;</span>
+<span class="lineNum">    1502 </span>                :<span class="lineCov">        206 :                 int yy_amount_of_matched_text = (int) (yy_cp - (yytext_ptr)) - 1;</span>
 <span class="lineNum">    1503 </span>                :            : 
 <span class="lineNum">    1504 </span>                :            :                 /* Undo the effects of YY_DO_BEFORE_ACTION. */
-<span class="lineNum">    1505 </span>                :<span class="lineCov">        180 :                 *yy_cp = (yy_hold_char);</span>
+<span class="lineNum">    1505 </span>                :<span class="lineCov">        206 :                 *yy_cp = (yy_hold_char);</span>
 <span class="lineNum">    1506 </span>                :            :                 YY_RESTORE_YY_MORE_OFFSET
 <span class="lineNum">    1507 </span>                :            : 
-<span class="lineNum">    1508 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        180 :                 if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status == YY_BUFFER_NEW )</span>
+<span class="lineNum">    1508 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        206 :                 if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status == YY_BUFFER_NEW )</span>
 <span class="lineNum">    1509 </span>                :            :                         {
 <span class="lineNum">    1510 </span>                :            :                         /* We're scanning a new file or input source.  It's
 <span class="lineNum">    1511 </span>                :            :                          * possible that this happened because the user
@@ -1597,9 +1604,9 @@
 <span class="lineNum">    1516 </span>                :            :                          * this is the first action (other than possibly a
 <span class="lineNum">    1517 </span>                :            :                          * back-up) that will match for the new input source.
 <span class="lineNum">    1518 </span>                :            :                          */
-<span class="lineNum">    1519 </span>                :<span class="lineCov">         90 :                         (yy_n_chars) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars;</span>
-<span class="lineNum">    1520 </span>                :<span class="lineCov">         90 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_input_file = netlist_in;</span>
-<span class="lineNum">    1521 </span>                :<span class="lineCov">         90 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status = YY_BUFFER_NORMAL;</span>
+<span class="lineNum">    1519 </span>                :<span class="lineCov">        103 :                         (yy_n_chars) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars;</span>
+<span class="lineNum">    1520 </span>                :<span class="lineCov">        103 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_input_file = netlist_in;</span>
+<span class="lineNum">    1521 </span>                :<span class="lineCov">        103 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status = YY_BUFFER_NORMAL;</span>
 <span class="lineNum">    1522 </span>                :            :                         }
 <span class="lineNum">    1523 </span>                :            : 
 <span class="lineNum">    1524 </span>                :            :                 /* Note that here we test for yy_c_buf_p &quot;&lt;=&quot; to the position
@@ -1609,7 +1616,7 @@
 <span class="lineNum">    1528 </span>                :            :                  * end-of-buffer state).  Contrast this with the test
 <span class="lineNum">    1529 </span>                :            :                  * in input().
 <span class="lineNum">    1530 </span>                :            :                  */
-<span class="lineNum">    1531 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :                 if ( (yy_c_buf_p) &lt;= &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)] )</span>
+<span class="lineNum">    1531 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :                 if ( (yy_c_buf_p) &lt;= &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)] )</span>
 <span class="lineNum">    1532 </span>                :            :                         { /* This was really a NUL. */
 <span class="lineNum">    1533 </span>                :            :                         yy_state_type yy_next_state;
 <span class="lineNum">    1534 </span>                :            : 
@@ -1645,11 +1652,11 @@
 <span class="lineNum">    1564 </span>                :            :                                 }
 <span class="lineNum">    1565 </span>                :            :                         }
 <span class="lineNum">    1566 </span>                :            : 
-<span class="lineNum">    1567 </span>  [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        180 :                 else switch ( yy_get_next_buffer(  ) )</span>
+<span class="lineNum">    1567 </span>  [<span class="branchCov" title="Branch 1 was taken 103 times"> + </span><span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        206 :                 else switch ( yy_get_next_buffer(  ) )</span>
 <span class="lineNum">    1568 </span>                :            :                         {
 <span class="lineNum">    1569 </span>                :            :                         case EOB_ACT_END_OF_FILE:
 <span class="lineNum">    1570 </span>                :            :                                 {
-<span class="lineNum">    1571 </span>                :<span class="lineCov">         90 :                                 (yy_did_buffer_switch_on_eof) = 0;</span>
+<span class="lineNum">    1571 </span>                :<span class="lineCov">        103 :                                 (yy_did_buffer_switch_on_eof) = 0;</span>
 <span class="lineNum">    1572 </span>                :            : 
 <span class="lineNum">    1573 </span>                :            :                                 if ( netlist_wrap( ) )
 <span class="lineNum">    1574 </span>                :            :                                         {
@@ -1662,10 +1669,10 @@
 <span class="lineNum">    1581 </span>                :            :                                          * YY_NULL, it'll still work - another
 <span class="lineNum">    1582 </span>                :            :                                          * YY_NULL will get returned.
 <span class="lineNum">    1583 </span>                :            :                                          */
-<span class="lineNum">    1584 </span>                :<span class="lineCov">         90 :                                         (yy_c_buf_p) = (yytext_ptr) + YY_MORE_ADJ;</span>
+<span class="lineNum">    1584 </span>                :<span class="lineCov">        103 :                                         (yy_c_buf_p) = (yytext_ptr) + YY_MORE_ADJ;</span>
 <span class="lineNum">    1585 </span>                :            : 
-<span class="lineNum">    1586 </span>                :<span class="lineCov">         90 :                                         yy_act = YY_STATE_EOF(YY_START);</span>
-<span class="lineNum">    1587 </span>                :<span class="lineCov">         90 :                                         goto do_action;</span>
+<span class="lineNum">    1586 </span>                :<span class="lineCov">        103 :                                         yy_act = YY_STATE_EOF(YY_START);</span>
+<span class="lineNum">    1587 </span>                :<span class="lineCov">        103 :                                         goto do_action;</span>
 <span class="lineNum">    1588 </span>                :            :                                         }
 <span class="lineNum">    1589 </span>                :            : 
 <span class="lineNum">    1590 </span>                :            :                                 else
@@ -1678,13 +1685,13 @@
 <span class="lineNum">    1597 </span>                :            : 
 <span class="lineNum">    1598 </span>                :            :                         case EOB_ACT_CONTINUE_SCAN:
 <span class="lineNum">    1599 </span>                :            :                                 (yy_c_buf_p) =
-<span class="lineNum">    1600 </span>                :<span class="lineCov">         90 :                                         (yytext_ptr) + yy_amount_of_matched_text;</span>
+<span class="lineNum">    1600 </span>                :<span class="lineCov">        103 :                                         (yytext_ptr) + yy_amount_of_matched_text;</span>
 <span class="lineNum">    1601 </span>                :            : 
-<span class="lineNum">    1602 </span>                :<span class="lineCov">         90 :                                 yy_current_state = yy_get_previous_state(  );</span>
+<span class="lineNum">    1602 </span>                :<span class="lineCov">        103 :                                 yy_current_state = yy_get_previous_state(  );</span>
 <span class="lineNum">    1603 </span>                :            : 
-<span class="lineNum">    1604 </span>                :<span class="lineCov">         90 :                                 yy_cp = (yy_c_buf_p);</span>
-<span class="lineNum">    1605 </span>                :<span class="lineCov">         90 :                                 yy_bp = (yytext_ptr) + YY_MORE_ADJ;</span>
-<span class="lineNum">    1606 </span>                :<span class="lineCov">         90 :                                 goto yy_match;</span>
+<span class="lineNum">    1604 </span>                :<span class="lineCov">        103 :                                 yy_cp = (yy_c_buf_p);</span>
+<span class="lineNum">    1605 </span>                :<span class="lineCov">        103 :                                 yy_bp = (yytext_ptr) + YY_MORE_ADJ;</span>
+<span class="lineNum">    1606 </span>                :<span class="lineCov">        103 :                                 goto yy_match;</span>
 <span class="lineNum">    1607 </span>                :            : 
 <span class="lineNum">    1608 </span>                :            :                         case EOB_ACT_LAST_MATCH:
 <span class="lineNum">    1609 </span>                :            :                                 (yy_c_buf_p) =
@@ -1713,18 +1720,18 @@
 <span class="lineNum">    1632 </span>                :            :  *      EOB_ACT_CONTINUE_SCAN - continue scanning from current position
 <a name="1633"><span class="lineNum">    1633 </span>                :            :  *      EOB_ACT_END_OF_FILE - end of file</a>
 <span class="lineNum">    1634 </span>                :            :  */
-<span class="lineNum">    1635 </span>                :<span class="lineCov">        180 : static int yy_get_next_buffer (void)</span>
+<span class="lineNum">    1635 </span>                :<span class="lineCov">        206 : static int yy_get_next_buffer (void)</span>
 <span class="lineNum">    1636 </span>                :            : {
-<span class="lineNum">    1637 </span>                :<span class="lineCov">        180 :         register char *dest = YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf;</span>
-<span class="lineNum">    1638 </span>                :<span class="lineCov">        180 :         register char *source = (yytext_ptr);</span>
+<span class="lineNum">    1637 </span>                :<span class="lineCov">        206 :         register char *dest = YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf;</span>
+<span class="lineNum">    1638 </span>                :<span class="lineCov">        206 :         register char *source = (yytext_ptr);</span>
 <span class="lineNum">    1639 </span>                :            :         register int number_to_move, i;
 <span class="lineNum">    1640 </span>                :            :         int ret_val;
 <span class="lineNum">    1641 </span>                :            : 
-<span class="lineNum">    1642 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         if ( (yy_c_buf_p) &gt; &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars) + 1] )</span>
+<span class="lineNum">    1642 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         if ( (yy_c_buf_p) &gt; &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars) + 1] )</span>
 <span class="lineNum">    1643 </span>                :            :                 YY_FATAL_ERROR(
 <span class="lineNum">    1644 </span>                :<span class="lineNoCov">          0 :                 &quot;fatal flex scanner internal error--end of buffer missed&quot; );</span>
 <span class="lineNum">    1645 </span>                :            : 
-<span class="lineNum">    1646 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_fill_buffer == 0 )</span>
+<span class="lineNum">    1646 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_fill_buffer == 0 )</span>
 <span class="lineNum">    1647 </span>                :            :                 { /* Don't try to fill the buffer, so this is an EOF. */
 <span class="lineNum">    1648 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if ( (yy_c_buf_p) - (yytext_ptr) - YY_MORE_ADJ == 1 )</span>
 <span class="lineNum">    1649 </span>                :            :                         {
@@ -1746,12 +1753,12 @@
 <span class="lineNum">    1665 </span>                :            :         /* Try to read more data. */
 <span class="lineNum">    1666 </span>                :            : 
 <span class="lineNum">    1667 </span>                :            :         /* First move last chars to start of buffer. */
-<span class="lineNum">    1668 </span>                :<span class="lineCov">        180 :         number_to_move = (int) ((yy_c_buf_p) - (yytext_ptr)) - 1;</span>
+<span class="lineNum">    1668 </span>                :<span class="lineCov">        206 :         number_to_move = (int) ((yy_c_buf_p) - (yytext_ptr)) - 1;</span>
 <span class="lineNum">    1669 </span>                :            : 
-<span class="lineNum">    1670 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         for ( i = 0; i &lt; number_to_move; ++i )</span>
+<span class="lineNum">    1670 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         for ( i = 0; i &lt; number_to_move; ++i )</span>
 <span class="lineNum">    1671 </span>                :<span class="lineNoCov">          0 :                 *(dest++) = *(source++);</span>
 <span class="lineNum">    1672 </span>                :            : 
-<span class="lineNum">    1673 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status == YY_BUFFER_EOF_PENDING )</span>
+<span class="lineNum">    1673 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         if ( YY_CURRENT_BUFFER_LVALUE-&gt;yy_buffer_status == YY_BUFFER_EOF_PENDING )</span>
 <span class="lineNum">    1674 </span>                :            :                 /* don't do the read, it's not guaranteed to return an EOF,
 <span class="lineNum">    1675 </span>                :            :                  * just force an EOF
 <span class="lineNum">    1676 </span>                :            :                  */
@@ -1760,9 +1767,9 @@
 <span class="lineNum">    1679 </span>                :            :         else
 <span class="lineNum">    1680 </span>                :            :                 {
 <span class="lineNum">    1681 </span>                :            :                         yy_size_t num_to_read =
-<span class="lineNum">    1682 </span>                :<span class="lineCov">        180 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_size - number_to_move - 1;</span>
+<span class="lineNum">    1682 </span>                :<span class="lineCov">        206 :                         YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_size - number_to_move - 1;</span>
 <span class="lineNum">    1683 </span>                :            : 
-<span class="lineNum">    1684 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :                 while ( num_to_read &lt;= 0 )</span>
+<span class="lineNum">    1684 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :                 while ( num_to_read &lt;= 0 )</span>
 <span class="lineNum">    1685 </span>                :            :                         { /* Not enough room in the buffer - grow it. */
 <span class="lineNum">    1686 </span>                :            : 
 <span class="lineNum">    1687 </span>                :            :                         /* just a shorter name for the current buffer */
@@ -1799,28 +1806,28 @@
 <span class="lineNum">    1718 </span>                :            : 
 <span class="lineNum">    1719 </span>                :            :                         }
 <span class="lineNum">    1720 </span>                :            : 
-<span class="lineNum">    1721 </span>        [<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        180 :                 if ( num_to_read &gt; YY_READ_BUF_SIZE )</span>
-<span class="lineNum">    1722 </span>                :<span class="lineCov">        180 :                         num_to_read = YY_READ_BUF_SIZE;</span>
+<span class="lineNum">    1721 </span>        [<span class="branchCov" title="Branch 0 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        206 :                 if ( num_to_read &gt; YY_READ_BUF_SIZE )</span>
+<span class="lineNum">    1722 </span>                :<span class="lineCov">        206 :                         num_to_read = YY_READ_BUF_SIZE;</span>
 <span class="lineNum">    1723 </span>                :            : 
 <span class="lineNum">    1724 </span>                :            :                 /* Read in more data. */
-<span class="lineNum">    1725 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        180 :                 YY_INPUT( (&amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[number_to_move]),</span>
+<span class="lineNum">    1725 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        206 :                 YY_INPUT( (&amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[number_to_move]),</span>
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
 <span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span>]
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 29 was taken 90 times"> + </span><span class="branchCov" title="Branch 30 was taken 90 times"> + </span>][<span class="branchNoCov" title="Branch 32 was not taken"> - </span><span class="branchCov" title="Branch 33 was taken 90 times"> + </span>]
-<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 34 was not taken"> - </span><span class="branchCov" title="Branch 35 was taken 180 times"> + </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 29 was taken 103 times"> + </span><span class="branchCov" title="Branch 30 was taken 103 times"> + </span>][<span class="branchNoCov" title="Branch 32 was not taken"> - </span><span class="branchCov" title="Branch 33 was taken 103 times"> + </span>]
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 34 was not taken"> - </span><span class="branchCov" title="Branch 35 was taken 206 times"> + </span>]
 <span class="lineNum">    1726 </span>                :            :                         (yy_n_chars), num_to_read );
 <span class="lineNum">    1727 </span>                :            : 
-<span class="lineNum">    1728 </span>                :<span class="lineCov">        180 :                 YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars = (yy_n_chars);</span>
+<span class="lineNum">    1728 </span>                :<span class="lineCov">        206 :                 YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars = (yy_n_chars);</span>
 <span class="lineNum">    1729 </span>                :            :                 }
 <span class="lineNum">    1730 </span>                :            : 
-<span class="lineNum">    1731 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        180 :         if ( (yy_n_chars) == 0 )</span>
+<span class="lineNum">    1731 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        206 :         if ( (yy_n_chars) == 0 )</span>
 <span class="lineNum">    1732 </span>                :            :                 {
-<span class="lineNum">    1733 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :                 if ( number_to_move == YY_MORE_ADJ )</span>
+<span class="lineNum">    1733 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :                 if ( number_to_move == YY_MORE_ADJ )</span>
 <span class="lineNum">    1734 </span>                :            :                         {
-<span class="lineNum">    1735 </span>                :<span class="lineCov">         90 :                         ret_val = EOB_ACT_END_OF_FILE;</span>
-<span class="lineNum">    1736 </span>                :<span class="lineCov">         90 :                         netlist_restart(netlist_in  );</span>
+<span class="lineNum">    1735 </span>                :<span class="lineCov">        103 :                         ret_val = EOB_ACT_END_OF_FILE;</span>
+<span class="lineNum">    1736 </span>                :<span class="lineCov">        103 :                         netlist_restart(netlist_in  );</span>
 <span class="lineNum">    1737 </span>                :            :                         }
 <span class="lineNum">    1738 </span>                :            : 
 <span class="lineNum">    1739 </span>                :            :                 else
@@ -1832,9 +1839,9 @@
 <span class="lineNum">    1745 </span>                :            :                 }
 <span class="lineNum">    1746 </span>                :            : 
 <span class="lineNum">    1747 </span>                :            :         else
-<span class="lineNum">    1748 </span>                :<span class="lineCov">         90 :                 ret_val = EOB_ACT_CONTINUE_SCAN;</span>
+<span class="lineNum">    1748 </span>                :<span class="lineCov">        103 :                 ret_val = EOB_ACT_CONTINUE_SCAN;</span>
 <span class="lineNum">    1749 </span>                :            : 
-<span class="lineNum">    1750 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         if ((yy_size_t) ((yy_n_chars) + number_to_move) &gt; YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_size) {</span>
+<span class="lineNum">    1750 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         if ((yy_size_t) ((yy_n_chars) + number_to_move) &gt; YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_size) {</span>
 <span class="lineNum">    1751 </span>                :            :                 /* Extend the array by 50%, plus the number we really need. */
 <span class="lineNum">    1752 </span>                :<span class="lineNoCov">          0 :                 yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) &gt;&gt; 1);</span>
 <span class="lineNum">    1753 </span>                :<span class="lineNoCov">          0 :                 YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf = (char *) netlist_realloc((void *) YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf,new_size  );</span>
@@ -1842,25 +1849,25 @@
 <span class="lineNum">    1755 </span>                :<span class="lineNoCov">          0 :                         YY_FATAL_ERROR( &quot;out of dynamic memory in yy_get_next_buffer()&quot; );</span>
 <span class="lineNum">    1756 </span>                :            :         }
 <span class="lineNum">    1757 </span>                :            : 
-<span class="lineNum">    1758 </span>                :<span class="lineCov">        180 :         (yy_n_chars) += number_to_move;</span>
-<span class="lineNum">    1759 </span>                :<span class="lineCov">        180 :         YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)] = YY_END_OF_BUFFER_CHAR;</span>
-<span class="lineNum">    1760 </span>                :<span class="lineCov">        180 :         YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars) + 1] = YY_END_OF_BUFFER_CHAR;</span>
+<span class="lineNum">    1758 </span>                :<span class="lineCov">        206 :         (yy_n_chars) += number_to_move;</span>
+<span class="lineNum">    1759 </span>                :<span class="lineCov">        206 :         YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars)] = YY_END_OF_BUFFER_CHAR;</span>
+<span class="lineNum">    1760 </span>                :<span class="lineCov">        206 :         YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[(yy_n_chars) + 1] = YY_END_OF_BUFFER_CHAR;</span>
 <span class="lineNum">    1761 </span>                :            : 
-<span class="lineNum">    1762 </span>                :<span class="lineCov">        180 :         (yytext_ptr) = &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[0];</span>
+<span class="lineNum">    1762 </span>                :<span class="lineCov">        206 :         (yytext_ptr) = &amp;YY_CURRENT_BUFFER_LVALUE-&gt;yy_ch_buf[0];</span>
 <span class="lineNum">    1763 </span>                :            : 
-<span class="lineNum">    1764 </span>                :<span class="lineCov">        180 :         return ret_val;</span>
+<span class="lineNum">    1764 </span>                :<span class="lineCov">        206 :         return ret_val;</span>
 <span class="lineNum">    1765 </span>                :            : }
 <span class="lineNum">    1766 </span>                :            : 
 <a name="1767"><span class="lineNum">    1767 </span>                :            : /* yy_get_previous_state - get the state just before the EOB char was reached */</a>
 <span class="lineNum">    1768 </span>                :            : 
-<span class="lineNum">    1769 </span>                :<span class="lineCov">         90 :     static yy_state_type yy_get_previous_state (void)</span>
+<span class="lineNum">    1769 </span>                :<span class="lineCov">        103 :     static yy_state_type yy_get_previous_state (void)</span>
 <span class="lineNum">    1770 </span>                :            : {
 <span class="lineNum">    1771 </span>                :            :         register yy_state_type yy_current_state;
 <span class="lineNum">    1772 </span>                :            :         register char *yy_cp;
 <span class="lineNum">    1773 </span>                :            :     
-<span class="lineNum">    1774 </span>                :<span class="lineCov">         90 :         yy_current_state = (yy_start);</span>
+<span class="lineNum">    1774 </span>                :<span class="lineCov">        103 :         yy_current_state = (yy_start);</span>
 <span class="lineNum">    1775 </span>                :            : 
-<span class="lineNum">    1776 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :         for ( yy_cp = (yytext_ptr) + YY_MORE_ADJ; yy_cp &lt; (yy_c_buf_p); ++yy_cp )</span>
+<span class="lineNum">    1776 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :         for ( yy_cp = (yytext_ptr) + YY_MORE_ADJ; yy_cp &lt; (yy_c_buf_p); ++yy_cp )</span>
 <span class="lineNum">    1777 </span>                :            :                 {
 <span class="lineNum">    1778 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);</span>
 <span class="lineNum">    1779 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 if ( yy_accept[yy_current_state] )</span>
@@ -1877,7 +1884,7 @@
 <span class="lineNum">    1790 </span>                :<span class="lineNoCov">          0 :                 yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];</span>
 <span class="lineNum">    1791 </span>                :            :                 }
 <span class="lineNum">    1792 </span>                :            : 
-<span class="lineNum">    1793 </span>                :<span class="lineCov">         90 :         return yy_current_state;</span>
+<span class="lineNum">    1793 </span>                :<span class="lineCov">        103 :         return yy_current_state;</span>
 <span class="lineNum">    1794 </span>                :            : }
 <span class="lineNum">    1795 </span>                :            : 
 <span class="lineNum">    1796 </span>                :            : /* yy_try_NUL_trans - try to make a transition on the NUL character
@@ -1992,18 +1999,18 @@
 <span class="lineNum">    1905 </span>                :            :  * 
 <a name="1906"><span class="lineNum">    1906 </span>                :            :  * @note This function does not reset the start condition to @c INITIAL .</a>
 <span class="lineNum">    1907 </span>                :            :  */
-<span class="lineNum">    1908 </span>                :<span class="lineCov">         90 :     void netlist_restart  (FILE * input_file )</span>
+<span class="lineNum">    1908 </span>                :<span class="lineCov">        103 :     void netlist_restart  (FILE * input_file )</span>
 <span class="lineNum">    1909 </span>                :            : {
 <span class="lineNum">    1910 </span>                :            :     
-<span class="lineNum">    1911 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>]:<span class="lineCov">         90 :         if ( ! YY_CURRENT_BUFFER ){</span>
+<span class="lineNum">    1911 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 103 times"> + </span>]:<span class="lineCov">        103 :         if ( ! YY_CURRENT_BUFFER ){</span>
 <span class="lineNum">    1912 </span>                :<span class="lineNoCov">          0 :         netlist_ensure_buffer_stack ();</span>
 <span class="lineNum">    1913 </span>                :<span class="lineNoCov">          0 :                 YY_CURRENT_BUFFER_LVALUE =</span>
 <span class="lineNum">    1914 </span>                :<span class="lineNoCov">          0 :             netlist__create_buffer(netlist_in,YY_BUF_SIZE );</span>
 <span class="lineNum">    1915 </span>                :            :         }
 <span class="lineNum">    1916 </span>                :            : 
-<span class="lineNum">    1917 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :         netlist__init_buffer(YY_CURRENT_BUFFER,input_file );</span>
-<span class="lineNum">    1918 </span>                :<span class="lineCov">         90 :         netlist__load_buffer_state( );</span>
-<span class="lineNum">    1919 </span>                :<span class="lineCov">         90 : }</span>
+<span class="lineNum">    1917 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :         netlist__init_buffer(YY_CURRENT_BUFFER,input_file );</span>
+<span class="lineNum">    1918 </span>                :<span class="lineCov">        103 :         netlist__load_buffer_state( );</span>
+<span class="lineNum">    1919 </span>                :<span class="lineCov">        103 : }</span>
 <span class="lineNum">    1920 </span>                :            : 
 <span class="lineNum">    1921 </span>                :            : /** Switch to a different input buffer.
 <span class="lineNum">    1922 </span>                :            :  * @param new_buffer The new input buffer.
@@ -2040,13 +2047,13 @@
 <span class="lineNum">    1953 </span>                :<span class="lineNoCov">          0 :         (yy_did_buffer_switch_on_eof) = 1;</span>
 <a name="1954"><span class="lineNum">    1954 </span>                :            : }</a>
 <span class="lineNum">    1955 </span>                :            : 
-<span class="lineNum">    1956 </span>                :<span class="lineCov">        270 : static void netlist__load_buffer_state  (void)</span>
+<span class="lineNum">    1956 </span>                :<span class="lineCov">        309 : static void netlist__load_buffer_state  (void)</span>
 <span class="lineNum">    1957 </span>                :            : {
-<span class="lineNum">    1958 </span>                :<span class="lineCov">        270 :         (yy_n_chars) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars;</span>
-<span class="lineNum">    1959 </span>                :<span class="lineCov">        270 :         (yytext_ptr) = (yy_c_buf_p) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_pos;</span>
-<span class="lineNum">    1960 </span>                :<span class="lineCov">        270 :         netlist_in = YY_CURRENT_BUFFER_LVALUE-&gt;yy_input_file;</span>
-<span class="lineNum">    1961 </span>                :<span class="lineCov">        270 :         (yy_hold_char) = *(yy_c_buf_p);</span>
-<span class="lineNum">    1962 </span>                :<span class="lineCov">        270 : }</span>
+<span class="lineNum">    1958 </span>                :<span class="lineCov">        309 :         (yy_n_chars) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_n_chars;</span>
+<span class="lineNum">    1959 </span>                :<span class="lineCov">        309 :         (yytext_ptr) = (yy_c_buf_p) = YY_CURRENT_BUFFER_LVALUE-&gt;yy_buf_pos;</span>
+<span class="lineNum">    1960 </span>                :<span class="lineCov">        309 :         netlist_in = YY_CURRENT_BUFFER_LVALUE-&gt;yy_input_file;</span>
+<span class="lineNum">    1961 </span>                :<span class="lineCov">        309 :         (yy_hold_char) = *(yy_c_buf_p);</span>
+<span class="lineNum">    1962 </span>                :<span class="lineCov">        309 : }</span>
 <span class="lineNum">    1963 </span>                :            : 
 <span class="lineNum">    1964 </span>                :            : /** Allocate and initialize an input buffer state.
 <span class="lineNum">    1965 </span>                :            :  * @param file A readable stream.
@@ -2054,102 +2061,102 @@
 <span class="lineNum">    1967 </span>                :            :  * 
 <a name="1968"><span class="lineNum">    1968 </span>                :            :  * @return the allocated buffer state.</a>
 <span class="lineNum">    1969 </span>                :            :  */
-<span class="lineNum">    1970 </span>                :<span class="lineCov">         90 :     YY_BUFFER_STATE netlist__create_buffer  (FILE * file, int  size )</span>
+<span class="lineNum">    1970 </span>                :<span class="lineCov">        103 :     YY_BUFFER_STATE netlist__create_buffer  (FILE * file, int  size )</span>
 <span class="lineNum">    1971 </span>                :            : {
 <span class="lineNum">    1972 </span>                :            :         YY_BUFFER_STATE b;
 <span class="lineNum">    1973 </span>                :            :     
-<span class="lineNum">    1974 </span>                :<span class="lineCov">         90 :         b = (YY_BUFFER_STATE) netlist_alloc(sizeof( struct yy_buffer_state )  );</span>
-<span class="lineNum">    1975 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :         if ( ! b )</span>
+<span class="lineNum">    1974 </span>                :<span class="lineCov">        103 :         b = (YY_BUFFER_STATE) netlist_alloc(sizeof( struct yy_buffer_state )  );</span>
+<span class="lineNum">    1975 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :         if ( ! b )</span>
 <span class="lineNum">    1976 </span>                :<span class="lineNoCov">          0 :                 YY_FATAL_ERROR( &quot;out of dynamic memory in netlist__create_buffer()&quot; );</span>
 <span class="lineNum">    1977 </span>                :            : 
-<span class="lineNum">    1978 </span>                :<span class="lineCov">         90 :         b-&gt;yy_buf_size = size;</span>
+<span class="lineNum">    1978 </span>                :<span class="lineCov">        103 :         b-&gt;yy_buf_size = size;</span>
 <span class="lineNum">    1979 </span>                :            : 
 <span class="lineNum">    1980 </span>                :            :         /* yy_ch_buf has to be 2 characters longer than the size given because
 <span class="lineNum">    1981 </span>                :            :          * we need to put in 2 end-of-buffer characters.
 <span class="lineNum">    1982 </span>                :            :          */
-<span class="lineNum">    1983 </span>                :<span class="lineCov">         90 :         b-&gt;yy_ch_buf = (char *) netlist_alloc(b-&gt;yy_buf_size + 2  );</span>
-<span class="lineNum">    1984 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :         if ( ! b-&gt;yy_ch_buf )</span>
+<span class="lineNum">    1983 </span>                :<span class="lineCov">        103 :         b-&gt;yy_ch_buf = (char *) netlist_alloc(b-&gt;yy_buf_size + 2  );</span>
+<span class="lineNum">    1984 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :         if ( ! b-&gt;yy_ch_buf )</span>
 <span class="lineNum">    1985 </span>                :<span class="lineNoCov">          0 :                 YY_FATAL_ERROR( &quot;out of dynamic memory in netlist__create_buffer()&quot; );</span>
 <span class="lineNum">    1986 </span>                :            : 
-<span class="lineNum">    1987 </span>                :<span class="lineCov">         90 :         b-&gt;yy_is_our_buffer = 1;</span>
+<span class="lineNum">    1987 </span>                :<span class="lineCov">        103 :         b-&gt;yy_is_our_buffer = 1;</span>
 <span class="lineNum">    1988 </span>                :            : 
-<span class="lineNum">    1989 </span>                :<span class="lineCov">         90 :         netlist__init_buffer(b,file );</span>
+<span class="lineNum">    1989 </span>                :<span class="lineCov">        103 :         netlist__init_buffer(b,file );</span>
 <span class="lineNum">    1990 </span>                :            : 
-<span class="lineNum">    1991 </span>                :<span class="lineCov">         90 :         return b;</span>
+<span class="lineNum">    1991 </span>                :<span class="lineCov">        103 :         return b;</span>
 <span class="lineNum">    1992 </span>                :            : }
 <span class="lineNum">    1993 </span>                :            : 
 <span class="lineNum">    1994 </span>                :            : /** Destroy the buffer.
 <span class="lineNum">    1995 </span>                :            :  * @param b a buffer created with netlist__create_buffer()
 <a name="1996"><span class="lineNum">    1996 </span>                :            :  * </a>
 <span class="lineNum">    1997 </span>                :            :  */
-<span class="lineNum">    1998 </span>                :<span class="lineCov">         90 :     void netlist__delete_buffer (YY_BUFFER_STATE  b )</span>
+<span class="lineNum">    1998 </span>                :<span class="lineCov">        103 :     void netlist__delete_buffer (YY_BUFFER_STATE  b )</span>
 <span class="lineNum">    1999 </span>                :            : {
 <span class="lineNum">    2000 </span>                :            :     
-<span class="lineNum">    2001 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :         if ( ! b )</span>
-<span class="lineNum">    2002 </span>                :<span class="lineCov">         90 :                 return;</span>
+<span class="lineNum">    2001 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :         if ( ! b )</span>
+<span class="lineNum">    2002 </span>                :<span class="lineCov">        103 :                 return;</span>
 <span class="lineNum">    2003 </span>                :            : 
-<span class="lineNum">    2004 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :         if ( b == YY_CURRENT_BUFFER ) /* Not sure if we should pop here. */</span>
-<span class="lineNum">    2005 </span>                :<span class="lineCov">         90 :                 YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;</span>
+<span class="lineNum">    2004 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :         if ( b == YY_CURRENT_BUFFER ) /* Not sure if we should pop here. */</span>
+<span class="lineNum">    2005 </span>                :<span class="lineCov">        103 :                 YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;</span>
 <span class="lineNum">    2006 </span>                :            : 
-<span class="lineNum">    2007 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :         if ( b-&gt;yy_is_our_buffer )</span>
-<span class="lineNum">    2008 </span>                :<span class="lineCov">         90 :                 netlist_free((void *) b-&gt;yy_ch_buf  );</span>
+<span class="lineNum">    2007 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :         if ( b-&gt;yy_is_our_buffer )</span>
+<span class="lineNum">    2008 </span>                :<span class="lineCov">        103 :                 netlist_free((void *) b-&gt;yy_ch_buf  );</span>
 <span class="lineNum">    2009 </span>                :            : 
-<span class="lineNum">    2010 </span>                :<span class="lineCov">         90 :         netlist_free((void *) b  );</span>
+<span class="lineNum">    2010 </span>                :<span class="lineCov">        103 :         netlist_free((void *) b  );</span>
 <span class="lineNum">    2011 </span>                :            : }
 <span class="lineNum">    2012 </span>                :            : 
 <span class="lineNum">    2013 </span>                :            : /* Initializes or reinitializes a buffer.
 <span class="lineNum">    2014 </span>                :            :  * This function is sometimes called more than once on the same buffer,
 <a name="2015"><span class="lineNum">    2015 </span>                :            :  * such as during a netlist_restart() or at EOF.</a>
 <span class="lineNum">    2016 </span>                :            :  */
-<span class="lineNum">    2017 </span>                :<span class="lineCov">        180 :     static void netlist__init_buffer  (YY_BUFFER_STATE  b, FILE * file )</span>
+<span class="lineNum">    2017 </span>                :<span class="lineCov">        206 :     static void netlist__init_buffer  (YY_BUFFER_STATE  b, FILE * file )</span>
 <span class="lineNum">    2018 </span>                :            : 
 <span class="lineNum">    2019 </span>                :            : {
-<span class="lineNum">    2020 </span>                :<span class="lineCov">        180 :         int oerrno = errno;</span>
+<span class="lineNum">    2020 </span>                :<span class="lineCov">        206 :         int oerrno = errno;</span>
 <span class="lineNum">    2021 </span>                :            :     
-<span class="lineNum">    2022 </span>                :<span class="lineCov">        180 :         netlist__flush_buffer(b );</span>
+<span class="lineNum">    2022 </span>                :<span class="lineCov">        206 :         netlist__flush_buffer(b );</span>
 <span class="lineNum">    2023 </span>                :            : 
-<span class="lineNum">    2024 </span>                :<span class="lineCov">        180 :         b-&gt;yy_input_file = file;</span>
-<span class="lineNum">    2025 </span>                :<span class="lineCov">        180 :         b-&gt;yy_fill_buffer = 1;</span>
+<span class="lineNum">    2024 </span>                :<span class="lineCov">        206 :         b-&gt;yy_input_file = file;</span>
+<span class="lineNum">    2025 </span>                :<span class="lineCov">        206 :         b-&gt;yy_fill_buffer = 1;</span>
 <span class="lineNum">    2026 </span>                :            : 
 <span class="lineNum">    2027 </span>                :            :     /* If b is the current buffer, then netlist__init_buffer was _probably_
 <span class="lineNum">    2028 </span>                :            :      * called from netlist_restart() or through yy_get_next_buffer.
 <span class="lineNum">    2029 </span>                :            :      * In that case, we don't want to reset the lineno or column.
 <span class="lineNum">    2030 </span>                :            :      */
-<span class="lineNum">    2031 </span>[<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>]:<span class="lineCov">        180 :     if (b != YY_CURRENT_BUFFER){</span>
-<span class="lineNum">    2032 </span>                :<span class="lineCov">         90 :         b-&gt;yy_bs_lineno = 1;</span>
-<span class="lineNum">    2033 </span>                :<span class="lineCov">         90 :         b-&gt;yy_bs_column = 0;</span>
+<span class="lineNum">    2031 </span>[<span class="branchCov" title="Branch 0 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchCov" title="Branch 3 was taken 103 times"> + </span>]:<span class="lineCov">        206 :     if (b != YY_CURRENT_BUFFER){</span>
+<span class="lineNum">    2032 </span>                :<span class="lineCov">        103 :         b-&gt;yy_bs_lineno = 1;</span>
+<span class="lineNum">    2033 </span>                :<span class="lineCov">        103 :         b-&gt;yy_bs_column = 0;</span>
 <span class="lineNum">    2034 </span>                :            :     }
 <span class="lineNum">    2035 </span>                :            : 
-<span class="lineNum">    2036 </span>[<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         b-&gt;yy_is_interactive = file ? (isatty( fileno(file) ) &gt; 0) : 0;</span>
+<span class="lineNum">    2036 </span>[<span class="branchCov" title="Branch 0 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         b-&gt;yy_is_interactive = file ? (isatty( fileno(file) ) &gt; 0) : 0;</span>
 <span class="lineNum">    2037 </span>                :            :     
-<span class="lineNum">    2038 </span>                :<span class="lineCov">        180 :         errno = oerrno;</span>
-<span class="lineNum">    2039 </span>                :<span class="lineCov">        180 : }</span>
+<span class="lineNum">    2038 </span>                :<span class="lineCov">        206 :         errno = oerrno;</span>
+<span class="lineNum">    2039 </span>                :<span class="lineCov">        206 : }</span>
 <span class="lineNum">    2040 </span>                :            : 
 <span class="lineNum">    2041 </span>                :            : /** Discard all buffered characters. On the next scan, YY_INPUT will be called.
 <span class="lineNum">    2042 </span>                :            :  * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
 <a name="2043"><span class="lineNum">    2043 </span>                :            :  * </a>
 <span class="lineNum">    2044 </span>                :            :  */
-<span class="lineNum">    2045 </span>                :<span class="lineCov">        180 :     void netlist__flush_buffer (YY_BUFFER_STATE  b )</span>
+<span class="lineNum">    2045 </span>                :<span class="lineCov">        206 :     void netlist__flush_buffer (YY_BUFFER_STATE  b )</span>
 <span class="lineNum">    2046 </span>                :            : {
-<span class="lineNum">    2047 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 180 times"> + </span>]:<span class="lineCov">        180 :         if ( ! b )</span>
-<span class="lineNum">    2048 </span>                :<span class="lineCov">        180 :                 return;</span>
+<span class="lineNum">    2047 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 206 times"> + </span>]:<span class="lineCov">        206 :         if ( ! b )</span>
+<span class="lineNum">    2048 </span>                :<span class="lineCov">        206 :                 return;</span>
 <span class="lineNum">    2049 </span>                :            : 
-<span class="lineNum">    2050 </span>                :<span class="lineCov">        180 :         b-&gt;yy_n_chars = 0;</span>
+<span class="lineNum">    2050 </span>                :<span class="lineCov">        206 :         b-&gt;yy_n_chars = 0;</span>
 <span class="lineNum">    2051 </span>                :            : 
 <span class="lineNum">    2052 </span>                :            :         /* We always need two end-of-buffer characters.  The first causes
 <span class="lineNum">    2053 </span>                :            :          * a transition to the end-of-buffer state.  The second causes
 <span class="lineNum">    2054 </span>                :            :          * a jam in that state.
 <span class="lineNum">    2055 </span>                :            :          */
-<span class="lineNum">    2056 </span>                :<span class="lineCov">        180 :         b-&gt;yy_ch_buf[0] = YY_END_OF_BUFFER_CHAR;</span>
-<span class="lineNum">    2057 </span>                :<span class="lineCov">        180 :         b-&gt;yy_ch_buf[1] = YY_END_OF_BUFFER_CHAR;</span>
+<span class="lineNum">    2056 </span>                :<span class="lineCov">        206 :         b-&gt;yy_ch_buf[0] = YY_END_OF_BUFFER_CHAR;</span>
+<span class="lineNum">    2057 </span>                :<span class="lineCov">        206 :         b-&gt;yy_ch_buf[1] = YY_END_OF_BUFFER_CHAR;</span>
 <span class="lineNum">    2058 </span>                :            : 
-<span class="lineNum">    2059 </span>                :<span class="lineCov">        180 :         b-&gt;yy_buf_pos = &amp;b-&gt;yy_ch_buf[0];</span>
+<span class="lineNum">    2059 </span>                :<span class="lineCov">        206 :         b-&gt;yy_buf_pos = &amp;b-&gt;yy_ch_buf[0];</span>
 <span class="lineNum">    2060 </span>                :            : 
-<span class="lineNum">    2061 </span>                :<span class="lineCov">        180 :         b-&gt;yy_at_bol = 1;</span>
-<span class="lineNum">    2062 </span>                :<span class="lineCov">        180 :         b-&gt;yy_buffer_status = YY_BUFFER_NEW;</span>
+<span class="lineNum">    2061 </span>                :<span class="lineCov">        206 :         b-&gt;yy_at_bol = 1;</span>
+<span class="lineNum">    2062 </span>                :<span class="lineCov">        206 :         b-&gt;yy_buffer_status = YY_BUFFER_NEW;</span>
 <span class="lineNum">    2063 </span>                :            : 
-<span class="lineNum">    2064 </span>[<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>]:<span class="lineCov">        180 :         if ( b == YY_CURRENT_BUFFER )</span>
-<span class="lineNum">    2065 </span>                :<span class="lineCov">         90 :                 netlist__load_buffer_state( );</span>
+<span class="lineNum">    2064 </span>[<span class="branchCov" title="Branch 0 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchCov" title="Branch 3 was taken 103 times"> + </span>]:<span class="lineCov">        206 :         if ( b == YY_CURRENT_BUFFER )</span>
+<span class="lineNum">    2065 </span>                :<span class="lineCov">        103 :                 netlist__load_buffer_state( );</span>
 <span class="lineNum">    2066 </span>                :            : }
 <span class="lineNum">    2067 </span>                :            : 
 <span class="lineNum">    2068 </span>                :            : /** Pushes the new state onto the stack. The new state becomes
@@ -2188,10 +2195,10 @@
 <span class="lineNum">    2101 </span>                :            :  *  The next element becomes the new top.
 <a name="2102"><span class="lineNum">    2102 </span>                :            :  *  </a>
 <span class="lineNum">    2103 </span>                :            :  */
-<span class="lineNum">    2104 </span>                :<span class="lineCov">         90 : void netlist_pop_buffer_state (void)</span>
+<span class="lineNum">    2104 </span>                :<span class="lineCov">        103 : void netlist_pop_buffer_state (void)</span>
 <span class="lineNum">    2105 </span>                :            : {
-<span class="lineNum">    2106 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :         if (!YY_CURRENT_BUFFER)</span>
-<span class="lineNum">    2107 </span>                :<span class="lineCov">         90 :                 return;</span>
+<span class="lineNum">    2106 </span>[<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        103 :         if (!YY_CURRENT_BUFFER)</span>
+<span class="lineNum">    2107 </span>                :<span class="lineCov">        103 :                 return;</span>
 <span class="lineNum">    2108 </span>                :            : 
 <span class="lineNum">    2109 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         netlist__delete_buffer(YY_CURRENT_BUFFER );</span>
 <span class="lineNum">    2110 </span>                :<span class="lineNoCov">          0 :         YY_CURRENT_BUFFER_LVALUE = NULL;</span>
@@ -2207,28 +2214,28 @@
 <span class="lineNum">    2120 </span>                :            : /* Allocates the stack if it does not exist.
 <a name="2121"><span class="lineNum">    2121 </span>                :            :  *  Guarantees space for at least one push.</a>
 <span class="lineNum">    2122 </span>                :            :  */
-<span class="lineNum">    2123 </span>                :<span class="lineCov">         90 : static void netlist_ensure_buffer_stack (void)</span>
+<span class="lineNum">    2123 </span>                :<span class="lineCov">        103 : static void netlist_ensure_buffer_stack (void)</span>
 <span class="lineNum">    2124 </span>                :            : {
 <span class="lineNum">    2125 </span>                :            :         yy_size_t num_to_alloc;
 <span class="lineNum">    2126 </span>                :            :     
-<span class="lineNum">    2127 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :         if (!(yy_buffer_stack)) {</span>
+<span class="lineNum">    2127 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :         if (!(yy_buffer_stack)) {</span>
 <span class="lineNum">    2128 </span>                :            : 
 <span class="lineNum">    2129 </span>                :            :                 /* First allocation is just for 2 elements, since we don't know if this
 <span class="lineNum">    2130 </span>                :            :                  * scanner will even need a stack. We use 2 instead of 1 to avoid an
 <span class="lineNum">    2131 </span>                :            :                  * immediate realloc on the next call.
 <span class="lineNum">    2132 </span>                :            :          */
-<span class="lineNum">    2133 </span>                :<span class="lineCov">         90 :                 num_to_alloc = 1;</span>
+<span class="lineNum">    2133 </span>                :<span class="lineCov">        103 :                 num_to_alloc = 1;</span>
 <span class="lineNum">    2134 </span>                :            :                 (yy_buffer_stack) = (struct yy_buffer_state**)netlist_alloc
 <span class="lineNum">    2135 </span>                :            :                                                                 (num_to_alloc * sizeof(struct yy_buffer_state*)
-<span class="lineNum">    2136 </span>                :<span class="lineCov">         90 :                                                                 );</span>
-<span class="lineNum">    2137 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :                 if ( ! (yy_buffer_stack) )</span>
+<span class="lineNum">    2136 </span>                :<span class="lineCov">        103 :                                                                 );</span>
+<span class="lineNum">    2137 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 103 times"> + </span>]:<span class="lineCov">        103 :                 if ( ! (yy_buffer_stack) )</span>
 <span class="lineNum">    2138 </span>                :<span class="lineNoCov">          0 :                         YY_FATAL_ERROR( &quot;out of dynamic memory in netlist_ensure_buffer_stack()&quot; );</span>
 <span class="lineNum">    2139 </span>                :            :                                                                   
-<span class="lineNum">    2140 </span>                :<span class="lineCov">         90 :                 memset((yy_buffer_stack), 0, num_to_alloc * sizeof(struct yy_buffer_state*));</span>
+<span class="lineNum">    2140 </span>                :<span class="lineCov">        103 :                 memset((yy_buffer_stack), 0, num_to_alloc * sizeof(struct yy_buffer_state*));</span>
 <span class="lineNum">    2141 </span>                :            :                                 
-<span class="lineNum">    2142 </span>                :<span class="lineCov">         90 :                 (yy_buffer_stack_max) = num_to_alloc;</span>
-<span class="lineNum">    2143 </span>                :<span class="lineCov">         90 :                 (yy_buffer_stack_top) = 0;</span>
-<span class="lineNum">    2144 </span>                :<span class="lineCov">         90 :                 return;</span>
+<span class="lineNum">    2142 </span>                :<span class="lineCov">        103 :                 (yy_buffer_stack_max) = num_to_alloc;</span>
+<span class="lineNum">    2143 </span>                :<span class="lineCov">        103 :                 (yy_buffer_stack_top) = 0;</span>
+<span class="lineNum">    2144 </span>                :<span class="lineCov">        103 :                 return;</span>
 <span class="lineNum">    2145 </span>                :            :         }
 <span class="lineNum">    2146 </span>                :            : 
 <span class="lineNum">    2147 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if ((yy_buffer_stack_top) &gt;= ((yy_buffer_stack_max)) - 1){</span>
@@ -2444,58 +2451,58 @@
 <span class="lineNum">    2356 </span>                :<span class="lineNoCov">          0 :         netlist__flex_debug = bdebug ;</span>
 <a name="2357"><span class="lineNum">    2357 </span>                :<span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">    2358 </span>                :            : 
-<span class="lineNum">    2359 </span>                :<span class="lineCov">         90 : static int yy_init_globals (void)</span>
+<span class="lineNum">    2359 </span>                :<span class="lineCov">        103 : static int yy_init_globals (void)</span>
 <span class="lineNum">    2360 </span>                :            : {
 <span class="lineNum">    2361 </span>                :            :         /* Initialization is the same as for the non-reentrant scanner.
 <span class="lineNum">    2362 </span>                :            :      * This function is called from netlist_lex_destroy(), so don't allocate here.
 <span class="lineNum">    2363 </span>                :            :      */
 <span class="lineNum">    2364 </span>                :            : 
 <span class="lineNum">    2365 </span>                :            :     /* We do not touch netlist_lineno unless the option is enabled. */
-<span class="lineNum">    2366 </span>                :<span class="lineCov">         90 :     netlist_lineno =  1;</span>
+<span class="lineNum">    2366 </span>                :<span class="lineCov">        103 :     netlist_lineno =  1;</span>
 <span class="lineNum">    2367 </span>                :            :     
-<span class="lineNum">    2368 </span>                :<span class="lineCov">         90 :     (yy_buffer_stack) = 0;</span>
-<span class="lineNum">    2369 </span>                :<span class="lineCov">         90 :     (yy_buffer_stack_top) = 0;</span>
-<span class="lineNum">    2370 </span>                :<span class="lineCov">         90 :     (yy_buffer_stack_max) = 0;</span>
-<span class="lineNum">    2371 </span>                :<span class="lineCov">         90 :     (yy_c_buf_p) = (char *) 0;</span>
-<span class="lineNum">    2372 </span>                :<span class="lineCov">         90 :     (yy_init) = 0;</span>
-<span class="lineNum">    2373 </span>                :<span class="lineCov">         90 :     (yy_start) = 0;</span>
+<span class="lineNum">    2368 </span>                :<span class="lineCov">        103 :     (yy_buffer_stack) = 0;</span>
+<span class="lineNum">    2369 </span>                :<span class="lineCov">        103 :     (yy_buffer_stack_top) = 0;</span>
+<span class="lineNum">    2370 </span>                :<span class="lineCov">        103 :     (yy_buffer_stack_max) = 0;</span>
+<span class="lineNum">    2371 </span>                :<span class="lineCov">        103 :     (yy_c_buf_p) = (char *) 0;</span>
+<span class="lineNum">    2372 </span>                :<span class="lineCov">        103 :     (yy_init) = 0;</span>
+<span class="lineNum">    2373 </span>                :<span class="lineCov">        103 :     (yy_start) = 0;</span>
 <span class="lineNum">    2374 </span>                :            : 
 <span class="lineNum">    2375 </span>                :            : /* Defined in main.c */
 <span class="lineNum">    2376 </span>                :            : #ifdef YY_STDINIT
 <span class="lineNum">    2377 </span>                :            :     netlist_in = stdin;
 <span class="lineNum">    2378 </span>                :            :     netlist_out = stdout;
 <span class="lineNum">    2379 </span>                :            : #else
-<span class="lineNum">    2380 </span>                :<span class="lineCov">         90 :     netlist_in = (FILE *) 0;</span>
-<span class="lineNum">    2381 </span>                :<span class="lineCov">         90 :     netlist_out = (FILE *) 0;</span>
+<span class="lineNum">    2380 </span>                :<span class="lineCov">        103 :     netlist_in = (FILE *) 0;</span>
+<span class="lineNum">    2381 </span>                :<span class="lineCov">        103 :     netlist_out = (FILE *) 0;</span>
 <span class="lineNum">    2382 </span>                :            : #endif
 <span class="lineNum">    2383 </span>                :            : 
 <span class="lineNum">    2384 </span>                :            :     /* For future reference: Set errno on error, since we are called by
 <span class="lineNum">    2385 </span>                :            :      * netlist_lex_init()
 <span class="lineNum">    2386 </span>                :            :      */
-<span class="lineNum">    2387 </span>                :<span class="lineCov">         90 :     return 0;</span>
+<span class="lineNum">    2387 </span>                :<span class="lineCov">        103 :     return 0;</span>
 <span class="lineNum">    2388 </span>                :            : }
 <a name="2389"><span class="lineNum">    2389 </span>                :            : </a>
 <span class="lineNum">    2390 </span>                :            : /* netlist_lex_destroy is for both reentrant and non-reentrant scanners. */
-<span class="lineNum">    2391 </span>                :<span class="lineCov">         90 : int netlist_lex_destroy  (void)</span>
+<span class="lineNum">    2391 </span>                :<span class="lineCov">        103 : int netlist_lex_destroy  (void)</span>
 <span class="lineNum">    2392 </span>                :            : {
 <span class="lineNum">    2393 </span>                :            :     
 <span class="lineNum">    2394 </span>                :            :     /* Pop the buffer stack, destroying each element. */
-<span class="lineNum">    2395 </span>[<span class="branchCov" title="Branch 0 was taken 180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>]:<span class="lineCov">        180 :         while(YY_CURRENT_BUFFER){</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 90 times"> + </span><span class="branchCov" title="Branch 5 was taken 90 times"> + </span>]
-<span class="lineNum">    2396 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :                 netlist__delete_buffer(YY_CURRENT_BUFFER  );</span>
-<span class="lineNum">    2397 </span>                :<span class="lineCov">         90 :                 YY_CURRENT_BUFFER_LVALUE = NULL;</span>
-<span class="lineNum">    2398 </span>                :<span class="lineCov">         90 :                 netlist_pop_buffer_state();</span>
+<span class="lineNum">    2395 </span>[<span class="branchCov" title="Branch 0 was taken 206 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 103 times"> + </span><span class="branchCov" title="Branch 3 was taken 103 times"> + </span>]:<span class="lineCov">        206 :         while(YY_CURRENT_BUFFER){</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 103 times"> + </span><span class="branchCov" title="Branch 5 was taken 103 times"> + </span>]
+<span class="lineNum">    2396 </span>        [<span class="branchCov" title="Branch 0 was taken 103 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        103 :                 netlist__delete_buffer(YY_CURRENT_BUFFER  );</span>
+<span class="lineNum">    2397 </span>                :<span class="lineCov">        103 :                 YY_CURRENT_BUFFER_LVALUE = NULL;</span>
+<span class="lineNum">    2398 </span>                :<span class="lineCov">        103 :                 netlist_pop_buffer_state();</span>
 <span class="lineNum">    2399 </span>                :            :         }
 <span class="lineNum">    2400 </span>                :            : 
 <span class="lineNum">    2401 </span>                :            :         /* Destroy the stack itself. */
-<span class="lineNum">    2402 </span>                :<span class="lineCov">         90 :         netlist_free((yy_buffer_stack) );</span>
-<span class="lineNum">    2403 </span>                :<span class="lineCov">         90 :         (yy_buffer_stack) = NULL;</span>
+<span class="lineNum">    2402 </span>                :<span class="lineCov">        103 :         netlist_free((yy_buffer_stack) );</span>
+<span class="lineNum">    2403 </span>                :<span class="lineCov">        103 :         (yy_buffer_stack) = NULL;</span>
 <span class="lineNum">    2404 </span>                :            : 
 <span class="lineNum">    2405 </span>                :            :     /* Reset the globals. This is important in a non-reentrant scanner so the next time
 <span class="lineNum">    2406 </span>                :            :      * netlist_lex() is called, initialization will occur. */
-<span class="lineNum">    2407 </span>                :<span class="lineCov">         90 :     yy_init_globals( );</span>
+<span class="lineNum">    2407 </span>                :<span class="lineCov">        103 :     yy_init_globals( );</span>
 <span class="lineNum">    2408 </span>                :            : 
-<span class="lineNum">    2409 </span>                :<span class="lineCov">         90 :     return 0;</span>
+<span class="lineNum">    2409 </span>                :<span class="lineCov">        103 :     return 0;</span>
 <span class="lineNum">    2410 </span>                :            : }
 <span class="lineNum">    2411 </span>                :            : 
 <span class="lineNum">    2412 </span>                :            : /*
@@ -2522,9 +2529,9 @@
 <span class="lineNum">    2433 </span>                :            : }
 <a name="2434"><span class="lineNum">    2434 </span>                :            : #endif</a>
 <span class="lineNum">    2435 </span>                :            : 
-<span class="lineNum">    2436 </span>                :<span class="lineCov">        270 : void *netlist_alloc (yy_size_t  size )</span>
+<span class="lineNum">    2436 </span>                :<span class="lineCov">        309 : void *netlist_alloc (yy_size_t  size )</span>
 <span class="lineNum">    2437 </span>                :            : {
-<span class="lineNum">    2438 </span>                :<span class="lineCov">        270 :         return (void *) malloc( size );</span>
+<span class="lineNum">    2438 </span>                :<span class="lineCov">        309 :         return (void *) malloc( size );</span>
 <a name="2439"><span class="lineNum">    2439 </span>                :            : }</a>
 <span class="lineNum">    2440 </span>                :            : 
 <span class="lineNum">    2441 </span>                :<span class="lineNoCov">          0 : void *netlist_realloc  (void * ptr, yy_size_t  size )</span>
@@ -2539,10 +2546,10 @@
 <span class="lineNum">    2450 </span>                :<span class="lineNoCov">          0 :         return (void *) realloc( (char *) ptr, size );</span>
 <a name="2451"><span class="lineNum">    2451 </span>                :            : }</a>
 <span class="lineNum">    2452 </span>                :            : 
-<span class="lineNum">    2453 </span>                :<span class="lineCov">        270 : void netlist_free (void * ptr )</span>
+<span class="lineNum">    2453 </span>                :<span class="lineCov">        309 : void netlist_free (void * ptr )</span>
 <span class="lineNum">    2454 </span>                :            : {
-<span class="lineNum">    2455 </span>                :<span class="lineCov">        270 :         free( (char *) ptr );   /* see netlist_realloc() for (char *) cast */</span>
-<span class="lineNum">    2456 </span>                :<span class="lineCov">        270 : }</span>
+<span class="lineNum">    2455 </span>                :<span class="lineCov">        309 :         free( (char *) ptr );   /* see netlist_realloc() for (char *) cast */</span>
+<span class="lineNum">    2456 </span>                :<span class="lineCov">        309 : }</span>
 <span class="lineNum">    2457 </span>                :            : 
 <span class="lineNum">    2458 </span>                :            : #define YYTABLES_NAME &quot;yytables&quot;
 <span class="lineNum">    2459 </span>                :            : 

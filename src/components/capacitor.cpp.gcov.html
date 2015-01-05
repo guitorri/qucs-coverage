@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/capacitor.cpp</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/components/capacitor.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">40</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryLo">70.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">35</td>
@@ -110,10 +117,10 @@
 <span class="lineNum">      39 </span>                :            : using namespace qucs;
 <a name="40"><span class="lineNum">      40 </span>                :            : </a>
 <span class="lineNum">      41 </span>                :            : /*!\brief Constructor */
-<span class="lineNum">      42 </span>                :<span class="lineCov">        112 : capacitor::capacitor () : circuit (2) {</span>
-<span class="lineNum">      43 </span>                :<span class="lineCov">        112 :   type = CIR_CAPACITOR;</span>
-<span class="lineNum">      44 </span>                :<span class="lineCov">        112 :   setISource (true);</span>
-<span class="lineNum">      45 </span>                :<span class="lineCov">        112 : }</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">        118 : capacitor::capacitor () : circuit (2) {</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">        118 :   type = CIR_CAPACITOR;</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">        118 :   setISource (true);</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">        118 : }</span>
 <span class="lineNum">      46 </span>                :            : 
 <span class="lineNum">      47 </span>                :            : /*!\brief Compute S parameters
 <span class="lineNum">      48 </span>                :            : 
@@ -138,9 +145,9 @@
 <span class="lineNum">      67 </span>                :<span class="lineCov">      14974 : }</span>
 <a name="68"><span class="lineNum">      68 </span>                :            : </a>
 <span class="lineNum">      69 </span>                :            : /*\brief Init DC simulation of capacitor */
-<span class="lineNum">      70 </span>                :<span class="lineCov">        384 : void capacitor::initDC (void) {</span>
-<span class="lineNum">      71 </span>                :<span class="lineCov">        384 :   allocMatrixMNA ();</span>
-<span class="lineNum">      72 </span>                :<span class="lineCov">        384 : }</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">        486 : void capacitor::initDC (void) {</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">        486 :   allocMatrixMNA ();</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">        486 : }</span>
 <span class="lineNum">      73 </span>                :            : 
 <span class="lineNum">      74 </span>                :            : /*!\brief AC model
 <span class="lineNum">      75 </span>                :            : 
@@ -170,33 +177,33 @@
 <span class="lineNum">      99 </span>                :            : #define qState 0 // charge state
 <a name="100"><span class="lineNum">     100 </span>                :            : #define cState 1 // current state</a>
 <span class="lineNum">     101 </span>                :            : 
-<span class="lineNum">     102 </span>                :<span class="lineCov">         46 : void capacitor::initTR (void) {</span>
-<span class="lineNum">     103 </span>                :<span class="lineCov">         46 :   setStates (2);</span>
-<span class="lineNum">     104 </span>                :<span class="lineCov">         46 :   initDC ();</span>
-<a name="105"><span class="lineNum">     105 </span>                :<span class="lineCov">         46 : }</span></a>
+<span class="lineNum">     102 </span>                :<span class="lineCov">         52 : void capacitor::initTR (void) {</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">         52 :   setStates (2);</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">         52 :   initDC ();</span>
+<a name="105"><span class="lineNum">     105 </span>                :<span class="lineCov">         52 : }</span></a>
 <span class="lineNum">     106 </span>                :            : 
-<span class="lineNum">     107 </span>                :<span class="lineCov">     337353 : void capacitor::calcTR (nr_double_t) {</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">     342591 : void capacitor::calcTR (nr_double_t) {</span>
 <span class="lineNum">     108 </span>                :            : 
 <span class="lineNum">     109 </span>                :            :   /* if this is a controlled capacitance then do nothing here */
-<span class="lineNum">     110 </span>[<span class="branchCov" title="Branch 0 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     674706 :   if (hasProperty (&quot;Controlled&quot;)) return;</span>
+<span class="lineNum">     110 </span>[<span class="branchCov" title="Branch 0 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     685182 :   if (hasProperty (&quot;Controlled&quot;)) return;</span>
 <span class="lineNum">     111 </span>                :            : 
-<span class="lineNum">     112 </span>        [<span class="branchCov" title="Branch 0 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     337353 :   nr_double_t c = getPropertyDouble (&quot;C&quot;);</span>
+<span class="lineNum">     112 </span>        [<span class="branchCov" title="Branch 0 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     342591 :   nr_double_t c = getPropertyDouble (&quot;C&quot;);</span>
 <span class="lineNum">     113 </span>                :            :   nr_double_t g, i;
-<span class="lineNum">     114 </span>[<span class="branchCov" title="Branch 0 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     337353 :   nr_double_t v = real (getV (NODE_1) - getV (NODE_2));</span>
-<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     114 </span>[<span class="branchCov" title="Branch 0 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     342591 :   nr_double_t v = real (getV (NODE_1) - getV (NODE_2));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
 <span class="lineNum">     115 </span>                :            : 
 <span class="lineNum">     116 </span>                :            :   /* apply initial condition if requested */
-<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 1 was taken 1928 times"> + </span><span class="branchCov" title="Branch 2 was taken 335425 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 1928 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     337353 :   if (getMode () == MODE_INIT &amp;&amp; isPropertyGiven (&quot;V&quot;)) {</span>
-<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 12 times"> + </span><span class="branchCov" title="Branch 7 was taken 1916 times"> + </span>][<span class="branchCov" title="Branch 8 was taken 12 times"> + </span><span class="branchCov" title="Branch 9 was taken 337341 times"> + </span>]
+<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 1 was taken 2144 times"> + </span><span class="branchCov" title="Branch 2 was taken 340447 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 2144 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     342591 :   if (getMode () == MODE_INIT &amp;&amp; isPropertyGiven (&quot;V&quot;)) {</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 12 times"> + </span><span class="branchCov" title="Branch 7 was taken 2132 times"> + </span>][<span class="branchCov" title="Branch 8 was taken 12 times"> + </span><span class="branchCov" title="Branch 9 was taken 342579 times"> + </span>]
 <span class="lineNum">     118 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     v = getPropertyDouble (&quot;V&quot;);</span>
 <span class="lineNum">     119 </span>                :            :   }
 <span class="lineNum">     120 </span>                :            : 
-<span class="lineNum">     121 </span>                :<span class="lineCov">     337353 :   setState (qState, c * v);</span>
-<span class="lineNum">     122 </span>        [<span class="branchCov" title="Branch 0 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     337353 :   integrate (qState, c, g, i);</span>
-<span class="lineNum">     123 </span>[<span class="branchCov" title="Branch 1 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     337353 :   setY (NODE_1, NODE_1, +g); setY (NODE_2, NODE_2, +g);</span>
-<span class="lineNum">     124 </span>[<span class="branchCov" title="Branch 1 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     337353 :   setY (NODE_1, NODE_2, -g); setY (NODE_2, NODE_1, -g);</span>
-<span class="lineNum">     125 </span>        [<span class="branchCov" title="Branch 1 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     337353 :   setI (NODE_1 , -i);</span>
-<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 1 was taken 337353 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     337353 :   setI (NODE_2 , +i);</span>
+<span class="lineNum">     121 </span>                :<span class="lineCov">     342591 :   setState (qState, c * v);</span>
+<span class="lineNum">     122 </span>        [<span class="branchCov" title="Branch 0 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     342591 :   integrate (qState, c, g, i);</span>
+<span class="lineNum">     123 </span>[<span class="branchCov" title="Branch 1 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     342591 :   setY (NODE_1, NODE_1, +g); setY (NODE_2, NODE_2, +g);</span>
+<span class="lineNum">     124 </span>[<span class="branchCov" title="Branch 1 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">     342591 :   setY (NODE_1, NODE_2, -g); setY (NODE_2, NODE_1, -g);</span>
+<span class="lineNum">     125 </span>        [<span class="branchCov" title="Branch 1 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     342591 :   setI (NODE_1 , -i);</span>
+<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 1 was taken 342591 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     342591 :   setI (NODE_2 , +i);</span>
 <a name="127"><span class="lineNum">     127 </span>                :            : }</a>
 <span class="lineNum">     128 </span>                :            : 
 <span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 : void capacitor::initHB (void) {</span>

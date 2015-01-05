@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">45</td>
@@ -189,17 +189,17 @@
 <a name="111"><span class="lineNum">     111 </span>                :            :    */</a>
 <a name="112"><span class="lineNum">     112 </span>                :<span class="lineCov">     124831 :   virtual void initSP (void) { allocMatrixS (); }</span></a>
 <a name="113"><span class="lineNum">     113 </span>                :<span class="lineCov">      76656 :   virtual void calcSP (nr_double_t) { }</span></a>
-<a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">      19977 :   virtual void initDC (void) { allocMatrixMNA (); }</span></a>
-<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">     207239 :   virtual void calcDC (void) { }</span></a>
+<a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">      22460 :   virtual void initDC (void) { allocMatrixMNA (); }</span></a>
+<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">     240703 :   virtual void calcDC (void) { }</span></a>
 <a name="116"><span class="lineNum">     116 </span>                :<span class="lineCov">        648 :   virtual void restartDC (void) { }</span></a>
 <a name="117"><span class="lineNum">     117 </span>                :<span class="lineCov">       9170 :   virtual void initNoiseSP (void) { allocMatrixN (); }</span></a>
 <a name="118"><span class="lineNum">     118 </span>                :<span class="lineCov">       7103 :   virtual void calcNoiseSP (nr_double_t) { }</span></a>
-<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">        188 :   virtual void initNoiseAC (void) { allocMatrixN (vsources); }</span></a>
-<a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">       9646 :   virtual void calcNoiseAC (nr_double_t) { }</span></a>
-<a name="121"><span class="lineNum">     121 </span>                :<span class="lineCov">        140 :   virtual void initAC (void) { allocMatrixMNA (); }</span></a>
-<a name="122"><span class="lineNum">     122 </span>                :<span class="lineCov">      18505 :   virtual void calcAC (nr_double_t) { }</span></a>
-<a name="123"><span class="lineNum">     123 </span>                :<span class="lineCov">         97 :   virtual void initTR (void) { allocMatrixMNA (); }</span></a>
-<a name="124"><span class="lineNum">     124 </span>                :<span class="lineCov">    1039762 :   virtual void calcTR (nr_double_t) { }</span></a>
+<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">        282 :   virtual void initNoiseAC (void) { allocMatrixN (vsources); }</span></a>
+<a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">      14469 :   virtual void calcNoiseAC (nr_double_t) { }</span></a>
+<a name="121"><span class="lineNum">     121 </span>                :<span class="lineCov">        151 :   virtual void initAC (void) { allocMatrixMNA (); }</span></a>
+<a name="122"><span class="lineNum">     122 </span>                :<span class="lineCov">      22418 :   virtual void calcAC (nr_double_t) { }</span></a>
+<a name="123"><span class="lineNum">     123 </span>                :<span class="lineCov">        122 :   virtual void initTR (void) { allocMatrixMNA (); }</span></a>
+<a name="124"><span class="lineNum">     124 </span>                :<span class="lineCov">    1256326 :   virtual void calcTR (nr_double_t) { }</span></a>
 <a name="125"><span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 :   virtual void initHB (void) { allocMatrixMNA (); }</span></a>
 <a name="126"><span class="lineNum">     126 </span>                :<span class="lineCov">         18 :   virtual void calcHB (nr_double_t) { }</span></a>
 <a name="127"><span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :   virtual void initHB (int) { allocMatrixMNA (); }</span></a>
@@ -213,13 +213,13 @@
 <span class="lineNum">     135 </span>                :            :   void   setNode (int, const char *, int intern = 0);
 <a name="136"><span class="lineNum">     136 </span>                :            :   node * getNode (int);</a>
 <span class="lineNum">     137 </span>                :            :   void   setType (int t) { type = t; }
-<span class="lineNum">     138 </span>                :<span class="lineCov">     243861 :   int    getType (void) { return type; }</span>
+<span class="lineNum">     138 </span>                :<span class="lineCov">     243987 :   int    getType (void) { return type; }</span>
 <span class="lineNum">     139 </span>                :            :   /*! \fn getSize
 <span class="lineNum">     140 </span>                :            :    * \brief Get the number of ports the circuit element has.
 <span class="lineNum">     141 </span>                :            :    *
 <a name="142"><span class="lineNum">     142 </span>                :            :    * Gets the number of ports the circuit element has</a>
 <span class="lineNum">     143 </span>                :            :    */
-<span class="lineNum">     144 </span>                :<span class="lineCov">   21751985 :   int    getSize (void) { return size; }</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">   22567361 :   int    getSize (void) { return size; }</span>
 <span class="lineNum">     145 </span>                :            :   /*! \fn setSize
 <span class="lineNum">     146 </span>                :            :    * \brief Set the number of ports the circuit element has.
 <span class="lineNum">     147 </span>                :            :    * \param s integer representing the number of ports
@@ -243,34 +243,34 @@
 <span class="lineNum">     165 </span>                :            :    *
 <a name="166"><span class="lineNum">     166 </span>                :            :    * Sets the circuit element to be enabled or disabled.</a>
 <a name="167"><span class="lineNum">     167 </span>                :            :    */</a>
-<a name="168"><span class="lineNum">     168 </span>        [<span class="branchCov" title="Branch 0 was taken 243334 times"> + </span><span class="branchCov" title="Branch 1 was taken 242351 times"> + </span>]:<span class="lineCov">     485685 :   void   setEnabled (bool e) { MODFLAG (e, CIRCUIT_ENABLED); }</span></a>
-<a name="169"><span class="lineNum">     169 </span>                :<span class="lineCov">        830 :   bool   isVariableSized (void) { return RETFLAG (CIRCUIT_VARSIZE); }</span></a>
+<a name="168"><span class="lineNum">     168 </span>        [<span class="branchCov" title="Branch 0 was taken 243460 times"> + </span><span class="branchCov" title="Branch 1 was taken 242351 times"> + </span>]:<span class="lineCov">     485811 :   void   setEnabled (bool e) { MODFLAG (e, CIRCUIT_ENABLED); }</span></a>
+<a name="169"><span class="lineNum">     169 </span>                :<span class="lineCov">        933 :   bool   isVariableSized (void) { return RETFLAG (CIRCUIT_VARSIZE); }</span></a>
 <a name="170"><span class="lineNum">     170 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   void   setVariableSized (bool v) { MODFLAG (v, CIRCUIT_VARSIZE); }</span></a>
-<a name="171"><span class="lineNum">     171 </span>                :<span class="lineCov">     504449 :   bool   isProbe (void) { return RETFLAG (CIRCUIT_PROBE); }</span></a>
-<a name="172"><span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         11 :   void   setProbe (bool p) { MODFLAG (p, CIRCUIT_PROBE); }</span></a>
-<span class="lineNum">     173 </span>                :<span class="lineCov">     485685 :   void   setNet (net * n) { subnet = n; }</span>
-<span class="lineNum">     174 </span>                :<span class="lineCov">     609668 :   net *  getNet (void) { return subnet; }</span>
+<a name="171"><span class="lineNum">     171 </span>                :<span class="lineCov">     652260 :   bool   isProbe (void) { return RETFLAG (CIRCUIT_PROBE); }</span></a>
+<a name="172"><span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 15 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         15 :   void   setProbe (bool p) { MODFLAG (p, CIRCUIT_PROBE); }</span></a>
+<span class="lineNum">     173 </span>                :<span class="lineCov">     485811 :   void   setNet (net * n) { subnet = n; }</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">     728780 :   net *  getNet (void) { return subnet; }</span>
 <a name="175"><span class="lineNum">     175 </span>                :            : </a>
 <span class="lineNum">     176 </span>                :            :   // subcircuitry
-<span class="lineNum">     177 </span>                :<span class="lineCov">     124339 :   char * getSubcircuit (void) { return subcircuit; }</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">     170813 :   char * getSubcircuit (void) { return subcircuit; }</span>
 <span class="lineNum">     178 </span>                :            :   void   setSubcircuit (char *);
 <a name="179"><span class="lineNum">     179 </span>                :            : </a>
 <a name="180"><span class="lineNum">     180 </span>                :            :   // environment specific</a>
 <span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :   environment * getEnv (void) { return env; }</span>
-<span class="lineNum">     182 </span>                :<span class="lineCov">        830 :   void setEnv (environment * e) { env = e; }</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">        933 :   void setEnv (environment * e) { env = e; }</span>
 <a name="183"><span class="lineNum">     183 </span>                :            : </a>
 <a name="184"><span class="lineNum">     184 </span>                :            :   // nodal analyses helpers</a>
-<a name="185"><span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 608 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        608 :   void setInternalVoltageSource (bool i) { MODFLAG (i, CIRCUIT_INTVSOURCE); }</span></a>
-<a name="186"><span class="lineNum">     186 </span>                :<span class="lineCov">     172873 :   bool isInternalVoltageSource (void) { return RETFLAG (CIRCUIT_INTVSOURCE); }</span></a>
-<span class="lineNum">     187 </span>                :<span class="lineCov">      23869 :   void setVoltageSource (int s) { vsource = s; }</span>
-<span class="lineNum">     188 </span>                :<span class="lineCov">  259870653 :   int  getVoltageSource (void) { return vsource; }</span>
+<a name="185"><span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 810 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        810 :   void setInternalVoltageSource (bool i) { MODFLAG (i, CIRCUIT_INTVSOURCE); }</span></a>
+<a name="186"><span class="lineNum">     186 </span>                :<span class="lineCov">     233232 :   bool isInternalVoltageSource (void) { return RETFLAG (CIRCUIT_INTVSOURCE); }</span></a>
+<span class="lineNum">     187 </span>                :<span class="lineCov">      31223 :   void setVoltageSource (int s) { vsource = s; }</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">  311375441 :   int  getVoltageSource (void) { return vsource; }</span>
 <span class="lineNum">     189 </span>                :            :   int  getVoltageSources (void);
 <a name="190"><span class="lineNum">     190 </span>                :            :   void setVoltageSources (int);</a>
 <a name="191"><span class="lineNum">     191 </span>                :            :   void voltageSource (int, int, int, nr_double_t value = 0.0);</a>
-<a name="192"><span class="lineNum">     192 </span>                :<span class="lineCov">     827231 :   bool isVSource (void) { return RETFLAG (CIRCUIT_VSOURCE); }</span></a>
-<a name="193"><span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 166 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        166 :   void setVSource (bool v) { MODFLAG (v, CIRCUIT_VSOURCE); }</span></a>
-<span class="lineNum">     194 </span>                :<span class="lineCov">    7442825 :   bool isISource (void) { return RETFLAG (CIRCUIT_ISOURCE); }</span>
-<span class="lineNum">     195 </span>        [<span class="branchCov" title="Branch 0 was taken 247 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">        255 :   void setISource (bool i) { MODFLAG (i, CIRCUIT_ISOURCE); }</span>
+<a name="192"><span class="lineNum">     192 </span>                :<span class="lineCov">    1030857 :   bool isVSource (void) { return RETFLAG (CIRCUIT_VSOURCE); }</span></a>
+<a name="193"><span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 200 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        200 :   void setVSource (bool v) { MODFLAG (v, CIRCUIT_VSOURCE); }</span></a>
+<span class="lineNum">     194 </span>                :<span class="lineCov">    8714481 :   bool isISource (void) { return RETFLAG (CIRCUIT_ISOURCE); }</span>
+<span class="lineNum">     195 </span>        [<span class="branchCov" title="Branch 0 was taken 265 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">        273 :   void setISource (bool i) { MODFLAG (i, CIRCUIT_ISOURCE); }</span>
 <span class="lineNum">     196 </span>                :            :   int  getNoiseSources (void);
 <span class="lineNum">     197 </span>                :            :   void setNoiseSources (int);
 <span class="lineNum">     198 </span>                :            : 
@@ -284,12 +284,12 @@
 <span class="lineNum">     206 </span>                :            :   void transientCapacitanceC (int, int, nr_double_t, nr_double_t);
 <a name="207"><span class="lineNum">     207 </span>                :            :   void transientCapacitanceC2V (int, int, int, nr_double_t, nr_double_t);</a>
 <a name="208"><span class="lineNum">     208 </span>                :            :   void transientCapacitanceC2Q (int, int, int, nr_double_t, nr_double_t);</a>
-<span class="lineNum">     209 </span>                :<span class="lineCov">        598 :   void setDelta (nr_double_t * d) { deltas = d; }</span>
-<span class="lineNum">     210 </span>                :<span class="lineCov">       5238 :   nr_double_t * getDelta (void) { return deltas; }</span>
+<span class="lineNum">     209 </span>                :<span class="lineCov">        740 :   void setDelta (nr_double_t * d) { deltas = d; }</span>
+<span class="lineNum">     210 </span>                :<span class="lineCov">       6984 :   nr_double_t * getDelta (void) { return deltas; }</span>
 <a name="211"><span class="lineNum">     211 </span>                :            : </a>
 <a name="212"><span class="lineNum">     212 </span>                :            :   // history specific functionality</a>
-<span class="lineNum">     213 </span>                :<span class="lineCov">    1510226 :   bool hasHistory (void) { return RETFLAG (CIRCUIT_HISTORY); }</span>
-<span class="lineNum">     214 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 125882 times"> + </span>]:<span class="lineCov">     125882 :   void setHistory (bool h) { MODFLAG (h, CIRCUIT_HISTORY); }</span>
+<span class="lineNum">     213 </span>                :<span class="lineCov">    1790107 :   bool hasHistory (void) { return RETFLAG (CIRCUIT_HISTORY); }</span>
+<span class="lineNum">     214 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 126018 times"> + </span>]:<span class="lineCov">     126018 :   void setHistory (bool h) { MODFLAG (h, CIRCUIT_HISTORY); }</span>
 <span class="lineNum">     215 </span>                :            :   void initHistory (nr_double_t);
 <span class="lineNum">     216 </span>                :            :   void deleteHistory (void);
 <span class="lineNum">     217 </span>                :            :   void truncateHistory (nr_double_t);
@@ -374,8 +374,8 @@
 <span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :   valuelist&lt;characteristic&gt; &amp; getCharacteristics (void) { return charac; }</span>
 <a name="297"><span class="lineNum">     297 </span>                :            : </a>
 <a name="298"><span class="lineNum">     298 </span>                :            :   // differentiate between linear and non-linear circuits</a>
-<span class="lineNum">     299 </span>        [<span class="branchCov" title="Branch 0 was taken 716 times"> + </span><span class="branchCov" title="Branch 1 was taken 114 times"> + </span>]:<span class="lineCov">        830 :   void setNonLinear (bool l) { MODFLAG (!l, CIRCUIT_LINEAR); }</span>
-<span class="lineNum">     300 </span>                :<span class="lineCov">    6723879 :   bool isNonLinear (void) { return !RETFLAG (CIRCUIT_LINEAR); }</span>
+<span class="lineNum">     299 </span>        [<span class="branchCov" title="Branch 0 was taken 812 times"> + </span><span class="branchCov" title="Branch 1 was taken 121 times"> + </span>]:<span class="lineCov">        933 :   void setNonLinear (bool l) { MODFLAG (!l, CIRCUIT_LINEAR); }</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">    8028504 :   bool isNonLinear (void) { return !RETFLAG (CIRCUIT_LINEAR); }</span>
 <span class="lineNum">     301 </span>                :            : 
 <span class="lineNum">     302 </span>                :            :   // miscellaneous functionality
 <span class="lineNum">     303 </span>                :            :   void print (void);

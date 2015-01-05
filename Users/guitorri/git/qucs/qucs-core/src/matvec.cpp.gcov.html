@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -237,10 +237,10 @@
 <span class="lineNum">     145 </span>                :            :    row and column indices as well.  The caller is responsible to
 <a name="146"><span class="lineNum">     146 </span>                :            :    'free()' the returned string.  If the vectors name does not match</a>
 <span class="lineNum">     147 </span>                :            :    the pattern the function returns NULL. */
-<span class="lineNum">     148 </span>                :<span class="lineCov">       1073 : char * matvec::isMatrixVector (char * n, int&amp; r, int&amp; c) {</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">       1218 : char * matvec::isMatrixVector (char * n, int&amp; r, int&amp; c) {</span>
 <span class="lineNum">     149 </span>                :            :   char * p; int len;
-<span class="lineNum">     150 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1073 times"> + </span>]:<span class="lineCov">       1073 :   if (n == NULL) return NULL;              // nothing todo here</span>
-<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchCov" title="Branch 1 was taken 889 times"> + </span>]:<span class="lineCov">       1073 :   if ((p = strchr (n, '[')) != NULL) {     // find first '['</span>
+<span class="lineNum">     150 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1218 times"> + </span>]:<span class="lineCov">       1218 :   if (n == NULL) return NULL;              // nothing todo here</span>
+<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchCov" title="Branch 1 was taken 1034 times"> + </span>]:<span class="lineCov">       1218 :   if ((p = strchr (n, '[')) != NULL) {     // find first '['</span>
 <span class="lineNum">     152 </span>                :<span class="lineCov">        184 :     r = atoi (p + 1) - 1;                  // get first index</span>
 <span class="lineNum">     153 </span>        [<span class="branchCov" title="Branch 0 was taken 184 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        184 :     if ((p = strchr (p, ',')) != NULL) {   // find the ','</span>
 <span class="lineNum">     154 </span>                :<span class="lineCov">        184 :       c = atoi (p + 1) - 1;                // get second index</span>
@@ -257,7 +257,7 @@
 <span class="lineNum">     165 </span>                :            :       }
 <span class="lineNum">     166 </span>                :            :     }
 <span class="lineNum">     167 </span>                :            :   }
-<span class="lineNum">     168 </span>                :<span class="lineCov">       1073 :   return NULL;</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">       1218 :   return NULL;</span>
 <span class="lineNum">     169 </span>                :            : }
 <span class="lineNum">     170 </span>                :            : 
 <span class="lineNum">     171 </span>                :            : /* This function looks through the vector list given in `data' to find

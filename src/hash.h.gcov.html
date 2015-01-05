@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/hash.h</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/hash.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">29</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">11</td>
@@ -122,12 +129,12 @@
 <span class="lineNum">      51 </span>                :            :   friend class hash&lt;type_t&gt;;
 <a name="52"><span class="lineNum">      52 </span>                :            : </a>
 <span class="lineNum">      53 </span>                :            :  public:
-<span class="lineNum">      54 </span>                :<span class="lineCov">      14287 :   hashentry () {  // Constructor.</span>
-<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">      14287 :     code = 0; key = NULL; value = NULL;</span></a>
-<span class="lineNum">      56 </span>                :<span class="lineCov">      14287 :   }</span>
-<span class="lineNum">      57 </span>                :<span class="lineCov">      14287 :   ~hashentry () { // Destructor.</span>
-<span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 14287 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      14287 :     if (key) free (key);</span>
-<span class="lineNum">      59 </span>                :<span class="lineCov">      14287 :   }</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">      16328 :   hashentry () {  // Constructor.</span>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">      16328 :     code = 0; key = NULL; value = NULL;</span></a>
+<span class="lineNum">      56 </span>                :<span class="lineCov">      16328 :   }</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">      16328 :   ~hashentry () { // Destructor.</span>
+<span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 16328 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      16328 :     if (key) free (key);</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">      16328 :   }</span>
 <span class="lineNum">      60 </span>                :            : 
 <span class="lineNum">      61 </span>                :            :  private:
 <span class="lineNum">      62 </span>                :            :   int code;       // Hash code.
@@ -144,37 +151,37 @@
 <span class="lineNum">      73 </span>                :            :   friend class hash&lt;type_t&gt;;
 <a name="74"><span class="lineNum">      74 </span>                :            : </a>
 <span class="lineNum">      75 </span>                :            :  public:
-<span class="lineNum">      76 </span>                :<span class="lineCov">       9555 :   hashbucket () {  // Constructor.</span>
-<span class="lineNum">      77 </span>                :<span class="lineCov">       9555 :     capacity = size = 0;</span>
-<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">       9555 :     entry = NULL;</span></a>
-<span class="lineNum">      79 </span>                :<span class="lineCov">       9555 :   }</span>
-<span class="lineNum">      80 </span>                :<span class="lineCov">       9555 :   ~hashbucket () { // Destructor.</span>
-<span class="lineNum">      81 </span>        [<span class="branchCov" title="Branch 0 was taken 9555 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       9555 :     if (entry) {</span>
-<span class="lineNum">      82 </span>[<span class="branchCov" title="Branch 0 was taken 14287 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 14287 times"> + </span><span class="branchCov" title="Branch 5 was taken 9555 times"> + </span>]:<span class="lineCov">      23842 :       for (int n = 0; n &lt; size; n++) delete entry[n];</span>
-<span class="lineNum">      83 </span>                :<span class="lineCov">       9555 :       free (entry);</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">      10920 :   hashbucket () {  // Constructor.</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">      10920 :     capacity = size = 0;</span>
+<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">      10920 :     entry = NULL;</span></a>
+<span class="lineNum">      79 </span>                :<span class="lineCov">      10920 :   }</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">      10920 :   ~hashbucket () { // Destructor.</span>
+<span class="lineNum">      81 </span>        [<span class="branchCov" title="Branch 0 was taken 10920 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      10920 :     if (entry) {</span>
+<span class="lineNum">      82 </span>[<span class="branchCov" title="Branch 0 was taken 16328 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 16328 times"> + </span><span class="branchCov" title="Branch 5 was taken 10920 times"> + </span>]:<span class="lineCov">      27248 :       for (int n = 0; n &lt; size; n++) delete entry[n];</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">      10920 :       free (entry);</span>
 <span class="lineNum">      84 </span>                :            :     }
-<span class="lineNum">      85 </span>                :<span class="lineCov">       9555 :   }</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">      10920 :   }</span>
 <span class="lineNum">      86 </span>                :            : 
 <a name="87"><span class="lineNum">      87 </span>                :            :  public:</a>
 <span class="lineNum">      88 </span>                :            :   // Adds an entry to the bucket.
-<span class="lineNum">      89 </span>                :<span class="lineCov">      24206 :   void add (hashentry&lt;type_t&gt; * e) {</span>
-<span class="lineNum">      90 </span>        [<span class="branchCov" title="Branch 0 was taken 9555 times"> + </span><span class="branchCov" title="Branch 1 was taken 14651 times"> + </span>]:<span class="lineCov">      24206 :     if (capacity == 0) {</span>
-<span class="lineNum">      91 </span>                :<span class="lineCov">       9555 :       capacity = HASH_MIN_SIZE;</span>
-<span class="lineNum">      92 </span>                :<span class="lineCov">       9555 :       entry = (hashentry&lt;type_t&gt; **)</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">      27664 :   void add (hashentry&lt;type_t&gt; * e) {</span>
+<span class="lineNum">      90 </span>        [<span class="branchCov" title="Branch 0 was taken 10920 times"> + </span><span class="branchCov" title="Branch 1 was taken 16744 times"> + </span>]:<span class="lineCov">      27664 :     if (capacity == 0) {</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">      10920 :       capacity = HASH_MIN_SIZE;</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">      10920 :       entry = (hashentry&lt;type_t&gt; **)</span>
 <span class="lineNum">      93 </span>                :            :         malloc (sizeof (hashentry&lt;type_t&gt; *) * capacity);
 <span class="lineNum">      94 </span>                :            :     }
-<span class="lineNum">      95 </span>        [<span class="branchCov" title="Branch 0 was taken 819 times"> + </span><span class="branchCov" title="Branch 1 was taken 13832 times"> + </span>]:<span class="lineCov">      14651 :     else if (size &gt;= capacity) {</span>
-<span class="lineNum">      96 </span>                :<span class="lineCov">        819 :       capacity *= 2;</span>
-<span class="lineNum">      97 </span>                :<span class="lineCov">        819 :       entry = (hashentry&lt;type_t&gt; **)</span>
+<span class="lineNum">      95 </span>        [<span class="branchCov" title="Branch 0 was taken 936 times"> + </span><span class="branchCov" title="Branch 1 was taken 15808 times"> + </span>]:<span class="lineCov">      16744 :     else if (size &gt;= capacity) {</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">        936 :       capacity *= 2;</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">        936 :       entry = (hashentry&lt;type_t&gt; **)</span>
 <span class="lineNum">      98 </span>                :            :         realloc (entry, sizeof (hashentry&lt;type_t&gt; *) * capacity);
 <span class="lineNum">      99 </span>                :            :     }
-<span class="lineNum">     100 </span>                :<span class="lineCov">      24206 :     entry[size++] = e;</span>
-<a name="101"><span class="lineNum">     101 </span>                :<span class="lineCov">      24206 :   }</span></a>
+<span class="lineNum">     100 </span>                :<span class="lineCov">      27664 :     entry[size++] = e;</span>
+<a name="101"><span class="lineNum">     101 </span>                :<span class="lineCov">      27664 :   }</span></a>
 <span class="lineNum">     102 </span>                :            :   // Removes an entry from the bucket.
-<span class="lineNum">     103 </span>                :<span class="lineCov">       9919 :   void del (int idx) {</span>
-<span class="lineNum">     104 </span>                :<span class="lineCov">       9919 :     size--;</span>
-<span class="lineNum">     105 </span>        [<span class="branchCov" title="Branch 0 was taken 5642 times"> + </span><span class="branchCov" title="Branch 1 was taken 4277 times"> + </span>]:<span class="lineCov">       9919 :     if (idx != size) entry[idx] = entry[size];</span>
-<span class="lineNum">     106 </span>                :<span class="lineCov">       9919 :   }</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">      11336 :   void del (int idx) {</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">      11336 :     size--;</span>
+<span class="lineNum">     105 </span>        [<span class="branchCov" title="Branch 0 was taken 6448 times"> + </span><span class="branchCov" title="Branch 1 was taken 4888 times"> + </span>]:<span class="lineCov">      11336 :     if (idx != size) entry[idx] = entry[size];</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">      11336 :   }</span>
 <span class="lineNum">     107 </span>                :            : 
 <span class="lineNum">     108 </span>                :            :  private:
 <span class="lineNum">     109 </span>                :            :   int capacity;               // The capacity of the bucket.
@@ -224,7 +231,7 @@
 <span class="lineNum">     153 </span>                :            :   char * toLast (void);
 <a name="154"><span class="lineNum">     154 </span>                :            :   char * operator++ (void);</a>
 <span class="lineNum">     155 </span>                :            :   char * operator-- (void);
-<span class="lineNum">     156 </span>                :<span class="lineCov">      28756 :   char * operator * (void) { return current (); }</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">      32864 :   char * operator * (void) { return current (); }</span>
 <span class="lineNum">     157 </span>                :            :   char * current (void);
 <span class="lineNum">     158 </span>                :            :   char * currentKey (void);
 <span class="lineNum">     159 </span>                :            :   type_t * currentVal (void);

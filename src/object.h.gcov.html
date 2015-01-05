@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - qucs-core-0.0.19-coverage.info - src/object.h</title>
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - src/object.h</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td class="headerValue">2015-01-05 16:01:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -45,8 +45,15 @@
             <td class="headerCovTableEntryMed">83.3 %</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntry">0</td>
@@ -127,12 +134,12 @@
 <span class="lineNum">      56 </span>                :            :   object (const char *);
 <a name="57"><span class="lineNum">      57 </span>                :            :   object (const object &amp;);</a>
 <a name="58"><span class="lineNum">      58 </span>                :            :   virtual ~object ();</a>
-<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">  127026938 :   object * getNext (void) const { return this-&gt;next; }</span></a>
-<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">     527845 :   void setNext (object * const o) { this-&gt;next = o; }</span></a>
-<span class="lineNum">      61 </span>                :<span class="lineCov">     331743 :   object * getPrev (void) const { return prev; }</span>
-<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">     960155 :   void setPrev (object * const o) { this-&gt;prev = o; }</span></a>
+<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">  151834156 :   object * getNext (void) const { return this-&gt;next; }</span></a>
+<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">     528132 :   void setNext (object * const o) { this-&gt;next = o; }</span></a>
+<span class="lineNum">      61 </span>                :<span class="lineCov">     331756 :   object * getPrev (void) const { return prev; }</span>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">     960686 :   void setPrev (object * const o) { this-&gt;prev = o; }</span></a>
 <span class="lineNum">      63 </span>                :            :   void setName (const char * const);
-<span class="lineNum">      64 </span>                :<span class="lineCov">    8516298 :   char * getName (void) const { return this-&gt;name; };</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">   10317587 :   char * getName (void) const { return this-&gt;name; };</span>
 <span class="lineNum">      65 </span>                :            :   void addProperty (property * const);
 <span class="lineNum">      66 </span>                :            :   property * addProperty (const char * const, const char * const);
 <span class="lineNum">      67 </span>                :            :   property * addProperty (const char * const, const nr_double_t);

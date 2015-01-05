@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td class="headerValue">2015-01-05 16:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -121,18 +121,18 @@
 <span class="lineNum">      43 </span>                :            :   // integration specific
 <a name="44"><span class="lineNum">      44 </span>                :            :   typedef void (* integrate_func_t)</a>
 <span class="lineNum">      45 </span>                :            :     (integrator *, int, nr_double_t, nr_double_t&amp;, nr_double_t&amp;);
-<span class="lineNum">      46 </span>                :<span class="lineCov">       2028 :   void setIntegration (integrate_func_t f) { integrate_func = f; }</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">       2467 :   void setIntegration (integrate_func_t f) { integrate_func = f; }</span>
 <a name="47"><span class="lineNum">      47 </span>                :            :   typedef void (* conductor_func_t)</a>
 <span class="lineNum">      48 </span>                :            :     (integrator *, nr_double_t, nr_double_t&amp;);
-<span class="lineNum">      49 </span>                :<span class="lineCov">       2028 :   void setConductance (conductor_func_t f) { conductor_func = f; }</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">       2467 :   void setConductance (conductor_func_t f) { conductor_func = f; }</span>
 <a name="50"><span class="lineNum">      50 </span>                :            :   void integrate (int, nr_double_t, nr_double_t&amp;, nr_double_t&amp;);</a>
 <a name="51"><span class="lineNum">      51 </span>                :            :   void conductor (nr_double_t, nr_double_t&amp;);</a>
-<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">       2028 :   void setOrder (int o) { order = o; }</span></a>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">       2467 :   void setOrder (int o) { order = o; }</span></a>
 <a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">      50834 :   int  getOrder (void) { return order; }</span></a>
-<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">    1661425 :   void setMode (int s) { state = s; }</span></a>
-<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">     542563 :   int  getMode (void) { return state; }</span></a>
-<span class="lineNum">      56 </span>                :<span class="lineCov">        650 :   void setCoefficients (nr_double_t * c) { coefficients = c; }</span>
-<span class="lineNum">      57 </span>                :<span class="lineCov">    1514214 :   nr_double_t * getCoefficients (void) { return coefficients; }</span>
+<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">    1985496 :   void setMode (int s) { state = s; }</span></a>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">     558277 :   int  getMode (void) { return state; }</span></a>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        805 :   void setCoefficients (nr_double_t * c) { coefficients = c; }</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">    1535166 :   nr_double_t * getCoefficients (void) { return coefficients; }</span>
 <span class="lineNum">      58 </span>                :            : 
 <span class="lineNum">      59 </span>                :            :  private:
 <span class="lineNum">      60 </span>                :            :   int order;
