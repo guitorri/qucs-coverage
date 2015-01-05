@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/components/microstrip/mscoupled.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/components/microstrip</a> - mscoupled.cpp<span style="font-size: 80%;"> (source / <a href="mscoupled.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">180</td>
+            <td class="headerCovTableEntry">283</td>
+            <td class="headerCovTableEntryLo">63.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryLo">41.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">216</td>
+            <td class="headerCovTableEntry">678</td>
+            <td class="headerCovTableEntryLo">31.9 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * mscoupled.cpp - parallel coupled microstrip lines class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2005, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;substrate.h&quot;
+<span class="lineNum">      31 </span>                :            : #include &quot;msline.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;mscoupled.h&quot;
+<span class="lineNum">      33 </span>                :            : 
+<a name="34"><span class="lineNum">      34 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :<span class="lineCov">          6 : mscoupled::mscoupled () : circuit (4) {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">          6 :   type = CIR_MSCOUPLED;</span>
+<a name="38"><span class="lineNum">      38 </span>                :<span class="lineCov">          6 : }</span></a>
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :<span class="lineCov">        851 : void mscoupled::calcPropagation (nr_double_t frequency) {</span>
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :            :   // fetch line properties
+<span class="lineNum">      43 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t W = getPropertyDouble (&quot;W&quot;);</span>
+<span class="lineNum">      44 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t s = getPropertyDouble (&quot;S&quot;);</span>
+<span class="lineNum">      45 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   const char * SModel = getPropertyString (&quot;Model&quot;);</span>
+<span class="lineNum">      46 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   const char * DModel = getPropertyString (&quot;DispModel&quot;);</span>
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            :   // fetch substrate properties
+<span class="lineNum">      49 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   substrate * subst = getSubstrate ();</span>
+<span class="lineNum">      50 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t er    = subst-&gt;getPropertyDouble (&quot;er&quot;);</span>
+<span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t h     = subst-&gt;getPropertyDouble (&quot;h&quot;);</span>
+<span class="lineNum">      52 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t t     = subst-&gt;getPropertyDouble (&quot;t&quot;);</span>
+<span class="lineNum">      53 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t tand  = subst-&gt;getPropertyDouble (&quot;tand&quot;);</span>
+<span class="lineNum">      54 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t rho   = subst-&gt;getPropertyDouble (&quot;rho&quot;);</span>
+<span class="lineNum">      55 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t D     = subst-&gt;getPropertyDouble (&quot;D&quot;);</span>
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :            :   // quasi-static analysis
+<span class="lineNum">      58 </span>                :            :   nr_double_t Zle, ErEffe, Zlo, ErEffo;
+<span class="lineNum">      59 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   analysQuasiStatic (W, h, s, t, er, SModel, Zle, Zlo, ErEffe, ErEffo);</span>
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>                :            :   // analyse dispersion of Zl and Er
+<span class="lineNum">      62 </span>                :            :   nr_double_t ZleFreq, ErEffeFreq, ZloFreq, ErEffoFreq;
+<span class="lineNum">      63 </span>                :            :   analyseDispersion (W, h, s, er, Zle, Zlo, ErEffe, ErEffo, frequency, DModel,
+<span class="lineNum">      64 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :                      ZleFreq, ZloFreq, ErEffeFreq, ErEffoFreq);</span>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :   // analyse losses of line
+<span class="lineNum">      67 </span>                :            :   nr_double_t ace, aco, ade, ado;
+<span class="lineNum">      68 </span>                :            :   msline::analyseLoss (W, t, er, rho, D, tand, Zle, Zlo, ErEffe,
+<span class="lineNum">      69 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :                        frequency, &quot;Hammerstad&quot;, ace, ade);</span>
+<span class="lineNum">      70 </span>                :            :   msline::analyseLoss (W, t, er, rho, D, tand, Zlo, Zle, ErEffo,
+<span class="lineNum">      71 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :                        frequency, &quot;Hammerstad&quot;, aco, ado);</span>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :            :   // compute propagation constants for even and odd mode
+<span class="lineNum">      74 </span>                :<span class="lineCov">        851 :   nr_double_t k0 = 2 * M_PI * frequency / C0;</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">        851 :   ae = ace + ade;</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">        851 :   ao = aco + ado;</span>
+<span class="lineNum">      77 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   be = qucs::sqrt (ErEffeFreq) * k0;</span>
+<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   bo = qucs::sqrt (ErEffoFreq) * k0;</span>
+<span class="lineNum">      79 </span>                :<span class="lineCov">        851 :   ze = ZleFreq;</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">        851 :   zo = ZloFreq;</span>
+<span class="lineNum">      81 </span>                :<span class="lineCov">        851 :   ee = ErEffeFreq;</span>
+<span class="lineNum">      82 </span>                :<span class="lineCov">        851 :   eo = ErEffoFreq;</span>
+<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">        851 : }</span></a>
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 : void mscoupled::saveCharacteristics (nr_double_t) {</span>
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;ZlEven&quot;, ze);</span>
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;ErEven&quot;, ee);</span>
+<span class="lineNum">      88 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;ZlOdd&quot;, zo);</span>
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;ErOdd&quot;, eo);</span>
+<a name="90"><span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :<span class="lineCov">        851 : void mscoupled::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">      93 </span>                :            :   // fetch line properties
+<span class="lineNum">      94 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      96 </span>                :            :   // compute propagation constants for even and odd mode
+<span class="lineNum">      97 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   calcPropagation (frequency);</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">        851 :   nr_complex_t ge = nr_complex_t (ae, be);</span>
+<span class="lineNum">      99 </span>                :<span class="lineCov">        851 :   nr_complex_t go = nr_complex_t (ao, bo);</span>
+<span class="lineNum">     100 </span>                :            : 
+<span class="lineNum">     101 </span>                :            :   // compute abbreviations
+<span class="lineNum">     102 </span>                :<span class="lineCov">        851 :   nr_complex_t Ee, Eo, De, Do, Xe, Xo, Ye, Yo;</span>
+<span class="lineNum">     103 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        851 :   Ee = (sqr (ze) + sqr (z0)) * qucs::sinh (ge * l);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     104 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        851 :   Eo = (sqr (zo) + sqr (z0)) * qucs::sinh (go * l);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     105 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        851 :   De = 2 * ze * z0 * cosh (ge * l) + Ee;</span>
+<span class="lineNum">     106 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        851 :   Do = 2 * zo * z0 * cosh (go * l) + Eo;</span>
+<span class="lineNum">     107 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        851 :   Xe = (sqr (ze) - sqr (z0)) * qucs::sinh (ge * l) / 2.0 / De;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>][<span class="branchCov" title="Branch 12 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     108 </span>[<span class="branchCov" title="Branch 1 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">        851 :   Xo = (sqr (zo) - sqr (z0)) * qucs::sinh (go * l) / 2.0 / Do;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 7 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>][<span class="branchCov" title="Branch 12 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     109 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   Ye = ze * z0 / De;</span>
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   Yo = zo * z0 / Do;</span>
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            :   // reflexion coefficients
+<span class="lineNum">     113 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_1, NODE_1, Xe + Xo); setS (NODE_2, NODE_2, Xe + Xo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     114 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_3, NODE_3, Xe + Xo); setS (NODE_4, NODE_4, Xe + Xo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     115 </span>                :            :   // through paths
+<span class="lineNum">     116 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_1, NODE_2, Ye + Yo); setS (NODE_2, NODE_1, Ye + Yo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_3, NODE_4, Ye + Yo); setS (NODE_4, NODE_3, Ye + Yo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     118 </span>                :            :   // coupled paths
+<span class="lineNum">     119 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_1, NODE_4, Xe - Xo); setS (NODE_4, NODE_1, Xe - Xo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     120 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_2, NODE_3, Xe - Xo); setS (NODE_3, NODE_2, Xe - Xo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     121 </span>                :            :   // isolated paths
+<span class="lineNum">     122 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_1, NODE_3, Ye - Yo); setS (NODE_3, NODE_1, Ye - Yo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     123 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :   setS (NODE_2, NODE_4, Ye - Yo); setS (NODE_4, NODE_2, Ye - Yo);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<a name="124"><span class="lineNum">     124 </span>                :<span class="lineCov">        851 : }</span></a>
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 : void mscoupled::calcNoiseSP (nr_double_t) {</span>
+<span class="lineNum">     127 </span>                :            :   // calculate noise using Bosma's theorem
+<span class="lineNum">     128 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     129 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix s = getMatrixS ();</span>
+<span class="lineNum">     130 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix e = eye (getSize ());</span>
+<span class="lineNum">     131 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (kelvin (T) / T0 * (e - s * transpose (conj (s))));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span>][<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>][<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 36 was not executed"> # </span><span class="branchNoExec" title="Branch 37 was not executed"> # </span>][<span class="branchNoExec" title="Branch 39 was not executed"> # </span><span class="branchNoExec" title="Branch 40 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 42 was not executed"> # </span><span class="branchNoExec" title="Branch 43 was not executed"> # </span>][<span class="branchNoExec" title="Branch 45 was not executed"> # </span><span class="branchNoExec" title="Branch 46 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 48 was not executed"> # </span><span class="branchNoExec" title="Branch 49 was not executed"> # </span>][<span class="branchNoExec" title="Branch 51 was not executed"> # </span><span class="branchNoExec" title="Branch 52 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 54 was not executed"> # </span><span class="branchNoExec" title="Branch 55 was not executed"> # </span>]
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     133 </span>                :            : 
+<span class="lineNum">     134 </span>                :            : /* The function calculates the quasi-static dielectric constants and
+<span class="lineNum">     135 </span>                :            :    characteristic impedances for the even and odd mode based upon the
+<a name="136"><span class="lineNum">     136 </span>                :            :    given line and substrate properties for parallel coupled microstrip</a>
+<span class="lineNum">     137 </span>                :            :    lines. */
+<span class="lineNum">     138 </span>                :<span class="lineCov">        851 : void mscoupled::analysQuasiStatic (nr_double_t W, nr_double_t h, nr_double_t s,</span>
+<span class="lineNum">     139 </span>                :            :                                    nr_double_t t, nr_double_t er,
+<span class="lineNum">     140 </span>                :            :                                    const char * const SModel, nr_double_t&amp; Zle,
+<span class="lineNum">     141 </span>                :            :                                    nr_double_t&amp; Zlo, nr_double_t&amp; ErEffe,
+<span class="lineNum">     142 </span>                :            :                                    nr_double_t&amp; ErEffo) {
+<span class="lineNum">     143 </span>                :            :   // initialize default return values
+<span class="lineNum">     144 </span>                :<span class="lineCov">        851 :   ErEffe = ErEffo = er;</span>
+<span class="lineNum">     145 </span>                :<span class="lineCov">        851 :   Zlo = 42.2; Zle = 55.7;</span>
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :            :   // normalized width and gap
+<span class="lineNum">     148 </span>                :<span class="lineCov">        851 :   nr_double_t u = W / h;</span>
+<span class="lineNum">     149 </span>                :<span class="lineCov">        851 :   nr_double_t g = s / h;</span>
+<span class="lineNum">     150 </span>                :            : 
+<span class="lineNum">     151 </span>                :            :   // HAMMERSTAD and JENSEN
+<span class="lineNum">     152 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 851 times"> + </span>]:<span class="lineCov">        851 :   if (!strcmp (SModel, &quot;Hammerstad&quot;)) {</span>
+<span class="lineNum">     153 </span>                :            :     nr_double_t Zl1, Fe, Fo, a, b, fo, Mu, Alpha, Beta, ErEff;
+<span class="lineNum">     154 </span>                :            :     nr_double_t Pe, Po, r, fo1, q, p, n, Psi, Phi, m, Theta;
+<span class="lineNum">     155 </span>                :            : 
+<span class="lineNum">     156 </span>                :            :     // modifying equations for even mode
+<span class="lineNum">     157 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     m = 0.2175 + qucs::pow (4.113 + qucs::pow (20.36 / g, 6.), -0.251) +</span>
+<span class="lineNum">     158 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       qucs::log (qucs::pow (g, 10.) / (1 + qucs::pow (g / 13.8, 10.))) / 323;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     159 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Alpha = 0.5 * qucs::exp (-g);</span>
+<span class="lineNum">     160 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Psi = 1 + g / 1.45 + qucs::pow (g, 2.09) / 3.95;</span>
+<span class="lineNum">     161 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Phi = 0.8645 * qucs::pow (u, 0.172);</span>
+<span class="lineNum">     162 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Pe = Phi / (Psi * (Alpha * qucs::pow (u, m) + (1 - Alpha) * qucs::pow (u, -m)));</span>
+<span class="lineNum">     163 </span>                :            :     // TODO: is this ... Psi * (Alpha ... or ... Psi / (Alpha ... ?
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :            :     // modifying equations for odd mode
+<span class="lineNum">     166 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     n = (1 / 17.7 + qucs::exp (-6.424 - 0.76 * qucs::log (g) - qucs::pow (g / 0.23, 5.))) *</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     167 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       qucs::log ((10 + 68.3 * sqr (g)) / (1 + 32.5 * qucs::pow (g, 3.093)));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     168 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Beta = 0.2306 + qucs::log (qucs::pow (g, 10.) / (1 + qucs::pow (g / 3.73, 10.))) / 301.8 +</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     169 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       qucs::log (1 + 0.646 * qucs::pow (g, 1.175)) / 5.3;</span>
+<span class="lineNum">     170 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Theta = 1.729 + 1.175 * qucs::log (1 + 0.627 / (g + 0.327 * qucs::pow (g, 2.17)));</span>
+<span class="lineNum">     171 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Po = Pe - Theta / Psi * qucs::exp (Beta * qucs::pow (u, -n) * qucs::log (u));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     172 </span>                :            : 
+<span class="lineNum">     173 </span>                :            :     // further modifying equations
+<span class="lineNum">     174 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     r = 1 + 0.15 * (1 - qucs::exp (1 - sqr (er - 1) / 8.2) / (1 + qucs::pow (g, -6.)));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     175 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     fo1 = 1 - qucs::exp (-0.179 * qucs::pow (g, 0.15) -</span>
+<span class="lineNum">     176 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :                    0.328 * qucs::pow (g, r) / qucs::log (M_E + qucs::pow (g / 7, 2.8)));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     177 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     q = qucs::exp (-1.366 - g);</span>
+<span class="lineNum">     178 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     p = qucs::exp (-0.745 * qucs::pow (g, 0.295)) / qucs::cosh (qucs::pow (g, 0.68));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     179 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     fo = fo1 * qucs::exp (p * qucs::log (u) + q * qucs::sin (M_PI * qucs::log10 (u)));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     180 </span>                :            : 
+<span class="lineNum">     181 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Mu = g * qucs::exp (-g) + u * (20 + sqr (g)) / (10 + sqr (g));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     182 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     msline::Hammerstad_ab (Mu, er, a, b);</span>
+<span class="lineNum">     183 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Fe = qucs::pow (1 + 10 / Mu, -a * b);</span>
+<span class="lineNum">     184 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     msline::Hammerstad_ab (u, er, a, b);</span>
+<span class="lineNum">     185 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Fo = fo * qucs::pow (1 + 10 / u, -a * b);</span>
+<span class="lineNum">     186 </span>                :            : 
+<span class="lineNum">     187 </span>                :            :     // finally compute effective dielectric constants and impedances
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 :     ErEffe = (er + 1) / 2 + (er - 1) / 2 * Fe;</span>
+<span class="lineNum">     189 </span>                :<span class="lineNoCov">          0 :     ErEffo = (er + 1) / 2 + (er - 1) / 2 * Fo;</span>
+<span class="lineNum">     190 </span>                :            : 
+<span class="lineNum">     191 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     msline::Hammerstad_er (u, er, a, b, ErEff);  // single microstrip</span>
+<span class="lineNum">     192 </span>                :            : 
+<span class="lineNum">     193 </span>                :            :     // first variant
+<span class="lineNum">     194 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Zl1 = Z0 / (u + 1.98 * qucs::pow (u, 0.172));</span>
+<span class="lineNum">     195 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Zl1 /= qucs::sqrt (ErEff);</span>
+<span class="lineNum">     196 </span>                :            : 
+<span class="lineNum">     197 </span>                :            :     // second variant
+<span class="lineNum">     198 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     msline::Hammerstad_zl (u, Zl1);</span>
+<span class="lineNum">     199 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     Zl1 /= qucs::sqrt (ErEff);</span>
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>                :<span class="lineNoCov">          0 :     Zle = Zl1 / (1 - Zl1 * Pe / Z0);</span>
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 :     Zlo = Zl1 / (1 - Zl1 * Po / Z0);</span>
+<span class="lineNum">     203 </span>                :            :   }
+<span class="lineNum">     204 </span>                :            :   // KIRSCHNING and JANSEN
+<span class="lineNum">     205 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   else if (!strcmp (SModel, &quot;Kirschning&quot;)) {</span>
+<span class="lineNum">     206 </span>                :            :     nr_double_t a, b, ae, be, ao, bo, v, co, d, ErEff, Zl1;
+<span class="lineNum">     207 </span>                :            :     nr_double_t q1, q2, q3, q4, q5, q6, q7, q8, q9, q10;
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :            :     // consider effect of finite strip thickness (JANSEN only)
+<span class="lineNum">     210 </span>                :<span class="lineCov">        851 :     nr_double_t ue = u;</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">        851 :     nr_double_t uo = u;</span>
+<span class="lineNum">     212 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 750 times"> + </span><span class="branchCov" title="Branch 3 was taken 101 times"> + </span>]:<span class="lineCov">        851 :     if (t != 0 &amp;&amp; s &gt; 10 * (2 * t)) {</span>
+<span class="lineNum">     213 </span>                :<span class="lineCov">        750 :       nr_double_t dW = 0;</span>
+<span class="lineNum">     214 </span>                :            :       // SCHNEIDER, referred by JANSEN
+<span class="lineNum">     215 </span>[<span class="branchCov" title="Branch 0 was taken 750 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 750 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        750 :       if (u &gt;= M_1_PI / 2 &amp;&amp; M_1_PI / 2 &gt; 2 * t / h)</span>
+<span class="lineNum">     216 </span>        [<span class="branchCov" title="Branch 0 was taken 750 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        750 :         dW = t * (1 + qucs::log (2 * h / t)) / M_PI;</span>
+<span class="lineNum">     217 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       else if (W &gt; 2 * t)</span>
+<span class="lineNum">     218 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         dW = t * (1 + qucs::log (4 * M_PI * W / t)) / M_PI;</span>
+<span class="lineNum">     219 </span>                :            :       // JANSEN
+<span class="lineNum">     220 </span>                :<span class="lineCov">        750 :       nr_double_t dt = 2 * t * h / s / er;</span>
+<span class="lineNum">     221 </span>        [<span class="branchCov" title="Branch 0 was taken 750 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        750 :       nr_double_t We = W + dW * (1 - 0.5 * qucs::exp (-0.69 * dW / dt));</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">        750 :       nr_double_t Wo = We + dt;</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">        750 :       ue = We / h;</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">        750 :       uo = Wo / h;</span>
+<span class="lineNum">     225 </span>                :            :     }
+<span class="lineNum">     226 </span>                :            : 
+<span class="lineNum">     227 </span>                :            :     // even relative dielectric constant
+<span class="lineNum">     228 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     v = ue * (20 + sqr (g)) / (10 + sqr (g)) + g * qucs::exp (-g);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     229 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Hammerstad_ab (v, er, ae, be);</span>
+<span class="lineNum">     230 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Hammerstad_er (v, er, ae, be, ErEffe);</span>
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            :     // odd relative dielectric constant
+<span class="lineNum">     233 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Hammerstad_ab (uo, er, a, b);</span>
+<span class="lineNum">     234 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Hammerstad_er (uo, er, a, b, ErEff);</span>
+<span class="lineNum">     235 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     d = 0.593 + 0.694 * qucs::exp (-0.562 * uo);</span>
+<span class="lineNum">     236 </span>                :<span class="lineCov">        851 :     bo = 0.747 * er / (0.15 + er);</span>
+<span class="lineNum">     237 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     co = bo - (bo - 0.207) * qucs::exp (-0.414 * uo);</span>
+<span class="lineNum">     238 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     ao = 0.7287 * (ErEff - (er + 1) / 2) * (1 - qucs::exp (-0.179 * uo));</span>
+<span class="lineNum">     239 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     ErEffo = ((er + 1) / 2 + ao - ErEff) * qucs::exp (-co * qucs::pow (g, d)) + ErEff;</span>
+<span class="lineNum">     240 </span>                :            : 
+<span class="lineNum">     241 </span>                :            :     // characteristic impedance of single line
+<span class="lineNum">     242 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Hammerstad_zl (u, Zl1);</span>
+<span class="lineNum">     243 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     Zl1 /= qucs::sqrt (ErEff);</span>
+<span class="lineNum">     244 </span>                :            : 
+<span class="lineNum">     245 </span>                :            :     // even characteristic impedance
+<span class="lineNum">     246 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q1 = 0.8695 * qucs::pow (ue, 0.194);</span>
+<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q2 = 1 + 0.7519 * g + 0.189 * qucs::pow (g, 2.31);</span>
+<span class="lineNum">     248 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q3 = 0.1975 + qucs::pow (16.6 + qucs::pow (8.4 / g, 6.), -0.387) +</span>
+<span class="lineNum">     249 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::log (qucs::pow (g, 10.) / (1 + qucs::pow (g / 3.4, 10.))) / 241;</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     250 </span>                :            :     q4 = q1 / q2 * 2 /
+<span class="lineNum">     251 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       (qucs::exp (-g) * qucs::pow (ue, q3) + (2 - qucs::exp (-g)) * qucs::pow (ue, -q3));</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">     252 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     Zle = qucs::sqrt (ErEff / ErEffe) * Zl1 / (1 - Zl1 * qucs::sqrt (ErEff) * q4 / Z0);</span>
+<span class="lineNum">     253 </span>                :            : 
+<span class="lineNum">     254 </span>                :            :     // odd characteristic impedance
+<span class="lineNum">     255 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q5 = 1.794 + 1.14 * qucs::log (1 + 0.638 / (g + 0.517 * qucs::pow (g, 2.43)));</span>
+<span class="lineNum">     256 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q6 = 0.2305 + qucs::log (qucs::pow (g, 10.) / (1 + qucs::pow (g / 5.8, 10.))) / 281.3 +</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     257 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::log (1 + 0.598 * qucs::pow (g, 1.154)) / 5.1;</span>
+<span class="lineNum">     258 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q7 = (10 + 190 * sqr (g)) / (1 + 82.3 * cubic (g));</span>
+<span class="lineNum">     259 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q8 = qucs::exp (-6.5 - 0.95 * qucs::log (g) - qucs::pow (g / 0.15, 5.));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     260 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q9 = qucs::log (q7) * (q8 + 1 / 16.5);</span>
+<span class="lineNum">     261 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q10 = (q2 * q4 - q5 * qucs::exp (qucs::log (uo) * q6 * qucs::pow (uo, -q9))) / q2;</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     262 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     Zlo = qucs::sqrt (ErEff / ErEffo) * Zl1 / (1 - Zl1 * qucs::sqrt (ErEff) * q10 / Z0);</span>
+<span class="lineNum">     263 </span>                :            :   }
+<span class="lineNum">     264 </span>                :<span class="lineCov">        851 : }</span>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :            : /* The function computes the dispersion effects on the dielectric
+<a name="267"><span class="lineNum">     267 </span>                :            :    constants and characteristic impedances for the even and odd mode</a>
+<span class="lineNum">     268 </span>                :            :    of parallel coupled microstrip lines. */
+<span class="lineNum">     269 </span>                :<span class="lineCov">        851 : void mscoupled::analyseDispersion (nr_double_t W, nr_double_t h, nr_double_t s,</span>
+<span class="lineNum">     270 </span>                :            :                                    nr_double_t er, nr_double_t Zle,
+<span class="lineNum">     271 </span>                :            :                                    nr_double_t Zlo, nr_double_t ErEffe,
+<span class="lineNum">     272 </span>                :            :                                    nr_double_t ErEffo, nr_double_t frequency,
+<span class="lineNum">     273 </span>                :            :                                    const char * const DModel, nr_double_t&amp; ZleFreq,
+<span class="lineNum">     274 </span>                :            :                                    nr_double_t&amp; ZloFreq,
+<span class="lineNum">     275 </span>                :            :                                    nr_double_t&amp; ErEffeFreq,
+<span class="lineNum">     276 </span>                :            :                                    nr_double_t&amp; ErEffoFreq) {
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :            :   // initialize default return values
+<span class="lineNum">     279 </span>                :<span class="lineCov">        851 :   ZleFreq = Zle;</span>
+<span class="lineNum">     280 </span>                :<span class="lineCov">        851 :   ErEffeFreq = ErEffe;</span>
+<span class="lineNum">     281 </span>                :<span class="lineCov">        851 :   ZloFreq = Zlo;</span>
+<span class="lineNum">     282 </span>                :<span class="lineCov">        851 :   ErEffoFreq = ErEffo;</span>
+<span class="lineNum">     283 </span>                :            : 
+<span class="lineNum">     284 </span>                :            :   // normalized width and gap
+<span class="lineNum">     285 </span>                :<span class="lineCov">        851 :   nr_double_t u = W / h;</span>
+<span class="lineNum">     286 </span>                :<span class="lineCov">        851 :   nr_double_t g = s / h;</span>
+<span class="lineNum">     287 </span>                :            : 
+<span class="lineNum">     288 </span>                :            :   // GETSINGER
+<span class="lineNum">     289 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 851 times"> + </span>]:<span class="lineCov">        851 :   if (!strcmp (DModel, &quot;Getsinger&quot;)) {</span>
+<span class="lineNum">     290 </span>                :            :     // even mode dispersion
+<span class="lineNum">     291 </span>                :            :     msline::Getsinger_disp (h, er, ErEffe, Zle / 2,
+<span class="lineNum">     292 </span>                :<span class="lineNoCov">          0 :                             frequency, ErEffeFreq, ZleFreq);</span>
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 :     ZleFreq *= 2;</span>
+<span class="lineNum">     294 </span>                :            :     // odd mode dispersion
+<span class="lineNum">     295 </span>                :            :     msline::Getsinger_disp (h, er, ErEffo, Zlo * 2,
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :                             frequency, ErEffoFreq, ZloFreq);</span>
+<span class="lineNum">     297 </span>                :<span class="lineNoCov">          0 :     ZloFreq /= 2;</span>
+<span class="lineNum">     298 </span>                :            :   }
+<span class="lineNum">     299 </span>                :            :   // KIRSCHNING and JANSEN
+<span class="lineNum">     300 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :   else if (!strcmp (DModel, &quot;Kirschning&quot;)) {</span>
+<span class="lineNum">     301 </span>                :            :     nr_double_t p1, p2, p3, p4, p5, p6, p7, Fe;
+<span class="lineNum">     302 </span>                :<span class="lineCov">        851 :     nr_double_t fn = frequency * h * 1e-6;</span>
+<span class="lineNum">     303 </span>                :            : 
+<span class="lineNum">     304 </span>                :            :     // even relative dielectric constant dispersion
+<span class="lineNum">     305 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p1 = 0.27488 * (0.6315 + 0.525 / qucs::pow (1 + 0.0157 * fn, 20.)) * u -</span>
+<span class="lineNum">     306 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       0.065683 * qucs::exp (-8.7513 * u);</span>
+<span class="lineNum">     307 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p2 = 0.33622 * (1 - qucs::exp (-0.03442 * er));</span>
+<span class="lineNum">     308 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     p3 = 0.0363 * qucs::exp (-4.6 * u) * (1 - qucs::exp (- qucs::pow (fn / 38.7, 4.97)));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     309 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     p4 = 1 + 2.751 * (1 - qucs::exp (- qucs::pow (er / 15.916, 8.)));</span>
+<span class="lineNum">     310 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p5 = 0.334 * qucs::exp (-3.3 * cubic (er / 15)) + 0.746;</span>
+<span class="lineNum">     311 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     p6 = p5 * qucs::exp (- qucs::pow (fn / 18, 0.368));</span>
+<span class="lineNum">     312 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p7 = 1 + 4.069 * p6 * qucs::pow (g, 0.479) *</span>
+<span class="lineNum">     313 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::exp (-1.347 * qucs::pow (g, 0.595) - 0.17 * qucs::pow (g, 2.5));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     Fe = p1 * p2 * qucs::pow ((p3 * p4 + 0.1844 * p7) * fn, 1.5763);</span>
+<span class="lineNum">     315 </span>                :<span class="lineCov">        851 :     ErEffeFreq = er - (er - ErEffe) / (1 + Fe);</span>
+<span class="lineNum">     316 </span>                :            : 
+<span class="lineNum">     317 </span>                :            :     // odd relative dielectric constant dispersion
+<span class="lineNum">     318 </span>                :            :     nr_double_t p8, p9, p10, p11, p12, p13, p14, p15, Fo;
+<span class="lineNum">     319 </span>                :<span class="lineCov">        851 :     p8 = 0.7168 * (1 + 1.076 / (1 + 0.0576 * (er - 1)));</span>
+<span class="lineNum">     320 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     p9 = p8 - 0.7913 * (1 - qucs::exp (- qucs::pow (fn / 20, 1.424))) *</span>
+<span class="lineNum">     321 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::atan (2.481 * qucs::pow (er / 8, 0.946));</span>
+<span class="lineNum">     322 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p10 = 0.242 * qucs::pow (er - 1, 0.55);</span>
+<span class="lineNum">     323 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p11 = 0.6366 * (qucs::exp (-0.3401 * fn) - 1) *</span>
+<span class="lineNum">     324 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::atan (1.263 * qucs::pow (u / 3, 1.629));</span>
+<span class="lineNum">     325 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     p12 = p9 + (1 - p9) / (1 + 1.183 * qucs::pow (u, 1.376));</span>
+<span class="lineNum">     326 </span>                :<span class="lineCov">        851 :     p13 = 1.695 * p10 / (0.414 + 1.605 * p10);</span>
+<span class="lineNum">     327 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     p14 = 0.8928 + 0.1072 * (1 - qucs::exp (-0.42 * qucs::pow (fn / 20, 3.215)));</span>
+<span class="lineNum">     328 </span>                :            :     p15 = fabs (1 - 0.8928 * (1 + p11) *
+<span class="lineNum">     329 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :                 qucs::exp (-p13 * qucs::pow (g, 1.092)) * p12 / p14);</span>
+<span class="lineNum">     330 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     Fo = p1 * p2 * qucs::pow ((p3 * p4 + 0.1844) * fn * p15, 1.5763);</span>
+<span class="lineNum">     331 </span>                :<span class="lineCov">        851 :     ErEffoFreq = er - (er - ErEffo) / (1 + Fo);</span>
+<span class="lineNum">     332 </span>                :            : 
+<span class="lineNum">     333 </span>                :            :     // dispersion of even characteristic impedance
+<span class="lineNum">     334 </span>                :            :     nr_double_t t, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21;
+<span class="lineNum">     335 </span>                :<span class="lineCov">        851 :     q11 = 0.893 * (1 - 0.3 / (1 + 0.7 * (er - 1)));</span>
+<span class="lineNum">     336 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (fn / 20, 4.91);</span>
+<span class="lineNum">     337 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q12 = 2.121 * t / (1 + q11 * t) * qucs::exp (-2.87 * g) * qucs::pow (g, 0.902);</span>
+<span class="lineNum">     338 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q13 = 1 + 0.038 * qucs::pow (er / 8, 5.1);</span>
+<span class="lineNum">     339 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = quadr (er / 15);</span>
+<span class="lineNum">     340 </span>                :<span class="lineCov">        851 :     q14 = 1 + 1.203 * t / (1 + t);</span>
+<span class="lineNum">     341 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q15 = 1.887 * qucs::exp (-1.5 * qucs::pow (g, 0.84)) * qucs::pow (g, q14) /</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     342 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 + 0.41 * qucs::pow (fn / 15, 3.) *</span>
+<span class="lineNum">     343 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :        qucs::pow (u, 2 / q13) / (0.125 + qucs::pow (u, 1.626 / q13)));</span>
+<span class="lineNum">     344 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q16 = q15 * (1 + 9 / (1 + 0.403 * sqr (er - 1)));</span>
+<span class="lineNum">     345 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q17 = 0.394 * (1 - qucs::exp (-1.47 * qucs::pow (u / 7, 0.672))) *</span>
+<span class="lineNum">     346 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 - qucs::exp (-4.25 * qucs::pow (fn / 20, 1.87)));</span>
+<span class="lineNum">     347 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q18 = 0.61 * (1 - qucs::exp (-2.31 * qucs::pow (u / 8, 1.593))) /</span>
+<span class="lineNum">     348 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 + 6.544 * qucs::pow (g, 4.17));</span>
+<span class="lineNum">     349 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q19 = 0.21 * quadr (g) / (1 + 0.18 * qucs::pow (g, 4.9)) / (1 + 0.1 * sqr (u)) /</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     350 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 + qucs::pow (fn / 24, 3.));</span>
+<span class="lineNum">     351 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q20 = q19 * (0.09 + 1 / (1 + 0.1 * qucs::pow (er - 1, 2.7)));</span>
+<span class="lineNum">     352 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (u, 2.5);</span>
+<span class="lineNum">     353 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q21 = fabs (1 - 42.54 * qucs::pow (g, 0.133) * qucs::exp (-0.812 * g) * t /</span>
+<span class="lineNum">     354 </span>                :<span class="lineCov">       1702 :                 (1 + 0.033 * t));</span>
+<span class="lineNum">     355 </span>                :            : 
+<span class="lineNum">     356 </span>                :            :     nr_double_t re, qe, pe, de, Ce, q0, ZlFreq, ErEffFreq;
+<span class="lineNum">     357 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Kirschning_er (u, fn, er, ErEffe, ErEffFreq);</span>
+<span class="lineNum">     358 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Kirschning_zl (u, fn, er, ErEffe, ErEffFreq, Zle, q0, ZlFreq);</span>
+<span class="lineNum">     359 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     re = qucs::pow (fn / 28.843, 12.);</span>
+<span class="lineNum">     360 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     qe = 0.016 + qucs::pow (0.0514 * er * q21, 4.524);</span>
+<span class="lineNum">     361 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     pe = 4.766 * qucs::exp (-3.228 * qucs::pow (u, 0.641));</span>
+<span class="lineNum">     362 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (er - 1, 6.);</span>
+<span class="lineNum">     363 </span>                :            :     de = 5.086 * qe * re / (0.3838 + 0.386 * qe) *
+<span class="lineNum">     364 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::exp (-22.2 * qucs::pow (u, 1.92)) / (1 + 1.2992 * re) * t / (1 + 10 * t);</span>
+<span class="lineNum">     365 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     Ce = 1 + 1.275 * (1 - qucs::exp (-0.004625 * pe * qucs::pow (er, 1.674) *</span>
+<span class="lineNum">     366 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :          qucs::pow (fn / 18.365, 2.745))) - q12 + q16 - q17 + q18 + q20;</span>
+<span class="lineNum">     367 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     ZleFreq = Zle * qucs::pow ((0.9408 * qucs::pow (ErEffFreq, Ce) - 0.9603) /</span>
+<span class="lineNum">     368 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :                          ((0.9408 - de) * qucs::pow (ErEffe, Ce) - 0.9603), q0);</span>
+<span class="lineNum">     369 </span>                :            : 
+<span class="lineNum">     370 </span>                :            :     // dispersion of odd characteristic impedance
+<span class="lineNum">     371 </span>                :            :     nr_double_t q22, q23, q24, q25, q26, q27, q28, q29;
+<span class="lineNum">     372 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Kirschning_er (u, fn, er, ErEffo, ErEffFreq);</span>
+<span class="lineNum">     373 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     msline::Kirschning_zl (u, fn, er, ErEffo, ErEffFreq, Zlo, q0, ZlFreq);</span>
+<span class="lineNum">     374 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q29 = 15.16 / (1 + 0.196 * sqr (er - 1));</span>
+<span class="lineNum">     375 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = sqr (er - 1);</span>
+<span class="lineNum">     376 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q25 = 0.3 * sqr (fn) / (10 + sqr (fn)) * (1 + 2.333 * t / (5 + t));</span>
+<span class="lineNum">     377 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow ((er - 1) / 13, 12.);</span>
+<span class="lineNum">     378 </span>                :<span class="lineCov">        851 :     q26 = 30 - 22.2 * t / (1 + 3 * t) - q29;</span>
+<span class="lineNum">     379 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (er - 1, 1.5);</span>
+<span class="lineNum">     380 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q27 = 0.4 * qucs::pow (g, 0.84) * (1 + 2.5 * t / (5 + t));</span>
+<span class="lineNum">     381 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (er - 1, 3.);</span>
+<span class="lineNum">     382 </span>                :<span class="lineCov">        851 :     q28 = 0.149 * t / (94.5 + 0.038 * t);</span>
+<span class="lineNum">     383 </span>[<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        851 :     q22 = 0.925 * qucs::pow (fn / q26, 1.536) / (1 + 0.3 * qucs::pow (fn / 30, 1.536));</span>
+<span class="lineNum">     384 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     q23 = 1 + 0.005 * fn * q27 / (1 + 0.812 * qucs::pow (fn / 15, 1.9)) /</span>
+<span class="lineNum">     385 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 + 0.025 * sqr (u));</span>
+<span class="lineNum">     386 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     t = qucs::pow (u, 0.894);</span>
+<span class="lineNum">     387 </span>                :            :     q24 = 2.506 * q28 * t / (3.575 + t) *
+<span class="lineNum">     388 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       qucs::pow ((1 + 1.3 * u) * fn / 99.25, 4.29);</span>
+<span class="lineNum">     389 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :     ZloFreq = ZlFreq + (Zlo * qucs::pow (ErEffoFreq / ErEffo, q22) - ZlFreq * q23) /</span>
+<span class="lineNum">     390 </span>        [<span class="branchCov" title="Branch 0 was taken 851 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        851 :       (1 + q24 + qucs::pow (0.46 * g, 2.2) * q25);</span>
+<span class="lineNum">     391 </span>                :            : 
+<span class="lineNum">     392 </span>                :            :   }
+<a name="393"><span class="lineNum">     393 </span>                :<span class="lineCov">        851 : }</span></a>
+<span class="lineNum">     394 </span>                :            : 
+<span class="lineNum">     395 </span>                :<span class="lineNoCov">          0 : void mscoupled::initDC (void) {</span>
+<span class="lineNum">     396 </span>                :<span class="lineNoCov">          0 :   nr_double_t l     = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 :   nr_double_t W     = getPropertyDouble (&quot;W&quot;);</span>
+<span class="lineNum">     398 </span>                :<span class="lineNoCov">          0 :   substrate * subst = getSubstrate ();</span>
+<span class="lineNum">     399 </span>                :<span class="lineNoCov">          0 :   nr_double_t t     = subst-&gt;getPropertyDouble (&quot;t&quot;);</span>
+<span class="lineNum">     400 </span>                :<span class="lineNoCov">          0 :   nr_double_t rho   = subst-&gt;getPropertyDouble (&quot;rho&quot;);</span>
+<span class="lineNum">     401 </span>                :            : 
+<span class="lineNum">     402 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (t != 0.0 &amp;&amp; rho != 0.0) {</span>
+<span class="lineNum">     403 </span>                :            :     // tiny resistances
+<span class="lineNum">     404 </span>                :<span class="lineNoCov">          0 :     nr_double_t g = t * W / rho / l;</span>
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 :     setVoltageSources (0);</span>
+<span class="lineNum">     406 </span>                :<span class="lineNoCov">          0 :     allocMatrixMNA ();</span>
+<span class="lineNum">     407 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setY (NODE_1, NODE_1, +g); setY (NODE_2, NODE_2, +g);</span>
+<span class="lineNum">     408 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setY (NODE_1, NODE_2, -g); setY (NODE_2, NODE_1, -g);</span>
+<span class="lineNum">     409 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setY (NODE_3, NODE_3, +g); setY (NODE_4, NODE_4, +g);</span>
+<span class="lineNum">     410 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setY (NODE_3, NODE_4, -g); setY (NODE_4, NODE_3, -g);</span>
+<span class="lineNum">     411 </span>                :            :   }
+<span class="lineNum">     412 </span>                :            :   else {
+<span class="lineNum">     413 </span>                :            :     // DC shorts (voltage sources V = 0 volts)
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 :     setVoltageSources (2);</span>
+<span class="lineNum">     415 </span>                :<span class="lineNoCov">          0 :     setInternalVoltageSource (1);</span>
+<span class="lineNum">     416 </span>                :<span class="lineNoCov">          0 :     allocMatrixMNA ();</span>
+<span class="lineNum">     417 </span>                :<span class="lineNoCov">          0 :     clearY ();</span>
+<span class="lineNum">     418 </span>                :<span class="lineNoCov">          0 :     voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 :     voltageSource (VSRC_2, NODE_3, NODE_4);</span>
+<span class="lineNum">     420 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setD (VSRC_1, VSRC_2, 0.0); setD (VSRC_2, VSRC_1, 0.0);</span>
+<span class="lineNum">     421 </span>                :            :   }
+<a name="422"><span class="lineNum">     422 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     423 </span>                :            : 
+<span class="lineNum">     424 </span>                :<span class="lineNoCov">          0 : void mscoupled::initAC (void) {</span>
+<span class="lineNum">     425 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (0);</span>
+<span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<a name="427"><span class="lineNum">     427 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     428 </span>                :            : 
+<span class="lineNum">     429 </span>                :<span class="lineNoCov">          0 : void mscoupled::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">     430 </span>                :            :   // fetch line properties
+<span class="lineNum">     431 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">     432 </span>                :            : 
+<span class="lineNum">     433 </span>                :            :   // compute propagation constants for even and odd mode
+<span class="lineNum">     434 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   calcPropagation (frequency);</span>
+<span class="lineNum">     435 </span>                :<span class="lineNoCov">          0 :   nr_complex_t ge = nr_complex_t (ae, be);</span>
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 :   nr_complex_t go = nr_complex_t (ao, bo);</span>
+<span class="lineNum">     437 </span>                :            : 
+<span class="lineNum">     438 </span>                :            :   // compute abbreviations
+<span class="lineNum">     439 </span>                :<span class="lineNoCov">          0 :   nr_complex_t De, Do, y1, y2, y3, y4;</span>
+<span class="lineNum">     440 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   De = 0.5 / (ze * qucs::sinh (ge * l));</span>
+<span class="lineNum">     441 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   Do = 0.5 / (zo * qucs::sinh (go * l));</span>
+<span class="lineNum">     442 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   y2 = -De - Do;</span>
+<span class="lineNum">     443 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   y3 = -De + Do;</span>
+<span class="lineNum">     444 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   De *= cosh (ge * l);</span>
+<span class="lineNum">     445 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   Do *= cosh (go * l);</span>
+<span class="lineNum">     446 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   y1 = De + Do;</span>
+<span class="lineNum">     447 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   y4 = De - Do;</span>
+<span class="lineNum">     448 </span>                :            : 
+<span class="lineNum">     449 </span>                :            :   // store Y-parameters
+<span class="lineNum">     450 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_1, y1); setY (NODE_2, NODE_2, y1);</span>
+<span class="lineNum">     451 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_3, NODE_3, y1); setY (NODE_4, NODE_4, y1);</span>
+<span class="lineNum">     452 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_2, y2); setY (NODE_2, NODE_1, y2);</span>
+<span class="lineNum">     453 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_3, NODE_4, y2); setY (NODE_4, NODE_3, y2);</span>
+<span class="lineNum">     454 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_3, y3); setY (NODE_2, NODE_4, y3);</span>
+<span class="lineNum">     455 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_3, NODE_1, y3); setY (NODE_4, NODE_2, y3);</span>
+<span class="lineNum">     456 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_4, y4); setY (NODE_2, NODE_3, y4);</span>
+<span class="lineNum">     457 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_3, NODE_2, y4); setY (NODE_4, NODE_1, y4);</span>
+<a name="458"><span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     459 </span>                :            : 
+<span class="lineNum">     460 </span>                :<span class="lineNoCov">          0 : void mscoupled::calcNoiseAC (nr_double_t) {</span>
+<span class="lineNum">     461 </span>                :            :   // calculate noise using Bosma's theorem
+<span class="lineNum">     462 </span>                :<span class="lineNoCov">          0 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     463 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (4 * kelvin (T) / T0 * real (getMatrixY ()));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<span class="lineNum">     464 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     465 </span>                :            : 
+<span class="lineNum">     466 </span>                :            : // properties
+<span class="lineNum">     467 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     468 </span>                :            :   { &quot;W&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     469 </span>                :            :   { &quot;L&quot;, PROP_REAL, { 10e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     470 </span>                :            :   { &quot;S&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     471 </span>                :            :   { &quot;Subst&quot;, PROP_STR, { PROP_NO_VAL, &quot;Subst1&quot; }, PROP_NO_RANGE },
+<span class="lineNum">     472 </span>                :            :   { &quot;Model&quot;, PROP_STR, { PROP_NO_VAL, &quot;Kirschning&quot; },
+<span class="lineNum">     473 </span>                :            :     PROP_RNG_STR2 (&quot;Kirschning&quot;, &quot;Hammerstad&quot;) },
+<span class="lineNum">     474 </span>                :            :   { &quot;DispModel&quot;, PROP_STR, { PROP_NO_VAL, &quot;Kirschning&quot; },
+<span class="lineNum">     475 </span>                :            :     PROP_RNG_STR2 (&quot;Kirschning&quot;, &quot;Getsinger&quot;) },
+<span class="lineNum">     476 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     477 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     478 </span>                :            :   { &quot;Temp&quot;, PROP_REAL, { 26.85, PROP_NO_STR }, PROP_MIN_VAL (K) },
+<span class="lineNum">     479 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     480 </span>                :            : struct define_t mscoupled::cirdef =
+<span class="lineNum">     481 </span>                :            :   { &quot;MCOUPLED&quot;, 4, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

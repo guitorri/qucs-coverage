@@ -1,0 +1,468 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/circuit.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - circuit.h<span style="font-size: 80%;"> (source / <a href="circuit.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntry">56</td>
+            <td class="headerCovTableEntryMed">80.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntry">56</td>
+            <td class="headerCovTableEntryMed">80.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryLo">61.1 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * circuit.h - circuit class definitions
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003-2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : /*! \file circuit.h
+<span class="lineNum">      26 </span>                :            :  * \brief The circuit class header file.
+<span class="lineNum">      27 </span>                :            :  *
+<span class="lineNum">      28 </span>                :            :  * Contains the circuit class definition.
+<span class="lineNum">      29 </span>                :            :  */
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #ifndef __CIRCUIT_H__
+<span class="lineNum">      32 </span>                :            : #define __CIRCUIT_H__
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &quot;characteristic.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;operatingpoint.h&quot;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : #define NODE_1 0
+<span class="lineNum">      38 </span>                :            : #define NODE_2 1
+<span class="lineNum">      39 </span>                :            : #define NODE_3 2
+<span class="lineNum">      40 </span>                :            : #define NODE_4 3
+<span class="lineNum">      41 </span>                :            : #define NODE_5 4
+<span class="lineNum">      42 </span>                :            : #define NODE_6 5
+<span class="lineNum">      43 </span>                :            : #define VSRC_1 0
+<span class="lineNum">      44 </span>                :            : #define VSRC_2 1
+<span class="lineNum">      45 </span>                :            : #define VSRC_3 2
+<span class="lineNum">      46 </span>                :            : #define VSRC_4 3
+<span class="lineNum">      47 </span>                :            : #define VSRC_5 4
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : #define MODFLAG(val,bit) if (val) flag |= (bit); else flag &amp;= ~(bit);
+<span class="lineNum">      50 </span>                :            : #define RETFLAG(bit)     ((flag &amp; (bit)) != 0)
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :            : #define CREATOR(val) \
+<span class="lineNum">      53 </span>                :            :   val (); \
+<span class="lineNum">      54 </span>                :            :   static qucs::circuit * create (void) { return new val (); } \
+<span class="lineNum">      55 </span>                :            :   static struct define_t cirdef; \
+<span class="lineNum">      56 </span>                :            :   static struct define_t * definition (void) { return &amp;cirdef; }
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :            : #include &lt;map&gt;
+<span class="lineNum">      59 </span>                :            : #include &quot;integrator.h&quot;
+<span class="lineNum">      60 </span>                :            : #include &quot;valuelist.h&quot;
+<span class="lineNum">      61 </span>                :            : 
+<span class="lineNum">      62 </span>                :            : namespace qucs {
+<span class="lineNum">      63 </span>                :            : 
+<span class="lineNum">      64 </span>                :            : enum circuit_flag {
+<span class="lineNum">      65 </span>                :            :   CIRCUIT_ENABLED     = 1,
+<span class="lineNum">      66 </span>                :            :   CIRCUIT_LINEAR      = 2,
+<span class="lineNum">      67 </span>                :            :   CIRCUIT_ORIGINAL    = 4,
+<span class="lineNum">      68 </span>                :            :   CIRCUIT_VSOURCE     = 8,
+<span class="lineNum">      69 </span>                :            :   CIRCUIT_ISOURCE     = 16,
+<span class="lineNum">      70 </span>                :            :   CIRCUIT_INTVSOURCE  = 32,
+<span class="lineNum">      71 </span>                :            :   CIRCUIT_VARSIZE     = 64,
+<span class="lineNum">      72 </span>                :            :   CIRCUIT_PROBE       = 128,
+<span class="lineNum">      73 </span>                :            :   CIRCUIT_HISTORY     = 256,
+<span class="lineNum">      74 </span>                :            : };
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :            : class node;
+<span class="lineNum">      77 </span>                :            : class property;
+<span class="lineNum">      78 </span>                :            : class substrate;
+<span class="lineNum">      79 </span>                :            : class matrix;
+<span class="lineNum">      80 </span>                :            : class net;
+<span class="lineNum">      81 </span>                :            : class environment;
+<span class="lineNum">      82 </span>                :            : class history;
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :            : /*! \class circuit
+<span class="lineNum">      85 </span>                :            :  * \brief base class for qucs circuit elements.
+<span class="lineNum">      86 </span>                :            :  *
+<span class="lineNum">      87 </span>                :            :  * This is the base class for all circuit elements and provides the
+<span class="lineNum">      88 </span>                :            :  * the functionality required for all simulation types. It has a number
+<span class="lineNum">      89 </span>                :            :  * of virtual functions intended to be overridden by the inheiriting
+<span class="lineNum">      90 </span>                :            :  * class
+<span class="lineNum">      91 </span>                :            :  *
+<span class="lineNum">      92 </span>                :            :  */
+<span class="lineNum">      93 </span>                :            : class circuit : public object, public integrator
+<span class="lineNum">      94 </span>                :            : {
+<span class="lineNum">      95 </span>                :            :  public:
+<span class="lineNum">      96 </span>                :            :   // constructor and destructor set
+<span class="lineNum">      97 </span>                :            :   circuit ();
+<span class="lineNum">      98 </span>                :            :   circuit (int);
+<span class="lineNum">      99 </span>                :            :   circuit (const circuit &amp;);
+<span class="lineNum">     100 </span>                :            :   ~circuit ();
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :            :   // functionality to be overloaded by real, derived circuit element
+<span class="lineNum">     103 </span>                :            :   // implementations
+<span class="lineNum">     104 </span>                :            :   /*! \fn initSP
+<span class="lineNum">     105 </span>                :            :    * \brief placehoder for S-Parameter initialisation function
+<span class="lineNum">     106 </span>                :            :    *
+<span class="lineNum">     107 </span>                :            :    * Virtual function intended to be overridden by the
+<span class="lineNum">     108 </span>                :            :    * inheiriting circuit element's S-Parameter initialisation
+<span class="lineNum">     109 </span>                :            :    * function. initSP is called before commencing the simulation
+<a name="110"><span class="lineNum">     110 </span>                :            :    * to set up the S-Parameter matrix.</a>
+<a name="111"><span class="lineNum">     111 </span>                :            :    */</a>
+<a name="112"><span class="lineNum">     112 </span>                :<span class="lineCov">     124831 :   virtual void initSP (void) { allocMatrixS (); }</span></a>
+<a name="113"><span class="lineNum">     113 </span>                :<span class="lineCov">      76656 :   virtual void calcSP (nr_double_t) { }</span></a>
+<a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">      19977 :   virtual void initDC (void) { allocMatrixMNA (); }</span></a>
+<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">     207239 :   virtual void calcDC (void) { }</span></a>
+<a name="116"><span class="lineNum">     116 </span>                :<span class="lineCov">        648 :   virtual void restartDC (void) { }</span></a>
+<a name="117"><span class="lineNum">     117 </span>                :<span class="lineCov">       9170 :   virtual void initNoiseSP (void) { allocMatrixN (); }</span></a>
+<a name="118"><span class="lineNum">     118 </span>                :<span class="lineCov">       7103 :   virtual void calcNoiseSP (nr_double_t) { }</span></a>
+<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">        188 :   virtual void initNoiseAC (void) { allocMatrixN (vsources); }</span></a>
+<a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">       9646 :   virtual void calcNoiseAC (nr_double_t) { }</span></a>
+<a name="121"><span class="lineNum">     121 </span>                :<span class="lineCov">        140 :   virtual void initAC (void) { allocMatrixMNA (); }</span></a>
+<a name="122"><span class="lineNum">     122 </span>                :<span class="lineCov">      18505 :   virtual void calcAC (nr_double_t) { }</span></a>
+<a name="123"><span class="lineNum">     123 </span>                :<span class="lineCov">         97 :   virtual void initTR (void) { allocMatrixMNA (); }</span></a>
+<a name="124"><span class="lineNum">     124 </span>                :<span class="lineCov">    1039762 :   virtual void calcTR (nr_double_t) { }</span></a>
+<a name="125"><span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 :   virtual void initHB (void) { allocMatrixMNA (); }</span></a>
+<a name="126"><span class="lineNum">     126 </span>                :<span class="lineCov">         18 :   virtual void calcHB (nr_double_t) { }</span></a>
+<a name="127"><span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :   virtual void initHB (int) { allocMatrixMNA (); }</span></a>
+<a name="128"><span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :   virtual void calcHB (int) { }</span></a>
+<a name="129"><span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 :   virtual void calcOperatingPoints (void) { }</span></a>
+<a name="130"><span class="lineNum">     130 </span>                :<span class="lineCov">          7 :   virtual void saveOperatingPoints (void) { }</span></a>
+<span class="lineNum">     131 </span>                :<span class="lineNoCov">          0 :   virtual void calcCharacteristics (nr_double_t) { }</span>
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :   virtual void saveCharacteristics (nr_double_t) { }</span>
+<span class="lineNum">     133 </span>                :            : 
+<span class="lineNum">     134 </span>                :            :   // basic circuit element functionality
+<span class="lineNum">     135 </span>                :            :   void   setNode (int, const char *, int intern = 0);
+<a name="136"><span class="lineNum">     136 </span>                :            :   node * getNode (int);</a>
+<span class="lineNum">     137 </span>                :            :   void   setType (int t) { type = t; }
+<span class="lineNum">     138 </span>                :<span class="lineCov">     243861 :   int    getType (void) { return type; }</span>
+<span class="lineNum">     139 </span>                :            :   /*! \fn getSize
+<span class="lineNum">     140 </span>                :            :    * \brief Get the number of ports the circuit element has.
+<span class="lineNum">     141 </span>                :            :    *
+<a name="142"><span class="lineNum">     142 </span>                :            :    * Gets the number of ports the circuit element has</a>
+<span class="lineNum">     143 </span>                :            :    */
+<span class="lineNum">     144 </span>                :<span class="lineCov">   21751985 :   int    getSize (void) { return size; }</span>
+<span class="lineNum">     145 </span>                :            :   /*! \fn setSize
+<span class="lineNum">     146 </span>                :            :    * \brief Set the number of ports the circuit element has.
+<span class="lineNum">     147 </span>                :            :    * \param s integer representing the number of ports
+<span class="lineNum">     148 </span>                :            :    *
+<span class="lineNum">     149 </span>                :            :    * Sets/changes the number of ports the circuit element has.
+<span class="lineNum">     150 </span>                :            :    * On setting this value, previously stored node and matrix
+<span class="lineNum">     151 </span>                :            :    * information is completely lost unless the new size equals
+<span class="lineNum">     152 </span>                :            :    * the original size
+<span class="lineNum">     153 </span>                :            :    */
+<span class="lineNum">     154 </span>                :            :   void   setSize (int);
+<span class="lineNum">     155 </span>                :            :   /*! \fn isEnabled
+<span class="lineNum">     156 </span>                :            :    * \brief Reports if circuit element is enabled.
+<span class="lineNum">     157 </span>                :            :    *
+<span class="lineNum">     158 </span>                :            :    * Returns true if the circuit element is enabled or false
+<a name="159"><span class="lineNum">     159 </span>                :            :    * otherwise.</a>
+<span class="lineNum">     160 </span>                :            :    */
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :   bool   isEnabled (void) { return RETFLAG (CIRCUIT_ENABLED); }</span>
+<span class="lineNum">     162 </span>                :            :   /*! \fn setEnabled
+<span class="lineNum">     163 </span>                :            :    * \brief Set a circuit element to be enabled or diabled.
+<span class="lineNum">     164 </span>                :            :    * \param e boolean indicating whether to enable or disable
+<span class="lineNum">     165 </span>                :            :    *
+<a name="166"><span class="lineNum">     166 </span>                :            :    * Sets the circuit element to be enabled or disabled.</a>
+<a name="167"><span class="lineNum">     167 </span>                :            :    */</a>
+<a name="168"><span class="lineNum">     168 </span>        [<span class="branchCov" title="Branch 0 was taken 243334 times"> + </span><span class="branchCov" title="Branch 1 was taken 242351 times"> + </span>]:<span class="lineCov">     485685 :   void   setEnabled (bool e) { MODFLAG (e, CIRCUIT_ENABLED); }</span></a>
+<a name="169"><span class="lineNum">     169 </span>                :<span class="lineCov">        830 :   bool   isVariableSized (void) { return RETFLAG (CIRCUIT_VARSIZE); }</span></a>
+<a name="170"><span class="lineNum">     170 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   void   setVariableSized (bool v) { MODFLAG (v, CIRCUIT_VARSIZE); }</span></a>
+<a name="171"><span class="lineNum">     171 </span>                :<span class="lineCov">     504449 :   bool   isProbe (void) { return RETFLAG (CIRCUIT_PROBE); }</span></a>
+<a name="172"><span class="lineNum">     172 </span>        [<span class="branchCov" title="Branch 0 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         11 :   void   setProbe (bool p) { MODFLAG (p, CIRCUIT_PROBE); }</span></a>
+<span class="lineNum">     173 </span>                :<span class="lineCov">     485685 :   void   setNet (net * n) { subnet = n; }</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">     609668 :   net *  getNet (void) { return subnet; }</span>
+<a name="175"><span class="lineNum">     175 </span>                :            : </a>
+<span class="lineNum">     176 </span>                :            :   // subcircuitry
+<span class="lineNum">     177 </span>                :<span class="lineCov">     124339 :   char * getSubcircuit (void) { return subcircuit; }</span>
+<span class="lineNum">     178 </span>                :            :   void   setSubcircuit (char *);
+<a name="179"><span class="lineNum">     179 </span>                :            : </a>
+<a name="180"><span class="lineNum">     180 </span>                :            :   // environment specific</a>
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :   environment * getEnv (void) { return env; }</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">        830 :   void setEnv (environment * e) { env = e; }</span>
+<a name="183"><span class="lineNum">     183 </span>                :            : </a>
+<a name="184"><span class="lineNum">     184 </span>                :            :   // nodal analyses helpers</a>
+<a name="185"><span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 608 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        608 :   void setInternalVoltageSource (bool i) { MODFLAG (i, CIRCUIT_INTVSOURCE); }</span></a>
+<a name="186"><span class="lineNum">     186 </span>                :<span class="lineCov">     172873 :   bool isInternalVoltageSource (void) { return RETFLAG (CIRCUIT_INTVSOURCE); }</span></a>
+<span class="lineNum">     187 </span>                :<span class="lineCov">      23869 :   void setVoltageSource (int s) { vsource = s; }</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">  259870653 :   int  getVoltageSource (void) { return vsource; }</span>
+<span class="lineNum">     189 </span>                :            :   int  getVoltageSources (void);
+<a name="190"><span class="lineNum">     190 </span>                :            :   void setVoltageSources (int);</a>
+<a name="191"><span class="lineNum">     191 </span>                :            :   void voltageSource (int, int, int, nr_double_t value = 0.0);</a>
+<a name="192"><span class="lineNum">     192 </span>                :<span class="lineCov">     827231 :   bool isVSource (void) { return RETFLAG (CIRCUIT_VSOURCE); }</span></a>
+<a name="193"><span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 166 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        166 :   void setVSource (bool v) { MODFLAG (v, CIRCUIT_VSOURCE); }</span></a>
+<span class="lineNum">     194 </span>                :<span class="lineCov">    7442825 :   bool isISource (void) { return RETFLAG (CIRCUIT_ISOURCE); }</span>
+<span class="lineNum">     195 </span>        [<span class="branchCov" title="Branch 0 was taken 247 times"> + </span><span class="branchCov" title="Branch 1 was taken 8 times"> + </span>]:<span class="lineCov">        255 :   void setISource (bool i) { MODFLAG (i, CIRCUIT_ISOURCE); }</span>
+<span class="lineNum">     196 </span>                :            :   int  getNoiseSources (void);
+<span class="lineNum">     197 </span>                :            :   void setNoiseSources (int);
+<span class="lineNum">     198 </span>                :            : 
+<span class="lineNum">     199 </span>                :            :   // transient analyses helpers
+<span class="lineNum">     200 </span>                :            :   void transientCapacitance (int, int, int, nr_double_t, nr_double_t,
+<span class="lineNum">     201 </span>                :            :                              nr_double_t);
+<span class="lineNum">     202 </span>                :            :   void transientCapacitance (int, int, nr_double_t, nr_double_t, nr_double_t);
+<span class="lineNum">     203 </span>                :            :   void transientCapacitanceQ (int, int, int, nr_double_t);
+<span class="lineNum">     204 </span>                :            :   void transientCapacitanceQ (int, int, nr_double_t);
+<span class="lineNum">     205 </span>                :            :   void transientCapacitanceC (int, int, int, int, nr_double_t, nr_double_t);
+<span class="lineNum">     206 </span>                :            :   void transientCapacitanceC (int, int, nr_double_t, nr_double_t);
+<a name="207"><span class="lineNum">     207 </span>                :            :   void transientCapacitanceC2V (int, int, int, nr_double_t, nr_double_t);</a>
+<a name="208"><span class="lineNum">     208 </span>                :            :   void transientCapacitanceC2Q (int, int, int, nr_double_t, nr_double_t);</a>
+<span class="lineNum">     209 </span>                :<span class="lineCov">        598 :   void setDelta (nr_double_t * d) { deltas = d; }</span>
+<span class="lineNum">     210 </span>                :<span class="lineCov">       5238 :   nr_double_t * getDelta (void) { return deltas; }</span>
+<a name="211"><span class="lineNum">     211 </span>                :            : </a>
+<a name="212"><span class="lineNum">     212 </span>                :            :   // history specific functionality</a>
+<span class="lineNum">     213 </span>                :<span class="lineCov">    1510226 :   bool hasHistory (void) { return RETFLAG (CIRCUIT_HISTORY); }</span>
+<span class="lineNum">     214 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 125882 times"> + </span>]:<span class="lineCov">     125882 :   void setHistory (bool h) { MODFLAG (h, CIRCUIT_HISTORY); }</span>
+<span class="lineNum">     215 </span>                :            :   void initHistory (nr_double_t);
+<span class="lineNum">     216 </span>                :            :   void deleteHistory (void);
+<span class="lineNum">     217 </span>                :            :   void truncateHistory (nr_double_t);
+<span class="lineNum">     218 </span>                :            :   void appendHistory (int, nr_double_t);
+<span class="lineNum">     219 </span>                :            :   void applyHistory (history *);
+<span class="lineNum">     220 </span>                :            :   nr_double_t getV (int, nr_double_t);
+<span class="lineNum">     221 </span>                :            :   nr_double_t getV (int, int);
+<span class="lineNum">     222 </span>                :            :   nr_double_t getJ (int, nr_double_t);
+<span class="lineNum">     223 </span>                :            :   nr_double_t getHistoryAge (void);
+<span class="lineNum">     224 </span>                :            :   void setHistoryAge (nr_double_t);
+<span class="lineNum">     225 </span>                :            :   int getHistorySize (void);
+<span class="lineNum">     226 </span>                :            :   nr_double_t getHistoryTFromIndex (int);
+<a name="227"><span class="lineNum">     227 </span>                :            : </a>
+<a name="228"><span class="lineNum">     228 </span>                :            :   // s-parameter helpers</a>
+<a name="229"><span class="lineNum">     229 </span>                :<span class="lineCov">   13647660 :   int  getPort (void) { return pacport; }</span></a>
+<a name="230"><span class="lineNum">     230 </span>                :<span class="lineCov">         40 :   void setPort (int p) { pacport = p; }</span></a>
+<a name="231"><span class="lineNum">     231 </span>                :<span class="lineCov">       4438 :   int  getInserted (void) { return inserted; }</span></a>
+<a name="232"><span class="lineNum">     232 </span>                :<span class="lineCov">        204 :   void setInserted (int i) { inserted = i; }</span></a>
+<span class="lineNum">     233 </span>                :<span class="lineCov">     377596 :   bool isOriginal (void) { return RETFLAG (CIRCUIT_ORIGINAL); }</span>
+<span class="lineNum">     234 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 124879 times"> + </span>]:<span class="lineCov">     124879 :   void setOriginal (bool o) { MODFLAG (o, CIRCUIT_ORIGINAL); }</span>
+<span class="lineNum">     235 </span>                :            : 
+<span class="lineNum">     236 </span>                :            :   // microstrip helpers
+<span class="lineNum">     237 </span>                :            :   substrate * getSubstrate (void);
+<span class="lineNum">     238 </span>                :            :   void setSubstrate (substrate *);
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :            :   // matrix entry modificators
+<span class="lineNum">     241 </span>                :            :   nr_complex_t getS (int, int);
+<span class="lineNum">     242 </span>                :            :   nr_complex_t getN (int, int);
+<span class="lineNum">     243 </span>                :            :   nr_complex_t getY (int, int);
+<span class="lineNum">     244 </span>                :            :   nr_complex_t getB (int, int);
+<span class="lineNum">     245 </span>                :            :   nr_complex_t getC (int, int);
+<span class="lineNum">     246 </span>                :            :   nr_complex_t getD (int, int);
+<span class="lineNum">     247 </span>                :            :   nr_complex_t getQV (int, int);
+<span class="lineNum">     248 </span>                :            :   nr_complex_t getGV (int);
+<span class="lineNum">     249 </span>                :            :   nr_complex_t getCV (int);
+<span class="lineNum">     250 </span>                :            :   nr_complex_t getE (int);
+<span class="lineNum">     251 </span>                :            :   nr_complex_t getI (int);
+<span class="lineNum">     252 </span>                :            :   nr_complex_t getJ (int);
+<span class="lineNum">     253 </span>                :            :   nr_complex_t getV (int);
+<span class="lineNum">     254 </span>                :            :   nr_complex_t getQ (int);
+<span class="lineNum">     255 </span>                :            :   nr_double_t getG (int, int);
+<span class="lineNum">     256 </span>                :            :   void setS (int, int, nr_complex_t);
+<span class="lineNum">     257 </span>                :            :   void setN (int, int, nr_complex_t);
+<span class="lineNum">     258 </span>                :            :   void setY (int, int, nr_complex_t);
+<span class="lineNum">     259 </span>                :            :   void setB (int, int, nr_complex_t);
+<span class="lineNum">     260 </span>                :            :   void setC (int, int, nr_complex_t);
+<span class="lineNum">     261 </span>                :            :   void setD (int, int, nr_complex_t);
+<span class="lineNum">     262 </span>                :            :   void setQV (int, int, nr_complex_t);
+<span class="lineNum">     263 </span>                :            :   void setGV (int, nr_complex_t);
+<span class="lineNum">     264 </span>                :            :   void setCV (int, nr_complex_t);
+<span class="lineNum">     265 </span>                :            :   void setE (int, nr_complex_t);
+<span class="lineNum">     266 </span>                :            :   void setI (int, nr_complex_t);
+<span class="lineNum">     267 </span>                :            :   void setJ (int, nr_complex_t);
+<span class="lineNum">     268 </span>                :            :   void setV (int, nr_complex_t);
+<span class="lineNum">     269 </span>                :            :   void setQ (int, nr_complex_t);
+<span class="lineNum">     270 </span>                :            :   void setG (int, int, nr_double_t);
+<span class="lineNum">     271 </span>                :            :   void clearB (void);
+<span class="lineNum">     272 </span>                :            :   void clearC (void);
+<span class="lineNum">     273 </span>                :            :   void clearD (void);
+<span class="lineNum">     274 </span>                :            :   void clearE (void);
+<span class="lineNum">     275 </span>                :            :   void clearI (void);
+<span class="lineNum">     276 </span>                :            :   void clearJ (void);
+<span class="lineNum">     277 </span>                :            :   void clearV (void);
+<span class="lineNum">     278 </span>                :            :   void clearY (void);
+<span class="lineNum">     279 </span>                :            :   void addY (int, int, nr_complex_t);
+<span class="lineNum">     280 </span>                :            :   void addY (int, int, nr_double_t);
+<span class="lineNum">     281 </span>                :            :   void addI (int, nr_complex_t);
+<span class="lineNum">     282 </span>                :            :   void addI (int, nr_double_t);
+<span class="lineNum">     283 </span>                :            : 
+<span class="lineNum">     284 </span>                :            :   // operating point functionality
+<span class="lineNum">     285 </span>                :            :   void        addOperatingPoint (const char *, nr_double_t);
+<span class="lineNum">     286 </span>                :            :   nr_double_t getOperatingPoint (const char *);
+<a name="287"><span class="lineNum">     287 </span>                :            :   void        setOperatingPoint (const char *, nr_double_t);</a>
+<span class="lineNum">     288 </span>                :            :   int         hasOperatingPoint (char *);
+<span class="lineNum">     289 </span>                :<span class="lineNoCov">          0 :   valuelist&lt;operatingpoint&gt; &amp; getOperatingPoints (void) { return oper; }</span>
+<span class="lineNum">     290 </span>                :            : 
+<span class="lineNum">     291 </span>                :            :   // characteristics functionality
+<span class="lineNum">     292 </span>                :            :   void        addCharacteristic (const char *, nr_double_t);
+<span class="lineNum">     293 </span>                :            :   nr_double_t getCharacteristic (char *);
+<a name="294"><span class="lineNum">     294 </span>                :            :   void        setCharacteristic (const char *, nr_double_t);</a>
+<span class="lineNum">     295 </span>                :            :   int         hasCharacteristic (char *);
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :   valuelist&lt;characteristic&gt; &amp; getCharacteristics (void) { return charac; }</span>
+<a name="297"><span class="lineNum">     297 </span>                :            : </a>
+<a name="298"><span class="lineNum">     298 </span>                :            :   // differentiate between linear and non-linear circuits</a>
+<span class="lineNum">     299 </span>        [<span class="branchCov" title="Branch 0 was taken 716 times"> + </span><span class="branchCov" title="Branch 1 was taken 114 times"> + </span>]:<span class="lineCov">        830 :   void setNonLinear (bool l) { MODFLAG (!l, CIRCUIT_LINEAR); }</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">    6723879 :   bool isNonLinear (void) { return !RETFLAG (CIRCUIT_LINEAR); }</span>
+<span class="lineNum">     301 </span>                :            : 
+<span class="lineNum">     302 </span>                :            :   // miscellaneous functionality
+<span class="lineNum">     303 </span>                :            :   void print (void);
+<span class="lineNum">     304 </span>                :            :   static char * createInternal (const char *, const char *);
+<span class="lineNum">     305 </span>                :            :   void setInternalNode (int, const char *);
+<span class="lineNum">     306 </span>                :            : 
+<span class="lineNum">     307 </span>                :            :   // matrix operations
+<span class="lineNum">     308 </span>                :            :   void   allocMatrixS (void);
+<span class="lineNum">     309 </span>                :            :   void   allocMatrixN (int sources = 0);
+<span class="lineNum">     310 </span>                :            :   void   allocMatrixMNA (void);
+<span class="lineNum">     311 </span>                :            :   void   freeMatrixMNA (void);
+<span class="lineNum">     312 </span>                :            :   void   allocMatrixHB (void);
+<span class="lineNum">     313 </span>                :            :   void   freeMatrixHB (void);
+<span class="lineNum">     314 </span>                :            :   void   setMatrixS (matrix);
+<span class="lineNum">     315 </span>                :            :   matrix getMatrixS (void);
+<span class="lineNum">     316 </span>                :            :   void   setMatrixN (matrix);
+<span class="lineNum">     317 </span>                :            :   matrix getMatrixN (void);
+<span class="lineNum">     318 </span>                :            :   void   setMatrixY (matrix);
+<span class="lineNum">     319 </span>                :            :   matrix getMatrixY (void);
+<span class="lineNum">     320 </span>                :            : 
+<span class="lineNum">     321 </span>                :            :   static const nr_double_t z0;
+<span class="lineNum">     322 </span>                :            : 
+<span class="lineNum">     323 </span>                :            :  protected:
+<span class="lineNum">     324 </span>                :            :   int type;
+<span class="lineNum">     325 </span>                :            :   int pol;
+<span class="lineNum">     326 </span>                :            : 
+<span class="lineNum">     327 </span>                :            :  private:
+<span class="lineNum">     328 </span>                :            :   int size;
+<span class="lineNum">     329 </span>                :            :   int pacport;
+<span class="lineNum">     330 </span>                :            :   int vsource;
+<span class="lineNum">     331 </span>                :            :   int vsources;
+<span class="lineNum">     332 </span>                :            :   int nsources;
+<span class="lineNum">     333 </span>                :            :   int inserted;
+<span class="lineNum">     334 </span>                :            :   int flag;
+<span class="lineNum">     335 </span>                :            :   nr_complex_t * MatrixS;
+<span class="lineNum">     336 </span>                :            :   nr_complex_t * MatrixN;
+<span class="lineNum">     337 </span>                :            :   nr_complex_t * MatrixY;
+<span class="lineNum">     338 </span>                :            :   nr_complex_t * MatrixB;
+<span class="lineNum">     339 </span>                :            :   nr_complex_t * MatrixC;
+<span class="lineNum">     340 </span>                :            :   nr_complex_t * MatrixD;
+<span class="lineNum">     341 </span>                :            :   nr_complex_t * VectorE;
+<span class="lineNum">     342 </span>                :            :   nr_complex_t * VectorI;
+<span class="lineNum">     343 </span>                :            :   nr_complex_t * VectorV;
+<span class="lineNum">     344 </span>                :            :   nr_complex_t * VectorJ;
+<span class="lineNum">     345 </span>                :            :   nr_complex_t * VectorQ;
+<span class="lineNum">     346 </span>                :            :   nr_complex_t * MatrixQV;
+<span class="lineNum">     347 </span>                :            :   nr_complex_t * VectorGV;
+<span class="lineNum">     348 </span>                :            :   nr_complex_t * VectorCV;
+<span class="lineNum">     349 </span>                :            :   char * subcircuit;
+<span class="lineNum">     350 </span>                :            :   node * nodes;
+<span class="lineNum">     351 </span>                :            :   substrate * subst;
+<span class="lineNum">     352 </span>                :            :   valuelist&lt;operatingpoint&gt; oper;
+<span class="lineNum">     353 </span>                :            :   valuelist&lt;characteristic&gt; charac;
+<span class="lineNum">     354 </span>                :            :   net * subnet;
+<span class="lineNum">     355 </span>                :            :   environment * env;
+<span class="lineNum">     356 </span>                :            :   nr_double_t * deltas;
+<span class="lineNum">     357 </span>                :            :   int nHistories;
+<span class="lineNum">     358 </span>                :            :   history * histories;
+<span class="lineNum">     359 </span>                :            : };
+<span class="lineNum">     360 </span>                :            : 
+<span class="lineNum">     361 </span>                :            : } // namespace qucs
+<span class="lineNum">     362 </span>                :            : 
+<span class="lineNum">     363 </span>                :            : // typedef to make it easier to set up our factory
+<span class="lineNum">     364 </span>                :            : typedef qucs::circuit *maker_t();
+<span class="lineNum">     365 </span>                :            : // function typdefs to make it easier to set up our factories
+<span class="lineNum">     366 </span>                :            : typedef qucs::circuit *creator_t();
+<span class="lineNum">     367 </span>                :            : typedef struct define_t *defs_t();
+<span class="lineNum">     368 </span>                :            : 
+<span class="lineNum">     369 </span>                :            : // our global factories defined in module.cpp
+<span class="lineNum">     370 </span>                :            : extern &quot;C&quot; {
+<span class="lineNum">     371 </span>                :            :  extern std::map&lt;std::string, creator_t *, std::less&lt;std::string&gt; &gt; factorycreate;
+<span class="lineNum">     372 </span>                :            :  extern std::map&lt;std::string, defs_t *, std::less&lt;std::string&gt; &gt; factorydef;
+<span class="lineNum">     373 </span>                :            : 
+<span class="lineNum">     374 </span>                :            : }
+<span class="lineNum">     375 </span>                :            : 
+<span class="lineNum">     376 </span>                :            : #endif /* __CIRCUIT_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

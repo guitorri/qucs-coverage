@@ -1,0 +1,540 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/microstrip/cpwline.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/microstrip</a> - cpwline.cpp<span style="font-size: 80%;"> (source / <a href="cpwline.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">223</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">134</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * cpwline.cpp - coplanar waveguide line class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2005 Vincent Habchi, F5RCS &lt;10.50@free.fr&gt;
+<span class="lineNum">       5 </span>                :            :  * Copyright (C) 2004, 2005, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id$
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      27 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      28 </span>                :            : #endif
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      31 </span>                :            : 
+<span class="lineNum">      32 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;substrate.h&quot;
+<span class="lineNum">      34 </span>                :            : #include &quot;cpwline.h&quot;
+<span class="lineNum">      35 </span>                :            : 
+<a name="36"><span class="lineNum">      36 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :<span class="lineNoCov">          0 : cpwline::cpwline () : circuit (2) {</span>
+<span class="lineNum">      39 </span>                :<span class="lineNoCov">          0 :   Zl = Er = 0;</span>
+<span class="lineNum">      40 </span>                :<span class="lineNoCov">          0 :   type = CIR_CPWLINE;</span>
+<span class="lineNum">      41 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :            : /*! K(k)
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            :  The function computes the complete elliptic integral of first kind
+<span class="lineNum">      46 </span>                :            :    K() and the second kind E() using the arithmetic-geometric mean
+<span class="lineNum">      47 </span>                :            :    algorithm (AGM) by Abramowitz and Stegun.
+<a name="48"><span class="lineNum">      48 </span>                :            : \todo move to common math</a>
+<span class="lineNum">      49 </span>                :            : */
+<span class="lineNum">      50 </span>                :<span class="lineNoCov">          0 : void cpwline::ellipke (nr_double_t arg, nr_double_t &amp;k, nr_double_t &amp;e) {</span>
+<span class="lineNum">      51 </span>                :<span class="lineNoCov">          0 :   int iMax = 16;</span>
+<span class="lineNum">      52 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (arg == 1.0) {</span>
+<span class="lineNum">      53 </span>                :<span class="lineNoCov">          0 :     k = std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 :     e = 0;</span>
+<span class="lineNum">      55 </span>                :            :   }
+<span class="lineNum">      56 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (std::isinf (arg) &amp;&amp; arg &lt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :     k = 0;</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 :     e = std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">      59 </span>                :            :   }
+<span class="lineNum">      60 </span>                :            :   else {
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 :     nr_double_t a, b, c, f, s, fk = 1, fe = 1, t, da = arg;</span>
+<span class="lineNum">      62 </span>                :            :     int i;
+<span class="lineNum">      63 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (arg &lt; 0) {</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :       fk = 1 / qucs::sqrt (1 - arg);</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :       fe = qucs::sqrt (1 - arg);</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :       da = -arg / (1 - arg);</span>
+<span class="lineNum">      67 </span>                :            :     }
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     a = 1;</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :     b = qucs::sqrt (1 - da);</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :     c = qucs::sqrt (da);</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :     f = 0.5;</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :     s = f * c * c;</span>
+<span class="lineNum">      73 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (i = 0; i &lt; iMax; i++) {</span>
+<span class="lineNum">      74 </span>                :<span class="lineNoCov">          0 :       t = (a + b) / 2;</span>
+<span class="lineNum">      75 </span>                :<span class="lineNoCov">          0 :       c = (a - b) / 2;</span>
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 :       b = qucs::sqrt (a * b);</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 :       a = t;</span>
+<span class="lineNum">      78 </span>                :<span class="lineNoCov">          0 :       f *= 2;</span>
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 :       s += f * c * c;</span>
+<span class="lineNum">      80 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (c / a &lt; std::numeric_limits&lt;nr_double_t&gt;::epsilon()) break;</span>
+<span class="lineNum">      81 </span>                :            :     }
+<span class="lineNum">      82 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i &gt;= iMax) {</span>
+<span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 :       k = 0; e = 0;</span>
+<span class="lineNum">      84 </span>                :            :     }
+<span class="lineNum">      85 </span>                :            :     else {
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :       k = M_PI_2 / a;</span>
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :       e = M_PI_2 * (1 - s) / a;</span>
+<span class="lineNum">      88 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (arg &lt; 0) {</span>
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 :         k *= fk;</span>
+<span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 :         e *= fe;</span>
+<span class="lineNum">      91 </span>                :            :       }
+<span class="lineNum">      92 </span>                :            :     }
+<span class="lineNum">      93 </span>                :            :   }
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="95"><span class="lineNum">      95 </span>                :            : </a>
+<span class="lineNum">      96 </span>                :            : /* We need to know only K(k), and if possible KISS. */
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 : nr_double_t cpwline::ellipk (nr_double_t k) {</span>
+<span class="lineNum">      98 </span>                :            :   nr_double_t r, lost;
+<span class="lineNum">      99 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   ellipke (k, r, lost);</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :   return r;</span>
+<span class="lineNum">     101 </span>                :            : }
+<span class="lineNum">     102 </span>                :            : 
+<a name="103"><span class="lineNum">     103 </span>                :            : /* More or less accurate approximation of K(k)/K'(k).  Suggested by</a>
+<span class="lineNum">     104 </span>                :            :    publications dealing with coplanar components. */
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 : nr_double_t cpwline::ellipa (nr_double_t k) {</span>
+<span class="lineNum">     106 </span>                :            :   nr_double_t r, kp;
+<span class="lineNum">     107 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (k &lt; M_SQRT1_2) {</span>
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :     kp = qucs::sqrt (1 - k * k);</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :     r = M_PI / qucs::log (2 * (1 + qucs::sqrt (kp)) / (1 - qucs::sqrt (kp)));</span>
+<span class="lineNum">     110 </span>                :            :   }
+<span class="lineNum">     111 </span>                :            :   else {
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :     r = qucs::log (2 * (1 + qucs::sqrt (k)) / (1 - qucs::sqrt (k))) / M_PI;</span>
+<span class="lineNum">     113 </span>                :            :   }
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :   return r;</span>
+<a name="115"><span class="lineNum">     115 </span>                :            : }</a>
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 : void cpwline::initSP (void) {</span>
+<span class="lineNum">     118 </span>                :            :   // allocate S-parameter matrix
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :   allocMatrixS ();</span>
+<span class="lineNum">     120 </span>                :            :   // pre-compute propagation factors
+<span class="lineNum">     121 </span>                :<span class="lineNoCov">          0 :   initPropagation ();</span>
+<a name="122"><span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     123 </span>                :            : 
+<span class="lineNum">     124 </span>                :<span class="lineNoCov">          0 : void cpwline::initPropagation (void) {</span>
+<span class="lineNum">     125 </span>                :            :   // get properties of substrate and coplanar line
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 :   nr_double_t W =  getPropertyDouble (&quot;W&quot;);</span>
+<span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :   nr_double_t s =  getPropertyDouble (&quot;S&quot;);</span>
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :   substrate * subst = getSubstrate ();</span>
+<span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 :   nr_double_t er = subst-&gt;getPropertyDouble (&quot;er&quot;);</span>
+<span class="lineNum">     130 </span>                :<span class="lineNoCov">          0 :   nr_double_t h  = subst-&gt;getPropertyDouble (&quot;h&quot;);</span>
+<span class="lineNum">     131 </span>                :<span class="lineNoCov">          0 :   nr_double_t t  = subst-&gt;getPropertyDouble (&quot;t&quot;);</span>
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :   int backMetal  = !strcmp (getPropertyString (&quot;Backside&quot;), &quot;Metal&quot;);</span>
+<span class="lineNum">     133 </span>                :<span class="lineNoCov">          0 :   int approx     = !strcmp (getPropertyString (&quot;Approx&quot;), &quot;yes&quot;);</span>
+<span class="lineNum">     134 </span>                :            : 
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :   tand = subst-&gt;getPropertyDouble (&quot;tand&quot;);</span>
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :   rho  = subst-&gt;getPropertyDouble (&quot;rho&quot;);</span>
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :   len  = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            :   // other local variables (quasi-static constants)
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :   nr_double_t k1, kk1, kpk1, k2, k3, q1, q2, q3 = 0, qz, er0 = 0;</span>
+<span class="lineNum">     141 </span>                :            : 
+<span class="lineNum">     142 </span>                :            :   // compute the necessary quasi-static approx. (K1, K3, er(0) and Z(0))
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :   k1   = W / (W + s + s);</span>
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :   kk1  = ellipk (k1);</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :   kpk1 = ellipk (qucs::sqrt (1 - k1 * k1));</span>
+<span class="lineNum">     146 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (approx) {</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :     q1 = ellipa (k1);</span>
+<span class="lineNum">     148 </span>                :            :   } else {
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 :     q1 = kk1 / kpk1;</span>
+<span class="lineNum">     150 </span>                :            :   }
+<span class="lineNum">     151 </span>                :            : 
+<span class="lineNum">     152 </span>                :            :   // backside is metal
+<span class="lineNum">     153 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (backMetal) {</span>
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 :     k3  = qucs::tanh ((M_PI / 4) * (W / h)) / qucs::tanh ((M_PI / 4) * (W + s + s) / h);</span>
+<span class="lineNum">     155 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (approx) {</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :       q3 = ellipa (k3);</span>
+<span class="lineNum">     157 </span>                :            :     } else {
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :       q3 = ellipk (k3) / ellipk (qucs::sqrt (1 - k3 * k3));</span>
+<span class="lineNum">     159 </span>                :            :     }
+<span class="lineNum">     160 </span>                :<span class="lineNoCov">          0 :     qz  = 1 / (q1 + q3);</span>
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :     er0 = 1 + q3 * qz * (er - 1);</span>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :     zl_factor = Z0 / 2 * qz;</span>
+<span class="lineNum">     163 </span>                :            :   }
+<span class="lineNum">     164 </span>                :            :   // backside is air
+<span class="lineNum">     165 </span>                :            :   else {
+<span class="lineNum">     166 </span>                :<span class="lineNoCov">          0 :     k2  = qucs::sinh ((M_PI / 4) * (W / h)) / qucs::sinh ((M_PI / 4) * (W + s + s) / h);</span>
+<span class="lineNum">     167 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (approx) {</span>
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :       q2 = ellipa (k2);</span>
+<span class="lineNum">     169 </span>                :            :     } else {
+<span class="lineNum">     170 </span>                :<span class="lineNoCov">          0 :       q2 = ellipk (k2) / ellipk (qucs::sqrt (1 - k2 * k2));</span>
+<span class="lineNum">     171 </span>                :            :     }
+<span class="lineNum">     172 </span>                :<span class="lineNoCov">          0 :     er0 = 1 + (er - 1) / 2 * q2 / q1;</span>
+<span class="lineNum">     173 </span>                :<span class="lineNoCov">          0 :     zl_factor = Z0 / 4 / q1;</span>
+<span class="lineNum">     174 </span>                :            :   }
+<span class="lineNum">     175 </span>                :            : 
+<span class="lineNum">     176 </span>                :            :   // adds effect of strip thickness
+<span class="lineNum">     177 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (t &gt; 0) {</span>
+<span class="lineNum">     178 </span>                :            :     nr_double_t d, se, We, ke, qe;
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 :     d  = (t * 1.25 / M_PI) * (1 + qucs::log (4 * M_PI * W / t));</span>
+<span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 :     se = s - d;</span>
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :     We = W + d;</span>
+<span class="lineNum">     182 </span>                :            : 
+<span class="lineNum">     183 </span>                :            :     // modifies k1 accordingly (k1 = ke)
+<span class="lineNum">     184 </span>                :<span class="lineNoCov">          0 :     ke = We / (We + se + se); // ke = k1 + (1 - k1 * k1) * d / 2 / s;</span>
+<span class="lineNum">     185 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (approx) {</span>
+<span class="lineNum">     186 </span>                :<span class="lineNoCov">          0 :       qe = ellipa (ke);</span>
+<span class="lineNum">     187 </span>                :            :     } else {
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 :       qe = ellipk (ke) / ellipk (qucs::sqrt (1 - ke * ke));</span>
+<span class="lineNum">     189 </span>                :            :     }
+<span class="lineNum">     190 </span>                :            :     // backside is metal
+<span class="lineNum">     191 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (backMetal) {</span>
+<span class="lineNum">     192 </span>                :<span class="lineNoCov">          0 :       qz  = 1 / (qe + q3);</span>
+<span class="lineNum">     193 </span>                :<span class="lineNoCov">          0 :       er0 = 1 + q3 * qz * (er - 1);</span>
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :       zl_factor = Z0 / 2 * qz;</span>
+<span class="lineNum">     195 </span>                :            :     }
+<span class="lineNum">     196 </span>                :            :     // backside is air
+<span class="lineNum">     197 </span>                :            :     else {
+<span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 :       zl_factor = Z0 / 4 / qe;</span>
+<span class="lineNum">     199 </span>                :            :     }
+<span class="lineNum">     200 </span>                :            : 
+<span class="lineNum">     201 </span>                :            :     // modifies er0 as well
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 :     er0 = er0 - (0.7 * (er0 - 1) * t / s) / (q1 + (0.7 * t / s));</span>
+<span class="lineNum">     203 </span>                :            :   }
+<span class="lineNum">     204 </span>                :            : 
+<span class="lineNum">     205 </span>                :            :   // pre-compute square roots
+<span class="lineNum">     206 </span>                :<span class="lineNoCov">          0 :   sr_er = qucs::sqrt (er);</span>
+<span class="lineNum">     207 </span>                :<span class="lineNoCov">          0 :   sr_er0 = qucs::sqrt (er0);</span>
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :            :   // cut-off frequency of the TE0 mode
+<span class="lineNum">     210 </span>                :<span class="lineNoCov">          0 :   fte = (C0 / 4) / (h * qucs::sqrt (er - 1));</span>
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>                :            :   // dispersion factor G
+<span class="lineNum">     213 </span>                :<span class="lineNoCov">          0 :   nr_double_t p = qucs::log (W / h);</span>
+<span class="lineNum">     214 </span>                :<span class="lineNoCov">          0 :   nr_double_t u = 0.54 - (0.64 - 0.015 * p) * p;</span>
+<span class="lineNum">     215 </span>                :<span class="lineNoCov">          0 :   nr_double_t v = 0.43 - (0.86 - 0.54 * p) * p;</span>
+<span class="lineNum">     216 </span>                :<span class="lineNoCov">          0 :   G = qucs::exp (u * qucs::log (W / s) + v);</span>
+<span class="lineNum">     217 </span>                :            : 
+<span class="lineNum">     218 </span>                :            :   // loss constant factors (computed only once for efficency sake)
+<span class="lineNum">     219 </span>                :<span class="lineNoCov">          0 :   nr_double_t ac = 0;</span>
+<span class="lineNum">     220 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (t &gt; 0) {</span>
+<span class="lineNum">     221 </span>                :            :     // equations by GHIONE
+<span class="lineNum">     222 </span>                :<span class="lineNoCov">          0 :     nr_double_t n  = (1 - k1) * 8 * M_PI / (t * (1 + k1));</span>
+<span class="lineNum">     223 </span>                :<span class="lineNoCov">          0 :     nr_double_t a  = W / 2;</span>
+<span class="lineNum">     224 </span>                :<span class="lineNoCov">          0 :     nr_double_t b  = a + s;</span>
+<span class="lineNum">     225 </span>                :<span class="lineNoCov">          0 :     ac = (M_PI + qucs::log (n * a)) / a + (M_PI + qucs::log (n * b)) / b;</span>
+<span class="lineNum">     226 </span>                :            :   }
+<span class="lineNum">     227 </span>                :<span class="lineNoCov">          0 :   ac_factor  = ac / (4 * Z0 * kk1 * kpk1 * (1 - k1 * k1));</span>
+<span class="lineNum">     228 </span>                :<span class="lineNoCov">          0 :   ac_factor *= qucs::sqrt (M_PI * MU0 * rho); // Rs factor</span>
+<span class="lineNum">     229 </span>                :<span class="lineNoCov">          0 :   ad_factor  = (er / (er - 1)) * tand * M_PI / C0;</span>
+<span class="lineNum">     230 </span>                :            : 
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :   bt_factor  = 2 * M_PI / C0;</span>
+<a name="232"><span class="lineNum">     232 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     233 </span>                :            : 
+<span class="lineNum">     234 </span>                :<span class="lineNoCov">          0 : void cpwline::calcAB (nr_double_t f, nr_double_t&amp; zl, nr_double_t&amp; al,</span>
+<span class="lineNum">     235 </span>                :            :                       nr_double_t&amp; bt) {
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :   nr_double_t sr_er_f = sr_er0;</span>
+<span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 :   nr_double_t ac = ac_factor;</span>
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 :   nr_double_t ad = ad_factor;</span>
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :            :   // by initializing as much as possible outside this function, the
+<span class="lineNum">     241 </span>                :            :   // overhead is minimal
+<span class="lineNum">     242 </span>                :            : 
+<span class="lineNum">     243 </span>                :            :   // add the dispersive effects to er0
+<span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 :   sr_er_f += (sr_er - sr_er0) / (1 + G * qucs::pow (f / fte, -1.8));</span>
+<span class="lineNum">     245 </span>                :            : 
+<span class="lineNum">     246 </span>                :            :   // computes impedance
+<span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 :   zl /= sr_er_f;</span>
+<span class="lineNum">     248 </span>                :            : 
+<span class="lineNum">     249 </span>                :            :   // for now, the loss are limited to strip losses (no radiation
+<span class="lineNum">     250 </span>                :            :   // losses yet) losses in neper/length
+<span class="lineNum">     251 </span>                :<span class="lineNoCov">          0 :   ad *= f * (sr_er_f - 1 / sr_er_f);</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :   ac *= qucs::sqrt (f) * sr_er0;</span>
+<span class="lineNum">     253 </span>                :            : 
+<span class="lineNum">     254 </span>                :<span class="lineNoCov">          0 :   al  = ac + ad;</span>
+<span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 :   bt *= sr_er_f * f;</span>
+<span class="lineNum">     256 </span>                :            : 
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 :   Er = sqr (sr_er_f);</span>
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 :   Zl = zl;</span>
+<a name="259"><span class="lineNum">     259 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     260 </span>                :            : 
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 : void cpwline::saveCharacteristics (nr_double_t) {</span>
+<span class="lineNum">     262 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;Zl&quot;, Zl);</span>
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 :   setCharacteristic (&quot;Er&quot;, Er);</span>
+<a name="264"><span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :<span class="lineNoCov">          0 : void cpwline::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">     267 </span>                :            : 
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 :   nr_double_t zl = zl_factor;</span>
+<span class="lineNum">     269 </span>                :<span class="lineNoCov">          0 :   nr_double_t beta = bt_factor;</span>
+<span class="lineNum">     270 </span>                :            :   nr_double_t alpha;
+<span class="lineNum">     271 </span>                :            : 
+<span class="lineNum">     272 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   calcAB (frequency, zl, alpha, beta);</span>
+<span class="lineNum">     273 </span>                :            : 
+<span class="lineNum">     274 </span>                :            :   // calculate and set S-parameters
+<span class="lineNum">     275 </span>                :<span class="lineNoCov">          0 :   nr_double_t z = zl / z0;</span>
+<span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 :   nr_double_t y = 1 / z;</span>
+<span class="lineNum">     277 </span>                :<span class="lineNoCov">          0 :   nr_complex_t g = nr_complex_t (alpha, beta);</span>
+<span class="lineNum">     278 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t n = 2.0 * cosh (g * len) + (z + y) * sinh (g * len);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     279 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t s11 = (z - y) * sinh (g * len) / n;</span>
+<span class="lineNum">     280 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t s21 = 2.0 / n;</span>
+<span class="lineNum">     281 </span>                :            : 
+<span class="lineNum">     282 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_1, NODE_1, s11); setS (NODE_2, NODE_2, s11);</span>
+<span class="lineNum">     283 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_1, NODE_2, s21); setS (NODE_2, NODE_1, s21);</span>
+<span class="lineNum">     284 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     285 </span>                :            : 
+<span class="lineNum">     286 </span>                :            : /* The function calculates the quasi-static impedance of a coplanar
+<a name="287"><span class="lineNum">     287 </span>                :            :    waveguide line and the value of the effective dielectric constant</a>
+<span class="lineNum">     288 </span>                :            :    for the given coplanar line and substrate properties. */
+<span class="lineNum">     289 </span>                :<span class="lineNoCov">          0 : void cpwline::analyseQuasiStatic (nr_double_t W, nr_double_t s, nr_double_t h,</span>
+<span class="lineNum">     290 </span>                :            :                                   nr_double_t t, nr_double_t er, int backMetal,
+<span class="lineNum">     291 </span>                :            :                                   nr_double_t&amp; ZlEff, nr_double_t&amp; ErEff) {
+<span class="lineNum">     292 </span>                :            : 
+<span class="lineNum">     293 </span>                :            :   // local variables (quasi-static constants)
+<span class="lineNum">     294 </span>                :<span class="lineNoCov">          0 :   nr_double_t k1, k2, k3, q1, q2, q3 = 0, qz;</span>
+<span class="lineNum">     295 </span>                :            : 
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :   ErEff = er;</span>
+<span class="lineNum">     297 </span>                :<span class="lineNoCov">          0 :   ZlEff = 0;</span>
+<span class="lineNum">     298 </span>                :            : 
+<span class="lineNum">     299 </span>                :            :   // compute the necessary quasi-static approx. (K1, K3, er(0) and Z(0))
+<span class="lineNum">     300 </span>                :<span class="lineNoCov">          0 :   k1 = W / (W + s + s);</span>
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 :   q1 = ellipk (k1) / ellipk (qucs::sqrt (1 - k1 * k1));</span>
+<span class="lineNum">     302 </span>                :            : 
+<span class="lineNum">     303 </span>                :            :   // backside is metal
+<span class="lineNum">     304 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (backMetal) {</span>
+<span class="lineNum">     305 </span>                :<span class="lineNoCov">          0 :     k3  = qucs::tanh ((M_PI / 4) * (W / h)) / qucs::tanh ((M_PI / 4) * (W + s + s) / h);</span>
+<span class="lineNum">     306 </span>                :<span class="lineNoCov">          0 :     q3 = ellipk (k3) / ellipk (qucs::sqrt (1 - k3 * k3));</span>
+<span class="lineNum">     307 </span>                :<span class="lineNoCov">          0 :     qz  = 1 / (q1 + q3);</span>
+<span class="lineNum">     308 </span>                :<span class="lineNoCov">          0 :     ErEff = 1 + q3 * qz * (er - 1);</span>
+<span class="lineNum">     309 </span>                :<span class="lineNoCov">          0 :     ZlEff = Z0 / 2 * qz;</span>
+<span class="lineNum">     310 </span>                :            :   }
+<span class="lineNum">     311 </span>                :            :   // backside is air
+<span class="lineNum">     312 </span>                :            :   else {
+<span class="lineNum">     313 </span>                :<span class="lineNoCov">          0 :     k2  = qucs::sinh ((M_PI / 4) * (W / h)) / qucs::sinh ((M_PI / 4) * (W + s + s) / h);</span>
+<span class="lineNum">     314 </span>                :<span class="lineNoCov">          0 :     q2 = ellipk (k2) / ellipk (qucs::sqrt (1 - k2 * k2));</span>
+<span class="lineNum">     315 </span>                :<span class="lineNoCov">          0 :     ErEff = 1 + (er - 1) / 2 * q2 / q1;</span>
+<span class="lineNum">     316 </span>                :<span class="lineNoCov">          0 :     ZlEff = Z0 / 4 / q1;</span>
+<span class="lineNum">     317 </span>                :            :   }
+<span class="lineNum">     318 </span>                :            : 
+<span class="lineNum">     319 </span>                :            :   // adds effect of strip thickness
+<span class="lineNum">     320 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (t &gt; 0) {</span>
+<span class="lineNum">     321 </span>                :            :     nr_double_t d, se, We, ke, qe;
+<span class="lineNum">     322 </span>                :<span class="lineNoCov">          0 :     d  = (t * 1.25 / M_PI) * (1 + qucs::log (4 * M_PI * W / t));</span>
+<span class="lineNum">     323 </span>                :<span class="lineNoCov">          0 :     se = s - d;</span>
+<span class="lineNum">     324 </span>                :<span class="lineNoCov">          0 :     We = W + d;</span>
+<span class="lineNum">     325 </span>                :            : 
+<span class="lineNum">     326 </span>                :            :     // modifies k1 accordingly (k1 = ke)
+<span class="lineNum">     327 </span>                :<span class="lineNoCov">          0 :     ke = We / (We + se + se); // ke = k1 + (1 - k1 * k1) * d / 2 / s;</span>
+<span class="lineNum">     328 </span>                :<span class="lineNoCov">          0 :     qe = ellipk (ke) / ellipk (qucs::sqrt (1 - ke * ke));</span>
+<span class="lineNum">     329 </span>                :            : 
+<span class="lineNum">     330 </span>                :            :     // backside is metal
+<span class="lineNum">     331 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (backMetal) {</span>
+<span class="lineNum">     332 </span>                :<span class="lineNoCov">          0 :       qz  = 1 / (qe + q3);</span>
+<span class="lineNum">     333 </span>                :<span class="lineNoCov">          0 :       ErEff = 1 + q3 * qz * (er - 1);</span>
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :       ZlEff = Z0 / 2 * qz;</span>
+<span class="lineNum">     335 </span>                :            :     }
+<span class="lineNum">     336 </span>                :            :     // backside is air
+<span class="lineNum">     337 </span>                :            :     else {
+<span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 :       ZlEff = Z0 / 4 / qe;</span>
+<span class="lineNum">     339 </span>                :            :     }
+<span class="lineNum">     340 </span>                :            : 
+<span class="lineNum">     341 </span>                :            :     // modifies ErEff as well
+<span class="lineNum">     342 </span>                :<span class="lineNoCov">          0 :     ErEff = ErEff - (0.7 * (ErEff - 1) * t / s) / (q1 + (0.7 * t / s));</span>
+<span class="lineNum">     343 </span>                :            :   }
+<span class="lineNum">     344 </span>                :<span class="lineNoCov">          0 :   ErEff = qucs::sqrt (ErEff);</span>
+<span class="lineNum">     345 </span>                :<span class="lineNoCov">          0 :   ZlEff /= ErEff;</span>
+<span class="lineNum">     346 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     347 </span>                :            : 
+<span class="lineNum">     348 </span>                :            : /* This function calculates the frequency dependent value of the
+<a name="349"><span class="lineNum">     349 </span>                :            :    effective dielectric constant and the coplanar line impedance for</a>
+<span class="lineNum">     350 </span>                :            :    the given frequency. */
+<span class="lineNum">     351 </span>                :<span class="lineNoCov">          0 : void cpwline::analyseDispersion (nr_double_t W, nr_double_t s, nr_double_t h,</span>
+<span class="lineNum">     352 </span>                :            :                                  nr_double_t er, nr_double_t ZlEff,
+<span class="lineNum">     353 </span>                :            :                                  nr_double_t ErEff, nr_double_t frequency,
+<span class="lineNum">     354 </span>                :            :                                  nr_double_t&amp; ZlEffFreq,
+<span class="lineNum">     355 </span>                :            :                                  nr_double_t&amp; ErEffFreq) {
+<span class="lineNum">     356 </span>                :            :   // local variables
+<span class="lineNum">     357 </span>                :            :   nr_double_t fte, G;
+<span class="lineNum">     358 </span>                :            : 
+<span class="lineNum">     359 </span>                :<span class="lineNoCov">          0 :   ErEffFreq = ErEff;</span>
+<span class="lineNum">     360 </span>                :<span class="lineNoCov">          0 :   ZlEffFreq = ZlEff * ErEff;</span>
+<span class="lineNum">     361 </span>                :            : 
+<span class="lineNum">     362 </span>                :            :   // cut-off frequency of the TE0 mode
+<span class="lineNum">     363 </span>                :<span class="lineNoCov">          0 :   fte = (C0 / 4) / (h * qucs::sqrt (er - 1));</span>
+<span class="lineNum">     364 </span>                :            : 
+<span class="lineNum">     365 </span>                :            :   // dispersion factor G
+<span class="lineNum">     366 </span>                :<span class="lineNoCov">          0 :   nr_double_t p = qucs::log (W / h);</span>
+<span class="lineNum">     367 </span>                :<span class="lineNoCov">          0 :   nr_double_t u = 0.54 - (0.64 - 0.015 * p) * p;</span>
+<span class="lineNum">     368 </span>                :<span class="lineNoCov">          0 :   nr_double_t v = 0.43 - (0.86 - 0.54 * p) * p;</span>
+<span class="lineNum">     369 </span>                :<span class="lineNoCov">          0 :   G = qucs::exp (u * qucs::log (W / s) + v);</span>
+<span class="lineNum">     370 </span>                :            : 
+<span class="lineNum">     371 </span>                :            :   // add the dispersive effects to er0
+<span class="lineNum">     372 </span>                :<span class="lineNoCov">          0 :   ErEffFreq += (qucs::sqrt (er) - ErEff) / (1 + G * qucs::pow (frequency / fte, -1.8));</span>
+<span class="lineNum">     373 </span>                :            : 
+<span class="lineNum">     374 </span>                :            :   // computes impedance
+<span class="lineNum">     375 </span>                :<span class="lineNoCov">          0 :   ZlEffFreq /= ErEffFreq;</span>
+<a name="376"><span class="lineNum">     376 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     377 </span>                :            : 
+<span class="lineNum">     378 </span>                :<span class="lineNoCov">          0 : void cpwline::calcNoiseSP (nr_double_t) {</span>
+<span class="lineNum">     379 </span>                :            :   // calculate noise using Bosma's theorem
+<span class="lineNum">     380 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     381 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix s = getMatrixS ();</span>
+<span class="lineNum">     382 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix e = eye (getSize ());</span>
+<span class="lineNum">     383 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (kelvin (T) / T0 * (e - s * transpose (conj (s))));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 18 was not executed"> # </span><span class="branchNoExec" title="Branch 19 was not executed"> # </span>][<span class="branchNoExec" title="Branch 21 was not executed"> # </span><span class="branchNoExec" title="Branch 22 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span>][<span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 30 was not executed"> # </span><span class="branchNoExec" title="Branch 31 was not executed"> # </span>][<span class="branchNoExec" title="Branch 33 was not executed"> # </span><span class="branchNoExec" title="Branch 34 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 36 was not executed"> # </span><span class="branchNoExec" title="Branch 37 was not executed"> # </span>][<span class="branchNoExec" title="Branch 39 was not executed"> # </span><span class="branchNoExec" title="Branch 40 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 42 was not executed"> # </span><span class="branchNoExec" title="Branch 43 was not executed"> # </span>][<span class="branchNoExec" title="Branch 45 was not executed"> # </span><span class="branchNoExec" title="Branch 46 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 48 was not executed"> # </span><span class="branchNoExec" title="Branch 49 was not executed"> # </span>][<span class="branchNoExec" title="Branch 51 was not executed"> # </span><span class="branchNoExec" title="Branch 52 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 54 was not executed"> # </span><span class="branchNoExec" title="Branch 55 was not executed"> # </span>]
+<a name="384"><span class="lineNum">     384 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     385 </span>                :            : 
+<span class="lineNum">     386 </span>                :<span class="lineNoCov">          0 : void cpwline::initDC (void) {</span>
+<span class="lineNum">     387 </span>                :            :   // a DC short (voltage source V = 0 volts)
+<span class="lineNum">     388 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (1);</span>
+<span class="lineNum">     389 </span>                :<span class="lineNoCov">          0 :   setInternalVoltageSource (1);</span>
+<span class="lineNum">     390 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     391 </span>                :<span class="lineNoCov">          0 :   clearY ();</span>
+<span class="lineNum">     392 </span>                :<span class="lineNoCov">          0 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<a name="393"><span class="lineNum">     393 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     394 </span>                :            : 
+<span class="lineNum">     395 </span>                :<span class="lineNoCov">          0 : void cpwline::initTR (void) {</span>
+<span class="lineNum">     396 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<a name="397"><span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     398 </span>                :            : 
+<span class="lineNum">     399 </span>                :<span class="lineNoCov">          0 : void cpwline::initAC (void) {</span>
+<span class="lineNum">     400 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (0);</span>
+<span class="lineNum">     401 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     402 </span>                :<span class="lineNoCov">          0 :   initPropagation ();</span>
+<a name="403"><span class="lineNum">     403 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     404 </span>                :            : 
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 : void cpwline::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">     406 </span>                :            : 
+<span class="lineNum">     407 </span>                :<span class="lineNoCov">          0 :   nr_double_t zl = zl_factor;</span>
+<span class="lineNum">     408 </span>                :<span class="lineNoCov">          0 :   nr_double_t beta = bt_factor;</span>
+<span class="lineNum">     409 </span>                :            :   nr_double_t alpha;
+<span class="lineNum">     410 </span>                :            : 
+<span class="lineNum">     411 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   calcAB (frequency, zl, alpha, beta);</span>
+<span class="lineNum">     412 </span>                :            : 
+<span class="lineNum">     413 </span>                :            :   // calculate and set Y-parameters
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 :   nr_complex_t g = nr_complex_t (alpha, beta);</span>
+<span class="lineNum">     415 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t y11 = coth (g * len) / zl;</span>
+<span class="lineNum">     416 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t y21 = -cosech (g * len) / zl;</span>
+<span class="lineNum">     417 </span>                :            : 
+<span class="lineNum">     418 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_1, y11); setY (NODE_2, NODE_2, y11);</span>
+<span class="lineNum">     419 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setY (NODE_1, NODE_2, y21); setY (NODE_2, NODE_1, y21);</span>
+<a name="420"><span class="lineNum">     420 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     421 </span>                :            : 
+<span class="lineNum">     422 </span>                :<span class="lineNoCov">          0 : void cpwline::calcNoiseAC (nr_double_t) {</span>
+<span class="lineNum">     423 </span>                :            :   // calculate noise using Bosma's theorem
+<span class="lineNum">     424 </span>                :<span class="lineNoCov">          0 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">     425 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (4 * kelvin (T) / T0 * real (getMatrixY ()));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     427 </span>                :            : 
+<span class="lineNum">     428 </span>                :            : // properties
+<span class="lineNum">     429 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     430 </span>                :            :   { &quot;W&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     431 </span>                :            :   { &quot;S&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     432 </span>                :            :   { &quot;L&quot;, PROP_REAL, { 10e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     433 </span>                :            :   { &quot;Subst&quot;, PROP_STR, { PROP_NO_VAL, &quot;Subst1&quot; }, PROP_NO_RANGE },
+<span class="lineNum">     434 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     435 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     436 </span>                :            :   { &quot;Temp&quot;, PROP_REAL, { 26.85, PROP_NO_STR }, PROP_MIN_VAL (K) },
+<span class="lineNum">     437 </span>                :            :   { &quot;Backside&quot;, PROP_STR, { PROP_NO_VAL, &quot;Metal&quot; },
+<span class="lineNum">     438 </span>                :            :     PROP_RNG_STR2 (&quot;Metal&quot;, &quot;Air&quot;) },
+<span class="lineNum">     439 </span>                :            :   { &quot;Approx&quot;, PROP_STR, { PROP_NO_VAL, &quot;no&quot; }, PROP_RNG_YESNO },
+<span class="lineNum">     440 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     441 </span>                :            : struct define_t cpwline::cirdef =
+<span class="lineNum">     442 </span>                :            :   { &quot;CLIN&quot;, 2, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/verilog/bsim4v30pMOS.core.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/verilog</a> - bsim4v30pMOS.core.h<span style="font-size: 80%;"> (source / <a href="bsim4v30pMOS.core.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * bsim4v30pMOS.core.h - device class definitions for bsim4v30pMOS module
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       5 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       6 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       7 </span>                :            :  * any later version.
+<span class="lineNum">       8 </span>                :            :  *
+<span class="lineNum">       9 </span>                :            :  */
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : #ifndef __bsim4v30pMOS_H__
+<a name="12"><span class="lineNum">      12 </span>                :            : #define __bsim4v30pMOS_H__</a>
+<span class="lineNum">      13 </span>                :            : 
+<span class="lineNum">      14 </span>        [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 3 times"> + </span>]:<span class="lineCov">          6 : class bsim4v30pMOS : public qucs::circuit</span>
+<a name="15"><span class="lineNum">      15 </span>                :            : {</a>
+<span class="lineNum">      16 </span>                :            :  public:
+<span class="lineNum">      17 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        185 :   CREATOR (bsim4v30pMOS);</span>
+<span class="lineNum">      18 </span>                :            : 
+<span class="lineNum">      19 </span>                :            :   void initDC (void);
+<span class="lineNum">      20 </span>                :            :   void restartDC (void);
+<span class="lineNum">      21 </span>                :            :   void calcDC (void);
+<span class="lineNum">      22 </span>                :            :   void saveOperatingPoints (void);
+<span class="lineNum">      23 </span>                :            :   void loadOperatingPoints (void);
+<span class="lineNum">      24 </span>                :            :   void calcOperatingPoints (void);
+<span class="lineNum">      25 </span>                :            :   void initAC (void);
+<span class="lineNum">      26 </span>                :            :   void calcAC (nr_double_t);
+<span class="lineNum">      27 </span>                :            :   void initSP (void);
+<span class="lineNum">      28 </span>                :            :   void calcSP (nr_double_t);
+<span class="lineNum">      29 </span>                :            :   void calcNoiseAC (nr_double_t);
+<span class="lineNum">      30 </span>                :            :   void calcNoiseSP (nr_double_t);
+<span class="lineNum">      31 </span>                :            :   void initTR (void);
+<span class="lineNum">      32 </span>                :            :   void calcTR (nr_double_t);
+<span class="lineNum">      33 </span>                :            :   void initHB (int);
+<span class="lineNum">      34 </span>                :            :   void calcHB (int);
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            :  private:
+<span class="lineNum">      37 </span>                :            :   void initVerilog (void);
+<span class="lineNum">      38 </span>                :            :   void calcVerilog (void);
+<span class="lineNum">      39 </span>                :            :   void initModel (void);
+<span class="lineNum">      40 </span>                :            :   void loadVariables (void);
+<span class="lineNum">      41 </span>                :            :   void initializeModel (void);
+<span class="lineNum">      42 </span>                :            :   void initializeInstance (void);
+<span class="lineNum">      43 </span>                :            :   void initialStep (void);
+<span class="lineNum">      44 </span>                :            :   void finalStep (void);
+<span class="lineNum">      45 </span>                :            :   qucs::matrix calcMatrixY (nr_double_t);
+<span class="lineNum">      46 </span>                :            :   qucs::matrix calcMatrixCy (nr_double_t);
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            :  private:
+<span class="lineNum">      49 </span>                :            :   int doHB;
+<span class="lineNum">      50 </span>                :            :   int doAC;
+<span class="lineNum">      51 </span>                :            :   int doTR;
+<span class="lineNum">      52 </span>                :            : 
+<span class="lineNum">      53 </span>                :            :   nr_double_t _freq;
+<span class="lineNum">      54 </span>                :            :   nr_double_t _rhs[11];
+<span class="lineNum">      55 </span>                :            :   nr_double_t _qhs[11];
+<span class="lineNum">      56 </span>                :            :   nr_double_t _ghs[11];
+<span class="lineNum">      57 </span>                :            :   nr_double_t _chs[11];
+<span class="lineNum">      58 </span>                :            :   nr_double_t _jstat[11][11];
+<span class="lineNum">      59 </span>                :            :   nr_double_t _jdyna[11][11];
+<span class="lineNum">      60 </span>                :            :   nr_double_t _white_pwr[11][11];
+<span class="lineNum">      61 </span>                :            :   nr_double_t _flicker_pwr[11][11];
+<span class="lineNum">      62 </span>                :            :   nr_double_t _flicker_exp[11][11];
+<span class="lineNum">      63 </span>                :            :   nr_double_t _charges[11][11];
+<span class="lineNum">      64 </span>                :            :   nr_double_t _caps[11][11][11][11];
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :   // device model parameters
+<span class="lineNum">      67 </span>                :            :   nr_double_t GMIN;
+<span class="lineNum">      68 </span>                :            :   nr_double_t PS;
+<span class="lineNum">      69 </span>                :            :   nr_double_t PD;
+<span class="lineNum">      70 </span>                :            :   nr_double_t AS;
+<span class="lineNum">      71 </span>                :            :   nr_double_t AD;
+<span class="lineNum">      72 </span>                :            :   nr_double_t CGBO;
+<span class="lineNum">      73 </span>                :            :   nr_double_t CGDO;
+<span class="lineNum">      74 </span>                :            :   nr_double_t CGSO;
+<span class="lineNum">      75 </span>                :            :   nr_double_t L;
+<span class="lineNum">      76 </span>                :            :   nr_double_t W;
+<span class="lineNum">      77 </span>                :            :   nr_double_t MOBMOD;
+<span class="lineNum">      78 </span>                :            :   nr_double_t RDSMOD;
+<span class="lineNum">      79 </span>                :            :   nr_double_t IGCMOD;
+<span class="lineNum">      80 </span>                :            :   nr_double_t IGBMOD;
+<span class="lineNum">      81 </span>                :            :   nr_double_t CAPMOD;
+<span class="lineNum">      82 </span>                :            :   nr_double_t RGATEMOD;
+<span class="lineNum">      83 </span>                :            :   nr_double_t RBODYMOD;
+<span class="lineNum">      84 </span>                :            :   nr_double_t DIOMOD;
+<span class="lineNum">      85 </span>                :            :   nr_double_t TEMPMOD;
+<span class="lineNum">      86 </span>                :            :   nr_double_t GEOMOD;
+<span class="lineNum">      87 </span>                :            :   nr_double_t RGEOMOD;
+<span class="lineNum">      88 </span>                :            :   nr_double_t PERMOD;
+<span class="lineNum">      89 </span>                :            :   nr_double_t TNOIMOD;
+<span class="lineNum">      90 </span>                :            :   nr_double_t FNOIMOD;
+<span class="lineNum">      91 </span>                :            :   nr_double_t EPSROX;
+<span class="lineNum">      92 </span>                :            :   nr_double_t TOXE;
+<span class="lineNum">      93 </span>                :            :   nr_double_t TOXP;
+<span class="lineNum">      94 </span>                :            :   nr_double_t TOXM;
+<span class="lineNum">      95 </span>                :            :   nr_double_t DTOX;
+<span class="lineNum">      96 </span>                :            :   nr_double_t XJ;
+<span class="lineNum">      97 </span>                :            :   nr_double_t GAMMA1;
+<span class="lineNum">      98 </span>                :            :   nr_double_t GAMMA2;
+<span class="lineNum">      99 </span>                :            :   nr_double_t NDEP;
+<span class="lineNum">     100 </span>                :            :   nr_double_t NSUB;
+<span class="lineNum">     101 </span>                :            :   nr_double_t NGATE;
+<span class="lineNum">     102 </span>                :            :   nr_double_t NSD;
+<span class="lineNum">     103 </span>                :            :   nr_double_t VBX;
+<span class="lineNum">     104 </span>                :            :   nr_double_t XT;
+<span class="lineNum">     105 </span>                :            :   nr_double_t RSH;
+<span class="lineNum">     106 </span>                :            :   nr_double_t RSHG;
+<span class="lineNum">     107 </span>                :            :   nr_double_t VTH0;
+<span class="lineNum">     108 </span>                :            :   nr_double_t VFB;
+<span class="lineNum">     109 </span>                :            :   nr_double_t PHIN;
+<span class="lineNum">     110 </span>                :            :   nr_double_t K1;
+<span class="lineNum">     111 </span>                :            :   nr_double_t K2;
+<span class="lineNum">     112 </span>                :            :   nr_double_t K3;
+<span class="lineNum">     113 </span>                :            :   nr_double_t K3B;
+<span class="lineNum">     114 </span>                :            :   nr_double_t W0;
+<span class="lineNum">     115 </span>                :            :   nr_double_t LPE0;
+<span class="lineNum">     116 </span>                :            :   nr_double_t LPEB;
+<span class="lineNum">     117 </span>                :            :   nr_double_t VBM;
+<span class="lineNum">     118 </span>                :            :   nr_double_t DVT0;
+<span class="lineNum">     119 </span>                :            :   nr_double_t DVT1;
+<span class="lineNum">     120 </span>                :            :   nr_double_t DVT2;
+<span class="lineNum">     121 </span>                :            :   nr_double_t DVTP0;
+<span class="lineNum">     122 </span>                :            :   nr_double_t DVTP1;
+<span class="lineNum">     123 </span>                :            :   nr_double_t DVT0W;
+<span class="lineNum">     124 </span>                :            :   nr_double_t DVT1W;
+<span class="lineNum">     125 </span>                :            :   nr_double_t DVT2W;
+<span class="lineNum">     126 </span>                :            :   nr_double_t U0;
+<span class="lineNum">     127 </span>                :            :   nr_double_t UA;
+<span class="lineNum">     128 </span>                :            :   nr_double_t UB;
+<span class="lineNum">     129 </span>                :            :   nr_double_t UC;
+<span class="lineNum">     130 </span>                :            :   nr_double_t EU;
+<span class="lineNum">     131 </span>                :            :   nr_double_t VSAT;
+<span class="lineNum">     132 </span>                :            :   nr_double_t A0;
+<span class="lineNum">     133 </span>                :            :   nr_double_t AGS;
+<span class="lineNum">     134 </span>                :            :   nr_double_t B0;
+<span class="lineNum">     135 </span>                :            :   nr_double_t B1;
+<span class="lineNum">     136 </span>                :            :   nr_double_t KETA;
+<span class="lineNum">     137 </span>                :            :   nr_double_t A1;
+<span class="lineNum">     138 </span>                :            :   nr_double_t A2;
+<span class="lineNum">     139 </span>                :            :   nr_double_t WINT;
+<span class="lineNum">     140 </span>                :            :   nr_double_t LINT;
+<span class="lineNum">     141 </span>                :            :   nr_double_t DWG;
+<span class="lineNum">     142 </span>                :            :   nr_double_t DWB;
+<span class="lineNum">     143 </span>                :            :   nr_double_t VOFF;
+<span class="lineNum">     144 </span>                :            :   nr_double_t VOFFL;
+<span class="lineNum">     145 </span>                :            :   nr_double_t MINV;
+<span class="lineNum">     146 </span>                :            :   nr_double_t NFACTOR;
+<span class="lineNum">     147 </span>                :            :   nr_double_t ETA0;
+<span class="lineNum">     148 </span>                :            :   nr_double_t ETAB;
+<span class="lineNum">     149 </span>                :            :   nr_double_t DROUT;
+<span class="lineNum">     150 </span>                :            :   nr_double_t DSUB;
+<span class="lineNum">     151 </span>                :            :   nr_double_t CIT;
+<span class="lineNum">     152 </span>                :            :   nr_double_t CDSC;
+<span class="lineNum">     153 </span>                :            :   nr_double_t CDSCB;
+<span class="lineNum">     154 </span>                :            :   nr_double_t CDSCD;
+<span class="lineNum">     155 </span>                :            :   nr_double_t PCLM;
+<span class="lineNum">     156 </span>                :            :   nr_double_t PDIBL1;
+<span class="lineNum">     157 </span>                :            :   nr_double_t PDIBL2;
+<span class="lineNum">     158 </span>                :            :   nr_double_t PDIBLB;
+<span class="lineNum">     159 </span>                :            :   nr_double_t PSCBE1;
+<span class="lineNum">     160 </span>                :            :   nr_double_t PSCBE2;
+<span class="lineNum">     161 </span>                :            :   nr_double_t PVAG;
+<span class="lineNum">     162 </span>                :            :   nr_double_t DELTA;
+<span class="lineNum">     163 </span>                :            :   nr_double_t FPROUT;
+<span class="lineNum">     164 </span>                :            :   nr_double_t PDITS;
+<span class="lineNum">     165 </span>                :            :   nr_double_t PDITSD;
+<span class="lineNum">     166 </span>                :            :   nr_double_t PDITSL;
+<span class="lineNum">     167 </span>                :            :   nr_double_t LAMBDA;
+<span class="lineNum">     168 </span>                :            :   nr_double_t VTL;
+<span class="lineNum">     169 </span>                :            :   nr_double_t LC;
+<span class="lineNum">     170 </span>                :            :   nr_double_t XN;
+<span class="lineNum">     171 </span>                :            :   nr_double_t RDSW;
+<span class="lineNum">     172 </span>                :            :   nr_double_t RDSWMIN;
+<span class="lineNum">     173 </span>                :            :   nr_double_t RDW;
+<span class="lineNum">     174 </span>                :            :   nr_double_t RDWMIN;
+<span class="lineNum">     175 </span>                :            :   nr_double_t RSW;
+<span class="lineNum">     176 </span>                :            :   nr_double_t RSWMIN;
+<span class="lineNum">     177 </span>                :            :   nr_double_t PRWG;
+<span class="lineNum">     178 </span>                :            :   nr_double_t PRWB;
+<span class="lineNum">     179 </span>                :            :   nr_double_t WR;
+<span class="lineNum">     180 </span>                :            :   nr_double_t NRS;
+<span class="lineNum">     181 </span>                :            :   nr_double_t NRD;
+<span class="lineNum">     182 </span>                :            :   nr_double_t ALPHA0;
+<span class="lineNum">     183 </span>                :            :   nr_double_t ALPHA1;
+<span class="lineNum">     184 </span>                :            :   nr_double_t BETA0;
+<span class="lineNum">     185 </span>                :            :   nr_double_t AGIDL;
+<span class="lineNum">     186 </span>                :            :   nr_double_t BGIDL;
+<span class="lineNum">     187 </span>                :            :   nr_double_t CGIDL;
+<span class="lineNum">     188 </span>                :            :   nr_double_t EGIDL;
+<span class="lineNum">     189 </span>                :            :   nr_double_t AIGBACC;
+<span class="lineNum">     190 </span>                :            :   nr_double_t BIGBACC;
+<span class="lineNum">     191 </span>                :            :   nr_double_t CIGBACC;
+<span class="lineNum">     192 </span>                :            :   nr_double_t NIGBACC;
+<span class="lineNum">     193 </span>                :            :   nr_double_t AIGBINV;
+<span class="lineNum">     194 </span>                :            :   nr_double_t BIGBINV;
+<span class="lineNum">     195 </span>                :            :   nr_double_t CIGBINV;
+<span class="lineNum">     196 </span>                :            :   nr_double_t EIGBINV;
+<span class="lineNum">     197 </span>                :            :   nr_double_t NIGBINV;
+<span class="lineNum">     198 </span>                :            :   nr_double_t AIGC;
+<span class="lineNum">     199 </span>                :            :   nr_double_t BIGC;
+<span class="lineNum">     200 </span>                :            :   nr_double_t CIGC;
+<span class="lineNum">     201 </span>                :            :   nr_double_t AIGSD;
+<span class="lineNum">     202 </span>                :            :   nr_double_t BIGSD;
+<span class="lineNum">     203 </span>                :            :   nr_double_t CIGSD;
+<span class="lineNum">     204 </span>                :            :   nr_double_t DLCIG;
+<span class="lineNum">     205 </span>                :            :   nr_double_t NIGC;
+<span class="lineNum">     206 </span>                :            :   nr_double_t POXEDGE;
+<span class="lineNum">     207 </span>                :            :   nr_double_t PIGCD;
+<span class="lineNum">     208 </span>                :            :   nr_double_t NTOX;
+<span class="lineNum">     209 </span>                :            :   nr_double_t TOXREF;
+<span class="lineNum">     210 </span>                :            :   nr_double_t XPART;
+<span class="lineNum">     211 </span>                :            :   nr_double_t CGS0;
+<span class="lineNum">     212 </span>                :            :   nr_double_t CGD0;
+<span class="lineNum">     213 </span>                :            :   nr_double_t CGB0;
+<span class="lineNum">     214 </span>                :            :   nr_double_t CGSL;
+<span class="lineNum">     215 </span>                :            :   nr_double_t CGDL;
+<span class="lineNum">     216 </span>                :            :   nr_double_t CKAPPAS;
+<span class="lineNum">     217 </span>                :            :   nr_double_t CKAPPAD;
+<span class="lineNum">     218 </span>                :            :   nr_double_t CF;
+<span class="lineNum">     219 </span>                :            :   nr_double_t CLC;
+<span class="lineNum">     220 </span>                :            :   nr_double_t CLE;
+<span class="lineNum">     221 </span>                :            :   nr_double_t DLC;
+<span class="lineNum">     222 </span>                :            :   nr_double_t DWC;
+<span class="lineNum">     223 </span>                :            :   nr_double_t VFBCV;
+<span class="lineNum">     224 </span>                :            :   nr_double_t NOFF;
+<span class="lineNum">     225 </span>                :            :   nr_double_t VOFFCV;
+<span class="lineNum">     226 </span>                :            :   nr_double_t ACDE;
+<span class="lineNum">     227 </span>                :            :   nr_double_t MOIN;
+<span class="lineNum">     228 </span>                :            :   nr_double_t XRCRG1;
+<span class="lineNum">     229 </span>                :            :   nr_double_t XRCRG2;
+<span class="lineNum">     230 </span>                :            :   nr_double_t RBPB;
+<span class="lineNum">     231 </span>                :            :   nr_double_t RBPD;
+<span class="lineNum">     232 </span>                :            :   nr_double_t RBPS;
+<span class="lineNum">     233 </span>                :            :   nr_double_t RBDB;
+<span class="lineNum">     234 </span>                :            :   nr_double_t RBSB;
+<span class="lineNum">     235 </span>                :            :   nr_double_t GBMIN;
+<span class="lineNum">     236 </span>                :            :   nr_double_t DMCG;
+<span class="lineNum">     237 </span>                :            :   nr_double_t DMCI;
+<span class="lineNum">     238 </span>                :            :   nr_double_t DMDG;
+<span class="lineNum">     239 </span>                :            :   nr_double_t DMCGT;
+<span class="lineNum">     240 </span>                :            :   nr_double_t NF;
+<span class="lineNum">     241 </span>                :            :   nr_double_t DWJ;
+<span class="lineNum">     242 </span>                :            :   nr_double_t MIN;
+<span class="lineNum">     243 </span>                :            :   nr_double_t XGW;
+<span class="lineNum">     244 </span>                :            :   nr_double_t XGL;
+<span class="lineNum">     245 </span>                :            :   nr_double_t XL;
+<span class="lineNum">     246 </span>                :            :   nr_double_t XW;
+<span class="lineNum">     247 </span>                :            :   nr_double_t NGCON;
+<span class="lineNum">     248 </span>                :            :   nr_double_t IJTHSREV;
+<span class="lineNum">     249 </span>                :            :   nr_double_t IJTHDREV;
+<span class="lineNum">     250 </span>                :            :   nr_double_t IJTHSFWD;
+<span class="lineNum">     251 </span>                :            :   nr_double_t IJTHDFWD;
+<span class="lineNum">     252 </span>                :            :   nr_double_t XJBVS;
+<span class="lineNum">     253 </span>                :            :   nr_double_t XJBVD;
+<span class="lineNum">     254 </span>                :            :   nr_double_t BVS;
+<span class="lineNum">     255 </span>                :            :   nr_double_t BVD;
+<span class="lineNum">     256 </span>                :            :   nr_double_t JSS;
+<span class="lineNum">     257 </span>                :            :   nr_double_t JSD;
+<span class="lineNum">     258 </span>                :            :   nr_double_t JSWS;
+<span class="lineNum">     259 </span>                :            :   nr_double_t JSWD;
+<span class="lineNum">     260 </span>                :            :   nr_double_t JSWGS;
+<span class="lineNum">     261 </span>                :            :   nr_double_t JSWGD;
+<span class="lineNum">     262 </span>                :            :   nr_double_t CJS;
+<span class="lineNum">     263 </span>                :            :   nr_double_t CJD;
+<span class="lineNum">     264 </span>                :            :   nr_double_t MJS;
+<span class="lineNum">     265 </span>                :            :   nr_double_t MJD;
+<span class="lineNum">     266 </span>                :            :   nr_double_t MJSWS;
+<span class="lineNum">     267 </span>                :            :   nr_double_t MJSWD;
+<span class="lineNum">     268 </span>                :            :   nr_double_t CJSWS;
+<span class="lineNum">     269 </span>                :            :   nr_double_t CJSWD;
+<span class="lineNum">     270 </span>                :            :   nr_double_t CJSWGS;
+<span class="lineNum">     271 </span>                :            :   nr_double_t CJSWGD;
+<span class="lineNum">     272 </span>                :            :   nr_double_t MJSWGS;
+<span class="lineNum">     273 </span>                :            :   nr_double_t MJSWGD;
+<span class="lineNum">     274 </span>                :            :   nr_double_t PBS;
+<span class="lineNum">     275 </span>                :            :   nr_double_t PBD;
+<span class="lineNum">     276 </span>                :            :   nr_double_t PBSWS;
+<span class="lineNum">     277 </span>                :            :   nr_double_t PBSWD;
+<span class="lineNum">     278 </span>                :            :   nr_double_t PBSWGS;
+<span class="lineNum">     279 </span>                :            :   nr_double_t PBSWGD;
+<span class="lineNum">     280 </span>                :            :   nr_double_t TNOM;
+<span class="lineNum">     281 </span>                :            :   nr_double_t UTE;
+<span class="lineNum">     282 </span>                :            :   nr_double_t KT1;
+<span class="lineNum">     283 </span>                :            :   nr_double_t KT1L;
+<span class="lineNum">     284 </span>                :            :   nr_double_t KT2;
+<span class="lineNum">     285 </span>                :            :   nr_double_t UA1;
+<span class="lineNum">     286 </span>                :            :   nr_double_t UB1;
+<span class="lineNum">     287 </span>                :            :   nr_double_t UC1;
+<span class="lineNum">     288 </span>                :            :   nr_double_t AT;
+<span class="lineNum">     289 </span>                :            :   nr_double_t PRT;
+<span class="lineNum">     290 </span>                :            :   nr_double_t NJS;
+<span class="lineNum">     291 </span>                :            :   nr_double_t NJD;
+<span class="lineNum">     292 </span>                :            :   nr_double_t XTIS;
+<span class="lineNum">     293 </span>                :            :   nr_double_t XTID;
+<span class="lineNum">     294 </span>                :            :   nr_double_t TPB;
+<span class="lineNum">     295 </span>                :            :   nr_double_t TPBSW;
+<span class="lineNum">     296 </span>                :            :   nr_double_t TPBSWG;
+<span class="lineNum">     297 </span>                :            :   nr_double_t TCJ;
+<span class="lineNum">     298 </span>                :            :   nr_double_t TCJSW;
+<span class="lineNum">     299 </span>                :            :   nr_double_t TCJSWG;
+<span class="lineNum">     300 </span>                :            :   nr_double_t SA;
+<span class="lineNum">     301 </span>                :            :   nr_double_t SB;
+<span class="lineNum">     302 </span>                :            :   nr_double_t SD;
+<span class="lineNum">     303 </span>                :            :   nr_double_t SAREF;
+<span class="lineNum">     304 </span>                :            :   nr_double_t SBREF;
+<span class="lineNum">     305 </span>                :            :   nr_double_t WLOD;
+<span class="lineNum">     306 </span>                :            :   nr_double_t KU0;
+<span class="lineNum">     307 </span>                :            :   nr_double_t KVSAT;
+<span class="lineNum">     308 </span>                :            :   nr_double_t TKU0;
+<span class="lineNum">     309 </span>                :            :   nr_double_t LKU0;
+<span class="lineNum">     310 </span>                :            :   nr_double_t WKU0;
+<span class="lineNum">     311 </span>                :            :   nr_double_t PKU0;
+<span class="lineNum">     312 </span>                :            :   nr_double_t LLODKU0;
+<span class="lineNum">     313 </span>                :            :   nr_double_t WLODKU0;
+<span class="lineNum">     314 </span>                :            :   nr_double_t KVTH0;
+<span class="lineNum">     315 </span>                :            :   nr_double_t LKVTH0;
+<span class="lineNum">     316 </span>                :            :   nr_double_t WKVTH0;
+<span class="lineNum">     317 </span>                :            :   nr_double_t PKVTH0;
+<span class="lineNum">     318 </span>                :            :   nr_double_t LLODVTH;
+<span class="lineNum">     319 </span>                :            :   nr_double_t WLODVTH;
+<span class="lineNum">     320 </span>                :            :   nr_double_t STK2;
+<span class="lineNum">     321 </span>                :            :   nr_double_t LODK2;
+<span class="lineNum">     322 </span>                :            :   nr_double_t STETA0;
+<span class="lineNum">     323 </span>                :            :   nr_double_t LODETA0;
+<span class="lineNum">     324 </span>                :            :   nr_double_t WL;
+<span class="lineNum">     325 </span>                :            :   nr_double_t WLN;
+<span class="lineNum">     326 </span>                :            :   nr_double_t WW;
+<span class="lineNum">     327 </span>                :            :   nr_double_t WWN;
+<span class="lineNum">     328 </span>                :            :   nr_double_t WWL;
+<span class="lineNum">     329 </span>                :            :   nr_double_t LL;
+<span class="lineNum">     330 </span>                :            :   nr_double_t LLN;
+<span class="lineNum">     331 </span>                :            :   nr_double_t LW;
+<span class="lineNum">     332 </span>                :            :   nr_double_t LWN;
+<span class="lineNum">     333 </span>                :            :   nr_double_t LWL;
+<span class="lineNum">     334 </span>                :            :   nr_double_t LLC;
+<span class="lineNum">     335 </span>                :            :   nr_double_t LWC;
+<span class="lineNum">     336 </span>                :            :   nr_double_t LWLC;
+<span class="lineNum">     337 </span>                :            :   nr_double_t WLC;
+<span class="lineNum">     338 </span>                :            :   nr_double_t WWC;
+<span class="lineNum">     339 </span>                :            :   nr_double_t WWLC;
+<span class="lineNum">     340 </span>                :            :   nr_double_t NTNOI;
+<span class="lineNum">     341 </span>                :            :   nr_double_t KF;
+<span class="lineNum">     342 </span>                :            :   nr_double_t AF;
+<span class="lineNum">     343 </span>                :            :   nr_double_t EF;
+<span class="lineNum">     344 </span>                :            :   nr_double_t TEMP;
+<span class="lineNum">     345 </span>                :            : 
+<span class="lineNum">     346 </span>                :            :   // global model variables
+<span class="lineNum">     347 </span>                :            :   double type;
+<span class="lineNum">     348 </span>                :            :   double gmin;
+<span class="lineNum">     349 </span>                :            :   double t0;
+<span class="lineNum">     350 </span>                :            :   double t1;
+<span class="lineNum">     351 </span>                :            :   double t2;
+<span class="lineNum">     352 </span>                :            :   double t3;
+<span class="lineNum">     353 </span>                :            :   double t4;
+<span class="lineNum">     354 </span>                :            :   double t5;
+<span class="lineNum">     355 </span>                :            :   double t8;
+<span class="lineNum">     356 </span>                :            :   double t9;
+<span class="lineNum">     357 </span>                :            :   double t10;
+<span class="lineNum">     358 </span>                :            :   double tmp;
+<span class="lineNum">     359 </span>                :            :   double tmp1;
+<span class="lineNum">     360 </span>                :            :   double tmp2;
+<span class="lineNum">     361 </span>                :            :   double tmp3;
+<span class="lineNum">     362 </span>                :            :   double mobmod;
+<span class="lineNum">     363 </span>                :            :   double rdsmod;
+<span class="lineNum">     364 </span>                :            :   double rgatemod;
+<span class="lineNum">     365 </span>                :            :   double igcmod;
+<span class="lineNum">     366 </span>                :            :   double igbmod;
+<span class="lineNum">     367 </span>                :            :   double diomod;
+<span class="lineNum">     368 </span>                :            :   double capmod;
+<span class="lineNum">     369 </span>                :            :   double rbodymod;
+<span class="lineNum">     370 </span>                :            :   double toxe;
+<span class="lineNum">     371 </span>                :            :   double toxp;
+<span class="lineNum">     372 </span>                :            :   double coxe;
+<span class="lineNum">     373 </span>                :            :   double coxp;
+<span class="lineNum">     374 </span>                :            :   double tnom;
+<span class="lineNum">     375 </span>                :            :   double vtm;
+<span class="lineNum">     376 </span>                :            :   double nf;
+<span class="lineNum">     377 </span>                :            :   double leff;
+<span class="lineNum">     378 </span>                :            :   double weff;
+<span class="lineNum">     379 </span>                :            :   double phi;
+<span class="lineNum">     380 </span>                :            :   double sqrtphi;
+<span class="lineNum">     381 </span>                :            :   double k3;
+<span class="lineNum">     382 </span>                :            :   double vfbzb;
+<span class="lineNum">     383 </span>                :            :   double w0;
+<span class="lineNum">     384 </span>                :            :   double xj;
+<span class="lineNum">     385 </span>                :            :   double xdep0;
+<span class="lineNum">     386 </span>                :            :   double litl;
+<span class="lineNum">     387 </span>                :            :   double vbi;
+<span class="lineNum">     388 </span>                :            :   double vfbsd;
+<span class="lineNum">     389 </span>                :            :   double ngate;
+<span class="lineNum">     390 </span>                :            :   double cdep0;
+<span class="lineNum">     391 </span>                :            :   double toxratio;
+<span class="lineNum">     392 </span>                :            :   double mstar;
+<span class="lineNum">     393 </span>                :            :   double voffcbn;
+<span class="lineNum">     394 </span>                :            :   double ldeb;
+<span class="lineNum">     395 </span>                :            :   double k1;
+<span class="lineNum">     396 </span>                :            :   double vbsc;
+<span class="lineNum">     397 </span>                :            :   double vfb;
+<span class="lineNum">     398 </span>                :            :   double vth0;
+<span class="lineNum">     399 </span>                :            :   double k1ox;
+<span class="lineNum">     400 </span>                :            :   double k2ox;
+<span class="lineNum">     401 </span>                :            :   double vtfbphi1;
+<span class="lineNum">     402 </span>                :            :   double vtfbphi2;
+<span class="lineNum">     403 </span>                :            :   double thetarout;
+<span class="lineNum">     404 </span>                :            :   double theta0vb0;
+<span class="lineNum">     405 </span>                :            :   double factor1;
+<span class="lineNum">     406 </span>                :            :   double dvt0w;
+<span class="lineNum">     407 </span>                :            :   double dvt1w;
+<span class="lineNum">     408 </span>                :            :   double dvt1;
+<span class="lineNum">     409 </span>                :            :   double dvt0;
+<span class="lineNum">     410 </span>                :            :   double lpe0;
+<span class="lineNum">     411 </span>                :            :   double lpeb;
+<span class="lineNum">     412 </span>                :            :   double kt1;
+<span class="lineNum">     413 </span>                :            :   double kt1l;
+<span class="lineNum">     414 </span>                :            :   double tratio;
+<span class="lineNum">     415 </span>                :            :   double dvt2;
+<span class="lineNum">     416 </span>                :            :   double dvt2w;
+<span class="lineNum">     417 </span>                :            :   double kt2;
+<span class="lineNum">     418 </span>                :            :   double eta0;
+<span class="lineNum">     419 </span>                :            :   double etab;
+<span class="lineNum">     420 </span>                :            :   double k3b;
+<span class="lineNum">     421 </span>                :            :   double dvtp0;
+<span class="lineNum">     422 </span>                :            :   double dvtp1;
+<span class="lineNum">     423 </span>                :            :   double cit;
+<span class="lineNum">     424 </span>                :            :   double nfactor;
+<span class="lineNum">     425 </span>                :            :   double cdsc;
+<span class="lineNum">     426 </span>                :            :   double cdscb;
+<span class="lineNum">     427 </span>                :            :   double cdscd;
+<span class="lineNum">     428 </span>                :            :   double dwg;
+<span class="lineNum">     429 </span>                :            :   double dwb;
+<span class="lineNum">     430 </span>                :            :   double weffcj;
+<span class="lineNum">     431 </span>                :            :   double ua;
+<span class="lineNum">     432 </span>                :            :   double ub;
+<span class="lineNum">     433 </span>                :            :   double uc;
+<span class="lineNum">     434 </span>                :            :   double vsattemp;
+<span class="lineNum">     435 </span>                :            :   double rdwmin;
+<span class="lineNum">     436 </span>                :            :   double rswmin;
+<span class="lineNum">     437 </span>                :            :   double rdswmin;
+<span class="lineNum">     438 </span>                :            :   double u0temp;
+<span class="lineNum">     439 </span>                :            :   double eu;
+<span class="lineNum">     440 </span>                :            :   double rds0;
+<span class="lineNum">     441 </span>                :            :   double rd0;
+<span class="lineNum">     442 </span>                :            :   double rs0;
+<span class="lineNum">     443 </span>                :            :   double prwb;
+<span class="lineNum">     444 </span>                :            :   double prwg;
+<span class="lineNum">     445 </span>                :            :   double a0;
+<span class="lineNum">     446 </span>                :            :   double ags;
+<span class="lineNum">     447 </span>                :            :   double b0;
+<span class="lineNum">     448 </span>                :            :   double b1;
+<span class="lineNum">     449 </span>                :            :   double keta;
+<span class="lineNum">     450 </span>                :            :   double a1;
+<span class="lineNum">     451 </span>                :            :   double a2;
+<span class="lineNum">     452 </span>                :            :   double delta;
+<span class="lineNum">     453 </span>                :            :   double lambda;
+<span class="lineNum">     454 </span>                :            :   double fprout;
+<span class="lineNum">     455 </span>                :            :   double pvag;
+<span class="lineNum">     456 </span>                :            :   double pclm;
+<span class="lineNum">     457 </span>                :            :   double pdiblb;
+<span class="lineNum">     458 </span>                :            :   double pdits;
+<span class="lineNum">     459 </span>                :            :   double pditsl;
+<span class="lineNum">     460 </span>                :            :   double pditsd;
+<span class="lineNum">     461 </span>                :            :   double pscbe1;
+<span class="lineNum">     462 </span>                :            :   double pscbe2;
+<span class="lineNum">     463 </span>                :            :   double alpha0;
+<span class="lineNum">     464 </span>                :            :   double alpha1;
+<span class="lineNum">     465 </span>                :            :   double beta0;
+<span class="lineNum">     466 </span>                :            :   double vtl;
+<span class="lineNum">     467 </span>                :            :   double tfactor;
+<span class="lineNum">     468 </span>                :            :   double grgeltd;
+<span class="lineNum">     469 </span>                :            :   double xrcrg1;
+<span class="lineNum">     470 </span>                :            :   double xrcrg2;
+<span class="lineNum">     471 </span>                :            :   double pseff;
+<span class="lineNum">     472 </span>                :            :   double pdeff;
+<span class="lineNum">     473 </span>                :            :   double adeff;
+<span class="lineNum">     474 </span>                :            :   double aseff;
+<span class="lineNum">     475 </span>                :            :   double gsdiff;
+<span class="lineNum">     476 </span>                :            :   double gddiff;
+<span class="lineNum">     477 </span>                :            :   double agidl;
+<span class="lineNum">     478 </span>                :            :   double bgidl;
+<span class="lineNum">     479 </span>                :            :   double cgidl;
+<span class="lineNum">     480 </span>                :            :   double egidl;
+<span class="lineNum">     481 </span>                :            :   double aechvb;
+<span class="lineNum">     482 </span>                :            :   double bechvb;
+<span class="lineNum">     483 </span>                :            :   double aechvbedge;
+<span class="lineNum">     484 </span>                :            :   double bechvbedge;
+<span class="lineNum">     485 </span>                :            :   double aigc;
+<span class="lineNum">     486 </span>                :            :   double bigc;
+<span class="lineNum">     487 </span>                :            :   double cigc;
+<span class="lineNum">     488 </span>                :            :   double aigsd;
+<span class="lineNum">     489 </span>                :            :   double bigsd;
+<span class="lineNum">     490 </span>                :            :   double cigsd;
+<span class="lineNum">     491 </span>                :            :   double aigbacc;
+<span class="lineNum">     492 </span>                :            :   double bigbacc;
+<span class="lineNum">     493 </span>                :            :   double cigbacc;
+<span class="lineNum">     494 </span>                :            :   double nigbacc;
+<span class="lineNum">     495 </span>                :            :   double aigbinv;
+<span class="lineNum">     496 </span>                :            :   double bigbinv;
+<span class="lineNum">     497 </span>                :            :   double cigbinv;
+<span class="lineNum">     498 </span>                :            :   double nigbinv;
+<span class="lineNum">     499 </span>                :            :   double nigc;
+<span class="lineNum">     500 </span>                :            :   double pigcd;
+<span class="lineNum">     501 </span>                :            :   double eigbinv;
+<span class="lineNum">     502 </span>                :            :   double cgbo;
+<span class="lineNum">     503 </span>                :            :   double param_cgdo;
+<span class="lineNum">     504 </span>                :            :   double param_cgso;
+<span class="lineNum">     505 </span>                :            :   double jss_temp;
+<span class="lineNum">     506 </span>                :            :   double jsd_temp;
+<span class="lineNum">     507 </span>                :            :   double jsws_temp;
+<span class="lineNum">     508 </span>                :            :   double jswd_temp;
+<span class="lineNum">     509 </span>                :            :   double jswgs_temp;
+<span class="lineNum">     510 </span>                :            :   double jswgd_temp;
+<span class="lineNum">     511 </span>                :            :   double njs;
+<span class="lineNum">     512 </span>                :            :   double njd;
+<span class="lineNum">     513 </span>                :            :   double cgdl;
+<span class="lineNum">     514 </span>                :            :   double cgsl;
+<span class="lineNum">     515 </span>                :            :   double cjs_temp;
+<span class="lineNum">     516 </span>                :            :   double cjd_temp;
+<span class="lineNum">     517 </span>                :            :   double cjsws_temp;
+<span class="lineNum">     518 </span>                :            :   double cjswd_temp;
+<span class="lineNum">     519 </span>                :            :   double cjswgs_temp;
+<span class="lineNum">     520 </span>                :            :   double cjswgd_temp;
+<span class="lineNum">     521 </span>                :            :   double phibs;
+<span class="lineNum">     522 </span>                :            :   double phibd;
+<span class="lineNum">     523 </span>                :            :   double phibsws;
+<span class="lineNum">     524 </span>                :            :   double phibswd;
+<span class="lineNum">     525 </span>                :            :   double phibswgs;
+<span class="lineNum">     526 </span>                :            :   double phibswgd;
+<span class="lineNum">     527 </span>                :            :   double xjbvd;
+<span class="lineNum">     528 </span>                :            :   double bvd;
+<span class="lineNum">     529 </span>                :            :   double xjbvs;
+<span class="lineNum">     530 </span>                :            :   double bvs;
+<span class="lineNum">     531 </span>                :            :   double weffcv;
+<span class="lineNum">     532 </span>                :            :   double leffcv;
+<span class="lineNum">     533 </span>                :            :   double acde;
+<span class="lineNum">     534 </span>                :            :   double grbdb;
+<span class="lineNum">     535 </span>                :            :   double grbpb;
+<span class="lineNum">     536 </span>                :            :   double grbsb;
+<span class="lineNum">     537 </span>                :            :   double grbpd;
+<span class="lineNum">     538 </span>                :            :   double grbps;
+<span class="lineNum">     539 </span>                :            :   double nvtms;
+<span class="lineNum">     540 </span>                :            :   double nvtmd;
+<span class="lineNum">     541 </span>                :            :   double isbs;
+<span class="lineNum">     542 </span>                :            :   double isbd;
+<span class="lineNum">     543 </span>                :            :   double xexpbvs;
+<span class="lineNum">     544 </span>                :            :   double xexpbvd;
+<span class="lineNum">     545 </span>                :            :   double vjsmfwd;
+<span class="lineNum">     546 </span>                :            :   double vjdmfwd;
+<span class="lineNum">     547 </span>                :            :   double ivjsmfwd;
+<span class="lineNum">     548 </span>                :            :   double ivjdmfwd;
+<span class="lineNum">     549 </span>                :            :   double sslpfwd;
+<span class="lineNum">     550 </span>                :            :   double dslpfwd;
+<span class="lineNum">     551 </span>                :            :   double vjsmrev;
+<span class="lineNum">     552 </span>                :            :   double vjdmrev;
+<span class="lineNum">     553 </span>                :            :   double ivjsmrev;
+<span class="lineNum">     554 </span>                :            :   double ivjdmrev;
+<span class="lineNum">     555 </span>                :            :   double sslprev;
+<span class="lineNum">     556 </span>                :            :   double dslprev;
+<span class="lineNum">     557 </span>                :            :   double abulkcvfactor;
+<span class="lineNum">     558 </span>                :            :   double xpart;
+<span class="lineNum">     559 </span>                :            :   double vfbcv;
+<span class="lineNum">     560 </span>                :            :   double noff;
+<span class="lineNum">     561 </span>                :            :   double voffcv;
+<span class="lineNum">     562 </span>                :            :   double cox;
+<span class="lineNum">     563 </span>                :            :   double moin;
+<span class="lineNum">     564 </span>                :            :   double mjs;
+<span class="lineNum">     565 </span>                :            :   double mjd;
+<span class="lineNum">     566 </span>                :            :   double mjsws;
+<span class="lineNum">     567 </span>                :            :   double mjswd;
+<span class="lineNum">     568 </span>                :            :   double mjswgs;
+<span class="lineNum">     569 </span>                :            :   double mjswgd;
+<span class="lineNum">     570 </span>                :            :   double ckappas;
+<span class="lineNum">     571 </span>                :            :   double ckappad;
+<span class="lineNum">     572 </span>                :            :   double Temp;
+<span class="lineNum">     573 </span>                :            : 
+<span class="lineNum">     574 </span>                :            : 
+<span class="lineNum">     575 </span>                :            : 
+<span class="lineNum">     576 </span>                :            : };
+<span class="lineNum">     577 </span>                :            : 
+<span class="lineNum">     578 </span>                :            : #endif /* __bsim4v30pMOS_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

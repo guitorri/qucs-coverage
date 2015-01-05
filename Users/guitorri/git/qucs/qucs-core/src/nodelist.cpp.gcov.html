@@ -1,0 +1,603 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/nodelist.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - nodelist.cpp<span style="font-size: 80%;"> (source / <a href="nodelist.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">196</td>
+            <td class="headerCovTableEntry">250</td>
+            <td class="headerCovTableEntryMed">78.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryLo">70.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">133</td>
+            <td class="headerCovTableEntry">210</td>
+            <td class="headerCovTableEntryLo">63.3 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * nodelist.cpp - node list class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;node.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;circuit.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;net.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;nodelist.h&quot;
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :            : namespace qucs {
+<a name="43"><span class="lineNum">      43 </span>                :            : </a>
+<span class="lineNum">      44 </span>                :            : // Constructor creates an instance of the nodelist class.
+<span class="lineNum">      45 </span>                :<span class="lineCov">         18 : nodelist::nodelist () {</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">         18 :   root = last = NULL;</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">         18 :   narray = NULL;</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">         18 :   txt = NULL;</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">         18 :   sorting = 0;</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">         18 : }</span>
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :            : /* The function creates a nodelist for the given netlist.  The
+<span class="lineNum">      53 </span>                :            :    nodelist is based on the circuit list and consists of unique nodes
+<span class="lineNum">      54 </span>                :            :    inside the circuit list only.  Each node in the list has references
+<a name="55"><span class="lineNum">      55 </span>                :            :    to their actual circuit nodes and thereby to the circuits it is</a>
+<span class="lineNum">      56 </span>                :            :    connected to. */
+<span class="lineNum">      57 </span>                :<span class="lineCov">      20175 : nodelist::nodelist (net * subnet) {</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">      20175 :   root = last = NULL;</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">      20175 :   narray = NULL;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">      20175 :   txt = NULL;</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">      20175 :   sorting = 0;</span>
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :            :   circuit * c;
+<span class="lineNum">      64 </span>                :            :   // go through circuit list and find unique nodes
+<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 2 was taken 99656 times"> + </span><span class="branchCov" title="Branch 3 was taken 20175 times"> + </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">     119831 :   for (c = subnet-&gt;getRoot (); c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
+<span class="lineNum">      66 </span>[<span class="branchCov" title="Branch 1 was taken 216991 times"> + </span><span class="branchCov" title="Branch 2 was taken 99656 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">     316647 :     for (int i = 0; i &lt; c-&gt;getSize (); i++) {</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">     216991 :       node * n = c-&gt;getNode (i);</span>
+<span class="lineNum">      68 </span>  [<span class="branchCov" title="Branch 2 was taken 94567 times"> + </span><span class="branchCov" title="Branch 3 was taken 122424 times"> + </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">     216991 :       if (contains (n-&gt;getName ()) == 0) {</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">      94567 :         add (n-&gt;getName (), n-&gt;getInternal ());</span>
+<span class="lineNum">      70 </span>                :            :       }
+<span class="lineNum">      71 </span>                :            :     }
+<span class="lineNum">      72 </span>                :            :   }
+<span class="lineNum">      73 </span>                :            :   // add circuit nodes to each unique node in the list
+<span class="lineNum">      74 </span>[<span class="branchCov" title="Branch 1 was taken 94567 times"> + </span><span class="branchCov" title="Branch 2 was taken 20175 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">     114742 :   for (struct nodelist_t * n = getRoot (); n != NULL; n = n-&gt;next) {</span>
+<span class="lineNum">      75 </span>[<span class="branchCov" title="Branch 2 was taken 731057 times"> + </span><span class="branchCov" title="Branch 3 was taken 94567 times"> + </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">     825624 :     for (c = subnet-&gt;getRoot (); c != NULL; c = (circuit *) c-&gt;getNext ()) {</span>
+<span class="lineNum">      76 </span>[<span class="branchCov" title="Branch 1 was taken 1769868 times"> + </span><span class="branchCov" title="Branch 2 was taken 731057 times"> + </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineCov">    2500925 :       for (int i = 0; i &lt; c-&gt;getSize (); i++) {</span>
+<span class="lineNum">      77 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1769868 times"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">    1769868 :         assert (n-&gt;name != NULL);</span>
+<span class="lineNum">      78 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 1769868 times"> + </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]:<span class="lineCov">    1769868 :         assert (c-&gt;getNode(i)-&gt;getName () != NULL);</span>
+<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 2 was taken 216991 times"> + </span><span class="branchCov" title="Branch 3 was taken 1552877 times"> + </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineCov">    1769868 :         if (!strcmp (n-&gt;name, c-&gt;getNode(i)-&gt;getName ())) {</span>
+<span class="lineNum">      80 </span>                :<span class="lineCov">     216991 :           addCircuitNode (n, c-&gt;getNode (i));</span>
+<span class="lineNum">      81 </span>                :            :         }
+<span class="lineNum">      82 </span>                :            :       }
+<span class="lineNum">      83 </span>                :            :     }
+<span class="lineNum">      84 </span>                :            :   }
+<span class="lineNum">      85 </span>                :<span class="lineCov">      20175 : }</span>
+<span class="lineNum">      86 </span>                :            : 
+<a name="87"><span class="lineNum">      87 </span>                :            : /* This copy constructor creates a instance of the nodelist class</a>
+<span class="lineNum">      88 </span>                :            :    based on the given nodelist. */
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 : nodelist::nodelist (const nodelist &amp; o) {</span>
+<span class="lineNum">      90 </span>                :            :   struct nodelist_t * n;
+<span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :   root = last = NULL;</span>
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :   narray = NULL;</span>
+<span class="lineNum">      93 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (n = o.root; n != NULL; n = n-&gt;next) append (copy (n));</span>
+<span class="lineNum">      94 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   txt = o.txt ? strdup (o.txt) : NULL;</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :   sorting = o.sorting;</span>
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="97"><span class="lineNum">      97 </span>                :            : </a>
+<span class="lineNum">      98 </span>                :            : // Destructor deletes an instance of the nodelist class.
+<span class="lineNum">      99 </span>                :<span class="lineCov">      20193 : nodelist::~nodelist () {</span>
+<span class="lineNum">     100 </span>                :            :   struct nodelist_t * next;
+<span class="lineNum">     101 </span>[<span class="branchCov" title="Branch 0 was taken 94567 times"> + </span><span class="branchCov" title="Branch 1 was taken 20193 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">     114760 :   while (root) {</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">      94567 :     next = root-&gt;next;</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">      94567 :     release (root);</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">      94567 :     root = next;</span>
+<span class="lineNum">     105 </span>                :            :   }
+<span class="lineNum">     106 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 20193 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      20193 :   if (txt) free (txt);</span>
+<span class="lineNum">     107 </span>[<span class="branchCov" title="Branch 0 was taken 20157 times"> + </span><span class="branchCov" title="Branch 1 was taken 36 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">      20193 :   if (narray) free (narray);</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">      20193 : }</span>
+<a name="109"><span class="lineNum">     109 </span>                :            : </a>
+<span class="lineNum">     110 </span>                :            : // The function copies the given node with all its properties.
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 : struct nodelist_t * nodelist::copy (struct nodelist_t * n) {</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :   struct nodelist_t * copy = create (n-&gt;name, n-&gt;internal);</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :   copy-&gt;n = n-&gt;n;</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :   copy-&gt;nNodes = n-&gt;nNodes;</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :   copy-&gt;nAlloc = n-&gt;nAlloc;</span>
+<span class="lineNum">     116 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (copy-&gt;nAlloc) {</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :     copy-&gt;nodes = (node **) malloc (sizeof (node *) * n-&gt;nAlloc);</span>
+<span class="lineNum">     118 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (copy-&gt;nNodes) {</span>
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :       memcpy (copy-&gt;nodes, n-&gt;nodes, sizeof (node *) * n-&gt;nNodes);</span>
+<span class="lineNum">     120 </span>                :            :     }
+<span class="lineNum">     121 </span>                :            :   }
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :   return copy;</span>
+<span class="lineNum">     123 </span>                :            : }
+<a name="124"><span class="lineNum">     124 </span>                :            : </a>
+<span class="lineNum">     125 </span>                :            : // This function adds a node name to the list and saves the internal flag.
+<span class="lineNum">     126 </span>                :<span class="lineCov">      94567 : void nodelist::add (char * str, int intern) {</span>
+<span class="lineNum">     127 </span>                :<span class="lineCov">      94567 :   add (create (str, intern));</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">      94567 : }</span>
+<a name="129"><span class="lineNum">     129 </span>                :            : </a>
+<span class="lineNum">     130 </span>                :            : // The function creates a node based upon the given arguments.
+<span class="lineNum">     131 </span>                :<span class="lineCov">     234996 : struct nodelist_t * nodelist::create (char * str, int intern) {</span>
+<span class="lineNum">     132 </span>                :            :   struct nodelist_t * n;
+<span class="lineNum">     133 </span>                :<span class="lineCov">     234996 :   n = (struct nodelist_t *) calloc (sizeof (struct nodelist_t), 1);</span>
+<span class="lineNum">     134 </span>                :<span class="lineCov">     234996 :   n-&gt;internal = intern;</span>
+<span class="lineNum">     135 </span>        [<span class="branchCov" title="Branch 0 was taken 234996 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     234996 :   n-&gt;name = str ? strdup (str) : NULL;</span>
+<span class="lineNum">     136 </span>                :<span class="lineCov">     234996 :   return n;</span>
+<span class="lineNum">     137 </span>                :            : }
+<a name="138"><span class="lineNum">     138 </span>                :            : </a>
+<span class="lineNum">     139 </span>                :            : // This function adds a node to the list.
+<span class="lineNum">     140 </span>                :<span class="lineCov">      95004 : void nodelist::add (struct nodelist_t * n) {</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">      95004 :   n-&gt;next = root;</span>
+<span class="lineNum">     142 </span>        [<span class="branchCov" title="Branch 0 was taken 20193 times"> + </span><span class="branchCov" title="Branch 1 was taken 74811 times"> + </span>]:<span class="lineCov">      95004 :   if (root == NULL) last = n;</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">      95004 :   root = n;</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">      95004 : }</span>
+<a name="145"><span class="lineNum">     145 </span>                :            : </a>
+<span class="lineNum">     146 </span>                :            : // This function appends a node name to the list.
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 : void nodelist::append (char * str, int intern) {</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :   append (create (str, intern));</span>
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="150"><span class="lineNum">     150 </span>                :            : </a>
+<span class="lineNum">     151 </span>                :            : // This function appends the given node to the list.
+<span class="lineNum">     152 </span>                :<span class="lineNoCov">          0 : void nodelist::append (struct nodelist_t * n) {</span>
+<span class="lineNum">     153 </span>                :<span class="lineNoCov">          0 :   n-&gt;next = NULL;</span>
+<span class="lineNum">     154 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (root)</span>
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 :     last-&gt;next = n;</span>
+<span class="lineNum">     156 </span>                :            :   else
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :     root = n;</span>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :   last = n;</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="160"><span class="lineNum">     160 </span>                :            : </a>
+<span class="lineNum">     161 </span>                :            : // This function removes the node with the given name from the list.
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 : void nodelist::remove (char * name) {</span>
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :   remove (getNode (name));</span>
+<span class="lineNum">     164 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="165"><span class="lineNum">     165 </span>                :            : </a>
+<span class="lineNum">     166 </span>                :            : // The function removes the given node from the list.
+<span class="lineNum">     167 </span>                :<span class="lineCov">     937488 : void nodelist::remove (struct nodelist_t * del, int keep) {</span>
+<span class="lineNum">     168 </span>                :            :   struct nodelist_t * prev, * n;
+<span class="lineNum">     169 </span>                :            :   // go through the list
+<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 0 was taken 4317970 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    4317970 :   for (prev = NULL, n = root; n != NULL; prev = n, n = n-&gt;next) {</span>
+<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 0 was taken 937488 times"> + </span><span class="branchCov" title="Branch 1 was taken 3380482 times"> + </span>]:<span class="lineCov">    4317970 :     if (n == del) {</span>
+<span class="lineNum">     172 </span>                :            :       // adjust the chain properly
+<span class="lineNum">     173 </span>        [<span class="branchCov" title="Branch 0 was taken 287400 times"> + </span><span class="branchCov" title="Branch 1 was taken 650088 times"> + </span>]:<span class="lineCov">     937488 :       if (prev == NULL)</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">     287400 :         root = n-&gt;next;</span>
+<span class="lineNum">     175 </span>                :            :       else
+<span class="lineNum">     176 </span>                :<span class="lineCov">     650088 :         prev-&gt;next = n-&gt;next;</span>
+<span class="lineNum">     177 </span>        [<span class="branchCov" title="Branch 0 was taken 20 times"> + </span><span class="branchCov" title="Branch 1 was taken 937468 times"> + </span>]:<span class="lineCov">     937488 :       if (n == last) last = prev;</span>
+<span class="lineNum">     178 </span>                :            :       // delete node if requested and return
+<span class="lineNum">     179 </span>        [<span class="branchCov" title="Branch 0 was taken 140429 times"> + </span><span class="branchCov" title="Branch 1 was taken 797059 times"> + </span>]:<span class="lineCov">     937488 :       if (!keep) release (n);</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">     937488 :       return;</span>
+<span class="lineNum">     181 </span>                :            :     }
+<span class="lineNum">     182 </span>                :            :   }
+<span class="lineNum">     183 </span>                :            : }
+<a name="184"><span class="lineNum">     184 </span>                :            : </a>
+<span class="lineNum">     185 </span>                :            : // This function free()'s the given node.
+<span class="lineNum">     186 </span>                :<span class="lineCov">     234996 : void nodelist::release (struct nodelist_t * n) {</span>
+<span class="lineNum">     187 </span>        [<span class="branchCov" title="Branch 0 was taken 234996 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     234996 :   if (n-&gt;name) free (n-&gt;name);</span>
+<span class="lineNum">     188 </span>        [<span class="branchCov" title="Branch 0 was taken 94567 times"> + </span><span class="branchCov" title="Branch 1 was taken 140429 times"> + </span>]:<span class="lineCov">     234996 :   if (n-&gt;nodes) free (n-&gt;nodes);</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">     234996 :   free (n);</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">     234996 : }</span>
+<a name="191"><span class="lineNum">     191 </span>                :            : </a>
+<span class="lineNum">     192 </span>                :            : // This function counts the node names in the list.
+<span class="lineNum">     193 </span>                :<span class="lineCov">    5794373 : int nodelist::length (void) {</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">    5794373 :   int res = 0;</span>
+<span class="lineNum">     195 </span>        [<span class="branchCov" title="Branch 0 was taken 33833250 times"> + </span><span class="branchCov" title="Branch 1 was taken 5794373 times"> + </span>]:<span class="lineCov">   39627623 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next) res++;</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">    5794373 :   return res;</span>
+<span class="lineNum">     197 </span>                :            : }
+<a name="198"><span class="lineNum">     198 </span>                :            : </a>
+<span class="lineNum">     199 </span>                :            : // This function finds the specified node name in the list.
+<span class="lineNum">     200 </span>                :<span class="lineCov">     823862 : int nodelist::contains (char * str) {</span>
+<span class="lineNum">     201 </span>                :<span class="lineCov">     823862 :   int res = 0;</span>
+<span class="lineNum">     202 </span>        [<span class="branchCov" title="Branch 0 was taken 10669265 times"> + </span><span class="branchCov" title="Branch 1 was taken 823862 times"> + </span>]:<span class="lineCov">   11493127 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next) {</span>
+<span class="lineNum">     203 </span>[<span class="branchCov" title="Branch 0 was taken 10669265 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 10669265 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">   10669265 :     if (n-&gt;name != NULL &amp;&amp; str != NULL &amp;&amp; !strcmp (n-&gt;name, str))</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 588866 times"> + </span><span class="branchCov" title="Branch 5 was taken 10080399 times"> + </span>]
+<span class="lineNum">     204 </span>                :<span class="lineCov">     588866 :       res++;</span>
+<span class="lineNum">     205 </span>                :            :   }
+<span class="lineNum">     206 </span>                :<span class="lineCov">     823862 :   return res;</span>
+<span class="lineNum">     207 </span>                :            : }
+<a name="208"><span class="lineNum">     208 </span>                :            : </a>
+<span class="lineNum">     209 </span>                :            : // Returns the node number of the given node name.
+<span class="lineNum">     210 </span>                :<span class="lineCov">       3640 : int nodelist::getNodeNr (char * str) {</span>
+<span class="lineNum">     211 </span>        [<span class="branchCov" title="Branch 0 was taken 12740 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      12740 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next) {</span>
+<span class="lineNum">     212 </span>[<span class="branchCov" title="Branch 0 was taken 12740 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 12740 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      12740 :     if (n-&gt;name != NULL &amp;&amp; str != NULL &amp;&amp; !strcmp (n-&gt;name, str))</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 3640 times"> + </span><span class="branchCov" title="Branch 5 was taken 9100 times"> + </span>]
+<span class="lineNum">     213 </span>                :<span class="lineCov">       3640 :       return n-&gt;n;</span>
+<span class="lineNum">     214 </span>                :            :   }
+<span class="lineNum">     215 </span>                :<span class="lineCov">       3640 :   return -1;</span>
+<span class="lineNum">     216 </span>                :            : }
+<span class="lineNum">     217 </span>                :            : 
+<a name="218"><span class="lineNum">     218 </span>                :            : /* This function returns the node name positioned at the specified</a>
+<span class="lineNum">     219 </span>                :            :    location in the node name list. */
+<span class="lineNum">     220 </span>                :<span class="lineCov">     258503 : char * nodelist::get (int nr) {</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">     258503 :   return narray[nr + 1]-&gt;name;</span>
+<span class="lineNum">     222 </span>                :            : }
+<span class="lineNum">     223 </span>                :            : 
+<span class="lineNum">     224 </span>                :            : /* This function returns non-zero if the node positioned at the
+<a name="225"><span class="lineNum">     225 </span>                :            :    specified location in the node name list is marked internal and</a>
+<span class="lineNum">     226 </span>                :            :    zero otherwise. */
+<span class="lineNum">     227 </span>                :<span class="lineCov">     297058 : int nodelist::isInternal (int nr) {</span>
+<span class="lineNum">     228 </span>                :<span class="lineCov">     297058 :   return narray[nr + 1]-&gt;internal;</span>
+<span class="lineNum">     229 </span>                :            : }
+<span class="lineNum">     230 </span>                :            : 
+<a name="231"><span class="lineNum">     231 </span>                :            : /* The function returns the nodelist structure at the specified</a>
+<span class="lineNum">     232 </span>                :            :    location in the node name list. */
+<span class="lineNum">     233 </span>                :<span class="lineCov">   51222339 : struct nodelist_t * nodelist::getNode (int nr) {</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">   51222339 :   return narray[nr + 1];</span>
+<span class="lineNum">     235 </span>                :            : }
+<span class="lineNum">     236 </span>                :            : 
+<a name="237"><span class="lineNum">     237 </span>                :            : /* The function returns the nodelist structure with the given name in</a>
+<span class="lineNum">     238 </span>                :            :    the node name list.  It returns NULL if there is no such node. */
+<span class="lineNum">     239 </span>                :<span class="lineCov">    1073315 : struct nodelist_t * nodelist::getNode (char * name) {</span>
+<span class="lineNum">     240 </span>        [<span class="branchCov" title="Branch 0 was taken 5661593 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    5661593 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next)</span>
+<span class="lineNum">     241 </span>        [<span class="branchCov" title="Branch 0 was taken 1073315 times"> + </span><span class="branchCov" title="Branch 1 was taken 4588278 times"> + </span>]:<span class="lineCov">    5661593 :     if (!strcmp (name, n-&gt;name)) return n;</span>
+<span class="lineNum">     242 </span>                :<span class="lineCov">    1073315 :   return NULL;</span>
+<span class="lineNum">     243 </span>                :            : }
+<span class="lineNum">     244 </span>                :            : 
+<a name="245"><span class="lineNum">     245 </span>                :            : /* Returns a comma separated list of the circuits connected to the</a>
+<span class="lineNum">     246 </span>                :            :    node specified by the given number. */
+<span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 : char * nodelist::getNodeString (int nr) {</span>
+<span class="lineNum">     248 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (txt) free (txt); txt = NULL;</span>
+<span class="lineNum">     249 </span>                :            :   // find the specified node
+<span class="lineNum">     250 </span>                :<span class="lineNoCov">          0 :   struct nodelist_t * n = getNode (nr);</span>
+<span class="lineNum">     251 </span>                :            :   // append circuit names connected to the node
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :   int len = (n-&gt;nNodes - 1) + 1;</span>
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 :   txt = (char *) malloc (len); txt[0] = '\0';</span>
+<span class="lineNum">     254 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; n-&gt;nNodes; i++) {</span>
+<span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 :     char * str = n-&gt;nodes[i]-&gt;getCircuit()-&gt;getName ();</span>
+<span class="lineNum">     256 </span>                :<span class="lineNoCov">          0 :     len += strlen (str);</span>
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 :     txt = (char *) realloc (txt, len);</span>
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 :     strcat (txt, str);</span>
+<span class="lineNum">     259 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i != n-&gt;nNodes - 1) strcat (txt, &quot;,&quot;);</span>
+<span class="lineNum">     260 </span>                :            :   }
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 :   return txt;</span>
+<span class="lineNum">     262 </span>                :            : }
+<span class="lineNum">     263 </span>                :            : 
+<a name="264"><span class="lineNum">     264 </span>                :            : /* The function returns the nodelist structure at the end of the node</a>
+<span class="lineNum">     265 </span>                :            :    name list. */
+<span class="lineNum">     266 </span>                :<span class="lineCov">         18 : struct nodelist_t * nodelist::getLastNode (void) {</span>
+<span class="lineNum">     267 </span>                :<span class="lineCov">         18 :   return last;</span>
+<span class="lineNum">     268 </span>                :            : }
+<a name="269"><span class="lineNum">     269 </span>                :            : </a>
+<span class="lineNum">     270 </span>                :            : // This function enumerates the nodes in the node name list.
+<span class="lineNum">     271 </span>                :<span class="lineCov">      20157 : void nodelist::assignNodes (void) {</span>
+<span class="lineNum">     272 </span>                :<span class="lineCov">      20157 :   int i = 1;</span>
+<span class="lineNum">     273 </span>                :            : 
+<span class="lineNum">     274 </span>                :            :   // create fast array access possibility
+<span class="lineNum">     275 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 20157 times"> + </span>]:<span class="lineCov">      20157 :   if (narray) free (narray);</span>
+<span class="lineNum">     276 </span>                :            :   narray = (struct nodelist_t **)
+<span class="lineNum">     277 </span>                :<span class="lineCov">      20157 :     malloc (sizeof (struct nodelist_t *) * length ());</span>
+<span class="lineNum">     278 </span>                :            : 
+<span class="lineNum">     279 </span>        [<span class="branchCov" title="Branch 0 was taken 94130 times"> + </span><span class="branchCov" title="Branch 1 was taken 20157 times"> + </span>]:<span class="lineCov">     114287 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next) {</span>
+<span class="lineNum">     280 </span>                :            :     // ground node gets a zero counter
+<span class="lineNum">     281 </span>        [<span class="branchCov" title="Branch 0 was taken 20157 times"> + </span><span class="branchCov" title="Branch 1 was taken 73973 times"> + </span>]:<span class="lineCov">      94130 :     if (!strcmp (n-&gt;name, &quot;gnd&quot;)) {</span>
+<span class="lineNum">     282 </span>                :<span class="lineCov">      20157 :       n-&gt;n = 0;</span>
+<span class="lineNum">     283 </span>                :<span class="lineCov">      20157 :       narray[0] = n;</span>
+<span class="lineNum">     284 </span>                :            :     }
+<span class="lineNum">     285 </span>                :            :     // others get a unique number greater than zero
+<span class="lineNum">     286 </span>                :            :     else {
+<span class="lineNum">     287 </span>                :<span class="lineCov">      73973 :       narray[i] = n;</span>
+<span class="lineNum">     288 </span>                :<span class="lineCov">      73973 :       n-&gt;n = i++;</span>
+<span class="lineNum">     289 </span>                :            :     }
+<span class="lineNum">     290 </span>                :            :   }
+<span class="lineNum">     291 </span>                :<span class="lineCov">      20157 : }</span>
+<span class="lineNum">     292 </span>                :            : 
+<a name="293"><span class="lineNum">     293 </span>                :            : /* The function appends a node pointer to the given nodelist</a>
+<span class="lineNum">     294 </span>                :            :    structure. */
+<span class="lineNum">     295 </span>                :<span class="lineCov">     823862 : void nodelist::addCircuitNode (struct nodelist_t * nl, node * n) {</span>
+<span class="lineNum">     296 </span>        [<span class="branchCov" title="Branch 0 was taken 273518 times"> + </span><span class="branchCov" title="Branch 1 was taken 550344 times"> + </span>]:<span class="lineCov">     823862 :   if (nl-&gt;nNodes &gt;= nl-&gt;nAlloc) { // ensure capacity</span>
+<span class="lineNum">     297 </span>        [<span class="branchCov" title="Branch 0 was taken 234996 times"> + </span><span class="branchCov" title="Branch 1 was taken 38522 times"> + </span>]:<span class="lineCov">     273518 :     if (nl-&gt;nAlloc == 0) {</span>
+<span class="lineNum">     298 </span>                :<span class="lineCov">     234996 :       nl-&gt;nAlloc = 2;</span>
+<span class="lineNum">     299 </span>                :<span class="lineCov">     234996 :       nl-&gt;nodes = (node **) malloc (sizeof (node *) * nl-&gt;nAlloc);</span>
+<span class="lineNum">     300 </span>                :            :     }
+<span class="lineNum">     301 </span>                :            :     else {
+<span class="lineNum">     302 </span>                :<span class="lineCov">      38522 :       nl-&gt;nAlloc *= 2;</span>
+<span class="lineNum">     303 </span>                :<span class="lineCov">      38522 :       nl-&gt;nodes = (node **) realloc (nl-&gt;nodes, sizeof (node *) * nl-&gt;nAlloc);</span>
+<span class="lineNum">     304 </span>                :            :     }
+<span class="lineNum">     305 </span>                :            :   }
+<span class="lineNum">     306 </span>                :<span class="lineCov">     823862 :   nl-&gt;nodes[nl-&gt;nNodes++] = n;</span>
+<span class="lineNum">     307 </span>        [<span class="branchCov" title="Branch 1 was taken 34416 times"> + </span><span class="branchCov" title="Branch 2 was taken 789446 times"> + </span>]:<span class="lineCov">     823862 :   if (n-&gt;getInternal ()) nl-&gt;internal = n-&gt;getInternal ();</span>
+<span class="lineNum">     308 </span>                :<span class="lineCov">     823862 : }</span>
+<span class="lineNum">     309 </span>                :            : 
+<a name="310"><span class="lineNum">     310 </span>                :            : /* This function deletes the given node from the nodelist</a>
+<span class="lineNum">     311 </span>                :            :    structure. */
+<span class="lineNum">     312 </span>                :<span class="lineCov">     606871 : void nodelist::delCircuitNode (struct nodelist_t * nl, node * n) {</span>
+<span class="lineNum">     313 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 606871 times"> + </span>]:<span class="lineCov">     606871 :   assert (nl-&gt;nNodes &gt; 0);</span>
+<span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 466442 times"> + </span><span class="branchCov" title="Branch 1 was taken 140429 times"> + </span>]:<span class="lineCov">     606871 :   if (nl-&gt;nNodes &gt; 1) {</span>
+<span class="lineNum">     315 </span>                :            :     int i, j;
+<span class="lineNum">     316 </span>                :            :     // copy nodelist except the given one
+<span class="lineNum">     317 </span>        [<span class="branchCov" title="Branch 0 was taken 478349 times"> + </span><span class="branchCov" title="Branch 1 was taken 466442 times"> + </span>]:<span class="lineCov">     944791 :     for (j = i = 0; j &lt; nl-&gt;nNodes - 1; i++, j++) {</span>
+<span class="lineNum">     318 </span>        [<span class="branchCov" title="Branch 0 was taken 209898 times"> + </span><span class="branchCov" title="Branch 1 was taken 268451 times"> + </span>]:<span class="lineCov">     478349 :       if (nl-&gt;nodes[i] == n) i++;</span>
+<span class="lineNum">     319 </span>                :<span class="lineCov">     478349 :       nl-&gt;nodes[j] = nl-&gt;nodes[i];</span>
+<span class="lineNum">     320 </span>                :            :     }
+<span class="lineNum">     321 </span>                :            :   }
+<span class="lineNum">     322 </span>                :            :   else {
+<span class="lineNum">     323 </span>                :            :     // no more nodes in the list
+<span class="lineNum">     324 </span>                :<span class="lineCov">     140429 :     free (nl-&gt;nodes);</span>
+<span class="lineNum">     325 </span>                :<span class="lineCov">     140429 :     nl-&gt;nodes = NULL;</span>
+<span class="lineNum">     326 </span>                :<span class="lineCov">     140429 :     nl-&gt;nAlloc = 0;</span>
+<span class="lineNum">     327 </span>                :            :   }
+<span class="lineNum">     328 </span>                :<span class="lineCov">     606871 :   nl-&gt;nNodes--;</span>
+<span class="lineNum">     329 </span>                :<span class="lineCov">     606871 : }</span>
+<span class="lineNum">     330 </span>                :            : 
+<span class="lineNum">     331 </span>                :            : /* This function is used as sorting criteria for the S-parameter
+<a name="332"><span class="lineNum">     332 </span>                :            :    analysis.  It returns the number of nodes a join of the two</a>
+<span class="lineNum">     333 </span>                :            :    circuits connected to the given node would yield. */
+<span class="lineNum">     334 </span>                :<span class="lineCov">    7960158 : static int sortfunc (struct nodelist_t * n) {</span>
+<span class="lineNum">     335 </span>                :            :   int p;
+<span class="lineNum">     336 </span>                :<span class="lineCov">    7960158 :   circuit * c1 = n-&gt;nodes[0]-&gt;getCircuit ();</span>
+<span class="lineNum">     337 </span>        [<span class="branchCov" title="Branch 0 was taken 5288603 times"> + </span><span class="branchCov" title="Branch 1 was taken 2671555 times"> + </span>]:<span class="lineCov">    7960158 :   circuit * c2 = n-&gt;nNodes &gt; 1 ? n-&gt;nodes[1]-&gt;getCircuit () : NULL;</span>
+<span class="lineNum">     338 </span>[<span class="branchCov" title="Branch 1 was taken 7763077 times"> + </span><span class="branchCov" title="Branch 2 was taken 197081 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 5157166 times"> + </span><span class="branchCov" title="Branch 4 was taken 2605911 times"> + </span>]:<span class="lineCov">    7960158 :   if (c1-&gt;getPort () || (c2 &amp;&amp; c2-&gt;getPort ())) return -1;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 48 times"> + </span><span class="branchCov" title="Branch 7 was taken 5157118 times"> + </span>][<span class="branchCov" title="Branch 8 was taken 197129 times"> + </span><span class="branchCov" title="Branch 9 was taken 7763029 times"> + </span>]
+<span class="lineNum">     339 </span>        [<span class="branchCov" title="Branch 0 was taken 42170 times"> + </span><span class="branchCov" title="Branch 1 was taken 7720859 times"> + </span>]:<span class="lineCov">    7763029 :   if (c1 == c2) { // interconnect</span>
+<span class="lineNum">     340 </span>                :<span class="lineCov">      42170 :     p = c1-&gt;getSize () - 2;</span>
+<span class="lineNum">     341 </span>                :            :   } else {        // connect
+<span class="lineNum">     342 </span>        [<span class="branchCov" title="Branch 1 was taken 5114948 times"> + </span><span class="branchCov" title="Branch 2 was taken 2605911 times"> + </span>]:<span class="lineCov">    7720859 :     p = c1-&gt;getSize () + (c2 ? c2-&gt;getSize () - 2 : 0);</span>
+<span class="lineNum">     343 </span>                :            :   }
+<span class="lineNum">     344 </span>                :<span class="lineCov">    7960158 :   return p;</span>
+<span class="lineNum">     345 </span>                :            : }
+<span class="lineNum">     346 </span>                :            : 
+<a name="347"><span class="lineNum">     347 </span>                :            : /* The function evaluates the sorting criteria of the given two nodes.</a>
+<span class="lineNum">     348 </span>                :            :    It returns non-zero if 'n1' should be inserted before 'n2'. */
+<span class="lineNum">     349 </span>                :<span class="lineCov">    3510791 : static int insfunc (struct nodelist_t * n1, struct nodelist_t * n2) {</span>
+<span class="lineNum">     350 </span>                :<span class="lineCov">    3510791 :   int p1 = sortfunc (n1);</span>
+<span class="lineNum">     351 </span>                :<span class="lineCov">    3510791 :   int p2 = sortfunc (n2);</span>
+<span class="lineNum">     352 </span>[<span class="branchCov" title="Branch 0 was taken 3510791 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 2634549 times"> + </span><span class="branchCov" title="Branch 3 was taken 876242 times"> + </span>]:<span class="lineCov">    3510791 :   return p1 &gt;= 0 &amp;&amp; (p1 &lt;= p2 || p2 &lt; 0);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 60809 times"> + </span><span class="branchCov" title="Branch 5 was taken 2573740 times"> + </span>]
+<span class="lineNum">     353 </span>                :            : }
+<span class="lineNum">     354 </span>                :            : 
+<span class="lineNum">     355 </span>                :            : /* The function inserts the given node structure into the node list.
+<a name="356"><span class="lineNum">     356 </span>                :            :    If the nodelist is sorted then the node gets inserted at a certain</a>
+<span class="lineNum">     357 </span>                :            :    position. */
+<span class="lineNum">     358 </span>                :<span class="lineCov">     937051 : void nodelist::insert (struct nodelist_t * n) {</span>
+<span class="lineNum">     359 </span>                :            :   // first node at all
+<span class="lineNum">     360 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 937051 times"> + </span>]:<span class="lineCov">     937051 :   if (root == NULL) {</span>
+<span class="lineNum">     361 </span>                :<span class="lineNoCov">          0 :     last = root = n;</span>
+<span class="lineNum">     362 </span>                :<span class="lineNoCov">          0 :     return;</span>
+<span class="lineNum">     363 </span>                :            :   }
+<span class="lineNum">     364 </span>                :            : 
+<span class="lineNum">     365 </span>                :            :   // sorted node list
+<span class="lineNum">     366 </span>        [<span class="branchCov" title="Branch 0 was taken 937051 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     937051 :   if (sorting) {</span>
+<span class="lineNum">     367 </span>                :<span class="lineCov">     937051 :     int added = 0;</span>
+<span class="lineNum">     368 </span>                :            :     struct nodelist_t * nl, * prev;
+<span class="lineNum">     369 </span>        [<span class="branchCov" title="Branch 0 was taken 3510791 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    3510791 :     for (prev = NULL, nl = root; nl != NULL; prev = nl, nl = nl-&gt;next) {</span>
+<span class="lineNum">     370 </span>        [<span class="branchCov" title="Branch 1 was taken 937051 times"> + </span><span class="branchCov" title="Branch 2 was taken 2573740 times"> + </span>]:<span class="lineCov">    3510791 :       if (insfunc (n, nl)) {</span>
+<span class="lineNum">     371 </span>        [<span class="branchCov" title="Branch 0 was taken 458047 times"> + </span><span class="branchCov" title="Branch 1 was taken 479004 times"> + </span>]:<span class="lineCov">     937051 :         if (prev == NULL) {</span>
+<span class="lineNum">     372 </span>                :<span class="lineCov">     458047 :           n-&gt;next = root;</span>
+<span class="lineNum">     373 </span>                :<span class="lineCov">     458047 :           root = n;</span>
+<span class="lineNum">     374 </span>                :            :         } else {
+<span class="lineNum">     375 </span>                :<span class="lineCov">     479004 :           n-&gt;next = nl;</span>
+<span class="lineNum">     376 </span>                :<span class="lineCov">     479004 :           prev-&gt;next = n;</span>
+<span class="lineNum">     377 </span>                :            :         }
+<span class="lineNum">     378 </span>                :<span class="lineCov">     937051 :         added++;</span>
+<span class="lineNum">     379 </span>                :<span class="lineCov">     937051 :         break;</span>
+<span class="lineNum">     380 </span>                :            :       }
+<span class="lineNum">     381 </span>                :            :     }
+<span class="lineNum">     382 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 937051 times"> + </span>]:<span class="lineCov">     937051 :     if (!added) append (n);</span>
+<span class="lineNum">     383 </span>                :<span class="lineCov">     937051 :     return;</span>
+<span class="lineNum">     384 </span>                :            :   }
+<span class="lineNum">     385 </span>                :            : 
+<span class="lineNum">     386 </span>                :            :   // unsorted node list
+<span class="lineNum">     387 </span>                :<span class="lineCov">     937051 :   add (n);</span>
+<span class="lineNum">     388 </span>                :            : }
+<span class="lineNum">     389 </span>                :            : 
+<span class="lineNum">     390 </span>                :            : /* This function removes the nodes associated with the given circuit
+<a name="391"><span class="lineNum">     391 </span>                :            :    from the node list.  If the node list is sorted then the order gets</a>
+<span class="lineNum">     392 </span>                :            :    rearranged properly. */
+<span class="lineNum">     393 </span>                :<span class="lineCov">     242129 : void nodelist::remove (circuit * c) {</span>
+<span class="lineNum">     394 </span>                :            :   // go through each node of the circuit
+<span class="lineNum">     395 </span>        [<span class="branchCov" title="Branch 1 was taken 606871 times"> + </span><span class="branchCov" title="Branch 2 was taken 242129 times"> + </span>]:<span class="lineCov">     849000 :   for (int i = 0; i &lt; c-&gt;getSize (); i++) {</span>
+<span class="lineNum">     396 </span>                :<span class="lineCov">     606871 :     node * n = c-&gt;getNode (i);</span>
+<span class="lineNum">     397 </span>                :            :     struct nodelist_t * nl;
+<span class="lineNum">     398 </span>        [<span class="branchCov" title="Branch 2 was taken 606871 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     606871 :     if ((nl = getNode (n-&gt;getName ())) != NULL) {</span>
+<span class="lineNum">     399 </span>                :            :       // remove node from node structure
+<span class="lineNum">     400 </span>                :<span class="lineCov">     606871 :       delCircuitNode (nl, n);</span>
+<span class="lineNum">     401 </span>        [<span class="branchCov" title="Branch 0 was taken 140429 times"> + </span><span class="branchCov" title="Branch 1 was taken 466442 times"> + </span>]:<span class="lineCov">     606871 :       if (nl-&gt;nNodes &lt;= 0) {</span>
+<span class="lineNum">     402 </span>                :            :         // completely remove the node structure
+<span class="lineNum">     403 </span>                :<span class="lineCov">     140429 :         remove (nl);</span>
+<span class="lineNum">     404 </span>                :            :       }
+<span class="lineNum">     405 </span>[<span class="branchCov" title="Branch 0 was taken 466442 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 398311 times"> + </span><span class="branchCov" title="Branch 4 was taken 68131 times"> + </span>]:<span class="lineCov">     466442 :       else if (sorting &amp;&amp; sortfunc (nl) &gt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 398311 times"> + </span><span class="branchCov" title="Branch 6 was taken 68131 times"> + </span>]
+<span class="lineNum">     406 </span>                :            :         // rearrange sorting
+<span class="lineNum">     407 </span>                :<span class="lineCov">     398311 :         remove (nl, 1);</span>
+<span class="lineNum">     408 </span>                :<span class="lineCov">     398311 :         insert (nl);</span>
+<span class="lineNum">     409 </span>                :            :       }
+<span class="lineNum">     410 </span>                :            :     }
+<span class="lineNum">     411 </span>                :            :   }
+<span class="lineNum">     412 </span>                :<span class="lineCov">     242129 : }</span>
+<span class="lineNum">     413 </span>                :            : 
+<span class="lineNum">     414 </span>                :            : /* The following function can be used to insert a new circuit to the
+<a name="415"><span class="lineNum">     415 </span>                :            :    node list.  It goes through each node of the circuit and rearranges</a>
+<span class="lineNum">     416 </span>                :            :    the node list appropriately. */
+<span class="lineNum">     417 </span>                :<span class="lineCov">     242129 : void nodelist::insert (circuit * c) {</span>
+<span class="lineNum">     418 </span>                :            :   // go through each node of the circuit
+<span class="lineNum">     419 </span>        [<span class="branchCov" title="Branch 1 was taken 606871 times"> + </span><span class="branchCov" title="Branch 2 was taken 242129 times"> + </span>]:<span class="lineCov">     849000 :   for (int i = 0; i &lt; c-&gt;getSize (); i++) {</span>
+<span class="lineNum">     420 </span>                :            :     struct nodelist_t * nl;
+<span class="lineNum">     421 </span>                :<span class="lineCov">     606871 :     node * n = c-&gt;getNode (i);</span>
+<span class="lineNum">     422 </span>                :            :     // is this node already in the nodelist?
+<span class="lineNum">     423 </span>        [<span class="branchCov" title="Branch 2 was taken 140429 times"> + </span><span class="branchCov" title="Branch 3 was taken 466442 times"> + </span>]:<span class="lineCov">     606871 :     if (contains (n-&gt;getName ()) == 0) {</span>
+<span class="lineNum">     424 </span>                :            :       // no, create new node and put it into the list
+<span class="lineNum">     425 </span>                :<span class="lineCov">     140429 :       nl = create (n-&gt;getName (), n-&gt;getInternal ());</span>
+<span class="lineNum">     426 </span>                :<span class="lineCov">     140429 :       addCircuitNode (nl, n);</span>
+<span class="lineNum">     427 </span>        [<span class="branchCov" title="Branch 0 was taken 140429 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     140429 :       if (sorting) {</span>
+<span class="lineNum">     428 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 140429 times"> + </span>]:<span class="lineCov">     140429 :         if (c-&gt;getPort ())</span>
+<span class="lineNum">     429 </span>                :<span class="lineNoCov">          0 :           append (nl);</span>
+<span class="lineNum">     430 </span>                :            :         else
+<span class="lineNum">     431 </span>                :<span class="lineCov">     140429 :           insert (nl);</span>
+<span class="lineNum">     432 </span>                :            :       }
+<span class="lineNum">     433 </span>                :<span class="lineNoCov">          0 :       else add (nl);</span>
+<span class="lineNum">     434 </span>                :            :     }
+<span class="lineNum">     435 </span>                :            :     else {
+<span class="lineNum">     436 </span>                :            :       // yes, put additional node into nodelist structure
+<span class="lineNum">     437 </span>        [<span class="branchCov" title="Branch 2 was taken 466442 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     466442 :       if ((nl = getNode (n-&gt;getName ())) != NULL) {</span>
+<span class="lineNum">     438 </span>                :<span class="lineCov">     466442 :         addCircuitNode (nl, n);</span>
+<span class="lineNum">     439 </span>[<span class="branchCov" title="Branch 0 was taken 466442 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 398311 times"> + </span><span class="branchCov" title="Branch 4 was taken 68131 times"> + </span>]:<span class="lineCov">     466442 :         if (sorting &amp;&amp; sortfunc (nl) &gt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 5 was taken 398311 times"> + </span><span class="branchCov" title="Branch 6 was taken 68131 times"> + </span>]
+<span class="lineNum">     440 </span>                :            :           // rearrange sorting
+<span class="lineNum">     441 </span>                :<span class="lineCov">     398311 :           remove (nl, 1);</span>
+<span class="lineNum">     442 </span>                :<span class="lineCov">     398311 :           insert (nl);</span>
+<span class="lineNum">     443 </span>                :            :         }
+<span class="lineNum">     444 </span>                :            :       }
+<span class="lineNum">     445 </span>                :            :     }
+<span class="lineNum">     446 </span>                :            :   }
+<span class="lineNum">     447 </span>                :<span class="lineCov">     242129 : }</span>
+<span class="lineNum">     448 </span>                :            : 
+<a name="449"><span class="lineNum">     449 </span>                :            : /* The function completely rebuilds the nodelist.  Once sort()'ed it</a>
+<span class="lineNum">     450 </span>                :            :    keeps being sorted when removing or inserting new circuits. */
+<span class="lineNum">     451 </span>                :<span class="lineCov">         18 : void nodelist::sort (void) {</span>
+<span class="lineNum">     452 </span>                :<span class="lineCov">         18 :   nodelist * nodes = new nodelist ();</span>
+<span class="lineNum">     453 </span>                :            :   struct nodelist_t * nl, * cand;
+<span class="lineNum">     454 </span>                :<span class="lineCov">         18 :   int p, i, ports, MaxPorts, len = length ();</span>
+<span class="lineNum">     455 </span>                :            : 
+<span class="lineNum">     456 </span>                :            :   // go through the list until there is no node left
+<span class="lineNum">     457 </span>        [<span class="branchCov" title="Branch 0 was taken 437 times"> + </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">        455 :   for (i = 0; i &lt; len; i++) {</span>
+<span class="lineNum">     458 </span>                :            :     // find last order node
+<span class="lineNum">     459 </span>                :<span class="lineCov">        437 :     cand = NULL;</span>
+<span class="lineNum">     460 </span>        [<span class="branchCov" title="Branch 0 was taken 5692 times"> + </span><span class="branchCov" title="Branch 1 was taken 379 times"> + </span>]:<span class="lineCov">       6071 :     for (MaxPorts = -1, p = 0, nl = root; nl != NULL; nl = nl-&gt;next) {</span>
+<span class="lineNum">     461 </span>                :<span class="lineCov">       5692 :       ports = sortfunc (nl);</span>
+<span class="lineNum">     462 </span>[<span class="branchCov" title="Branch 0 was taken 4981 times"> + </span><span class="branchCov" title="Branch 1 was taken 711 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 4970 times"> + </span><span class="branchCov" title="Branch 3 was taken 11 times"> + </span>]:<span class="lineCov">       5692 :       if (ports &gt; MaxPorts || MaxPorts &lt; 0 || ports == -1) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 47 times"> + </span><span class="branchCov" title="Branch 5 was taken 4923 times"> + </span>]
+<span class="lineNum">     463 </span>                :<span class="lineCov">        769 :         cand = nl;</span>
+<span class="lineNum">     464 </span>                :<span class="lineCov">        769 :         MaxPorts = ports;</span>
+<span class="lineNum">     465 </span>                :            :       }
+<span class="lineNum">     466 </span>        [<span class="branchCov" title="Branch 0 was taken 58 times"> + </span><span class="branchCov" title="Branch 1 was taken 5634 times"> + </span>]:<span class="lineCov">       5692 :       if (ports == -1) break;</span>
+<span class="lineNum">     467 </span>                :            :     }
+<span class="lineNum">     468 </span>                :            :     // add last order node
+<span class="lineNum">     469 </span>                :<span class="lineCov">        437 :     remove (cand, 1);</span>
+<span class="lineNum">     470 </span>                :<span class="lineCov">        437 :     nodes-&gt;add (cand);</span>
+<span class="lineNum">     471 </span>                :            :   }
+<span class="lineNum">     472 </span>                :            : 
+<span class="lineNum">     473 </span>                :            :   // store sorted node list in current object
+<span class="lineNum">     474 </span>                :<span class="lineCov">         18 :   root = nodes-&gt;getRoot ();</span>
+<span class="lineNum">     475 </span>                :<span class="lineCov">         18 :   last = nodes-&gt;getLastNode ();</span>
+<span class="lineNum">     476 </span>                :<span class="lineCov">         18 :   nodes-&gt;root = NULL;</span>
+<span class="lineNum">     477 </span>                :<span class="lineCov">         18 :   sorting = 1;</span>
+<span class="lineNum">     478 </span>                :            : 
+<span class="lineNum">     479 </span>                :            :   // delete temporary node list
+<span class="lineNum">     480 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         18 :   delete nodes;</span>
+<span class="lineNum">     481 </span>                :<span class="lineCov">         18 : }</span>
+<a name="482"><span class="lineNum">     482 </span>                :            : </a>
+<span class="lineNum">     483 </span>                :            : // The function returns the first two nodes of the sorted list.
+<span class="lineNum">     484 </span>                :<span class="lineCov">     124675 : void nodelist::sortedNodes (node ** node1, node ** node2) {</span>
+<span class="lineNum">     485 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 124675 times"> + </span>]:<span class="lineCov">     124675 :   assert (root-&gt;nNodes == 2);</span>
+<span class="lineNum">     486 </span>                :<span class="lineCov">     124675 :   *node1 = root-&gt;nodes[0];</span>
+<span class="lineNum">     487 </span>                :<span class="lineCov">     124675 :   *node2 = root-&gt;nodes[1];</span>
+<span class="lineNum">     488 </span>                :<span class="lineCov">     124675 : }</span>
+<span class="lineNum">     489 </span>                :            : 
+<a name="490"><span class="lineNum">     490 </span>                :            : #if DEBUG</a>
+<span class="lineNum">     491 </span>                :            : // Debug function: Prints the entire nodelist.
+<span class="lineNum">     492 </span>                :<span class="lineNoCov">          0 : void nodelist::print (void) {</span>
+<span class="lineNum">     493 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (struct nodelist_t * n = root; n != NULL; n = n-&gt;next) {</span>
+<span class="lineNum">     494 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_STATUS, &quot;DEBUG: node %s-%d [&quot;, n-&gt;name, n-&gt;n);</span>
+<span class="lineNum">     495 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i = 0; i &lt; n-&gt;nNodes; i++) {</span>
+<span class="lineNum">     496 </span>                :<span class="lineNoCov">          0 :       logprint (LOG_STATUS, &quot;%s&quot;, n-&gt;nodes[i]-&gt;getCircuit()-&gt;getName ());</span>
+<span class="lineNum">     497 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (i != n-&gt;nNodes - 1) logprint (LOG_STATUS, &quot;,&quot;);</span>
+<span class="lineNum">     498 </span>                :            :     }
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_STATUS, &quot;]\n&quot;);</span>
+<span class="lineNum">     500 </span>                :            :   }
+<span class="lineNum">     501 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     502 </span>                :            : #endif /* DEBUG */
+<span class="lineNum">     503 </span>                :            : 
+<span class="lineNum">     504 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

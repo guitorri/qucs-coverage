@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/tswitch.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">src/components</a> - tswitch.cpp<span style="font-size: 80%;"> (source / <a href="tswitch.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">57</td>
+            <td class="headerCovTableEntry">84</td>
+            <td class="headerCovTableEntryLo">67.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryLo">58.3 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntryLo">35.3 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * tswitch.cpp - time controlled switch class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;iostream&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      31 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;tswitch.h&quot;
+<span class="lineNum">      33 </span>                :            : 
+<a name="34"><span class="lineNum">      34 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :<span class="lineCov">          2 : tswitch::tswitch () : circuit (2) {</span>
+<span class="lineNum">      37 </span>                :<span class="lineCov">          2 :   type = CIR_TSWITCH;</span>
+<span class="lineNum">      38 </span>  [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">          2 :   setVoltageSources (1);</span>
+<a name="39"><span class="lineNum">      39 </span>                :<span class="lineCov">          2 : }</span></a>
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :<span class="lineCov">          4 : nr_double_t tswitch::initState (void) {</span>
+<span class="lineNum">      42 </span>                :<span class="lineCov">          4 :   const char * const init = getPropertyString (&quot;init&quot;);</span>
+<span class="lineNum">      43 </span>                :<span class="lineCov">          4 :   bool on = !strcmp (init, &quot;on&quot;);</span>
+<span class="lineNum">      44 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          4 :   return on ? getPropertyDouble (&quot;Ron&quot;) : getPropertyDouble (&quot;Roff&quot;);</span>
+<a name="45"><span class="lineNum">      45 </span>                :            : }</a>
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :<span class="lineNoCov">          0 : void tswitch::initSP (void) {</span>
+<span class="lineNum">      48 </span>                :<span class="lineNoCov">          0 :   nr_double_t r = initState ();</span>
+<span class="lineNum">      49 </span>                :<span class="lineNoCov">          0 :   allocMatrixS ();</span>
+<span class="lineNum">      50 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_1, NODE_1, r / (r + 2));</span>
+<span class="lineNum">      51 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_2, NODE_2, r / (r + 2));</span>
+<span class="lineNum">      52 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_1, NODE_2, 2 / (r + 2));</span>
+<span class="lineNum">      53 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setS (NODE_2, NODE_1, 2 / (r + 2));</span>
+<a name="54"><span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :<span class="lineNoCov">          0 : void tswitch::calcNoiseSP (nr_double_t) {</span>
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :   nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 :   nr_double_t r = initState ();</span>
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :   nr_double_t f = kelvin (T) * 4.0 * r * z0 / sqr (2.0 * z0 + r) / T0;</span>
+<span class="lineNum">      60 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setN (NODE_1, NODE_1, +f); setN (NODE_2, NODE_2, +f);</span>
+<span class="lineNum">      61 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setN (NODE_1, NODE_2, -f); setN (NODE_2, NODE_1, -f);</span>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      63 </span>                :            : 
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 : void tswitch::calcNoiseAC (nr_double_t) {</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :   nr_double_t r = initState ();</span>
+<span class="lineNum">      66 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (r &gt; 0.0 || r &lt; 0.0) {</span>
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :     nr_double_t T = getPropertyDouble (&quot;Temp&quot;);</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     nr_double_t f = kelvin (T) / T0 * 4.0 / r;</span>
+<span class="lineNum">      69 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setN (NODE_1, NODE_1, +f); setN (NODE_2, NODE_2, +f);</span>
+<span class="lineNum">      70 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setN (NODE_1, NODE_2, -f); setN (NODE_2, NODE_1, -f);</span>
+<span class="lineNum">      71 </span>                :            :   }
+<a name="72"><span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :<span class="lineCov">          4 : void tswitch::initDC (void) {</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">          4 :   nr_double_t r = initState ();</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">          4 :   allocMatrixMNA ();</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">          4 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          4 :   setD (VSRC_1, VSRC_1, -r);</span>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          4 : }</span></a>
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 : void tswitch::initAC (void) {</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<a name="83"><span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineCov">          2 : void tswitch::initTR (void) {</span>
+<span class="lineNum">      86 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :   qucs::vector * values = getPropertyVector (&quot;time&quot;);</span>
+<span class="lineNum">      87 </span>                :            :   // Find the total time of the switching periods
+<span class="lineNum">      88 </span>[<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">          2 :   T = real (sum (*values));</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">      89 </span>                :            :   // if the user enters an even number of switchng times
+<span class="lineNum">      90 </span>                :            :   // the pattern is repeated continuously
+<span class="lineNum">      91 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :   repeat = (values-&gt;getSize () % 2) == 0 ? true : false;</span>
+<span class="lineNum">      92 </span>                :            :   // make the time taken to go from fully on to fully off
+<span class="lineNum">      93 </span>                :            :   // the smallest switching time / 100, or the smallest possible
+<span class="lineNum">      94 </span>                :            :   // number, but no bogger than the max specified duration
+<span class="lineNum">      95 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :   nr_double_t maxduration = getPropertyDouble(&quot;MaxDuration&quot;);</span>
+<span class="lineNum">      96 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :   duration = std::min ( std::max (10*NR_TINY, values-&gt;minimum() / 100),</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">          2 :                         maxduration );</span>
+<span class="lineNum">      98 </span>                :            : 
+<span class="lineNum">      99 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          2 :   initDC ();</span>
+<a name="100"><span class="lineNum">     100 </span>                :<span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :<span class="lineCov">       7268 : void tswitch::calcTR (nr_double_t t) {</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">       7268 :   const char * const init = getPropertyString (&quot;init&quot;);</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">       7268 :   nr_double_t ron = getPropertyDouble (&quot;Ron&quot;);</span>
+<span class="lineNum">     105 </span>                :<span class="lineCov">       7268 :   nr_double_t roff = getPropertyDouble (&quot;Roff&quot;);</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">       7268 :   nr_double_t r = 0;</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">       7268 :   nr_double_t rdiff = 0;</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">       7268 :   nr_double_t s_i = 0;</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">       7268 :   nr_double_t r_0 = 0;</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">       7268 :   qucs::vector * values = getPropertyVector (&quot;time&quot;);</span>
+<span class="lineNum">     111 </span>                :<span class="lineCov">       7268 :   bool on = !strcmp (init, &quot;on&quot;);</span>
+<span class="lineNum">     112 </span>                :<span class="lineCov">       7268 :   nr_double_t ti = 0;</span>
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 7268 times"> + </span>]:<span class="lineCov">       7268 :   if (repeat) {</span>
+<span class="lineNum">     115 </span>                :            :     // if the user enters an even number of switchng times
+<span class="lineNum">     116 </span>                :            :     // the pattern is repeated continuously. This is acieved by
+<span class="lineNum">     117 </span>                :            :     // subtracting an integer number of total switching periods
+<span class="lineNum">     118 </span>                :            :     // from the real time
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :     t = t - T * qucs::floor (t / T);</span>
+<span class="lineNum">     120 </span>                :            :   }
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :            :   // Initialise the last switching time to be a full
+<span class="lineNum">     123 </span>                :            :   // switching duration
+<span class="lineNum">     124 </span>                :<span class="lineCov">       7268 :   nr_double_t ts = t - duration;</span>
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :            :   // here we determine whether a switching event should occur
+<span class="lineNum">     127 </span>                :            :   // by looping through the list of switching times and comparing
+<span class="lineNum">     128 </span>                :            :   // to the current time
+<span class="lineNum">     129 </span>        [<span class="branchCov" title="Branch 1 was taken 7268 times"> + </span><span class="branchCov" title="Branch 2 was taken 6630 times"> + </span>]:<span class="lineCov">      13898 :   for (int i = 0; i &lt; values-&gt;getSize (); i++) {</span>
+<span class="lineNum">     130 </span>                :            :     // add the current value from the list of switching times
+<span class="lineNum">     131 </span>                :            :     // to a counter
+<span class="lineNum">     132 </span>                :<span class="lineCov">       7268 :     ti += real (values-&gt;get (i));</span>
+<span class="lineNum">     133 </span>                :            : 
+<span class="lineNum">     134 </span>        [<span class="branchCov" title="Branch 0 was taken 6630 times"> + </span><span class="branchCov" title="Branch 1 was taken 638 times"> + </span>]:<span class="lineCov">       7268 :     if (t &gt;= ti)</span>
+<span class="lineNum">     135 </span>                :            :     {
+<span class="lineNum">     136 </span>                :            :       // the current time is greater than or equal to the current
+<span class="lineNum">     137 </span>                :            :       // sum of switching times so the switch state changes
+<span class="lineNum">     138 </span>                :<span class="lineCov">       6630 :       on = !on;</span>
+<span class="lineNum">     139 </span>                :            :       // store the current switching time
+<span class="lineNum">     140 </span>                :<span class="lineCov">       6630 :       ts = ti;</span>
+<span class="lineNum">     141 </span>                :            :     }
+<span class="lineNum">     142 </span>                :            :     else {
+<span class="lineNum">     143 </span>                :            :       // the current sum of switching times is in the future
+<span class="lineNum">     144 </span>                :            :       // so exit the loop
+<span class="lineNum">     145 </span>                :<span class="lineCov">        638 :       break;</span>
+<span class="lineNum">     146 </span>                :            :     }
+<span class="lineNum">     147 </span>                :            :   }
+<span class="lineNum">     148 </span>                :            :   // calculate the time since the last switch occured
+<span class="lineNum">     149 </span>                :<span class="lineCov">       7268 :   nr_double_t tdiff = std::max(NR_TINY, t - ts);</span>
+<span class="lineNum">     150 </span>                :            : 
+<span class="lineNum">     151 </span>                :            :   // set the time difference to be no more than the max switch
+<span class="lineNum">     152 </span>                :            :   // duration so when we interpolate below we only get the max
+<span class="lineNum">     153 </span>                :            :   // or min function value if we are past a switching time
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 6454 times"> + </span><span class="branchCov" title="Branch 1 was taken 814 times"> + </span>]:<span class="lineCov">       7268 :   if (tdiff &gt; duration) {</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">       6454 :         tdiff = duration;</span>
+<span class="lineNum">     156 </span>                :            :   }
+<span class="lineNum">     157 </span>                :            : 
+<span class="lineNum">     158 </span>                :            :   // Set the appropriate resistance. The resistance is interpolated
+<span class="lineNum">     159 </span>                :            :   // along a cubic spline with zero derivative at the start and end
+<span class="lineNum">     160 </span>                :            :   // points to ensure a smooth derivative
+<span class="lineNum">     161 </span>        [<span class="branchCov" title="Branch 0 was taken 3628 times"> + </span><span class="branchCov" title="Branch 1 was taken 3640 times"> + </span>]:<span class="lineCov">       7268 :   if (on)</span>
+<span class="lineNum">     162 </span>                :            :   {
+<span class="lineNum">     163 </span>                :<span class="lineCov">       3628 :     r_0 = roff;</span>
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :<span class="lineCov">       3628 :     rdiff = ron - roff;</span>
+<span class="lineNum">     166 </span>                :            : 
+<span class="lineNum">     167 </span>                :<span class="lineCov">       3628 :     s_i = (rdiff) / (duration);</span>
+<span class="lineNum">     168 </span>                :            :   }
+<span class="lineNum">     169 </span>                :            :   else
+<span class="lineNum">     170 </span>                :            :   {
+<span class="lineNum">     171 </span>                :<span class="lineCov">       3640 :     r_0 = ron;</span>
+<span class="lineNum">     172 </span>                :            : 
+<span class="lineNum">     173 </span>                :<span class="lineCov">       3640 :     rdiff = roff - ron;</span>
+<span class="lineNum">     174 </span>                :            : 
+<span class="lineNum">     175 </span>                :<span class="lineCov">       3640 :     s_i = (rdiff) / (duration);</span>
+<span class="lineNum">     176 </span>                :            :   }
+<span class="lineNum">     177 </span>                :            : 
+<span class="lineNum">     178 </span>                :            :   // perform the interpolation of the constrained cubic spline
+<span class="lineNum">     179 </span>                :<span class="lineCov">       7268 :   r = r_0 + ((3. * s_i * qucs::pow (tdiff,2.0)) / (duration))</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">       7268 :           + ((-2. * s_i * qucs::pow (tdiff,3.0)) / qucs::pow (duration, 2.0));</span>
+<span class="lineNum">     181 </span>                :            : 
+<span class="lineNum">     182 </span>        [<span class="branchCov" title="Branch 1 was taken 7268 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">       7268 :   setD (VSRC_1, VSRC_1, -r);</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">       7268 : }</span>
+<span class="lineNum">     184 </span>                :            : 
+<span class="lineNum">     185 </span>                :            : // properties
+<span class="lineNum">     186 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     187 </span>                :            :   { &quot;init&quot;, PROP_STR, { PROP_NO_VAL, &quot;off&quot; }, PROP_RNG_STR2 (&quot;on&quot;, &quot;off&quot;) },
+<span class="lineNum">     188 </span>                :            :   { &quot;time&quot;, PROP_LIST, { 1e-9, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     189 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     190 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     191 </span>                :            :   { &quot;Ron&quot;, PROP_REAL, { 0, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     192 </span>                :            :   { &quot;Roff&quot;, PROP_REAL, { 1e12, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     193 </span>                :            :   { &quot;Temp&quot;, PROP_REAL, { 26.85, PROP_NO_STR }, PROP_MIN_VAL (K) },
+<span class="lineNum">     194 </span>                :            :   { &quot;MaxDuration&quot;, PROP_REAL, { 1e-6, PROP_NO_STR }, PROP_MIN_VAL (10*NR_TINY) },
+<a name="195"><span class="lineNum">     195 </span>                :            :   PROP_NO_PROP };</a>
+<span class="lineNum">     196 </span>                :            : struct define_t tswitch::cirdef =
+<span class="lineNum">     197 </span>[<span class="branchCov" title="Branch 1 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        282 :   { &quot;Switch&quot;, 2, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

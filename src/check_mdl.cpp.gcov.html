@@ -1,0 +1,797 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/check_mdl.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - check_mdl.cpp<span style="font-size: 80%;"> (source / <a href="check_mdl.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">383</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">364</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * check_mdl.cpp - iterate an IC-CAP MDL file
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2006, 2007 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;float.h&gt;
+<span class="lineNum">      35 </span>                :            : #include &lt;ctype.h&gt;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;strlist.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;vector.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;dataset.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;sweep.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;valuelist.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;constants.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;check_mdl.h&quot;
+<span class="lineNum">      47 </span>                :            : #include &quot;tokens_mdl.h&quot;
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : using namespace qucs;
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : // Global variables.
+<span class="lineNum">      52 </span>                :            : dataset * mdl_result = NULL;
+<span class="lineNum">      53 </span>                :            : struct mdl_link_t * mdl_root = NULL;
+<span class="lineNum">      54 </span>                :            : struct mdl_sync_t * mdl_sync_root = NULL;
+<a name="55"><span class="lineNum">      55 </span>                :            : </a>
+<span class="lineNum">      56 </span>                :            : // Creates an independent data vector.
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 : static void mdl_create_depdataset (sweep * data, char * name) {</span>
+<span class="lineNum">      58 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   vector v (name);</span>
+<span class="lineNum">      59 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; data-&gt;getSize (); i++) v.add (data-&gt;get (i));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">      60 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   mdl_result-&gt;appendDependency (new vector (v));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="62"><span class="lineNum">      62 </span>                :            : </a>
+<span class="lineNum">      63 </span>                :            : // Creates an independent data vector with a single element.
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 : static void mdl_create_condataset (double val, char * name) {</span>
+<span class="lineNum">      65 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   vector v (name);</span>
+<span class="lineNum">      66 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   v.add (val);</span>
+<span class="lineNum">      67 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   mdl_result-&gt;appendDependency (new vector (v));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="69"><span class="lineNum">      69 </span>                :            : </a>
+<span class="lineNum">      70 </span>                :            : // The functions creates dependent data vector(s).
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 : static void mdl_create_vardataset (struct mdl_point_t * point,</span>
+<span class="lineNum">      72 </span>                :            :                                    struct mdl_datasize_t * dsize,
+<span class="lineNum">      73 </span>                :            :                                    const char * name, const char * type,
+<span class="lineNum">      74 </span>                :            :                                    strlist * deps) {
+<span class="lineNum">      75 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span> :<span class="lineNoCov">          0 :   vector * v = new vector[dsize-&gt;x * dsize-&gt;y] ();</span>
+<span class="lineNum">         </span>   <span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">      76 </span>                :            :   // adjust type
+<span class="lineNum">      77 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (!strcmp (type, &quot;MEAS&quot;))</span>
+<span class="lineNum">      78 </span>                :<span class="lineNoCov">          0 :     type = &quot;.M&quot;;</span>
+<span class="lineNum">      79 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (!strcmp (type, &quot;SIMU&quot;))</span>
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :     type = &quot;.S&quot;;</span>
+<span class="lineNum">      81 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (!strcmp (type, &quot;COMMON&quot;))</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :     type = &quot;&quot;;</span>
+<span class="lineNum">      83 </span>                :            :   // create vectors
+<span class="lineNum">      84 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (struct mdl_point_t * p = point; p != NULL; p = p-&gt;next) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 :     int n = (p-&gt;y - 1) * 2 + p-&gt;x - 1;</span>
+<span class="lineNum">      86 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     v[n].add (nr_complex_t (p-&gt;r, p-&gt;i));</span>
+<span class="lineNum">      87 </span>                :            :   }
+<span class="lineNum">      88 </span>                :            :   // go through indices
+<span class="lineNum">      89 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int x = 1; x &lt; dsize-&gt;x + 1; x++) {</span>
+<span class="lineNum">      90 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int y = 1; y &lt; dsize-&gt;y + 1; y++) {</span>
+<span class="lineNum">      91 </span>                :            :       // create vector description
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :       int n = (y - 1) * 2 + x - 1;</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :       char * txt = (char *) malloc (strlen (name) + strlen (type) + 4 + 2 * 3);</span>
+<span class="lineNum">      94 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (dsize-&gt;x &gt; 1 || dsize-&gt;y &gt; 1)</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :         sprintf (txt, &quot;%s%s[%d,%d]&quot;, name, type, x, y);</span>
+<span class="lineNum">      96 </span>                :            :       else
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 :         sprintf (txt, &quot;%s%s&quot;, name, type);</span>
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 :       v[n].setName (txt);</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :       free (txt);</span>
+<span class="lineNum">     100 </span>                :            :       // put vector into dataset
+<span class="lineNum">     101 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (v[n].getSize () &gt; 1) {</span>
+<span class="lineNum">     102 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         v[n].setDependencies (new strlist (*deps));</span>
+<span class="lineNum">     103 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         mdl_result-&gt;appendVariable (new vector (v[n]));</span>
+<span class="lineNum">     104 </span>                :            :       } else {
+<span class="lineNum">     105 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         v[n].setDependencies (new strlist ());</span>
+<span class="lineNum">     106 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         mdl_result-&gt;appendDependency (new vector (v[n]));</span>
+<span class="lineNum">     107 </span>                :            :       }
+<span class="lineNum">     108 </span>                :            :     }
+<span class="lineNum">     109 </span>                :            :   }
+<span class="lineNum">     110 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete[] v;</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="112"><span class="lineNum">     112 </span>                :            : </a>
+<span class="lineNum">     113 </span>                :            : // Look through hypertable elements for a name and return value.
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 : static char * mdl_find_helement (struct mdl_element_t * root,</span>
+<span class="lineNum">     115 </span>                :            :                                  const char * name) {
+<span class="lineNum">     116 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     117 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (!strcmp (root-&gt;name, name)) return root-&gt;value;</span>
+<span class="lineNum">     118 </span>                :            :   }
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :   return NULL;</span>
+<span class="lineNum">     120 </span>                :            : }
+<a name="121"><span class="lineNum">     121 </span>                :            : </a>
+<span class="lineNum">     122 </span>                :            : // Look through table elements for a name and return value.
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 : static char * mdl_find_telement (struct mdl_element_t * root,</span>
+<span class="lineNum">     124 </span>                :            :                                  const char * name) {
+<span class="lineNum">     125 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     126 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (!strcmp (root-&gt;name, &quot;Name&quot;) &amp;&amp; !strcmp (root-&gt;value, name)) {</span>
+<span class="lineNum">     127 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (root-&gt;next &amp;&amp; !strcmp (root-&gt;next-&gt;name, &quot;Value&quot;)) {</span>
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :         return root-&gt;next-&gt;value;</span>
+<span class="lineNum">     129 </span>                :            :       }
+<span class="lineNum">     130 </span>                :            :     }
+<span class="lineNum">     131 </span>                :            :   }
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :   return NULL;</span>
+<span class="lineNum">     133 </span>                :            : }
+<a name="134"><span class="lineNum">     134 </span>                :            : </a>
+<span class="lineNum">     135 </span>                :            : // Convert number suffix into a multiplication factor.
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 : static double mdl_convert_factor (char * end) {</span>
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :   double f = 1.0;</span>
+<span class="lineNum">     138 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (end) {</span>
+<span class="lineNum">     139 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span> :<span class="lineNoCov">          0 :     switch (*end) {</span>
+<span class="lineNum">         </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span> 
+<span class="lineNum">         </span>         <span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :     case 'K': f = 1e+03; break;</span>
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 :     case 'M': f = 1e+06; break;</span>
+<span class="lineNum">     142 </span>                :<span class="lineNoCov">          0 :     case 'G': f = 1e+09; break;</span>
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :     case 'T': f = 1e+12; break;</span>
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :     case 'm': f = 1e-03; break;</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :     case 'u': f = 1e-06; break;</span>
+<span class="lineNum">     146 </span>                :<span class="lineNoCov">          0 :     case 'n': f = 1e-09; break;</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :     case 'p': f = 1e-12; break;</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :     case 'f': f = 1e-15; break;</span>
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 :     case 'a': f = 1e-18; break;</span>
+<span class="lineNum">     150 </span>                :            :     }
+<span class="lineNum">     151 </span>                :            :   }
+<span class="lineNum">     152 </span>                :<span class="lineNoCov">          0 :   return f;</span>
+<span class="lineNum">     153 </span>                :            : }
+<span class="lineNum">     154 </span>                :            : 
+<span class="lineNum">     155 </span>                :            : // Forward declaration.
+<span class="lineNum">     156 </span>                :            : static double mdl_telement_dvalue (struct mdl_link_t *, struct mdl_element_t *,
+<span class="lineNum">     157 </span>                :            :                                    const char *);
+<a name="158"><span class="lineNum">     158 </span>                :            : </a>
+<span class="lineNum">     159 </span>                :            : // The function resolves the given variable trying upscope resolving.
+<span class="lineNum">     160 </span>                :<span class="lineNoCov">          0 : static int mdl_resolve_variable (struct mdl_link_t * link, char * name,</span>
+<span class="lineNum">     161 </span>                :            :                                  double &amp;val) {
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :   int done = 0;</span>
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :   val = 0.0;</span>
+<span class="lineNum">     164 </span>                :            :   struct mdl_lcontent_t * root;
+<span class="lineNum">     165 </span>                :            :   // try finding variable in current link
+<span class="lineNum">     166 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = link-&gt;content; !done &amp;&amp; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     167 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_TABLE) {</span>
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :       struct mdl_element_t * eroot = root-&gt;table-&gt;data;</span>
+<span class="lineNum">     169 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (mdl_find_telement (eroot, name)) {</span>
+<span class="lineNum">     170 </span>                :<span class="lineNoCov">          0 :         val = mdl_telement_dvalue (link, eroot, name);</span>
+<span class="lineNum">     171 </span>                :<span class="lineNoCov">          0 :         done++;</span>
+<span class="lineNum">     172 </span>                :            :       }
+<span class="lineNum">     173 </span>                :            :     }
+<span class="lineNum">     174 </span>                :            :   }
+<span class="lineNum">     175 </span>                :            :   // resolve variable in upper scope recursively
+<span class="lineNum">     176 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (!done &amp;&amp; link-&gt;parent) {</span>
+<span class="lineNum">     177 </span>                :<span class="lineNoCov">          0 :     done = mdl_resolve_variable (link-&gt;parent, name, val);</span>
+<span class="lineNum">     178 </span>                :            :   }
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 :   return done;</span>
+<span class="lineNum">     180 </span>                :            : }
+<a name="181"><span class="lineNum">     181 </span>                :            : </a>
+<span class="lineNum">     182 </span>                :            : // Converts a string into a valid value.  Uses variable substitutions.
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 : static double mdl_variable_value (struct mdl_link_t * link, char * txt) {</span>
+<span class="lineNum">     184 </span>                :<span class="lineNoCov">          0 :   double val = 0.0;</span>
+<span class="lineNum">     185 </span>                :<span class="lineNoCov">          0 :   char * end = NULL;</span>
+<span class="lineNum">     186 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (txt != NULL) {</span>
+<span class="lineNum">     187 </span>                :            :     // remove whitespaces
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 :     char * t, * p = txt;</span>
+<span class="lineNum">     189 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while (*p) {</span>
+<span class="lineNum">     190 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (isspace (*p)) {</span>
+<span class="lineNum">     191 </span>                :<span class="lineNoCov">          0 :         t = p;</span>
+<span class="lineNum">     192 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         while (*t) { *t = *(t + 1); t++; }</span>
+<span class="lineNum">     193 </span>                :<span class="lineNoCov">          0 :         p--;</span>
+<span class="lineNum">     194 </span>                :            :       }
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 :       p++;</span>
+<span class="lineNum">     196 </span>                :            :     }
+<span class="lineNum">     197 </span>                :            :     // extract value if possible
+<span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 :     val = strtod (txt, &amp;end);</span>
+<span class="lineNum">     199 </span>                :            :     // not a value, a variable
+<span class="lineNum">     200 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (end == txt) {</span>
+<span class="lineNum">     201 </span>                :<span class="lineNoCov">          0 :       double f = 1.0;</span>
+<span class="lineNum">     202 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if      (*txt == '-') { f = -1.0; txt++; }</span>
+<span class="lineNum">     203 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       else if (*txt == '+') { f = +1.0; txt++; }</span>
+<span class="lineNum">     204 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (!mdl_resolve_variable (link, txt, val)) {</span>
+<span class="lineNum">     205 </span>                :            :         // special variables
+<span class="lineNum">     206 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (!strcmp (txt, &quot;PI&quot;)) {</span>
+<span class="lineNum">     207 </span>                :<span class="lineNoCov">          0 :           val = M_PI;</span>
+<span class="lineNum">     208 </span>                :            :         }
+<span class="lineNum">     209 </span>                :            :         // no resolvable (probably equation)
+<span class="lineNum">     210 </span>                :            :         else {
+<span class="lineNum">     211 </span>                :            :           logprint (LOG_ERROR,
+<span class="lineNum">     212 </span>                :            :                     &quot;checker error, unable to resolve `%s' variable in '%s'\n&quot;,
+<span class="lineNum">     213 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :                     txt, link-&gt;name);</span>
+<span class="lineNum">     214 </span>                :<span class="lineNoCov">          0 :           val = 0.0;</span>
+<span class="lineNum">     215 </span>                :            :         }
+<span class="lineNum">     216 </span>                :            :       }
+<span class="lineNum">     217 </span>                :<span class="lineNoCov">          0 :       val = f * val;</span>
+<span class="lineNum">     218 </span>                :            :     }
+<span class="lineNum">     219 </span>                :            :     // normal value with probably a suffix
+<span class="lineNum">     220 </span>                :            :     else {
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 :       val *= mdl_convert_factor (end);</span>
+<span class="lineNum">     222 </span>                :            :     }
+<span class="lineNum">     223 </span>                :            :   }
+<span class="lineNum">     224 </span>                :<span class="lineNoCov">          0 :   return val;</span>
+<span class="lineNum">     225 </span>                :            : }
+<a name="226"><span class="lineNum">     226 </span>                :            : </a>
+<span class="lineNum">     227 </span>                :            : // Returns a double variable value stored in a hypertable.
+<span class="lineNum">     228 </span>                :<span class="lineNoCov">          0 : static double mdl_helement_dvalue (struct mdl_link_t * link,</span>
+<span class="lineNum">     229 </span>                :            :                                    struct mdl_element_t * eroot,
+<span class="lineNum">     230 </span>                :            :                                    const char * name) {
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :   char * txt = mdl_find_helement (eroot, name);</span>
+<span class="lineNum">     232 </span>                :<span class="lineNoCov">          0 :   return mdl_variable_value (link, txt);</span>
+<span class="lineNum">     233 </span>                :            : }
+<a name="234"><span class="lineNum">     234 </span>                :            : </a>
+<span class="lineNum">     235 </span>                :            : // Returns a double variable value stored in a table.
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 : static double mdl_telement_dvalue (struct mdl_link_t * link,</span>
+<span class="lineNum">     237 </span>                :            :                                    struct mdl_element_t * eroot,
+<span class="lineNum">     238 </span>                :            :                                    const char * name) {
+<span class="lineNum">     239 </span>                :<span class="lineNoCov">          0 :   char * txt = mdl_find_telement (eroot, name);</span>
+<span class="lineNum">     240 </span>                :<span class="lineNoCov">          0 :   return mdl_variable_value (link, txt);</span>
+<span class="lineNum">     241 </span>                :            : }
+<a name="242"><span class="lineNum">     242 </span>                :            : </a>
+<span class="lineNum">     243 </span>                :            : // Returns a integer variable value stored in a hypertable.
+<span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 : static int mdl_helement_ivalue (struct mdl_link_t * link,</span>
+<span class="lineNum">     245 </span>                :            :                                 struct mdl_element_t  * eroot,
+<span class="lineNum">     246 </span>                :            :                                 const char * name) {
+<span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 :   return (int) mdl_helement_dvalue (link, eroot, name);</span>
+<span class="lineNum">     248 </span>                :            : }
+<a name="249"><span class="lineNum">     249 </span>                :            : </a>
+<span class="lineNum">     250 </span>                :            : // Looks for dependent data vectors and creates them.
+<span class="lineNum">     251 </span>                :<span class="lineNoCov">          0 : static void mdl_find_vardataset (struct mdl_dcontent_t * droot, char * name,</span>
+<span class="lineNum">     252 </span>                :            :                                  strlist * deps) {
+<span class="lineNum">     253 </span>                :            :   struct mdl_dcontent_t * root;
+<span class="lineNum">     254 </span>                :            :   // go through dataset content
+<span class="lineNum">     255 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = droot; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     256 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_DATASET) {</span>
+<span class="lineNum">     257 </span>                :            :       // create possibly both - MEAS and SIMU - data vectors
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 :       struct mdl_dataset_t * dset = root-&gt;data;</span>
+<span class="lineNum">     259 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (dset-&gt;data1)</span>
+<span class="lineNum">     260 </span>                :            :         mdl_create_vardataset (dset-&gt;data1, dset-&gt;dsize, name, dset-&gt;type1,
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 :                                deps);</span>
+<span class="lineNum">     262 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (dset-&gt;data2)</span>
+<span class="lineNum">     263 </span>                :            :         mdl_create_vardataset (dset-&gt;data2, dset-&gt;dsize, name, dset-&gt;type2,
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 :                                deps);</span>
+<span class="lineNum">     265 </span>                :            :     }
+<span class="lineNum">     266 </span>                :            :   }
+<span class="lineNum">     267 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="268"><span class="lineNum">     268 </span>                :            : </a>
+<span class="lineNum">     269 </span>                :            : // Looks for independent data vectors and creates them.
+<span class="lineNum">     270 </span>                :<span class="lineNoCov">          0 : valuelist&lt;int&gt; * mdl_find_depdataset (struct mdl_link_t * link,</span>
+<span class="lineNum">     271 </span>                :            :                                       struct mdl_dcontent_t * droot,
+<span class="lineNum">     272 </span>                :            :                                       char * name) {
+<span class="lineNum">     273 </span>                :<span class="lineNoCov">          0 :   char * stype = NULL;</span>
+<span class="lineNum">     274 </span>                :            :   double val, start, stop, step;
+<span class="lineNum">     275 </span>                :<span class="lineNoCov">          0 :   int nof = 0, order = 0;</span>
+<span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 :   valuelist&lt;int&gt; * deps = new valuelist&lt;int&gt; ();</span>
+<span class="lineNum">     277 </span>                :            :   struct mdl_dcontent_t * root;
+<span class="lineNum">     278 </span>                :            : 
+<span class="lineNum">     279 </span>                :            :   // go through dataset content
+<span class="lineNum">     280 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = droot; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     281 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_HYPTABLE) {</span>
+<span class="lineNum">     282 </span>                :<span class="lineNoCov">          0 :       struct mdl_hyptable_t * hyptab = root-&gt;hyptable;</span>
+<span class="lineNum">     283 </span>                :            :       // found a sweep definition?
+<span class="lineNum">     284 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (!strcmp (hyptab-&gt;name, &quot;Edit Sweep Def&quot;)) {</span>
+<span class="lineNum">     285 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (!strcmp (stype, &quot;LIN&quot;)) {</span>
+<span class="lineNum">     286 </span>                :            :           // linear sweep
+<span class="lineNum">     287 </span>                :<span class="lineNoCov">          0 :           order = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;Sweep Order&quot;);</span>
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 :           start = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Start&quot;);</span>
+<span class="lineNum">     289 </span>                :<span class="lineNoCov">          0 :           stop = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Stop&quot;);</span>
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 :           nof = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;# of Points&quot;);</span>
+<span class="lineNum">     291 </span>                :<span class="lineNoCov">          0 :           step = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Step Size&quot;);</span>
+<span class="lineNum">     292 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           if (nof &lt;= 0) nof = (int) fabs ((stop - start) / step) + 1;</span>
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 :           deps-&gt;append (name, new int (order));</span>
+<span class="lineNum">     294 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :           linsweep * sw = new linsweep ();</span>
+<span class="lineNum">     295 </span>                :<span class="lineNoCov">          0 :           sw-&gt;create (start, stop, nof);</span>
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :           mdl_create_depdataset (sw, name);</span>
+<span class="lineNum">     297 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           delete sw;</span>
+<span class="lineNum">     298 </span>                :            :         }
+<span class="lineNum">     299 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if (!strcmp (stype, &quot;CON&quot;)) {</span>
+<span class="lineNum">     300 </span>                :            :           // constant sweep
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 :           val = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Value&quot;);</span>
+<span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 :           mdl_create_condataset (val, name);</span>
+<span class="lineNum">     303 </span>                :            :         }
+<span class="lineNum">     304 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if (!strcmp (stype, &quot;LOG&quot;)) {</span>
+<span class="lineNum">     305 </span>                :            :           // logarithmic sweep
+<span class="lineNum">     306 </span>                :<span class="lineNoCov">          0 :           order = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;Sweep Order&quot;);</span>
+<span class="lineNum">     307 </span>                :<span class="lineNoCov">          0 :           start = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Start&quot;);</span>
+<span class="lineNum">     308 </span>                :<span class="lineNoCov">          0 :           stop = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Stop&quot;);</span>
+<span class="lineNum">     309 </span>                :<span class="lineNoCov">          0 :           nof = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;Total Pts&quot;);</span>
+<span class="lineNum">     310 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           if (nof &lt;= 0)</span>
+<span class="lineNum">     311 </span>                :<span class="lineNoCov">          0 :             nof = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;# of Points&quot;);</span>
+<span class="lineNum">     312 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           if (start * stop == 0.0) {</span>
+<span class="lineNum">     313 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :             if (start == 0.0) start = 1.0;</span>
+<span class="lineNum">     314 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :             if (stop  == 0.0) stop  = 1.0;</span>
+<span class="lineNum">     315 </span>                :            :           }
+<span class="lineNum">     316 </span>                :<span class="lineNoCov">          0 :           deps-&gt;append (name, new int (order));</span>
+<span class="lineNum">     317 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :           logsweep * sw = new logsweep ();</span>
+<span class="lineNum">     318 </span>                :<span class="lineNoCov">          0 :           sw-&gt;create (start, stop, nof);</span>
+<span class="lineNum">     319 </span>                :<span class="lineNoCov">          0 :           mdl_create_depdataset (sw, name);</span>
+<span class="lineNum">     320 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           delete sw;</span>
+<span class="lineNum">     321 </span>                :            :         }
+<span class="lineNum">     322 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if (!strcmp (stype, &quot;LIST&quot;)) {</span>
+<span class="lineNum">     323 </span>                :            :           // list sweep
+<span class="lineNum">     324 </span>                :<span class="lineNoCov">          0 :           order = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;Sweep Order&quot;);</span>
+<span class="lineNum">     325 </span>                :<span class="lineNoCov">          0 :           nof = mdl_helement_ivalue (link, hyptab-&gt;data, &quot;# of Values&quot;);</span>
+<span class="lineNum">     326 </span>                :<span class="lineNoCov">          0 :           deps-&gt;append (name, new int (order));</span>
+<span class="lineNum">     327 </span>                :            :         }
+<span class="lineNum">     328 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         else if (!strcmp (stype, &quot;SYNC&quot;)) {</span>
+<span class="lineNum">     329 </span>                :            :           // sync sweep
+<span class="lineNum">     330 </span>                :            :           struct mdl_sync_t * sync = (struct mdl_sync_t *)
+<span class="lineNum">     331 </span>                :<span class="lineNoCov">          0 :             calloc (sizeof (struct mdl_sync_t), 1);</span>
+<span class="lineNum">     332 </span>                :<span class="lineNoCov">          0 :           sync-&gt;ratio = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Ratio&quot;);</span>
+<span class="lineNum">     333 </span>                :<span class="lineNoCov">          0 :           sync-&gt;offset = mdl_helement_dvalue (link, hyptab-&gt;data, &quot;Offset&quot;);</span>
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :           sync-&gt;master = mdl_find_helement (hyptab-&gt;data, &quot;Master Sweep&quot;);</span>
+<span class="lineNum">     335 </span>                :<span class="lineNoCov">          0 :           sync-&gt;master = strdup (sync-&gt;master);</span>
+<span class="lineNum">     336 </span>                :<span class="lineNoCov">          0 :           sync-&gt;name = strdup (name);</span>
+<span class="lineNum">     337 </span>                :<span class="lineNoCov">          0 :           sync-&gt;next = mdl_sync_root;</span>
+<span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 :           mdl_sync_root = sync;</span>
+<span class="lineNum">     339 </span>                :            :         }
+<span class="lineNum">     340 </span>                :            :       }
+<span class="lineNum">     341 </span>                :            :       // found a sweep information?
+<span class="lineNum">     342 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       else if (!strcmp (hyptab-&gt;name, &quot;Edit Sweep Info&quot;)) {</span>
+<span class="lineNum">     343 </span>                :<span class="lineNoCov">          0 :         stype = mdl_find_helement (hyptab-&gt;data, &quot;Sweep Type&quot;);</span>
+<span class="lineNum">     344 </span>                :            :       }
+<span class="lineNum">     345 </span>                :            :       // found a list table?
+<span class="lineNum">     346 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       else if (!strcmp (hyptab-&gt;name, &quot;List Table&quot;)) {</span>
+<span class="lineNum">     347 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         lstsweep * sw = new lstsweep ();</span>
+<span class="lineNum">     348 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         sw-&gt;create (nof);</span>
+<span class="lineNum">     349 </span>                :            :         char txt[16];
+<span class="lineNum">     350 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         for (int i = 0; i &lt; nof; i++) {</span>
+<span class="lineNum">     351 </span>                :<span class="lineNoCov">          0 :           sprintf (txt, &quot;Value %d&quot;, i + 1);</span>
+<span class="lineNum">     352 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           val = mdl_helement_dvalue (link, hyptab-&gt;data, txt);</span>
+<span class="lineNum">     353 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :           sw-&gt;set (i, val);</span>
+<span class="lineNum">     354 </span>                :            :         }
+<span class="lineNum">     355 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         mdl_create_depdataset (sw, name);</span>
+<span class="lineNum">     356 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :         delete sw;</span>
+<span class="lineNum">     357 </span>                :            :       }
+<span class="lineNum">     358 </span>                :            :     }
+<span class="lineNum">     359 </span>                :            :   }
+<span class="lineNum">     360 </span>                :<span class="lineNoCov">          0 :   return deps;</span>
+<span class="lineNum">     361 </span>                :            : }
+<a name="362"><span class="lineNum">     362 </span>                :            : </a>
+<span class="lineNum">     363 </span>                :            : // Composes a link name.
+<span class="lineNum">     364 </span>                :<span class="lineNoCov">          0 : static char * mdl_create_linkname (char * base, char * name) {</span>
+<span class="lineNum">     365 </span>                :<span class="lineNoCov">          0 :   char * txt = (char *) malloc (strlen (base) + 2 + strlen (name));</span>
+<span class="lineNum">     366 </span>                :<span class="lineNoCov">          0 :   sprintf (txt, &quot;%s.%s&quot;, base, name);</span>
+<span class="lineNum">     367 </span>                :<span class="lineNoCov">          0 :   return txt;</span>
+<span class="lineNum">     368 </span>                :            : }
+<a name="369"><span class="lineNum">     369 </span>                :            : </a>
+<span class="lineNum">     370 </span>                :            : // Collects dependency links.
+<span class="lineNum">     371 </span>                :<span class="lineNoCov">          0 : static void mdl_find_deplink (struct mdl_link_t * link, char * name,</span>
+<span class="lineNum">     372 </span>                :            :                               valuelist&lt;int&gt; * deps) {
+<span class="lineNum">     373 </span>                :            :   struct mdl_lcontent_t * root;
+<span class="lineNum">     374 </span>                :            :   valuelist&lt;int&gt; * d;
+<span class="lineNum">     375 </span>                :            :   // go through link content
+<span class="lineNum">     376 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = link-&gt;content; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     377 </span>                :            :     // independent data vector
+<span class="lineNum">     378 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_DATA) {</span>
+<span class="lineNum">     379 </span>                :<span class="lineNoCov">          0 :       d = mdl_find_depdataset (link, root-&gt;data-&gt;content, name);</span>
+<span class="lineNum">     380 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (d != NULL) {</span>
+<span class="lineNum">     381 </span>                :<span class="lineNoCov">          0 :         deps-&gt;append (d);</span>
+<span class="lineNum">     382 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         delete d;</span>
+<span class="lineNum">     383 </span>                :            :       }
+<span class="lineNum">     384 </span>                :            :     }
+<span class="lineNum">     385 </span>                :            :     // link to independent data vector
+<span class="lineNum">     386 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (root-&gt;type == t_LINK &amp;&amp; !strcmp (root-&gt;link-&gt;type, &quot;SWEEP&quot;)) {</span>
+<span class="lineNum">     387 </span>                :<span class="lineNoCov">          0 :       char * txt = mdl_create_linkname (name, root-&gt;link-&gt;name);</span>
+<span class="lineNum">     388 </span>                :<span class="lineNoCov">          0 :       root-&gt;link-&gt;parent = link;</span>
+<span class="lineNum">     389 </span>                :<span class="lineNoCov">          0 :       mdl_find_deplink (root-&gt;link, txt, deps);</span>
+<span class="lineNum">     390 </span>                :<span class="lineNoCov">          0 :       free (txt);</span>
+<span class="lineNum">     391 </span>                :            :     }
+<span class="lineNum">     392 </span>                :            :   }
+<span class="lineNum">     393 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="394"><span class="lineNum">     394 </span>                :            : </a>
+<span class="lineNum">     395 </span>                :            : // Collects variable links.
+<span class="lineNum">     396 </span>                :<span class="lineNoCov">          0 : static void mdl_find_varlink (struct mdl_link_t * link, char * name,</span>
+<span class="lineNum">     397 </span>                :            :                               strlist * deps) {
+<span class="lineNum">     398 </span>                :            :   struct mdl_lcontent_t * root;
+<span class="lineNum">     399 </span>                :            :   // go through link content
+<span class="lineNum">     400 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = link-&gt;content; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     401 </span>                :            :     // dependent data vector
+<span class="lineNum">     402 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_DATA) {</span>
+<span class="lineNum">     403 </span>                :<span class="lineNoCov">          0 :       mdl_find_vardataset (root-&gt;data-&gt;content, name, deps);</span>
+<span class="lineNum">     404 </span>                :            :     }
+<span class="lineNum">     405 </span>                :            :     // link to dependent data vector
+<span class="lineNum">     406 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (root-&gt;type == t_LINK &amp;&amp; (!strcmp (root-&gt;link-&gt;type, &quot;OUT&quot;) ||</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     407 </span>                :<span class="lineNoCov">          0 :                                       !strcmp (root-&gt;link-&gt;type, &quot;XFORM&quot;))) {</span>
+<span class="lineNum">     408 </span>                :<span class="lineNoCov">          0 :       char * txt = mdl_create_linkname (name, root-&gt;link-&gt;name);</span>
+<span class="lineNum">     409 </span>                :<span class="lineNoCov">          0 :       root-&gt;link-&gt;parent = link;</span>
+<span class="lineNum">     410 </span>                :<span class="lineNoCov">          0 :       mdl_find_varlink (root-&gt;link, txt, deps);</span>
+<span class="lineNum">     411 </span>                :<span class="lineNoCov">          0 :       free (txt);</span>
+<span class="lineNum">     412 </span>                :            :     }
+<span class="lineNum">     413 </span>                :            :   }
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="415"><span class="lineNum">     415 </span>                :            : </a>
+<span class="lineNum">     416 </span>                :            : // Sorts a dependency list according to their sweep order.
+<span class="lineNum">     417 </span>                :<span class="lineNoCov">          0 : static strlist * mdl_sort_deps (valuelist&lt;int&gt; * d) {</span>
+<span class="lineNum">     418 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   strlist * deps = new strlist ();</span>
+<span class="lineNum">     419 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; d-&gt;length (); i++) {</span>
+<span class="lineNum">     420 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (valuelistiterator&lt;int&gt; it (*d); *it; ++it) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     421 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (*(it.currentVal ()) == i + 1) {</span>
+<span class="lineNum">     422 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         deps-&gt;append (it.currentKey ());</span>
+<span class="lineNum">     423 </span>                :            :       }
+<span class="lineNum">     424 </span>                :<span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     425 </span>                :            :   }
+<span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 :   return deps;</span>
+<span class="lineNum">     427 </span>                :            : }
+<a name="428"><span class="lineNum">     428 </span>                :            : </a>
+<span class="lineNum">     429 </span>                :            : // Iterates the MDL file recursively.
+<span class="lineNum">     430 </span>                :<span class="lineNoCov">          0 : static void mdl_find_link (struct mdl_link_t * link, char * name) {</span>
+<span class="lineNum">     431 </span>                :            :   struct mdl_lcontent_t * root;
+<span class="lineNum">     432 </span>                :            : 
+<span class="lineNum">     433 </span>                :            :   // collect independent data
+<span class="lineNum">     434 </span>                :<span class="lineNoCov">          0 :   valuelist&lt;int&gt; * vdeps = new valuelist&lt;int&gt; ();</span>
+<span class="lineNum">     435 </span>                :<span class="lineNoCov">          0 :   mdl_find_deplink (link, name, vdeps);</span>
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 :   strlist * deps = mdl_sort_deps (vdeps);</span>
+<span class="lineNum">     437 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete vdeps;</span>
+<span class="lineNum">     438 </span>                :            : 
+<span class="lineNum">     439 </span>                :            :   // collect dependent data
+<span class="lineNum">     440 </span>                :<span class="lineNoCov">          0 :   mdl_find_varlink (link, name, deps);</span>
+<span class="lineNum">     441 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete deps;</span>
+<span class="lineNum">     442 </span>                :            : 
+<span class="lineNum">     443 </span>                :            :   // go through link content
+<span class="lineNum">     444 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = link-&gt;content; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     445 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;type == t_LINK &amp;&amp;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     446 </span>                :<span class="lineNoCov">          0 :         strcmp (root-&gt;link-&gt;type, &quot;OUT&quot;) &amp;&amp;</span>
+<span class="lineNum">     447 </span>                :<span class="lineNoCov">          0 :         strcmp (root-&gt;link-&gt;type, &quot;SWEEP&quot;) &amp;&amp;</span>
+<span class="lineNum">     448 </span>                :<span class="lineNoCov">          0 :         strcmp (root-&gt;link-&gt;type, &quot;XFORM&quot;)) {</span>
+<span class="lineNum">     449 </span>                :<span class="lineNoCov">          0 :       char * txt = mdl_create_linkname (name, root-&gt;link-&gt;name);</span>
+<span class="lineNum">     450 </span>                :<span class="lineNoCov">          0 :       root-&gt;link-&gt;parent = link;</span>
+<span class="lineNum">     451 </span>                :<span class="lineNoCov">          0 :       mdl_find_link (root-&gt;link, txt);</span>
+<span class="lineNum">     452 </span>                :<span class="lineNoCov">          0 :       free (txt);</span>
+<span class="lineNum">     453 </span>                :            :     }
+<span class="lineNum">     454 </span>                :            :   }
+<span class="lineNum">     455 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="456"><span class="lineNum">     456 </span>                :            : </a>
+<span class="lineNum">     457 </span>                :            : // Creates an synchronized independent data vector.
+<span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 : static void mdl_create_syndataset (vector * v, char * name) {</span>
+<span class="lineNum">     459 </span>                :<span class="lineNoCov">          0 :   v-&gt;setName (name);</span>
+<span class="lineNum">     460 </span>                :<span class="lineNoCov">          0 :   mdl_result-&gt;appendDependency (v);</span>
+<span class="lineNum">     461 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="462"><span class="lineNum">     462 </span>                :            : </a>
+<span class="lineNum">     463 </span>                :            : // Goes through list of sync sweeps and creates them if possible.
+<span class="lineNum">     464 </span>                :<span class="lineNoCov">          0 : void mdl_find_syncdatasets (struct mdl_sync_t * root) {</span>
+<span class="lineNum">     465 </span>                :            :   struct mdl_sync_t * sync;
+<span class="lineNum">     466 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (sync = root; sync != NULL; sync = sync-&gt;next) {</span>
+<span class="lineNum">     467 </span>                :            :     // determine master sweep link
+<span class="lineNum">     468 </span>                :<span class="lineNoCov">          0 :     char * link = sync-&gt;name;</span>
+<span class="lineNum">     469 </span>                :<span class="lineNoCov">          0 :     int i = strlen (link) - 1;</span>
+<span class="lineNum">     470 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while (i &gt; 0 &amp;&amp; link[i] != '.') i--;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     471 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (link[i] == '.') {</span>
+<span class="lineNum">     472 </span>                :<span class="lineNoCov">          0 :       link[i] = '\0';</span>
+<span class="lineNum">     473 </span>                :<span class="lineNoCov">          0 :       char * txt = (char *) malloc (i + 2 + strlen (sync-&gt;master));</span>
+<span class="lineNum">     474 </span>                :<span class="lineNoCov">          0 :       sprintf (txt, &quot;%s.%s&quot;, link, sync-&gt;master);</span>
+<span class="lineNum">     475 </span>                :<span class="lineNoCov">          0 :       link[i] = '.';</span>
+<span class="lineNum">     476 </span>                :<span class="lineNoCov">          0 :       free (sync-&gt;master);</span>
+<span class="lineNum">     477 </span>                :<span class="lineNoCov">          0 :       sync-&gt;master = txt;</span>
+<span class="lineNum">     478 </span>                :            :     }
+<span class="lineNum">     479 </span>                :            :     // create synchronize independent data vector
+<span class="lineNum">     480 </span>                :<span class="lineNoCov">          0 :     vector * v = mdl_result-&gt;findDependency (sync-&gt;master);</span>
+<span class="lineNum">     481 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (v != NULL) {</span>
+<span class="lineNum">     482 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :       vector * s = new vector ((*v) * sync-&gt;ratio + sync-&gt;offset);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     483 </span>                :<span class="lineNoCov">          0 :       mdl_create_syndataset (s, sync-&gt;name);</span>
+<span class="lineNum">     484 </span>                :            :     }
+<span class="lineNum">     485 </span>                :            :   }
+<span class="lineNum">     486 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="487"><span class="lineNum">     487 </span>                :            : </a>
+<span class="lineNum">     488 </span>                :            : // Destroys an element structure.
+<span class="lineNum">     489 </span>                :<span class="lineNoCov">          0 : static void mdl_free_element (struct mdl_element_t * e) {</span>
+<span class="lineNum">     490 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (e-&gt;name) free (e-&gt;name);</span>
+<span class="lineNum">     491 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (e-&gt;value) free (e-&gt;value);</span>
+<span class="lineNum">     492 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (e-&gt;attr) free (e-&gt;attr);</span>
+<span class="lineNum">     493 </span>                :<span class="lineNoCov">          0 :   free (e);</span>
+<span class="lineNum">     494 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="495"><span class="lineNum">     495 </span>                :            : </a>
+<span class="lineNum">     496 </span>                :            : // Destroys a datasize structure.
+<span class="lineNum">     497 </span>                :<span class="lineNoCov">          0 : static void mdl_free_datasize (struct mdl_datasize_t * d) {</span>
+<span class="lineNum">     498 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d-&gt;type) free (d-&gt;type);</span>
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 :   free (d);</span>
+<span class="lineNum">     500 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="501"><span class="lineNum">     501 </span>                :            : </a>
+<span class="lineNum">     502 </span>                :            : // Destroys a hypertable structure.
+<span class="lineNum">     503 </span>                :<span class="lineNoCov">          0 : static void mdl_free_hyptable (struct mdl_hyptable_t * h) {</span>
+<span class="lineNum">     504 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (h-&gt;name) free (h-&gt;name);</span>
+<span class="lineNum">     505 </span>                :            :   struct mdl_element_t * e, * next;
+<span class="lineNum">     506 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (e = h-&gt;data; e != NULL; e = next) {</span>
+<span class="lineNum">     507 </span>                :<span class="lineNoCov">          0 :     next = e-&gt;next;</span>
+<span class="lineNum">     508 </span>                :<span class="lineNoCov">          0 :     mdl_free_element (e);</span>
+<span class="lineNum">     509 </span>                :            :   }
+<span class="lineNum">     510 </span>                :<span class="lineNoCov">          0 :   free (h);</span>
+<span class="lineNum">     511 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="512"><span class="lineNum">     512 </span>                :            : </a>
+<span class="lineNum">     513 </span>                :            : // Destroys a table structure.
+<span class="lineNum">     514 </span>                :<span class="lineNoCov">          0 : static void mdl_free_table (struct mdl_table_t * t) {</span>
+<span class="lineNum">     515 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (t-&gt;name) free (t-&gt;name);</span>
+<span class="lineNum">     516 </span>                :            :   struct mdl_element_t * e, * next;
+<span class="lineNum">     517 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (e = t-&gt;data; e != NULL; e = next) {</span>
+<span class="lineNum">     518 </span>                :<span class="lineNoCov">          0 :     next = e-&gt;next;</span>
+<span class="lineNum">     519 </span>                :<span class="lineNoCov">          0 :     mdl_free_element (e);</span>
+<span class="lineNum">     520 </span>                :            :   }
+<span class="lineNum">     521 </span>                :<span class="lineNoCov">          0 :   free (t);</span>
+<span class="lineNum">     522 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="523"><span class="lineNum">     523 </span>                :            : </a>
+<span class="lineNum">     524 </span>                :            : // Destroys a dataset structure.
+<span class="lineNum">     525 </span>                :<span class="lineNoCov">          0 : static void mdl_free_dataset (struct mdl_dataset_t * d) {</span>
+<span class="lineNum">     526 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d-&gt;type1) free (d-&gt;type1);</span>
+<span class="lineNum">     527 </span>                :            :   struct mdl_point_t * p, * next;
+<span class="lineNum">     528 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (p = d-&gt;data1; p != NULL; p = next) {</span>
+<span class="lineNum">     529 </span>                :<span class="lineNoCov">          0 :     next = p-&gt;next;</span>
+<span class="lineNum">     530 </span>                :<span class="lineNoCov">          0 :     free (p);</span>
+<span class="lineNum">     531 </span>                :            :   }
+<span class="lineNum">     532 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d-&gt;type2) free (d-&gt;type2);</span>
+<span class="lineNum">     533 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (p = d-&gt;data2; p != NULL; p = next) {</span>
+<span class="lineNum">     534 </span>                :<span class="lineNoCov">          0 :     next = p-&gt;next;</span>
+<span class="lineNum">     535 </span>                :<span class="lineNoCov">          0 :     free (p);</span>
+<span class="lineNum">     536 </span>                :            :   }
+<span class="lineNum">     537 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d-&gt;dsize) mdl_free_datasize (d-&gt;dsize);</span>
+<span class="lineNum">     538 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="539"><span class="lineNum">     539 </span>                :            : </a>
+<span class="lineNum">     540 </span>                :            : // Destroys a data content structure.
+<span class="lineNum">     541 </span>                :<span class="lineNoCov">          0 : static void mdl_free_dcontent (struct mdl_dcontent_t * c) {</span>
+<span class="lineNum">     542 </span>     [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   switch (c-&gt;type) {</span>
+<span class="lineNum">     543 </span>                :<span class="lineNoCov">          0 :   case t_DATASET: mdl_free_dataset (c-&gt;data); break;</span>
+<span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 :   case t_HYPTABLE: mdl_free_hyptable (c-&gt;hyptable); break;</span>
+<span class="lineNum">     545 </span>                :            :   }
+<span class="lineNum">     546 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="547"><span class="lineNum">     547 </span>                :            : </a>
+<span class="lineNum">     548 </span>                :            : // Destroys a data structure.
+<span class="lineNum">     549 </span>                :<span class="lineNoCov">          0 : static void mdl_free_data (struct mdl_data_t * d) {</span>
+<span class="lineNum">     550 </span>                :            :   struct mdl_dcontent_t * c, * next;
+<span class="lineNum">     551 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (c = d-&gt;content; c != NULL; c = next) {</span>
+<span class="lineNum">     552 </span>                :<span class="lineNoCov">          0 :     next = c-&gt;next;</span>
+<span class="lineNum">     553 </span>                :<span class="lineNoCov">          0 :     mdl_free_dcontent (c);</span>
+<span class="lineNum">     554 </span>                :            :   }
+<span class="lineNum">     555 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     556 </span>                :            : 
+<span class="lineNum">     557 </span>                :            : // Forward declaration.
+<span class="lineNum">     558 </span>                :            : static void mdl_free_link (struct mdl_link_t *);
+<a name="559"><span class="lineNum">     559 </span>                :            : </a>
+<span class="lineNum">     560 </span>                :            : // Destroys a link content structure.
+<span class="lineNum">     561 </span>                :<span class="lineNoCov">          0 : static void mdl_free_lcontent (struct mdl_lcontent_t * c) {</span>
+<span class="lineNum">     562 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   switch (c-&gt;type) {</span>
+<span class="lineNum">     563 </span>                :<span class="lineNoCov">          0 :   case t_LINK: mdl_free_link (c-&gt;link); break;</span>
+<span class="lineNum">     564 </span>                :<span class="lineNoCov">          0 :   case t_DATA: mdl_free_data (c-&gt;data); break;</span>
+<span class="lineNum">     565 </span>                :<span class="lineNoCov">          0 :   case t_TABLE: mdl_free_table (c-&gt;table); break;</span>
+<span class="lineNum">     566 </span>                :            :   }
+<span class="lineNum">     567 </span>                :<span class="lineNoCov">          0 :   free (c);</span>
+<span class="lineNum">     568 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="569"><span class="lineNum">     569 </span>                :            : </a>
+<span class="lineNum">     570 </span>                :            : // Destroys a link structure.
+<span class="lineNum">     571 </span>                :<span class="lineNoCov">          0 : static void mdl_free_link (struct mdl_link_t * l) {</span>
+<span class="lineNum">     572 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (l-&gt;name) free (l-&gt;name);</span>
+<span class="lineNum">     573 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (l-&gt;type) free (l-&gt;type);</span>
+<span class="lineNum">     574 </span>                :            :   struct mdl_lcontent_t * c, * next;
+<span class="lineNum">     575 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (c = l-&gt;content; c != NULL; c = next) {</span>
+<span class="lineNum">     576 </span>                :<span class="lineNoCov">          0 :     next = c-&gt;next;</span>
+<span class="lineNum">     577 </span>                :<span class="lineNoCov">          0 :     mdl_free_lcontent (c);</span>
+<span class="lineNum">     578 </span>                :            :   }
+<span class="lineNum">     579 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="580"><span class="lineNum">     580 </span>                :            : </a>
+<span class="lineNum">     581 </span>                :            : // Destroys a sync structure.
+<span class="lineNum">     582 </span>                :<span class="lineNoCov">          0 : static void mdl_free_sync (struct mdl_sync_t * s) {</span>
+<span class="lineNum">     583 </span>                :            :   struct mdl_sync_t * next;
+<span class="lineNum">     584 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (; s != NULL; s = next) {</span>
+<span class="lineNum">     585 </span>                :<span class="lineNoCov">          0 :     next = s-&gt;next;</span>
+<span class="lineNum">     586 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (s-&gt;name) free (s-&gt;name);</span>
+<span class="lineNum">     587 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (s-&gt;master) free (s-&gt;master);</span>
+<span class="lineNum">     588 </span>                :<span class="lineNoCov">          0 :     free (s);</span>
+<span class="lineNum">     589 </span>                :            :   }
+<span class="lineNum">     590 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="591"><span class="lineNum">     591 </span>                :            : </a>
+<span class="lineNum">     592 </span>                :            : // Computes the dependent vector length for the given dependency list.
+<span class="lineNum">     593 </span>                :<span class="lineNoCov">          0 : static int mdl_get_depsize (strlist * deps) {</span>
+<span class="lineNum">     594 </span>                :            :   char * n;
+<span class="lineNum">     595 </span>                :            :   vector * v;
+<span class="lineNum">     596 </span>                :<span class="lineNoCov">          0 :   int res = 1;</span>
+<span class="lineNum">     597 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; deps-&gt;length (); i++) {</span>
+<span class="lineNum">     598 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if ((n = deps-&gt;get (i)) != NULL)</span>
+<span class="lineNum">     599 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if ((v = mdl_result-&gt;findDependency (n)) != NULL)</span>
+<span class="lineNum">     600 </span>                :<span class="lineNoCov">          0 :         res *= v-&gt;getSize ();</span>
+<span class="lineNum">     601 </span>                :            :   }
+<span class="lineNum">     602 </span>                :<span class="lineNoCov">          0 :   return res;</span>
+<span class="lineNum">     603 </span>                :            : }
+<span class="lineNum">     604 </span>                :            : 
+<a name="605"><span class="lineNum">     605 </span>                :            : // Checks the variable vector dependencies.  Makes them independent if</a>
+<span class="lineNum">     606 </span>                :            : // necessary.
+<span class="lineNum">     607 </span>                :<span class="lineNoCov">          0 : static void mdl_check_xform_deplen (void) {</span>
+<span class="lineNum">     608 </span>                :            :   vector * v, * next;
+<span class="lineNum">     609 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = mdl_result-&gt;getVariables (); v; v = next) {</span>
+<span class="lineNum">     610 </span>                :<span class="lineNoCov">          0 :     next = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">     611 </span>                :<span class="lineNoCov">          0 :     strlist * deps = v-&gt;getDependencies ();</span>
+<span class="lineNum">     612 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (deps-&gt;length () &lt;= 0) {</span>
+<span class="lineNum">     613 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       vector * d = new vector (*v);</span>
+<span class="lineNum">     614 </span>                :<span class="lineNoCov">          0 :       mdl_result-&gt;delVariable (v);</span>
+<span class="lineNum">     615 </span>                :<span class="lineNoCov">          0 :       mdl_result-&gt;addDependency (d);</span>
+<span class="lineNum">     616 </span>                :            :     }
+<span class="lineNum">     617 </span>                :            :   }
+<span class="lineNum">     618 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="619"><span class="lineNum">     619 </span>                :            : </a>
+<span class="lineNum">     620 </span>                :            : // Checks the variable vector dependencies and reduces them if necessary.
+<span class="lineNum">     621 </span>                :<span class="lineNoCov">          0 : static void mdl_check_xform_dep (void) {</span>
+<span class="lineNum">     622 </span>                :            :   vector * v, * d;
+<span class="lineNum">     623 </span>                :            :   strlist * deps;
+<span class="lineNum">     624 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = mdl_result-&gt;getVariables (); v; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     625 </span>                :<span class="lineNoCov">          0 :     deps = v-&gt;getDependencies ();</span>
+<span class="lineNum">     626 </span>                :<span class="lineNoCov">          0 :     int s = mdl_get_depsize (deps);</span>
+<span class="lineNum">     627 </span>                :            :     // dependencies differ from actual vector length
+<span class="lineNum">     628 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (v-&gt;getSize () != s) {</span>
+<span class="lineNum">     629 </span>                :<span class="lineNoCov">          0 :       int found = 0;</span>
+<span class="lineNum">     630 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (int i = 0; i &lt; deps-&gt;length (); i++) {</span>
+<span class="lineNum">     631 </span>                :            :         // find out a single dependency with the appropriate length
+<span class="lineNum">     632 </span>                :<span class="lineNoCov">          0 :         char * n = deps-&gt;get (i);</span>
+<span class="lineNum">     633 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (n != NULL) {</span>
+<span class="lineNum">     634 </span>                :<span class="lineNoCov">          0 :           d = mdl_result-&gt;findDependency (n);</span>
+<span class="lineNum">     635 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :           if (d != NULL &amp;&amp; v-&gt;getSize () == d-&gt;getSize ()) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     636 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :             strlist * dep = new strlist ();</span>
+<span class="lineNum">     637 </span>                :<span class="lineNoCov">          0 :             dep-&gt;add (n);</span>
+<span class="lineNum">     638 </span>                :<span class="lineNoCov">          0 :             v-&gt;setDependencies (dep);</span>
+<span class="lineNum">     639 </span>                :<span class="lineNoCov">          0 :             found++;</span>
+<span class="lineNum">     640 </span>                :<span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     641 </span>                :            :           }
+<span class="lineNum">     642 </span>                :            :         }
+<span class="lineNum">     643 </span>                :            :       }
+<span class="lineNum">     644 </span>                :            :       // if not found, then no dependency vector
+<span class="lineNum">     645 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (!found) v-&gt;setDependencies (new strlist ());</span>
+<span class="lineNum">     646 </span>                :            :     }
+<span class="lineNum">     647 </span>                :            :   }
+<span class="lineNum">     648 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="649"><span class="lineNum">     649 </span>                :            : </a>
+<span class="lineNum">     650 </span>                :            : // Checks the XFORM's in the model file
+<span class="lineNum">     651 </span>                :<span class="lineNoCov">          0 : static void mdl_check_xforms (void) {</span>
+<span class="lineNum">     652 </span>                :<span class="lineNoCov">          0 :   mdl_check_xform_dep ();</span>
+<span class="lineNum">     653 </span>                :<span class="lineNoCov">          0 :   mdl_check_xform_deplen ();</span>
+<span class="lineNum">     654 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     655 </span>                :            : 
+<a name="656"><span class="lineNum">     656 </span>                :            : /* This function is the overall MDL data checker.  It returns zero on</a>
+<span class="lineNum">     657 </span>                :            :    success, non-zero otherwise. */
+<span class="lineNum">     658 </span>                :<span class="lineNoCov">          0 : int mdl_check (void) {</span>
+<span class="lineNum">     659 </span>                :<span class="lineNoCov">          0 :   int errors = 0;</span>
+<span class="lineNum">     660 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   mdl_result = new dataset ();</span>
+<span class="lineNum">     661 </span>                :            :   struct mdl_link_t * root;
+<span class="lineNum">     662 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = mdl_root; root; root = root-&gt;next) {</span>
+<span class="lineNum">     663 </span>                :<span class="lineNoCov">          0 :     char * name = root-&gt;name;</span>
+<span class="lineNum">     664 </span>                :<span class="lineNoCov">          0 :     mdl_find_link (root, name);</span>
+<span class="lineNum">     665 </span>                :            :   }
+<span class="lineNum">     666 </span>                :<span class="lineNoCov">          0 :   mdl_find_syncdatasets (mdl_sync_root);</span>
+<span class="lineNum">     667 </span>                :<span class="lineNoCov">          0 :   mdl_check_xforms ();</span>
+<span class="lineNum">     668 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return errors ? -1 : 0;</span>
+<span class="lineNum">     669 </span>                :            : }
+<a name="670"><span class="lineNum">     670 </span>                :            : </a>
+<span class="lineNum">     671 </span>                :            : // Destroys data used by the MDL checker.
+<span class="lineNum">     672 </span>                :<span class="lineNoCov">          0 : void mdl_destroy (void) {</span>
+<span class="lineNum">     673 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_result != NULL) {</span>
+<span class="lineNum">     674 </span>                :            :     // delete associated dataset
+<span class="lineNum">     675 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete mdl_result;</span>
+<span class="lineNum">     676 </span>                :<span class="lineNoCov">          0 :     mdl_result = NULL;</span>
+<span class="lineNum">     677 </span>                :            :   }
+<span class="lineNum">     678 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_root != NULL) {</span>
+<span class="lineNum">     679 </span>                :            :     // release internal data structures
+<span class="lineNum">     680 </span>                :            :     struct mdl_link_t * root, * next;
+<span class="lineNum">     681 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (root = mdl_root; root; root = next) {</span>
+<span class="lineNum">     682 </span>                :<span class="lineNoCov">          0 :       next = root-&gt;next;</span>
+<span class="lineNum">     683 </span>                :<span class="lineNoCov">          0 :       mdl_free_link (root);</span>
+<span class="lineNum">     684 </span>                :            :     }
+<span class="lineNum">     685 </span>                :<span class="lineNoCov">          0 :     mdl_root = NULL;</span>
+<span class="lineNum">     686 </span>                :            :   }
+<span class="lineNum">     687 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_sync_root != NULL) {</span>
+<span class="lineNum">     688 </span>                :            :     // release internal sync structures
+<span class="lineNum">     689 </span>                :<span class="lineNoCov">          0 :     mdl_free_sync (mdl_sync_root);</span>
+<span class="lineNum">     690 </span>                :<span class="lineNoCov">          0 :     mdl_sync_root = NULL;</span>
+<span class="lineNum">     691 </span>                :            :   }
+<span class="lineNum">     692 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="693"><span class="lineNum">     693 </span>                :            : </a>
+<span class="lineNum">     694 </span>                :            : // Initializes the MDL checker.
+<span class="lineNum">     695 </span>                :<span class="lineNoCov">          0 : void mdl_init (void) {</span>
+<span class="lineNum">     696 </span>                :<span class="lineNoCov">          0 :   mdl_root = NULL;</span>
+<span class="lineNum">     697 </span>                :<span class="lineNoCov">          0 :   mdl_result = NULL;</span>
+<span class="lineNum">     698 </span>                :<span class="lineNoCov">          0 :   mdl_sync_root = NULL;</span>
+<span class="lineNum">     699 </span>                :<span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/devices/device.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/devices</a> - device.cpp<span style="font-size: 80%;"> (source / <a href="device.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">162</td>
+            <td class="headerCovTableEntry">185</td>
+            <td class="headerCovTableEntryMed">87.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryHi">91.7 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">88</td>
+            <td class="headerCovTableEntry">106</td>
+            <td class="headerCovTableEntryMed">83.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * device.cpp - device class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2005, 2006 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      34 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;node.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;circuit.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;net.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;constants.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;device.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;netdefs.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;resistor.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;capacitor.h&quot;
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :            : using namespace qucs;
+<span class="lineNum">      45 </span>                :            : using namespace qucs::device;
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :            : /* This function can be used to create an extra resistor circuit.  If
+<span class="lineNum">      48 </span>                :            :    the 'res' argument is NULL then the new circuit is created, the
+<span class="lineNum">      49 </span>                :            :    nodes get re-arranged and it is inserted into the given
+<span class="lineNum">      50 </span>                :            :    netlist. The given arguments can be explained as follows.
+<span class="lineNum">      51 </span>                :            :    base:     calling circuit (this)
+<span class="lineNum">      52 </span>                :            :    res:      additional resistor circuit (can be NULL)
+<span class="lineNum">      53 </span>                :            :    c:        name of the additional circuit
+<a name="54"><span class="lineNum">      54 </span>                :            :    n:        name of the inserted (internal) node</a>
+<span class="lineNum">      55 </span>                :            :    internal: number of new internal node (the original external node) */
+<span class="lineNum">      56 </span>                :<span class="lineCov">       6408 : circuit * device::splitResistor (circuit * base, circuit * res,</span>
+<span class="lineNum">      57 </span>                :            :                                  const char * c, const char * n,
+<span class="lineNum">      58 </span>                :            :                                  int internal) {
+<span class="lineNum">      59 </span>        [<span class="branchCov" title="Branch 0 was taken 60 times"> + </span><span class="branchCov" title="Branch 1 was taken 6348 times"> + </span>]:<span class="lineCov">       6408 :   if (res == NULL) {</span>
+<span class="lineNum">      60 </span>        [<span class="branchCov" title="Branch 1 was taken 60 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         60 :     res = new resistor ();</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">         60 :     char * name = circuit::createInternal (c, base-&gt;getName ());</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">         60 :     char * node = circuit::createInternal (n, base-&gt;getName ());</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">         60 :     res-&gt;setName (name);</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">         60 :     res-&gt;setNode (0, base-&gt;getNode(internal)-&gt;getName ());</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">         60 :     res-&gt;setNode (1, node, 1);</span>
+<span class="lineNum">      66 </span>                :<span class="lineCov">         60 :     base-&gt;getNet()-&gt;insertCircuit (res);</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">         60 :     free (name);</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">         60 :     free (node);</span>
+<span class="lineNum">      69 </span>                :            :   }
+<span class="lineNum">      70 </span>                :<span class="lineCov">       6408 :   base-&gt;setNode (internal, res-&gt;getNode(1)-&gt;getName (), 1);</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">       6408 :   return res;</span>
+<span class="lineNum">      72 </span>                :            : }
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :            : /* This function is the counterpart of the above routine.  It removes
+<a name="75"><span class="lineNum">      75 </span>                :            :    the resistor circuit from the netlist and re-assigns the original</a>
+<span class="lineNum">      76 </span>                :            :    node. */
+<span class="lineNum">      77 </span>                :<span class="lineCov">      20833 : void device::disableResistor (circuit * base, circuit * res, int internal) {</span>
+<span class="lineNum">      78 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 20833 times"> + </span>]:<span class="lineCov">      20833 :   if (res != NULL) {</span>
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 :     base-&gt;getNet()-&gt;removeCircuit (res, 0);</span>
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :     base-&gt;setNode (internal, res-&gt;getNode(1)-&gt;getName (), 0);</span>
+<span class="lineNum">      81 </span>                :            :   }
+<span class="lineNum">      82 </span>                :<span class="lineCov">      20833 : }</span>
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :            : /* This function creates a new capacitor circuit if the given one is
+<span class="lineNum">      85 </span>                :            :    not NULL.  The new circuit is connected between the given nodes and
+<a name="86"><span class="lineNum">      86 </span>                :            :    a name is applied based upon the parents (base) name and the given</a>
+<span class="lineNum">      87 </span>                :            :    name 'c'.  The circuit is then put into the netlist. */
+<span class="lineNum">      88 </span>                :<span class="lineNoCov">          0 : circuit * device::splitCapacitor (circuit * base, circuit * cap,</span>
+<span class="lineNum">      89 </span>                :            :                                   const char * c, node * n1, node * n2) {
+<span class="lineNum">      90 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (cap == NULL) {</span>
+<span class="lineNum">      91 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     cap = new capacitor ();</span>
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :     char * name = circuit::createInternal (c, base-&gt;getName ());</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :     cap-&gt;setName (name);</span>
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :     cap-&gt;setNode (0, n1-&gt;getName ());</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :     cap-&gt;setNode (1, n2-&gt;getName ());</span>
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 :     free (name);</span>
+<span class="lineNum">      97 </span>                :            :   }
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 :   base-&gt;getNet()-&gt;insertCircuit (cap);</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :   return cap;</span>
+<span class="lineNum">     100 </span>                :            : }
+<a name="101"><span class="lineNum">     101 </span>                :            : </a>
+<span class="lineNum">     102 </span>                :            : // The function removes the given capacitor circuit from the netlist.
+<span class="lineNum">     103 </span>                :<span class="lineCov">         36 : void device::disableCapacitor (circuit * base, circuit * cap) {</span>
+<span class="lineNum">     104 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 36 times"> + </span>]:<span class="lineCov">         36 :   if (cap != NULL) {</span>
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :     base-&gt;getNet()-&gt;removeCircuit (cap, 0);</span>
+<span class="lineNum">     106 </span>                :            :   }
+<span class="lineNum">     107 </span>                :<span class="lineCov">         36 : }</span>
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :            : /* This function checks whether the given circuit object exists and is
+<a name="110"><span class="lineNum">     110 </span>                :            :    chained within the current netlist.  It returns non-zero if so and</a>
+<span class="lineNum">     111 </span>                :            :    zero otherwise. */
+<span class="lineNum">     112 </span>                :<span class="lineCov">     114970 : int device::deviceEnabled (circuit * c) {</span>
+<span class="lineNum">     113 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 114970 times"> + </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineCov">     114970 :   if (c != NULL &amp;&amp; c-&gt;isEnabled ())</span>
+<span class="lineNum">         </span>        [<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 114970 times"> + </span>]
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :     return 1;</span>
+<span class="lineNum">     115 </span>                :<span class="lineCov">     114970 :   return 0;</span>
+<span class="lineNum">     116 </span>                :            : }
+<span class="lineNum">     117 </span>                :            : 
+<span class="lineNum">     118 </span>                :            : /* The function limits the forward pn-voltage for each DC iteration in
+<a name="119"><span class="lineNum">     119 </span>                :            :    order to avoid numerical overflows and thereby improve the</a>
+<span class="lineNum">     120 </span>                :            :    convergence. */
+<span class="lineNum">     121 </span>                :<span class="lineCov">     716574 : nr_double_t device::pnVoltage (nr_double_t Ud, nr_double_t Uold,</span>
+<span class="lineNum">     122 </span>                :            :                                nr_double_t Ut, nr_double_t Ucrit) {
+<span class="lineNum">     123 </span>                :            :   nr_double_t arg;
+<span class="lineNum">     124 </span>[<span class="branchCov" title="Branch 0 was taken 230351 times"> + </span><span class="branchCov" title="Branch 1 was taken 486223 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 35742 times"> + </span><span class="branchCov" title="Branch 3 was taken 194609 times"> + </span>]:<span class="lineCov">     716574 :   if (Ud &gt; Ucrit &amp;&amp; fabs (Ud - Uold) &gt; 2 * Ut) {</span>
+<span class="lineNum">     125 </span>        [<span class="branchCov" title="Branch 0 was taken 15821 times"> + </span><span class="branchCov" title="Branch 1 was taken 19921 times"> + </span>]:<span class="lineCov">      71484 :     if (Uold &gt; 0) {</span>
+<span class="lineNum">     126 </span>                :<span class="lineCov">      15821 :       arg = (Ud - Uold) / Ut;</span>
+<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 0 was taken 15799 times"> + </span><span class="branchCov" title="Branch 1 was taken 22 times"> + </span>]:<span class="lineCov">      15821 :       if (arg &gt; 0)</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">      15799 :         Ud = Uold + Ut * (2 + log (arg - 2));</span>
+<span class="lineNum">     129 </span>                :            :       else
+<span class="lineNum">     130 </span>                :<span class="lineCov">         22 :         Ud = Uold - Ut * (2 + log (2 - arg));</span>
+<span class="lineNum">     131 </span>                :            :     }
+<span class="lineNum">     132 </span>        [<span class="branchCov" title="Branch 0 was taken 1432 times"> + </span><span class="branchCov" title="Branch 1 was taken 18489 times"> + </span>]:<span class="lineCov">      19921 :     else Ud = Uold &lt; 0 ? Ut * log (Ud / Ut) : Ucrit;</span>
+<span class="lineNum">     133 </span>                :            :   }
+<span class="lineNum">     134 </span>                :            :   else {
+<span class="lineNum">     135 </span>        [<span class="branchCov" title="Branch 0 was taken 270644 times"> + </span><span class="branchCov" title="Branch 1 was taken 410188 times"> + </span>]:<span class="lineCov">     680832 :     if (Ud &lt; 0) {</span>
+<span class="lineNum">     136 </span>        [<span class="branchCov" title="Branch 0 was taken 3920 times"> + </span><span class="branchCov" title="Branch 1 was taken 266724 times"> + </span>]:<span class="lineCov">     270644 :       arg = Uold &gt; 0 ? -1 - Uold : 2 * Uold - 1;</span>
+<span class="lineNum">     137 </span>        [<span class="branchCov" title="Branch 0 was taken 8441 times"> + </span><span class="branchCov" title="Branch 1 was taken 262203 times"> + </span>]:<span class="lineCov">     270644 :       if (Ud &lt; arg) Ud = arg;</span>
+<span class="lineNum">     138 </span>                :            :     }
+<span class="lineNum">     139 </span>                :            :   }
+<span class="lineNum">     140 </span>                :<span class="lineCov">     716574 :   return Ud;</span>
+<span class="lineNum">     141 </span>                :            : }
+<a name="142"><span class="lineNum">     142 </span>                :            : </a>
+<span class="lineNum">     143 </span>                :            : // Computes current and its derivative for a MOS pn-junction.
+<span class="lineNum">     144 </span>                :<span class="lineCov">     167290 : void device::pnJunctionMOS (nr_double_t Upn, nr_double_t Iss, nr_double_t Ute,</span>
+<span class="lineNum">     145 </span>                :            :                             nr_double_t&amp; I, nr_double_t&amp; g) {
+<span class="lineNum">     146 </span>        [<span class="branchCov" title="Branch 0 was taken 157255 times"> + </span><span class="branchCov" title="Branch 1 was taken 10035 times"> + </span>]:<span class="lineCov">     167290 :   if (Upn &lt;= 0) {</span>
+<span class="lineNum">     147 </span>                :<span class="lineCov">     157255 :     g = Iss / Ute;</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">     157255 :     I = g * Upn;</span>
+<span class="lineNum">     149 </span>                :            :   }
+<span class="lineNum">     150 </span>                :            :   else {
+<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 10035 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      10035 :     nr_double_t e = exp (MIN (Upn / Ute, 709));</span>
+<span class="lineNum">     152 </span>                :<span class="lineCov">      10035 :     I = Iss * (e - 1);</span>
+<span class="lineNum">     153 </span>                :<span class="lineCov">      10035 :     g = Iss * e / Ute;</span>
+<span class="lineNum">     154 </span>                :            :   }
+<span class="lineNum">     155 </span>                :<span class="lineCov">     167290 : }</span>
+<a name="156"><span class="lineNum">     156 </span>                :            : </a>
+<span class="lineNum">     157 </span>                :            : // Computes current and its derivative for a bipolar pn-junction.
+<span class="lineNum">     158 </span>                :<span class="lineCov">     505940 : void device::pnJunctionBIP (nr_double_t Upn, nr_double_t Iss, nr_double_t Ute,</span>
+<span class="lineNum">     159 </span>                :            :                             nr_double_t&amp; I, nr_double_t&amp; g) {
+<span class="lineNum">     160 </span>        [<span class="branchCov" title="Branch 0 was taken 153558 times"> + </span><span class="branchCov" title="Branch 1 was taken 352382 times"> + </span>]:<span class="lineCov">     505940 :   if (Upn &lt; -3 * Ute) {</span>
+<span class="lineNum">     161 </span>                :<span class="lineCov">     153558 :     nr_double_t a = 3 * Ute / (Upn * M_E);</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">     153558 :     a = cubic (a);</span>
+<span class="lineNum">     163 </span>                :<span class="lineCov">     153558 :     I = -Iss * (1 + a);</span>
+<span class="lineNum">     164 </span>                :<span class="lineCov">     153558 :     g = +Iss * 3 * a / Upn;</span>
+<span class="lineNum">     165 </span>                :            :   }
+<span class="lineNum">     166 </span>                :            :   else {
+<span class="lineNum">     167 </span>        [<span class="branchCov" title="Branch 0 was taken 352382 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     352382 :     nr_double_t e = exp (MIN (Upn / Ute, 709));</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">     352382 :     I = Iss * (e - 1);</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">     352382 :     g = Iss * e / Ute;</span>
+<span class="lineNum">     170 </span>                :            :   }
+<span class="lineNum">     171 </span>                :<span class="lineCov">     505940 : }</span>
+<span class="lineNum">     172 </span>                :            : 
+<a name="173"><span class="lineNum">     173 </span>                :            : // The function computes the exponential pn-junction current.</a>
+<span class="lineNum">     174 </span>                :            : nr_double_t
+<span class="lineNum">     175 </span>                :<span class="lineCov">     478258 : device::pnCurrent (nr_double_t Upn, nr_double_t Iss, nr_double_t Ute) {</span>
+<span class="lineNum">     176 </span>        [<span class="branchCov" title="Branch 0 was taken 478258 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     478258 :   return Iss * (exp (MIN (Upn / Ute, 709)) - 1);</span>
+<span class="lineNum">     177 </span>                :            : }
+<span class="lineNum">     178 </span>                :            : 
+<a name="179"><span class="lineNum">     179 </span>                :            : // The function computes the exponential pn-junction current's derivative.</a>
+<span class="lineNum">     180 </span>                :            : nr_double_t
+<span class="lineNum">     181 </span>                :<span class="lineCov">     478258 : device::pnConductance (nr_double_t Upn, nr_double_t Iss, nr_double_t Ute) {</span>
+<span class="lineNum">     182 </span>        [<span class="branchCov" title="Branch 0 was taken 478258 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     478258 :   return Iss * exp (MIN (Upn / Ute, 709)) / Ute;</span>
+<span class="lineNum">     183 </span>                :            : }
+<span class="lineNum">     184 </span>                :            : 
+<a name="185"><span class="lineNum">     185 </span>                :            : // Computes pn-junction depletion capacitance.</a>
+<span class="lineNum">     186 </span>                :            : nr_double_t
+<span class="lineNum">     187 </span>                :<span class="lineCov">     822537 : device::pnCapacitance (nr_double_t Uj, nr_double_t Cj, nr_double_t Vj,</span>
+<span class="lineNum">     188 </span>                :            :                        nr_double_t Mj, nr_double_t Fc) {
+<span class="lineNum">     189 </span>                :            :   nr_double_t c;
+<span class="lineNum">     190 </span>        [<span class="branchCov" title="Branch 0 was taken 607067 times"> + </span><span class="branchCov" title="Branch 1 was taken 215470 times"> + </span>]:<span class="lineCov">     822537 :   if (Uj &lt;= Fc * Vj)</span>
+<span class="lineNum">     191 </span>                :<span class="lineCov">     607067 :     c = Cj * exp (-Mj * log (1 - Uj / Vj));</span>
+<span class="lineNum">     192 </span>                :            :   else
+<span class="lineNum">     193 </span>                :<span class="lineCov">     215470 :     c = Cj * exp (-Mj * log (1 - Fc)) *</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">     215470 :       (1 + Mj * (Uj - Fc * Vj) / Vj / (1 - Fc));</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">     822537 :   return c;</span>
+<span class="lineNum">     196 </span>                :            : }
+<a name="197"><span class="lineNum">     197 </span>                :            : </a>
+<span class="lineNum">     198 </span>                :            : // Computes pn-junction depletion charge.
+<span class="lineNum">     199 </span>                :<span class="lineCov">     822537 : nr_double_t device::pnCharge (nr_double_t Uj, nr_double_t Cj, nr_double_t Vj,</span>
+<span class="lineNum">     200 </span>                :            :                               nr_double_t Mj, nr_double_t Fc) {
+<span class="lineNum">     201 </span>                :            :   nr_double_t q, a, b;
+<span class="lineNum">     202 </span>        [<span class="branchCov" title="Branch 0 was taken 607067 times"> + </span><span class="branchCov" title="Branch 1 was taken 215470 times"> + </span>]:<span class="lineCov">     822537 :   if (Uj &lt;= Fc * Vj) {</span>
+<span class="lineNum">     203 </span>                :<span class="lineCov">     607067 :     a = 1 - Uj / Vj;</span>
+<span class="lineNum">     204 </span>                :<span class="lineCov">     607067 :     b = exp ((1 - Mj) * log (a));</span>
+<span class="lineNum">     205 </span>                :<span class="lineCov">     607067 :     q = Cj * Vj / (1 - Mj) * (1 - b);</span>
+<span class="lineNum">     206 </span>                :            :   }
+<span class="lineNum">     207 </span>                :            :   else {
+<span class="lineNum">     208 </span>                :            : #if 0
+<span class="lineNum">     209 </span>                :            :     a = 1 - Fc;
+<span class="lineNum">     210 </span>                :            :     b = exp ((1 - Mj) * log (a));
+<span class="lineNum">     211 </span>                :            :     a = exp ((1 + Mj) * log (a));
+<span class="lineNum">     212 </span>                :            :     nr_double_t c = 1 - Fc * (1 + Mj);
+<span class="lineNum">     213 </span>                :            :     nr_double_t d = Fc * Vj;
+<span class="lineNum">     214 </span>                :            :     nr_double_t e = Vj * (1 - b) / (1 - Mj);
+<span class="lineNum">     215 </span>                :            :     q = Cj * (e + (c * (Uj - d) + Mj / 2 / Vj * (sqr (Uj) - sqr (d))) / a);
+<span class="lineNum">     216 </span>                :            : #else /* this variant is numerically more stable */
+<span class="lineNum">     217 </span>                :<span class="lineCov">     215470 :     a = 1 - Fc;</span>
+<span class="lineNum">     218 </span>                :<span class="lineCov">     215470 :     b = exp (-Mj * log (a));</span>
+<span class="lineNum">     219 </span>                :<span class="lineCov">     215470 :     nr_double_t f = Fc * Vj;</span>
+<span class="lineNum">     220 </span>                :<span class="lineCov">     215470 :     nr_double_t c = Cj * (1 - Fc * (1 + Mj)) * b / a;</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">     215470 :     nr_double_t d = Cj * Mj * b / a / Vj;</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">     215470 :     nr_double_t e = Cj * Vj * (1 - a * b) / (1 - Mj) - d / 2 * f * f - f * c;</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">     215470 :     q = e + Uj * (c + Uj * d / 2);</span>
+<span class="lineNum">     224 </span>                :            : #endif
+<span class="lineNum">     225 </span>                :            :   }
+<span class="lineNum">     226 </span>                :<span class="lineCov">     822537 :   return q;</span>
+<span class="lineNum">     227 </span>                :            : }
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>                :            : /* This function computes the pn-junction depletion capacitance with
+<a name="230"><span class="lineNum">     230 </span>                :            :    no linearization factor given. */</a>
+<span class="lineNum">     231 </span>                :            : nr_double_t
+<span class="lineNum">     232 </span>                :<span class="lineCov">      71116 : device::pnCapacitance (nr_double_t Uj, nr_double_t Cj, nr_double_t Vj,</span>
+<span class="lineNum">     233 </span>                :            :                        nr_double_t Mj) {
+<span class="lineNum">     234 </span>                :            :   nr_double_t c;
+<span class="lineNum">     235 </span>        [<span class="branchCov" title="Branch 0 was taken 54098 times"> + </span><span class="branchCov" title="Branch 1 was taken 17018 times"> + </span>]:<span class="lineCov">      71116 :   if (Uj &lt;= 0)</span>
+<span class="lineNum">     236 </span>                :<span class="lineCov">      54098 :     c = Cj * exp (-Mj * log (1 - Uj / Vj));</span>
+<span class="lineNum">     237 </span>                :            :   else
+<span class="lineNum">     238 </span>                :<span class="lineCov">      17018 :     c = Cj * (1 + Mj * Uj / Vj);</span>
+<span class="lineNum">     239 </span>                :<span class="lineCov">      71116 :   return c;</span>
+<span class="lineNum">     240 </span>                :            : }
+<span class="lineNum">     241 </span>                :            : 
+<a name="242"><span class="lineNum">     242 </span>                :            : /* This function computes the pn-junction depletion charge with no</a>
+<span class="lineNum">     243 </span>                :            :    linearization factor given. */
+<span class="lineNum">     244 </span>                :<span class="lineCov">      71116 : nr_double_t device::pnCharge (nr_double_t Uj, nr_double_t Cj, nr_double_t Vj,</span>
+<span class="lineNum">     245 </span>                :            :                               nr_double_t Mj) {
+<span class="lineNum">     246 </span>                :            :   nr_double_t q;
+<span class="lineNum">     247 </span>        [<span class="branchCov" title="Branch 0 was taken 54098 times"> + </span><span class="branchCov" title="Branch 1 was taken 17018 times"> + </span>]:<span class="lineCov">      71116 :   if (Uj &lt;= 0)</span>
+<span class="lineNum">     248 </span>                :<span class="lineCov">      54098 :     q = Cj * Vj / (1 - Mj) * (1 - exp ((1 - Mj) * log (1 - Uj / Vj)));</span>
+<span class="lineNum">     249 </span>                :            :   else
+<span class="lineNum">     250 </span>                :<span class="lineCov">      17018 :     q = Cj * Uj * (1 + Mj * Uj / 2 / Vj);</span>
+<span class="lineNum">     251 </span>                :<span class="lineCov">      71116 :   return q;</span>
+<span class="lineNum">     252 </span>                :            : }
+<a name="253"><span class="lineNum">     253 </span>                :            : </a>
+<span class="lineNum">     254 </span>                :            : // Compute critical voltage of pn-junction.
+<span class="lineNum">     255 </span>                :<span class="lineCov">     800219 : nr_double_t device::pnCriticalVoltage (nr_double_t Iss, nr_double_t Ute) {</span>
+<span class="lineNum">     256 </span>                :<span class="lineCov">     800219 :   return Ute * log (Ute / M_SQRT2 / Iss);</span>
+<span class="lineNum">     257 </span>                :            : }
+<span class="lineNum">     258 </span>                :            : 
+<span class="lineNum">     259 </span>                :            : /* The function limits the forward fet-voltage for each DC iteration
+<span class="lineNum">     260 </span>                :            :    in order to avoid numerical overflows and thereby improve the
+<a name="261"><span class="lineNum">     261 </span>                :            :    convergence. */</a>
+<span class="lineNum">     262 </span>                :            : nr_double_t
+<span class="lineNum">     263 </span>                :<span class="lineCov">      83645 : device::fetVoltage (nr_double_t Ufet, nr_double_t Uold, nr_double_t Uth) {</span>
+<span class="lineNum">     264 </span>                :<span class="lineCov">      83645 :   nr_double_t Utsthi = fabs (2 * (Uold - Uth)) + 2.0;</span>
+<span class="lineNum">     265 </span>                :<span class="lineCov">      83645 :   nr_double_t Utstlo = Utsthi / 2;</span>
+<span class="lineNum">     266 </span>                :<span class="lineCov">      83645 :   nr_double_t Utox   = Uth + 3.5;</span>
+<span class="lineNum">     267 </span>                :<span class="lineCov">      83645 :   nr_double_t DeltaU = Ufet - Uold;</span>
+<span class="lineNum">     268 </span>                :            : 
+<span class="lineNum">     269 </span>        [<span class="branchCov" title="Branch 0 was taken 65343 times"> + </span><span class="branchCov" title="Branch 1 was taken 18302 times"> + </span>]:<span class="lineCov">      83645 :   if (Uold &gt;= Uth) { /* FET is on */</span>
+<span class="lineNum">     270 </span>        [<span class="branchCov" title="Branch 0 was taken 20877 times"> + </span><span class="branchCov" title="Branch 1 was taken 44466 times"> + </span>]:<span class="lineCov">      65343 :     if (Uold &gt;= Utox) {</span>
+<span class="lineNum">     271 </span>        [<span class="branchCov" title="Branch 0 was taken 11158 times"> + </span><span class="branchCov" title="Branch 1 was taken 9719 times"> + </span>]:<span class="lineCov">      20877 :       if (DeltaU &lt;= 0) { /* going off */</span>
+<span class="lineNum">     272 </span>        [<span class="branchCov" title="Branch 0 was taken 10450 times"> + </span><span class="branchCov" title="Branch 1 was taken 708 times"> + </span>]:<span class="lineCov">      11158 :         if (Ufet &gt;= Utox) {</span>
+<span class="lineNum">     273 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 10450 times"> + </span>]:<span class="lineCov">      10450 :           if (-DeltaU &gt; Utstlo) {</span>
+<span class="lineNum">     274 </span>                :<span class="lineNoCov">          0 :             Ufet = Uold - Utstlo;</span>
+<span class="lineNum">     275 </span>                :            :           }
+<span class="lineNum">     276 </span>                :            :         } else {
+<span class="lineNum">     277 </span>        [<span class="branchCov" title="Branch 0 was taken 705 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">        708 :           Ufet = MAX (Ufet, Uth + 2);</span>
+<span class="lineNum">     278 </span>                :            :         }
+<span class="lineNum">     279 </span>                :            :       } else { /* staying on */
+<span class="lineNum">     280 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 9719 times"> + </span>]:<span class="lineCov">       9719 :         if (DeltaU &gt;= Utsthi) {</span>
+<span class="lineNum">     281 </span>                :<span class="lineNoCov">          0 :           Ufet = Uold + Utsthi;</span>
+<span class="lineNum">     282 </span>                :            :         }
+<span class="lineNum">     283 </span>                :            :       }
+<span class="lineNum">     284 </span>                :            :     } else { /* middle region */
+<span class="lineNum">     285 </span>        [<span class="branchCov" title="Branch 0 was taken 26141 times"> + </span><span class="branchCov" title="Branch 1 was taken 18325 times"> + </span>]:<span class="lineCov">      44466 :       if (DeltaU &lt;= 0) { /* decreasing */</span>
+<span class="lineNum">     286 </span>        [<span class="branchCov" title="Branch 0 was taken 26140 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">      26141 :         Ufet = MAX (Ufet, Uth - 0.5);</span>
+<span class="lineNum">     287 </span>                :            :       } else { /* increasing */
+<span class="lineNum">     288 </span>        [<span class="branchCov" title="Branch 0 was taken 17304 times"> + </span><span class="branchCov" title="Branch 1 was taken 1021 times"> + </span>]:<span class="lineCov">      18325 :         Ufet = MIN (Ufet, Uth + 4);</span>
+<span class="lineNum">     289 </span>                :            :       }
+<span class="lineNum">     290 </span>                :            :     }
+<span class="lineNum">     291 </span>                :            :   } else { /* FET is off */
+<span class="lineNum">     292 </span>        [<span class="branchCov" title="Branch 0 was taken 9550 times"> + </span><span class="branchCov" title="Branch 1 was taken 8752 times"> + </span>]:<span class="lineCov">      18302 :     if (DeltaU &lt;= 0) { /* staying off */</span>
+<span class="lineNum">     293 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 9548 times"> + </span>]:<span class="lineCov">       9550 :       if (-DeltaU &gt; Utsthi) {</span>
+<span class="lineNum">     294 </span>                :<span class="lineCov">          2 :         Ufet = Uold - Utsthi;</span>
+<span class="lineNum">     295 </span>                :            :       }
+<span class="lineNum">     296 </span>                :            :     } else { /* going on */
+<span class="lineNum">     297 </span>        [<span class="branchCov" title="Branch 0 was taken 7706 times"> + </span><span class="branchCov" title="Branch 1 was taken 1046 times"> + </span>]:<span class="lineCov">       8752 :       if (Ufet &lt;= Uth + 0.5) {</span>
+<span class="lineNum">     298 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 7706 times"> + </span>]:<span class="lineCov">       7706 :         if (DeltaU &gt; Utstlo) {</span>
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 :           Ufet = Uold + Utstlo;</span>
+<span class="lineNum">     300 </span>                :            :         }
+<span class="lineNum">     301 </span>                :            :       } else {
+<span class="lineNum">     302 </span>                :<span class="lineCov">       1046 :         Ufet = Uth + 0.5;</span>
+<span class="lineNum">     303 </span>                :            :       }
+<span class="lineNum">     304 </span>                :            :     }
+<span class="lineNum">     305 </span>                :            :   }
+<span class="lineNum">     306 </span>                :<span class="lineCov">      83645 :   return Ufet;</span>
+<span class="lineNum">     307 </span>                :            : }
+<span class="lineNum">     308 </span>                :            : 
+<span class="lineNum">     309 </span>                :            : /* The function limits the drain-source voltage for each DC iteration
+<a name="310"><span class="lineNum">     310 </span>                :            :    in order to avoid numerical overflows and thereby improve the</a>
+<span class="lineNum">     311 </span>                :            :    convergence. */
+<span class="lineNum">     312 </span>                :<span class="lineCov">      83645 : nr_double_t device::fetVoltageDS (nr_double_t Ufet, nr_double_t Uold) {</span>
+<span class="lineNum">     313 </span>        [<span class="branchCov" title="Branch 0 was taken 34612 times"> + </span><span class="branchCov" title="Branch 1 was taken 49033 times"> + </span>]:<span class="lineCov">      83645 :   if (Uold &gt;= 3.5) {</span>
+<span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 15100 times"> + </span><span class="branchCov" title="Branch 1 was taken 19512 times"> + </span>]:<span class="lineCov">      34612 :     if (Ufet &gt; Uold) {</span>
+<span class="lineNum">     315 </span>        [<span class="branchCov" title="Branch 0 was taken 15099 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">      15100 :       Ufet = MIN (Ufet, 3 * Uold + 2);</span>
+<span class="lineNum">     316 </span>        [<span class="branchCov" title="Branch 0 was taken 171 times"> + </span><span class="branchCov" title="Branch 1 was taken 19341 times"> + </span>]:<span class="lineCov">      19512 :     } else if (Ufet &lt; 3.5) {</span>
+<span class="lineNum">     317 </span>        [<span class="branchCov" title="Branch 0 was taken 165 times"> + </span><span class="branchCov" title="Branch 1 was taken 6 times"> + </span>]:<span class="lineCov">        171 :       Ufet = MAX (Ufet, 2);</span>
+<span class="lineNum">     318 </span>                :            :     }
+<span class="lineNum">     319 </span>                :            :   } else {
+<span class="lineNum">     320 </span>        [<span class="branchCov" title="Branch 0 was taken 25754 times"> + </span><span class="branchCov" title="Branch 1 was taken 23279 times"> + </span>]:<span class="lineCov">      49033 :     if (Ufet &gt; Uold) {</span>
+<span class="lineNum">     321 </span>        [<span class="branchCov" title="Branch 0 was taken 25012 times"> + </span><span class="branchCov" title="Branch 1 was taken 742 times"> + </span>]:<span class="lineCov">      25754 :       Ufet = MIN (Ufet, 4);</span>
+<span class="lineNum">     322 </span>                :            :     } else {
+<span class="lineNum">     323 </span>        [<span class="branchCov" title="Branch 0 was taken 23229 times"> + </span><span class="branchCov" title="Branch 1 was taken 50 times"> + </span>]:<span class="lineCov">      23279 :       Ufet = MAX (Ufet, -0.5);</span>
+<span class="lineNum">     324 </span>                :            :     }
+<span class="lineNum">     325 </span>                :            :   }
+<span class="lineNum">     326 </span>                :<span class="lineCov">      83645 :   return Ufet;</span>
+<span class="lineNum">     327 </span>                :            : }
+<span class="lineNum">     328 </span>                :            : 
+<span class="lineNum">     329 </span>                :            : /* This function calculates the overlap capacitance for MOS based upon
+<span class="lineNum">     330 </span>                :            :    the given voltages, surface potential and the zero-bias oxide
+<a name="331"><span class="lineNum">     331 </span>                :            :    capacitance. */</a>
+<span class="lineNum">     332 </span>                :            : void
+<span class="lineNum">     333 </span>                :<span class="lineCov">      83504 : device::fetCapacitanceMeyer (nr_double_t Ugs, nr_double_t Ugd, nr_double_t Uth,</span>
+<span class="lineNum">     334 </span>                :            :                              nr_double_t Udsat, nr_double_t Phi,
+<span class="lineNum">     335 </span>                :            :                              nr_double_t Cox, nr_double_t&amp; Cgs,
+<span class="lineNum">     336 </span>                :            :                              nr_double_t&amp; Cgd, nr_double_t&amp; Cgb) {
+<span class="lineNum">     337 </span>                :            : 
+<span class="lineNum">     338 </span>                :<span class="lineCov">      83504 :   nr_double_t Utst = Ugs - Uth;</span>
+<span class="lineNum">     339 </span>        [<span class="branchCov" title="Branch 0 was taken 14965 times"> + </span><span class="branchCov" title="Branch 1 was taken 68539 times"> + </span>]:<span class="lineCov">      83504 :   if (Utst &lt;= -Phi) { // cutoff regions</span>
+<span class="lineNum">     340 </span>                :<span class="lineCov">      14965 :     Cgb = Cox;</span>
+<span class="lineNum">     341 </span>                :<span class="lineCov">      14965 :     Cgs = 0;</span>
+<span class="lineNum">     342 </span>                :<span class="lineCov">      14965 :     Cgd = 0;</span>
+<span class="lineNum">     343 </span>        [<span class="branchCov" title="Branch 0 was taken 1443 times"> + </span><span class="branchCov" title="Branch 1 was taken 67096 times"> + </span>]:<span class="lineCov">      68539 :   } else if (Utst &lt;= -Phi / 2) {</span>
+<span class="lineNum">     344 </span>                :<span class="lineCov">       1443 :     Cgb = -Utst * Cox / Phi;</span>
+<span class="lineNum">     345 </span>                :<span class="lineCov">       1443 :     Cgs = 0;</span>
+<span class="lineNum">     346 </span>                :<span class="lineCov">       1443 :     Cgd = 0;</span>
+<span class="lineNum">     347 </span>        [<span class="branchCov" title="Branch 0 was taken 863 times"> + </span><span class="branchCov" title="Branch 1 was taken 66233 times"> + </span>]:<span class="lineCov">      67096 :   } else if (Utst &lt;= 0) { // depletion region</span>
+<span class="lineNum">     348 </span>                :<span class="lineCov">        863 :     Cgb = -Utst * Cox / Phi;</span>
+<span class="lineNum">     349 </span>                :<span class="lineCov">        863 :     Cgs = Utst * Cox * 4 / 3 / Phi + 2 * Cox / 3;</span>
+<span class="lineNum">     350 </span>                :<span class="lineCov">        863 :     Cgd = 0;</span>
+<span class="lineNum">     351 </span>                :            :   } else {
+<span class="lineNum">     352 </span>                :<span class="lineCov">      66233 :     Cgb = 0;</span>
+<span class="lineNum">     353 </span>                :<span class="lineCov">      66233 :     nr_double_t Uds = Ugs - Ugd;</span>
+<span class="lineNum">     354 </span>        [<span class="branchCov" title="Branch 0 was taken 46319 times"> + </span><span class="branchCov" title="Branch 1 was taken 19914 times"> + </span>]:<span class="lineCov">      66233 :     if (Udsat &lt;= Uds) { // saturation region</span>
+<span class="lineNum">     355 </span>                :<span class="lineCov">      46319 :       Cgs = 2 * Cox / 3;</span>
+<span class="lineNum">     356 </span>                :<span class="lineCov">      46319 :       Cgd = 0;</span>
+<span class="lineNum">     357 </span>                :            :     } else { // linear region
+<span class="lineNum">     358 </span>                :<span class="lineCov">      19914 :       nr_double_t Sqr1 = sqr (Udsat - Uds);</span>
+<span class="lineNum">     359 </span>                :<span class="lineCov">      19914 :       nr_double_t Sqr2 = sqr (2 * Udsat - Uds);</span>
+<span class="lineNum">     360 </span>                :<span class="lineCov">      19914 :       Cgs = Cox * (1 - Sqr1 / Sqr2) * 2 / 3;</span>
+<span class="lineNum">     361 </span>                :<span class="lineCov">      19914 :       Cgd = Cox * (1 - Udsat * Udsat / Sqr2) * 2 / 3;</span>
+<span class="lineNum">     362 </span>                :            :     }
+<span class="lineNum">     363 </span>                :            :   }
+<span class="lineNum">     364 </span>                :<span class="lineCov">      83504 : }</span>
+<a name="365"><span class="lineNum">     365 </span>                :            : </a>
+<span class="lineNum">     366 </span>                :            : // Computes temperature dependency of energy bandgap.
+<span class="lineNum">     367 </span>                :<span class="lineCov">      54480 : nr_double_t device::Egap (nr_double_t T, nr_double_t Eg0) {</span>
+<span class="lineNum">     368 </span>                :<span class="lineCov">      54480 :   nr_double_t a = 7.02e-4;</span>
+<span class="lineNum">     369 </span>                :<span class="lineCov">      54480 :   nr_double_t b = 1108;</span>
+<span class="lineNum">     370 </span>                :<span class="lineCov">      54480 :   return Eg0 - (a * sqr (T)) / (T + b);</span>
+<span class="lineNum">     371 </span>                :            : }
+<a name="372"><span class="lineNum">     372 </span>                :            : </a>
+<span class="lineNum">     373 </span>                :            : // Computes temperature dependency of intrinsic density.
+<span class="lineNum">     374 </span>                :<span class="lineNoCov">          0 : nr_double_t device::intrinsicDensity (nr_double_t T, nr_double_t Eg0) {</span>
+<span class="lineNum">     375 </span>                :<span class="lineNoCov">          0 :   nr_double_t TR = 300.00;</span>
+<span class="lineNum">     376 </span>                :<span class="lineNoCov">          0 :   nr_double_t E1 = Egap (TR, Eg0);</span>
+<span class="lineNum">     377 </span>                :<span class="lineNoCov">          0 :   nr_double_t E2 = Egap (T, Eg0);</span>
+<span class="lineNum">     378 </span>                :<span class="lineNoCov">          0 :   nr_double_t NI = NiSi / 1e6;</span>
+<span class="lineNum">     379 </span>                :<span class="lineNoCov">          0 :   return  NI * exp (1.5 * log (T / TR) + (E1 / TR - E2 / T) / kBoverQ / 2);</span>
+<span class="lineNum">     380 </span>                :            : }
+<span class="lineNum">     381 </span>                :            : 
+<a name="382"><span class="lineNum">     382 </span>                :            : // Calculates temperature dependence for saturation current.</a>
+<span class="lineNum">     383 </span>                :            : nr_double_t
+<span class="lineNum">     384 </span>                :<span class="lineCov">      29308 : device::pnCurrent_T (nr_double_t T1, nr_double_t T2, nr_double_t Is,</span>
+<span class="lineNum">     385 </span>                :            :                      nr_double_t Eg, nr_double_t N,  nr_double_t Xti) {
+<span class="lineNum">     386 </span>                :            :   nr_double_t Vt, TR;
+<span class="lineNum">     387 </span>                :<span class="lineCov">      29308 :   TR = T2 / T1;</span>
+<span class="lineNum">     388 </span>                :<span class="lineCov">      29308 :   Vt = T2 * kBoverQ;</span>
+<span class="lineNum">     389 </span>                :<span class="lineCov">      29308 :   return Is * exp (Xti / N * log (TR) - Eg / N / Vt * (1 - TR));</span>
+<span class="lineNum">     390 </span>                :            : }
+<span class="lineNum">     391 </span>                :            : 
+<a name="392"><span class="lineNum">     392 </span>                :            : // Calculates temperature dependence for junction potential.</a>
+<span class="lineNum">     393 </span>                :            : nr_double_t
+<span class="lineNum">     394 </span>                :<span class="lineCov">      27209 : device::pnPotential_T (nr_double_t T1, nr_double_t T2, nr_double_t Vj,</span>
+<span class="lineNum">     395 </span>                :            :                        nr_double_t Eg0) {
+<span class="lineNum">     396 </span>                :            :   nr_double_t Vt, TR, E1, E2;
+<span class="lineNum">     397 </span>                :<span class="lineCov">      27209 :   TR = T2 / T1;</span>
+<span class="lineNum">     398 </span>                :<span class="lineCov">      27209 :   E1 = Egap (T1, Eg0);</span>
+<span class="lineNum">     399 </span>                :<span class="lineCov">      27209 :   E2 = Egap (T2, Eg0);</span>
+<span class="lineNum">     400 </span>                :<span class="lineCov">      27209 :   Vt = T2 * kBoverQ;</span>
+<span class="lineNum">     401 </span>                :<span class="lineCov">      27209 :   return TR * Vj - 3 * Vt * log (TR) - (TR * E1 - E2);</span>
+<span class="lineNum">     402 </span>                :            : }
+<span class="lineNum">     403 </span>                :            : 
+<a name="404"><span class="lineNum">     404 </span>                :            : // Calculates temperature dependence for junction capacitance.</a>
+<span class="lineNum">     405 </span>                :            : nr_double_t
+<span class="lineNum">     406 </span>                :<span class="lineCov">      27147 : device::pnCapacitance_T (nr_double_t T1, nr_double_t T2, nr_double_t M,</span>
+<span class="lineNum">     407 </span>                :            :                          nr_double_t VR, nr_double_t Cj) {
+<span class="lineNum">     408 </span>                :<span class="lineCov">      27147 :   return Cj * pnCapacitance_F (T1, T2, M, VR);</span>
+<span class="lineNum">     409 </span>                :            : }
+<span class="lineNum">     410 </span>                :            : 
+<a name="411"><span class="lineNum">     411 </span>                :            : // Calculates temperature dependence for junction capacitance.</a>
+<span class="lineNum">     412 </span>                :            : nr_double_t
+<span class="lineNum">     413 </span>                :<span class="lineCov">      27209 : device::pnCapacitance_F (nr_double_t T1, nr_double_t T2, nr_double_t M,</span>
+<span class="lineNum">     414 </span>                :            :                          nr_double_t VR) {
+<span class="lineNum">     415 </span>                :<span class="lineCov">      27209 :   nr_double_t DT = T2 - T1;</span>
+<span class="lineNum">     416 </span>                :<span class="lineCov">      27209 :   return 1 + M * (4e-4 * DT - VR + 1);</span>
+<span class="lineNum">     417 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

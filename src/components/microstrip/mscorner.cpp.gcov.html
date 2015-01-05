@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/microstrip/mscorner.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/microstrip</a> - mscorner.cpp<span style="font-size: 80%;"> (source / <a href="mscorner.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * mscorner.cpp - microstrip corner class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  * Copyright (C) 2004 Michael Margraf &lt;Michael.Margraf@alumni.TU-Berlin.DE&gt;
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id$
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      27 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      28 </span>                :            : #endif
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      31 </span>                :            : #include &quot;substrate.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;mscorner.h&quot;
+<span class="lineNum">      33 </span>                :            : 
+<a name="34"><span class="lineNum">      34 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :<span class="lineNoCov">          0 : mscorner::mscorner () : circuit (2) {</span>
+<span class="lineNum">      37 </span>                :<span class="lineNoCov">          0 :   type = CIR_MSCORNER;</span>
+<a name="38"><span class="lineNum">      38 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :<span class="lineNoCov">          0 : void mscorner::initCheck (void) {</span>
+<span class="lineNum">      41 </span>                :            :   // get properties of substrate and corner
+<span class="lineNum">      42 </span>                :<span class="lineNoCov">          0 :   nr_double_t W = getPropertyDouble (&quot;W&quot;);</span>
+<span class="lineNum">      43 </span>                :<span class="lineNoCov">          0 :   substrate * subst = getSubstrate ();</span>
+<span class="lineNum">      44 </span>                :<span class="lineNoCov">          0 :   nr_double_t er = subst-&gt;getPropertyDouble (&quot;er&quot;);</span>
+<span class="lineNum">      45 </span>                :<span class="lineNoCov">          0 :   h = subst-&gt;getPropertyDouble (&quot;h&quot;);</span>
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :            :   // local variables
+<span class="lineNum">      48 </span>                :<span class="lineNoCov">          0 :   nr_double_t Wh = W/h;</span>
+<span class="lineNum">      49 </span>                :            : 
+<span class="lineNum">      50 </span>                :            :   // check validity
+<span class="lineNum">      51 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (Wh &lt; 0.2 || Wh &gt; 6.0) {</span>
+<span class="lineNum">      52 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Model for microstrip corner defined for &quot;
+<span class="lineNum">      53 </span>                :<span class="lineNoCov">          0 :               &quot;0.2 &lt;= W/h &lt;= 6.0 (W/h = %g)\n&quot;, Wh);</span>
+<span class="lineNum">      54 </span>                :            :   }
+<span class="lineNum">      55 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (er &lt; 2.36 || er &gt; 10.4) {</span>
+<span class="lineNum">      56 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Model for microstrip corner defined for &quot;
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :               &quot;2.36 &lt;= er &lt;= 10.4 (er = %g)\n&quot;, er);</span>
+<span class="lineNum">      58 </span>                :            :   }
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :            :   // capacitance in pF
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 :   C = W * ((10.35 * er + 2.5) * Wh + (2.6 * er + 5.64));</span>
+<span class="lineNum">      62 </span>                :            :   // inductivity in nH
+<span class="lineNum">      63 </span>                :<span class="lineNoCov">          0 :   L = 220.0 * h * (1.0 - 1.35 * qucs::exp (-0.18 * qucs::pow (Wh, 1.39)));</span>
+<a name="64"><span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 : void mscorner::initSP (void) {</span>
+<span class="lineNum">      67 </span>                :            :   // allocate S-parameter matrix
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :   allocMatrixS ();</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :   initCheck ();</span>
+<a name="70"><span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 : void mscorner::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">      73 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixS (ztos (calcMatrixZ (frequency)));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<a name="74"><span class="lineNum">      74 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 : matrix mscorner::calcMatrixZ (nr_double_t frequency) {</span>
+<span class="lineNum">      77 </span>                :            :   // check frequency validity
+<span class="lineNum">      78 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (frequency * h &gt; 12e6) {</span>
+<span class="lineNum">      79 </span>                :            :     logprint (LOG_ERROR, &quot;WARNING: Model for microstrip corner defined for &quot;
+<span class="lineNum">      80 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :               &quot;freq*h &lt;= 12MHz (is %g)\n&quot;, frequency * h);</span>
+<span class="lineNum">      81 </span>                :            :   }
+<span class="lineNum">      82 </span>                :            : 
+<span class="lineNum">      83 </span>                :            :   // create Z-parameter matrix
+<span class="lineNum">      84 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix z (2);</span>
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 :   nr_complex_t z21 = nr_complex_t (0.0, -0.5e12 / (M_PI * frequency * C));</span>
+<span class="lineNum">      86 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   nr_complex_t z11 = nr_complex_t (0.0, 2e-9 * M_PI * frequency * L) + z21;</span>
+<span class="lineNum">      87 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   z.set (0, 0, z11);</span>
+<span class="lineNum">      88 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   z.set (0, 1, z21);</span>
+<span class="lineNum">      89 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   z.set (1, 0, z21);</span>
+<span class="lineNum">      90 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   z.set (1, 1, z11);</span>
+<span class="lineNum">      91 </span>                :<span class="lineNoCov">          0 :   return z;</span>
+<a name="92"><span class="lineNum">      92 </span>                :            : }</a>
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 : void mscorner::initDC (void) {</span>
+<span class="lineNum">      95 </span>                :            :   // a DC short (voltage source V = 0 volts)
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (1);</span>
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 :   setInternalVoltageSource (1);</span>
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<a name="100"><span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 : void mscorner::initAC (void) {</span>
+<span class="lineNum">     103 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (0);</span>
+<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :   initCheck ();</span>
+<a name="106"><span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 : void mscorner::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">     109 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixY (ztoy (calcMatrixZ (frequency)));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            : // properties
+<span class="lineNum">     113 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     114 </span>                :            :   { &quot;W&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     115 </span>                :            :   { &quot;Subst&quot;, PROP_STR, { PROP_NO_VAL, &quot;Subst1&quot; }, PROP_NO_RANGE },
+<span class="lineNum">     116 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     117 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     118 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     119 </span>                :            : struct define_t mscorner::cirdef =
+<span class="lineNum">     120 </span>                :            :   { &quot;MCORN&quot;, 2, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

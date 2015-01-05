@@ -1,0 +1,805 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/components/verilog/HBT_X.analogfunction.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/components/verilog</a> - HBT_X.analogfunction.cpp<span style="font-size: 80%;"> (source / <a href="HBT_X.analogfunction.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">505</td>
+            <td class="headerCovTableEntryLo">0.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryLo">8.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * HBT_X.analogfunction.cpp - analog function implementations
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       5 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       6 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       7 </span>                :            :  * any later version.
+<span class="lineNum">       8 </span>                :            :  *
+<span class="lineNum">       9 </span>                :            :  */
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      12 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      13 </span>                :            : #endif
+<span class="lineNum">      14 </span>                :            : 
+<span class="lineNum">      15 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      16 </span>                :            : #include &quot;HBT_X.analogfunction.h&quot;
+<span class="lineNum">      17 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      18 </span>                :            : 
+<span class="lineNum">      19 </span>                :            : 
+<span class="lineNum">      20 </span>                :            : /* math functions and appropriate derivatives */
+<span class="lineNum">      21 </span>                :            : inline double _cos(double arg)             { return  cos(arg); }
+<span class="lineNum">      22 </span>                :            : inline double _d0_cos(double arg)          { return (-sin(arg)); }
+<span class="lineNum">      23 </span>                :            : inline double _sin(double arg)             { return  sin(arg); }
+<span class="lineNum">      24 </span>                :            : inline double _d0_sin(double arg)          { return (cos(arg)); }
+<span class="lineNum">      25 </span>                :            : inline double _tan(double arg)             { return  tan(arg); }
+<span class="lineNum">      26 </span>                :            : inline double _d0_tan(double arg)          { return (1.0/cos(arg)/cos(arg)); }
+<span class="lineNum">      27 </span>                :            : inline double _cosh(double arg)            { return  cosh(arg); }
+<span class="lineNum">      28 </span>                :            : inline double _d0_cosh(double arg)         { return (sinh(arg)); }
+<span class="lineNum">      29 </span>                :            : inline double _sinh(double arg)            { return  sinh(arg); }
+<span class="lineNum">      30 </span>                :            : inline double _d0_sinh(double arg)         { return (cosh(arg)); }
+<span class="lineNum">      31 </span>                :            : inline double _tanh(double arg)            { return  tanh(arg); }
+<span class="lineNum">      32 </span>                :            : inline double _d0_tanh(double arg)         { return (1.0/cosh(arg)/cosh(arg)); }
+<span class="lineNum">      33 </span>                :            : inline double _acos(double arg)            { return  acos(arg); }
+<span class="lineNum">      34 </span>                :            : inline double _d0_acos(double arg)         { return (-1.0/sqrt(1-arg*arg)); }
+<span class="lineNum">      35 </span>                :            : inline double _asin(double arg)            { return  asin(arg); }
+<span class="lineNum">      36 </span>                :            : inline double _d0_asin(double arg)         { return (+1.0/sqrt(1-arg*arg)); }
+<span class="lineNum">      37 </span>                :            : inline double _atan(double arg)            { return  atan(arg); }
+<span class="lineNum">      38 </span>                :            : inline double _d0_atan(double arg)         { return (+1.0/(1+arg*arg)); }
+<span class="lineNum">      39 </span>                :            : inline double _acosh(double arg)           { return  acosh(arg); }
+<span class="lineNum">      40 </span>                :            : inline double _d0_acosh(double arg)        { return (1.0/(sqrt(arg-1)*sqrt(arg+1))); }
+<span class="lineNum">      41 </span>                :            : inline double _asinh(double arg)           { return  asinh(arg); }
+<span class="lineNum">      42 </span>                :            : inline double _d0_asinh(double arg)        { return (1.0/(sqrt(arg*arg+1))); }
+<span class="lineNum">      43 </span>                :            : inline double _atanh(double arg)           { return  atanh(arg); }
+<a name="44"><span class="lineNum">      44 </span>                :            : inline double _d0_atanh(double arg)        { return (+1.0/(1-arg*arg)); }</a>
+<a name="45"><span class="lineNum">      45 </span>                :            : </a>
+<span class="lineNum">      46 </span>                :<span class="lineCov">       6000 : inline double _logE(double arg)            { return  log(arg); }</span>
+<span class="lineNum">      47 </span>                :<span class="lineNoCov">          0 : inline double _d0_logE(double arg)         { return (1.0/arg); }</span>
+<a name="48"><span class="lineNum">      48 </span>                :            : inline double _log10(double arg)           { return  log10(arg); }</a>
+<a name="49"><span class="lineNum">      49 </span>                :            : inline double _d0_log10(double arg)        { return (1.0/arg/log(10.0)); }</a>
+<a name="50"><span class="lineNum">      50 </span>                :<span class="lineNoCov">          0 : inline double _exp(double arg)             { return  exp(arg); }</span></a>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineNoCov">          0 : inline double _d0_exp(double arg)          { return exp(arg); }</span></a>
+<span class="lineNum">      52 </span>                :<span class="lineCov">       6000 : inline double _sqrt(double arg)            { return  sqrt(arg); }</span>
+<span class="lineNum">      53 </span>                :<span class="lineNoCov">          0 : inline double _d0_sqrt(double arg)         { return (1.0/sqrt(arg)/2.0); }</span>
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :            : inline double _abs(double arg)             { return std::abs(arg); }
+<span class="lineNum">      56 </span>                :            : inline double _d0_abs(double arg)          { return (((arg)&gt;=0)?(+1.0):(-1.0)); }
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :            : inline int _floor(double arg)              { return  floor(arg); }
+<span class="lineNum">      59 </span>                :            : inline int _d0_floor(double)               { return (1.0); }
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>                :            : inline int _ceil(double arg)               { return  ceil(arg); }
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :            : inline double _hypot(double x,double y)    { return sqrt((x)*(x)+(y)*(y)); }
+<span class="lineNum">      64 </span>                :            : inline double _d0_hypot(double x,double y) { return (x)/sqrt((x)*(x)+(y)*(y)); }
+<span class="lineNum">      65 </span>                :            : inline double _d1_hypot(double x,double y) { return (y)/sqrt((x)*(x)+(y)*(y)); }
+<span class="lineNum">      66 </span>                :            : 
+<span class="lineNum">      67 </span>                :            : inline double _atan2(double x,double y)    { return atan2(x,y); }
+<span class="lineNum">      68 </span>                :            : // TODO atan2 derivatives?
+<span class="lineNum">      69 </span>                :            : 
+<span class="lineNum">      70 </span>                :            : inline double _max(double x,double y)      { return ((x)&gt;(y))?(x):(y); }
+<span class="lineNum">      71 </span>                :            : inline double _d0_max(double x,double y)   { return ((x)&gt;(y))?1.0:0.0; }
+<span class="lineNum">      72 </span>                :            : inline double _d1_max(double x,double y)   { return ((x)&gt;(y))?0.0:1.0; }
+<span class="lineNum">      73 </span>                :            : 
+<span class="lineNum">      74 </span>                :            : inline double _min(double x,double y)      { return ((x)&lt;(y))?(x):(y); }
+<span class="lineNum">      75 </span>                :            : inline double _d0_min(double x,double y)   { return ((x)&lt;(y))?1.0:0.0; }
+<a name="76"><span class="lineNum">      76 </span>                :            : inline double _d1_min(double x,double y)   { return ((x)&lt;(y))?0.0:1.0; }</a>
+<a name="77"><span class="lineNum">      77 </span>                :            : </a>
+<a name="78"><span class="lineNum">      78 </span>                :<span class="lineNoCov">          0 : inline double _pow(double x,double y)      { return pow(x,y); }</span></a>
+<span class="lineNum">      79 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : inline double _d0_pow(double x,double y)   { return (x==0.0)?0.0:((y/x)*pow(x,y)); }</span>
+<span class="lineNum">      80 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : inline double _d1_pow(double x,double y)   { return (x==0.0)?0.0:((log(x)/exp(0.0))*pow(x,y)); }</span>
+<span class="lineNum">      81 </span>                :            : 
+<span class="lineNum">      82 </span>                :            : inline double _limexp(double arg)          { return ((arg)&lt;(80))?(exp(arg)):(exp(80.0)*(1.0+(arg-80))); }
+<a name="83"><span class="lineNum">      83 </span>                :            : inline double _d0_limexp(double arg)       { return ((arg)&lt;(80))?(exp(arg)):(exp(80.0)); }</a>
+<a name="84"><span class="lineNum">      84 </span>                :            : </a>
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 : inline double _vt(double arg)              { return 1.3806503e-23*arg/1.602176462e-19; }</span>
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 : inline double _d0_vt(double)               { return 1.3806503e-23/1.602176462e-19; }</span>
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :            : /*
+<a name="90"><span class="lineNum">      90 </span>                :            :  * analog function: exp_soft</a>
+<span class="lineNum">      91 </span>                :            :  */
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 : double HBT_X_exp_soft (double x)</span>
+<span class="lineNum">      93 </span>                :            : {
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 : double exp_soft=0.0;</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 : double maxexp=0.0;</span>
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 : double maxarg=0.0;</span>
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 : {maxexp=1.0e25;</span>
+<span class="lineNum">      98 </span>                :<span class="lineNoCov">          0 : maxarg=_logE(maxexp);</span>
+<span class="lineNum">      99 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (x&lt;maxarg)</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :  {exp_soft=_exp(x);</span>
+<span class="lineNum">     101 </span>                :            : }else
+<span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 : {exp_soft=(((x+1.0)-maxarg)*maxexp);</span>
+<span class="lineNum">     103 </span>                :            : }}
+<a name="104"><span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 : return exp_soft;</span></a>
+<span class="lineNum">     105 </span>                :            : }
+<span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_exp_soft (double x, double d_x)</span>
+<span class="lineNum">     107 </span>                :            : {
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 : double exp_soft=0.0;</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 : double exp_soft_x=0.0;</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 : double maxexp=0.0;</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 : double maxexp_x=0.0;</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 : double maxarg=0.0;</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 : double maxarg_x=0.0;</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 : {{maxexp_x=0.0;</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 : maxexp=1.0e25;</span>
+<span class="lineNum">     116 </span>                :            : }
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 : {maxarg_x=_d0_logE(maxexp)*(maxexp_x);</span>
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 : maxarg=_logE(maxexp);</span>
+<span class="lineNum">     119 </span>                :            : }
+<span class="lineNum">     120 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (x&lt;maxarg)</span>
+<span class="lineNum">     121 </span>                :<span class="lineNoCov">          0 :  {{exp_soft_x=_d0_exp(x)*(1.0);</span>
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 : exp_soft=_exp(x);</span>
+<span class="lineNum">     123 </span>                :            : }
+<span class="lineNum">     124 </span>                :            : }else
+<span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 : {{exp_soft_x=(((1.0-maxarg_x)*maxexp)+(((x+1.0)-maxarg)*maxexp_x));</span>
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 : exp_soft=(((x+1.0)-maxarg)*maxexp);</span>
+<span class="lineNum">     127 </span>                :            : }
+<span class="lineNum">     128 </span>                :            : }}
+<span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 : return exp_soft_x*d_x;</span>
+<span class="lineNum">     130 </span>                :            : }
+<span class="lineNum">     131 </span>                :            : 
+<span class="lineNum">     132 </span>                :            : /*
+<a name="133"><span class="lineNum">     133 </span>                :            :  * analog function: Vt</a>
+<span class="lineNum">     134 </span>                :            :  */
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 : double HBT_X_Vt (double U, double Ud)</span>
+<span class="lineNum">     136 </span>                :            : {
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 : double Vt=0.0;</span>
+<span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 : double Vch=0.0;</span>
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 : double VF=0.0;</span>
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 : {Vch=(0.1*Ud);</span>
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 : VF=(0.9*Ud);</span>
+<span class="lineNum">     142 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (U&lt;VF)</span>
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :  Vt=(U-(Vch*_logE((1.0+_exp(((U-VF)/Vch))))));</span>
+<span class="lineNum">     144 </span>                :            : else
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 : Vt=(VF-(Vch*_logE((1.0+_exp(((VF-U)/Vch))))));</span>
+<span class="lineNum">     146 </span>                :            : }
+<a name="147"><span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 : return Vt;</span></a>
+<span class="lineNum">     148 </span>                :            : }
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_Vt (double U, double Ud, double d_U, double d_Ud)</span>
+<span class="lineNum">     150 </span>                :            : {
+<span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 : double Vt=0.0;</span>
+<span class="lineNum">     152 </span>                :<span class="lineNoCov">          0 : double Vt_U=0.0;</span>
+<span class="lineNum">     153 </span>                :<span class="lineNoCov">          0 : double Vt_Ud=0.0;</span>
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 : double Vch=0.0;</span>
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 : double Vch_U=0.0;</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 : double Vch_Ud=0.0;</span>
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 : double VF=0.0;</span>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 : double VF_U=0.0;</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 : double VF_Ud=0.0;</span>
+<span class="lineNum">     160 </span>                :<span class="lineNoCov">          0 : {{Vch_U=0.0;</span>
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 : Vch_Ud=(0.1);</span>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 : Vch=(0.1*Ud);</span>
+<span class="lineNum">     163 </span>                :            : }
+<span class="lineNum">     164 </span>                :<span class="lineNoCov">          0 : {VF_U=0.0;</span>
+<span class="lineNum">     165 </span>                :<span class="lineNoCov">          0 : VF_Ud=(0.9);</span>
+<span class="lineNum">     166 </span>                :<span class="lineNoCov">          0 : VF=(0.9*Ud);</span>
+<span class="lineNum">     167 </span>                :            : }
+<span class="lineNum">     168 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (U&lt;VF)</span>
+<span class="lineNum">     169 </span>                :<span class="lineNoCov">          0 :  {Vt_U=(1.0-((Vch_U*_logE((1.0+_exp(((U-VF)/Vch)))))+(Vch*_d0_logE((1.0+_exp(((U-VF)/Vch))))*((+_d0_exp(((U-VF)/Vch))*(((1.0-VF_U)*Vch-(U-VF)*Vch_U)/(Vch*Vch)))))));</span>
+<span class="lineNum">     170 </span>                :<span class="lineNoCov">          0 : Vt_Ud=(-((Vch_Ud*_logE((1.0+_exp(((U-VF)/Vch)))))+(Vch*_d0_logE((1.0+_exp(((U-VF)/Vch))))*((+_d0_exp(((U-VF)/Vch))*(((-VF_Ud)*Vch-(U-VF)*Vch_Ud)/(Vch*Vch)))))));</span>
+<span class="lineNum">     171 </span>                :<span class="lineNoCov">          0 : Vt=(U-(Vch*_logE((1.0+_exp(((U-VF)/Vch))))));</span>
+<span class="lineNum">     172 </span>                :            : }
+<span class="lineNum">     173 </span>                :            : else
+<span class="lineNum">     174 </span>                :<span class="lineNoCov">          0 : {Vt_U=(VF_U-((Vch_U*_logE((1.0+_exp(((VF-U)/Vch)))))+(Vch*_d0_logE((1.0+_exp(((VF-U)/Vch))))*((+_d0_exp(((VF-U)/Vch))*(((VF_U-1.0)*Vch-(VF-U)*Vch_U)/(Vch*Vch)))))));</span>
+<span class="lineNum">     175 </span>                :<span class="lineNoCov">          0 : Vt_Ud=(VF_Ud-((Vch_Ud*_logE((1.0+_exp(((VF-U)/Vch)))))+(Vch*_d0_logE((1.0+_exp(((VF-U)/Vch))))*((+_d0_exp(((VF-U)/Vch))*((VF_Ud*Vch-(VF-U)*Vch_Ud)/(Vch*Vch)))))));</span>
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 : Vt=(VF-(Vch*_logE((1.0+_exp(((VF-U)/Vch))))));</span>
+<span class="lineNum">     177 </span>                :            : }
+<span class="lineNum">     178 </span>                :            : }
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 : return Vt_U*d_U+Vt_Ud*d_Ud;</span>
+<span class="lineNum">     180 </span>                :            : }
+<span class="lineNum">     181 </span>                :            : 
+<span class="lineNum">     182 </span>                :            : /*
+<a name="183"><span class="lineNum">     183 </span>                :            :  * analog function: diode</a>
+<span class="lineNum">     184 </span>                :            :  */
+<span class="lineNum">     185 </span>                :<span class="lineNoCov">          0 : double HBT_X_diode (double U, double Is, double Ug, double N, double AREA, double TJ, double TNOM)</span>
+<span class="lineNum">     186 </span>                :            : {
+<span class="lineNum">     187 </span>                :<span class="lineNoCov">          0 : double diode=0.0;</span>
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 : double VTH0=0.0;</span>
+<span class="lineNum">     189 </span>                :<span class="lineNoCov">          0 : double VTHJ=0.0;</span>
+<span class="lineNum">     190 </span>                :<span class="lineNoCov">          0 : double VTHNOM=0.0;</span>
+<span class="lineNum">     191 </span>                :<span class="lineNoCov">          0 : double maxi=0.0;</span>
+<span class="lineNum">     192 </span>                :<span class="lineNoCov">          0 : double Tmax=0.0;</span>
+<span class="lineNum">     193 </span>                :<span class="lineNoCov">          0 : double TJM=0.0;</span>
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 : double KDURCHQ=0.0;</span>
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 : double lnIs=0.0;</span>
+<span class="lineNum">     196 </span>                :<span class="lineNoCov">          0 : {VTH0=_vt((20.0+273.15));</span>
+<span class="lineNum">     197 </span>                :<span class="lineNoCov">          0 : VTHNOM=_vt((TNOM+273.15));</span>
+<span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 : KDURCHQ=0.861708692e-4;</span>
+<span class="lineNum">     199 </span>                :<span class="lineNoCov">          0 : lnIs=_logE((Is*AREA));</span>
+<span class="lineNum">     200 </span>                :<span class="lineNoCov">          0 : maxi=_logE(1e6);</span>
+<span class="lineNum">     201 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : if ((maxi&lt;(Ug/VTHNOM))&amp;&amp;(U&lt;0.0))</span>
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 :  {Tmax=(((Ug*VTHNOM)/((Ug-(maxi*VTHNOM))*KDURCHQ))-273.15);</span>
+<span class="lineNum">     203 </span>                :<span class="lineNoCov">          0 : TJM=HBT_X_Vt(TJ,Tmax);</span>
+<span class="lineNum">     204 </span>                :            : }else
+<span class="lineNum">     205 </span>                :<span class="lineNoCov">          0 : {TJM=TJ;</span>
+<span class="lineNum">     206 </span>                :<span class="lineNoCov">          0 : }VTHJ=_vt((TJM+273.15));</span>
+<span class="lineNum">     207 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (Ug&gt;0.0)</span>
+<span class="lineNum">     208 </span>                :<span class="lineNoCov">          0 :  {diode=(HBT_X_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs))-HBT_X_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs)));</span>
+<span class="lineNum">     209 </span>                :            : }else
+<span class="lineNum">     210 </span>                :<span class="lineNoCov">          0 : {diode=(HBT_X_exp_soft(((U/(N*VTH0))+lnIs))-(Is*AREA));</span>
+<span class="lineNum">     211 </span>                :            : }}
+<a name="212"><span class="lineNum">     212 </span>                :<span class="lineNoCov">          0 : return diode;</span></a>
+<span class="lineNum">     213 </span>                :            : }
+<span class="lineNum">     214 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_diode (double U, double Is, double Ug, double N, double AREA, double TJ, double TNOM, double d_U, double d_Is, double d_Ug, double d_N, double d_AREA, double d_TJ, double d_TNOM)</span>
+<span class="lineNum">     215 </span>                :            : {
+<span class="lineNum">     216 </span>                :<span class="lineNoCov">          0 : double diode=0.0;</span>
+<span class="lineNum">     217 </span>                :<span class="lineNoCov">          0 : double diode_U=0.0;</span>
+<span class="lineNum">     218 </span>                :<span class="lineNoCov">          0 : double diode_Is=0.0;</span>
+<span class="lineNum">     219 </span>                :<span class="lineNoCov">          0 : double diode_Ug=0.0;</span>
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 : double diode_N=0.0;</span>
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 : double diode_AREA=0.0;</span>
+<span class="lineNum">     222 </span>                :<span class="lineNoCov">          0 : double diode_TJ=0.0;</span>
+<span class="lineNum">     223 </span>                :<span class="lineNoCov">          0 : double diode_TNOM=0.0;</span>
+<span class="lineNum">     224 </span>                :<span class="lineNoCov">          0 : double VTH0=0.0;</span>
+<span class="lineNum">     225 </span>                :<span class="lineNoCov">          0 : double VTH0_U=0.0;</span>
+<span class="lineNum">     226 </span>                :<span class="lineNoCov">          0 : double VTH0_Is=0.0;</span>
+<span class="lineNum">     227 </span>                :<span class="lineNoCov">          0 : double VTH0_Ug=0.0;</span>
+<span class="lineNum">     228 </span>                :<span class="lineNoCov">          0 : double VTH0_N=0.0;</span>
+<span class="lineNum">     229 </span>                :<span class="lineNoCov">          0 : double VTH0_AREA=0.0;</span>
+<span class="lineNum">     230 </span>                :<span class="lineNoCov">          0 : double VTH0_TJ=0.0;</span>
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 : double VTH0_TNOM=0.0;</span>
+<span class="lineNum">     232 </span>                :<span class="lineNoCov">          0 : double VTHJ=0.0;</span>
+<span class="lineNum">     233 </span>                :<span class="lineNoCov">          0 : double VTHJ_U=0.0;</span>
+<span class="lineNum">     234 </span>                :<span class="lineNoCov">          0 : double VTHJ_Is=0.0;</span>
+<span class="lineNum">     235 </span>                :<span class="lineNoCov">          0 : double VTHJ_Ug=0.0;</span>
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 : double VTHJ_N=0.0;</span>
+<span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 : double VTHJ_AREA=0.0;</span>
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 : double VTHJ_TJ=0.0;</span>
+<span class="lineNum">     239 </span>                :<span class="lineNoCov">          0 : double VTHJ_TNOM=0.0;</span>
+<span class="lineNum">     240 </span>                :<span class="lineNoCov">          0 : double VTHNOM=0.0;</span>
+<span class="lineNum">     241 </span>                :<span class="lineNoCov">          0 : double VTHNOM_U=0.0;</span>
+<span class="lineNum">     242 </span>                :<span class="lineNoCov">          0 : double VTHNOM_Is=0.0;</span>
+<span class="lineNum">     243 </span>                :<span class="lineNoCov">          0 : double VTHNOM_Ug=0.0;</span>
+<span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 : double VTHNOM_N=0.0;</span>
+<span class="lineNum">     245 </span>                :<span class="lineNoCov">          0 : double VTHNOM_AREA=0.0;</span>
+<span class="lineNum">     246 </span>                :<span class="lineNoCov">          0 : double VTHNOM_TJ=0.0;</span>
+<span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 : double VTHNOM_TNOM=0.0;</span>
+<span class="lineNum">     248 </span>                :<span class="lineNoCov">          0 : double maxi=0.0;</span>
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 : double maxi_U=0.0;</span>
+<span class="lineNum">     250 </span>                :<span class="lineNoCov">          0 : double maxi_Is=0.0;</span>
+<span class="lineNum">     251 </span>                :<span class="lineNoCov">          0 : double maxi_Ug=0.0;</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 : double maxi_N=0.0;</span>
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 : double maxi_AREA=0.0;</span>
+<span class="lineNum">     254 </span>                :<span class="lineNoCov">          0 : double maxi_TJ=0.0;</span>
+<span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 : double maxi_TNOM=0.0;</span>
+<span class="lineNum">     256 </span>                :<span class="lineNoCov">          0 : double Tmax=0.0;</span>
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 : double Tmax_U=0.0;</span>
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 : double Tmax_Is=0.0;</span>
+<span class="lineNum">     259 </span>                :<span class="lineNoCov">          0 : double Tmax_Ug=0.0;</span>
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 : double Tmax_N=0.0;</span>
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 : double Tmax_AREA=0.0;</span>
+<span class="lineNum">     262 </span>                :<span class="lineNoCov">          0 : double Tmax_TJ=0.0;</span>
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 : double Tmax_TNOM=0.0;</span>
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 : double TJM=0.0;</span>
+<span class="lineNum">     265 </span>                :<span class="lineNoCov">          0 : double TJM_U=0.0;</span>
+<span class="lineNum">     266 </span>                :<span class="lineNoCov">          0 : double TJM_Is=0.0;</span>
+<span class="lineNum">     267 </span>                :<span class="lineNoCov">          0 : double TJM_Ug=0.0;</span>
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 : double TJM_N=0.0;</span>
+<span class="lineNum">     269 </span>                :<span class="lineNoCov">          0 : double TJM_AREA=0.0;</span>
+<span class="lineNum">     270 </span>                :<span class="lineNoCov">          0 : double TJM_TJ=0.0;</span>
+<span class="lineNum">     271 </span>                :<span class="lineNoCov">          0 : double TJM_TNOM=0.0;</span>
+<span class="lineNum">     272 </span>                :<span class="lineNoCov">          0 : double KDURCHQ=0.0;</span>
+<span class="lineNum">     273 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_U=0.0;</span>
+<span class="lineNum">     274 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_Is=0.0;</span>
+<span class="lineNum">     275 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_Ug=0.0;</span>
+<span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_N=0.0;</span>
+<span class="lineNum">     277 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_AREA=0.0;</span>
+<span class="lineNum">     278 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_TJ=0.0;</span>
+<span class="lineNum">     279 </span>                :<span class="lineNoCov">          0 : double KDURCHQ_TNOM=0.0;</span>
+<span class="lineNum">     280 </span>                :<span class="lineNoCov">          0 : double lnIs=0.0;</span>
+<span class="lineNum">     281 </span>                :<span class="lineNoCov">          0 : double lnIs_U=0.0;</span>
+<span class="lineNum">     282 </span>                :<span class="lineNoCov">          0 : double lnIs_Is=0.0;</span>
+<span class="lineNum">     283 </span>                :<span class="lineNoCov">          0 : double lnIs_Ug=0.0;</span>
+<span class="lineNum">     284 </span>                :<span class="lineNoCov">          0 : double lnIs_N=0.0;</span>
+<span class="lineNum">     285 </span>                :<span class="lineNoCov">          0 : double lnIs_AREA=0.0;</span>
+<span class="lineNum">     286 </span>                :<span class="lineNoCov">          0 : double lnIs_TJ=0.0;</span>
+<span class="lineNum">     287 </span>                :<span class="lineNoCov">          0 : double lnIs_TNOM=0.0;</span>
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 : {{VTH0_U=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     289 </span>                :<span class="lineNoCov">          0 : VTH0_Is=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 : VTH0_Ug=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     291 </span>                :<span class="lineNoCov">          0 : VTH0_N=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     292 </span>                :<span class="lineNoCov">          0 : VTH0_AREA=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 : VTH0_TJ=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     294 </span>                :<span class="lineNoCov">          0 : VTH0_TNOM=_d0_vt((20.0+273.15))*(0.0);</span>
+<span class="lineNum">     295 </span>                :<span class="lineNoCov">          0 : VTH0=_vt((20.0+273.15));</span>
+<span class="lineNum">     296 </span>                :            : }
+<span class="lineNum">     297 </span>                :<span class="lineNoCov">          0 : {VTHNOM_U=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     298 </span>                :<span class="lineNoCov">          0 : VTHNOM_Is=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 : VTHNOM_Ug=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     300 </span>                :<span class="lineNoCov">          0 : VTHNOM_N=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 : VTHNOM_AREA=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 : VTHNOM_TJ=_d0_vt((TNOM+273.15))*(0.0);</span>
+<span class="lineNum">     303 </span>                :<span class="lineNoCov">          0 : VTHNOM_TNOM=_d0_vt((TNOM+273.15))*(1.0);</span>
+<span class="lineNum">     304 </span>                :<span class="lineNoCov">          0 : VTHNOM=_vt((TNOM+273.15));</span>
+<span class="lineNum">     305 </span>                :            : }
+<span class="lineNum">     306 </span>                :<span class="lineNoCov">          0 : {KDURCHQ_U=0.0;</span>
+<span class="lineNum">     307 </span>                :<span class="lineNoCov">          0 : KDURCHQ_Is=0.0;</span>
+<span class="lineNum">     308 </span>                :<span class="lineNoCov">          0 : KDURCHQ_Ug=0.0;</span>
+<span class="lineNum">     309 </span>                :<span class="lineNoCov">          0 : KDURCHQ_N=0.0;</span>
+<span class="lineNum">     310 </span>                :<span class="lineNoCov">          0 : KDURCHQ_AREA=0.0;</span>
+<span class="lineNum">     311 </span>                :<span class="lineNoCov">          0 : KDURCHQ_TJ=0.0;</span>
+<span class="lineNum">     312 </span>                :<span class="lineNoCov">          0 : KDURCHQ_TNOM=0.0;</span>
+<span class="lineNum">     313 </span>                :<span class="lineNoCov">          0 : KDURCHQ=0.861708692e-4;</span>
+<span class="lineNum">     314 </span>                :            : }
+<span class="lineNum">     315 </span>                :<span class="lineNoCov">          0 : {lnIs_U=_d0_logE((Is*AREA))*(0.0);</span>
+<span class="lineNum">     316 </span>                :<span class="lineNoCov">          0 : lnIs_Is=_d0_logE((Is*AREA))*((AREA));</span>
+<span class="lineNum">     317 </span>                :<span class="lineNoCov">          0 : lnIs_Ug=_d0_logE((Is*AREA))*(0.0);</span>
+<span class="lineNum">     318 </span>                :<span class="lineNoCov">          0 : lnIs_N=_d0_logE((Is*AREA))*(0.0);</span>
+<span class="lineNum">     319 </span>                :<span class="lineNoCov">          0 : lnIs_AREA=_d0_logE((Is*AREA))*((Is));</span>
+<span class="lineNum">     320 </span>                :<span class="lineNoCov">          0 : lnIs_TJ=_d0_logE((Is*AREA))*(0.0);</span>
+<span class="lineNum">     321 </span>                :<span class="lineNoCov">          0 : lnIs_TNOM=_d0_logE((Is*AREA))*(0.0);</span>
+<span class="lineNum">     322 </span>                :<span class="lineNoCov">          0 : lnIs=_logE((Is*AREA));</span>
+<span class="lineNum">     323 </span>                :            : }
+<span class="lineNum">     324 </span>                :<span class="lineNoCov">          0 : {maxi_U=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     325 </span>                :<span class="lineNoCov">          0 : maxi_Is=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     326 </span>                :<span class="lineNoCov">          0 : maxi_Ug=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     327 </span>                :<span class="lineNoCov">          0 : maxi_N=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     328 </span>                :<span class="lineNoCov">          0 : maxi_AREA=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     329 </span>                :<span class="lineNoCov">          0 : maxi_TJ=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     330 </span>                :<span class="lineNoCov">          0 : maxi_TNOM=_d0_logE(1e6)*(0.0);</span>
+<span class="lineNum">     331 </span>                :<span class="lineNoCov">          0 : maxi=_logE(1e6);</span>
+<span class="lineNum">     332 </span>                :            : }
+<span class="lineNum">     333 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : if ((maxi&lt;(Ug/VTHNOM))&amp;&amp;(U&lt;0.0))</span>
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :  {{Tmax_U=((Ug*VTHNOM_U)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_U*VTHNOM)+(maxi*VTHNOM_U)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_U)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     335 </span>                :<span class="lineNoCov">          0 : Tmax_Is=((Ug*VTHNOM_Is)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_Is*VTHNOM)+(maxi*VTHNOM_Is)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_Is)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     336 </span>                :<span class="lineNoCov">          0 : Tmax_Ug=((VTHNOM+(VTHNOM_Ug*Ug))*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((1.0-((maxi_Ug*VTHNOM)+(maxi*VTHNOM_Ug)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_Ug)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     337 </span>                :<span class="lineNoCov">          0 : Tmax_N=((Ug*VTHNOM_N)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_N*VTHNOM)+(maxi*VTHNOM_N)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_N)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 : Tmax_AREA=((Ug*VTHNOM_AREA)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_AREA*VTHNOM)+(maxi*VTHNOM_AREA)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_AREA)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     339 </span>                :<span class="lineNoCov">          0 : Tmax_TJ=((Ug*VTHNOM_TJ)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_TJ*VTHNOM)+(maxi*VTHNOM_TJ)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_TJ)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     340 </span>                :<span class="lineNoCov">          0 : Tmax_TNOM=((Ug*VTHNOM_TNOM)*((Ug-(maxi*VTHNOM))*KDURCHQ)-(Ug*VTHNOM)*(((-((maxi_TNOM*VTHNOM)+(maxi*VTHNOM_TNOM)))*KDURCHQ)+((Ug-(maxi*VTHNOM))*KDURCHQ_TNOM)))/(((Ug-(maxi*VTHNOM))*KDURCHQ)*((Ug-(maxi*VTHNOM))*KDURCHQ));</span>
+<span class="lineNum">     341 </span>                :<span class="lineNoCov">          0 : Tmax=(((Ug*VTHNOM)/((Ug-(maxi*VTHNOM))*KDURCHQ))-273.15);</span>
+<span class="lineNum">     342 </span>                :            : }
+<span class="lineNum">     343 </span>                :<span class="lineNoCov">          0 : {TJM_U=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_U));</span>
+<span class="lineNum">     344 </span>                :<span class="lineNoCov">          0 : TJM_Is=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_Is));</span>
+<span class="lineNum">     345 </span>                :<span class="lineNoCov">          0 : TJM_Ug=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_Ug));</span>
+<span class="lineNum">     346 </span>                :<span class="lineNoCov">          0 : TJM_N=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_N));</span>
+<span class="lineNum">     347 </span>                :<span class="lineNoCov">          0 : TJM_AREA=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_AREA));</span>
+<span class="lineNum">     348 </span>                :<span class="lineNoCov">          0 : TJM_TJ=HBT_X_d_Vt(TJ,Tmax,(1.0),(Tmax_TJ));</span>
+<span class="lineNum">     349 </span>                :<span class="lineNoCov">          0 : TJM_TNOM=HBT_X_d_Vt(TJ,Tmax,(0.0),(Tmax_TNOM));</span>
+<span class="lineNum">     350 </span>                :<span class="lineNoCov">          0 : TJM=HBT_X_Vt(TJ,Tmax);</span>
+<span class="lineNum">     351 </span>                :            : }
+<span class="lineNum">     352 </span>                :            : }else
+<span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 : {{TJM_U=0.0;</span>
+<span class="lineNum">     354 </span>                :<span class="lineNoCov">          0 : TJM_Is=0.0;</span>
+<span class="lineNum">     355 </span>                :<span class="lineNoCov">          0 : TJM_Ug=0.0;</span>
+<span class="lineNum">     356 </span>                :<span class="lineNoCov">          0 : TJM_N=0.0;</span>
+<span class="lineNum">     357 </span>                :<span class="lineNoCov">          0 : TJM_AREA=0.0;</span>
+<span class="lineNum">     358 </span>                :<span class="lineNoCov">          0 : TJM_TJ=1.0;</span>
+<span class="lineNum">     359 </span>                :<span class="lineNoCov">          0 : TJM_TNOM=0.0;</span>
+<span class="lineNum">     360 </span>                :<span class="lineNoCov">          0 : TJM=TJ;</span>
+<span class="lineNum">     361 </span>                :            : }
+<span class="lineNum">     362 </span>                :<span class="lineNoCov">          0 : }{VTHJ_U=_d0_vt((TJM+273.15))*(TJM_U);</span>
+<span class="lineNum">     363 </span>                :<span class="lineNoCov">          0 : VTHJ_Is=_d0_vt((TJM+273.15))*(TJM_Is);</span>
+<span class="lineNum">     364 </span>                :<span class="lineNoCov">          0 : VTHJ_Ug=_d0_vt((TJM+273.15))*(TJM_Ug);</span>
+<span class="lineNum">     365 </span>                :<span class="lineNoCov">          0 : VTHJ_N=_d0_vt((TJM+273.15))*(TJM_N);</span>
+<span class="lineNum">     366 </span>                :<span class="lineNoCov">          0 : VTHJ_AREA=_d0_vt((TJM+273.15))*(TJM_AREA);</span>
+<span class="lineNum">     367 </span>                :<span class="lineNoCov">          0 : VTHJ_TJ=_d0_vt((TJM+273.15))*(TJM_TJ);</span>
+<span class="lineNum">     368 </span>                :<span class="lineNoCov">          0 : VTHJ_TNOM=_d0_vt((TJM+273.15))*(TJM_TNOM);</span>
+<span class="lineNum">     369 </span>                :<span class="lineNoCov">          0 : VTHJ=_vt((TJM+273.15));</span>
+<span class="lineNum">     370 </span>                :            : }
+<span class="lineNum">     371 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (Ug&gt;0.0)</span>
+<span class="lineNum">     372 </span>                :<span class="lineNoCov">          0 :  {{diode_U=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((((N*VTHJ)-(U*(N*VTHJ_U)))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_U)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_U)/(VTHJ*VTHJ)))+lnIs_U)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_U)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_U)/(VTHJ*VTHJ)))+lnIs_U))));</span>
+<span class="lineNum">     373 </span>                :<span class="lineNoCov">          0 : diode_Is=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(N*VTHJ_Is))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_Is)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_Is)/(VTHJ*VTHJ)))+lnIs_Is)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_Is)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_Is)/(VTHJ*VTHJ)))+lnIs_Is))));</span>
+<span class="lineNum">     374 </span>                :<span class="lineNoCov">          0 : diode_Ug=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(N*VTHJ_Ug))/((N*VTHJ)*(N*VTHJ)))+((VTHNOM-(Ug*VTHNOM_Ug))/(VTHNOM*VTHNOM)))-((VTHJ-(Ug*VTHJ_Ug))/(VTHJ*VTHJ)))+lnIs_Ug)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),(((((VTHNOM-(Ug*VTHNOM_Ug))/(VTHNOM*VTHNOM))-((VTHJ-(Ug*VTHJ_Ug))/(VTHJ*VTHJ)))+lnIs_Ug))));</span>
+<span class="lineNum">     375 </span>                :<span class="lineNoCov">          0 : diode_N=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(VTHJ+(VTHJ_N*N)))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_N)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_N)/(VTHJ*VTHJ)))+lnIs_N)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_N)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_N)/(VTHJ*VTHJ)))+lnIs_N))));</span>
+<span class="lineNum">     376 </span>                :<span class="lineNoCov">          0 : diode_AREA=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(N*VTHJ_AREA))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_AREA)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_AREA)/(VTHJ*VTHJ)))+lnIs_AREA)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_AREA)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_AREA)/(VTHJ*VTHJ)))+lnIs_AREA))));</span>
+<span class="lineNum">     377 </span>                :<span class="lineNoCov">          0 : diode_TJ=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(N*VTHJ_TJ))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_TJ)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_TJ)/(VTHJ*VTHJ)))+lnIs_TJ)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_TJ)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_TJ)/(VTHJ*VTHJ)))+lnIs_TJ))));</span>
+<span class="lineNum">     378 </span>                :<span class="lineNoCov">          0 : diode_TNOM=(HBT_X_d_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs),(((((-(U*(N*VTHJ_TNOM))/((N*VTHJ)*(N*VTHJ)))+(-(Ug*VTHNOM_TNOM)/(VTHNOM*VTHNOM)))-(-(Ug*VTHJ_TNOM)/(VTHJ*VTHJ)))+lnIs_TNOM)))-HBT_X_d_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs),((((-(Ug*VTHNOM_TNOM)/(VTHNOM*VTHNOM))-(-(Ug*VTHJ_TNOM)/(VTHJ*VTHJ)))+lnIs_TNOM))));</span>
+<span class="lineNum">     379 </span>                :<span class="lineNoCov">          0 : diode=(HBT_X_exp_soft(((((U/(N*VTHJ))+(Ug/VTHNOM))-(Ug/VTHJ))+lnIs))-HBT_X_exp_soft((((Ug/VTHNOM)-(Ug/VTHJ))+lnIs)));</span>
+<span class="lineNum">     380 </span>                :            : }
+<span class="lineNum">     381 </span>                :            : }else
+<span class="lineNum">     382 </span>                :<span class="lineNoCov">          0 : {{diode_U=HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((((N*VTH0)-(U*(N*VTH0_U)))/((N*VTH0)*(N*VTH0)))+lnIs_U)));</span>
+<span class="lineNum">     383 </span>                :<span class="lineNoCov">          0 : diode_Is=(HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(N*VTH0_Is))/((N*VTH0)*(N*VTH0)))+lnIs_Is)))-(AREA));</span>
+<span class="lineNum">     384 </span>                :<span class="lineNoCov">          0 : diode_Ug=HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(N*VTH0_Ug))/((N*VTH0)*(N*VTH0)))+lnIs_Ug)));</span>
+<span class="lineNum">     385 </span>                :<span class="lineNoCov">          0 : diode_N=HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(VTH0+(VTH0_N*N)))/((N*VTH0)*(N*VTH0)))+lnIs_N)));</span>
+<span class="lineNum">     386 </span>                :<span class="lineNoCov">          0 : diode_AREA=(HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(N*VTH0_AREA))/((N*VTH0)*(N*VTH0)))+lnIs_AREA)))-(Is));</span>
+<span class="lineNum">     387 </span>                :<span class="lineNoCov">          0 : diode_TJ=HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(N*VTH0_TJ))/((N*VTH0)*(N*VTH0)))+lnIs_TJ)));</span>
+<span class="lineNum">     388 </span>                :<span class="lineNoCov">          0 : diode_TNOM=HBT_X_d_exp_soft(((U/(N*VTH0))+lnIs),(((-(U*(N*VTH0_TNOM))/((N*VTH0)*(N*VTH0)))+lnIs_TNOM)));</span>
+<span class="lineNum">     389 </span>                :<span class="lineNoCov">          0 : diode=(HBT_X_exp_soft(((U/(N*VTH0))+lnIs))-(Is*AREA));</span>
+<span class="lineNum">     390 </span>                :            : }
+<span class="lineNum">     391 </span>                :            : }}
+<span class="lineNum">     392 </span>                :<span class="lineNoCov">          0 : return diode_U*d_U+diode_Is*d_Is+diode_Ug*d_Ug+diode_N*d_N+diode_AREA*d_AREA+diode_TJ*d_TJ+diode_TNOM*d_TNOM;</span>
+<span class="lineNum">     393 </span>                :            : }
+<span class="lineNum">     394 </span>                :            : 
+<span class="lineNum">     395 </span>                :            : /*
+<a name="396"><span class="lineNum">     396 </span>                :            :  * analog function: MM</a>
+<span class="lineNum">     397 </span>                :            :  */
+<span class="lineNum">     398 </span>                :<span class="lineNoCov">          0 : double HBT_X_MM (double VBCI, double VCBO, double MC, double VCBLIN, double BF, double KC)</span>
+<span class="lineNum">     399 </span>                :            : {
+<span class="lineNum">     400 </span>                :<span class="lineNoCov">          0 : double MM=0.0;</span>
+<span class="lineNum">     401 </span>                :<span class="lineNoCov">          0 : double FBD=0.0;</span>
+<span class="lineNum">     402 </span>                :<span class="lineNoCov">          0 : double vcbi=0.0;</span>
+<span class="lineNum">     403 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : {if (((KC&gt;0.0)&amp;&amp;(MC&gt;0.0))&amp;&amp;(VCBO&gt;0.0))</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     404 </span>                :<span class="lineNoCov">          0 :  {vcbi=VBCI;</span>
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 : FBD=(VCBLIN/VCBO);</span>
+<span class="lineNum">     406 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&gt;0.0)</span>
+<span class="lineNum">     407 </span>                :<span class="lineNoCov">          0 :  MM=1.0;</span>
+<span class="lineNum">     408 </span>                :            : else
+<span class="lineNum">     409 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&gt;(-VCBLIN))</span>
+<span class="lineNum">     410 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :  {if (MC==1)</span>
+<span class="lineNum">     411 </span>                :<span class="lineNoCov">          0 :  MM=(1.0/(1.0-(vcbi/(-VCBO))));</span>
+<span class="lineNum">     412 </span>                :            : else
+<span class="lineNum">     413 </span>                :<span class="lineNoCov">          0 : MM=(1.0/(1.0-_pow((vcbi/(-VCBO)),MC)));</span>
+<span class="lineNum">     414 </span>                :            : }else
+<span class="lineNum">     415 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&lt;=(-VCBLIN))</span>
+<span class="lineNum">     416 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :  {if (MC==1)</span>
+<span class="lineNum">     417 </span>                :<span class="lineNoCov">          0 :  {MM=((1.0/(1.0-FBD))-((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi+(FBD*VCBO))));</span>
+<span class="lineNum">     418 </span>                :            : }else
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 : {MM=((1.0/(1.0-_pow(FBD,MC)))-((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO))));</span>
+<span class="lineNum">     420 </span>                :            : }}}else
+<span class="lineNum">     421 </span>                :<span class="lineNoCov">          0 : MM=1.0;</span>
+<span class="lineNum">     422 </span>                :            : }
+<a name="423"><span class="lineNum">     423 </span>                :<span class="lineNoCov">          0 : return MM;</span></a>
+<span class="lineNum">     424 </span>                :            : }
+<span class="lineNum">     425 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_MM (double VBCI, double VCBO, double MC, double VCBLIN, double BF, double KC, double d_VBCI, double d_VCBO, double d_MC, double d_VCBLIN, double d_BF, double d_KC)</span>
+<span class="lineNum">     426 </span>                :            : {
+<span class="lineNum">     427 </span>                :<span class="lineNoCov">          0 : double MM=0.0;</span>
+<span class="lineNum">     428 </span>                :<span class="lineNoCov">          0 : double MM_VBCI=0.0;</span>
+<span class="lineNum">     429 </span>                :<span class="lineNoCov">          0 : double MM_VCBO=0.0;</span>
+<span class="lineNum">     430 </span>                :<span class="lineNoCov">          0 : double MM_MC=0.0;</span>
+<span class="lineNum">     431 </span>                :<span class="lineNoCov">          0 : double MM_VCBLIN=0.0;</span>
+<span class="lineNum">     432 </span>                :<span class="lineNoCov">          0 : double MM_BF=0.0;</span>
+<span class="lineNum">     433 </span>                :<span class="lineNoCov">          0 : double MM_KC=0.0;</span>
+<span class="lineNum">     434 </span>                :<span class="lineNoCov">          0 : double FBD=0.0;</span>
+<span class="lineNum">     435 </span>                :<span class="lineNoCov">          0 : double FBD_VBCI=0.0;</span>
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 : double FBD_VCBO=0.0;</span>
+<span class="lineNum">     437 </span>                :<span class="lineNoCov">          0 : double FBD_MC=0.0;</span>
+<span class="lineNum">     438 </span>                :<span class="lineNoCov">          0 : double FBD_VCBLIN=0.0;</span>
+<span class="lineNum">     439 </span>                :<span class="lineNoCov">          0 : double FBD_BF=0.0;</span>
+<span class="lineNum">     440 </span>                :<span class="lineNoCov">          0 : double FBD_KC=0.0;</span>
+<span class="lineNum">     441 </span>                :<span class="lineNoCov">          0 : double vcbi=0.0;</span>
+<span class="lineNum">     442 </span>                :<span class="lineNoCov">          0 : double vcbi_VBCI=0.0;</span>
+<span class="lineNum">     443 </span>                :<span class="lineNoCov">          0 : double vcbi_VCBO=0.0;</span>
+<span class="lineNum">     444 </span>                :<span class="lineNoCov">          0 : double vcbi_MC=0.0;</span>
+<span class="lineNum">     445 </span>                :<span class="lineNoCov">          0 : double vcbi_VCBLIN=0.0;</span>
+<span class="lineNum">     446 </span>                :<span class="lineNoCov">          0 : double vcbi_BF=0.0;</span>
+<span class="lineNum">     447 </span>                :<span class="lineNoCov">          0 : double vcbi_KC=0.0;</span>
+<span class="lineNum">     448 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : {if (((KC&gt;0.0)&amp;&amp;(MC&gt;0.0))&amp;&amp;(VCBO&gt;0.0))</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     449 </span>                :<span class="lineNoCov">          0 :  {{vcbi_VBCI=1.0;</span>
+<span class="lineNum">     450 </span>                :<span class="lineNoCov">          0 : vcbi_VCBO=0.0;</span>
+<span class="lineNum">     451 </span>                :<span class="lineNoCov">          0 : vcbi_MC=0.0;</span>
+<span class="lineNum">     452 </span>                :<span class="lineNoCov">          0 : vcbi_VCBLIN=0.0;</span>
+<span class="lineNum">     453 </span>                :<span class="lineNoCov">          0 : vcbi_BF=0.0;</span>
+<span class="lineNum">     454 </span>                :<span class="lineNoCov">          0 : vcbi_KC=0.0;</span>
+<span class="lineNum">     455 </span>                :<span class="lineNoCov">          0 : vcbi=VBCI;</span>
+<span class="lineNum">     456 </span>                :            : }
+<span class="lineNum">     457 </span>                :<span class="lineNoCov">          0 : {FBD_VBCI=0.0;</span>
+<span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 : FBD_VCBO=(-VCBLIN/(VCBO*VCBO));</span>
+<span class="lineNum">     459 </span>                :<span class="lineNoCov">          0 : FBD_MC=0.0;</span>
+<span class="lineNum">     460 </span>                :<span class="lineNoCov">          0 : FBD_VCBLIN=(1/VCBO);</span>
+<span class="lineNum">     461 </span>                :<span class="lineNoCov">          0 : FBD_BF=0.0;</span>
+<span class="lineNum">     462 </span>                :<span class="lineNoCov">          0 : FBD_KC=0.0;</span>
+<span class="lineNum">     463 </span>                :<span class="lineNoCov">          0 : FBD=(VCBLIN/VCBO);</span>
+<span class="lineNum">     464 </span>                :            : }
+<span class="lineNum">     465 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&gt;0.0)</span>
+<span class="lineNum">     466 </span>                :<span class="lineNoCov">          0 :  {MM_VBCI=0.0;</span>
+<span class="lineNum">     467 </span>                :<span class="lineNoCov">          0 : MM_VCBO=0.0;</span>
+<span class="lineNum">     468 </span>                :<span class="lineNoCov">          0 : MM_MC=0.0;</span>
+<span class="lineNum">     469 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=0.0;</span>
+<span class="lineNum">     470 </span>                :<span class="lineNoCov">          0 : MM_BF=0.0;</span>
+<span class="lineNum">     471 </span>                :<span class="lineNoCov">          0 : MM_KC=0.0;</span>
+<span class="lineNum">     472 </span>                :<span class="lineNoCov">          0 : MM=1.0;</span>
+<span class="lineNum">     473 </span>                :            : }
+<span class="lineNum">     474 </span>                :            : else
+<span class="lineNum">     475 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&gt;(-VCBLIN))</span>
+<span class="lineNum">     476 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :  {if (MC==1)</span>
+<span class="lineNum">     477 </span>                :<span class="lineNoCov">          0 :  {MM_VBCI=(-(-vcbi_VBCI/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     478 </span>                :<span class="lineNoCov">          0 : MM_VCBO=(-(-vcbi_VCBO/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     479 </span>                :<span class="lineNoCov">          0 : MM_MC=(-(-vcbi_MC/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     480 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=(-(-vcbi_VCBLIN/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     481 </span>                :<span class="lineNoCov">          0 : MM_BF=(-(-vcbi_BF/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     482 </span>                :<span class="lineNoCov">          0 : MM_KC=(-(-vcbi_KC/(-VCBO))/((1.0-(vcbi/(-VCBO)))*(1.0-(vcbi/(-VCBO)))));</span>
+<span class="lineNum">     483 </span>                :<span class="lineNoCov">          0 : MM=(1.0/(1.0-(vcbi/(-VCBO))));</span>
+<span class="lineNum">     484 </span>                :            : }
+<span class="lineNum">     485 </span>                :            : else
+<span class="lineNum">     486 </span>                :<span class="lineNoCov">          0 : {MM_VBCI=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_VBCI/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(0.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     487 </span>                :<span class="lineNoCov">          0 : MM_VCBO=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_VCBO/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(0.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     488 </span>                :<span class="lineNoCov">          0 : MM_MC=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_MC/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(1.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     489 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_VCBLIN/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(0.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     490 </span>                :<span class="lineNoCov">          0 : MM_BF=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_BF/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(0.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     491 </span>                :<span class="lineNoCov">          0 : MM_KC=(-(-_d0_pow((vcbi/(-VCBO)),MC)*(vcbi_KC/(-VCBO))+_d1_pow((vcbi/(-VCBO)),MC)*(0.0))/((1.0-_pow((vcbi/(-VCBO)),MC))*(1.0-_pow((vcbi/(-VCBO)),MC))));</span>
+<span class="lineNum">     492 </span>                :<span class="lineNoCov">          0 : MM=(1.0/(1.0-_pow((vcbi/(-VCBO)),MC)));</span>
+<span class="lineNum">     493 </span>                :            : }
+<span class="lineNum">     494 </span>                :            : }else
+<span class="lineNum">     495 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (VBCI&lt;=(-VCBLIN))</span>
+<span class="lineNum">     496 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :  {if (MC==1)</span>
+<span class="lineNum">     497 </span>                :<span class="lineNoCov">          0 :  {{MM_VBCI=((-(-FBD_VBCI)/((1.0-FBD)*(1.0-FBD)))-(((-(((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_VBCI))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0)))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_VBCI+FBD_VBCI*VCBO))));</span>
+<span class="lineNum">     498 </span>                :<span class="lineNoCov">          0 : MM_VCBO=((-(-FBD_VCBO)/((1.0-FBD)*(1.0-FBD)))-((((-1/(VCBO*VCBO))*1.0*_pow((1.0-FBD),2.0)-((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_VCBO))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_VCBO+(FBD_VCBO*VCBO)+FBD))));</span>
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 : MM_MC=((-(-FBD_MC)/((1.0-FBD)*(1.0-FBD)))-(((-(((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_MC))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0)))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_MC+FBD_MC*VCBO))));</span>
+<span class="lineNum">     500 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=((-(-FBD_VCBLIN)/((1.0-FBD)*(1.0-FBD)))-(((-(((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_VCBLIN))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0)))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_VCBLIN+FBD_VCBLIN*VCBO))));</span>
+<span class="lineNum">     501 </span>                :<span class="lineNoCov">          0 : MM_BF=((-(-FBD_BF)/((1.0-FBD)*(1.0-FBD)))-(((-(((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_BF))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0)))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_BF+FBD_BF*VCBO))));</span>
+<span class="lineNum">     502 </span>                :<span class="lineNoCov">          0 : MM_KC=((-(-FBD_KC)/((1.0-FBD)*(1.0-FBD)))-(((-(((1.0/VCBO)*1.0)*_d0_pow((1.0-FBD),2.0)*((-FBD_KC))+_d1_pow((1.0-FBD),2.0)*(0.0))/(_pow((1.0-FBD),2.0)*_pow((1.0-FBD),2.0)))*(vcbi+(FBD*VCBO)))+((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi_KC+FBD_KC*VCBO))));</span>
+<span class="lineNum">     503 </span>                :<span class="lineNoCov">          0 : MM=((1.0/(1.0-FBD))-((((1.0/VCBO)*1.0)/_pow((1.0-FBD),2.0))*(vcbi+(FBD*VCBO))));</span>
+<span class="lineNum">     504 </span>                :            : }
+<span class="lineNum">     505 </span>                :            : }else
+<span class="lineNum">     506 </span>                :<span class="lineNoCov">          0 : {{MM_VBCI=((-(-_d0_pow(FBD,MC)*(FBD_VBCI)+_d1_pow(FBD,MC)*(0.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-(((((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_VBCI)+_d1_pow(FBD,(MC-1.0))*(0.0))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_VBCI)+_d1_pow(FBD,MC)*(0.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_VBCI+FBD_VBCI*VCBO))));</span>
+<span class="lineNum">     507 </span>                :<span class="lineNoCov">          0 : MM_VCBO=((-(-_d0_pow(FBD,MC)*(FBD_VCBO)+_d1_pow(FBD,MC)*(0.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-((((((-MC/(VCBO*VCBO))*_pow(FBD,(MC-1.0)))+((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_VCBO)+_d1_pow(FBD,(MC-1.0))*(0.0)))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_VCBO)+_d1_pow(FBD,MC)*(0.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_VCBO+(FBD_VCBO*VCBO)+FBD))));</span>
+<span class="lineNum">     508 </span>                :<span class="lineNoCov">          0 : MM_MC=((-(-_d0_pow(FBD,MC)*(FBD_MC)+_d1_pow(FBD,MC)*(1.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-((((((1/VCBO)*_pow(FBD,(MC-1.0)))+((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_MC)+_d1_pow(FBD,(MC-1.0))*(1.0)))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_MC)+_d1_pow(FBD,MC)*(1.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_MC+FBD_MC*VCBO))));</span>
+<span class="lineNum">     509 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=((-(-_d0_pow(FBD,MC)*(FBD_VCBLIN)+_d1_pow(FBD,MC)*(0.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-(((((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_VCBLIN)+_d1_pow(FBD,(MC-1.0))*(0.0))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_VCBLIN)+_d1_pow(FBD,MC)*(0.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_VCBLIN+FBD_VCBLIN*VCBO))));</span>
+<span class="lineNum">     510 </span>                :<span class="lineNoCov">          0 : MM_BF=((-(-_d0_pow(FBD,MC)*(FBD_BF)+_d1_pow(FBD,MC)*(0.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-(((((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_BF)+_d1_pow(FBD,(MC-1.0))*(0.0))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_BF)+_d1_pow(FBD,MC)*(0.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_BF+FBD_BF*VCBO))));</span>
+<span class="lineNum">     511 </span>                :<span class="lineNoCov">          0 : MM_KC=((-(-_d0_pow(FBD,MC)*(FBD_KC)+_d1_pow(FBD,MC)*(0.0))/((1.0-_pow(FBD,MC))*(1.0-_pow(FBD,MC))))-(((((MC/VCBO)*_d0_pow(FBD,(MC-1.0))*(FBD_KC)+_d1_pow(FBD,(MC-1.0))*(0.0))*_pow((1.0-_pow(FBD,MC)),2.0)-((MC/VCBO)*_pow(FBD,(MC-1.0)))*_d0_pow((1.0-_pow(FBD,MC)),2.0)*((-_d0_pow(FBD,MC)*(FBD_KC)+_d1_pow(FBD,MC)*(0.0)))+_d1_pow((1.0-_pow(FBD,MC)),2.0)*(0.0))/(_pow((1.0-_pow(FBD,MC)),2.0)*_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO)))+((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi_KC+FBD_KC*VCBO))));</span>
+<span class="lineNum">     512 </span>                :<span class="lineNoCov">          0 : MM=((1.0/(1.0-_pow(FBD,MC)))-((((MC/VCBO)*_pow(FBD,(MC-1.0)))/_pow((1.0-_pow(FBD,MC)),2.0))*(vcbi+(FBD*VCBO))));</span>
+<span class="lineNum">     513 </span>                :            : }
+<span class="lineNum">     514 </span>                :            : }}}else
+<span class="lineNum">     515 </span>                :<span class="lineNoCov">          0 : {MM_VBCI=0.0;</span>
+<span class="lineNum">     516 </span>                :<span class="lineNoCov">          0 : MM_VCBO=0.0;</span>
+<span class="lineNum">     517 </span>                :<span class="lineNoCov">          0 : MM_MC=0.0;</span>
+<span class="lineNum">     518 </span>                :<span class="lineNoCov">          0 : MM_VCBLIN=0.0;</span>
+<span class="lineNum">     519 </span>                :<span class="lineNoCov">          0 : MM_BF=0.0;</span>
+<span class="lineNum">     520 </span>                :<span class="lineNoCov">          0 : MM_KC=0.0;</span>
+<span class="lineNum">     521 </span>                :<span class="lineNoCov">          0 : MM=1.0;</span>
+<span class="lineNum">     522 </span>                :            : }
+<span class="lineNum">     523 </span>                :            : }
+<span class="lineNum">     524 </span>                :<span class="lineNoCov">          0 : return MM_VBCI*d_VBCI+MM_VCBO*d_VCBO+MM_MC*d_MC+MM_VCBLIN*d_VCBLIN+MM_BF*d_BF+MM_KC*d_KC;</span>
+<span class="lineNum">     525 </span>                :            : }
+<span class="lineNum">     526 </span>                :            : 
+<span class="lineNum">     527 </span>                :            : /*
+<a name="528"><span class="lineNum">     528 </span>                :            :  * analog function: charge</a>
+<span class="lineNum">     529 </span>                :            :  */
+<span class="lineNum">     530 </span>                :<span class="lineNoCov">          0 : double HBT_X_charge (double U, double C0, double Ud, double m, double Area)</span>
+<span class="lineNum">     531 </span>                :            : {
+<span class="lineNum">     532 </span>                :<span class="lineNoCov">          0 : double charge=0.0;</span>
+<span class="lineNum">     533 </span>                :<span class="lineNoCov">          0 : double Vj=0.0;</span>
+<span class="lineNum">     534 </span>                :<span class="lineNoCov">          0 : double Vjo=0.0;</span>
+<span class="lineNum">     535 </span>                :<span class="lineNoCov">          0 : double VF=0.0;</span>
+<span class="lineNum">     536 </span>                :<span class="lineNoCov">          0 : {Vj=HBT_X_Vt(U,Ud);</span>
+<span class="lineNum">     537 </span>                :<span class="lineNoCov">          0 : Vjo=HBT_X_Vt(0.0,Ud);</span>
+<span class="lineNum">     538 </span>                :<span class="lineNoCov">          0 : VF=(0.9*Ud);</span>
+<span class="lineNum">     539 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (m==1.0)</span>
+<span class="lineNum">     540 </span>                :<span class="lineNoCov">          0 :  {charge=((Area*C0)*((Ud*(_logE((1.0-(Vjo/Ud)))-_logE((1.0-(Vj/Ud)))))+((1.0/(1.0-(VF/Ud)))*((U-Vj)+Vjo))));</span>
+<span class="lineNum">     541 </span>                :            : }else
+<span class="lineNum">     542 </span>                :<span class="lineNoCov">          0 : {charge=((Area*C0)*((((Ud/(1.0-m))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+(_pow((1.0-(VF/Ud)),(-m))*((U-Vj)+Vjo)))-(Ud*(1.0/(1.0-m)))));</span>
+<span class="lineNum">     543 </span>                :            : }}
+<a name="544"><span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 : return charge;</span></a>
+<span class="lineNum">     545 </span>                :            : }
+<span class="lineNum">     546 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_charge (double U, double C0, double Ud, double m, double Area, double d_U, double d_C0, double d_Ud, double d_m, double d_Area)</span>
+<span class="lineNum">     547 </span>                :            : {
+<span class="lineNum">     548 </span>                :<span class="lineNoCov">          0 : double charge=0.0;</span>
+<span class="lineNum">     549 </span>                :<span class="lineNoCov">          0 : double charge_U=0.0;</span>
+<span class="lineNum">     550 </span>                :<span class="lineNoCov">          0 : double charge_C0=0.0;</span>
+<span class="lineNum">     551 </span>                :<span class="lineNoCov">          0 : double charge_Ud=0.0;</span>
+<span class="lineNum">     552 </span>                :<span class="lineNoCov">          0 : double charge_m=0.0;</span>
+<span class="lineNum">     553 </span>                :<span class="lineNoCov">          0 : double charge_Area=0.0;</span>
+<span class="lineNum">     554 </span>                :<span class="lineNoCov">          0 : double Vj=0.0;</span>
+<span class="lineNum">     555 </span>                :<span class="lineNoCov">          0 : double Vj_U=0.0;</span>
+<span class="lineNum">     556 </span>                :<span class="lineNoCov">          0 : double Vj_C0=0.0;</span>
+<span class="lineNum">     557 </span>                :<span class="lineNoCov">          0 : double Vj_Ud=0.0;</span>
+<span class="lineNum">     558 </span>                :<span class="lineNoCov">          0 : double Vj_m=0.0;</span>
+<span class="lineNum">     559 </span>                :<span class="lineNoCov">          0 : double Vj_Area=0.0;</span>
+<span class="lineNum">     560 </span>                :<span class="lineNoCov">          0 : double Vjo=0.0;</span>
+<span class="lineNum">     561 </span>                :<span class="lineNoCov">          0 : double Vjo_U=0.0;</span>
+<span class="lineNum">     562 </span>                :<span class="lineNoCov">          0 : double Vjo_C0=0.0;</span>
+<span class="lineNum">     563 </span>                :<span class="lineNoCov">          0 : double Vjo_Ud=0.0;</span>
+<span class="lineNum">     564 </span>                :<span class="lineNoCov">          0 : double Vjo_m=0.0;</span>
+<span class="lineNum">     565 </span>                :<span class="lineNoCov">          0 : double Vjo_Area=0.0;</span>
+<span class="lineNum">     566 </span>                :<span class="lineNoCov">          0 : double VF=0.0;</span>
+<span class="lineNum">     567 </span>                :<span class="lineNoCov">          0 : double VF_U=0.0;</span>
+<span class="lineNum">     568 </span>                :<span class="lineNoCov">          0 : double VF_C0=0.0;</span>
+<span class="lineNum">     569 </span>                :<span class="lineNoCov">          0 : double VF_Ud=0.0;</span>
+<span class="lineNum">     570 </span>                :<span class="lineNoCov">          0 : double VF_m=0.0;</span>
+<span class="lineNum">     571 </span>                :<span class="lineNoCov">          0 : double VF_Area=0.0;</span>
+<span class="lineNum">     572 </span>                :<span class="lineNoCov">          0 : {{Vj_U=HBT_X_d_Vt(U,Ud,(1.0),(0.0));</span>
+<span class="lineNum">     573 </span>                :<span class="lineNoCov">          0 : Vj_C0=HBT_X_d_Vt(U,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     574 </span>                :<span class="lineNoCov">          0 : Vj_Ud=HBT_X_d_Vt(U,Ud,(0.0),(1.0));</span>
+<span class="lineNum">     575 </span>                :<span class="lineNoCov">          0 : Vj_m=HBT_X_d_Vt(U,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     576 </span>                :<span class="lineNoCov">          0 : Vj_Area=HBT_X_d_Vt(U,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     577 </span>                :<span class="lineNoCov">          0 : Vj=HBT_X_Vt(U,Ud);</span>
+<span class="lineNum">     578 </span>                :            : }
+<span class="lineNum">     579 </span>                :<span class="lineNoCov">          0 : {Vjo_U=HBT_X_d_Vt(0.0,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     580 </span>                :<span class="lineNoCov">          0 : Vjo_C0=HBT_X_d_Vt(0.0,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     581 </span>                :<span class="lineNoCov">          0 : Vjo_Ud=HBT_X_d_Vt(0.0,Ud,(0.0),(1.0));</span>
+<span class="lineNum">     582 </span>                :<span class="lineNoCov">          0 : Vjo_m=HBT_X_d_Vt(0.0,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     583 </span>                :<span class="lineNoCov">          0 : Vjo_Area=HBT_X_d_Vt(0.0,Ud,(0.0),(0.0));</span>
+<span class="lineNum">     584 </span>                :<span class="lineNoCov">          0 : Vjo=HBT_X_Vt(0.0,Ud);</span>
+<span class="lineNum">     585 </span>                :            : }
+<span class="lineNum">     586 </span>                :<span class="lineNoCov">          0 : {VF_U=0.0;</span>
+<span class="lineNum">     587 </span>                :<span class="lineNoCov">          0 : VF_C0=0.0;</span>
+<span class="lineNum">     588 </span>                :<span class="lineNoCov">          0 : VF_Ud=(0.9);</span>
+<span class="lineNum">     589 </span>                :<span class="lineNoCov">          0 : VF_m=0.0;</span>
+<span class="lineNum">     590 </span>                :<span class="lineNoCov">          0 : VF_Area=0.0;</span>
+<span class="lineNum">     591 </span>                :<span class="lineNoCov">          0 : VF=(0.9*Ud);</span>
+<span class="lineNum">     592 </span>                :            : }
+<span class="lineNum">     593 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (m==1.0)</span>
+<span class="lineNum">     594 </span>                :<span class="lineNoCov">          0 :  {{charge_U=((Area*C0)*((Ud*(_d0_logE((1.0-(Vjo/Ud)))*((-Vjo_U/Ud))-_d0_logE((1.0-(Vj/Ud)))*((-Vj_U/Ud))))+(((-(-VF_U/Ud)/((1.0-(VF/Ud))*(1.0-(VF/Ud))))*((U-Vj)+Vjo))+((1.0/(1.0-(VF/Ud)))*((1.0-Vj_U)+Vjo_U)))));</span>
+<span class="lineNum">     595 </span>                :<span class="lineNoCov">          0 : charge_C0=(((Area)*((Ud*(_logE((1.0-(Vjo/Ud)))-_logE((1.0-(Vj/Ud)))))+((1.0/(1.0-(VF/Ud)))*((U-Vj)+Vjo))))+((Area*C0)*((Ud*(_d0_logE((1.0-(Vjo/Ud)))*((-Vjo_C0/Ud))-_d0_logE((1.0-(Vj/Ud)))*((-Vj_C0/Ud))))+(((-(-VF_C0/Ud)/((1.0-(VF/Ud))*(1.0-(VF/Ud))))*((U-Vj)+Vjo))+((1.0/(1.0-(VF/Ud)))*((-Vj_C0)+Vjo_C0))))));</span>
+<span class="lineNum">     596 </span>                :<span class="lineNoCov">          0 : charge_Ud=((Area*C0)*(((_logE((1.0-(Vjo/Ud)))-_logE((1.0-(Vj/Ud))))+((_d0_logE((1.0-(Vjo/Ud)))*((-((Vjo_Ud*Ud)-Vjo)/(Ud*Ud)))-_d0_logE((1.0-(Vj/Ud)))*((-((Vj_Ud*Ud)-Vj)/(Ud*Ud))))*Ud))+(((-(-((VF_Ud*Ud)-VF)/(Ud*Ud))/((1.0-(VF/Ud))*(1.0-(VF/Ud))))*((U-Vj)+Vjo))+((1.0/(1.0-(VF/Ud)))*((-Vj_Ud)+Vjo_Ud)))));</span>
+<span class="lineNum">     597 </span>                :<span class="lineNoCov">          0 : charge_m=((Area*C0)*((Ud*(_d0_logE((1.0-(Vjo/Ud)))*((-Vjo_m/Ud))-_d0_logE((1.0-(Vj/Ud)))*((-Vj_m/Ud))))+(((-(-VF_m/Ud)/((1.0-(VF/Ud))*(1.0-(VF/Ud))))*((U-Vj)+Vjo))+((1.0/(1.0-(VF/Ud)))*((-Vj_m)+Vjo_m)))));</span>
+<span class="lineNum">     598 </span>                :<span class="lineNoCov">          0 : charge_Area=(((C0)*((Ud*(_logE((1.0-(Vjo/Ud)))-_logE((1.0-(Vj/Ud)))))+((1.0/(1.0-(VF/Ud)))*((U-Vj)+Vjo))))+((Area*C0)*((Ud*(_d0_logE((1.0-(Vjo/Ud)))*((-Vjo_Area/Ud))-_d0_logE((1.0-(Vj/Ud)))*((-Vj_Area/Ud))))+(((-(-VF_Area/Ud)/((1.0-(VF/Ud))*(1.0-(VF/Ud))))*((U-Vj)+Vjo))+((1.0/(1.0-(VF/Ud)))*((-Vj_Area)+Vjo_Area))))));</span>
+<span class="lineNum">     599 </span>                :<span class="lineNoCov">          0 : charge=((Area*C0)*((Ud*(_logE((1.0-(Vjo/Ud)))-_logE((1.0-(Vj/Ud)))))+((1.0/(1.0-(VF/Ud)))*((U-Vj)+Vjo))));</span>
+<span class="lineNum">     600 </span>                :            : }
+<span class="lineNum">     601 </span>                :            : }else
+<span class="lineNum">     602 </span>                :<span class="lineNoCov">          0 : {{charge_U=((Area*C0)*(((Ud/(1.0-m))*(_d0_pow((1.0-(Vjo/Ud)),(1.0-m))*((-Vjo_U/Ud))+_d1_pow((1.0-(Vjo/Ud)),(1.0-m))*(0.0)-_d0_pow((1.0-(Vj/Ud)),(1.0-m))*((-Vj_U/Ud))+_d1_pow((1.0-(Vj/Ud)),(1.0-m))*(0.0)))+((_d0_pow((1.0-(VF/Ud)),(-m))*((-VF_U/Ud))+_d1_pow((1.0-(VF/Ud)),(-m))*(0.0)*((U-Vj)+Vjo))+(_pow((1.0-(VF/Ud)),(-m))*((1.0-Vj_U)+Vjo_U)))));</span>
+<span class="lineNum">     603 </span>                :<span class="lineNoCov">          0 : charge_C0=(((Area)*((((Ud/(1.0-m))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+(_pow((1.0-(VF/Ud)),(-m))*((U-Vj)+Vjo)))-(Ud*(1.0/(1.0-m)))))+((Area*C0)*(((Ud/(1.0-m))*(_d0_pow((1.0-(Vjo/Ud)),(1.0-m))*((-Vjo_C0/Ud))+_d1_pow((1.0-(Vjo/Ud)),(1.0-m))*(0.0)-_d0_pow((1.0-(Vj/Ud)),(1.0-m))*((-Vj_C0/Ud))+_d1_pow((1.0-(Vj/Ud)),(1.0-m))*(0.0)))+((_d0_pow((1.0-(VF/Ud)),(-m))*((-VF_C0/Ud))+_d1_pow((1.0-(VF/Ud)),(-m))*(0.0)*((U-Vj)+Vjo))+(_pow((1.0-(VF/Ud)),(-m))*((-Vj_C0)+Vjo_C0))))));</span>
+<span class="lineNum">     604 </span>                :<span class="lineNoCov">          0 : charge_Ud=((Area*C0)*(((((1/(1.0-m))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+((Ud/(1.0-m))*(_d0_pow((1.0-(Vjo/Ud)),(1.0-m))*((-((Vjo_Ud*Ud)-Vjo)/(Ud*Ud)))+_d1_pow((1.0-(Vjo/Ud)),(1.0-m))*(0.0)-_d0_pow((1.0-(Vj/Ud)),(1.0-m))*((-((Vj_Ud*Ud)-Vj)/(Ud*Ud)))+_d1_pow((1.0-(Vj/Ud)),(1.0-m))*(0.0))))+((_d0_pow((1.0-(VF/Ud)),(-m))*((-((VF_Ud*Ud)-VF)/(Ud*Ud)))+_d1_pow((1.0-(VF/Ud)),(-m))*(0.0)*((U-Vj)+Vjo))+(_pow((1.0-(VF/Ud)),(-m))*((-Vj_Ud)+Vjo_Ud))))-((1.0/(1.0-m)))));</span>
+<span class="lineNum">     605 </span>                :<span class="lineNoCov">          0 : charge_m=((Area*C0)*(((((-(Ud*(-1.0))/((1.0-m)*(1.0-m)))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+((Ud/(1.0-m))*(_d0_pow((1.0-(Vjo/Ud)),(1.0-m))*((-Vjo_m/Ud))+_d1_pow((1.0-(Vjo/Ud)),(1.0-m))*((-1.0))-_d0_pow((1.0-(Vj/Ud)),(1.0-m))*((-Vj_m/Ud))+_d1_pow((1.0-(Vj/Ud)),(1.0-m))*((-1.0)))))+((_d0_pow((1.0-(VF/Ud)),(-m))*((-VF_m/Ud))+_d1_pow((1.0-(VF/Ud)),(-m))*(0.0)*((U-Vj)+Vjo))+(_pow((1.0-(VF/Ud)),(-m))*((-Vj_m)+Vjo_m))))-(Ud*(-(-1.0)/((1.0-m)*(1.0-m))))));</span>
+<span class="lineNum">     606 </span>                :<span class="lineNoCov">          0 : charge_Area=(((C0)*((((Ud/(1.0-m))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+(_pow((1.0-(VF/Ud)),(-m))*((U-Vj)+Vjo)))-(Ud*(1.0/(1.0-m)))))+((Area*C0)*(((Ud/(1.0-m))*(_d0_pow((1.0-(Vjo/Ud)),(1.0-m))*((-Vjo_Area/Ud))+_d1_pow((1.0-(Vjo/Ud)),(1.0-m))*(0.0)-_d0_pow((1.0-(Vj/Ud)),(1.0-m))*((-Vj_Area/Ud))+_d1_pow((1.0-(Vj/Ud)),(1.0-m))*(0.0)))+((_d0_pow((1.0-(VF/Ud)),(-m))*((-VF_Area/Ud))+_d1_pow((1.0-(VF/Ud)),(-m))*(0.0)*((U-Vj)+Vjo))+(_pow((1.0-(VF/Ud)),(-m))*((-Vj_Area)+Vjo_Area))))));</span>
+<span class="lineNum">     607 </span>                :<span class="lineNoCov">          0 : charge=((Area*C0)*((((Ud/(1.0-m))*(_pow((1.0-(Vjo/Ud)),(1.0-m))-_pow((1.0-(Vj/Ud)),(1.0-m))))+(_pow((1.0-(VF/Ud)),(-m))*((U-Vj)+Vjo)))-(Ud*(1.0/(1.0-m)))));</span>
+<span class="lineNum">     608 </span>                :            : }
+<span class="lineNum">     609 </span>                :            : }}
+<span class="lineNum">     610 </span>                :<span class="lineNoCov">          0 : return charge_U*d_U+charge_C0*d_C0+charge_Ud*d_Ud+charge_m*d_m+charge_Area*d_Area;</span>
+<span class="lineNum">     611 </span>                :            : }
+<span class="lineNum">     612 </span>                :            : 
+<span class="lineNum">     613 </span>                :            : /*
+<a name="614"><span class="lineNum">     614 </span>                :            :  * analog function: Vceff</a>
+<span class="lineNum">     615 </span>                :            :  */
+<span class="lineNum">     616 </span>                :<span class="lineNoCov">          0 : double HBT_X_Vceff (double U, double VCES)</span>
+<span class="lineNum">     617 </span>                :            : {
+<span class="lineNum">     618 </span>                :<span class="lineNoCov">          0 : double Vceff=0.0;</span>
+<span class="lineNum">     619 </span>                :<span class="lineNoCov">          0 : double Vth0=0.0;</span>
+<span class="lineNum">     620 </span>                :<span class="lineNoCov">          0 : {Vth0=0.025;</span>
+<span class="lineNum">     621 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (U&lt;VCES)</span>
+<span class="lineNum">     622 </span>                :<span class="lineNoCov">          0 :  Vceff=(Vth0+(Vth0*_logE((1.0+_exp((((U-VCES)/Vth0)-1.0))))));</span>
+<span class="lineNum">     623 </span>                :            : else
+<span class="lineNum">     624 </span>                :<span class="lineNoCov">          0 : Vceff=((U-VCES)+(Vth0*_logE((1.0+_exp((1.0-((U-VCES)/Vth0)))))));</span>
+<span class="lineNum">     625 </span>                :            : }
+<a name="626"><span class="lineNum">     626 </span>                :<span class="lineNoCov">          0 : return Vceff;</span></a>
+<span class="lineNum">     627 </span>                :            : }
+<span class="lineNum">     628 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_Vceff (double U, double VCES, double d_U, double d_VCES)</span>
+<span class="lineNum">     629 </span>                :            : {
+<span class="lineNum">     630 </span>                :<span class="lineNoCov">          0 : double Vceff=0.0;</span>
+<span class="lineNum">     631 </span>                :<span class="lineNoCov">          0 : double Vceff_U=0.0;</span>
+<span class="lineNum">     632 </span>                :<span class="lineNoCov">          0 : double Vceff_VCES=0.0;</span>
+<span class="lineNum">     633 </span>                :<span class="lineNoCov">          0 : double Vth0=0.0;</span>
+<span class="lineNum">     634 </span>                :<span class="lineNoCov">          0 : double Vth0_U=0.0;</span>
+<span class="lineNum">     635 </span>                :<span class="lineNoCov">          0 : double Vth0_VCES=0.0;</span>
+<span class="lineNum">     636 </span>                :<span class="lineNoCov">          0 : {{Vth0_U=0.0;</span>
+<span class="lineNum">     637 </span>                :<span class="lineNoCov">          0 : Vth0_VCES=0.0;</span>
+<span class="lineNum">     638 </span>                :<span class="lineNoCov">          0 : Vth0=0.025;</span>
+<span class="lineNum">     639 </span>                :            : }
+<span class="lineNum">     640 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : if (U&lt;VCES)</span>
+<span class="lineNum">     641 </span>                :<span class="lineNoCov">          0 :  {Vceff_U=(Vth0_U+((Vth0_U*_logE((1.0+_exp((((U-VCES)/Vth0)-1.0)))))+(Vth0*_d0_logE((1.0+_exp((((U-VCES)/Vth0)-1.0))))*((+_d0_exp((((U-VCES)/Vth0)-1.0))*(((Vth0-((U-VCES)*Vth0_U))/(Vth0*Vth0))))))));</span>
+<span class="lineNum">     642 </span>                :<span class="lineNoCov">          0 : Vceff_VCES=(Vth0_VCES+((Vth0_VCES*_logE((1.0+_exp((((U-VCES)/Vth0)-1.0)))))+(Vth0*_d0_logE((1.0+_exp((((U-VCES)/Vth0)-1.0))))*((+_d0_exp((((U-VCES)/Vth0)-1.0))*(((-1.0)*Vth0-(U-VCES)*Vth0_VCES)/(Vth0*Vth0)))))));</span>
+<span class="lineNum">     643 </span>                :<span class="lineNoCov">          0 : Vceff=(Vth0+(Vth0*_logE((1.0+_exp((((U-VCES)/Vth0)-1.0))))));</span>
+<span class="lineNum">     644 </span>                :            : }
+<span class="lineNum">     645 </span>                :            : else
+<span class="lineNum">     646 </span>                :<span class="lineNoCov">          0 : {Vceff_U=(1.0+((Vth0_U*_logE((1.0+_exp((1.0-((U-VCES)/Vth0))))))+(Vth0*_d0_logE((1.0+_exp((1.0-((U-VCES)/Vth0)))))*((+_d0_exp((1.0-((U-VCES)/Vth0)))*((-((Vth0-((U-VCES)*Vth0_U))/(Vth0*Vth0)))))))));</span>
+<span class="lineNum">     647 </span>                :<span class="lineNoCov">          0 : Vceff_VCES=((-1.0)+((Vth0_VCES*_logE((1.0+_exp((1.0-((U-VCES)/Vth0))))))+(Vth0*_d0_logE((1.0+_exp((1.0-((U-VCES)/Vth0)))))*((+_d0_exp((1.0-((U-VCES)/Vth0)))*((-((-1.0)*Vth0-(U-VCES)*Vth0_VCES)/(Vth0*Vth0))))))));</span>
+<span class="lineNum">     648 </span>                :<span class="lineNoCov">          0 : Vceff=((U-VCES)+(Vth0*_logE((1.0+_exp((1.0-((U-VCES)/Vth0)))))));</span>
+<span class="lineNum">     649 </span>                :            : }
+<span class="lineNum">     650 </span>                :            : }
+<span class="lineNum">     651 </span>                :<span class="lineNoCov">          0 : return Vceff_U*d_U+Vceff_VCES*d_VCES;</span>
+<span class="lineNum">     652 </span>                :            : }
+<span class="lineNum">     653 </span>                :            : 
+<span class="lineNum">     654 </span>                :            : /*
+<a name="655"><span class="lineNum">     655 </span>                :            :  * analog function: ICK</a>
+<span class="lineNum">     656 </span>                :            :  */
+<span class="lineNum">     657 </span>                :<span class="lineNoCov">          0 : double HBT_X_ICK (double U, double RCI0, double VLIM, double InvVPT, double VCES)</span>
+<span class="lineNum">     658 </span>                :            : {
+<span class="lineNum">     659 </span>                :<span class="lineNoCov">          0 : double ICK=0.0;</span>
+<span class="lineNum">     660 </span>                :<span class="lineNoCov">          0 : double VC=0.0;</span>
+<span class="lineNum">     661 </span>                :<span class="lineNoCov">          0 : double x=0.0;</span>
+<span class="lineNum">     662 </span>                :<span class="lineNoCov">          0 : {VC=HBT_X_Vceff(U,VCES);</span>
+<span class="lineNum">     663 </span>                :<span class="lineNoCov">          0 : x=((VC-VLIM)*InvVPT);</span>
+<span class="lineNum">     664 </span>                :<span class="lineNoCov">          0 : ICK=(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)));</span>
+<span class="lineNum">     665 </span>                :            : }
+<a name="666"><span class="lineNum">     666 </span>                :<span class="lineNoCov">          0 : return ICK;</span></a>
+<span class="lineNum">     667 </span>                :            : }
+<span class="lineNum">     668 </span>                :<span class="lineNoCov">          0 : double HBT_X_d_ICK (double U, double RCI0, double VLIM, double InvVPT, double VCES, double d_U, double d_RCI0, double d_VLIM, double d_InvVPT, double d_VCES)</span>
+<span class="lineNum">     669 </span>                :            : {
+<span class="lineNum">     670 </span>                :<span class="lineNoCov">          0 : double ICK=0.0;</span>
+<span class="lineNum">     671 </span>                :<span class="lineNoCov">          0 : double ICK_U=0.0;</span>
+<span class="lineNum">     672 </span>                :<span class="lineNoCov">          0 : double ICK_RCI0=0.0;</span>
+<span class="lineNum">     673 </span>                :<span class="lineNoCov">          0 : double ICK_VLIM=0.0;</span>
+<span class="lineNum">     674 </span>                :<span class="lineNoCov">          0 : double ICK_InvVPT=0.0;</span>
+<span class="lineNum">     675 </span>                :<span class="lineNoCov">          0 : double ICK_VCES=0.0;</span>
+<span class="lineNum">     676 </span>                :<span class="lineNoCov">          0 : double VC=0.0;</span>
+<span class="lineNum">     677 </span>                :<span class="lineNoCov">          0 : double VC_U=0.0;</span>
+<span class="lineNum">     678 </span>                :<span class="lineNoCov">          0 : double VC_RCI0=0.0;</span>
+<span class="lineNum">     679 </span>                :<span class="lineNoCov">          0 : double VC_VLIM=0.0;</span>
+<span class="lineNum">     680 </span>                :<span class="lineNoCov">          0 : double VC_InvVPT=0.0;</span>
+<span class="lineNum">     681 </span>                :<span class="lineNoCov">          0 : double VC_VCES=0.0;</span>
+<span class="lineNum">     682 </span>                :<span class="lineNoCov">          0 : double x=0.0;</span>
+<span class="lineNum">     683 </span>                :<span class="lineNoCov">          0 : double x_U=0.0;</span>
+<span class="lineNum">     684 </span>                :<span class="lineNoCov">          0 : double x_RCI0=0.0;</span>
+<span class="lineNum">     685 </span>                :<span class="lineNoCov">          0 : double x_VLIM=0.0;</span>
+<span class="lineNum">     686 </span>                :<span class="lineNoCov">          0 : double x_InvVPT=0.0;</span>
+<span class="lineNum">     687 </span>                :<span class="lineNoCov">          0 : double x_VCES=0.0;</span>
+<span class="lineNum">     688 </span>                :<span class="lineNoCov">          0 : {{VC_U=HBT_X_d_Vceff(U,VCES,(1.0),(0.0));</span>
+<span class="lineNum">     689 </span>                :<span class="lineNoCov">          0 : VC_RCI0=HBT_X_d_Vceff(U,VCES,(0.0),(0.0));</span>
+<span class="lineNum">     690 </span>                :<span class="lineNoCov">          0 : VC_VLIM=HBT_X_d_Vceff(U,VCES,(0.0),(0.0));</span>
+<span class="lineNum">     691 </span>                :<span class="lineNoCov">          0 : VC_InvVPT=HBT_X_d_Vceff(U,VCES,(0.0),(0.0));</span>
+<span class="lineNum">     692 </span>                :<span class="lineNoCov">          0 : VC_VCES=HBT_X_d_Vceff(U,VCES,(0.0),(1.0));</span>
+<span class="lineNum">     693 </span>                :<span class="lineNoCov">          0 : VC=HBT_X_Vceff(U,VCES);</span>
+<span class="lineNum">     694 </span>                :            : }
+<span class="lineNum">     695 </span>                :<span class="lineNoCov">          0 : {x_U=VC_U*InvVPT;</span>
+<span class="lineNum">     696 </span>                :<span class="lineNoCov">          0 : x_RCI0=VC_RCI0*InvVPT;</span>
+<span class="lineNum">     697 </span>                :<span class="lineNoCov">          0 : x_VLIM=(VC_VLIM-1.0)*InvVPT;</span>
+<span class="lineNum">     698 </span>                :<span class="lineNoCov">          0 : x_InvVPT=(VC_InvVPT*InvVPT)+(VC-VLIM);</span>
+<span class="lineNum">     699 </span>                :<span class="lineNoCov">          0 : x_VCES=VC_VCES*InvVPT;</span>
+<span class="lineNum">     700 </span>                :<span class="lineNoCov">          0 : x=((VC-VLIM)*InvVPT);</span>
+<span class="lineNum">     701 </span>                :            : }
+<span class="lineNum">     702 </span>                :<span class="lineNoCov">          0 : {ICK_U=((((VC_U/RCI0*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))+((VC/RCI0)*(-_d0_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*((+((VC_U/VLIM*(VC/VLIM))+((VC/VLIM)*VC_U/VLIM))))/(_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)))+(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(+(x_U+_d0_sqrt(((x*x)+0.001))*(((x_U*x)+(x*x_U))))/2.0)));</span>
+<span class="lineNum">     703 </span>                :<span class="lineNoCov">          0 : ICK_RCI0=((((((VC_RCI0*RCI0)-VC)/(RCI0*RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))+((VC/RCI0)*(-_d0_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*((+((VC_RCI0/VLIM*(VC/VLIM))+((VC/VLIM)*VC_RCI0/VLIM))))/(_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)))+(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(+(x_RCI0+_d0_sqrt(((x*x)+0.001))*(((x_RCI0*x)+(x*x_RCI0))))/2.0)));</span>
+<span class="lineNum">     704 </span>                :<span class="lineNoCov">          0 : ICK_VLIM=((((VC_VLIM/RCI0*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))+((VC/RCI0)*(-_d0_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*((+((((VC_VLIM*VLIM)-VC)/(VLIM*VLIM)*(VC/VLIM))+((VC/VLIM)*((VC_VLIM*VLIM)-VC)/(VLIM*VLIM)))))/(_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)))+(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(+(x_VLIM+_d0_sqrt(((x*x)+0.001))*(((x_VLIM*x)+(x*x_VLIM))))/2.0)));</span>
+<span class="lineNum">     705 </span>                :<span class="lineNoCov">          0 : ICK_InvVPT=((((VC_InvVPT/RCI0*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))+((VC/RCI0)*(-_d0_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*((+((VC_InvVPT/VLIM*(VC/VLIM))+((VC/VLIM)*VC_InvVPT/VLIM))))/(_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)))+(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(+(x_InvVPT+_d0_sqrt(((x*x)+0.001))*(((x_InvVPT*x)+(x*x_InvVPT))))/2.0)));</span>
+<span class="lineNum">     706 </span>                :<span class="lineNoCov">          0 : ICK_VCES=((((VC_VCES/RCI0*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))+((VC/RCI0)*(-_d0_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*((+((VC_VCES/VLIM*(VC/VLIM))+((VC/VLIM)*VC_VCES/VLIM))))/(_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))*_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)))+(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(+(x_VCES+_d0_sqrt(((x*x)+0.001))*(((x_VCES*x)+(x*x_VCES))))/2.0)));</span>
+<span class="lineNum">     707 </span>                :<span class="lineNoCov">          0 : ICK=(((VC/RCI0)*(1.0/_sqrt((1.0+((VC/VLIM)*(VC/VLIM))))))*(1.0+((x+_sqrt(((x*x)+0.001)))/2.0)));</span>
+<span class="lineNum">     708 </span>                :            : }
+<span class="lineNum">     709 </span>                :            : }
+<span class="lineNum">     710 </span>                :<span class="lineNoCov">          0 : return ICK_U*d_U+ICK_RCI0*d_RCI0+ICK_VLIM*d_VLIM+ICK_InvVPT*d_InvVPT+ICK_VCES*d_VCES;</span>
+<span class="lineNum">     711 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

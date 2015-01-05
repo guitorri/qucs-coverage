@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/mutualx.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">src/components</a> - mutualx.cpp<span style="font-size: 80%;"> (source / <a href="mutualx.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">82</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">76</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * mutualx.cpp - multiple mutual inductors class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2007, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;mutualx.h&quot;
+<span class="lineNum">      31 </span>                :            : 
+<a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :<span class="lineNoCov">          0 : mutualx::mutualx () : circuit () {</span>
+<span class="lineNum">      35 </span>                :<span class="lineNoCov">          0 :   type = CIR_MUTUALX;</span>
+<span class="lineNum">      36 </span>                :<span class="lineNoCov">          0 :   setVariableSized (true);</span>
+<a name="37"><span class="lineNum">      37 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :<span class="lineNoCov">          0 : void mutualx::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">      40 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixS (ytos (calcMatrixY (frequency)));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<a name="41"><span class="lineNum">      41 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :<span class="lineNoCov">          0 : matrix mutualx::calcMatrixY (nr_double_t frequency) {</span>
+<span class="lineNum">      44 </span>                :            : #if 1
+<span class="lineNum">      45 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix ts = ztos (calcMatrixZ (frequency));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      46 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix ty = stoy (ts);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      47 </span>                :            : #else
+<span class="lineNum">      48 </span>                :            :   matrix ty = ztoy (calcMatrixZ (frequency));
+<span class="lineNum">      49 </span>                :            : #endif
+<span class="lineNum">      50 </span>                :            :   int r, c;
+<span class="lineNum">      51 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">      52 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   matrix y = matrix (inductors * 2);</span>
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (r = 0; r &lt; inductors; r++) {</span>
+<span class="lineNum">      55 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (c = 0; c &lt; inductors; c++) {</span>
+<span class="lineNum">      56 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       y.set (2 * r + 0, 2 * c + 0, +ty (r, c));</span>
+<span class="lineNum">      57 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       y.set (2 * r + 1, 2 * c + 1, +ty (r, c));</span>
+<span class="lineNum">      58 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       y.set (2 * r + 0, 2 * c + 1, -ty (r, c));</span>
+<span class="lineNum">      59 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       y.set (2 * r + 1, 2 * c + 0, -ty (r, c));</span>
+<span class="lineNum">      60 </span>                :            :     }
+<span class="lineNum">      61 </span>                :            :   }
+<span class="lineNum">      62 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return y;</span>
+<a name="63"><span class="lineNum">      63 </span>                :            : }</a>
+<span class="lineNum">      64 </span>                :            : 
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 : matrix mutualx::calcMatrixZ (nr_double_t frequency) {</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">      67 </span>                :            :   int r, c, state;
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :   qucs::vector * L = getPropertyVector (&quot;L&quot;);</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :   qucs::vector * C = getPropertyVector (&quot;k&quot;);</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :   nr_double_t o = 2 * M_PI * frequency;</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :   matrix z = matrix (inductors);</span>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :            :   // fill Z-Matrix entries
+<span class="lineNum">      74 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (state = 0, r = 0; r &lt; inductors; r++) {</span>
+<span class="lineNum">      75 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (c = 0; c &lt; inductors; c++, state++) {</span>
+<span class="lineNum">      76 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       nr_double_t l1 = real (L-&gt;get (r));</span>
+<span class="lineNum">      77 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       nr_double_t l2 = real (L-&gt;get (c));</span>
+<span class="lineNum">      78 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       nr_double_t k = real (C-&gt;get (state)) * std::sqrt (l1 * l2);</span>
+<span class="lineNum">      79 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       z.set (r, c, nr_complex_t (0.0, k * o));</span>
+<span class="lineNum">      80 </span>                :            :     }
+<span class="lineNum">      81 </span>                :            :   }
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :   return z;</span>
+<a name="83"><span class="lineNum">      83 </span>                :            : }</a>
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 : void mutualx::initAC (void) {</span>
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<a name="87"><span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 : void mutualx::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">      90 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">      91 </span>                :            :   int r, c, state;
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :   qucs::vector * L = getPropertyVector (&quot;L&quot;);</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :   qucs::vector * C = getPropertyVector (&quot;k&quot;);</span>
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :   nr_double_t o = 2 * M_PI * frequency;</span>
+<span class="lineNum">      95 </span>                :            : 
+<span class="lineNum">      96 </span>                :            :   // fill D-Matrix
+<span class="lineNum">      97 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (state = 0, r = 0; r &lt; inductors; r++) {</span>
+<span class="lineNum">      98 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (c = 0; c &lt; inductors; c++, state++) {</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :       nr_double_t l1 = real (L-&gt;get (r));</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :       nr_double_t l2 = real (L-&gt;get (c));</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :       nr_double_t k = real (C-&gt;get (state)) * std::sqrt (l1 * l2);</span>
+<span class="lineNum">     102 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       setD (VSRC_1 + r, VSRC_1 + c, nr_complex_t (0.0, k * o));</span>
+<span class="lineNum">     103 </span>                :            :     }
+<span class="lineNum">     104 </span>                :            :   }
+<a name="105"><span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     106 </span>                :            : 
+<span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 : void mutualx::initDC (void) {</span>
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (inductors);</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     111 </span>                :            :   // fill C and B-Matrix entries
+<span class="lineNum">     112 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; inductors; i++)</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :     voltageSource (VSRC_1 + i, NODE_1 + i * 2, NODE_2 + i * 2);</span>
+<a name="114"><span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     115 </span>                :            : 
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 : void mutualx::initTR (void) {</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :   setStates (inductors * inductors * 2);</span>
+<a name="120"><span class="lineNum">     120 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 : void mutualx::calcTR (nr_double_t) {</span>
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 :   int inductors = getSize () / 2;</span>
+<span class="lineNum">     124 </span>                :            :   int r, c, state;
+<span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 :   qucs::vector * L = getPropertyVector (&quot;L&quot;);</span>
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 :   qucs::vector * C = getPropertyVector (&quot;k&quot;);</span>
+<span class="lineNum">     127 </span>                :            : 
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :   nr_double_t * veq = new nr_double_t[inductors * inductors];</span>
+<span class="lineNum">     129 </span>                :<span class="lineNoCov">          0 :   nr_double_t * req = new nr_double_t[inductors * inductors];</span>
+<span class="lineNum">     130 </span>                :            : 
+<span class="lineNum">     131 </span>                :            :   // integration for self and mutual inductances
+<span class="lineNum">     132 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (state = 0, r = 0; r &lt; inductors; r++) {</span>
+<span class="lineNum">     133 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (c = 0; c &lt; inductors; c++, state++) {</span>
+<span class="lineNum">     134 </span>                :<span class="lineNoCov">          0 :       nr_double_t l1 = real (L-&gt;get (r));</span>
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :       nr_double_t l2 = real (L-&gt;get (c));</span>
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :       nr_double_t i = real (getJ (VSRC_1 + c));</span>
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :       nr_double_t k = real (C-&gt;get (state)) * std::sqrt (l1 * l2);</span>
+<span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :       setState  (2 * state, i * k);</span>
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :       integrate (2 * state, k, req[state], veq[state]);</span>
+<span class="lineNum">     140 </span>                :            :     }
+<span class="lineNum">     141 </span>                :            :   }
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            :   // fill D-Matrix entries and extended RHS
+<span class="lineNum">     144 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (state = 0, r = 0; r &lt; inductors; r++) {</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :     nr_double_t v = 0;</span>
+<span class="lineNum">     146 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (c = 0; c &lt; inductors; c++, state++) {</span>
+<span class="lineNum">     147 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       setD (VSRC_1 + r, VSRC_1 + c, -req[state]);</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :       v += veq[state];</span>
+<span class="lineNum">     149 </span>                :            :     }
+<span class="lineNum">     150 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setE (VSRC_1 + r, v);</span>
+<span class="lineNum">     151 </span>                :            :   }
+<span class="lineNum">     152 </span>                :            : 
+<span class="lineNum">     153 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete[] veq;</span>
+<span class="lineNum">     154 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete[] req;</span>
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     156 </span>                :            : 
+<span class="lineNum">     157 </span>                :            : // properties
+<span class="lineNum">     158 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     159 </span>                :            :   { &quot;L&quot;, PROP_LIST, { 1e-9, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     160 </span>                :            :   { &quot;k&quot;, PROP_LIST, { 0.9, PROP_NO_STR }, PROP_RNGII (-1, +1) },
+<span class="lineNum">     161 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     162 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     163 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     164 </span>                :            : struct define_t mutualx::cirdef =
+<span class="lineNum">     165 </span>                :            :   { &quot;MUTX&quot;,
+<span class="lineNum">     166 </span>                :            :     PROP_NODES, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

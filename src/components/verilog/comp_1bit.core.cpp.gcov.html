@@ -1,0 +1,823 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/verilog/comp_1bit.core.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/verilog</a> - comp_1bit.core.cpp<span style="font-size: 80%;"> (source / <a href="comp_1bit.core.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">219</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">248</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * comp_1bit.core.cpp - device implementations for comp_1bit module
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       5 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       6 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       7 </span>                :            :  * any later version.
+<span class="lineNum">       8 </span>                :            :  *
+<span class="lineNum">       9 </span>                :            :  */
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      12 </span>                :            : #include &lt;config.h&gt;
+<span class="lineNum">      13 </span>                :            : #endif
+<span class="lineNum">      14 </span>                :            : 
+<span class="lineNum">      15 </span>                :            : #include &quot;comp_1bit.analogfunction.h&quot;
+<span class="lineNum">      16 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      17 </span>                :            : #include &quot;device.h&quot;
+<span class="lineNum">      18 </span>                :            : #include &quot;comp_1bit.core.h&quot;
+<span class="lineNum">      19 </span>                :            : 
+<span class="lineNum">      20 </span>                :            : #ifndef CIR_comp_1bit
+<span class="lineNum">      21 </span>                :            : #define CIR_comp_1bit -1
+<span class="lineNum">      22 </span>                :            : #endif
+<span class="lineNum">      23 </span>                :            : 
+<span class="lineNum">      24 </span>                :            : // external nodes
+<span class="lineNum">      25 </span>                :            : #define X 0
+<span class="lineNum">      26 </span>                :            : #define Y 1
+<span class="lineNum">      27 </span>                :            : #define L 2
+<span class="lineNum">      28 </span>                :            : #define G 3
+<span class="lineNum">      29 </span>                :            : #define E 4
+<span class="lineNum">      30 </span>                :            : // internal nodes
+<span class="lineNum">      31 </span>                :            : #define Ln1 5
+<span class="lineNum">      32 </span>                :            : #define Ln2 6
+<span class="lineNum">      33 </span>                :            : #define Gn1 7
+<span class="lineNum">      34 </span>                :            : #define Gn2 8
+<span class="lineNum">      35 </span>                :            : #define En1 9
+<span class="lineNum">      36 </span>                :            : #define En2 10
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : // useful macro definitions
+<span class="lineNum">      39 </span>                :            : #define NP(node) real (getV (node))
+<span class="lineNum">      40 </span>                :            : #define BP(pnode,nnode) (NP(pnode) - NP(nnode))
+<span class="lineNum">      41 </span>                :            : #define _load_static_residual2(pnode,nnode,current)\
+<span class="lineNum">      42 </span>                :            :         _rhs[pnode] -= current;\
+<span class="lineNum">      43 </span>                :            :         _rhs[nnode] += current;
+<span class="lineNum">      44 </span>                :            : #define _load_static_augmented_residual2(pnode,nnode,current)\
+<span class="lineNum">      45 </span>                :            :         _rhs[pnode] -= current;\
+<span class="lineNum">      46 </span>                :            :         _rhs[nnode] += current;
+<span class="lineNum">      47 </span>                :            : #define _load_static_residual1(node,current)\
+<span class="lineNum">      48 </span>                :            :         _rhs[node] -= current;
+<span class="lineNum">      49 </span>                :            : #define _load_static_augmented_residual1(node,current)\
+<span class="lineNum">      50 </span>                :            :         _rhs[node] -= current;
+<span class="lineNum">      51 </span>                :            : #define _load_static_jacobian4(pnode,nnode,vpnode,vnnode,conductance)\
+<span class="lineNum">      52 </span>                :            :         _jstat[pnode][vpnode] += conductance;\
+<span class="lineNum">      53 </span>                :            :         _jstat[nnode][vnnode] += conductance;\
+<span class="lineNum">      54 </span>                :            :         _jstat[pnode][vnnode] -= conductance;\
+<span class="lineNum">      55 </span>                :            :         _jstat[nnode][vpnode] -= conductance;\
+<span class="lineNum">      56 </span>                :            :         if (doHB) {\
+<span class="lineNum">      57 </span>                :            :         _ghs[pnode] += conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      58 </span>                :            :         _ghs[nnode] -= conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      59 </span>                :            :         } else {\
+<span class="lineNum">      60 </span>                :            :         _rhs[pnode] += conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      61 </span>                :            :         _rhs[nnode] -= conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      62 </span>                :            :         }
+<span class="lineNum">      63 </span>                :            : #define _load_static_jacobian2p(node,vpnode,vnnode,conductance)\
+<span class="lineNum">      64 </span>                :            :         _jstat[node][vpnode] += conductance;\
+<span class="lineNum">      65 </span>                :            :         _jstat[node][vnnode] -= conductance;\
+<span class="lineNum">      66 </span>                :            :         if (doHB) {\
+<span class="lineNum">      67 </span>                :            :         _ghs[node] += conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      68 </span>                :            :         } else {\
+<span class="lineNum">      69 </span>                :            :         _rhs[node] += conductance * BP(vpnode,vnnode);\
+<span class="lineNum">      70 </span>                :            :         }
+<span class="lineNum">      71 </span>                :            : #define _load_static_jacobian2s(pnode,nnode,node,conductance)\
+<span class="lineNum">      72 </span>                :            :         _jstat[pnode][node] += conductance;\
+<span class="lineNum">      73 </span>                :            :         _jstat[nnode][node] -= conductance;\
+<span class="lineNum">      74 </span>                :            :         if (doHB) {\
+<span class="lineNum">      75 </span>                :            :         _ghs[pnode] += conductance * NP(node);\
+<span class="lineNum">      76 </span>                :            :         _ghs[nnode] -= conductance * NP(node);\
+<span class="lineNum">      77 </span>                :            :         } else {\
+<span class="lineNum">      78 </span>                :            :         _rhs[pnode] += conductance * NP(node);\
+<span class="lineNum">      79 </span>                :            :         _rhs[nnode] -= conductance * NP(node);\
+<span class="lineNum">      80 </span>                :            :         }
+<span class="lineNum">      81 </span>                :            : #define _load_static_jacobian1(node,vnode,conductance)\
+<span class="lineNum">      82 </span>                :            :         _jstat[node][vnode] += conductance;\
+<span class="lineNum">      83 </span>                :            :         if (doHB) {\
+<span class="lineNum">      84 </span>                :            :         _ghs[node] += conductance * NP(vnode);\
+<span class="lineNum">      85 </span>                :            :         } else {\
+<span class="lineNum">      86 </span>                :            :         _rhs[node] += conductance * NP(vnode);\
+<span class="lineNum">      87 </span>                :            :         }
+<span class="lineNum">      88 </span>                :            : #define _load_dynamic_residual2(pnode,nnode,charge)\
+<span class="lineNum">      89 </span>                :            :         if (doTR) _charges[pnode][nnode] += charge;\
+<span class="lineNum">      90 </span>                :            :         if (doHB) {\
+<span class="lineNum">      91 </span>                :            :         _qhs[pnode] -= charge;\
+<span class="lineNum">      92 </span>                :            :         _qhs[nnode] += charge;\
+<span class="lineNum">      93 </span>                :            :         }
+<span class="lineNum">      94 </span>                :            : #define _load_dynamic_residual1(node,charge)\
+<span class="lineNum">      95 </span>                :            :         if (doTR) _charges[node][node] += charge;\
+<span class="lineNum">      96 </span>                :            :         if (doHB) {\
+<span class="lineNum">      97 </span>                :            :         _qhs[node] -= charge;\
+<span class="lineNum">      98 </span>                :            :         }
+<span class="lineNum">      99 </span>                :            : #define _load_dynamic_jacobian4(pnode,nnode,vpnode,vnnode,capacitance)\
+<span class="lineNum">     100 </span>                :            :         if (doAC) {\
+<span class="lineNum">     101 </span>                :            :         _jdyna[pnode][vpnode] += capacitance;\
+<span class="lineNum">     102 </span>                :            :         _jdyna[nnode][vnnode] += capacitance;\
+<span class="lineNum">     103 </span>                :            :         _jdyna[pnode][vnnode] -= capacitance;\
+<span class="lineNum">     104 </span>                :            :         _jdyna[nnode][vpnode] -= capacitance;\
+<span class="lineNum">     105 </span>                :            :         }\
+<span class="lineNum">     106 </span>                :            :         if (doTR) {\
+<span class="lineNum">     107 </span>                :            :         _caps[pnode][nnode][vpnode][vnnode] += capacitance;\
+<span class="lineNum">     108 </span>                :            :         }\
+<span class="lineNum">     109 </span>                :            :         if (doHB) {\
+<span class="lineNum">     110 </span>                :            :         _chs[pnode] += capacitance * BP(vpnode,vnnode);\
+<span class="lineNum">     111 </span>                :            :         _chs[nnode] -= capacitance * BP(vpnode,vnnode);\
+<span class="lineNum">     112 </span>                :            :         }
+<span class="lineNum">     113 </span>                :            : #define _load_dynamic_jacobian2s(pnode,nnode,vnode,capacitance)\
+<span class="lineNum">     114 </span>                :            :         if (doAC) {\
+<span class="lineNum">     115 </span>                :            :         _jdyna[pnode][vnode] += capacitance;\
+<span class="lineNum">     116 </span>                :            :         _jdyna[nnode][vnode] -= capacitance;\
+<span class="lineNum">     117 </span>                :            :         }\
+<span class="lineNum">     118 </span>                :            :         if (doTR) {\
+<span class="lineNum">     119 </span>                :            :         _caps[pnode][nnode][vnode][vnode] += capacitance;\
+<span class="lineNum">     120 </span>                :            :         }\
+<span class="lineNum">     121 </span>                :            :         if (doHB) {\
+<span class="lineNum">     122 </span>                :            :         _chs[pnode] += capacitance * NP(vnode);\
+<span class="lineNum">     123 </span>                :            :         _chs[nnode] -= capacitance * NP(vnode);\
+<span class="lineNum">     124 </span>                :            :         }
+<span class="lineNum">     125 </span>                :            : #define _load_dynamic_jacobian2p(node,vpnode,vnnode,capacitance)\
+<span class="lineNum">     126 </span>                :            :         if (doAC) {\
+<span class="lineNum">     127 </span>                :            :         _jdyna[node][vpnode] += capacitance;\
+<span class="lineNum">     128 </span>                :            :         _jdyna[node][vnnode] -= capacitance;\
+<span class="lineNum">     129 </span>                :            :         }\
+<span class="lineNum">     130 </span>                :            :         if (doTR) {\
+<span class="lineNum">     131 </span>                :            :         _caps[node][node][vpnode][vnnode] += capacitance;\
+<span class="lineNum">     132 </span>                :            :         }\
+<span class="lineNum">     133 </span>                :            :         if (doHB) {\
+<span class="lineNum">     134 </span>                :            :         _chs[node] += capacitance * BP(vpnode,vnnode);\
+<span class="lineNum">     135 </span>                :            :         }
+<span class="lineNum">     136 </span>                :            : #define _load_dynamic_jacobian1(node,vnode,capacitance)\
+<span class="lineNum">     137 </span>                :            :         if (doAC) {\
+<span class="lineNum">     138 </span>                :            :         _jdyna[node][vnode] += capacitance;\
+<span class="lineNum">     139 </span>                :            :         }\
+<span class="lineNum">     140 </span>                :            :         if (doTR) {\
+<span class="lineNum">     141 </span>                :            :         _caps[node][node][vnode][vnode] += capacitance;\
+<span class="lineNum">     142 </span>                :            :         }\
+<span class="lineNum">     143 </span>                :            :         if (doHB) {\
+<span class="lineNum">     144 </span>                :            :         _chs[node] += capacitance * NP(vnode);\
+<span class="lineNum">     145 </span>                :            :         }
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :            : #define _save_whitenoise1(n1,pwr,type)\
+<span class="lineNum">     148 </span>                :            :         _white_pwr[n1][n1] += pwr;
+<span class="lineNum">     149 </span>                :            : #define _save_whitenoise2(n1,n2,pwr,type)\
+<span class="lineNum">     150 </span>                :            :         _white_pwr[n1][n2] += pwr;
+<span class="lineNum">     151 </span>                :            : #define _save_flickernoise1(n1,pwr,exp,type)\
+<span class="lineNum">     152 </span>                :            :         _flicker_pwr[n1][n1] += pwr;\
+<span class="lineNum">     153 </span>                :            :         _flicker_exp[n1][n1] += exp;
+<span class="lineNum">     154 </span>                :            : #define _save_flickernoise2(n1,n2,pwr,exp,type)\
+<span class="lineNum">     155 </span>                :            :         _flicker_pwr[n1][n2] += pwr;\
+<span class="lineNum">     156 </span>                :            :         _flicker_exp[n1][n2] += exp;
+<span class="lineNum">     157 </span>                :            : #define _load_whitenoise2(n1,n2,pwr)\
+<span class="lineNum">     158 </span>                :            :         cy (n1,n2) -= pwr/kB/T0; cy (n2,n1) -= pwr/kB/T0;\
+<span class="lineNum">     159 </span>                :            :         cy (n1,n1) += pwr/kB/T0; cy (n2,n2) += pwr/kB/T0;
+<span class="lineNum">     160 </span>                :            : #define _load_whitenoise1(n1,pwr)\
+<span class="lineNum">     161 </span>                :            :         cy (n1,n1) += pwr/kB/T0;
+<span class="lineNum">     162 </span>                :            : #define _load_flickernoise2(n1,n2,pwr,exp)\
+<span class="lineNum">     163 </span>                :            :         cy (n1,n2) -= pwr*pow(_freq,-exp)/kB/T0;\
+<span class="lineNum">     164 </span>                :            :         cy (n2,n1) -= pwr*pow(_freq,-exp)/kB/T0;\
+<span class="lineNum">     165 </span>                :            :         cy (n1,n1) += pwr*pow(_freq,-exp)/kB/T0;\
+<span class="lineNum">     166 </span>                :            :         cy (n2,n2) += pwr*pow(_freq,-exp)/kB/T0;
+<span class="lineNum">     167 </span>                :            : #define _load_flickernoise1(n1,pwr,exp)\
+<span class="lineNum">     168 </span>                :            :         cy (n1,n1) += pwr*pow(_freq,-exp)/kB/T0;
+<span class="lineNum">     169 </span>                :            : 
+<span class="lineNum">     170 </span>                :            : // derivative helper macros
+<span class="lineNum">     171 </span>                :            : // transcendental LRM p. 59
+<span class="lineNum">     172 </span>                :            : #define m00_cos(v00,x)          v00 = cos(x);
+<span class="lineNum">     173 </span>                :            : #define m10_cos(v10,v00,x)      v10 = (-sin(x));
+<span class="lineNum">     174 </span>                :            : #define m00_sin(v00,x)          v00 = sin(x);
+<span class="lineNum">     175 </span>                :            : #define m10_sin(v10,v00,x)      v10 = (cos(x));
+<span class="lineNum">     176 </span>                :            : #define m00_tan(v00,x)          v00 = tan(x);
+<span class="lineNum">     177 </span>                :            : #define m10_tan(v10,v00,x)      v10 = (1.0/cos(x)/cos(x));
+<span class="lineNum">     178 </span>                :            : #define m00_cosh(v00,x)         v00 = cosh(x);
+<span class="lineNum">     179 </span>                :            : #define m10_cosh(v10,v00,x)     v10 = (sinh(x));
+<span class="lineNum">     180 </span>                :            : #define m00_sinh(v00,x)         v00 = sinh(x);
+<span class="lineNum">     181 </span>                :            : #define m10_sinh(v10,v00,x)     v10 = (cosh(x));
+<span class="lineNum">     182 </span>                :            : #define m00_tanh(v00,x)         v00 = tanh(x);
+<span class="lineNum">     183 </span>                :            : #define m10_tanh(v10,v00,x)     v10 = (1.0/cosh(x)/cosh(x));
+<span class="lineNum">     184 </span>                :            : #define m00_acos(v00,x)         v00 = acos(x);
+<span class="lineNum">     185 </span>                :            : #define m10_acos(v10,v00,x)     v10 = (-1.0/sqrt(1-x*x));
+<span class="lineNum">     186 </span>                :            : #define m00_asin(v00,x)         v00 = asin(x);
+<span class="lineNum">     187 </span>                :            : #define m10_asin(v10,v00,x)     v10 = (+1.0/sqrt(1-x*x));
+<span class="lineNum">     188 </span>                :            : #define m00_atan(v00,x)         v00 = atan(x);
+<span class="lineNum">     189 </span>                :            : #define m10_atan(v10,v00,x)     v10 = (+1.0/(1+x*x));
+<span class="lineNum">     190 </span>                :            : #define m00_hypot(v00,x,y)      v00 = sqrt((x)*(x)+(y)*(y));
+<span class="lineNum">     191 </span>                :            : #define m10_hypot(v10,v00,x,y)  v10 = (x)/(v00);
+<span class="lineNum">     192 </span>                :            : #define m11_hypot(v11,v00,x,y)  v11 = (y)/(v00);
+<span class="lineNum">     193 </span>                :            : #define m00_atan2(v00,x,y)      v00 = atan2(x,y);
+<span class="lineNum">     194 </span>                :            : // TODO atan2 derivatives ?
+<span class="lineNum">     195 </span>                :            : #define m00_acosh(v00,x)        v00 = acosh(x);
+<span class="lineNum">     196 </span>                :            : #define m10_acosh(v10,v00,x)    v10 = (1.0/(sqrt(x-1)*sqrt(x+1)));
+<span class="lineNum">     197 </span>                :            : #define m00_asinh(v00,x)        v00 = asinh(x);
+<span class="lineNum">     198 </span>                :            : #define m10_asinh(v10,v00,x)    v10 = (1.0/(sqrt(x*x+1)));
+<span class="lineNum">     199 </span>                :            : #define m00_atanh(v00,x)        v00 = atanh(x);
+<span class="lineNum">     200 </span>                :            : #define m10_atanh(v10,v00,x)    v10 = (1.0/(1-x*x));
+<span class="lineNum">     201 </span>                :            : 
+<span class="lineNum">     202 </span>                :            : 
+<span class="lineNum">     203 </span>                :            : // standard functions LRM p.58
+<span class="lineNum">     204 </span>                :            : #define m00_logE(v00,x)         v00 = log(x);
+<span class="lineNum">     205 </span>                :            : #define m10_logE(v10,v00,x)     v10 = (1.0/x);
+<span class="lineNum">     206 </span>                :            : #define m00_log10(v00,x)        v00 = log10(x);
+<span class="lineNum">     207 </span>                :            : #define m10_log10(v10,v00,x)    v10 = (1.0/x/M_LN10);
+<span class="lineNum">     208 </span>                :            : #define m00_exp(v00,x)          v00 = exp(x);
+<span class="lineNum">     209 </span>                :            : #define m10_exp(v10,v00,x)      v10 = v00;
+<span class="lineNum">     210 </span>                :            : #define m00_sqrt(v00,x)         v00 = sqrt(x);
+<span class="lineNum">     211 </span>                :            : #define m10_sqrt(v10,v00,x)     v10 = (0.5/v00);
+<span class="lineNum">     212 </span>                :            : #define m00_min(v00,x,y)        v00 = ((x)&lt;(y))?(x):(y);
+<span class="lineNum">     213 </span>                :            : #define m10_min(v10,v00,x,y)    v10 = ((x)&lt;(y))?1.0:0.0;
+<span class="lineNum">     214 </span>                :            : #define m11_min(v11,v00,x,y)    v11 = ((x)&lt;(y))?0.0:1.0;
+<span class="lineNum">     215 </span>                :            : #define m00_max(v00,x,y)        v00 = ((x)&gt;(y))?(x):(y);
+<span class="lineNum">     216 </span>                :            : #define m10_max(v10,v00,x,y)    v10 = ((x)&gt;(y))?1.0:0.0;
+<span class="lineNum">     217 </span>                :            : #define m11_max(v11,v00,x,y)    v11 = ((x)&gt;(y))?0.0:1.0;
+<span class="lineNum">     218 </span>                :            : #define m00_pow(v00,x,y)        v00 = pow(x,y);
+<span class="lineNum">     219 </span>                :            : #define m10_pow(v10,v00,x,y)    v10 = (x==0.0)?0.0:(v00)*(y)/(x);
+<span class="lineNum">     220 </span>                :            : #define m11_pow(v11,v00,x,y)    v11 = (x==0.0)?0.0:(log(x)*(v00));
+<span class="lineNum">     221 </span>                :            : #define m00_abs(v00,x)          v00 = ((x)&lt;(0)?(-(x)):(x));
+<span class="lineNum">     222 </span>                :            : #define m10_abs(v10,v00,x)      v10 = (((x)&gt;=0)?(+1.0):(-1.0));
+<span class="lineNum">     223 </span>                :            : #define m00_floor(v00,x)        v00 = floor(x);
+<span class="lineNum">     224 </span>                :            : #define m10_floor(v10,v00,x)    v10 = 1.0;
+<span class="lineNum">     225 </span>                :            : 
+<span class="lineNum">     226 </span>                :            : #define m00_ceil(v00,x)         v00 = ceil(x);
+<span class="lineNum">     227 </span>                :            : // TODO ceil derivative, needed?
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>                :            : // analog operator, LRM p.61
+<span class="lineNum">     230 </span>                :            : #define m00_limexp(v00,x)       v00 = ((x)&lt;80.0?exp(x):exp(80.0)*(x-79.0));
+<span class="lineNum">     231 </span>                :            : #define m10_limexp(v10,v00,x)   v10 = ((x)&lt;80.0?(v00):exp(80.0));
+<span class="lineNum">     232 </span>                :            : 
+<span class="lineNum">     233 </span>                :            : // analog kernel parameter system functions, LRM p.215
+<span class="lineNum">     234 </span>                :            : #define m00_vt(x)               (kBoverQ*(x))
+<span class="lineNum">     235 </span>                :            : #define m10_vt(x)               (kBoverQ)
+<span class="lineNum">     236 </span>                :            : 
+<span class="lineNum">     237 </span>                :            : // extra functions (?)
+<span class="lineNum">     238 </span>                :            : #define m00_div(v00,v10,x,y)    double v10=1/(y); double v00=(x)*v10;
+<span class="lineNum">     239 </span>                :            : #define m10_div(v10,v00,vv,x,y)
+<span class="lineNum">     240 </span>                :            : #define m11_div(v11,v00,vv,x,y) double v11 = -v00*vv;
+<span class="lineNum">     241 </span>                :            : #define m00_mult(v00,v10,v11,x,y) double v10=(x); double v11=(y); double v00=v10*v11;
+<span class="lineNum">     242 </span>                :            : #define m00_add(v00,x,y)        double v00=(x)+(y);
+<span class="lineNum">     243 </span>                :            : 
+<span class="lineNum">     244 </span>                :            : // second derivatives
+<span class="lineNum">     245 </span>                :            : #define m20_logE(v00)           (-1.0/v00/v00)
+<span class="lineNum">     246 </span>                :            : #define m20_exp(v00)            exp(v00)
+<span class="lineNum">     247 </span>                :            : #define m20_limexp(v00)         ((v00)&lt;80.0?exp(v00):0.0)
+<span class="lineNum">     248 </span>                :            : #define m20_sqrt(v00)           (-0.25/(v00)/sqrt(v00))
+<span class="lineNum">     249 </span>                :            : #define m20_abs(v00)           0.0
+<span class="lineNum">     250 </span>                :            : #define m20_pow(x,y)            ((y)*((y)-1.0)*pow(x,y)/(x)/(x))
+<span class="lineNum">     251 </span>                :            : 
+<span class="lineNum">     252 </span>                :            : 
+<span class="lineNum">     253 </span>                :            : // simulator specific definitions
+<span class="lineNum">     254 </span>                :            : #define _modelname              &quot;comp_1bit&quot;
+<span class="lineNum">     255 </span>                :            : #define _instancename           getName()
+<span class="lineNum">     256 </span>                :            : #define _circuit_temp           (getPropertyDouble(&quot;Temp&quot;)+273.15)
+<span class="lineNum">     257 </span>                :            : #define _param_given(p)         (isPropertyGiven(p)?1:0)
+<span class="lineNum">     258 </span>                :            : 
+<span class="lineNum">     259 </span>                :            : 
+<span class="lineNum">     260 </span>                :            : // $vt and $vt() functions
+<span class="lineNum">     261 </span>                :            : #define _vt_nom                 (kBoverQ*_circuit_temp)
+<span class="lineNum">     262 </span>                :            : 
+<span class="lineNum">     263 </span>                :            : using namespace qucs::device;
+<span class="lineNum">     264 </span>                :            : using qucs::matrix;
+<a name="265"><span class="lineNum">     265 </span>                :            : </a>
+<span class="lineNum">     266 </span>                :            : /* Device constructor. */
+<span class="lineNum">     267 </span>                :<span class="lineNoCov">          0 : comp_1bit::comp_1bit() : circuit (11)</span>
+<span class="lineNum">     268 </span>                :            : {
+<span class="lineNum">     269 </span>                :<span class="lineNoCov">          0 :   type = CIR_comp_1bit;</span>
+<span class="lineNum">     270 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="271"><span class="lineNum">     271 </span>                :            : </a>
+<span class="lineNum">     272 </span>                :            : /* Initialization of model. */
+<span class="lineNum">     273 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initModel (void)</span>
+<span class="lineNum">     274 </span>                :            : {
+<span class="lineNum">     275 </span>                :            :   // create internal nodes
+<span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 :   setInternalNode (Ln1, &quot;Ln1&quot;);</span>
+<span class="lineNum">     277 </span>                :<span class="lineNoCov">          0 :   setInternalNode (Ln2, &quot;Ln2&quot;);</span>
+<span class="lineNum">     278 </span>                :<span class="lineNoCov">          0 :   setInternalNode (Gn1, &quot;Gn1&quot;);</span>
+<span class="lineNum">     279 </span>                :<span class="lineNoCov">          0 :   setInternalNode (Gn2, &quot;Gn2&quot;);</span>
+<span class="lineNum">     280 </span>                :<span class="lineNoCov">          0 :   setInternalNode (En1, &quot;En1&quot;);</span>
+<span class="lineNum">     281 </span>                :<span class="lineNoCov">          0 :   setInternalNode (En2, &quot;En2&quot;);</span>
+<span class="lineNum">     282 </span>                :            : 
+<span class="lineNum">     283 </span>                :            :   // get device model parameters
+<span class="lineNum">     284 </span>                :<span class="lineNoCov">          0 :   loadVariables ();</span>
+<span class="lineNum">     285 </span>                :            :   // evaluate global model equations
+<span class="lineNum">     286 </span>                :<span class="lineNoCov">          0 :   initializeModel ();</span>
+<span class="lineNum">     287 </span>                :            :   // evaluate initial step equations
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 :   initialStep ();</span>
+<span class="lineNum">     289 </span>                :            :   // evaluate global instance equations
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 :   initializeInstance ();</span>
+<span class="lineNum">     291 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="292"><span class="lineNum">     292 </span>                :            : </a>
+<span class="lineNum">     293 </span>                :            : /* Initialization of DC analysis. */
+<span class="lineNum">     294 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initDC (void)</span>
+<span class="lineNum">     295 </span>                :            : {
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     297 </span>                :<span class="lineNoCov">          0 :   initModel ();</span>
+<span class="lineNum">     298 </span>                :<span class="lineNoCov">          0 :   pol = 1;</span>
+<span class="lineNum">     299 </span>                :<span class="lineNoCov">          0 :   restartDC ();</span>
+<span class="lineNum">     300 </span>                :<span class="lineNoCov">          0 :   doAC = 1;</span>
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 :   doTR = 0;</span>
+<span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 :   doHB = 0;</span>
+<span class="lineNum">     303 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="304"><span class="lineNum">     304 </span>                :            : </a>
+<span class="lineNum">     305 </span>                :            : /* Run when DC is restarted (fallback algorithms). */
+<span class="lineNum">     306 </span>                :<span class="lineNoCov">          0 : void comp_1bit::restartDC (void)</span>
+<span class="lineNum">     307 </span>                :            : {
+<span class="lineNum">     308 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="309"><span class="lineNum">     309 </span>                :            : </a>
+<span class="lineNum">     310 </span>                :            : /* Initialize Verilog-AMS code. */
+<span class="lineNum">     311 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initVerilog (void)</span>
+<span class="lineNum">     312 </span>                :            : {
+<span class="lineNum">     313 </span>                :            :   // initialization of noise variables
+<span class="lineNum">     314 </span>                :            : 
+<span class="lineNum">     315 </span>                :            :   int i1, i2, i3, i4;
+<span class="lineNum">     316 </span>                :            : 
+<span class="lineNum">     317 </span>                :            :   // zero charges
+<span class="lineNum">     318 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     319 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     320 </span>                :<span class="lineNoCov">          0 :     _charges[i1][i2] = 0.0;</span>
+<span class="lineNum">     321 </span>                :            :   } }
+<span class="lineNum">     322 </span>                :            : 
+<span class="lineNum">     323 </span>                :            :   // zero capacitances
+<span class="lineNum">     324 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     325 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     326 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i3 = 0; i3 &lt; 11; i3++) {</span>
+<span class="lineNum">     327 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i4 = 0; i4 &lt; 11; i4++) {</span>
+<span class="lineNum">     328 </span>                :<span class="lineNoCov">          0 :     _caps[i1][i2][i3][i4] = 0.0;</span>
+<span class="lineNum">     329 </span>                :            :   } } } }
+<span class="lineNum">     330 </span>                :            : 
+<span class="lineNum">     331 </span>                :            :   // zero right hand side, static and dynamic jacobian
+<span class="lineNum">     332 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     333 </span>                :<span class="lineNoCov">          0 :     _rhs[i1] = 0.0;</span>
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :     _qhs[i1] = 0.0;</span>
+<span class="lineNum">     335 </span>                :<span class="lineNoCov">          0 :     _chs[i1] = 0.0;</span>
+<span class="lineNum">     336 </span>                :<span class="lineNoCov">          0 :     _ghs[i1] = 0.0;</span>
+<span class="lineNum">     337 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     338 </span>                :<span class="lineNoCov">          0 :       _jstat[i1][i2] = 0.0;</span>
+<span class="lineNum">     339 </span>                :<span class="lineNoCov">          0 :       _jdyna[i1][i2] = 0.0;</span>
+<span class="lineNum">     340 </span>                :            :     }
+<span class="lineNum">     341 </span>                :            :   }
+<span class="lineNum">     342 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="343"><span class="lineNum">     343 </span>                :            : </a>
+<span class="lineNum">     344 </span>                :            : /* Load device model input parameters. */
+<span class="lineNum">     345 </span>                :<span class="lineNoCov">          0 : void comp_1bit::loadVariables (void)</span>
+<span class="lineNum">     346 </span>                :            : {
+<span class="lineNum">     347 </span>                :<span class="lineNoCov">          0 :   TR = getPropertyDouble (&quot;TR&quot;);</span>
+<span class="lineNum">     348 </span>                :<span class="lineNoCov">          0 :   Delay = getPropertyDouble (&quot;Delay&quot;);</span>
+<span class="lineNum">     349 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     350 </span>                :            : 
+<span class="lineNum">     351 </span>                :            : /* #define's for translated code */
+<span class="lineNum">     352 </span>                :            : #undef  _DDT
+<span class="lineNum">     353 </span>                :            : #define _DDT(q) q
+<span class="lineNum">     354 </span>                :            : #define _DYNAMIC
+<span class="lineNum">     355 </span>                :            : #define _DERIVATE
+<span class="lineNum">     356 </span>                :            : #define _DDX
+<span class="lineNum">     357 </span>                :            : #define _DERIVATEFORDDX
+<a name="358"><span class="lineNum">     358 </span>                :            : </a>
+<span class="lineNum">     359 </span>                :            : /* Evaluate Verilog-AMS equations in model initialization. */
+<span class="lineNum">     360 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initializeModel (void)</span>
+<span class="lineNum">     361 </span>                :            : {
+<span class="lineNum">     362 </span>                :            : #if defined(_DYNAMIC)
+<span class="lineNum">     363 </span>                :            : #endif
+<span class="lineNum">     364 </span>                :            : {
+<span class="lineNum">     365 </span>                :<span class="lineNoCov">          0 : Rd=1e3;</span>
+<span class="lineNum">     366 </span>                :            : #if defined(_DYNAMIC)
+<span class="lineNum">     367 </span>                :<span class="lineNoCov">          0 : Cd=((Delay*1.43)/Rd);</span>
+<span class="lineNum">     368 </span>                :            : #endif
+<span class="lineNum">     369 </span>                :            : }
+<span class="lineNum">     370 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="371"><span class="lineNum">     371 </span>                :            : </a>
+<span class="lineNum">     372 </span>                :            : /* Evaluate Verilog-AMS equations in instance initialization. */
+<span class="lineNum">     373 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initializeInstance (void)</span>
+<span class="lineNum">     374 </span>                :            : {
+<span class="lineNum">     375 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="376"><span class="lineNum">     376 </span>                :            : </a>
+<span class="lineNum">     377 </span>                :            : /* Evaluate Verilog-AMS equations in initial step. */
+<span class="lineNum">     378 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initialStep (void)</span>
+<span class="lineNum">     379 </span>                :            : {
+<span class="lineNum">     380 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="381"><span class="lineNum">     381 </span>                :            : </a>
+<span class="lineNum">     382 </span>                :            : /* Evaluate Verilog-AMS equations in final step. */
+<span class="lineNum">     383 </span>                :<span class="lineNoCov">          0 : void comp_1bit::finalStep (void)</span>
+<span class="lineNum">     384 </span>                :            : {
+<span class="lineNum">     385 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="386"><span class="lineNum">     386 </span>                :            : </a>
+<span class="lineNum">     387 </span>                :            : /* Evaluate Verilog-AMS equations in analog block. */
+<span class="lineNum">     388 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcVerilog (void)</span>
+<span class="lineNum">     389 </span>                :            : {
+<span class="lineNum">     390 </span>                :            : 
+<span class="lineNum">     391 </span>                :            : /* ----------------- evaluate verilog analog equations -------------------- */
+<span class="lineNum">     392 </span>                :            : double mL;
+<span class="lineNum">     393 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     394 </span>                :            : double mL_VX_GND;
+<span class="lineNum">     395 </span>                :            : double mL_VY_GND;
+<span class="lineNum">     396 </span>                :            : #endif
+<span class="lineNum">     397 </span>                :            : double mG;
+<span class="lineNum">     398 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     399 </span>                :            : double mG_VX_GND;
+<span class="lineNum">     400 </span>                :            : double mG_VY_GND;
+<span class="lineNum">     401 </span>                :            : #endif
+<span class="lineNum">     402 </span>                :            : double mE;
+<span class="lineNum">     403 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     404 </span>                :            : double mE_VX_GND;
+<span class="lineNum">     405 </span>                :            : double mE_VY_GND;
+<span class="lineNum">     406 </span>                :            : #endif
+<span class="lineNum">     407 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     408 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : mE_VX_GND=(-(((1-NP(Y)))+(-1.0)*NP(Y)));</span>
+<span class="lineNum">     409 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : mE_VY_GND=(-((NP(X)*(-1.0))+((1-NP(X)))));</span>
+<span class="lineNum">     410 </span>                :            : #endif
+<span class="lineNum">     411 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 : mE=(1-((NP(X)*(1-NP(Y)))+((1-NP(X))*NP(Y))));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     412 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     413 </span>                :<span class="lineNoCov">          0 : mG_VX_GND=((1-NP(Y)));</span>
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 : mG_VY_GND=(NP(X)*(-1.0));</span>
+<span class="lineNum">     415 </span>                :            : #endif
+<span class="lineNum">     416 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : mG=(NP(X)*(1-NP(Y)));</span>
+<span class="lineNum">     417 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     418 </span>                :<span class="lineNoCov">          0 : mL_VX_GND=(-1.0)*NP(Y);</span>
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 : mL_VY_GND=((1-NP(X)));</span>
+<span class="lineNum">     420 </span>                :            : #endif
+<span class="lineNum">     421 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : mL=((1-NP(X))*NP(Y));</span>
+<span class="lineNum">     422 </span>                :            : {
+<span class="lineNum">     423 </span>                :<span class="lineNoCov">          0 : double m00_tanh(d00_tanh0,(TR*(mE-0.5)))</span>
+<span class="lineNum">     424 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     425 </span>                :<span class="lineNoCov">          0 : double m10_tanh(d10_tanh0,d00_tanh0,(TR*(mE-0.5)))</span>
+<span class="lineNum">     426 </span>                :            : #endif
+<span class="lineNum">     427 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(En1,((-0.5)*(1+d00_tanh0)));</span>
+<span class="lineNum">     428 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     429 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(En1,Y,((-0.5)*(TR*mE_VY_GND)*d10_tanh0));</span>
+<span class="lineNum">     430 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(En1,X,((-0.5)*(TR*mE_VX_GND)*d10_tanh0));</span>
+<span class="lineNum">     431 </span>                :            : #endif
+<span class="lineNum">     432 </span>                :            : }
+<span class="lineNum">     433 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(En1,NP(En1));</span>
+<span class="lineNum">     434 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     435 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(En1,En1,1.0);</span>
+<span class="lineNum">     436 </span>                :            : #endif
+<span class="lineNum">     437 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_residual2(En1,En2,(BP(En1,En2)/Rd));</span>
+<span class="lineNum">     438 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     439 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian4(En1,En2,En1,En2,(1/Rd));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>]
+<span class="lineNum">     440 </span>                :            : #endif
+<span class="lineNum">     441 </span>                :            : #if defined(_DYNAMIC)
+<span class="lineNum">     442 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_residual1(En2,_DDT((Cd*NP(En2))));</span>
+<span class="lineNum">     443 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     444 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_jacobian1(En2,En2,(Cd));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     445 </span>                :            : #endif
+<span class="lineNum">     446 </span>                :            : #endif
+<span class="lineNum">     447 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(E,(-NP(En2)));</span>
+<span class="lineNum">     448 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     449 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(E,En2,(-1.0));</span>
+<span class="lineNum">     450 </span>                :            : #endif
+<span class="lineNum">     451 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(E,NP(E));</span>
+<span class="lineNum">     452 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     453 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(E,E,1.0);</span>
+<span class="lineNum">     454 </span>                :            : #endif
+<span class="lineNum">     455 </span>                :            : {
+<span class="lineNum">     456 </span>                :<span class="lineNoCov">          0 : double m00_tanh(d00_tanh0,(TR*(mG-0.5)))</span>
+<span class="lineNum">     457 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 : double m10_tanh(d10_tanh0,d00_tanh0,(TR*(mG-0.5)))</span>
+<span class="lineNum">     459 </span>                :            : #endif
+<span class="lineNum">     460 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(Gn1,((-0.5)*(1+d00_tanh0)));</span>
+<span class="lineNum">     461 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     462 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Gn1,Y,((-0.5)*(TR*mG_VY_GND)*d10_tanh0));</span>
+<span class="lineNum">     463 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Gn1,X,((-0.5)*(TR*mG_VX_GND)*d10_tanh0));</span>
+<span class="lineNum">     464 </span>                :            : #endif
+<span class="lineNum">     465 </span>                :            : }
+<span class="lineNum">     466 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(Gn1,NP(Gn1));</span>
+<span class="lineNum">     467 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     468 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Gn1,Gn1,1.0);</span>
+<span class="lineNum">     469 </span>                :            : #endif
+<span class="lineNum">     470 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_residual2(Gn1,Gn2,(BP(Gn1,Gn2)/Rd));</span>
+<span class="lineNum">     471 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     472 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian4(Gn1,Gn2,Gn1,Gn2,(1/Rd));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>]
+<span class="lineNum">     473 </span>                :            : #endif
+<span class="lineNum">     474 </span>                :            : #if defined(_DYNAMIC)
+<span class="lineNum">     475 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_residual1(Gn2,_DDT((Cd*NP(Gn2))));</span>
+<span class="lineNum">     476 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     477 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_jacobian1(Gn2,Gn2,(Cd));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     478 </span>                :            : #endif
+<span class="lineNum">     479 </span>                :            : #endif
+<span class="lineNum">     480 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(G,(-NP(Gn2)));</span>
+<span class="lineNum">     481 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     482 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(G,Gn2,(-1.0));</span>
+<span class="lineNum">     483 </span>                :            : #endif
+<span class="lineNum">     484 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(G,NP(G));</span>
+<span class="lineNum">     485 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     486 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(G,G,1.0);</span>
+<span class="lineNum">     487 </span>                :            : #endif
+<span class="lineNum">     488 </span>                :            : {
+<span class="lineNum">     489 </span>                :<span class="lineNoCov">          0 : double m00_tanh(d00_tanh0,(TR*(mL-0.5)))</span>
+<span class="lineNum">     490 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     491 </span>                :<span class="lineNoCov">          0 : double m10_tanh(d10_tanh0,d00_tanh0,(TR*(mL-0.5)))</span>
+<span class="lineNum">     492 </span>                :            : #endif
+<span class="lineNum">     493 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(Ln1,((-0.5)*(1+d00_tanh0)));</span>
+<span class="lineNum">     494 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     495 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Ln1,Y,((-0.5)*(TR*mL_VY_GND)*d10_tanh0));</span>
+<span class="lineNum">     496 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Ln1,X,((-0.5)*(TR*mL_VX_GND)*d10_tanh0));</span>
+<span class="lineNum">     497 </span>                :            : #endif
+<span class="lineNum">     498 </span>                :            : }
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(Ln1,NP(Ln1));</span>
+<span class="lineNum">     500 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     501 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(Ln1,Ln1,1.0);</span>
+<span class="lineNum">     502 </span>                :            : #endif
+<span class="lineNum">     503 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_residual2(Ln1,Ln2,(BP(Ln1,Ln2)/Rd));</span>
+<span class="lineNum">     504 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     505 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian4(Ln1,Ln2,Ln1,Ln2,(1/Rd));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span>]
+<span class="lineNum">     506 </span>                :            : #endif
+<span class="lineNum">     507 </span>                :            : #if defined(_DYNAMIC)
+<span class="lineNum">     508 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_residual1(Ln2,_DDT((Cd*NP(Ln2))));</span>
+<span class="lineNum">     509 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     510 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_dynamic_jacobian1(Ln2,Ln2,(Cd));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     511 </span>                :            : #endif
+<span class="lineNum">     512 </span>                :            : #endif
+<span class="lineNum">     513 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(L,(-NP(Ln2)));</span>
+<span class="lineNum">     514 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     515 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(L,Ln2,(-1.0));</span>
+<span class="lineNum">     516 </span>                :            : #endif
+<span class="lineNum">     517 </span>                :<span class="lineNoCov">          0 : _load_static_residual1(L,NP(L));</span>
+<span class="lineNum">     518 </span>                :            : #if defined(_DERIVATE)
+<span class="lineNum">     519 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 : _load_static_jacobian1(L,L,1.0);</span>
+<span class="lineNum">     520 </span>                :            : #endif
+<span class="lineNum">     521 </span>                :            : 
+<span class="lineNum">     522 </span>                :            : /* ------------------ end of verilog analog equations --------------------- */
+<span class="lineNum">     523 </span>                :            : 
+<span class="lineNum">     524 </span>                :            : /* ------------------ evaluate verilog noise equations -------------------- */
+<span class="lineNum">     525 </span>                :            : 
+<span class="lineNum">     526 </span>                :            : /* ------------------- end of verilog noise equations --------------------- */
+<span class="lineNum">     527 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="528"><span class="lineNum">     528 </span>                :            : </a>
+<span class="lineNum">     529 </span>                :            : /* Perform DC iteration. */
+<span class="lineNum">     530 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcDC (void)</span>
+<span class="lineNum">     531 </span>                :            : {
+<span class="lineNum">     532 </span>                :            :   // evaluate Verilog code
+<span class="lineNum">     533 </span>                :<span class="lineNoCov">          0 :   initVerilog ();</span>
+<span class="lineNum">     534 </span>                :<span class="lineNoCov">          0 :   calcVerilog ();</span>
+<span class="lineNum">     535 </span>                :            : 
+<span class="lineNum">     536 </span>                :            :   // fill right hand side and static jacobian
+<span class="lineNum">     537 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     538 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setI (i1, _rhs[i1]);</span>
+<span class="lineNum">     539 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     540 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       setY (i1, i2, _jstat[i1][i2]);</span>
+<span class="lineNum">     541 </span>                :            :     }
+<span class="lineNum">     542 </span>                :            :   }
+<span class="lineNum">     543 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="544"><span class="lineNum">     544 </span>                :            : </a>
+<span class="lineNum">     545 </span>                :            : /* Save operating points. */
+<span class="lineNum">     546 </span>                :<span class="lineNoCov">          0 : void comp_1bit::saveOperatingPoints (void)</span>
+<span class="lineNum">     547 </span>                :            : {
+<span class="lineNum">     548 </span>                :            :   // save global instance operating points
+<span class="lineNum">     549 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="550"><span class="lineNum">     550 </span>                :            : </a>
+<span class="lineNum">     551 </span>                :            : /* Load operating points. */
+<span class="lineNum">     552 </span>                :<span class="lineNoCov">          0 : void comp_1bit::loadOperatingPoints (void)</span>
+<span class="lineNum">     553 </span>                :            : {
+<span class="lineNum">     554 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="555"><span class="lineNum">     555 </span>                :            : </a>
+<span class="lineNum">     556 </span>                :            : /* Calculate operating points. */
+<span class="lineNum">     557 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcOperatingPoints (void)</span>
+<span class="lineNum">     558 </span>                :            : {
+<span class="lineNum">     559 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="560"><span class="lineNum">     560 </span>                :            : </a>
+<span class="lineNum">     561 </span>                :            : /* Initialization of AC analysis. */
+<span class="lineNum">     562 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initAC (void)</span>
+<span class="lineNum">     563 </span>                :            : {
+<span class="lineNum">     564 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     565 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="566"><span class="lineNum">     566 </span>                :            : </a>
+<span class="lineNum">     567 </span>                :            : /* Perform AC calculations. */
+<span class="lineNum">     568 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcAC (nr_double_t frequency)</span>
+<span class="lineNum">     569 </span>                :            : {
+<span class="lineNum">     570 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixY (calcMatrixY (frequency));</span>
+<span class="lineNum">     571 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="572"><span class="lineNum">     572 </span>                :            : </a>
+<span class="lineNum">     573 </span>                :            : /* Compute Y-matrix for AC analysis. */
+<span class="lineNum">     574 </span>                :<span class="lineNoCov">          0 : matrix comp_1bit::calcMatrixY (nr_double_t frequency)</span>
+<span class="lineNum">     575 </span>                :            : {
+<span class="lineNum">     576 </span>                :<span class="lineNoCov">          0 :   _freq = frequency;</span>
+<span class="lineNum">     577 </span>                :<span class="lineNoCov">          0 :   saveOperatingPoints ();</span>
+<span class="lineNum">     578 </span>                :<span class="lineNoCov">          0 :   matrix y (11);</span>
+<span class="lineNum">     579 </span>                :            : 
+<span class="lineNum">     580 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     581 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     582 </span>                :<span class="lineNoCov">          0 :       y (i1,i2) = nr_complex_t (_jstat[i1][i2], _jdyna[i1][i2] * 2 * M_PI * _freq);</span>
+<span class="lineNum">     583 </span>                :            :     }
+<span class="lineNum">     584 </span>                :            :   }
+<span class="lineNum">     585 </span>                :            : 
+<span class="lineNum">     586 </span>                :<span class="lineNoCov">          0 :   return y;</span>
+<span class="lineNum">     587 </span>                :            : }
+<a name="588"><span class="lineNum">     588 </span>                :            : </a>
+<span class="lineNum">     589 </span>                :            : /* Initialization of S-parameter analysis. */
+<span class="lineNum">     590 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initSP (void)</span>
+<span class="lineNum">     591 </span>                :            : {
+<span class="lineNum">     592 </span>                :<span class="lineNoCov">          0 :   allocMatrixS ();</span>
+<span class="lineNum">     593 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="594"><span class="lineNum">     594 </span>                :            : </a>
+<span class="lineNum">     595 </span>                :            : /* Perform S-parameter calculations. */
+<span class="lineNum">     596 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcSP (nr_double_t frequency)</span>
+<span class="lineNum">     597 </span>                :            : {
+<span class="lineNum">     598 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixS (ytos (calcMatrixY (frequency)));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>]
+<span class="lineNum">     599 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="600"><span class="lineNum">     600 </span>                :            : </a>
+<span class="lineNum">     601 </span>                :            : /* Initialization of transient analysis. */
+<span class="lineNum">     602 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initTR (void)</span>
+<span class="lineNum">     603 </span>                :            : {
+<span class="lineNum">     604 </span>                :<span class="lineNoCov">          0 :   setStates (2 * 11 * 11);</span>
+<span class="lineNum">     605 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<span class="lineNum">     606 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="607"><span class="lineNum">     607 </span>                :            : </a>
+<span class="lineNum">     608 </span>                :            : /* Perform transient analysis iteration step. */
+<span class="lineNum">     609 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcTR (nr_double_t)</span>
+<span class="lineNum">     610 </span>                :            : {
+<span class="lineNum">     611 </span>                :<span class="lineNoCov">          0 :   doHB = 0;</span>
+<span class="lineNum">     612 </span>                :<span class="lineNoCov">          0 :   doAC = 1;</span>
+<span class="lineNum">     613 </span>                :<span class="lineNoCov">          0 :   doTR = 1;</span>
+<span class="lineNum">     614 </span>                :<span class="lineNoCov">          0 :   calcDC ();</span>
+<span class="lineNum">     615 </span>                :            : 
+<span class="lineNum">     616 </span>                :            :   int i1, i2, i3, i4, state;
+<span class="lineNum">     617 </span>                :            : 
+<span class="lineNum">     618 </span>                :            :   // 2-node charge integrations
+<span class="lineNum">     619 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     620 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     621 </span>                :<span class="lineNoCov">          0 :     state = 2 * (i2 + 11 * i1);</span>
+<span class="lineNum">     622 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i1 != i2)</span>
+<span class="lineNum">     623 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_charges[i1][i2] != 0.0)</span>
+<span class="lineNum">     624 </span>                :<span class="lineNoCov">          0 :       transientCapacitanceQ (state, i1, i2, _charges[i1][i2]);</span>
+<span class="lineNum">     625 </span>                :            :   } }
+<span class="lineNum">     626 </span>                :            : 
+<span class="lineNum">     627 </span>                :            :   // 1-node charge integrations
+<span class="lineNum">     628 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     629 </span>                :<span class="lineNoCov">          0 :     state = 2 * (i1 + 11 * i1);</span>
+<span class="lineNum">     630 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_charges[i1][i1] != 0.0)</span>
+<span class="lineNum">     631 </span>                :<span class="lineNoCov">          0 :       transientCapacitanceQ (state, i1, _charges[i1][i1]);</span>
+<span class="lineNum">     632 </span>                :            :   }
+<span class="lineNum">     633 </span>                :            : 
+<span class="lineNum">     634 </span>                :            :   // charge: 2-node, voltage: 2-node
+<span class="lineNum">     635 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     636 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     637 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (i1 != i2)</span>
+<span class="lineNum">     638 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i3 = 0; i3 &lt; 11; i3++) {</span>
+<span class="lineNum">     639 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i4 = 0; i4 &lt; 11; i4++) {</span>
+<span class="lineNum">     640 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i3 != i4)</span>
+<span class="lineNum">     641 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_caps[i1][i2][i3][i4] != 0.0)</span>
+<span class="lineNum">     642 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :       transientCapacitanceC (i1, i2, i3, i4, _caps[i1][i2][i3][i4], BP(i3,i4));</span>
+<span class="lineNum">     643 </span>                :            :   } } } }
+<span class="lineNum">     644 </span>                :            : 
+<span class="lineNum">     645 </span>                :            :   // charge: 2-node, voltage: 1-node
+<span class="lineNum">     646 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     647 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     648 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (i1 != i2)</span>
+<span class="lineNum">     649 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i3 = 0; i3 &lt; 11; i3++) {</span>
+<span class="lineNum">     650 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_caps[i1][i2][i3][i3] != 0.0)</span>
+<span class="lineNum">     651 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       transientCapacitanceC2Q (i1, i2, i3, _caps[i1][i2][i3][i3], NP(i3));</span>
+<span class="lineNum">     652 </span>                :            :   } } }
+<span class="lineNum">     653 </span>                :            : 
+<span class="lineNum">     654 </span>                :            :   // charge: 1-node, voltage: 2-node
+<span class="lineNum">     655 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     656 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i3 = 0; i3 &lt; 11; i3++) {</span>
+<span class="lineNum">     657 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i4 = 0; i4 &lt; 11; i4++) {</span>
+<span class="lineNum">     658 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i3 != i4)</span>
+<span class="lineNum">     659 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_caps[i1][i1][i3][i4] != 0.0)</span>
+<span class="lineNum">     660 </span>[<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]:<span class="lineNoCov">          0 :       transientCapacitanceC2V (i1, i3, i4, _caps[i1][i1][i3][i4], BP(i3,i4));</span>
+<span class="lineNum">     661 </span>                :            :   } } }
+<span class="lineNum">     662 </span>                :            : 
+<span class="lineNum">     663 </span>                :            :   // charge: 1-node, voltage: 1-node
+<span class="lineNum">     664 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     665 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i3 = 0; i3 &lt; 11; i3++) {</span>
+<span class="lineNum">     666 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (_caps[i1][i1][i3][i3] != 0.0)</span>
+<span class="lineNum">     667 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       transientCapacitanceC (i1, i3, _caps[i1][i1][i3][i3], NP(i3));</span>
+<span class="lineNum">     668 </span>                :            :   } }
+<span class="lineNum">     669 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="670"><span class="lineNum">     670 </span>                :            : </a>
+<span class="lineNum">     671 </span>                :            : /* Compute Cy-matrix for AC noise analysis. */
+<span class="lineNum">     672 </span>                :<span class="lineNoCov">          0 : matrix comp_1bit::calcMatrixCy (nr_double_t frequency) </span>
+<span class="lineNum">     673 </span>                :            : {
+<span class="lineNum">     674 </span>                :<span class="lineNoCov">          0 :   _freq = frequency;</span>
+<span class="lineNum">     675 </span>                :<span class="lineNoCov">          0 :   matrix cy (11);</span>
+<span class="lineNum">     676 </span>                :            : 
+<span class="lineNum">     677 </span>                :            : 
+<span class="lineNum">     678 </span>                :<span class="lineNoCov">          0 :   return cy;</span>
+<span class="lineNum">     679 </span>                :            : }
+<a name="680"><span class="lineNum">     680 </span>                :            : </a>
+<span class="lineNum">     681 </span>                :            : /* Perform AC noise computations. */
+<span class="lineNum">     682 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcNoiseAC (nr_double_t frequency) </span>
+<span class="lineNum">     683 </span>                :            : {
+<span class="lineNum">     684 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (calcMatrixCy (frequency));</span>
+<span class="lineNum">     685 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="686"><span class="lineNum">     686 </span>                :            : </a>
+<span class="lineNum">     687 </span>                :            : /* Perform S-parameter noise computations. */
+<span class="lineNum">     688 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcNoiseSP (nr_double_t frequency) </span>
+<span class="lineNum">     689 </span>                :            : {
+<span class="lineNum">     690 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setMatrixN (cytocs (calcMatrixCy (frequency) * z0, getMatrixS ()));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 13 was not executed"> # </span><span class="branchNoExec" title="Branch 14 was not executed"> # </span>][<span class="branchNoExec" title="Branch 16 was not executed"> # </span><span class="branchNoExec" title="Branch 17 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 19 was not executed"> # </span><span class="branchNoExec" title="Branch 20 was not executed"> # </span>]
+<span class="lineNum">     691 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="692"><span class="lineNum">     692 </span>                :            : </a>
+<span class="lineNum">     693 </span>                :            : /* Initialization of HB analysis. */
+<span class="lineNum">     694 </span>                :<span class="lineNoCov">          0 : void comp_1bit::initHB (int)</span>
+<span class="lineNum">     695 </span>                :            : {
+<span class="lineNum">     696 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<span class="lineNum">     697 </span>                :<span class="lineNoCov">          0 :   allocMatrixHB ();</span>
+<span class="lineNum">     698 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="699"><span class="lineNum">     699 </span>                :            : </a>
+<span class="lineNum">     700 </span>                :            : /* Perform HB analysis. */
+<span class="lineNum">     701 </span>                :<span class="lineNoCov">          0 : void comp_1bit::calcHB (int)</span>
+<span class="lineNum">     702 </span>                :            : {
+<span class="lineNum">     703 </span>                :<span class="lineNoCov">          0 :   doHB = 1;</span>
+<span class="lineNum">     704 </span>                :<span class="lineNoCov">          0 :   doAC = 1;</span>
+<span class="lineNum">     705 </span>                :<span class="lineNoCov">          0 :   doTR = 0;</span>
+<span class="lineNum">     706 </span>                :            : 
+<span class="lineNum">     707 </span>                :            :   // jacobian dI/dV and currents get filled
+<span class="lineNum">     708 </span>                :<span class="lineNoCov">          0 :   calcDC ();</span>
+<span class="lineNum">     709 </span>                :<span class="lineNoCov">          0 :   saveOperatingPoints ();</span>
+<span class="lineNum">     710 </span>                :            : 
+<span class="lineNum">     711 </span>                :            :   // fill in HB matrices
+<span class="lineNum">     712 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i1 = 0; i1 &lt; 11; i1++) {</span>
+<span class="lineNum">     713 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setQ  (i1, _qhs[i1]); // charges</span>
+<span class="lineNum">     714 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setCV (i1, _chs[i1]); // jacobian dQ/dV * V</span>
+<span class="lineNum">     715 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     setGV (i1, _ghs[i1]); // jacobian dI/dV * V</span>
+<span class="lineNum">     716 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i2 = 0; i2 &lt; 11; i2++) {</span>
+<span class="lineNum">     717 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       setQV (i1, i2, _jdyna[i1][i2]); // jacobian dQ/dV</span>
+<span class="lineNum">     718 </span>                :            :     }
+<span class="lineNum">     719 </span>                :            :   }
+<span class="lineNum">     720 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     721 </span>                :            : 
+<span class="lineNum">     722 </span>                :            : #include &quot;comp_1bit.defs.h&quot;
+<span class="lineNum">     723 </span>                :            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

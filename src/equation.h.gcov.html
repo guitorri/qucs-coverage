@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/equation.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - equation.h<span style="font-size: 80%;"> (source / <a href="equation.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryLo">65.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryLo">65.2 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * equation.h - checker definitions for Qucs equations
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004-2009 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #ifndef __EQUATION_H__
+<span class="lineNum">      26 </span>                :            : #define __EQUATION_H__
+<span class="lineNum">      27 </span>                :            : 
+<span class="lineNum">      28 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      29 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;vector.h&quot;
+<span class="lineNum">      31 </span>                :            : #include &quot;matrix.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;matvec.h&quot;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : struct definition_t;
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : namespace qucs {
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :            : class strlist;
+<span class="lineNum">      39 </span>                :            : class dataset;
+<span class="lineNum">      40 </span>                :            : class range;
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :            : namespace eqn {
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :            : class solver;
+<span class="lineNum">      45 </span>                :            : class checker;
+<span class="lineNum">      46 </span>                :            : class constant;
+<span class="lineNum">      47 </span>                :            : class reference;
+<span class="lineNum">      48 </span>                :            : class assignment;
+<span class="lineNum">      49 </span>                :            : class application;
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : enum NodeTag {
+<span class="lineNum">      52 </span>                :            :   UNKNOWN = -1,
+<span class="lineNum">      53 </span>                :            :   CONSTANT = 0, /* source code constant */
+<span class="lineNum">      54 </span>                :            :   REFERENCE,    /* variable reference   */
+<span class="lineNum">      55 </span>                :            :   APPLICATION,  /* call to function     */
+<span class="lineNum">      56 </span>                :            :   ASSIGNMENT    /* root of equation     */
+<span class="lineNum">      57 </span>                :            : };
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            : /* The equation node base class defines and implements the basic
+<span class="lineNum">      60 </span>                :            :    functionality of an equation node.  Possible types of nodes are
+<span class="lineNum">      61 </span>                :            :    listed in 'NodeTag'. */
+<span class="lineNum">      62 </span>                :            : class node
+<span class="lineNum">      63 </span>                :            : {
+<span class="lineNum">      64 </span>                :            : public:
+<span class="lineNum">      65 </span>                :            :   node ();
+<span class="lineNum">      66 </span>                :            :   node (int);
+<a name="67"><span class="lineNum">      67 </span>                :            :   node (const node &amp;);</a>
+<a name="68"><span class="lineNum">      68 </span>                :            :   virtual ~node ();</a>
+<span class="lineNum">      69 </span>                :<span class="lineCov">    2561192 :   node * getNext (void) { return next; }</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">     225419 :   void setNext (node * n) { next = n; }</span>
+<span class="lineNum">      71 </span>                :            :   int count (void);
+<span class="lineNum">      72 </span>                :            :   void append (node *);
+<span class="lineNum">      73 </span>                :            :   void appendNodes (node *);
+<span class="lineNum">      74 </span>                :            :   void setDependencies (strlist *);
+<a name="75"><span class="lineNum">      75 </span>                :            :   strlist * getDependencies (void);</a>
+<span class="lineNum">      76 </span>                :            :   void setDataDependencies (strlist *);
+<span class="lineNum">      77 </span>                :<span class="lineCov">     112906 :   strlist * getDataDependencies (void) { return dataDependencies; }</span>
+<a name="78"><span class="lineNum">      78 </span>                :            :   void setDropDependencies (strlist * deps) { dropDependencies = deps; }</a>
+<a name="79"><span class="lineNum">      79 </span>                :            :   void addDropDependencies (char *);</a>
+<span class="lineNum">      80 </span>                :<span class="lineCov">     112167 :   strlist * getDropDependencies (void) { return dropDependencies; }</span>
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 :   void setPrepDependencies (strlist * deps) { prepDependencies = deps; }</span>
+<a name="82"><span class="lineNum">      82 </span>                :            :   void addPrepDependencies (char *);</a>
+<span class="lineNum">      83 </span>                :            :   void appendPrepDependencies (strlist *);
+<span class="lineNum">      84 </span>                :<span class="lineCov">     112180 :   strlist * getPrepDependencies (void) { return prepDependencies; }</span>
+<span class="lineNum">      85 </span>                :            :   strlist * recurseDependencies (checker *, strlist *);
+<a name="86"><span class="lineNum">      86 </span>                :            :   node * get (int);</a>
+<a name="87"><span class="lineNum">      87 </span>                :            :   constant * getResult (int);</a>
+<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">     285551 :   int getType (void) { return type; }</span></a>
+<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">      21868 :   int getTag (void) { return tag; }</span></a>
+<span class="lineNum">      90 </span>                :<span class="lineCov">     117604 :   void setType (int tag) { type = tag; }</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">     929202 :   constant * getResult (void) { return res; }</span>
+<span class="lineNum">      92 </span>                :            :   nr_double_t getResultDouble (void);
+<span class="lineNum">      93 </span>                :            :   nr_complex_t getResultComplex (void);
+<span class="lineNum">      94 </span>                :            :   qucs::vector getResultVector (void);
+<span class="lineNum">      95 </span>                :            :   void setResult (constant *);
+<span class="lineNum">      96 </span>                :            :   char * getInstance (void);
+<span class="lineNum">      97 </span>                :            :   void setInstance (const char *);
+<span class="lineNum">      98 </span>                :            :   void applyInstance (void);
+<span class="lineNum">      99 </span>                :            :   constant * calculate (void);
+<span class="lineNum">     100 </span>                :            :   strlist * collectDependencies (void);
+<span class="lineNum">     101 </span>                :            :   strlist * collectDataDependencies (void);
+<a name="102"><span class="lineNum">     102 </span>                :            : </a>
+<a name="103"><span class="lineNum">     103 </span>                :            :   /* These functions should be overloaded by derivative classes. */</a>
+<a name="104"><span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :   virtual void print (void) { }</span></a>
+<a name="105"><span class="lineNum">     105 </span>                :<span class="lineCov">     113139 :   virtual void addDependencies (strlist *) { }</span></a>
+<a name="106"><span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 :   virtual int evalType (void) { return type; }</span></a>
+<a name="107"><span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 :   virtual char * toString (void) { return txt; }</span></a>
+<a name="108"><span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :   virtual constant * evaluate (void) { return res; }</span></a>
+<a name="109"><span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :   virtual node * differentiate (char *) { return this; }</span></a>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :   virtual node * recreate (void) { return new node (*this); }</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :   virtual void replace (char *, char *) { }</span>
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :            : public:
+<span class="lineNum">     114 </span>                :            :   int duplicate;
+<span class="lineNum">     115 </span>                :            :   int cycle;
+<span class="lineNum">     116 </span>                :            :   int evalPossible;
+<span class="lineNum">     117 </span>                :            :   int skip;
+<span class="lineNum">     118 </span>                :            :   char * txt;
+<span class="lineNum">     119 </span>                :            :   int evaluated;
+<span class="lineNum">     120 </span>                :            :   char * instance;
+<span class="lineNum">     121 </span>                :            :   int output;
+<span class="lineNum">     122 </span>                :            :   int dropdeps;
+<span class="lineNum">     123 </span>                :            :   solver * solvee;
+<span class="lineNum">     124 </span>                :            :   checker * checkee;
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :            : private:
+<span class="lineNum">     127 </span>                :            :   int type;
+<span class="lineNum">     128 </span>                :            :   int tag;
+<span class="lineNum">     129 </span>                :            :   node * next;
+<span class="lineNum">     130 </span>                :            :   strlist * dependencies;
+<span class="lineNum">     131 </span>                :            :   constant * res;
+<span class="lineNum">     132 </span>                :            :   strlist * dataDependencies;
+<span class="lineNum">     133 </span>                :            :   strlist * dropDependencies;
+<span class="lineNum">     134 </span>                :            :   strlist * prepDependencies;
+<span class="lineNum">     135 </span>                :            : };
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            : enum ConstantTag {
+<span class="lineNum">     138 </span>                :            :   TAG_UNKNOWN =   0,
+<span class="lineNum">     139 </span>                :            :   TAG_DOUBLE  =   1, /* double constant          */
+<span class="lineNum">     140 </span>                :            :   TAG_COMPLEX =   2, /* complex value            */
+<span class="lineNum">     141 </span>                :            :   TAG_VECTOR  =   4, /* list of complex values   */
+<span class="lineNum">     142 </span>                :            :   TAG_MATRIX  =   8, /* complex matrix           */
+<span class="lineNum">     143 </span>                :            :   TAG_MATVEC  =  16, /* list of complex matrices */
+<span class="lineNum">     144 </span>                :            :   TAG_CHAR    =  32, /* single character         */
+<span class="lineNum">     145 </span>                :            :   TAG_STRING  =  64, /* character string         */
+<span class="lineNum">     146 </span>                :            :   TAG_RANGE   = 128, /* interval specification   */
+<span class="lineNum">     147 </span>                :            :   TAG_BOOLEAN = 256, /* boolean value            */
+<span class="lineNum">     148 </span>                :            : };
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :            : /* This class represents any type of constant expression. */
+<span class="lineNum">     151 </span>                :            : class constant : public node
+<span class="lineNum">     152 </span>                :            : {
+<span class="lineNum">     153 </span>                :            : public:
+<span class="lineNum">     154 </span>                :            :   constant ();
+<span class="lineNum">     155 </span>                :            :   constant (int);
+<span class="lineNum">     156 </span>                :            :   constant (const constant &amp;);
+<span class="lineNum">     157 </span>                :            :   ~constant ();
+<span class="lineNum">     158 </span>                :            :   void print (void);
+<span class="lineNum">     159 </span>                :            :   int evalType (void);
+<span class="lineNum">     160 </span>                :            :   char * toString (void);
+<span class="lineNum">     161 </span>                :            :   constant * evaluate (void);
+<span class="lineNum">     162 </span>                :            :   node * differentiate (char *);
+<span class="lineNum">     163 </span>                :            :   node * recreate (void);
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :            : public:
+<span class="lineNum">     166 </span>                :            :   bool dataref;
+<span class="lineNum">     167 </span>                :            :   int type;
+<span class="lineNum">     168 </span>                :            :   union {
+<span class="lineNum">     169 </span>                :            :     nr_double_t d;
+<span class="lineNum">     170 </span>                :            :     nr_complex_t * c;
+<span class="lineNum">     171 </span>                :            :     qucs::vector * v;
+<span class="lineNum">     172 </span>                :            :     matrix * m;
+<span class="lineNum">     173 </span>                :            :     matvec * mv;
+<span class="lineNum">     174 </span>                :            :     char chr;
+<span class="lineNum">     175 </span>                :            :     char * s;
+<span class="lineNum">     176 </span>                :            :     range * r;
+<span class="lineNum">     177 </span>                :            :     bool b;
+<span class="lineNum">     178 </span>                :            :   };
+<span class="lineNum">     179 </span>                :            : };
+<span class="lineNum">     180 </span>                :            : 
+<span class="lineNum">     181 </span>                :            : /* The class represents variable references. */
+<span class="lineNum">     182 </span>                :            : class reference : public node
+<span class="lineNum">     183 </span>                :            : {
+<span class="lineNum">     184 </span>                :            : public:
+<span class="lineNum">     185 </span>                :            :   reference ();
+<span class="lineNum">     186 </span>                :            :   reference (const reference &amp;);
+<span class="lineNum">     187 </span>                :            :   ~reference ();
+<span class="lineNum">     188 </span>                :            :   void print (void);
+<span class="lineNum">     189 </span>                :            :   void addDependencies (strlist *);
+<span class="lineNum">     190 </span>                :            :   void findVariable (void);
+<span class="lineNum">     191 </span>                :            :   int evalType (void);
+<span class="lineNum">     192 </span>                :            :   char * toString (void);
+<span class="lineNum">     193 </span>                :            :   constant * evaluate (void);
+<span class="lineNum">     194 </span>                :            :   node * differentiate (char *);
+<span class="lineNum">     195 </span>                :            :   node * recreate (void);
+<span class="lineNum">     196 </span>                :            :   void replace (char *, char *);
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :            : public:
+<span class="lineNum">     199 </span>                :            :   char * n;
+<span class="lineNum">     200 </span>                :            :   node * ref;
+<span class="lineNum">     201 </span>                :            : };
+<span class="lineNum">     202 </span>                :            : 
+<span class="lineNum">     203 </span>                :            : /* This class represents assignments with a left hand and right hand
+<span class="lineNum">     204 </span>                :            :    side. */
+<span class="lineNum">     205 </span>                :            : class assignment : public node
+<span class="lineNum">     206 </span>                :            : {
+<span class="lineNum">     207 </span>                :            : public:
+<span class="lineNum">     208 </span>                :            :   assignment ();
+<span class="lineNum">     209 </span>                :            :   assignment (const assignment &amp;);
+<span class="lineNum">     210 </span>                :            :   ~assignment ();
+<span class="lineNum">     211 </span>                :            :   void print (void);
+<span class="lineNum">     212 </span>                :            :   void addDependencies (strlist *);
+<span class="lineNum">     213 </span>                :            :   int evalType (void);
+<span class="lineNum">     214 </span>                :            :   char * toString (void);
+<span class="lineNum">     215 </span>                :            :   constant * evaluate (void);
+<span class="lineNum">     216 </span>                :            :   node * differentiate (char *);
+<span class="lineNum">     217 </span>                :            :   node * recreate (void);
+<span class="lineNum">     218 </span>                :            :   void replace (char *, char *);
+<span class="lineNum">     219 </span>                :            :   void rename (char *);
+<span class="lineNum">     220 </span>                :            :   void mul (assignment *);
+<span class="lineNum">     221 </span>                :            :   void add (assignment *);
+<span class="lineNum">     222 </span>                :            :   void mulref (assignment *);
+<span class="lineNum">     223 </span>                :            : 
+<span class="lineNum">     224 </span>                :            : public:
+<span class="lineNum">     225 </span>                :            :   char * result;
+<span class="lineNum">     226 </span>                :            :   node * body;
+<span class="lineNum">     227 </span>                :            : };
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>                :            : // Type of application function.
+<span class="lineNum">     230 </span>                :            : typedef constant * (* evaluator_t) (constant *);
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            : // Type of derivative function.
+<span class="lineNum">     233 </span>                :            : typedef node * (* differentiator_t) (application *, char *);
+<span class="lineNum">     234 </span>                :            : 
+<span class="lineNum">     235 </span>                :            : /* The application class represents any kind of operation (unary,
+<span class="lineNum">     236 </span>                :            :    binary and n-ary ones) containing the appropriate argument list. */
+<span class="lineNum">     237 </span>                :            : class application : public node
+<span class="lineNum">     238 </span>                :            : {
+<span class="lineNum">     239 </span>                :            : public:
+<span class="lineNum">     240 </span>                :            :   application ();
+<span class="lineNum">     241 </span>                :            :   application (const application &amp;);
+<span class="lineNum">     242 </span>                :            :   application (const char *, int);
+<span class="lineNum">     243 </span>                :            :   ~application ();
+<span class="lineNum">     244 </span>                :            :   void print (void);
+<span class="lineNum">     245 </span>                :            :   void addDependencies (strlist *);
+<span class="lineNum">     246 </span>                :            :   int evalType (void);
+<span class="lineNum">     247 </span>                :            :   char * toString (void);
+<span class="lineNum">     248 </span>                :            :   constant * evaluate (void);
+<span class="lineNum">     249 </span>                :            :   node * differentiate (char *);
+<span class="lineNum">     250 </span>                :            :   node * recreate (void);
+<span class="lineNum">     251 </span>                :            :   void replace (char *, char *);
+<span class="lineNum">     252 </span>                :            : 
+<span class="lineNum">     253 </span>                :            : public:
+<span class="lineNum">     254 </span>                :            :   char * n;
+<span class="lineNum">     255 </span>                :            :   int nargs;
+<span class="lineNum">     256 </span>                :            :   node * args;
+<span class="lineNum">     257 </span>                :            :   node * ddx;
+<span class="lineNum">     258 </span>                :            :   evaluator_t eval;
+<span class="lineNum">     259 </span>                :            :   differentiator_t derive;
+<span class="lineNum">     260 </span>                :            : 
+<span class="lineNum">     261 </span>                :            : private:
+<span class="lineNum">     262 </span>                :            :   void evalTypeArgs (void);
+<span class="lineNum">     263 </span>                :            :   char * createKey (void);
+<span class="lineNum">     264 </span>                :            :   int evalTypeFast (void);
+<span class="lineNum">     265 </span>                :            :   int findDifferentiator (void);
+<span class="lineNum">     266 </span>                :            : };
+<span class="lineNum">     267 </span>                :            : 
+<span class="lineNum">     268 </span>                :            : /* This class implements the actual functionality regarding a set of
+<span class="lineNum">     269 </span>                :            :    equations stored within a netlist. */
+<span class="lineNum">     270 </span>                :            : class checker
+<span class="lineNum">     271 </span>                :            : {
+<span class="lineNum">     272 </span>                :            : public:
+<span class="lineNum">     273 </span>                :            :   checker ();
+<span class="lineNum">     274 </span>                :            :   ~checker ();
+<span class="lineNum">     275 </span>                :            :   void collectDependencies (void);
+<a name="276"><span class="lineNum">     276 </span>                :            :   void collectDependencies (node *);</a>
+<span class="lineNum">     277 </span>                :            :   void setEquations (node *);
+<span class="lineNum">     278 </span>                :<span class="lineCov">      50274 :   node * getEquations (void) { return equations; }</span>
+<span class="lineNum">     279 </span>                :            :   void list (void);
+<span class="lineNum">     280 </span>                :            :   int findUndefined (int);
+<span class="lineNum">     281 </span>                :            :   static const char * tag2key (int);
+<span class="lineNum">     282 </span>                :            :   static int isGenerated (char *);
+<span class="lineNum">     283 </span>                :            :   strlist * getVariables (void);
+<span class="lineNum">     284 </span>                :            :   int findDuplicate (void);
+<span class="lineNum">     285 </span>                :            :   static node * findEquation (node *, const char * const);
+<span class="lineNum">     286 </span>                :            :   int detectCycles (void);
+<span class="lineNum">     287 </span>                :            :   static strlist * foldDependencies (strlist *);
+<span class="lineNum">     288 </span>                :            :   node * appendEquation (node *, node *);
+<span class="lineNum">     289 </span>                :            :   void dropEquation (node *);
+<span class="lineNum">     290 </span>                :            :   void reorderEquations (void);
+<span class="lineNum">     291 </span>                :            :   static node * lastEquation (node *);
+<span class="lineNum">     292 </span>                :            :   int applyTypes (void);
+<span class="lineNum">     293 </span>                :            :   int checkExport (void);
+<span class="lineNum">     294 </span>                :            :   void constants (void);
+<span class="lineNum">     295 </span>                :            :   int check (int noundefined = 1);
+<span class="lineNum">     296 </span>                :            :   strlist * variables (void);
+<span class="lineNum">     297 </span>                :            :   node * addDouble (const char *, const char *, nr_double_t);
+<span class="lineNum">     298 </span>                :            :   node * createDouble (const char *, const char *, nr_double_t);
+<span class="lineNum">     299 </span>                :            :   node * addComplex (const char *, const char *, nr_complex_t);
+<span class="lineNum">     300 </span>                :            :   node * createComplex (const char *, const char *, nr_complex_t);
+<span class="lineNum">     301 </span>                :            :   node * addReference (const char *, const char *, char *);
+<span class="lineNum">     302 </span>                :            :   node * createReference (const char *, const char *, char *);
+<span class="lineNum">     303 </span>                :            :   void appendEquation (node *);
+<span class="lineNum">     304 </span>                :            :   void addEquation (node *);
+<span class="lineNum">     305 </span>                :            :   node * findEquation (const char *
+<span class="lineNum">     306 </span>                :            :                        const) const;
+<span class="lineNum">     307 </span>                :            :   bool containsVariable (const char * const) const;
+<span class="lineNum">     308 </span>                :            :   nr_double_t getDouble (const char *const) const;
+<a name="309"><span class="lineNum">     309 </span>                :            :   void setDouble (const char *const, nr_double_t);</a>
+<span class="lineNum">     310 </span>                :            :   qucs::vector getVector (const char * const) const;
+<span class="lineNum">     311 </span>                :<span class="lineCov">      20668 :   void setDefinitions (struct definition_t * d) { defs = d; }</span>
+<span class="lineNum">     312 </span>                :            :   struct definition_t * getDefinitions (void) { return defs; }
+<span class="lineNum">     313 </span>                :            :   node * findProperty (char *);
+<span class="lineNum">     314 </span>                :            : 
+<span class="lineNum">     315 </span>                :            : public:
+<span class="lineNum">     316 </span>                :            :   node * equations;
+<span class="lineNum">     317 </span>                :            : 
+<span class="lineNum">     318 </span>                :            :  private:
+<span class="lineNum">     319 </span>                :            :   bool consts;
+<span class="lineNum">     320 </span>                :            :   struct definition_t * defs;
+<span class="lineNum">     321 </span>                :            : };
+<span class="lineNum">     322 </span>                :            : 
+<span class="lineNum">     323 </span>                :            : /* The solver class is finally used to solve the list of equations. */
+<span class="lineNum">     324 </span>                :            : class solver
+<span class="lineNum">     325 </span>                :            : {
+<span class="lineNum">     326 </span>                :            : public:
+<a name="327"><span class="lineNum">     327 </span>                :            :   solver (checker *);</a>
+<a name="328"><span class="lineNum">     328 </span>                :            :   ~solver ();</a>
+<a name="329"><span class="lineNum">     329 </span>                :<span class="lineCov">      20567 :   void setEquations (node * eqn) { equations = eqn; }</span></a>
+<span class="lineNum">     330 </span>                :<span class="lineCov">      20567 :   node * getEquations (void) { return equations; }</span>
+<span class="lineNum">     331 </span>                :<span class="lineCov">      20567 :   void setData (dataset * d) { data = d; }</span>
+<span class="lineNum">     332 </span>                :            :   dataset * getDataset (void) { return data; }
+<span class="lineNum">     333 </span>                :            :   void evaluate (void);
+<span class="lineNum">     334 </span>                :            :   node * addEquationData (qucs::vector *, bool ref = false);
+<span class="lineNum">     335 </span>                :            :   node * addEquationData (matvec *);
+<span class="lineNum">     336 </span>                :            :   node * addGeneratedEquation (qucs::vector *, const char *);
+<span class="lineNum">     337 </span>                :            :   qucs::vector * dataVector (node *);
+<span class="lineNum">     338 </span>                :            :   void checkinDataset (void);
+<span class="lineNum">     339 </span>                :            :   void checkoutDataset (void);
+<span class="lineNum">     340 </span>                :            :   static int dataSize (constant *);
+<span class="lineNum">     341 </span>                :            :   int getDependencySize (strlist *, int);
+<span class="lineNum">     342 </span>                :            :   int getDataSize (char *);
+<span class="lineNum">     343 </span>                :            :   strlist * collectDataDependencies (node *);
+<span class="lineNum">     344 </span>                :            :   int dataSize (strlist *);
+<span class="lineNum">     345 </span>                :            :   qucs::vector * getDataVector (char *);
+<span class="lineNum">     346 </span>                :            :   void findMatrixVectors (qucs::vector *);
+<span class="lineNum">     347 </span>                :            :   char * isMatrixVector (char *, int&amp;, int&amp;);
+<span class="lineNum">     348 </span>                :            :   int findEquationResult (node *);
+<span class="lineNum">     349 </span>                :            :   int solve (dataset *);
+<span class="lineNum">     350 </span>                :            : 
+<span class="lineNum">     351 </span>                :            : public:
+<span class="lineNum">     352 </span>                :            :   node * equations;
+<span class="lineNum">     353 </span>                :            : 
+<span class="lineNum">     354 </span>                :            : private:
+<span class="lineNum">     355 </span>                :            :   dataset * data;
+<span class="lineNum">     356 </span>                :            :   int generated;
+<span class="lineNum">     357 </span>                :            :   checker * checkee;
+<span class="lineNum">     358 </span>                :            : };
+<span class="lineNum">     359 </span>                :            : 
+<span class="lineNum">     360 </span>                :            : } /* namespace eqn */
+<span class="lineNum">     361 </span>                :            : 
+<span class="lineNum">     362 </span>                :            : } // namespace qucs
+<span class="lineNum">     363 </span>                :            : 
+<span class="lineNum">     364 </span>                :            : #endif /* __EQUATION_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

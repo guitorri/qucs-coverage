@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/math/cbesselj.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/math</a> - cbesselj.cpp<span style="font-size: 80%;"> (source / <a href="cbesselj.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">92</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">116</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * cbesselj.cpp - Bessel function of first kind
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2007 Bastien Roucaries &lt;roucaries.bastien@gmail.com&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : /*!\file cbesselj.cpp
+<span class="lineNum">      26 </span>                :            :    \brief compute complex bessel J function
+<span class="lineNum">      27 </span>                :            : 
+<span class="lineNum">      28 </span>                :            :   Bibligraphy:
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            :   [1] Bessel function of the first kind with complex argument
+<span class="lineNum">      31 </span>                :            :       Yousif, Hashim A.; Melka, Richard
+<span class="lineNum">      32 </span>                :            :       Computer Physics Communications, vol. 106, Issue 3, pp.199-206
+<span class="lineNum">      33 </span>                :            :       11/1997, ELSEVIER, doi://10.1016/S0010-4655(97)00087-8
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            :   [2] Handbook of Mathematical Functions with
+<span class="lineNum">      36 </span>                :            :       Formulas, Graphs, and Mathematical Tables
+<span class="lineNum">      37 </span>                :            :       Milton Abramowitz and Irene A. Stegun
+<span class="lineNum">      38 </span>                :            :       public domain (work of US government)
+<span class="lineNum">      39 </span>                :            :       online http://www.math.sfu.ca/~cbm/aands/
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            :   [3] Mathematica Manual
+<span class="lineNum">      42 </span>                :            :       Bessel, Airy, Struve Functions&gt; BesselJ[nu,z]
+<span class="lineNum">      43 </span>                :            :       &gt; General characteristics&gt; Symmetries and periodicities
+<span class="lineNum">      44 </span>                :            :       http://functions.wolfram.com/BesselAiryStruveFunctions/BesselJ/04/02/01/
+<span class="lineNum">      45 </span>                :            : 
+<span class="lineNum">      46 </span>                :            :   [4] Mathematica Manual
+<span class="lineNum">      47 </span>                :            :       Bessel, Airy, Struve Functions&gt; BesselJ[nu,z]
+<span class="lineNum">      48 </span>                :            :       Representations through equivalent functions
+<span class="lineNum">      49 </span>                :            :       http://functions.wolfram.com/BesselAiryStruveFunctions/BesselJ/27/ShowAll.html
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            :   [5] Algorithms for the evaluation of Bessel functions
+<span class="lineNum">      52 </span>                :            :       of complex argument and integer orders
+<span class="lineNum">      53 </span>                :            :       G. D. C. Kuiken
+<span class="lineNum">      54 </span>                :            :       Applied Mathematics Letters, Volume 2, Issue 4,
+<span class="lineNum">      55 </span>                :            :       1989,  Pages 353-356
+<span class="lineNum">      56 </span>                :            :       doi://10.1016/0893-9659(89)90086-4
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :            : */
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>                :            : //#if HAVE_CONFIG_H
+<span class="lineNum">      62 </span>                :            : //# include &lt;config.h&gt;
+<span class="lineNum">      63 </span>                :            : //#endif
+<span class="lineNum">      64 </span>                :            : //
+<span class="lineNum">      65 </span>                :            : //#include &lt;cmath&gt;
+<span class="lineNum">      66 </span>                :            : //#include &lt;assert.h&gt;
+<span class="lineNum">      67 </span>                :            : //#include &lt;errno.h&gt;
+<span class="lineNum">      68 </span>                :            : //#include &lt;stdio.h&gt;
+<span class="lineNum">      69 </span>                :            : //#include &lt;stdlib.h&gt;
+<span class="lineNum">      70 </span>                :            : //
+<span class="lineNum">      71 </span>                :            : //#include &quot;real.h&quot;
+<span class="lineNum">      72 </span>                :            : //#include &quot;complex.h&quot;
+<span class="lineNum">      73 </span>                :            : //#include &quot;constants.h&quot;
+<span class="lineNum">      74 </span>                :            : //#include &quot;precision.h&quot;
+<span class="lineNum">      75 </span>                :            : //#include &lt;limits&gt;
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :            : #define SMALL_J0_BOUND 1e6
+<span class="lineNum">      78 </span>                :            : 
+<span class="lineNum">      79 </span>                :            : /*!\brief use ascending serie below this magnitude */
+<span class="lineNum">      80 </span>                :            : #define SMALL_JN_BOUND 5.0
+<span class="lineNum">      81 </span>                :            : 
+<span class="lineNum">      82 </span>                :            : /*!\brief use assymptotic expression above this magnitude */
+<span class="lineNum">      83 </span>                :            : #define BIG_JN_BOUND 25.0
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :            : /*! \brief Arbitrary value for iteration*/
+<span class="lineNum">      86 </span>                :            : #define MAX_SMALL_ITERATION 2048
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :            : /*!\brief Implement bessel J function for small arguments
+<span class="lineNum">      90 </span>                :            :     according to [5]
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :            :     For small argument we use the following formulae:
+<span class="lineNum">      93 </span>                :            :     \{align}
+<span class="lineNum">      94 </span>                :            :     J_n(z)&amp;=\sum_0^\infty R_k &amp; &amp; \\
+<span class="lineNum">      95 </span>                :            :     R_{-1}&amp;=1 &amp; R_k &amp;= a_k R_{k-1} \\
+<span class="lineNum">      96 </span>                :            :     a_0&amp;=\frac{\left(\frac{1}{2}z\right)^n}{n!} &amp;
+<span class="lineNum">      97 </span>                :            :     a_{+k}&amp;=\frac{-\frac{1}{4} z^2}{k(n+k)}
+<span class="lineNum">      98 </span>                :            :     \}
+<span class="lineNum">      99 </span>                :            : 
+<span class="lineNum">     100 </span>                :            :     \todo Not really adapted to high order
+<span class="lineNum">     101 </span>                :            :           therefore we do not check overflow for n &gt;&gt; 1
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>                :            :     \param[in] n order
+<span class="lineNum">     104 </span>                :            :     \param[in] arg arguments
+<a name="105"><span class="lineNum">     105 </span>                :            : */</a>
+<span class="lineNum">     106 </span>                :            : static nr_complex_t
+<span class="lineNum">     107 </span>                :<span class="lineNoCov">          0 : cbesselj_smallarg (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     108 </span>                :            : {
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :   nr_complex_t ak, Rk;</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :   nr_complex_t R;</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :   nr_complex_t R0;</span>
+<span class="lineNum">     112 </span>                :            :   unsigned int k;
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>                :            :   /* a_0 */
+<span class="lineNum">     115 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   errno = 0;</span>
+<span class="lineNum">     116 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   ak = pow (0.5 * z, n);</span>
+<span class="lineNum">     117 </span>                :            :   /* underflow */
+<span class="lineNum">     118 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (errno == ERANGE)</span>
+<span class="lineNum">     119 </span>                :            :     {
+<span class="lineNum">     120 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       return n &gt; 0 ? 0.0 : 1;</span>
+<span class="lineNum">     121 </span>                :            :     }
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   ak = ak / (nr_double_t) qucs::factorial (n);</span>
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            :   /* R_0 */
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 :   R0 = ak * 1.0;</span>
+<span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :   Rk = R0;</span>
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :   R = R0;</span>
+<span class="lineNum">     129 </span>                :            : 
+<span class="lineNum">     130 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (k = 1; k &lt; MAX_SMALL_ITERATION; k++)</span>
+<span class="lineNum">     131 </span>                :            :     {
+<span class="lineNum">     132 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       ak = -(z * z) / (4.0 * k * (n + k));</span>
+<span class="lineNum">     133 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       Rk = ak * Rk;</span>
+<span class="lineNum">     134 </span>  [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (fabs (real (Rk)) &lt; fabs (real (R) * std::numeric_limits&lt;nr_double_t&gt;::epsilon()) &amp;&amp;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :           fabs (imag (Rk)) &lt; fabs (imag (R) * std::numeric_limits&lt;nr_double_t&gt;::epsilon()))</span>
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :         return R;</span>
+<span class="lineNum">     137 </span>                :            : 
+<span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :       R += Rk;</span>
+<span class="lineNum">     139 </span>                :            :     }
+<span class="lineNum">     140 </span>                :            :   /* impossible */
+<span class="lineNum">     141 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   assert (k &lt; MAX_SMALL_ITERATION);</span>
+<span class="lineNum">     142 </span>                :<span class="lineNoCov">          0 :   abort ();</span>
+<span class="lineNum">     143 </span>                :            : }
+<span class="lineNum">     144 </span>                :            : 
+<a name="145"><span class="lineNum">     145 </span>                :            : </a>
+<span class="lineNum">     146 </span>                :            : static nr_complex_t
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 : cbesselj_mediumarg_odd (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     148 </span>                :            : {
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 :   nr_complex_t first, second;</span>
+<span class="lineNum">     150 </span>                :<span class="lineNoCov">          0 :   nr_complex_t ak;</span>
+<span class="lineNum">     151 </span>                :            : 
+<span class="lineNum">     152 </span>                :            :   unsigned int m;
+<span class="lineNum">     153 </span>                :            :   unsigned int k;
+<span class="lineNum">     154 </span>                :            :   nr_double_t t;
+<span class="lineNum">     155 </span>                :            :   nr_double_t m1pna2;
+<span class="lineNum">     156 </span>                :            : 
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :   m = (2 * std::abs (z) + 0.25 * (n + std::abs (imag (z))));</span>
+<span class="lineNum">     158 </span>                :            : 
+<span class="lineNum">     159 </span>                :            :   /* -1^(n/2) */
+<span class="lineNum">     160 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   m1pna2 = (n / 2) % 2 == 0 ? 1.0 : -1.0;</span>
+<span class="lineNum">     161 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   first = (1.0 + m1pna2 * cos (z)) / (2.0 * m);</span>
+<span class="lineNum">     162 </span>                :            : 
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :   second = 0.0;</span>
+<span class="lineNum">     164 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (k = 1; k &lt;= m - 1; k++)</span>
+<span class="lineNum">     165 </span>                :            :     {
+<span class="lineNum">     166 </span>                :<span class="lineNoCov">          0 :       t = (k * M_PI) / (2 * m);</span>
+<span class="lineNum">     167 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       ak = cos (z * std::sin (t)) * std::cos (n * t);</span>
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :       second += ak;</span>
+<span class="lineNum">     169 </span>                :            :     }
+<span class="lineNum">     170 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return first + second / (nr_double_t) m;</span>
+<span class="lineNum">     171 </span>                :            : }
+<a name="172"><span class="lineNum">     172 </span>                :            : </a>
+<span class="lineNum">     173 </span>                :            : static nr_complex_t
+<span class="lineNum">     174 </span>                :<span class="lineNoCov">          0 : cbesselj_mediumarg_even (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     175 </span>                :            : {
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 :   nr_complex_t first, second;</span>
+<span class="lineNum">     177 </span>                :<span class="lineNoCov">          0 :   nr_complex_t ak;</span>
+<span class="lineNum">     178 </span>                :            : 
+<span class="lineNum">     179 </span>                :            :   unsigned int m;
+<span class="lineNum">     180 </span>                :            :   unsigned int k;
+<span class="lineNum">     181 </span>                :            :   nr_double_t t;
+<span class="lineNum">     182 </span>                :            :   nr_double_t m1pn1a2;
+<span class="lineNum">     183 </span>                :            : 
+<span class="lineNum">     184 </span>                :<span class="lineNoCov">          0 :   m = (2 * std::abs (z) + 0.25 * (n + std::abs (imag (z))));</span>
+<span class="lineNum">     185 </span>                :            : 
+<span class="lineNum">     186 </span>                :            :   /* -1^(n/2) */
+<span class="lineNum">     187 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   m1pn1a2 = ((n - 1) / 2) % 2 == 0 ? 1.0 : -1.0;</span>
+<span class="lineNum">     188 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   first = (m1pn1a2 * sin (z)) / (2.0 * m);</span>
+<span class="lineNum">     189 </span>                :            : 
+<span class="lineNum">     190 </span>                :<span class="lineNoCov">          0 :   second = 0.0;</span>
+<span class="lineNum">     191 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (k = 1; k &lt;= m - 1; k++)</span>
+<span class="lineNum">     192 </span>                :            :     {
+<span class="lineNum">     193 </span>                :<span class="lineNoCov">          0 :       t = (k * M_PI) / (2 * m);</span>
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :       ak = std::sin (z * std::sin (t)) * std::sin (n * t);</span>
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 :       second += ak;</span>
+<span class="lineNum">     196 </span>                :            :     }
+<span class="lineNum">     197 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return first + second / (nr_double_t) m;</span>
+<span class="lineNum">     198 </span>                :            : }
+<span class="lineNum">     199 </span>                :            : 
+<a name="200"><span class="lineNum">     200 </span>                :            : </a>
+<span class="lineNum">     201 </span>                :            : static nr_complex_t
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 : cbesselj_mediumarg (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     203 </span>                :            : {
+<span class="lineNum">     204 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (n % 2 == 0)</span>
+<span class="lineNum">     205 </span>                :<span class="lineNoCov">          0 :     return cbesselj_mediumarg_odd (n, z);</span>
+<span class="lineNum">     206 </span>                :            :   else
+<span class="lineNum">     207 </span>                :<span class="lineNoCov">          0 :     return cbesselj_mediumarg_even (n, z);</span>
+<span class="lineNum">     208 </span>                :            : }
+<span class="lineNum">     209 </span>                :            : 
+<span class="lineNum">     210 </span>                :            : 
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>                :            : /*! \brief num of P(k) (n = 8) will overlow above this value */
+<span class="lineNum">     213 </span>                :            : #define MAX_LARGE_ITERATION 430
+<span class="lineNum">     214 </span>                :            : 
+<span class="lineNum">     215 </span>                :            : /*!\brief besselj for large argument
+<span class="lineNum">     216 </span>                :            : 
+<span class="lineNum">     217 </span>                :            :     Based on [5] eq (5)
+<a name="218"><span class="lineNum">     218 </span>                :            : */</a>
+<span class="lineNum">     219 </span>                :            : static nr_complex_t
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 : cbesselj_largearg (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     221 </span>                :            : {
+<span class="lineNum">     222 </span>                :<span class="lineNoCov">          0 :   nr_complex_t Pk, P0, P, Qk, Q0, Q_;</span>
+<span class="lineNum">     223 </span>                :<span class="lineNoCov">          0 :   nr_complex_t tmp;</span>
+<span class="lineNum">     224 </span>                :            :   unsigned long num, denum;
+<span class="lineNum">     225 </span>                :<span class="lineNoCov">          0 :   nr_complex_t m1a8z2;</span>
+<span class="lineNum">     226 </span>                :            :   unsigned int k;
+<span class="lineNum">     227 </span>                :            :   nr_double_t l, m;
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>                :            :   /* P0 &amp; Q0 */
+<span class="lineNum">     230 </span>                :<span class="lineNoCov">          0 :   P0 = 1;</span>
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :   P = P0;</span>
+<span class="lineNum">     232 </span>                :<span class="lineNoCov">          0 :   Pk = P0;</span>
+<span class="lineNum">     233 </span>                :            : 
+<span class="lineNum">     234 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   Q0 = (4.0 * n * n - 1) / (8.0 * z);</span>
+<span class="lineNum">     235 </span>                :<span class="lineNoCov">          0 :   Q_ = Q0;</span>
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :   Qk = Q0;</span>
+<span class="lineNum">     237 </span>                :            : 
+<span class="lineNum">     238 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   m1a8z2 = (-1.0) / (8.0 * sqr (z));</span>
+<span class="lineNum">     239 </span>                :            : 
+<span class="lineNum">     240 </span>                :            :   /* P */
+<span class="lineNum">     241 </span>                :<span class="lineNoCov">          0 :   for (k = 1;; k++)</span>
+<span class="lineNum">     242 </span>                :            :     {
+<span class="lineNum">     243 </span>                :            :       /* Usually converge before overflow */
+<span class="lineNum">     244 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       assert (k &lt;= MAX_LARGE_ITERATION);</span>
+<span class="lineNum">     245 </span>                :            : 
+<span class="lineNum">     246 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       num = (4 * sqr (n) - sqr (4 * k - 3)) * (4 * sqr (n) - (4 * k - 1));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 :       denum = 2 * k * (2 * k - 1);</span>
+<span class="lineNum">     248 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       Pk = Pk * ((nr_double_t) num * m1a8z2) / ((nr_double_t) denum);</span>
+<span class="lineNum">     249 </span>                :            : 
+<span class="lineNum">     250 </span>  [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (real (Pk) &lt; real (P0) * std::numeric_limits&lt;nr_double_t&gt;::epsilon() &amp;&amp;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     251 </span>                :<span class="lineNoCov">          0 :           imag (Pk) &lt; imag (P0) * std::numeric_limits&lt;nr_double_t&gt;::epsilon())</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     253 </span>                :            : 
+<span class="lineNum">     254 </span>                :<span class="lineNoCov">          0 :       P += Pk;</span>
+<span class="lineNum">     255 </span>                :            :     }
+<span class="lineNum">     256 </span>                :            : 
+<span class="lineNum">     257 </span>                :            :   /* P */
+<span class="lineNum">     258 </span>                :<span class="lineNoCov">          0 :   for (k = 1;; k++)</span>
+<span class="lineNum">     259 </span>                :            :     {
+<span class="lineNum">     260 </span>                :            :       /* Usually converge before overflow */
+<span class="lineNum">     261 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       assert (k &lt;= MAX_LARGE_ITERATION);</span>
+<span class="lineNum">     262 </span>                :            : 
+<span class="lineNum">     263 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       num = (4 * sqr (n) - sqr (4 * k - 1)) * (4 * sqr (n) - (4 * k - 1));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 :       denum = 2 * k * (2 * k - 1);</span>
+<span class="lineNum">     265 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       Qk = Qk * ((nr_double_t) num * m1a8z2) / ((nr_double_t) denum);</span>
+<span class="lineNum">     266 </span>                :            : 
+<span class="lineNum">     267 </span>  [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (real (Qk) &lt; real (Q0) * std::numeric_limits&lt;nr_double_t&gt;::epsilon() ||</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 :           imag (Qk) &lt; imag (Q0) * std::numeric_limits&lt;nr_double_t&gt;::epsilon())</span>
+<span class="lineNum">     269 </span>                :<span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     270 </span>                :            : 
+<span class="lineNum">     271 </span>                :<span class="lineNoCov">          0 :       Q_ += Qk;</span>
+<span class="lineNum">     272 </span>                :            :     }
+<span class="lineNum">     273 </span>                :            : 
+<span class="lineNum">     274 </span>                :            :   /* l, m cf [5] eq (5) */
+<span class="lineNum">     275 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   l = (n % 4 == 0) || (n % 4 == 3) ? 1.0 : -1.0;</span>
+<span class="lineNum">     276 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   m = (n % 4 == 0) || (n % 4 == 1) ? 1.0 : -1.0;</span>
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :            : 
+<span class="lineNum">     279 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   tmp = (l * P + m * Q_) * cos (z);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     280 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   tmp += (m * P - l * Q_) * sin (z);</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     281 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return tmp / sqrt (M_PI * z);</span>
+<span class="lineNum">     282 </span>                :            : }
+<span class="lineNum">     283 </span>                :            : 
+<span class="lineNum">     284 </span>                :            : /*!\brief Main entry point for besselj function
+<span class="lineNum">     285 </span>                :            : 
+<a name="286"><span class="lineNum">     286 </span>                :            : */</a>
+<span class="lineNum">     287 </span>                :            : nr_complex_t
+<span class="lineNum">     288 </span>                :<span class="lineNoCov">          0 : cbesselj (unsigned int n, nr_complex_t z)</span>
+<span class="lineNum">     289 </span>                :            : {
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 :   nr_double_t mul = 1.0;</span>
+<span class="lineNum">     291 </span>                :<span class="lineNoCov">          0 :   nr_complex_t ret;</span>
+<span class="lineNum">     292 </span>                :            : 
+<span class="lineNum">     293 </span>                :            :   /* J_n(-z)=(-1)^n J_n(z) */
+<span class="lineNum">     294 </span>                :            :   /*
+<span class="lineNum">     295 </span>                :            :      if(real(z) &lt; 0.0)
+<span class="lineNum">     296 </span>                :            :      {
+<span class="lineNum">     297 </span>                :            :      z = -z;
+<span class="lineNum">     298 </span>                :            :      mul = (n % 2) == 0 ? 1.0 : -1.0 ;
+<span class="lineNum">     299 </span>                :            :      }
+<span class="lineNum">     300 </span>                :            :    */
+<span class="lineNum">     301 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (abs (z) &lt; SMALL_JN_BOUND)</span>
+<span class="lineNum">     302 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     ret = cbesselj_smallarg (n, z);</span>
+<span class="lineNum">     303 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (abs (z) &gt; BIG_JN_BOUND)</span>
+<span class="lineNum">     304 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     ret = cbesselj_largearg (n, z);</span>
+<span class="lineNum">     305 </span>                :            :   else
+<span class="lineNum">     306 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     ret = cbesselj_mediumarg (n, z);</span>
+<span class="lineNum">     307 </span>                :            : 
+<span class="lineNum">     308 </span>                :<span class="lineNoCov">          0 :   return mul * ret;</span>
+<span class="lineNum">     309 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

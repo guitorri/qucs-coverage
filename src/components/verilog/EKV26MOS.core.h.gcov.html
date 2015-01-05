@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/verilog/EKV26MOS.core.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/verilog</a> - EKV26MOS.core.h<span style="font-size: 80%;"> (source / <a href="EKV26MOS.core.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryLo">25.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * EKV26MOS.core.h - device class definitions for EKV26MOS module
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       5 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       6 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       7 </span>                :            :  * any later version.
+<span class="lineNum">       8 </span>                :            :  *
+<span class="lineNum">       9 </span>                :            :  */
+<span class="lineNum">      10 </span>                :            : 
+<span class="lineNum">      11 </span>                :            : #ifndef __EKV26MOS_H__
+<a name="12"><span class="lineNum">      12 </span>                :            : #define __EKV26MOS_H__</a>
+<span class="lineNum">      13 </span>                :            : 
+<span class="lineNum">      14 </span>        [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 : class EKV26MOS : public qucs::circuit</span>
+<a name="15"><span class="lineNum">      15 </span>                :            : {</a>
+<span class="lineNum">      16 </span>                :            :  public:
+<span class="lineNum">      17 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineCov">        182 :   CREATOR (EKV26MOS);</span>
+<span class="lineNum">      18 </span>                :            : 
+<span class="lineNum">      19 </span>                :            :   void initDC (void);
+<span class="lineNum">      20 </span>                :            :   void restartDC (void);
+<span class="lineNum">      21 </span>                :            :   void calcDC (void);
+<span class="lineNum">      22 </span>                :            :   void saveOperatingPoints (void);
+<span class="lineNum">      23 </span>                :            :   void loadOperatingPoints (void);
+<span class="lineNum">      24 </span>                :            :   void calcOperatingPoints (void);
+<span class="lineNum">      25 </span>                :            :   void initAC (void);
+<span class="lineNum">      26 </span>                :            :   void calcAC (nr_double_t);
+<span class="lineNum">      27 </span>                :            :   void initSP (void);
+<span class="lineNum">      28 </span>                :            :   void calcSP (nr_double_t);
+<span class="lineNum">      29 </span>                :            :   void calcNoiseAC (nr_double_t);
+<span class="lineNum">      30 </span>                :            :   void calcNoiseSP (nr_double_t);
+<span class="lineNum">      31 </span>                :            :   void initTR (void);
+<span class="lineNum">      32 </span>                :            :   void calcTR (nr_double_t);
+<span class="lineNum">      33 </span>                :            :   void initHB (int);
+<span class="lineNum">      34 </span>                :            :   void calcHB (int);
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            :  private:
+<span class="lineNum">      37 </span>                :            :   void initVerilog (void);
+<span class="lineNum">      38 </span>                :            :   void calcVerilog (void);
+<span class="lineNum">      39 </span>                :            :   void initModel (void);
+<span class="lineNum">      40 </span>                :            :   void loadVariables (void);
+<span class="lineNum">      41 </span>                :            :   void initializeModel (void);
+<span class="lineNum">      42 </span>                :            :   void initializeInstance (void);
+<span class="lineNum">      43 </span>                :            :   void initialStep (void);
+<span class="lineNum">      44 </span>                :            :   void finalStep (void);
+<span class="lineNum">      45 </span>                :            :   qucs::matrix calcMatrixY (nr_double_t);
+<span class="lineNum">      46 </span>                :            :   qucs::matrix calcMatrixCy (nr_double_t);
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            :  private:
+<span class="lineNum">      49 </span>                :            :   int doHB;
+<span class="lineNum">      50 </span>                :            :   int doAC;
+<span class="lineNum">      51 </span>                :            :   int doTR;
+<span class="lineNum">      52 </span>                :            : 
+<span class="lineNum">      53 </span>                :            :   nr_double_t _freq;
+<span class="lineNum">      54 </span>                :            :   nr_double_t _rhs[6];
+<span class="lineNum">      55 </span>                :            :   nr_double_t _qhs[6];
+<span class="lineNum">      56 </span>                :            :   nr_double_t _ghs[6];
+<span class="lineNum">      57 </span>                :            :   nr_double_t _chs[6];
+<span class="lineNum">      58 </span>                :            :   nr_double_t _jstat[6][6];
+<span class="lineNum">      59 </span>                :            :   nr_double_t _jdyna[6][6];
+<span class="lineNum">      60 </span>                :            :   nr_double_t _white_pwr[6][6];
+<span class="lineNum">      61 </span>                :            :   nr_double_t _flicker_pwr[6][6];
+<span class="lineNum">      62 </span>                :            :   nr_double_t _flicker_exp[6][6];
+<span class="lineNum">      63 </span>                :            :   nr_double_t _charges[6][6];
+<span class="lineNum">      64 </span>                :            :   nr_double_t _caps[6][6][6][6];
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :            :   // device model parameters
+<span class="lineNum">      67 </span>                :            :   nr_double_t LEVEL;
+<span class="lineNum">      68 </span>                :            :   nr_double_t L;
+<span class="lineNum">      69 </span>                :            :   nr_double_t W;
+<span class="lineNum">      70 </span>                :            :   nr_double_t Np;
+<span class="lineNum">      71 </span>                :            :   nr_double_t Ns;
+<span class="lineNum">      72 </span>                :            :   nr_double_t Cox;
+<span class="lineNum">      73 </span>                :            :   nr_double_t Xj;
+<span class="lineNum">      74 </span>                :            :   nr_double_t Dw;
+<span class="lineNum">      75 </span>                :            :   nr_double_t Dl;
+<span class="lineNum">      76 </span>                :            :   nr_double_t Vto;
+<span class="lineNum">      77 </span>                :            :   nr_double_t Gamma;
+<span class="lineNum">      78 </span>                :            :   nr_double_t Phi;
+<span class="lineNum">      79 </span>                :            :   nr_double_t Kp;
+<span class="lineNum">      80 </span>                :            :   nr_double_t Theta;
+<span class="lineNum">      81 </span>                :            :   nr_double_t EO;
+<span class="lineNum">      82 </span>                :            :   nr_double_t Ucrit;
+<span class="lineNum">      83 </span>                :            :   nr_double_t Lambda;
+<span class="lineNum">      84 </span>                :            :   nr_double_t Weta;
+<span class="lineNum">      85 </span>                :            :   nr_double_t Leta;
+<span class="lineNum">      86 </span>                :            :   nr_double_t Q0;
+<span class="lineNum">      87 </span>                :            :   nr_double_t Lk;
+<span class="lineNum">      88 </span>                :            :   nr_double_t Tcv;
+<span class="lineNum">      89 </span>                :            :   nr_double_t Bex;
+<span class="lineNum">      90 </span>                :            :   nr_double_t Ucex;
+<span class="lineNum">      91 </span>                :            :   nr_double_t Ibbt;
+<span class="lineNum">      92 </span>                :            :   nr_double_t Hdif;
+<span class="lineNum">      93 </span>                :            :   nr_double_t Rsh;
+<span class="lineNum">      94 </span>                :            :   nr_double_t Rsc;
+<span class="lineNum">      95 </span>                :            :   nr_double_t Rdc;
+<span class="lineNum">      96 </span>                :            :   nr_double_t Cgso;
+<span class="lineNum">      97 </span>                :            :   nr_double_t Cgdo;
+<span class="lineNum">      98 </span>                :            :   nr_double_t Cgbo;
+<span class="lineNum">      99 </span>                :            :   nr_double_t Iba;
+<span class="lineNum">     100 </span>                :            :   nr_double_t Ibb;
+<span class="lineNum">     101 </span>                :            :   nr_double_t Ibn;
+<span class="lineNum">     102 </span>                :            :   nr_double_t Kf;
+<span class="lineNum">     103 </span>                :            :   nr_double_t Af;
+<span class="lineNum">     104 </span>                :            :   nr_double_t Avto;
+<span class="lineNum">     105 </span>                :            :   nr_double_t Akp;
+<span class="lineNum">     106 </span>                :            :   nr_double_t Agamma;
+<span class="lineNum">     107 </span>                :            :   nr_double_t N;
+<span class="lineNum">     108 </span>                :            :   nr_double_t Is;
+<span class="lineNum">     109 </span>                :            :   nr_double_t Bv;
+<span class="lineNum">     110 </span>                :            :   nr_double_t Ibv;
+<span class="lineNum">     111 </span>                :            :   nr_double_t Vj;
+<span class="lineNum">     112 </span>                :            :   nr_double_t Cj0;
+<span class="lineNum">     113 </span>                :            :   nr_double_t M;
+<span class="lineNum">     114 </span>                :            :   nr_double_t Area;
+<span class="lineNum">     115 </span>                :            :   nr_double_t Fc;
+<span class="lineNum">     116 </span>                :            :   nr_double_t Tt;
+<span class="lineNum">     117 </span>                :            :   nr_double_t Xti;
+<span class="lineNum">     118 </span>                :            :   nr_double_t Xpart;
+<span class="lineNum">     119 </span>                :            :   nr_double_t Tnom;
+<span class="lineNum">     120 </span>                :            :   int nmos;
+<span class="lineNum">     121 </span>                :            :   int pmos;
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>                :            :   // global model variables
+<span class="lineNum">     124 </span>                :            :   double Ucrit_T;
+<span class="lineNum">     125 </span>                :            :   double Phi_T;
+<span class="lineNum">     126 </span>                :            :   double Weff;
+<span class="lineNum">     127 </span>                :            :   double RDeff;
+<span class="lineNum">     128 </span>                :            :   double RSeff;
+<span class="lineNum">     129 </span>                :            :   double Kpa_T;
+<span class="lineNum">     130 </span>                :            :   double Gammaa;
+<span class="lineNum">     131 </span>                :            :   double Vc;
+<span class="lineNum">     132 </span>                :            :   double Lc;
+<span class="lineNum">     133 </span>                :            :   double Lmin;
+<span class="lineNum">     134 </span>                :            :   double eta;
+<span class="lineNum">     135 </span>                :            :   double Ibb_T;
+<span class="lineNum">     136 </span>                :            :   double Vj_T2;
+<span class="lineNum">     137 </span>                :            :   double F3;
+<span class="lineNum">     138 </span>                :            :   double GMIN;
+<span class="lineNum">     139 </span>                :            :   double fourkt;
+<span class="lineNum">     140 </span>                :            :   double p_n_MOS;
+<span class="lineNum">     141 </span>                :            :   double Area1;
+<span class="lineNum">     142 </span>                :            :   double Area2;
+<span class="lineNum">     143 </span>                :            :   double Area3;
+<span class="lineNum">     144 </span>                :            :   double DP1;
+<span class="lineNum">     145 </span>                :            :   double DP2;
+<span class="lineNum">     146 </span>                :            :   double DP3;
+<span class="lineNum">     147 </span>                :            :   double DP4;
+<span class="lineNum">     148 </span>                :            :   double con3;
+<span class="lineNum">     149 </span>                :            :   double con4;
+<span class="lineNum">     150 </span>                :            :   double con5;
+<span class="lineNum">     151 </span>                :            :   double con6;
+<span class="lineNum">     152 </span>                :            :   double con7;
+<span class="lineNum">     153 </span>                :            :   double con8;
+<span class="lineNum">     154 </span>                :            :   double con9;
+<span class="lineNum">     155 </span>                :            :   double con10;
+<span class="lineNum">     156 </span>                :            :   double con11;
+<span class="lineNum">     157 </span>                :            :   double con12;
+<span class="lineNum">     158 </span>                :            :   double con13;
+<span class="lineNum">     159 </span>                :            :   double con14;
+<span class="lineNum">     160 </span>                :            :   double con15;
+<span class="lineNum">     161 </span>                :            :   double con16;
+<span class="lineNum">     162 </span>                :            :   double con17;
+<span class="lineNum">     163 </span>                :            :   double con18;
+<span class="lineNum">     164 </span>                :            :   double con19;
+<span class="lineNum">     165 </span>                :            :   double con20;
+<span class="lineNum">     166 </span>                :            :   double con21;
+<span class="lineNum">     167 </span>                :            :   double con22;
+<span class="lineNum">     168 </span>                :            :   double con23;
+<span class="lineNum">     169 </span>                :            :   double con24;
+<span class="lineNum">     170 </span>                :            :   double Spart;
+<span class="lineNum">     171 </span>                :            :   double con25;
+<span class="lineNum">     172 </span>                :            :   double con26;
+<span class="lineNum">     173 </span>                :            :   double con27;
+<span class="lineNum">     174 </span>                :            :   double con28;
+<span class="lineNum">     175 </span>                :            :   double con29;
+<span class="lineNum">     176 </span>                :            :   double con30;
+<span class="lineNum">     177 </span>                :            :   double con31;
+<span class="lineNum">     178 </span>                :            :   double con32;
+<span class="lineNum">     179 </span>                :            :   double con33;
+<span class="lineNum">     180 </span>                :            : 
+<span class="lineNum">     181 </span>                :            : 
+<span class="lineNum">     182 </span>                :            : 
+<span class="lineNum">     183 </span>                :            : };
+<span class="lineNum">     184 </span>                :            : 
+<span class="lineNum">     185 </span>                :            : #endif /* __EKV26MOS_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

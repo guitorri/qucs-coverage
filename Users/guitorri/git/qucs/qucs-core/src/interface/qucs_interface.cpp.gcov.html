@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/interface/qucs_interface.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/interface</a> - qucs_interface.cpp<span style="font-size: 80%;"> (source / <a href="qucs_interface.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">141</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">94</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * qucs_interface.cpp - m-code interface implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2013 Richard Crozier &lt;richard.crozier@yahoo.co.uk&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;time.h&gt;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;precision.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;components.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;net.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;input.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;dataset.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;equation.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;environment.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;exceptionstack.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;check_netlist.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;module.h&quot;
+<span class="lineNum">      47 </span>                :            : #include &quot;qucs_interface.h&quot;
+<span class="lineNum">      48 </span>                :            : #include &quot;analysis.h&quot;
+<span class="lineNum">      49 </span>                :            : #include &quot;e_trsolver.h&quot;
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : #if HAVE_UNISTD_H
+<span class="lineNum">      52 </span>                :            : #include &lt;unistd.h&gt;
+<span class="lineNum">      53 </span>                :            : #endif
+<span class="lineNum">      54 </span>                :            : 
+<span class="lineNum">      55 </span>                :            : #include &lt;string&gt;
+<span class="lineNum">      56 </span>                :            : 
+<span class="lineNum">      57 </span>                :            : using namespace qucs;
+<a name="58"><span class="lineNum">      58 </span>                :            : </a>
+<span class="lineNum">      59 </span>                :            : // constructor
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 : qucsint::qucsint ()</span>
+<span class="lineNum">      61 </span>                :            : {
+<span class="lineNum">      62 </span>                :            : 
+<span class="lineNum">      63 </span>                :            :     //int listing = 0;
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :     ret = 0;</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :     err = 0;</span>
+<span class="lineNum">      66 </span>                :            : 
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :     loginit ();</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     ::srand (::time (NULL));</span>
+<span class="lineNum">      69 </span>                :            : 
+<a name="70"><span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 : qucsint::qucsint (char* infile)</span>
+<span class="lineNum">      73 </span>                :            : {
+<span class="lineNum">      74 </span>                :            :     //int listing = 0;
+<span class="lineNum">      75 </span>                :<span class="lineNoCov">          0 :     ret = 0;</span>
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 :     err = 0;</span>
+<span class="lineNum">      77 </span>                :            : 
+<span class="lineNum">      78 </span>                :<span class="lineNoCov">          0 :     loginit ();</span>
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 :     ::srand (::time (NULL));</span>
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 :     prepare_netlist (infile);</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="83"><span class="lineNum">      83 </span>                :            : </a>
+<span class="lineNum">      84 </span>                :            : // destructor
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 : qucsint::~qucsint ()</span>
+<span class="lineNum">      86 </span>                :            : {
+<span class="lineNum">      87 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete subnet;</span>
+<span class="lineNum">      88 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete in;</span>
+<span class="lineNum">      89 </span>                :            : //    delete out;
+<span class="lineNum">      90 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete root;</span>
+<span class="lineNum">      91 </span>                :            : 
+<span class="lineNum">      92 </span>                :            :     // delete modules
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :     module::unregisterModules ();</span>
+<span class="lineNum">      94 </span>                :            : 
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :     netlist_destroy_env ();</span>
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="97"><span class="lineNum">      97 </span>                :            : </a>
+<span class="lineNum">      98 </span>                :            : /*!\ todo: replace &quot;root&quot; by / as environement root */
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 : int qucsint::prepare_netlist (char * infile)</span>
+<span class="lineNum">     100 </span>                :            : {
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>                :            :     // create static modules
+<span class="lineNum">     103 </span>                :<span class="lineNoCov">          0 :     module::registerModules ();</span>
+<span class="lineNum">     104 </span>                :            : 
+<span class="lineNum">     105 </span>                :            :     // create root environment
+<span class="lineNum">     106 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     root = new qucs::environment (std::string(&quot;root&quot;));</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :            :     // create netlist object and input
+<span class="lineNum">     109 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     subnet = new net (&quot;subnet&quot;);</span>
+<span class="lineNum">     110 </span>                :            : 
+<span class="lineNum">     111 </span>                :            :     // test if the file actually exists
+<span class="lineNum">     112 </span>                :            :     FILE * pFile;
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :     pFile = fopen (infile,&quot;r&quot;);</span>
+<span class="lineNum">     114 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (pFile!=NULL)</span>
+<span class="lineNum">     115 </span>                :            :     {
+<span class="lineNum">     116 </span>                :            :         // close the file again
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :         fclose (pFile);</span>
+<span class="lineNum">     118 </span>                :            :     }
+<span class="lineNum">     119 </span>                :            :     else
+<span class="lineNum">     120 </span>                :            :     {
+<span class="lineNum">     121 </span>                :<span class="lineNoCov">          0 :         return NETLIST_FILE_NOT_FOUND;</span>
+<span class="lineNum">     122 </span>                :            :     }
+<span class="lineNum">     123 </span>                :            : 
+<span class="lineNum">     124 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     in = infile ? new input (infile) : new input ();</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     125 </span>                :            : 
+<span class="lineNum">     126 </span>                :            :     // pass root environment to netlist object and input
+<span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :     subnet-&gt;setEnv (root);</span>
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 :     in-&gt;setEnv (root);</span>
+<span class="lineNum">     129 </span>                :            : 
+<span class="lineNum">     130 </span>                :            :     // get input netlist
+<span class="lineNum">     131 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (in-&gt;netlist (subnet) != 0)</span>
+<span class="lineNum">     132 </span>                :            :     {
+<span class="lineNum">     133 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (netlist_check)</span>
+<span class="lineNum">     134 </span>                :            :         {
+<span class="lineNum">     135 </span>                :            :             // replace with mex error message
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :             logprint (LOG_STATUS, &quot;checker notice, netlist check FAILED\n&quot;);</span>
+<span class="lineNum">     137 </span>                :            :         }
+<span class="lineNum">     138 </span>                :<span class="lineNoCov">          0 :         return NETLIST_FAILED_CHECK;</span>
+<span class="lineNum">     139 </span>                :            :     }
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :            :     // attach a ground to the netlist
+<span class="lineNum">     142 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     gnd = new ground ();</span>
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :     gnd-&gt;setNode (0, &quot;gnd&quot;);</span>
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :     gnd-&gt;setName (&quot;GND&quot;);</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :     subnet-&gt;insertCircuit (gnd);</span>
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :            :     // apply some data to all analyses
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :     subnet-&gt;setActionNetAll(subnet);</span>
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :<span class="lineNoCov">          0 :     return NETLIST_OK;</span>
+<a name="151"><span class="lineNum">     151 </span>                :            : }</a>
+<span class="lineNum">     152 </span>                :            : 
+<span class="lineNum">     153 </span>                :<span class="lineNoCov">          0 : int qucsint::evaluate ()</span>
+<span class="lineNum">     154 </span>                :            : {
+<span class="lineNum">     155 </span>                :            :     // analyse the netlist
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :     err = 0;</span>
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :     ret = 0;</span>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :     out = subnet-&gt;runAnalysis (err);</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 :     ret |= err;</span>
+<span class="lineNum">     160 </span>                :            : 
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :     return ret;</span>
+<a name="162"><span class="lineNum">     162 </span>                :            : }</a>
+<span class="lineNum">     163 </span>                :            : 
+<span class="lineNum">     164 </span>                :<span class="lineNoCov">          0 : int qucsint::output (char * outfile)</span>
+<span class="lineNum">     165 </span>                :            : {
+<span class="lineNum">     166 </span>                :            :     // evaluate output dataset
+<span class="lineNum">     167 </span>                :<span class="lineNoCov">          0 :     ret |= root-&gt;equationSolver (out);</span>
+<span class="lineNum">     168 </span>                :            : 
+<span class="lineNum">     169 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (outfile != NULL)</span>
+<span class="lineNum">     170 </span>                :            :     {
+<span class="lineNum">     171 </span>                :<span class="lineNoCov">          0 :         out-&gt;setFile (outfile);</span>
+<span class="lineNum">     172 </span>                :<span class="lineNoCov">          0 :         out-&gt;print ();</span>
+<span class="lineNum">     173 </span>                :            :     }
+<span class="lineNum">     174 </span>                :            : 
+<span class="lineNum">     175 </span>                :<span class="lineNoCov">          0 :     return ret;</span>
+<span class="lineNum">     176 </span>                :            : }
+<span class="lineNum">     177 </span>                :            : 
+<span class="lineNum">     178 </span>                :            : /*/////////////////////////////////////////////////////////////////////////////
+<span class="lineNum">     179 </span>                :            : 
+<span class="lineNum">     180 </span>                :            :                             trsolver_interface
+<span class="lineNum">     181 </span>                :            : 
+<a name="182"><span class="lineNum">     182 </span>                :            : /////////////////////////////////////////////////////////////////////////////*/</a>
+<span class="lineNum">     183 </span>                :            : 
+<span class="lineNum">     184 </span>                :<span class="lineNoCov">          0 : trsolver_interface::trsolver_interface ()</span>
+<span class="lineNum">     185 </span>                :<span class="lineNoCov">          0 :     : qucsint ()</span>
+<span class="lineNum">     186 </span>                :            : {
+<span class="lineNum">     187 </span>                :<span class="lineNoCov">          0 :     etr = 0;</span>
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 :     isInitialised = false;</span>
+<a name="189"><span class="lineNum">     189 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     190 </span>                :            : 
+<span class="lineNum">     191 </span>                :<span class="lineNoCov">          0 : trsolver_interface::trsolver_interface (char * infile)</span>
+<span class="lineNum">     192 </span>                :<span class="lineNoCov">          0 :     : qucsint (infile)</span>
+<span class="lineNum">     193 </span>                :            : {
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :     isInitialised = false;</span>
+<span class="lineNum">     195 </span>                :            : 
+<span class="lineNum">     196 </span>  [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     int result = prepare_netlist (infile);</span>
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (result == NETLIST_OK)</span>
+<span class="lineNum">     199 </span>                :            :     {
+<span class="lineNum">     200 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         getETR ();</span>
+<span class="lineNum">     201 </span>                :            :     }
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     203 </span>                :            : 
+<span class="lineNum">     204 </span>                :            : //trsolver_interface::~trsolver_interface ()
+<span class="lineNum">     205 </span>                :            : //{
+<span class="lineNum">     206 </span>                :            : //
+<a name="207"><span class="lineNum">     207 </span>                :            : //}</a>
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getN (void)</span>
+<span class="lineNum">     210 </span>                :            : {
+<span class="lineNum">     211 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;getN ();</span>
+<span class="lineNum">     212 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="213"><span class="lineNum">     213 </span>                :            : }</a>
+<span class="lineNum">     214 </span>                :            : 
+<span class="lineNum">     215 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getM (void)</span>
+<span class="lineNum">     216 </span>                :            : {
+<span class="lineNum">     217 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;getM ();</span>
+<span class="lineNum">     218 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<span class="lineNum">     219 </span>                :            : }
+<a name="220"><span class="lineNum">     220 </span>                :            : </a>
+<span class="lineNum">     221 </span>                :            : // gets a pointer to the trsolver_interface if it is present
+<span class="lineNum">     222 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::getETR()</span>
+<span class="lineNum">     223 </span>                :            : {
+<span class="lineNum">     224 </span>                :            :     // get a pointer to the external transient solver interface
+<span class="lineNum">     225 </span>                :            :     // the pointer will be to the supclass of e_trsolver, analysis
+<span class="lineNum">     226 </span>                :            :     // so we must perform a dynamic cast to convert it to an e_trsolver
+<span class="lineNum">     227 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     etr = dynamic_cast&lt;e_trsolver *&gt;(subnet-&gt;findAnalysis (ANALYSIS_E_TRANSIENT));</span>
+<span class="lineNum">     228 </span>                :            : 
+<span class="lineNum">     229 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr)</span>
+<span class="lineNum">     230 </span>                :            :     {
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :         isInitialised = true;</span>
+<span class="lineNum">     232 </span>                :            :     }
+<span class="lineNum">     233 </span>                :            :     else
+<span class="lineNum">     234 </span>                :            :     {
+<span class="lineNum">     235 </span>                :<span class="lineNoCov">          0 :         isInitialised = false;</span>
+<span class="lineNum">     236 </span>                :            :     }
+<a name="237"><span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     238 </span>                :            : 
+<span class="lineNum">     239 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::init (double start, double firstdelta, int mode)</span>
+<span class="lineNum">     240 </span>                :            : {
+<span class="lineNum">     241 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;init ((nr_double_t)start, (nr_double_t)firstdelta, mode);</span>
+<span class="lineNum">     242 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<span class="lineNum">     243 </span>                :            : }
+<a name="244"><span class="lineNum">     244 </span>                :            : </a>
+<span class="lineNum">     245 </span>                :            : 
+<span class="lineNum">     246 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::stepsolve_sync (double synctime)</span>
+<span class="lineNum">     247 </span>                :            : {
+<span class="lineNum">     248 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;stepsolve_sync ((nr_double_t)synctime);</span>
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="250"><span class="lineNum">     250 </span>                :            : }</a>
+<span class="lineNum">     251 </span>                :            : 
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::acceptstep_sync (void)</span>
+<span class="lineNum">     253 </span>                :            : {
+<span class="lineNum">     254 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) etr-&gt;acceptstep_sync ();</span>
+<a name="255"><span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     256 </span>                :            : 
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::stepsolve_async (double steptime)</span>
+<span class="lineNum">     258 </span>                :            : {
+<span class="lineNum">     259 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;stepsolve_async ((nr_double_t)steptime);</span>
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="261"><span class="lineNum">     261 </span>                :            : }</a>
+<span class="lineNum">     262 </span>                :            : 
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::acceptstep_async (void)</span>
+<span class="lineNum">     264 </span>                :            : {
+<span class="lineNum">     265 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) etr-&gt;acceptstep_async ();</span>
+<a name="266"><span class="lineNum">     266 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     267 </span>                :            : 
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::rejectstep_async (void)</span>
+<span class="lineNum">     269 </span>                :            : {
+<span class="lineNum">     270 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) etr-&gt;rejectstep_async ();</span>
+<a name="271"><span class="lineNum">     271 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     272 </span>                :            : 
+<span class="lineNum">     273 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::getsolution (double * sol)</span>
+<span class="lineNum">     274 </span>                :            : {
+<span class="lineNum">     275 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) etr-&gt;getsolution (sol);</span>
+<a name="276"><span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::setECVSVoltage(char * ecvsname, double V)</span>
+<span class="lineNum">     279 </span>                :            : {
+<span class="lineNum">     280 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;setECVSVoltage (ecvsname, (nr_double_t)V);</span>
+<span class="lineNum">     281 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="282"><span class="lineNum">     282 </span>                :            : }</a>
+<span class="lineNum">     283 </span>                :            : 
+<span class="lineNum">     284 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getJacRows ()</span>
+<span class="lineNum">     285 </span>                :            : {
+<span class="lineNum">     286 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;getJacRows ();</span>
+<span class="lineNum">     287 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="288"><span class="lineNum">     288 </span>                :            : }</a>
+<span class="lineNum">     289 </span>                :            : 
+<span class="lineNum">     290 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getJacCols ()</span>
+<span class="lineNum">     291 </span>                :            : {
+<span class="lineNum">     292 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) return etr-&gt;getJacCols ();</span>
+<span class="lineNum">     293 </span>                :<span class="lineNoCov">          0 :     else return -2;</span>
+<a name="294"><span class="lineNum">     294 </span>                :            : }</a>
+<span class="lineNum">     295 </span>                :            : 
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getJacData (int r, int c, double&amp; data)</span>
+<span class="lineNum">     297 </span>                :            : {
+<span class="lineNum">     298 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr)</span>
+<span class="lineNum">     299 </span>                :            :     {
+<span class="lineNum">     300 </span>                :<span class="lineNoCov">          0 :         nr_double_t tempdata = (nr_double_t)data;</span>
+<span class="lineNum">     301 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         etr-&gt;getJacData (r, c, tempdata);</span>
+<span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 :         data = (double)tempdata;</span>
+<span class="lineNum">     303 </span>                :<span class="lineNoCov">          0 :         return 0;</span>
+<span class="lineNum">     304 </span>                :            :     }
+<span class="lineNum">     305 </span>                :            :     else
+<span class="lineNum">     306 </span>                :            :     {
+<span class="lineNum">     307 </span>                :<span class="lineNoCov">          0 :         return -2;</span>
+<span class="lineNum">     308 </span>                :            :     }
+<a name="309"><span class="lineNum">     309 </span>                :            : }</a>
+<span class="lineNum">     310 </span>                :            : 
+<span class="lineNum">     311 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getNodeV (char * label, double&amp; nodeV)</span>
+<span class="lineNum">     312 </span>                :            : {
+<span class="lineNum">     313 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr)</span>
+<span class="lineNum">     314 </span>                :            :     {
+<span class="lineNum">     315 </span>                :<span class="lineNoCov">          0 :         nr_double_t tempnodeV = (nr_double_t)nodeV;</span>
+<span class="lineNum">     316 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         int flag = etr-&gt;getNodeV (label, tempnodeV);</span>
+<span class="lineNum">     317 </span>                :<span class="lineNoCov">          0 :         nodeV = (double)tempnodeV;</span>
+<span class="lineNum">     318 </span>                :<span class="lineNoCov">          0 :         return flag;</span>
+<span class="lineNum">     319 </span>                :            :     }
+<span class="lineNum">     320 </span>                :            :     else
+<span class="lineNum">     321 </span>                :            :     {
+<span class="lineNum">     322 </span>                :<span class="lineNoCov">          0 :         return -2;</span>
+<span class="lineNum">     323 </span>                :            :     }
+<a name="324"><span class="lineNum">     324 </span>                :            : }</a>
+<span class="lineNum">     325 </span>                :            : 
+<span class="lineNum">     326 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getVProbeV (char * probename, double&amp; probeV)</span>
+<span class="lineNum">     327 </span>                :            : {
+<span class="lineNum">     328 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr)</span>
+<span class="lineNum">     329 </span>                :            :     {
+<span class="lineNum">     330 </span>                :<span class="lineNoCov">          0 :         nr_double_t tempprobeV = (nr_double_t)probeV;</span>
+<span class="lineNum">     331 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         int flag = etr-&gt;getVProbeV (probename, tempprobeV);</span>
+<span class="lineNum">     332 </span>                :<span class="lineNoCov">          0 :         probeV = (double)tempprobeV;</span>
+<span class="lineNum">     333 </span>                :<span class="lineNoCov">          0 :         return flag;</span>
+<span class="lineNum">     334 </span>                :            :     }
+<span class="lineNum">     335 </span>                :            :     else
+<span class="lineNum">     336 </span>                :            :     {
+<span class="lineNum">     337 </span>                :<span class="lineNoCov">          0 :         return -2;</span>
+<span class="lineNum">     338 </span>                :            :     }
+<span class="lineNum">     339 </span>                :            : }
+<a name="340"><span class="lineNum">     340 </span>                :            : </a>
+<span class="lineNum">     341 </span>                :            : 
+<span class="lineNum">     342 </span>                :<span class="lineNoCov">          0 : int trsolver_interface::getIProbeI (char * probename, double&amp; probeI)</span>
+<span class="lineNum">     343 </span>                :            : {
+<span class="lineNum">     344 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr)</span>
+<span class="lineNum">     345 </span>                :            :     {
+<span class="lineNum">     346 </span>                :<span class="lineNoCov">          0 :         nr_double_t tempprobeI = (nr_double_t)probeI;</span>
+<span class="lineNum">     347 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         int flag = etr-&gt;getIProbeI (probename, tempprobeI);</span>
+<span class="lineNum">     348 </span>                :<span class="lineNoCov">          0 :         probeI = (double)tempprobeI;</span>
+<span class="lineNum">     349 </span>                :<span class="lineNoCov">          0 :         return flag;</span>
+<span class="lineNum">     350 </span>                :            :     }
+<span class="lineNum">     351 </span>                :            :     else
+<span class="lineNum">     352 </span>                :            :     {
+<span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 :         return -2;</span>
+<span class="lineNum">     354 </span>                :            :     }
+<span class="lineNum">     355 </span>                :            : }
+<span class="lineNum">     356 </span>                :            : 
+<span class="lineNum">     357 </span>                :            : //void trsolver_interface::debug (void)
+<span class="lineNum">     358 </span>                :            : //{
+<span class="lineNum">     359 </span>                :            : //    if (etr) etr-&gt;debug ();
+<span class="lineNum">     360 </span>                :            : //}
+<a name="361"><span class="lineNum">     361 </span>                :            : //</a>
+<span class="lineNum">     362 </span>                :            : 
+<span class="lineNum">     363 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::printSolution (void)</span>
+<span class="lineNum">     364 </span>                :            : {
+<span class="lineNum">     365 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (etr) etr-&gt;printx ();</span>
+<a name="366"><span class="lineNum">     366 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     367 </span>                :            : 
+<span class="lineNum">     368 </span>                :<span class="lineNoCov">          0 : void trsolver_interface::setMessageFcn(void (*newmessagefcn)(int level, const char * format, ...))</span>
+<span class="lineNum">     369 </span>                :            : {
+<span class="lineNum">     370 </span>                :<span class="lineNoCov">          0 :     etr-&gt;messagefcn = newmessagefcn;</span>
+<span class="lineNum">     371 </span>                :<span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

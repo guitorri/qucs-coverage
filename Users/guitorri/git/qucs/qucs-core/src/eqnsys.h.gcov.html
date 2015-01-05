@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/eqnsys.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - eqnsys.h<span style="font-size: 80%;"> (source / <a href="eqnsys.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * eqnsys.h - equations system solver class definitions
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2005, 2006 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #ifndef __EQNSYS_H__
+<span class="lineNum">      26 </span>                :            : #define __EQNSYS_H__
+<span class="lineNum">      27 </span>                :            : 
+<span class="lineNum">      28 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : //! Definition of equation system solving algorithms.
+<span class="lineNum">      31 </span>                :            : enum algo_type {
+<span class="lineNum">      32 </span>                :            :   ALGO_INVERSE                    = 0x0001,
+<span class="lineNum">      33 </span>                :            :   ALGO_GAUSS                      = 0x0002,
+<span class="lineNum">      34 </span>                :            :   ALGO_GAUSS_JORDAN               = 0x0004,
+<span class="lineNum">      35 </span>                :            :   ALGO_LU_FACTORIZATION_CROUT     = 0x0008,
+<span class="lineNum">      36 </span>                :            :   ALGO_LU_FACTORIZATION_DOOLITTLE = 0x0010,
+<span class="lineNum">      37 </span>                :            :   ALGO_LU_SUBSTITUTION_CROUT      = 0x0020,
+<span class="lineNum">      38 </span>                :            :   ALGO_LU_SUBSTITUTION_DOOLITTLE  = 0x0040,
+<span class="lineNum">      39 </span>                :            :   ALGO_LU_DECOMPOSITION           = 0x0028,
+<span class="lineNum">      40 </span>                :            :   ALGO_LU_DECOMPOSITION_CROUT     = 0x0028,
+<span class="lineNum">      41 </span>                :            :   ALGO_LU_DECOMPOSITION_DOOLITTLE = 0x0050,
+<span class="lineNum">      42 </span>                :            :   ALGO_JACOBI                     = 0x0080,
+<span class="lineNum">      43 </span>                :            :   ALGO_GAUSS_SEIDEL               = 0x0100,
+<span class="lineNum">      44 </span>                :            :   ALGO_SOR                        = 0x0200,
+<span class="lineNum">      45 </span>                :            :   ALGO_QR_DECOMPOSITION           = 0x0400,
+<span class="lineNum">      46 </span>                :            :   ALGO_QR_DECOMPOSITION_LS        = 0x0800,
+<span class="lineNum">      47 </span>                :            :   ALGO_SV_DECOMPOSITION           = 0x1000,
+<span class="lineNum">      48 </span>                :            :   // testing
+<span class="lineNum">      49 </span>                :            :   ALGO_QR_DECOMPOSITION_2         = 0x2000,
+<span class="lineNum">      50 </span>                :            : };
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :            : //! Definition of pivoting strategies.
+<span class="lineNum">      53 </span>                :            : enum pivot_type {
+<span class="lineNum">      54 </span>                :            :   PIVOT_NONE    = 0x01,
+<span class="lineNum">      55 </span>                :            :   PIVOT_PARTIAL = 0x02,
+<span class="lineNum">      56 </span>                :            :   PIVOT_FULL    = 0x04
+<span class="lineNum">      57 </span>                :            : };
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            : #include &quot;tvector.h&quot;
+<span class="lineNum">      60 </span>                :            : #include &quot;tmatrix.h&quot;
+<span class="lineNum">      61 </span>                :            : 
+<span class="lineNum">      62 </span>                :            : namespace qucs {
+<span class="lineNum">      63 </span>                :            : 
+<span class="lineNum">      64 </span>                :            : template &lt;class nr_type_t&gt;
+<span class="lineNum">      65 </span>                :            : class eqnsys
+<span class="lineNum">      66 </span>                :            : {
+<span class="lineNum">      67 </span>                :            :  public:
+<span class="lineNum">      68 </span>                :            :   eqnsys ();
+<a name="69"><span class="lineNum">      69 </span>                :            :   eqnsys (eqnsys &amp;);</a>
+<span class="lineNum">      70 </span>                :            :   ~eqnsys ();
+<span class="lineNum">      71 </span>                :<span class="lineCov">     940673 :   void setAlgo (int a) { algo = a; }</span>
+<span class="lineNum">      72 </span>                :            :   int  getAlgo (void) { return algo; }
+<span class="lineNum">      73 </span>                :            :   void passEquationSys (tmatrix&lt;nr_type_t&gt; *, tvector&lt;nr_type_t&gt; *,
+<span class="lineNum">      74 </span>                :            :                         tvector&lt;nr_type_t&gt; *);
+<span class="lineNum">      75 </span>                :            :   void solve (void);
+<span class="lineNum">      76 </span>                :            : 
+<span class="lineNum">      77 </span>                :            :  private:
+<span class="lineNum">      78 </span>                :            :   int update;
+<span class="lineNum">      79 </span>                :            :   int algo;
+<span class="lineNum">      80 </span>                :            :   int pivoting;
+<span class="lineNum">      81 </span>                :            :   int * rMap;
+<span class="lineNum">      82 </span>                :            :   int * cMap;
+<span class="lineNum">      83 </span>                :            :   int N;
+<span class="lineNum">      84 </span>                :            :   nr_double_t * nPvt;
+<span class="lineNum">      85 </span>                :            : 
+<span class="lineNum">      86 </span>                :            :   tmatrix&lt;nr_type_t&gt; * A;
+<span class="lineNum">      87 </span>                :            :   tmatrix&lt;nr_type_t&gt; * V;
+<span class="lineNum">      88 </span>                :            :   tvector&lt;nr_type_t&gt; * B;
+<span class="lineNum">      89 </span>                :            :   tvector&lt;nr_type_t&gt; * X;
+<span class="lineNum">      90 </span>                :            :   tvector&lt;nr_type_t&gt; * R;
+<span class="lineNum">      91 </span>                :            :   tvector&lt;nr_type_t&gt; * T;
+<span class="lineNum">      92 </span>                :            :   tvector&lt;nr_double_t&gt; * S;
+<span class="lineNum">      93 </span>                :            :   tvector&lt;nr_double_t&gt; * E;
+<span class="lineNum">      94 </span>                :            : 
+<span class="lineNum">      95 </span>                :            :   void solve_inverse (void);
+<span class="lineNum">      96 </span>                :            :   void solve_gauss (void);
+<span class="lineNum">      97 </span>                :            :   void solve_gauss_jordan (void);
+<span class="lineNum">      98 </span>                :            :   void solve_lu_crout (void);
+<span class="lineNum">      99 </span>                :            :   void solve_lu_doolittle (void);
+<span class="lineNum">     100 </span>                :            :   void factorize_lu_crout (void);
+<span class="lineNum">     101 </span>                :            :   void factorize_lu_doolittle (void);
+<span class="lineNum">     102 </span>                :            :   void substitute_lu_crout (void);
+<span class="lineNum">     103 </span>                :            :   void substitute_lu_doolittle (void);
+<span class="lineNum">     104 </span>                :            :   void solve_qr (void);
+<span class="lineNum">     105 </span>                :            :   void solve_qr_ls (void);
+<span class="lineNum">     106 </span>                :            :   void solve_qrh (void);
+<span class="lineNum">     107 </span>                :            :   void factorize_qrh (void);
+<span class="lineNum">     108 </span>                :            :   void substitute_qrh (void);
+<span class="lineNum">     109 </span>                :            :   void factorize_qr_householder (void);
+<span class="lineNum">     110 </span>                :            :   void substitute_qr_householder (void);
+<span class="lineNum">     111 </span>                :            :   void substitute_qr_householder_ls (void);
+<span class="lineNum">     112 </span>                :            :   nr_type_t householder_create_left (int);
+<span class="lineNum">     113 </span>                :            :   void householder_apply_left (int, nr_type_t);
+<span class="lineNum">     114 </span>                :            :   nr_type_t householder_left (int);
+<span class="lineNum">     115 </span>                :            :   nr_type_t householder_create_right (int);
+<span class="lineNum">     116 </span>                :            :   void householder_apply_right (int, nr_type_t);
+<span class="lineNum">     117 </span>                :            :   void householder_apply_right_extern (int, nr_type_t);
+<span class="lineNum">     118 </span>                :            :   nr_type_t householder_right (int);
+<span class="lineNum">     119 </span>                :            :   nr_double_t euclidian_c (int, int r = 1);
+<span class="lineNum">     120 </span>                :            :   nr_double_t euclidian_r (int, int c = 1);
+<span class="lineNum">     121 </span>                :            :   void givens_apply_u (int, int, nr_double_t, nr_double_t);
+<span class="lineNum">     122 </span>                :            :   void givens_apply_v (int, int, nr_double_t, nr_double_t);
+<span class="lineNum">     123 </span>                :            :   void solve_svd (void);
+<span class="lineNum">     124 </span>                :            :   void chop_svd (void);
+<span class="lineNum">     125 </span>                :            :   void factorize_svd (void);
+<span class="lineNum">     126 </span>                :            :   void substitute_svd (void);
+<span class="lineNum">     127 </span>                :            :   void diagonalize_svd (void);
+<span class="lineNum">     128 </span>                :            :   void solve_iterative (void);
+<span class="lineNum">     129 </span>                :            :   void solve_sor (void);
+<span class="lineNum">     130 </span>                :            :   nr_double_t convergence_criteria (void);
+<span class="lineNum">     131 </span>                :            :   void ensure_diagonal (void);
+<span class="lineNum">     132 </span>                :            :   void ensure_diagonal_MNA (void);
+<span class="lineNum">     133 </span>                :            :   int countPairs (int, int&amp;, int&amp;);
+<span class="lineNum">     134 </span>                :            :   void preconditioner (void);
+<span class="lineNum">     135 </span>                :            : };
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            : } // namespace qucs
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            : #include &quot;eqnsys.cpp&quot;
+<span class="lineNum">     140 </span>                :            : 
+<span class="lineNum">     141 </span>                :            : #endif /* __EQNSYS_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/hbsolver.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - hbsolver.h<span style="font-size: 80%;"> (source / <a href="hbsolver.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * hbsolver.h - harmonic balance solver class definitions
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2005, 2006, 2007, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #ifndef __HBSOLVER_H__
+<span class="lineNum">      26 </span>                :            : #define __HBSOLVER_H__
+<span class="lineNum">      27 </span>                :            : 
+<span class="lineNum">      28 </span>                :            : #include &quot;ptrlist.h&quot;
+<span class="lineNum">      29 </span>                :            : #include &quot;tvector.h&quot;
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : namespace qucs {
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : class vector;
+<span class="lineNum">      34 </span>                :            : class strlist;
+<span class="lineNum">      35 </span>                :            : class circuit;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : class hbsolver : public analysis
+<a name="38"><span class="lineNum">      38 </span>                :            : {</a>
+<span class="lineNum">      39 </span>                :            :  public:
+<span class="lineNum">      40 </span>        [<span class="branchCov" title="Branch 1 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        183 :   ACREATOR (hbsolver);</span>
+<span class="lineNum">      41 </span>                :            :   hbsolver (char *);
+<span class="lineNum">      42 </span>                :            :   hbsolver (hbsolver &amp;);
+<span class="lineNum">      43 </span>                :            :   ~hbsolver ();
+<span class="lineNum">      44 </span>                :            :   int  solve (void);
+<span class="lineNum">      45 </span>                :            :   void initHB (void);
+<span class="lineNum">      46 </span>                :            :   void initDC (void);
+<span class="lineNum">      47 </span>                :            :   static void calc (hbsolver *);
+<span class="lineNum">      48 </span>                :            :   void collectFrequencies (void);
+<span class="lineNum">      49 </span>                :            :   int  checkBalance (void);
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            :   void splitCircuits (void);
+<span class="lineNum">      52 </span>                :            :   void expandFrequencies (nr_double_t, int);
+<span class="lineNum">      53 </span>                :            :   bool isExcitation (circuit *);
+<span class="lineNum">      54 </span>                :            :   strlist * circuitNodes (ptrlist&lt;circuit&gt;);
+<span class="lineNum">      55 </span>                :            :   void getNodeLists (void);
+<span class="lineNum">      56 </span>                :            :   int  assignVoltageSources (ptrlist&lt;circuit&gt;);
+<span class="lineNum">      57 </span>                :            :   int  assignNodes (ptrlist&lt;circuit&gt;, strlist *, int offset = 0);
+<span class="lineNum">      58 </span>                :            :   void prepareLinear (void);
+<span class="lineNum">      59 </span>                :            :   void createMatrixLinearA (void);
+<span class="lineNum">      60 </span>                :            :   void fillMatrixLinearA (tmatrix&lt;nr_complex_t&gt; *, int);
+<span class="lineNum">      61 </span>                :            :   void invertMatrix (tmatrix&lt;nr_complex_t&gt; *, tmatrix&lt;nr_complex_t&gt; *);
+<span class="lineNum">      62 </span>                :            :   void createMatrixLinearY (void);
+<span class="lineNum">      63 </span>                :            :   void saveResults (void);
+<span class="lineNum">      64 </span>                :            :   void calcConstantCurrent (void);
+<span class="lineNum">      65 </span>                :            :   nr_complex_t excitationZ (tvector&lt;nr_complex_t&gt; *, circuit *, int);
+<span class="lineNum">      66 </span>                :            :   void finalSolution (void);
+<span class="lineNum">      67 </span>                :            :   void fillMatrixNonLinear (tmatrix&lt;nr_complex_t&gt; *, tmatrix&lt;nr_complex_t&gt; *,
+<span class="lineNum">      68 </span>                :            :                             tvector&lt;nr_complex_t&gt; *, tvector&lt;nr_complex_t&gt; *,
+<span class="lineNum">      69 </span>                :            :                             tvector&lt;nr_complex_t&gt; *, tvector&lt;nr_complex_t&gt; *,
+<span class="lineNum">      70 </span>                :            :                             int);
+<span class="lineNum">      71 </span>                :            :   void prepareNonLinear (void);
+<span class="lineNum">      72 </span>                :            :   void solveHB (void);
+<span class="lineNum">      73 </span>                :            :   void loadMatrices (void);
+<span class="lineNum">      74 </span>                :            :   void VectorFFT (tvector&lt;nr_complex_t&gt; *, int isign = 1);
+<span class="lineNum">      75 </span>                :            :   void VectorIFFT (tvector&lt;nr_complex_t&gt; *, int isign = 1);
+<span class="lineNum">      76 </span>                :            :   int  calcOrder (int);
+<span class="lineNum">      77 </span>                :            :   void MatrixFFT (tmatrix&lt;nr_complex_t&gt; *);
+<span class="lineNum">      78 </span>                :            :   void calcJacobian (void);
+<span class="lineNum">      79 </span>                :            :   void solveVoltages (void);
+<span class="lineNum">      80 </span>                :            :   tvector&lt;nr_complex_t&gt; expandVector (tvector&lt;nr_complex_t&gt;, int);
+<span class="lineNum">      81 </span>                :            :   tmatrix&lt;nr_complex_t&gt; expandMatrix (tmatrix&lt;nr_complex_t&gt;, int);
+<span class="lineNum">      82 </span>                :            :   tmatrix&lt;nr_complex_t&gt; extendMatrixLinear (tmatrix&lt;nr_complex_t&gt;, int);
+<span class="lineNum">      83 </span>                :            :   void fillMatrixLinearExtended (tmatrix&lt;nr_complex_t&gt; *,
+<span class="lineNum">      84 </span>                :            :                                  tvector&lt;nr_complex_t&gt; *);
+<span class="lineNum">      85 </span>                :            :   void saveNodeVoltages (circuit *, int);
+<span class="lineNum">      86 </span>                :            : 
+<span class="lineNum">      87 </span>                :            :  private:
+<span class="lineNum">      88 </span>                :            :   tvector&lt;nr_double_t&gt; negfreqs;    // full frequency set
+<span class="lineNum">      89 </span>                :            :   tvector&lt;nr_double_t&gt; posfreqs;    // full frequency set but positive
+<span class="lineNum">      90 </span>                :            :   tvector&lt;nr_double_t&gt; rfreqs;      // real positive frequency set
+<span class="lineNum">      91 </span>                :            :   int * ndfreqs;                    // number of frequencies for each dimension
+<span class="lineNum">      92 </span>                :            :   tvector&lt;nr_double_t&gt; dfreqs;      // base frequencies for each dimension
+<span class="lineNum">      93 </span>                :            :   nr_double_t frequency;
+<span class="lineNum">      94 </span>                :            :   strlist * nlnodes, * lnnodes, * banodes, * nanodes, * exnodes;
+<span class="lineNum">      95 </span>                :            :   ptrlist&lt;circuit&gt; excitations;
+<span class="lineNum">      96 </span>                :            :   ptrlist&lt;circuit&gt; nolcircuits;
+<span class="lineNum">      97 </span>                :            :   ptrlist&lt;circuit&gt; lincircuits;
+<span class="lineNum">      98 </span>                :            : 
+<span class="lineNum">      99 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * Y;  // transadmittance matrix of linear network
+<span class="lineNum">     100 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * A;  // MNA-matrix of linear network
+<span class="lineNum">     101 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * Z;  // transimpedance matrix of linear network
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * YV; // linear transadmittance matrix
+<span class="lineNum">     104 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * NA; // MNA-matrix of complete network
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * JQ; // C-Jacobian in t and f
+<span class="lineNum">     107 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * JG; // G-Jacobian in t and f
+<span class="lineNum">     108 </span>                :            :   tmatrix&lt;nr_complex_t&gt; * JF; // full Jacobian for non-linear balancing
+<span class="lineNum">     109 </span>                :            :   tvector&lt;nr_complex_t&gt; * IG; // currents in t and f
+<span class="lineNum">     110 </span>                :            :   tvector&lt;nr_complex_t&gt; * FQ; // charges in t and f
+<span class="lineNum">     111 </span>                :            :   tvector&lt;nr_complex_t&gt; * VS;
+<span class="lineNum">     112 </span>                :            :   tvector&lt;nr_complex_t&gt; * VP;
+<span class="lineNum">     113 </span>                :            :   tvector&lt;nr_complex_t&gt; * FV; // error vector F(V) of HB equation
+<span class="lineNum">     114 </span>                :            :   tvector&lt;nr_complex_t&gt; * IL; // currents into linear network
+<span class="lineNum">     115 </span>                :            :   tvector&lt;nr_complex_t&gt; * IN; // currents into non-linear network
+<span class="lineNum">     116 </span>                :            : 
+<span class="lineNum">     117 </span>                :            :   tvector&lt;nr_complex_t&gt; * IR;
+<span class="lineNum">     118 </span>                :            :   tvector&lt;nr_complex_t&gt; * QR;
+<span class="lineNum">     119 </span>                :            :   tvector&lt;nr_complex_t&gt; * RH;
+<span class="lineNum">     120 </span>                :            :   tvector&lt;nr_complex_t&gt; * OM;
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :            :   tvector&lt;nr_complex_t&gt; * IC; // source currents into balanced nodes
+<span class="lineNum">     123 </span>                :            :   tvector&lt;nr_complex_t&gt; * IS; // currents through sources themselves
+<span class="lineNum">     124 </span>                :            :   tvector&lt;nr_complex_t&gt; * x;
+<span class="lineNum">     125 </span>                :            :   tvector&lt;nr_complex_t&gt; * vs;
+<span class="lineNum">     126 </span>                :            : 
+<span class="lineNum">     127 </span>                :            :   int runs;
+<span class="lineNum">     128 </span>                :            :   int lnfreqs;
+<span class="lineNum">     129 </span>                :            :   int nlfreqs;
+<span class="lineNum">     130 </span>                :            :   int nnlvsrcs;
+<span class="lineNum">     131 </span>                :            :   int nlnvsrcs;
+<span class="lineNum">     132 </span>                :            :   int nlnnodes;
+<span class="lineNum">     133 </span>                :            :   int nnanodes;
+<span class="lineNum">     134 </span>                :            :   int nexnodes;
+<span class="lineNum">     135 </span>                :            :   int nbanodes;
+<span class="lineNum">     136 </span>                :            : };
+<span class="lineNum">     137 </span>                :            : 
+<span class="lineNum">     138 </span>                :            : } // namespace qucs
+<span class="lineNum">     139 </span>                :            : 
+<span class="lineNum">     140 </span>                :            : #endif /* __HBSOLVER_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

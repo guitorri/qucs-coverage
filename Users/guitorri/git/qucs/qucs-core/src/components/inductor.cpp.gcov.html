@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/components/inductor.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/components</a> - inductor.cpp<span style="font-size: 80%;"> (source / <a href="inductor.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">60</td>
+            <td class="headerCovTableEntryMed">80.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntryLo">72.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntryLo">53.8 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * inductor.cpp - inductor class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2005, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;inductor.h&quot;
+<span class="lineNum">      31 </span>                :            : 
+<a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :<span class="lineCov">         82 : inductor::inductor () : circuit (2) {</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">         82 :   type = CIR_INDUCTOR;</span>
+<span class="lineNum">      36 </span>                :<span class="lineCov">         82 :   setISource (true);</span>
+<a name="37"><span class="lineNum">      37 </span>                :<span class="lineCov">         82 : }</span></a>
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :<span class="lineCov">      18823 : void inductor::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">      40 </span>        [<span class="branchCov" title="Branch 0 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      18823 :   nr_double_t l = getPropertyDouble (&quot;L&quot;) / z0;</span>
+<span class="lineNum">      41 </span>                :<span class="lineCov">      18823 :   nr_complex_t z = nr_complex_t (0, 2.0 * M_PI * frequency * l);</span>
+<span class="lineNum">      42 </span>[<span class="branchCov" title="Branch 1 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      18823 :   setS (NODE_1, NODE_1, z / (z + 2.0));</span>
+<span class="lineNum">      43 </span>[<span class="branchCov" title="Branch 1 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      18823 :   setS (NODE_2, NODE_2, z / (z + 2.0));</span>
+<span class="lineNum">      44 </span>[<span class="branchCov" title="Branch 1 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      18823 :   setS (NODE_1, NODE_2, 2.0 / (z + 2.0));</span>
+<span class="lineNum">      45 </span>[<span class="branchCov" title="Branch 1 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 18823 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">      18823 :   setS (NODE_2, NODE_1, 2.0 / (z + 2.0));</span>
+<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">      18823 : }</span></a>
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :<span class="lineCov">        548 : void inductor::initDC (void) {</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">        548 :   setVoltageSources (1);</span>
+<span class="lineNum">      50 </span>                :<span class="lineCov">        548 :   allocMatrixMNA ();</span>
+<span class="lineNum">      51 </span>                :<span class="lineCov">        548 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">        548 : }</span></a>
+<span class="lineNum">      53 </span>                :            : 
+<span class="lineNum">      54 </span>                :<span class="lineCov">       3866 : void inductor::calcDC (void) {</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">       3866 :   clearY ();</span>
+<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">       3866 : }</span></a>
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :<span class="lineCov">         12 : void inductor::initAC (void) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">         12 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">      60 </span>                :            : 
+<span class="lineNum">      61 </span>                :            :   // for non-zero inductance usual MNA entries
+<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :   if (l != 0.0) {</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">         12 :     setVoltageSources (0);</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">         12 :     allocMatrixMNA ();</span>
+<span class="lineNum">      65 </span>                :            :   }
+<span class="lineNum">      66 </span>                :            :   // for zero inductance create a zero voltage source
+<span class="lineNum">      67 </span>                :            :   else {
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :     initDC ();</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :     calcDC ();</span>
+<span class="lineNum">      70 </span>                :            :   }
+<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">         12 : }</span></a>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :<span class="lineCov">       1858 : void inductor::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">       1858 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :            :   // for non-zero inductance usual MNA entries
+<span class="lineNum">      77 </span>        [<span class="branchCov" title="Branch 0 was taken 1858 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">       1858 :   if (l != 0.0) {</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">       1858 :     nr_complex_t y = nr_complex_t (0, -1 / (2.0 * M_PI * frequency * l));</span>
+<span class="lineNum">      79 </span>[<span class="branchCov" title="Branch 1 was taken 1858 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 1858 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">       1858 :     setY (NODE_1, NODE_1, +y); setY (NODE_2, NODE_2, +y);</span>
+<span class="lineNum">      80 </span>[<span class="branchCov" title="Branch 1 was taken 1858 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 1858 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">       1858 :     setY (NODE_1, NODE_2, -y); setY (NODE_2, NODE_1, -y);</span>
+<span class="lineNum">      81 </span>                :            :   }
+<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">       1858 : }</span></a>
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :<span class="lineCov">         40 : void inductor::initTR (void) {</span>
+<span class="lineNum">      85 </span>                :<span class="lineCov">         40 :   initDC ();</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">         40 :   clearY ();</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">         40 :   setStates (2);</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">         40 : }</span>
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :            : #define fState 0 // flux state
+<a name="91"><span class="lineNum">      91 </span>                :            : #define vState 1 // voltage state</a>
+<span class="lineNum">      92 </span>                :            : 
+<span class="lineNum">      93 </span>                :<span class="lineCov">     199972 : void inductor::calcTR (nr_double_t) {</span>
+<span class="lineNum">      94 </span>        [<span class="branchCov" title="Branch 0 was taken 199972 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     199972 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">      95 </span>                :            :   nr_double_t r, v;
+<span class="lineNum">      96 </span>        [<span class="branchCov" title="Branch 0 was taken 199972 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     199972 :   nr_double_t i = real (getJ (VSRC_1));</span>
+<span class="lineNum">      97 </span>                :            : 
+<span class="lineNum">      98 </span>                :            :   /* apply initial condition if requested */
+<span class="lineNum">      99 </span>[<span class="branchCov" title="Branch 1 was taken 1446 times"> + </span><span class="branchCov" title="Branch 2 was taken 198526 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 1446 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     199972 :   if (getMode () == MODE_INIT &amp;&amp; isPropertyGiven (&quot;I&quot;)) {</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 12 times"> + </span><span class="branchCov" title="Branch 7 was taken 1434 times"> + </span>][<span class="branchCov" title="Branch 8 was taken 12 times"> + </span><span class="branchCov" title="Branch 9 was taken 199960 times"> + </span>]
+<span class="lineNum">     100 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     i = getPropertyDouble (&quot;I&quot;);</span>
+<span class="lineNum">     101 </span>                :            :   }
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>                :<span class="lineCov">     199972 :   setState (fState, i * l);</span>
+<span class="lineNum">     104 </span>        [<span class="branchCov" title="Branch 0 was taken 199972 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     199972 :   integrate (fState, l, r, v);</span>
+<span class="lineNum">     105 </span>        [<span class="branchCov" title="Branch 1 was taken 199972 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     199972 :   setD (VSRC_1, VSRC_1, -r);</span>
+<span class="lineNum">     106 </span>        [<span class="branchCov" title="Branch 1 was taken 199972 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     199972 :   setE (VSRC_1, v);</span>
+<a name="107"><span class="lineNum">     107 </span>                :<span class="lineCov">     199972 : }</span></a>
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 : void inductor::initHB (void) {</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (1);</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :   setInternalVoltageSource (1);</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<a name="114"><span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     115 </span>                :            : 
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 : void inductor::calcHB (nr_double_t frequency) {</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :   nr_double_t l = getPropertyDouble (&quot;L&quot;);</span>
+<span class="lineNum">     118 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_1, VSRC_1, -l * 2 * M_PI * frequency);</span>
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     120 </span>                :            : 
+<span class="lineNum">     121 </span>                :            : // properties
+<span class="lineNum">     122 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     123 </span>                :            :   { &quot;L&quot;, PROP_REAL, { 1e-9, PROP_NO_STR }, PROP_NO_RANGE }, PROP_NO_PROP };
+<span class="lineNum">     124 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     125 </span>                :            :   { &quot;I&quot;, PROP_REAL, { 0, PROP_NO_STR }, PROP_NO_RANGE }, PROP_NO_PROP };
+<span class="lineNum">     126 </span>                :            : struct define_t inductor::cirdef =
+<span class="lineNum">     127 </span>                :            :   { &quot;L&quot;, 2, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

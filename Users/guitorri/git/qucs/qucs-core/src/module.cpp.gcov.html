@@ -1,0 +1,662 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/module.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - module.cpp<span style="font-size: 80%;"> (source / <a href="module.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">271</td>
+            <td class="headerCovTableEntry">291</td>
+            <td class="headerCovTableEntryHi">93.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntryMed">89.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntry">146</td>
+            <td class="headerCovTableEntryLo">43.8 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * module.cpp - module class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2008, 2009, 2010 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  * New models added Mike Brinson 2013 mbrin72043@yahoo.co.uk
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id: module.cpp 1872 2013-03-06 14:13:37Z fransschreuder $
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      27 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      28 </span>                :            : #endif
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : #include &lt;iostream&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;map&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;list&gt;
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : #include &quot;netdefs.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;components.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;analyses.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;netdefs.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;module.h&quot;
+<span class="lineNum">      41 </span>                :            : 
+<span class="lineNum">      42 </span>                :            : #ifdef __MINGW32__
+<span class="lineNum">      43 </span>                :            :  #include &lt;windows.h&gt;
+<span class="lineNum">      44 </span>                :            : #else
+<span class="lineNum">      45 </span>                :            :  #include &lt;dlfcn.h&gt;
+<span class="lineNum">      46 </span>                :            : #endif
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            : #include &lt;cstdlib&gt; //for exit
+<a name="49"><span class="lineNum">      49 </span>                :            : </a>
+<span class="lineNum">      50 </span>                :            : // Global module hash.
+<span class="lineNum">      51 </span>                :<span class="lineCov">         94 : qucs::hash&lt;module&gt; module::modules;</span>
+<span class="lineNum">      52 </span>                :            : 
+<span class="lineNum">      53 </span>                :            : // Our global factories for making loaded circuit objects
+<span class="lineNum">      54 </span>                :            : // The factories are populated as dynamic modules are loaded
+<span class="lineNum">      55 </span>                :            : // factorycreate hold the loaded modules constructor function
+<span class="lineNum">      56 </span>                :<span class="lineCov">         94 : std::map&lt; std::string, creator_t *, std::less&lt;std::string&gt; &gt; factorycreate;</span>
+<span class="lineNum">      57 </span>                :            : // factorydef hold the loaded modules definitions
+<span class="lineNum">      58 </span>                :<span class="lineCov">         94 : std::map&lt; std::string, defs_t *, std::less&lt;std::string&gt; &gt; factorydef;</span>
+<span class="lineNum">      59 </span>                :            : 
+<span class="lineNum">      60 </span>                :            : #if __MINGW32__
+<span class="lineNum">      61 </span>                :            :   std::list&lt;HINSTANCE&gt; dl_list; // list to hold handles for dynamic libs
+<span class="lineNum">      62 </span>                :            :   std::list&lt;HINSTANCE&gt;::iterator itr;
+<span class="lineNum">      63 </span>                :            : #else
+<span class="lineNum">      64 </span>                :<span class="lineCov">         94 :   std::list&lt;void *&gt; dl_list; // list to hold handles for dynamic libs</span>
+<span class="lineNum">      65 </span>                :<span class="lineCov">         94 :   std::list&lt;void *&gt;::iterator itr;</span>
+<span class="lineNum">      66 </span>                :            : #endif
+<a name="67"><span class="lineNum">      67 </span>                :            : </a>
+<span class="lineNum">      68 </span>                :            : // Constructor creates an instance of the module class.
+<span class="lineNum">      69 </span>                :<span class="lineCov">      14287 : module::module () {</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">      14287 :   definition = NULL;</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">      14287 :   circreate = NULL;</span>
+<span class="lineNum">      72 </span>                :<span class="lineCov">      14287 :   anacreate = NULL;</span>
+<span class="lineNum">      73 </span>                :<span class="lineCov">      14287 : }</span>
+<a name="74"><span class="lineNum">      74 </span>                :            : </a>
+<span class="lineNum">      75 </span>                :            : // Destructor deletes an instance of the module class.
+<span class="lineNum">      76 </span>                :<span class="lineCov">      14130 : module::~module () {</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">      14130 : }</span>
+<span class="lineNum">      78 </span>                :            : 
+<span class="lineNum">      79 </span>                :            : // Definitions which do not fit elsewhere.
+<span class="lineNum">      80 </span>                :            : static struct property_t props1[] = {
+<span class="lineNum">      81 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">      82 </span>                :            : static struct property_t props2[] = {
+<span class="lineNum">      83 </span>                :            :   { &quot;Type&quot;, PROP_STR, { PROP_NO_VAL, &quot;DEF1&quot; }, PROP_NO_RANGE },
+<span class="lineNum">      84 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">      85 </span>                :            : 
+<span class="lineNum">      86 </span>                :            : struct define_t miscdef1 =
+<span class="lineNum">      87 </span>                :            :   { &quot;Def&quot;, PROP_NODES, PROP_ACTION, PROP_NO_SUBSTRATE, PROP_LINEAR,
+<span class="lineNum">      88 </span>                :            :     props1, props1 };
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :            : struct define_t miscdef2 =
+<span class="lineNum">      91 </span>                :            :   { &quot;Sub&quot;, PROP_NODES, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR,
+<span class="lineNum">      92 </span>                :            :     props1, props2 };
+<a name="93"><span class="lineNum">      93 </span>                :            : </a>
+<span class="lineNum">      94 </span>                :            : // Registers an analysis object to the list of available modules.
+<span class="lineNum">      95 </span>                :<span class="lineCov">        637 : void module::registerModule (analysis_definer_t define,</span>
+<span class="lineNum">      96 </span>                :            :                              analysis_creator_t create) {
+<span class="lineNum">      97 </span>                :<span class="lineCov">        637 :   module * m = new module ();</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">        637 :   m-&gt;definition = define ();</span>
+<span class="lineNum">      99 </span>                :<span class="lineCov">        637 :   m-&gt;anacreate = create;</span>
+<span class="lineNum">     100 </span>                :<span class="lineCov">        637 :   modules.put ((char *) define()-&gt;type, m);</span>
+<span class="lineNum">     101 </span>                :<span class="lineCov">        637 : }</span>
+<a name="102"><span class="lineNum">     102 </span>                :            : </a>
+<span class="lineNum">     103 </span>                :            : // Registers a circuit object to the list of available modules.
+<span class="lineNum">     104 </span>                :<span class="lineCov">      13286 : void module::registerModule (circuit_definer_t define,</span>
+<span class="lineNum">     105 </span>                :            :                              circuit_creator_t create) {
+<span class="lineNum">     106 </span>                :<span class="lineCov">      13286 :   module * m = new module ();</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">      13286 :   m-&gt;definition = define ();</span>
+<span class="lineNum">     108 </span>                :<span class="lineCov">      13286 :   m-&gt;circreate = create;</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">      13286 :   registerModule (define()-&gt;type, m);</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">      13286 : }</span>
+<a name="111"><span class="lineNum">     111 </span>                :            : </a>
+<span class="lineNum">     112 </span>                :            : // Registers a miscellaneous object to the list of available modules.
+<span class="lineNum">     113 </span>                :<span class="lineCov">        182 : void module::registerModule (misc_definer_t define) {</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">        182 :   module * m = new module ();</span>
+<span class="lineNum">     115 </span>                :<span class="lineCov">        182 :   m-&gt;definition = define ();</span>
+<span class="lineNum">     116 </span>                :<span class="lineCov">        182 :   registerModule (define()-&gt;type, m);</span>
+<span class="lineNum">     117 </span>                :<span class="lineCov">        182 : }</span>
+<span class="lineNum">     118 </span>                :            : 
+<a name="119"><span class="lineNum">     119 </span>                :            : /* Registers a miscellaneous structure just defined by a somple</a>
+<span class="lineNum">     120 </span>                :            :    define_t structure to the list of available modules. */
+<span class="lineNum">     121 </span>                :<span class="lineCov">        182 : void module::registerModule (struct define_t * define) {</span>
+<span class="lineNum">     122 </span>                :<span class="lineCov">        182 :   module * m = new module ();</span>
+<span class="lineNum">     123 </span>                :<span class="lineCov">        182 :   m-&gt;definition = define;</span>
+<span class="lineNum">     124 </span>                :<span class="lineCov">        182 :   registerModule (define-&gt;type, m);</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">        182 : }</span>
+<a name="126"><span class="lineNum">     126 </span>                :            : </a>
+<span class="lineNum">     127 </span>                :            : // Puts a module into the available module hash.
+<span class="lineNum">     128 </span>                :<span class="lineCov">      13650 : void module::registerModule (const char * type, module * m) {</span>
+<span class="lineNum">     129 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 13650 times"> + </span>]:<span class="lineCov">      13650 :   if (modules.get ((char *) type) != NULL) {</span>
+<span class="lineNum">     130 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;module already registered: %s\n&quot;, type);</span>
+<span class="lineNum">     131 </span>                :            :   }
+<span class="lineNum">     132 </span>                :            :   else {
+<span class="lineNum">     133 </span>                :<span class="lineCov">      13650 :     modules.put ((char *) type, m);</span>
+<span class="lineNum">     134 </span>                :            :   }
+<span class="lineNum">     135 </span>                :<span class="lineCov">      13650 : }</span>
+<span class="lineNum">     136 </span>                :            : 
+<a name="137"><span class="lineNum">     137 </span>                :            : /* Returns the definition of a module specified by its type name if</a>
+<span class="lineNum">     138 </span>                :            :    such is existing and otherwise NULL. */
+<span class="lineNum">     139 </span>                :<span class="lineCov">        974 : struct define_t * module::getModule (char * type) {</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">        974 :   module * m = modules.get (type);</span>
+<span class="lineNum">     141 </span>        [<span class="branchCov" title="Branch 0 was taken 974 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        974 :   if (m != NULL) {</span>
+<span class="lineNum">     142 </span>                :<span class="lineCov">        974 :     return m-&gt;definition;</span>
+<span class="lineNum">     143 </span>                :            :   }
+<span class="lineNum">     144 </span>                :<span class="lineCov">        974 :   return NULL;</span>
+<span class="lineNum">     145 </span>                :            : }
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :            : // Helper macros.
+<span class="lineNum">     148 </span>                :            : #define REGISTER_CIRCUIT(val) \
+<span class="lineNum">     149 </span>                :            :   registerModule (&amp;val::definition, &amp;val::create)
+<span class="lineNum">     150 </span>                :            : #define REGISTER_ANALYSIS(val) \
+<span class="lineNum">     151 </span>                :            :   registerModule (&amp;val::definition, &amp;val::create)
+<span class="lineNum">     152 </span>                :            : #define REGISTER_MISC(val) \
+<span class="lineNum">     153 </span>                :            :   registerModule (&amp;val::definition)
+<a name="154"><span class="lineNum">     154 </span>                :            : </a>
+<span class="lineNum">     155 </span>                :            : // Global static module registration.
+<span class="lineNum">     156 </span>                :<span class="lineCov">         91 : void module::registerModules (void) {</span>
+<span class="lineNum">     157 </span>                :            : 
+<span class="lineNum">     158 </span>                :            :   // miscellaneous
+<span class="lineNum">     159 </span>                :<span class="lineCov">         91 :   registerModule (&amp;miscdef1);</span>
+<span class="lineNum">     160 </span>                :<span class="lineCov">         91 :   registerModule (&amp;miscdef2);</span>
+<span class="lineNum">     161 </span>                :<span class="lineCov">         91 :   REGISTER_MISC (nodeset);</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">         91 :   REGISTER_MISC (substrate);</span>
+<span class="lineNum">     163 </span>                :            : 
+<span class="lineNum">     164 </span>                :            :   // circuit components
+<span class="lineNum">     165 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (resistor);</span>
+<span class="lineNum">     166 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (capacitor);</span>
+<span class="lineNum">     167 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (pac);</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (inductor);</span>
+<span class="lineNum">     169 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vccs);</span>
+<span class="lineNum">     170 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cccs);</span>
+<span class="lineNum">     171 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vcvs);</span>
+<span class="lineNum">     172 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ccvs);</span>
+<span class="lineNum">     173 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (biastee);</span>
+<span class="lineNum">     174 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dcfeed);</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dcblock);</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (circulator);</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (attenuator);</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (isolator);</span>
+<span class="lineNum">     179 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (trafo);</span>
+<span class="lineNum">     180 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (strafo);</span>
+<span class="lineNum">     181 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vdc);</span>
+<span class="lineNum">     182 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (idc);</span>
+<span class="lineNum">     183 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vac);</span>
+<span class="lineNum">     184 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (iac);</span>
+<span class="lineNum">     185 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (iexp);</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vexp);</span>
+<span class="lineNum">     187 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ifile);</span>
+<span class="lineNum">     188 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vfile);</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vam);</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vpm);</span>
+<span class="lineNum">     191 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vpulse);</span>
+<span class="lineNum">     192 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ipulse);</span>
+<span class="lineNum">     193 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vrect);</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (irect);</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (gyrator);</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (phaseshifter);</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (tswitch);</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (relais);</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (tline);</span>
+<span class="lineNum">     200 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (tline4p);</span>
+<span class="lineNum">     201 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ctline);</span>
+<span class="lineNum">     202 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (coaxline);</span>
+<span class="lineNum">     203 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (rectline);</span>
+<span class="lineNum">     204 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (twistedpair);</span>
+<span class="lineNum">     205 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (rlcg);</span>
+<span class="lineNum">     206 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (coupler);</span>
+<span class="lineNum">     207 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hybrid);</span>
+<span class="lineNum">     208 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (diode);</span>
+<span class="lineNum">     209 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (eqndefined);</span>
+<span class="lineNum">     210 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (rfedd);</span>
+<span class="lineNum">     211 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (diac);</span>
+<span class="lineNum">     212 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (thyristor);</span>
+<span class="lineNum">     213 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (triac);</span>
+<span class="lineNum">     214 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (tunneldiode);</span>
+<span class="lineNum">     215 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msline);</span>
+<span class="lineNum">     216 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mscorner);</span>
+<span class="lineNum">     217 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msstep);</span>
+<span class="lineNum">     218 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msopen);</span>
+<span class="lineNum">     219 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msgap);</span>
+<span class="lineNum">     220 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msmbend);</span>
+<span class="lineNum">     221 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mscoupled);</span>
+<span class="lineNum">     222 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mslange);</span>
+<span class="lineNum">     223 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mstee);</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mscross);</span>
+<span class="lineNum">     225 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msvia);</span>
+<span class="lineNum">     226 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (msrstub);</span>
+<span class="lineNum">     227 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bondwire);</span>
+<span class="lineNum">     228 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cpwline);</span>
+<span class="lineNum">     229 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cpwopen);</span>
+<span class="lineNum">     230 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cpwshort);</span>
+<span class="lineNum">     231 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cpwgap);</span>
+<span class="lineNum">     232 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (cpwstep);</span>
+<span class="lineNum">     233 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (iprobe);</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vprobe);</span>
+<span class="lineNum">     235 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (jfet);</span>
+<span class="lineNum">     236 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bjt);</span>
+<span class="lineNum">     237 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (spfile);</span>
+<span class="lineNum">     238 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vnoise);</span>
+<span class="lineNum">     239 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (inoise);</span>
+<span class="lineNum">     240 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mosfet);</span>
+<span class="lineNum">     241 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (amplifier);</span>
+<span class="lineNum">     242 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (opamp);</span>
+<span class="lineNum">     243 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (iinoise);</span>
+<span class="lineNum">     244 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mutual);</span>
+<span class="lineNum">     245 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mutual2);</span>
+<span class="lineNum">     246 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mutualx);</span>
+<span class="lineNum">     247 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ivnoise);</span>
+<span class="lineNum">     248 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vvnoise);</span>
+<span class="lineNum">     249 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (inverter);</span>
+<span class="lineNum">     250 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicnor);</span>
+<span class="lineNum">     251 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicor);</span>
+<span class="lineNum">     252 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicnand);</span>
+<span class="lineNum">     253 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicand);</span>
+<span class="lineNum">     254 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicxnor);</span>
+<span class="lineNum">     255 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logicxor);</span>
+<span class="lineNum">     256 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (digisource);</span>
+<span class="lineNum">     257 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (buffer);</span>
+<span class="lineNum">     258 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL2V2p1);</span>
+<span class="lineNum">     259 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (HBT_X);</span>
+<span class="lineNum">     260 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mod_amp);</span>
+<span class="lineNum">     261 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hic2_full);</span>
+<span class="lineNum">     262 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (log_amp);</span>
+<span class="lineNum">     263 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hic0_full);</span>
+<span class="lineNum">     264 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (potentiometer);</span>
+<span class="lineNum">     265 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (MESFET);</span>
+<span class="lineNum">     266 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (EKV26MOS);</span>
+<span class="lineNum">     267 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bsim3v34nMOS);</span>
+<span class="lineNum">     268 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bsim3v34pMOS);</span>
+<span class="lineNum">     269 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bsim4v30nMOS);</span>
+<span class="lineNum">     270 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (bsim4v30pMOS);</span>
+<span class="lineNum">     271 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL0V1p2);</span>
+<span class="lineNum">     272 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL0V1p2g);</span>
+<span class="lineNum">     273 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL0V1p3);</span>
+<span class="lineNum">     274 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL2V2p23);</span>
+<span class="lineNum">     275 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL2V2p24);</span>
+<span class="lineNum">     276 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hicumL2V2p31n);</span>
+<span class="lineNum">     277 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (photodiode);</span>
+<span class="lineNum">     278 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (phototransistor);</span>
+<span class="lineNum">     279 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (nigbt);</span>
+<span class="lineNum">     280 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dff_SR);</span>
+<span class="lineNum">     281 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (tff_SR);</span>
+<span class="lineNum">     282 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (jkff_SR);</span>
+<span class="lineNum">     283 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (gatedDlatch);</span>
+<span class="lineNum">     284 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logic_1);</span>
+<span class="lineNum">     285 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (logic_0);</span>
+<span class="lineNum">     286 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mux2to1);</span>
+<span class="lineNum">     287 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mux4to1);</span>
+<span class="lineNum">     288 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (mux8to1);</span>
+<span class="lineNum">     289 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (DLS_nto1);</span>
+<span class="lineNum">     290 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (DLS_1ton);</span>
+<span class="lineNum">     291 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (andor4x2);</span>
+<span class="lineNum">     292 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (andor4x3);</span>
+<span class="lineNum">     293 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (andor4x4);</span>
+<span class="lineNum">     294 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dmux2to4);</span>
+<span class="lineNum">     295 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dmux3to8);</span>
+<span class="lineNum">     296 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (dmux4to16);</span>
+<span class="lineNum">     297 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ha1b);</span>
+<span class="lineNum">     298 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (fa1b);</span>
+<span class="lineNum">     299 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (fa2b);</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (pad2bit);</span>
+<span class="lineNum">     301 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (pad3bit);</span>
+<span class="lineNum">     302 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (pad4bit);</span>
+<span class="lineNum">     303 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (binarytogrey4bit);</span>
+<span class="lineNum">     304 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (greytobinary4bit);</span>
+<span class="lineNum">     305 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (comp_1bit);</span>
+<span class="lineNum">     306 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (comp_2bit);</span>
+<span class="lineNum">     307 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (comp_4bit);</span>
+<span class="lineNum">     308 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (hpribin4bit);</span>
+<span class="lineNum">     309 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (vcresistor);</span>
+<span class="lineNum">     310 </span>                :<span class="lineCov">         91 :   REGISTER_CIRCUIT (ecvs);</span>
+<span class="lineNum">     311 </span>                :            : 
+<span class="lineNum">     312 </span>                :            :   // analyses
+<span class="lineNum">     313 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (dcsolver);</span>
+<span class="lineNum">     314 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (acsolver);</span>
+<span class="lineNum">     315 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (spsolver);</span>
+<span class="lineNum">     316 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (trsolver);</span>
+<span class="lineNum">     317 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (hbsolver);</span>
+<span class="lineNum">     318 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (parasweep);</span>
+<span class="lineNum">     319 </span>                :<span class="lineCov">         91 :   REGISTER_ANALYSIS (e_trsolver);</span>
+<span class="lineNum">     320 </span>                :<span class="lineCov">         91 : }</span>
+<a name="321"><span class="lineNum">     321 </span>                :            : </a>
+<span class="lineNum">     322 </span>                :            : // Global module unregistration.
+<span class="lineNum">     323 </span>                :<span class="lineCov">         90 : void module::unregisterModules (void) {</span>
+<span class="lineNum">     324 </span>                :<span class="lineCov">         90 :   qucs::hashiterator&lt;module&gt; it;</span>
+<span class="lineNum">     325 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 14220 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">      14220 :   for (it = qucs::hashiterator&lt;module&gt; (modules); *it; ++it) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 8 was taken 14130 times"> + </span><span class="branchCov" title="Branch 9 was taken 90 times"> + </span>]
+<span class="lineNum">     326 </span>        [<span class="branchCov" title="Branch 1 was taken 14130 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">      14130 :     delete it.currentVal ();</span>
+<span class="lineNum">     327 </span>                :            :   }
+<span class="lineNum">     328 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   modules.clear ();</span>
+<span class="lineNum">     329 </span>                :<span class="lineCov">         90 : }</span>
+<span class="lineNum">     330 </span>                :            : 
+<span class="lineNum">     331 </span>                :            : #if DEBUG
+<span class="lineNum">     332 </span>                :            : // header prefix
+<span class="lineNum">     333 </span>                :            : static const char * def_prefix =
+<span class="lineNum">     334 </span>                :            : &quot;/*\n&quot;
+<span class="lineNum">     335 </span>                :            : &quot; * qucsdefs.h - netlist definitions for the Qucs netlists\n&quot;
+<span class="lineNum">     336 </span>                :            : &quot; *\n&quot;
+<span class="lineNum">     337 </span>                :            : &quot; * This is free software; you can redistribute it and/or modify\n&quot;
+<span class="lineNum">     338 </span>                :            : &quot; * it under the terms of the GNU General Public License as published by\n&quot;
+<span class="lineNum">     339 </span>                :            : &quot; * the Free Software Foundation; either version 2, or (at your option)\n&quot;
+<span class="lineNum">     340 </span>                :            : &quot; * any later version.\n&quot;
+<span class="lineNum">     341 </span>                :            : &quot; * \n&quot;
+<span class="lineNum">     342 </span>                :            : &quot; */\n&quot;
+<span class="lineNum">     343 </span>                :            : &quot;\n&quot;
+<span class="lineNum">     344 </span>                :            : &quot;#ifndef __QUCSDEFS_H__\n&quot;
+<span class="lineNum">     345 </span>                :            : &quot;#define __QUCSDEFS_H__\n&quot;;
+<span class="lineNum">     346 </span>                :            : 
+<span class="lineNum">     347 </span>                :            : // header suffix
+<span class="lineNum">     348 </span>                :            : static const char * def_suffix =
+<span class="lineNum">     349 </span>                :            : &quot;\n&quot;
+<span class="lineNum">     350 </span>                :            : &quot;#endif /* __QUCSDEFS_H__ */\n&quot;;
+<span class="lineNum">     351 </span>                :            : 
+<span class="lineNum">     352 </span>                :            : // start of list of definitions
+<span class="lineNum">     353 </span>                :            : static const char * def_start =
+<span class="lineNum">     354 </span>                :            : &quot;\n&quot;
+<span class="lineNum">     355 </span>                :            : &quot;// List of available components.\n&quot;
+<span class="lineNum">     356 </span>                :            : &quot;struct define_t qucs_definition_available[] =\n&quot;;
+<span class="lineNum">     357 </span>                :            : 
+<span class="lineNum">     358 </span>                :            : // end of list entry
+<span class="lineNum">     359 </span>                :            : static const char * def_stop =
+<span class="lineNum">     360 </span>                :            : &quot;\n&quot;
+<span class="lineNum">     361 </span>                :            : &quot;static struct define_t def_End = {\n&quot;
+<span class="lineNum">     362 </span>                :            : &quot;  ((char *) 0), -1, 1, 0, 0, req_Def, opt_Def };\n&quot;;
+<a name="363"><span class="lineNum">     363 </span>                :            : </a>
+<span class="lineNum">     364 </span>                :            : // Returns a compilable C-code string made from the given string.
+<span class="lineNum">     365 </span>                :<span class="lineCov">      11528 : static char * printstr (const char * str) {</span>
+<span class="lineNum">     366 </span>                :            :   static char txt[256];
+<span class="lineNum">     367 </span>                :<span class="lineCov">      11528 :   int nostr = (str == PROP_NO_STR);</span>
+<span class="lineNum">     368 </span>                :            :   sprintf (txt, &quot;%s%s%s&quot;,
+<span class="lineNum">     369 </span>                :            :            (str &amp;&amp; !nostr) ? &quot;\&quot;&quot; : &quot;&quot;,
+<span class="lineNum">     370 </span>                :            :            str ? nostr ? &quot;((char *) -1)&quot; : str : &quot;((char *) 0)&quot;,
+<span class="lineNum">     371 </span>[<span class="branchCov" title="Branch 0 was taken 7488 times"> + </span><span class="branchCov" title="Branch 1 was taken 4040 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 3845 times"> + </span><span class="branchCov" title="Branch 3 was taken 3643 times"> + </span>]:<span class="lineCov">      11528 :            (str &amp;&amp; !nostr) ? &quot;\&quot;&quot; : &quot;&quot;);</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 7488 times"> + </span><span class="branchCov" title="Branch 5 was taken 4040 times"> + </span>][<span class="branchCov" title="Branch 6 was taken 3845 times"> + </span><span class="branchCov" title="Branch 7 was taken 3643 times"> + </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 8 was taken 7488 times"> + </span><span class="branchCov" title="Branch 9 was taken 4040 times"> + </span>][<span class="branchCov" title="Branch 10 was taken 3845 times"> + </span><span class="branchCov" title="Branch 11 was taken 3643 times"> + </span>]
+<span class="lineNum">     372 </span>                :<span class="lineCov">      11528 :   return txt;</span>
+<span class="lineNum">     373 </span>                :            : }
+<a name="374"><span class="lineNum">     374 </span>                :            : </a>
+<span class="lineNum">     375 </span>                :            : // Prints a property list as compilable C-code.
+<span class="lineNum">     376 </span>                :<span class="lineCov">        314 : static void printprop (const char * type, const char * prefix,</span>
+<span class="lineNum">     377 </span>                :            :                        struct property_t * prop) {
+<span class="lineNum">     378 </span>                :            :   const char * key;
+<span class="lineNum">     379 </span>                :            :   const char ** str;
+<span class="lineNum">     380 </span>                :            :   const char * txt;
+<span class="lineNum">     381 </span>                :<span class="lineCov">        314 :   fprintf (stdout, &quot;static struct property_t %s_%s[] = {\n&quot;, prefix, type);</span>
+<span class="lineNum">     382 </span>        [<span class="branchCov" title="Branch 0 was taken 3412 times"> + </span><span class="branchCov" title="Branch 1 was taken 314 times"> + </span>]:<span class="lineCov">       3726 :   do {</span>
+<span class="lineNum">     383 </span>                :<span class="lineCov">       3726 :     key = prop-&gt;key;</span>
+<span class="lineNum">     384 </span>                :<span class="lineCov">       3726 :     fprintf (stdout, &quot;  { %s, %d, &quot;, printstr (key), prop-&gt;type);</span>
+<span class="lineNum">     385 </span>                :            :     fprintf (stdout, &quot;{ %g, %s }, &quot;, prop-&gt;defaultval.d,
+<span class="lineNum">     386 </span>                :<span class="lineCov">       3726 :              printstr (prop-&gt;defaultval.s));</span>
+<span class="lineNum">     387 </span>                :            :     fprintf (stdout, &quot;{ '%c', %g, %g, '%c',\n&quot;,
+<span class="lineNum">     388 </span>                :<span class="lineCov">       3726 :              prop-&gt;range.il, prop-&gt;range.l, prop-&gt;range.h, prop-&gt;range.ih);</span>
+<span class="lineNum">     389 </span>                :<span class="lineCov">       3726 :     fprintf (stdout, &quot;    {&quot;);</span>
+<span class="lineNum">     390 </span>                :<span class="lineCov">       3726 :     str = prop-&gt;range.str;</span>
+<span class="lineNum">     391 </span>        [<span class="branchCov" title="Branch 0 was taken 193 times"> + </span><span class="branchCov" title="Branch 1 was taken 3726 times"> + </span>]:<span class="lineCov">       3919 :     do {</span>
+<span class="lineNum">     392 </span>                :<span class="lineCov">       3919 :       txt = *str;</span>
+<span class="lineNum">     393 </span>                :<span class="lineCov">       3919 :       fprintf (stdout, &quot; %s&quot;, printstr (txt));</span>
+<span class="lineNum">     394 </span>        [<span class="branchCov" title="Branch 0 was taken 193 times"> + </span><span class="branchCov" title="Branch 1 was taken 3726 times"> + </span>]:<span class="lineCov">       3919 :       if (txt) fprintf (stdout, &quot;,&quot;);</span>
+<span class="lineNum">     395 </span>                :<span class="lineCov">       3919 :       str++;</span>
+<span class="lineNum">     396 </span>                :            :     }
+<span class="lineNum">     397 </span>                :            :     while (txt != NULL);
+<span class="lineNum">     398 </span>                :<span class="lineCov">       3726 :     fprintf (stdout, &quot; } } }&quot;);</span>
+<span class="lineNum">     399 </span>        [<span class="branchCov" title="Branch 0 was taken 3412 times"> + </span><span class="branchCov" title="Branch 1 was taken 314 times"> + </span>]:<span class="lineCov">       3726 :     if (key) fprintf (stdout, &quot;,&quot;);</span>
+<span class="lineNum">     400 </span>                :<span class="lineCov">       3726 :     fprintf (stdout, &quot;\n&quot;);</span>
+<span class="lineNum">     401 </span>                :<span class="lineCov">       3726 :     prop++;</span>
+<span class="lineNum">     402 </span>                :            :   }
+<span class="lineNum">     403 </span>                :            :   while (key != NULL);
+<span class="lineNum">     404 </span>                :<span class="lineCov">        314 :   fprintf (stdout, &quot;};\n&quot;);</span>
+<span class="lineNum">     405 </span>                :<span class="lineCov">        314 : }</span>
+<span class="lineNum">     406 </span>                :            : 
+<a name="407"><span class="lineNum">     407 </span>                :            : /* The function emits a complete list of the registered component</a>
+<span class="lineNum">     408 </span>                :            :    definitions as compilable C-code. */
+<span class="lineNum">     409 </span>                :<span class="lineCov">          1 : void module::print (void) {</span>
+<span class="lineNum">     410 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;%s&quot;, def_prefix);</span>
+<span class="lineNum">     411 </span>                :<span class="lineCov">          1 :   qucs::hashiterator&lt;module&gt; it;</span>
+<span class="lineNum">     412 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 158 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        158 :   for (it = qucs::hashiterator&lt;module&gt; (modules); *it; ++it) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 8 was taken 157 times"> + </span><span class="branchCov" title="Branch 9 was taken 1 time"> + </span>]
+<span class="lineNum">     413 </span>                :<span class="lineCov">        157 :     module * m = it.currentVal ();</span>
+<span class="lineNum">     414 </span>                :<span class="lineCov">        157 :     struct define_t * def = m-&gt;definition;</span>
+<span class="lineNum">     415 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     fprintf (stdout, &quot;\n&quot;);</span>
+<span class="lineNum">     416 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     printprop (def-&gt;type, &quot;req&quot;, def-&gt;required);</span>
+<span class="lineNum">     417 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     fprintf (stdout, &quot;\n&quot;);</span>
+<span class="lineNum">     418 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     printprop (def-&gt;type, &quot;opt&quot;, def-&gt;optional);</span>
+<span class="lineNum">     419 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     fprintf (stdout, &quot;\n&quot;);</span>
+<span class="lineNum">     420 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     fprintf (stdout, &quot;static struct define_t def_%s = {\n&quot;, def-&gt;type);</span>
+<span class="lineNum">     421 </span>                :            :     fprintf (stdout, &quot;  %s, %d, %d, %d, %d, req_%s, opt_%s };\n&quot;,
+<span class="lineNum">     422 </span>                :            :              printstr (def-&gt;type), def-&gt;nodes, def-&gt;action, def-&gt;substrate,
+<span class="lineNum">     423 </span>        [<span class="branchCov" title="Branch 1 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        157 :              def-&gt;nonlinear, def-&gt;type, def-&gt;type);</span>
+<span class="lineNum">     424 </span>                :            :   }
+<span class="lineNum">     425 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;%s&quot;, def_stop);</span>
+<span class="lineNum">     426 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;%s&quot;, def_start);</span>
+<span class="lineNum">     427 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;{\n&quot;);</span>
+<span class="lineNum">     428 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 158 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">        158 :   for (it = qucs::hashiterator&lt;module&gt; (modules); *it; ++it) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 8 was taken 157 times"> + </span><span class="branchCov" title="Branch 9 was taken 1 time"> + </span>]
+<span class="lineNum">     429 </span>                :<span class="lineCov">        157 :     module * m = it.currentVal ();</span>
+<span class="lineNum">     430 </span>                :<span class="lineCov">        157 :     struct define_t * def = m-&gt;definition;</span>
+<span class="lineNum">     431 </span>        [<span class="branchCov" title="Branch 0 was taken 157 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        157 :     fprintf (stdout, &quot;  def_%s,\n&quot;, def-&gt;type);</span>
+<span class="lineNum">     432 </span>                :            :   }
+<span class="lineNum">     433 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;  def_End\n&quot;);</span>
+<span class="lineNum">     434 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;};\n&quot;);</span>
+<span class="lineNum">     435 </span>        [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          1 :   fprintf (stdout, &quot;%s&quot;, def_suffix);</span>
+<span class="lineNum">     436 </span>                :<span class="lineCov">          1 : }</span>
+<span class="lineNum">     437 </span>                :            : #endif /* DEBUG */
+<span class="lineNum">     438 </span>                :            : 
+<a name="439"><span class="lineNum">     439 </span>                :            : </a>
+<span class="lineNum">     440 </span>                :            : // look for dynamic libs, load and register them
+<span class="lineNum">     441 </span>                :<span class="lineCov">         90 : void module::registerDynamicModules (char *proj, std::list&lt;std::string&gt; modlist)</span>
+<span class="lineNum">     442 </span>                :            : {
+<span class="lineNum">     443 </span>                :            : /* How it is (WAS) supposed to work:
+<span class="lineNum">     444 </span>                :            :  * 1) It will list the working directory contents looking for libraries
+<span class="lineNum">     445 </span>                :            :  * 2) It will try to open each library and put its handle into a list
+<span class="lineNum">     446 </span>                :            :  *   - Just by opening the lib it will already populate the factorycreate and factorydef
+<span class="lineNum">     447 </span>                :            :  * 3) The factory is iterated to create new modules and add them to the global hash
+<span class="lineNum">     448 </span>                :            :  *
+<span class="lineNum">     449 </span>                :            :  * TODO:
+<span class="lineNum">     450 </span>                :            :  *   - Add destructor for loaded objects
+<span class="lineNum">     451 </span>                :            :  *   - Add other methods to find the libraries
+<span class="lineNum">     452 </span>                :            :  *
+<span class="lineNum">     453 </span>                :            :  * Update
+<span class="lineNum">     454 </span>                :            :  *  * project path is passed as paramter
+<span class="lineNum">     455 </span>                :            :  *  * module names are passed as parameter
+<span class="lineNum">     456 </span>                :            : */
+<span class="lineNum">     457 </span>                :            : 
+<span class="lineNum">     458 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   fprintf(stdout,&quot;project location: %s\n&quot;, proj);</span>
+<span class="lineNum">     459 </span>        [<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         90 :   fprintf(stdout,&quot;modules to load: %lu\n&quot;, modlist.size());</span>
+<span class="lineNum">     460 </span>                :            : 
+<span class="lineNum">     461 </span>                :<span class="lineCov">         90 :   std::list&lt;std::string&gt;::iterator it;</span>
+<span class="lineNum">     462 </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   for (it=modlist.begin(); it!=modlist.end(); ++it) {</span>
+<span class="lineNum">     463 </span>                :            : 
+<span class="lineNum">     464 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     std::string absPathLib = proj;</span>
+<span class="lineNum">     465 </span>                :            : 
+<span class="lineNum">     466 </span>                :            : #ifdef __APPLE__
+<span class="lineNum">     467 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     absPathLib = absPathLib + &quot;/&quot; + *it + &quot;.dylib&quot;;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>]
+<span class="lineNum">     468 </span>                :            : #endif
+<span class="lineNum">     469 </span>                :            : #ifdef __linux__
+<span class="lineNum">     470 </span>                :            :   absPathLib = absPathLib + &quot;/&quot; + *it + &quot;.so&quot;;
+<span class="lineNum">     471 </span>                :            : #endif
+<span class="lineNum">     472 </span>                :            : #ifdef __MINGW32__
+<span class="lineNum">     473 </span>                :            :   absPathLib = absPathLib + &quot;\\&quot; + *it + &quot;.dll&quot;;
+<span class="lineNum">     474 </span>                :            : #endif
+<span class="lineNum">     475 </span>                :            : 
+<span class="lineNum">     476 </span>                :            :     // which lib is going to be loaded
+<span class="lineNum">     477 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     fprintf( stdout, &quot;try loading %s\n&quot;, absPathLib.c_str() );</span>
+<span class="lineNum">     478 </span>                :            : 
+<span class="lineNum">     479 </span>                :            : #if __MINGW32__
+<span class="lineNum">     480 </span>                :            :     // Load the DLL
+<span class="lineNum">     481 </span>                :            :     HINSTANCE dlib = ::LoadLibrary(TEXT(absPathLib.c_str()));
+<span class="lineNum">     482 </span>                :            :     if (!dlib) {
+<span class="lineNum">     483 </span>                :            :         std::cerr &lt;&lt; &quot;Unable to load DLL!\n&quot;;
+<span class="lineNum">     484 </span>                :            :         exit(-1);
+<span class="lineNum">     485 </span>                :            :     }
+<span class="lineNum">     486 </span>                :            : #else //Linux and OSX
+<span class="lineNum">     487 </span>                :            :     // for some reason the RTLD_NOW alones makes dlopen
+<span class="lineNum">     488 </span>                :            :     // stick with the name (content) of the first loaded library
+<span class="lineNum">     489 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     void* dlib = dlopen(absPathLib.c_str(), RTLD_NOW|RTLD_LOCAL);</span>
+<span class="lineNum">     490 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if(dlib == NULL){</span>
+<span class="lineNum">     491 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       std::cerr &lt;&lt; dlerror() &lt;&lt; std::endl;</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     492 </span>                :<span class="lineNoCov">          0 :       exit(-1);</span>
+<span class="lineNum">     493 </span>                :            :     }
+<span class="lineNum">     494 </span>                :            : #endif
+<span class="lineNum">     495 </span>                :            : 
+<span class="lineNum">     496 </span>                :            :     // add the handle to our list
+<span class="lineNum">     497 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     dl_list.insert(dl_list.end(), dlib);</span>
+<span class="lineNum">     498 </span>                :            : 
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 :   }</span>
+<span class="lineNum">     500 </span>                :            : 
+<span class="lineNum">     501 </span>                :            :   // report on factorycreate
+<span class="lineNum">     502 </span>[<span class="branchCov" title="Branch 1 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         90 :   std::cout &lt;&lt; &quot;factorycreate.size() is &quot; &lt;&lt; factorycreate.size() &lt;&lt; '\n';</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 7 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     503 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   std::cout &lt;&lt; &quot;factorycreate has registered:&quot;;</span>
+<span class="lineNum">     504 </span>                :            : 
+<span class="lineNum">     505 </span>                :            :   // print map key names/registered objects into factory
+<span class="lineNum">     506 </span>                :<span class="lineCov">         90 :   std::map&lt;std::string, creator_t *, std::less&lt;std::string&gt; &gt;::iterator fitr;</span>
+<span class="lineNum">     507 </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   for (fitr=factorycreate.begin(); fitr!=factorycreate.end(); ++fitr)</span>
+<span class="lineNum">     508 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     std::cout &lt;&lt; ' ' &lt;&lt; fitr-&gt;first;</span>
+<span class="lineNum">     509 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   std::cout &lt;&lt; '\n';</span>
+<span class="lineNum">     510 </span>                :            : 
+<span class="lineNum">     511 </span>                :            :   // loop again over registered keys in factory and register into hash
+<span class="lineNum">     512 </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   for (fitr=factorycreate.begin(); fitr!=factorycreate.end(); ++fitr) {</span>
+<span class="lineNum">     513 </span>                :            : 
+<span class="lineNum">     514 </span>                :            :     // fetch creator and definition by key name from factories
+<span class="lineNum">     515 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     circuit_creator_t mycreate = factorycreate[fitr-&gt;first];</span>
+<span class="lineNum">     516 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :     define_t *mydefine = factorydef[fitr-&gt;first]();</span>
+<span class="lineNum">     517 </span>                :            : 
+<span class="lineNum">     518 </span>                :            :     /*
+<span class="lineNum">     519 </span>                :            :     printf(&quot;\n  type: %s\n&quot;,mydefine-&gt;type );
+<span class="lineNum">     520 </span>                :            :     printf(&quot;  nodes: %i\n&quot;,mydefine-&gt;nodes );
+<span class="lineNum">     521 </span>                :            :     printf(&quot;  action: %i\n&quot;,mydefine-&gt;action );
+<span class="lineNum">     522 </span>                :            :     printf(&quot;  required-&gt;key: %s\n&quot;,mydefine-&gt;required-&gt;key);
+<span class="lineNum">     523 </span>                :            :     */
+<span class="lineNum">     524 </span>                :            : 
+<span class="lineNum">     525 </span>                :            :     // modified registerModule to register dynamic loaded modules
+<span class="lineNum">     526 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     module * m = new module ();</span>
+<span class="lineNum">     527 </span>                :<span class="lineNoCov">          0 :     m-&gt;circreate = mycreate;</span>
+<span class="lineNum">     528 </span>                :<span class="lineNoCov">          0 :     m-&gt;definition = mydefine;</span>
+<span class="lineNum">     529 </span>                :            : 
+<span class="lineNum">     530 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (modules.get ((char *) mydefine-&gt;type) != NULL) {</span>
+<span class="lineNum">     531 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       logprint (LOG_ERROR, &quot;load module already registered: %s\n&quot;, mydefine-&gt;type);</span>
+<span class="lineNum">     532 </span>                :            :     }
+<span class="lineNum">     533 </span>                :            :     else {
+<span class="lineNum">     534 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       modules.put ((char *) mydefine-&gt;type, m);</span>
+<span class="lineNum">     535 </span>                :            :     }
+<span class="lineNum">     536 </span>                :            :   }
+<span class="lineNum">     537 </span>                :            : 
+<span class="lineNum">     538 </span>                :            :   // print registered components
+<span class="lineNum">     539 </span>                :            :   /*
+<span class="lineNum">     540 </span>                :            :   qucs::hashiterator&lt;module&gt; it;
+<span class="lineNum">     541 </span>                :            :   for (it = qucs::hashiterator&lt;module&gt; (module::modules); *it; ++it) {
+<span class="lineNum">     542 </span>                :            :     module * m = it.currentVal ();
+<span class="lineNum">     543 </span>                :            :     struct define_t * def = m-&gt;definition;
+<span class="lineNum">     544 </span>                :            :     printf(&quot;\n&quot; );
+<span class="lineNum">     545 </span>                :            :     printf(&quot;type: %s\n&quot;,def-&gt;type );
+<span class="lineNum">     546 </span>                :            :     printf(&quot;\n&quot; );
+<span class="lineNum">     547 </span>                :            :   }
+<span class="lineNum">     548 </span>                :            :   */
+<span class="lineNum">     549 </span>                :            : 
+<span class="lineNum">     550 </span>                :<span class="lineCov">         90 : }</span>
+<a name="551"><span class="lineNum">     551 </span>                :            : </a>
+<span class="lineNum">     552 </span>                :            : // Close all the dynamic libs if any opened
+<span class="lineNum">     553 </span>                :<span class="lineCov">         90 : void module::closeDynamicLibs()</span>
+<span class="lineNum">     554 </span>                :            : {
+<span class="lineNum">     555 </span>        [<span class="branchNoCov" title="Branch 4 was not taken"> - </span><span class="branchCov" title="Branch 5 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   for(itr=dl_list.begin(); itr!=dl_list.end(); itr++){</span>
+<span class="lineNum">     556 </span>                :            : #if __MINGW32__
+<span class="lineNum">     557 </span>                :            :     FreeLibrary(*itr);
+<span class="lineNum">     558 </span>                :            : #else
+<span class="lineNum">     559 </span>                :<span class="lineNoCov">          0 :     dlclose(*itr);</span>
+<a name="560"><span class="lineNum">     560 </span>                :            : #endif</a>
+<span class="lineNum">     561 </span>                :            :   }
+<span class="lineNum">     562 </span>[<span class="branchCov" title="Branch 1 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 94 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        372 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

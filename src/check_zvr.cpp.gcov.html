@@ -1,0 +1,358 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/check_zvr.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - check_zvr.cpp<span style="font-size: 80%;"> (source / <a href="check_zvr.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">129</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">128</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * check_zvr.cpp - iterate a zvr file
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2006, 2007 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;float.h&gt;
+<span class="lineNum">      35 </span>                :            : #include &lt;ctype.h&gt;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : #include &quot;strlist.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;vector.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;dataset.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;constants.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;check_zvr.h&quot;
+<span class="lineNum">      44 </span>                :            : 
+<span class="lineNum">      45 </span>                :            : using namespace qucs;
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :            : // Global variables.
+<span class="lineNum">      48 </span>                :            : dataset * zvr_result = NULL;
+<span class="lineNum">      49 </span>                :            : struct zvr_data_t * zvr_root = NULL;
+<a name="50"><span class="lineNum">      50 </span>                :            : </a>
+<span class="lineNum">      51 </span>                :            : // Creates a valid data vector description.
+<span class="lineNum">      52 </span>                :<span class="lineNoCov">          0 : static char * zvr_vector_txt (struct zvr_vector_t * vec) {</span>
+<span class="lineNum">      53 </span>                :<span class="lineNoCov">          0 :   int i, i1 = -1, i2 = -1, off = 0, len = strlen (vec-&gt;n1);</span>
+<span class="lineNum">      54 </span>                :            :   static char txt[64];
+<span class="lineNum">      55 </span>                :            :   // strip off leading 're' or 'im'
+<span class="lineNum">      56 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (strstr (vec-&gt;n1, &quot;re&quot;) == vec-&gt;n1 ||</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :       strstr (vec-&gt;n1, &quot;im&quot;) == vec-&gt;n1 ||</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 :       strstr (vec-&gt;n1, &quot;db&quot;) == vec-&gt;n1) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :     off = 2;</span>
+<span class="lineNum">      60 </span>                :            :   }
+<span class="lineNum">      61 </span>                :            :   // strip off leading 'mag' or 'ang'
+<span class="lineNum">      62 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (strstr (vec-&gt;n1, &quot;mag&quot;) == vec-&gt;n1 ||</span>
+<span class="lineNum">      63 </span>                :<span class="lineNoCov">          0 :            strstr (vec-&gt;n1, &quot;ang&quot;) == vec-&gt;n1) {</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :     off = 3;</span>
+<span class="lineNum">      65 </span>                :            :   }
+<span class="lineNum">      66 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (i = off; i &lt; len; i++) if (!isalpha (vec-&gt;n1[i])) break;</span>
+<span class="lineNum">      67 </span>                :            :   // get index 1
+<span class="lineNum">      68 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (i &lt; len) {</span>
+<span class="lineNum">      69 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (isdigit (vec-&gt;n1[i])) { i1 = vec-&gt;n1[i] - '0'; vec-&gt;n1[i] = '\0'; }</span>
+<span class="lineNum">      70 </span>                :            :   }
+<span class="lineNum">      71 </span>                :            :   // get index 2
+<span class="lineNum">      72 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (++i &lt; len) {</span>
+<span class="lineNum">      73 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (isdigit (vec-&gt;n1[i])) { i2 = vec-&gt;n1[i] - '0'; vec-&gt;n1[i] = '\0'; }</span>
+<span class="lineNum">      74 </span>                :            :   }
+<span class="lineNum">      75 </span>                :            :   // create vector description
+<span class="lineNum">      76 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (i1 &gt;= 0 &amp;&amp; i2 &gt;= 0) {</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 :     sprintf (txt, &quot;%s[%d,%d]&quot;, &amp;vec-&gt;n1[off], i1, i2);</span>
+<span class="lineNum">      78 </span>                :            :   }
+<span class="lineNum">      79 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (i1 &gt;= 0) {</span>
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :     sprintf (txt, &quot;%s[%d]&quot;, &amp;vec-&gt;n1[off], i1);</span>
+<span class="lineNum">      81 </span>                :            :   }
+<span class="lineNum">      82 </span>                :            :   else {
+<span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 :     sprintf (txt, &quot;%s&quot;, &amp;vec-&gt;n1[off]);</span>
+<span class="lineNum">      84 </span>                :            :   }
+<span class="lineNum">      85 </span>                :<span class="lineNoCov">          0 :   return txt;</span>
+<span class="lineNum">      86 </span>                :            : }
+<a name="87"><span class="lineNum">      87 </span>                :            : </a>
+<span class="lineNum">      88 </span>                :            : // The function free's the memory used by the ZVR checker.
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 : static void zvr_finalize (void) {</span>
+<span class="lineNum">      90 </span>                :            :   struct zvr_data_t * root, * next;
+<span class="lineNum">      91 </span>                :            :   // go through each dataset
+<span class="lineNum">      92 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = zvr_root; root; root = next) {</span>
+<span class="lineNum">      93 </span>                :<span class="lineNoCov">          0 :     struct zvr_vector_t * vec = root-&gt;v;</span>
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 :     struct zvr_header_t * hdr = root-&gt;h;</span>
+<span class="lineNum">      95 </span>                :<span class="lineNoCov">          0 :     next = root-&gt;next;</span>
+<span class="lineNum">      96 </span>                :            :     // free each data line
+<span class="lineNum">      97 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (root-&gt;d) {</span>
+<span class="lineNum">      98 </span>                :            :       struct zvr_line_t * rl, * nl;
+<span class="lineNum">      99 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (rl = root-&gt;d; rl; rl = nl) {</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :         nl = rl-&gt;next;</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :         free (rl);</span>
+<span class="lineNum">     102 </span>                :            :       }
+<span class="lineNum">     103 </span>                :            :     }
+<span class="lineNum">     104 </span>                :            :     // free header
+<span class="lineNum">     105 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (hdr) {</span>
+<span class="lineNum">     106 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (hdr-&gt;funit) free (hdr-&gt;funit);</span>
+<span class="lineNum">     107 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (hdr-&gt;d_UNT) free (hdr-&gt;d_UNT);</span>
+<span class="lineNum">     108 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (hdr-&gt;d_FMT) free (hdr-&gt;d_FMT);</span>
+<span class="lineNum">     109 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (hdr-&gt;d_TYP) free (hdr-&gt;d_TYP);</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :       free (hdr);</span>
+<span class="lineNum">     111 </span>                :            :     }
+<span class="lineNum">     112 </span>                :            :     // free data vector
+<span class="lineNum">     113 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (vec) {</span>
+<span class="lineNum">     114 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (vec-&gt;nf) free (vec-&gt;nf);</span>
+<span class="lineNum">     115 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (vec-&gt;n1) free (vec-&gt;n1);</span>
+<span class="lineNum">     116 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (vec-&gt;n2) free (vec-&gt;n2);</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :       free (vec);</span>
+<span class="lineNum">     118 </span>                :            :     }
+<span class="lineNum">     119 </span>                :            :   }
+<span class="lineNum">     120 </span>                :<span class="lineNoCov">          0 :   zvr_root = NULL;</span>
+<span class="lineNum">     121 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="122"><span class="lineNum">     122 </span>                :            : </a>
+<span class="lineNum">     123 </span>                :            : // Create a dependency string list.
+<span class="lineNum">     124 </span>                :<span class="lineNoCov">          0 : static strlist * zvr_create_dep (char * n) {</span>
+<span class="lineNum">     125 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   strlist * dep = new strlist ();</span>
+<span class="lineNum">     126 </span>                :<span class="lineNoCov">          0 :   dep-&gt;add (n);</span>
+<span class="lineNum">     127 </span>                :<span class="lineNoCov">          0 :   return dep;</span>
+<span class="lineNum">     128 </span>                :            : }
+<a name="129"><span class="lineNum">     129 </span>                :            : </a>
+<span class="lineNum">     130 </span>                :            : // Handles the dependency vectors.
+<span class="lineNum">     131 </span>                :<span class="lineNoCov">          0 : static void zvr_check_dependencies (void) {</span>
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :   vector * dep1 = zvr_result-&gt;getDependencies ();</span>
+<span class="lineNum">     133 </span>                :<span class="lineNoCov">          0 :   vector * depn = (vector *) dep1-&gt;getNext ();</span>
+<span class="lineNum">     134 </span>                :            :   bool equal;
+<span class="lineNum">     135 </span>                :            : 
+<span class="lineNum">     136 </span>                :            :   // check for differing dependency vectors
+<span class="lineNum">     137 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (equal = true; depn != NULL; depn = (vector *) depn-&gt;getNext ()) {</span>
+<span class="lineNum">     138 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (depn-&gt;getSize () != dep1-&gt;getSize ()) {</span>
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :       equal = false; // differs in size</span>
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :       break;</span>
+<span class="lineNum">     141 </span>                :            :     } else {
+<span class="lineNum">     142 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (int i = 0; i &lt; depn-&gt;getSize (); i++) {</span>
+<span class="lineNum">     143 </span>        [<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :         if (depn-&gt;get (i) != dep1-&gt;get (i)) {</span>
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :           equal = false; // differs in content</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :           break;</span>
+<span class="lineNum">     146 </span>                :            :         }
+<span class="lineNum">     147 </span>                :            :       }
+<span class="lineNum">     148 </span>                :            :     }
+<span class="lineNum">     149 </span>                :            :   }
+<span class="lineNum">     150 </span>                :            : 
+<span class="lineNum">     151 </span>                :            :   // all dependency vectors equal
+<span class="lineNum">     152 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (equal) {</span>
+<span class="lineNum">     153 </span>                :            :     vector * ndep;
+<span class="lineNum">     154 </span>                :            :     // delete unnecessary vectors
+<span class="lineNum">     155 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (depn = (vector *) dep1-&gt;getNext (); depn != NULL; depn = ndep) {</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :       ndep = (vector *) depn-&gt;getNext ();</span>
+<span class="lineNum">     157 </span>                :<span class="lineNoCov">          0 :       zvr_result-&gt;delDependency (depn);</span>
+<span class="lineNum">     158 </span>                :            :     }
+<span class="lineNum">     159 </span>                :            :   }
+<span class="lineNum">     160 </span>                :            :   // at least one dependency vectors not equal
+<span class="lineNum">     161 </span>                :            :   else {
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :     vector * depn = zvr_result-&gt;getDependencies ();</span>
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :     vector * varn = zvr_result-&gt;getVariables ();</span>
+<span class="lineNum">     164 </span>                :<span class="lineNoCov">          0 :     char txt[64]; int i = 1;</span>
+<span class="lineNum">     165 </span>                :            :     // change name of dependency vectors as well as the dependency
+<span class="lineNum">     166 </span>                :            :     // reference in the appropriate variable vectors
+<span class="lineNum">     167 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     while (depn != NULL &amp;&amp; varn != NULL) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :       sprintf (txt, &quot;%s.%d&quot;, depn-&gt;getName (), i);</span>
+<span class="lineNum">     169 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       depn-&gt;setName (txt);</span>
+<span class="lineNum">     170 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       varn-&gt;setDependencies (zvr_create_dep (txt));</span>
+<span class="lineNum">     171 </span>                :<span class="lineNoCov">          0 :       depn = (vector *) depn-&gt;getNext ();</span>
+<span class="lineNum">     172 </span>                :<span class="lineNoCov">          0 :       varn = (vector *) varn-&gt;getNext ();</span>
+<span class="lineNum">     173 </span>                :<span class="lineNoCov">          0 :       i++;</span>
+<span class="lineNum">     174 </span>                :            :     }
+<span class="lineNum">     175 </span>                :            :   }
+<span class="lineNum">     176 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="177"><span class="lineNum">     177 </span>                :            : </a>
+<span class="lineNum">     178 </span>                :            : // The function performs the data conversion if necessary.
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 : static void zvr_conversion (struct zvr_data_t * root) {</span>
+<span class="lineNum">     180 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (; root != NULL; root = root-&gt;next) {</span>
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :     struct zvr_vector_t * vec = root-&gt;v;</span>
+<span class="lineNum">     182 </span>                :<span class="lineNoCov">          0 :     struct zvr_header_t * hdr = root-&gt;h;</span>
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 :     vector * var = vec-&gt;vd; int n;</span>
+<span class="lineNum">     184 </span>                :            :     // magnitude in [dB] and angle in [degree]
+<span class="lineNum">     185 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (!strcmp (hdr-&gt;d_FMT, &quot;COMPLEX&quot;) &amp;&amp; !strcmp (hdr-&gt;d_UNT, &quot;dB&quot;)) {</span>
+<span class="lineNum">     186 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (n = 0; n &lt; var-&gt;getSize (); n++) {</span>
+<span class="lineNum">     187 </span>                :<span class="lineNoCov">          0 :         nr_double_t r = real (var-&gt;get (n));</span>
+<span class="lineNum">     188 </span>                :<span class="lineNoCov">          0 :         nr_double_t i = imag (var-&gt;get (n));</span>
+<span class="lineNum">     189 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         var-&gt;set (std::polar (std::pow (10.0, r / 20.0), rad (i)), n);</span>
+<span class="lineNum">     190 </span>                :<span class="lineNoCov">          0 :       }</span>
+<span class="lineNum">     191 </span>                :            :     }
+<span class="lineNum">     192 </span>                :            :     // magnitude in [dB]
+<span class="lineNum">     193 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (!strcmp (hdr-&gt;d_FMT, &quot;MAGNITUDE&quot;) &amp;&amp; !strcmp (hdr-&gt;d_UNT, &quot;dB&quot;)) {</span>
+<span class="lineNum">     194 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (n = 0; n &lt; var-&gt;getSize (); n++) {</span>
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 :         nr_double_t r = real (var-&gt;get (n));</span>
+<span class="lineNum">     196 </span>                :<span class="lineNoCov">          0 :         var-&gt;set (std::pow (10.0, r / 20.0), n);</span>
+<span class="lineNum">     197 </span>                :<span class="lineNoCov">          0 :       }</span>
+<span class="lineNum">     198 </span>                :            :     }
+<span class="lineNum">     199 </span>                :            :     // linear magnitude and angle in [degree]
+<span class="lineNum">     200 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (!strcmp (hdr-&gt;d_FMT, &quot;MA&quot;)) {</span>
+<span class="lineNum">     201 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (n = 0; n &lt; var-&gt;getSize (); n++) {</span>
+<span class="lineNum">     202 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         nr_double_t r = real (var-&gt;get (n));</span>
+<span class="lineNum">     203 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :         nr_double_t i = imag (var-&gt;get (n));</span>
+<span class="lineNum">     204 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         var-&gt;set (std::polar (r, rad (i)), n);</span>
+<span class="lineNum">     205 </span>                :            :       }
+<span class="lineNum">     206 </span>                :            :     }
+<span class="lineNum">     207 </span>                :            :     // magnitude in [dB] and angle in [degree]
+<span class="lineNum">     208 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (!strcmp (hdr-&gt;d_FMT, &quot;DB&quot;)) {</span>
+<span class="lineNum">     209 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (n = 0; n &lt; var-&gt;getSize (); n++) {</span>
+<span class="lineNum">     210 </span>                :<span class="lineNoCov">          0 :         nr_double_t r = real (var-&gt;get (n));</span>
+<span class="lineNum">     211 </span>                :<span class="lineNoCov">          0 :         nr_double_t i = imag (var-&gt;get (n));</span>
+<span class="lineNum">     212 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         var-&gt;set (std::polar (std::pow (10.0, r / 20.0), rad (i)), n);</span>
+<span class="lineNum">     213 </span>                :            :       }
+<span class="lineNum">     214 </span>                :            :     }
+<span class="lineNum">     215 </span>                :            :   }
+<span class="lineNum">     216 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     217 </span>                :            : 
+<a name="218"><span class="lineNum">     218 </span>                :            : /* This function is the overall ZVR data checker.  It returns zero on</a>
+<span class="lineNum">     219 </span>                :            :    success, non-zero otherwise. */
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 : int zvr_check (void) {</span>
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 :   int errors = 0;</span>
+<span class="lineNum">     222 </span>                :            :   struct zvr_data_t * root;
+<span class="lineNum">     223 </span>                :            : 
+<span class="lineNum">     224 </span>                :            :   // create a dataset
+<span class="lineNum">     225 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   zvr_result = new dataset ();</span>
+<span class="lineNum">     226 </span>                :            : 
+<span class="lineNum">     227 </span>                :            :   // transfer ZVR tree data into the dataset
+<span class="lineNum">     228 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (root = zvr_root; root; root = root-&gt;next) {</span>
+<span class="lineNum">     229 </span>                :<span class="lineNoCov">          0 :     struct zvr_vector_t * vec = root-&gt;v;</span>
+<span class="lineNum">     230 </span>                :<span class="lineNoCov">          0 :     vec-&gt;vi-&gt;setName (vec-&gt;nf);</span>
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :     vec-&gt;vd-&gt;setName (zvr_vector_txt (vec));</span>
+<span class="lineNum">     232 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (struct zvr_line_t * line = root-&gt;d; line; line = line-&gt;next) {</span>
+<span class="lineNum">     233 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       vec-&gt;vi-&gt;add (line-&gt;d);</span>
+<span class="lineNum">     234 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       vec-&gt;vd-&gt;add (nr_complex_t (line-&gt;r, line-&gt;i));</span>
+<span class="lineNum">     235 </span>                :            :     }
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :     vec-&gt;vd-&gt;setDependencies (zvr_create_dep (vec-&gt;nf));</span>
+<span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 :     zvr_result-&gt;appendDependency (vec-&gt;vi);</span>
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 :     zvr_result-&gt;appendVariable (vec-&gt;vd);</span>
+<span class="lineNum">     239 </span>                :            :   }
+<span class="lineNum">     240 </span>                :            : 
+<span class="lineNum">     241 </span>                :            :   // handle dependency vectors
+<span class="lineNum">     242 </span>                :<span class="lineNoCov">          0 :   zvr_check_dependencies ();</span>
+<span class="lineNum">     243 </span>                :            : 
+<span class="lineNum">     244 </span>                :            :   // perform data conversions
+<span class="lineNum">     245 </span>                :<span class="lineNoCov">          0 :   zvr_conversion (zvr_root);</span>
+<span class="lineNum">     246 </span>                :            : 
+<span class="lineNum">     247 </span>                :            :   // free temporary memory
+<span class="lineNum">     248 </span>                :<span class="lineNoCov">          0 :   zvr_finalize ();</span>
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 :   zvr_root = NULL;</span>
+<span class="lineNum">     250 </span>                :            : 
+<span class="lineNum">     251 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return errors ? -1 : 0;</span>
+<span class="lineNum">     252 </span>                :            : }
+<a name="253"><span class="lineNum">     253 </span>                :            : </a>
+<span class="lineNum">     254 </span>                :            : // Destroys data used by the ZVR checker.
+<span class="lineNum">     255 </span>                :<span class="lineNoCov">          0 : void zvr_destroy (void) {</span>
+<span class="lineNum">     256 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (zvr_result != NULL) {</span>
+<span class="lineNum">     257 </span>                :            :     // delete associated dataset
+<span class="lineNum">     258 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete zvr_result;</span>
+<span class="lineNum">     259 </span>                :<span class="lineNoCov">          0 :     zvr_result = NULL;</span>
+<span class="lineNum">     260 </span>                :            :   }
+<span class="lineNum">     261 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (zvr_root != NULL) {</span>
+<span class="lineNum">     262 </span>                :<span class="lineNoCov">          0 :     zvr_finalize ();</span>
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 :     zvr_root = NULL;</span>
+<span class="lineNum">     264 </span>                :            :   }
+<span class="lineNum">     265 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="266"><span class="lineNum">     266 </span>                :            : </a>
+<span class="lineNum">     267 </span>                :            : // Initializes the ZVR checker.
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 : void zvr_init (void) {</span>
+<span class="lineNum">     269 </span>                :<span class="lineNoCov">          0 :   zvr_result = NULL;</span>
+<span class="lineNum">     270 </span>                :<span class="lineNoCov">          0 :   zvr_root = NULL;</span>
+<span class="lineNum">     271 </span>                :<span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/circuit.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - circuit.cpp<span style="font-size: 80%;"> (source / <a href="circuit.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">268</td>
+            <td class="headerCovTableEntry">507</td>
+            <td class="headerCovTableEntryLo">52.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntry">105</td>
+            <td class="headerCovTableEntryLo">61.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">145</td>
+            <td class="headerCovTableEntry">402</td>
+            <td class="headerCovTableEntryLo">36.1 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * circuit.cpp - circuit class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2005, 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;matrix.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;node.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;property.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;valuelist.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;tvector.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;history.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;circuit.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;microstrip/substrate.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;operatingpoint.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;characteristic.h&quot;
+<span class="lineNum">      47 </span>                :            : #include &quot;component_id.h&quot;
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : namespace qucs {
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : // normalising impedance
+<span class="lineNum">      52 </span>                :            : const nr_double_t circuit::z0 = 50.0;
+<a name="53"><span class="lineNum">      53 </span>                :            : </a>
+<span class="lineNum">      54 </span>                :            : // Constructor creates an unnamed instance of the circuit class.
+<span class="lineNum">      55 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]:<span class="lineNoCov">          0 : circuit::circuit () : object (), integrator () {</span>
+<span class="lineNum">      56 </span>                :<span class="lineNoCov">          0 :   size = 0;</span>
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :   MatrixN = MatrixS = MatrixY = NULL;</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 :   MatrixB = MatrixC = MatrixD = NULL;</span>
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :   VectorQ = VectorE = VectorI = VectorV = VectorJ = NULL;</span>
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 :   MatrixQV = NULL;</span>
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 :   VectorCV = VectorGV = NULL;</span>
+<span class="lineNum">      62 </span>                :<span class="lineNoCov">          0 :   nodes = NULL;</span>
+<span class="lineNum">      63 </span>                :<span class="lineNoCov">          0 :   pacport = 0;</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :   pol = 1;</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :   flag = CIRCUIT_ORIGINAL | CIRCUIT_LINEAR;</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :   subst = NULL;</span>
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :   vsource = -1;</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :   vsources = 0;</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :   nsources = 0;</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :   inserted = -1;</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :   subcircuit = NULL;</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :   subnet = NULL;</span>
+<span class="lineNum">      73 </span>                :<span class="lineNoCov">          0 :   deltas = NULL;</span>
+<span class="lineNum">      74 </span>                :<span class="lineNoCov">          0 :   histories = NULL;</span>
+<span class="lineNum">      75 </span>                :<span class="lineNoCov">          0 :   nHistories = 0;</span>
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 :   type = CIR_UNKNOWN;</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      78 </span>                :            : 
+<a name="79"><span class="lineNum">      79 </span>                :            : /* Constructor creates an unnamed instance of the circuit class with a</a>
+<span class="lineNum">      80 </span>                :            :    certain number of ports. */
+<span class="lineNum">      81 </span>[<span class="branchCov" title="Branch 1 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 12 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]:<span class="lineCov">     125862 : circuit::circuit (int s) : object (), integrator () {</span>
+<span class="lineNum">      82 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 124675 times"> + </span>][<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 1187 times"> + </span>]:<span class="lineCov">     125862 :   assert (s &gt;= 0);</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">     125862 :   size = s;</span>
+<span class="lineNum">      84 </span>[<span class="branchCov" title="Branch 0 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     474074 :   if (size &gt; 0) nodes = new node[s];</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 345614 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>][<span class="branchCov" title="Branch 8 was taken 345614 times"> + </span><span class="branchCov" title="Branch 9 was taken 124675 times"> + </span>]
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 16 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 17 was not taken"> - </span>][<span class="branchCov" title="Branch 18 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 19 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 21 was taken 2598 times"> + </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span>][<span class="branchCov" title="Branch 24 was taken 2598 times"> + </span><span class="branchCov" title="Branch 25 was taken 1187 times"> + </span>]
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 26 was not executed"> # </span><span class="branchNoExec" title="Branch 27 was not executed"> # </span><span class="branchNoExec" title="Branch 28 was not executed"> # </span><span class="branchNoExec" title="Branch 29 was not executed"> # </span>]
+<span class="lineNum">      85 </span>                :<span class="lineCov">     125862 :   MatrixN = MatrixS = MatrixY = NULL;</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">     125862 :   MatrixB = MatrixC = MatrixD = NULL;</span>
+<span class="lineNum">      87 </span>                :<span class="lineCov">     125862 :   VectorQ = VectorE = VectorI = VectorV = VectorJ = NULL;</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">     125862 :   MatrixQV = NULL;</span>
+<span class="lineNum">      89 </span>                :<span class="lineCov">     125862 :   VectorCV = VectorGV = NULL;</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">     125862 :   pacport = 0;</span>
+<span class="lineNum">      91 </span>                :<span class="lineCov">     125862 :   pol = 1;</span>
+<span class="lineNum">      92 </span>                :<span class="lineCov">     125862 :   flag = CIRCUIT_ORIGINAL | CIRCUIT_LINEAR;</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">     125862 :   subst = NULL;</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">     125862 :   vsource = -1;</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">     125862 :   vsources = 0;</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">     125862 :   nsources = 0;</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">     125862 :   inserted = -1;</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">     125862 :   subcircuit = NULL;</span>
+<span class="lineNum">      99 </span>                :<span class="lineCov">     125862 :   subnet = NULL;</span>
+<span class="lineNum">     100 </span>                :<span class="lineCov">     125862 :   deltas = NULL;</span>
+<span class="lineNum">     101 </span>                :<span class="lineCov">     125862 :   histories = NULL;</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">     125862 :   nHistories = 0;</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">     125862 :   type = CIR_UNKNOWN;</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">     125862 : }</span>
+<span class="lineNum">     105 </span>                :            : 
+<a name="106"><span class="lineNum">     106 </span>                :            : /* The copy constructor creates a new instance based on the given</a>
+<span class="lineNum">     107 </span>                :            :    circuit object. */
+<span class="lineNum">     108 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>]:<span class="lineNoCov">          0 : circuit::circuit (const circuit &amp; c) : object (c), integrator (c) {</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :   size = c.size;</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :   pol = c.pol;</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :   pacport = c.pacport;</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :   flag = c.flag;</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :   type = c.type;</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :   subst = c.subst;</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :   vsource = c.vsource;</span>
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 :   vsources = c.vsources;</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :   nsources = c.nsources;</span>
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 :   inserted = c.inserted;</span>
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 :   subnet = c.subnet;</span>
+<span class="lineNum">     120 </span>                :<span class="lineNoCov">          0 :   deltas = c.deltas;</span>
+<span class="lineNum">     121 </span>                :<span class="lineNoCov">          0 :   nHistories = c.nHistories;</span>
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :   histories = NULL;</span>
+<span class="lineNum">     123 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   subcircuit = c.subcircuit ? strdup (c.subcircuit) : NULL;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (size &gt; 0) {</span>
+<span class="lineNum">     126 </span>                :            :     // copy each node and set its circuit to the current circuit object
+<span class="lineNum">     127 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     nodes = new node[size];</span>
+<span class="lineNum">         </span>  [<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span> 
+<span class="lineNum">         </span> <span class="branchNoExec" title="Branch 10 was not executed"> # </span><span class="branchNoExec" title="Branch 11 was not executed"> # </span>][<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 17 was not executed"> # </span><span class="branchNoExec" title="Branch 18 was not executed"> # </span>][<span class="branchNoExec" title="Branch 20 was not executed"> # </span><span class="branchNoExec" title="Branch 21 was not executed"> # </span> 
+<span class="lineNum">         </span>   <span class="branchNoExec" title="Branch 22 was not executed"> # </span><span class="branchNoExec" title="Branch 23 was not executed"> # </span><span class="branchNoExec" title="Branch 24 was not executed"> # </span><span class="branchNoExec" title="Branch 25 was not executed"> # </span>]
+<span class="lineNum">     128 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i = 0; i &lt; size; i++) {</span>
+<span class="lineNum">     129 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :       nodes[i] = node (c.nodes[i]);;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">     130 </span>                :<span class="lineNoCov">          0 :       nodes[i].setCircuit (this);</span>
+<span class="lineNum">     131 </span>                :            :     }
+<span class="lineNum">     132 </span>                :            :     // copy each s-parameter
+<span class="lineNum">     133 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (c.MatrixS) {</span>
+<span class="lineNum">     134 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       allocMatrixS ();</span>
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :       memcpy (MatrixS, c.MatrixS, size * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     136 </span>                :            :     }
+<span class="lineNum">     137 </span>                :            :     // copy each noise-correlation parameter
+<span class="lineNum">     138 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (c.MatrixN) {</span>
+<span class="lineNum">     139 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       allocMatrixN (nsources);</span>
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :       int i = size + nsources;</span>
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 :       memcpy (MatrixN, c.MatrixN, i * i * sizeof (nr_complex_t));</span>
+<span class="lineNum">     142 </span>                :            :     }
+<span class="lineNum">     143 </span>                :            :     // copy each HB-matrix entry
+<span class="lineNum">     144 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (c.MatrixQV) {</span>
+<span class="lineNum">     145 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       allocMatrixHB ();</span>
+<span class="lineNum">     146 </span>                :<span class="lineNoCov">          0 :       memcpy (MatrixQV, c.MatrixQV, size * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :       memcpy (VectorGV, c.VectorGV, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :       memcpy (VectorCV, c.VectorCV, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 :       memcpy (VectorQ, c.VectorQ, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     150 </span>                :            :     }
+<span class="lineNum">     151 </span>                :            :     // copy each G-MNA matrix entry
+<span class="lineNum">     152 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (c.MatrixY) {</span>
+<span class="lineNum">     153 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :       allocMatrixMNA ();</span>
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 :       memcpy (MatrixY, c.MatrixY, size * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 :       memcpy (VectorI, c.VectorI, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :       memcpy (VectorV, c.VectorV, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     157 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (vsources &gt; 0) {</span>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :         memcpy (MatrixB, c.MatrixB, vsources * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 :         memcpy (MatrixC, c.MatrixC, vsources * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     160 </span>                :<span class="lineNoCov">          0 :         memcpy (MatrixD, c.MatrixD, vsources * vsources * sizeof (nr_complex_t));</span>
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :         memcpy (VectorE, c.VectorE, vsources * sizeof (nr_complex_t));</span>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :         memcpy (VectorJ, c.VectorJ, vsources * sizeof (nr_complex_t));</span>
+<span class="lineNum">     163 </span>                :            :       }
+<span class="lineNum">     164 </span>                :            :     }
+<span class="lineNum">     165 </span>                :            :   }
+<span class="lineNum">     166 </span>                :            :   else {
+<span class="lineNum">     167 </span>                :<span class="lineNoCov">          0 :     nodes = NULL;</span>
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :     MatrixS = MatrixN = MatrixY = NULL;</span>
+<span class="lineNum">     169 </span>                :<span class="lineNoCov">          0 :     MatrixB = MatrixC = MatrixD = NULL;</span>
+<span class="lineNum">     170 </span>                :<span class="lineNoCov">          0 :     VectorQ = VectorE = VectorI = VectorV = VectorJ = NULL;</span>
+<span class="lineNum">     171 </span>                :<span class="lineNoCov">          0 :     MatrixQV = NULL;</span>
+<span class="lineNum">     172 </span>                :<span class="lineNoCov">          0 :     VectorCV = VectorGV = NULL;</span>
+<span class="lineNum">     173 </span>                :            :   }
+<span class="lineNum">     174 </span>                :            : 
+<span class="lineNum">     175 </span>                :            :   // copy operating points
+<span class="lineNum">     176 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   oper = valuelist&lt;operatingpoint&gt; (c.oper);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">     177 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="178"><span class="lineNum">     178 </span>                :            : </a>
+<span class="lineNum">     179 </span>                :            : // Destructor deletes a circuit object.
+<span class="lineNum">     180 </span>[<span class="branchCov" title="Branch 0 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">     125862 : circuit::~circuit () {</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 15 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 16 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 18 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 19 was not taken"> - </span>][<span class="branchCov" title="Branch 21 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 22 was not taken"> - </span>]
+<span class="lineNum">     181 </span>[<span class="branchCov" title="Branch 0 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :   if (size &gt; 0) {</span>
+<span class="lineNum">     182 </span>[<span class="branchCov" title="Branch 0 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :     if (MatrixS) delete[] MatrixS;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 422 times"> + </span><span class="branchCov" title="Branch 6 was taken 765 times"> + </span>][<span class="branchCov" title="Branch 7 was taken 422 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     183 </span>[<span class="branchCov" title="Branch 0 was taken 9071 times"> + </span><span class="branchCov" title="Branch 1 was taken 115604 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 9071 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :     if (MatrixN) delete[] MatrixN;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 5 was taken 125 times"> + </span><span class="branchCov" title="Branch 6 was taken 1062 times"> + </span>][<span class="branchCov" title="Branch 7 was taken 125 times"> + </span><span class="branchNoCov" title="Branch 8 was not taken"> - </span>]
+<span class="lineNum">     184 </span>                :<span class="lineCov">     125862 :     freeMatrixMNA ();</span>
+<span class="lineNum">     185 </span>                :<span class="lineCov">     125862 :     freeMatrixHB ();</span>
+<span class="lineNum">     186 </span>[<span class="branchCov" title="Branch 0 was taken 124675 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 345614 times"> + </span><span class="branchCov" title="Branch 3 was taken 124675 times"> + </span>]:<span class="lineCov">     474074 :     delete[] nodes;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 4 was taken 345614 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>][<span class="branchCov" title="Branch 8 was taken 1187 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span>]
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 10 was taken 2598 times"> + </span><span class="branchCov" title="Branch 11 was taken 1187 times"> + </span>][<span class="branchCov" title="Branch 12 was taken 2598 times"> + </span><span class="branchNoCov" title="Branch 13 was not taken"> - </span>]
+<span class="lineNum">     187 </span>                :            :   }
+<span class="lineNum">     188 </span>[<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 124675 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 111 times"> + </span><span class="branchCov" title="Branch 3 was taken 1076 times"> + </span>]:<span class="lineCov">     125862 :   if (subcircuit) free (subcircuit);</span>
+<span class="lineNum">     189 </span>                :<span class="lineCov">     125862 :   deleteHistory ();</span>
+<span class="lineNum">     190 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 124675 times"> + </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 1187 times"> + </span>]:<span class="lineCov">     250537 : }</span>
+<span class="lineNum">     191 </span>                :            : 
+<span class="lineNum">     192 </span>                :            : /* With this function the number of ports of the circuit object can be
+<a name="193"><span class="lineNum">     193 </span>                :            :    changed.  Previously stored node and matrix information gets</a>
+<span class="lineNum">     194 </span>                :            :    completely lost except the current size equals the given size. */
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 : void circuit::setSize (int s) {</span>
+<span class="lineNum">     196 </span>                :            :   // nothing to do here
+<span class="lineNum">     197 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (size == s) return;</span>
+<span class="lineNum">     198 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   assert (s &gt;= 0);</span>
+<span class="lineNum">     199 </span>                :            : 
+<span class="lineNum">     200 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (size &gt; 0) {</span>
+<span class="lineNum">     201 </span>                :            :     // destroy any matrix and node information
+<span class="lineNum">     202 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (MatrixS) delete[] MatrixS;</span>
+<span class="lineNum">     203 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (MatrixN) delete[] MatrixN;</span>
+<span class="lineNum">     204 </span>                :<span class="lineNoCov">          0 :     MatrixS = MatrixN = NULL;</span>
+<span class="lineNum">     205 </span>                :<span class="lineNoCov">          0 :     freeMatrixMNA ();</span>
+<span class="lineNum">     206 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete[] nodes; nodes = NULL;</span>
+<span class="lineNum">     207 </span>                :            :   }
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((size = s) &gt; 0) {</span>
+<span class="lineNum">     210 </span>                :            :     // re-create matrix and node information space
+<span class="lineNum">     211 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span> :<span class="lineNoCov">          0 :     nodes = new node[size];</span>
+<span class="lineNum">         </span>   <span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     212 </span>                :<span class="lineNoCov">          0 :     allocMatrixS ();</span>
+<span class="lineNum">     213 </span>                :<span class="lineNoCov">          0 :     allocMatrixN (nsources);</span>
+<span class="lineNum">     214 </span>                :<span class="lineNoCov">          0 :     allocMatrixMNA ();</span>
+<span class="lineNum">     215 </span>                :            :   }
+<span class="lineNum">     216 </span>                :            : }
+<a name="217"><span class="lineNum">     217 </span>                :            : </a>
+<span class="lineNum">     218 </span>                :            : /* Destroys the HB-matrix memory. */
+<span class="lineNum">     219 </span>                :<span class="lineCov">     125862 : void circuit::freeMatrixHB (void) {</span>
+<span class="lineNum">     220 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 125861 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :   if (VectorQ) { delete[] VectorQ; VectorQ = NULL; }</span>
+<span class="lineNum">     221 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 125861 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :   if (MatrixQV) { delete[] MatrixQV; MatrixQV = NULL; }</span>
+<span class="lineNum">     222 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 125861 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :   if (VectorCV) { delete[] VectorCV; VectorCV = NULL; }</span>
+<span class="lineNum">     223 </span>[<span class="branchCov" title="Branch 0 was taken 1 time"> + </span><span class="branchCov" title="Branch 1 was taken 125861 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 1 time"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     125862 :   if (VectorGV) { delete[] VectorGV; VectorGV = NULL; }</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">     125862 : }</span>
+<a name="225"><span class="lineNum">     225 </span>                :            : </a>
+<span class="lineNum">     226 </span>                :            : /* Allocates the HB-matrix memory. */
+<span class="lineNum">     227 </span>                :<span class="lineCov">          1 : void circuit::allocMatrixHB (void) {</span>
+<span class="lineNum">     228 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :   if (VectorQ) {</span>
+<span class="lineNum">     229 </span>                :<span class="lineNoCov">          0 :     memset (VectorQ, 0, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     230 </span>                :            :   } else {
+<span class="lineNum">     231 </span>        [<span class="branchCov" title="Branch 2 was taken 2 times"> + </span><span class="branchCov" title="Branch 3 was taken 1 time"> + </span>]:<span class="lineCov">          3 :     VectorQ = new nr_complex_t[size];</span>
+<span class="lineNum">     232 </span>                :            :   }
+<span class="lineNum">     233 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :   if (MatrixQV) {</span>
+<span class="lineNum">     234 </span>                :<span class="lineNoCov">          0 :     memset (MatrixQV, 0, size * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     235 </span>                :            :   } else {
+<span class="lineNum">     236 </span>        [<span class="branchCov" title="Branch 2 was taken 4 times"> + </span><span class="branchCov" title="Branch 3 was taken 1 time"> + </span>]:<span class="lineCov">          5 :     MatrixQV = new nr_complex_t[size * size];</span>
+<span class="lineNum">     237 </span>                :            :   }
+<span class="lineNum">     238 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :   if (VectorCV) {</span>
+<span class="lineNum">     239 </span>                :<span class="lineNoCov">          0 :     memset (VectorCV, 0, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     240 </span>                :            :   } else {
+<span class="lineNum">     241 </span>        [<span class="branchCov" title="Branch 2 was taken 2 times"> + </span><span class="branchCov" title="Branch 3 was taken 1 time"> + </span>]:<span class="lineCov">          3 :     VectorCV = new nr_complex_t[size];</span>
+<span class="lineNum">     242 </span>                :            :   }
+<span class="lineNum">     243 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">          1 :   if (VectorGV) {</span>
+<span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 :     memset (VectorGV, 0, size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     245 </span>                :            :   } else {
+<span class="lineNum">     246 </span>        [<span class="branchCov" title="Branch 2 was taken 2 times"> + </span><span class="branchCov" title="Branch 3 was taken 1 time"> + </span>]:<span class="lineCov">          3 :     VectorGV = new nr_complex_t[size];</span>
+<span class="lineNum">     247 </span>                :            :   }
+<span class="lineNum">     248 </span>                :<span class="lineCov">          1 : }</span>
+<a name="249"><span class="lineNum">     249 </span>                :            : </a>
+<span class="lineNum">     250 </span>                :            : /* Allocates the S-parameter matrix memory. */
+<span class="lineNum">     251 </span>                :<span class="lineCov">     125097 : void circuit::allocMatrixS (void) {</span>
+<span class="lineNum">     252 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 125097 times"> + </span>]:<span class="lineCov">     125097 :   if (MatrixS) {</span>
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 :     memset (MatrixS, 0, size * size * sizeof (nr_complex_t));</span>
+<span class="lineNum">     254 </span>                :            :   } else {
+<span class="lineNum">     255 </span>        [<span class="branchCov" title="Branch 2 was taken 1179542 times"> + </span><span class="branchCov" title="Branch 3 was taken 125097 times"> + </span>]:<span class="lineCov">    1304639 :     MatrixS = new nr_complex_t[size * size];</span>
+<span class="lineNum">     256 </span>                :            :   }
+<span class="lineNum">     257 </span>                :<span class="lineCov">     125097 : }</span>
+<a name="258"><span class="lineNum">     258 </span>                :            : </a>
+<span class="lineNum">     259 </span>                :            : /* Allocates the noise correlation matrix memory. */
+<span class="lineNum">     260 </span>                :<span class="lineCov">       9358 : void circuit::allocMatrixN (int sources) {</span>
+<span class="lineNum">     261 </span>                :<span class="lineCov">       9358 :   nsources = sources;</span>
+<span class="lineNum">     262 </span>[<span class="branchCov" title="Branch 0 was taken 162 times"> + </span><span class="branchCov" title="Branch 1 was taken 9196 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 162 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       9358 :   if (MatrixN) delete[] MatrixN;</span>
+<span class="lineNum">     263 </span>        [<span class="branchCov" title="Branch 2 was taken 167923 times"> + </span><span class="branchCov" title="Branch 3 was taken 9358 times"> + </span>]:<span class="lineCov">     177281 :   MatrixN = new nr_complex_t[(size + sources) * (size + sources)];</span>
+<span class="lineNum">     264 </span>                :<span class="lineCov">       9358 : }</span>
+<a name="265"><span class="lineNum">     265 </span>                :            : </a>
+<span class="lineNum">     266 </span>                :            : /* Allocates the matrix memory for the MNA matrices. */
+<span class="lineNum">     267 </span>                :<span class="lineCov">     105656 : void circuit::allocMatrixMNA (void) {</span>
+<span class="lineNum">     268 </span>                :<span class="lineCov">     105656 :   freeMatrixMNA ();</span>
+<span class="lineNum">     269 </span>        [<span class="branchCov" title="Branch 0 was taken 105656 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     105656 :   if (size &gt; 0) {</span>
+<span class="lineNum">     270 </span>        [<span class="branchCov" title="Branch 2 was taken 777728 times"> + </span><span class="branchCov" title="Branch 3 was taken 105656 times"> + </span>]:<span class="lineCov">     883384 :     MatrixY = new nr_complex_t[size * size];</span>
+<span class="lineNum">     271 </span>        [<span class="branchCov" title="Branch 2 was taken 228878 times"> + </span><span class="branchCov" title="Branch 3 was taken 105656 times"> + </span>]:<span class="lineCov">     334534 :     VectorI = new nr_complex_t[size];</span>
+<span class="lineNum">     272 </span>        [<span class="branchCov" title="Branch 2 was taken 228878 times"> + </span><span class="branchCov" title="Branch 3 was taken 105656 times"> + </span>]:<span class="lineCov">     334534 :     VectorV = new nr_complex_t[size];</span>
+<span class="lineNum">     273 </span>        [<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 81996 times"> + </span>]:<span class="lineCov">     105656 :     if (vsources &gt; 0) {</span>
+<span class="lineNum">     274 </span>        [<span class="branchCov" title="Branch 2 was taken 48434 times"> + </span><span class="branchCov" title="Branch 3 was taken 23660 times"> + </span>]:<span class="lineCov">      72094 :       MatrixB = new nr_complex_t[vsources * size];</span>
+<span class="lineNum">     275 </span>        [<span class="branchCov" title="Branch 2 was taken 48434 times"> + </span><span class="branchCov" title="Branch 3 was taken 23660 times"> + </span>]:<span class="lineCov">      72094 :       MatrixC = new nr_complex_t[vsources * size];</span>
+<span class="lineNum">     276 </span>        [<span class="branchCov" title="Branch 2 was taken 23986 times"> + </span><span class="branchCov" title="Branch 3 was taken 23660 times"> + </span>]:<span class="lineCov">      47646 :       MatrixD = new nr_complex_t[vsources * vsources];</span>
+<span class="lineNum">     277 </span>        [<span class="branchCov" title="Branch 2 was taken 23764 times"> + </span><span class="branchCov" title="Branch 3 was taken 23660 times"> + </span>]:<span class="lineCov">      47424 :       VectorE = new nr_complex_t[vsources];</span>
+<span class="lineNum">     278 </span>        [<span class="branchCov" title="Branch 2 was taken 23764 times"> + </span><span class="branchCov" title="Branch 3 was taken 23660 times"> + </span>]:<span class="lineCov">      47424 :       VectorJ = new nr_complex_t[vsources];</span>
+<span class="lineNum">     279 </span>                :            :     }
+<span class="lineNum">     280 </span>                :            :   }
+<span class="lineNum">     281 </span>                :<span class="lineCov">     105656 : }</span>
+<a name="282"><span class="lineNum">     282 </span>                :            : </a>
+<span class="lineNum">     283 </span>                :            : /* Free()'s all memory used by the MNA matrices. */
+<span class="lineNum">     284 </span>                :<span class="lineCov">     231518 : void circuit::freeMatrixMNA (void) {</span>
+<span class="lineNum">     285 </span>[<span class="branchCov" title="Branch 0 was taken 105656 times"> + </span><span class="branchCov" title="Branch 1 was taken 125862 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 105656 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (MatrixY) { delete[] MatrixY; MatrixY = NULL; }</span>
+<span class="lineNum">     286 </span>[<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 207858 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23660 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (MatrixB) { delete[] MatrixB; MatrixB = NULL; }</span>
+<span class="lineNum">     287 </span>[<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 207858 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23660 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (MatrixC) { delete[] MatrixC; MatrixC = NULL; }</span>
+<span class="lineNum">     288 </span>[<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 207858 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23660 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (MatrixD) { delete[] MatrixD; MatrixD = NULL; }</span>
+<span class="lineNum">     289 </span>[<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 207858 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23660 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (VectorE) { delete[] VectorE; VectorE = NULL; }</span>
+<span class="lineNum">     290 </span>[<span class="branchCov" title="Branch 0 was taken 105656 times"> + </span><span class="branchCov" title="Branch 1 was taken 125862 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 105656 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (VectorI) { delete[] VectorI; VectorI = NULL; }</span>
+<span class="lineNum">     291 </span>[<span class="branchCov" title="Branch 0 was taken 105656 times"> + </span><span class="branchCov" title="Branch 1 was taken 125862 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 105656 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (VectorV) { delete[] VectorV; VectorV = NULL; }</span>
+<span class="lineNum">     292 </span>[<span class="branchCov" title="Branch 0 was taken 23660 times"> + </span><span class="branchCov" title="Branch 1 was taken 207858 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23660 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     231518 :   if (VectorJ) { delete[] VectorJ; VectorJ = NULL; }</span>
+<span class="lineNum">     293 </span>                :<span class="lineCov">     231518 : }</span>
+<span class="lineNum">     294 </span>                :            : 
+<span class="lineNum">     295 </span>                :            : /* This function sets the name and port number of one of the circuit's
+<span class="lineNum">     296 </span>                :            :    nodes.  It also tells the appropriate node about the circuit it
+<a name="297"><span class="lineNum">     297 </span>                :            :    belongs to.  The optional 'intern' argument is used to mark a node</a>
+<span class="lineNum">     298 </span>                :            :    to be for internal use only. */
+<span class="lineNum">     299 </span>                :<span class="lineCov">     375297 : void circuit::setNode (int i, const char * n, int intern) {</span>
+<span class="lineNum">     300 </span>                :<span class="lineCov">     375297 :   nodes[i].setName (n);</span>
+<span class="lineNum">     301 </span>                :<span class="lineCov">     375297 :   nodes[i].setCircuit (this);</span>
+<span class="lineNum">     302 </span>                :<span class="lineCov">     375297 :   nodes[i].setPort (i);</span>
+<span class="lineNum">     303 </span>                :<span class="lineCov">     375297 :   nodes[i].setInternal (intern);</span>
+<span class="lineNum">     304 </span>                :<span class="lineCov">     375297 : }</span>
+<a name="305"><span class="lineNum">     305 </span>                :            : </a>
+<span class="lineNum">     306 </span>                :            : // Returns one of the circuit's nodes.
+<span class="lineNum">     307 </span>                :<span class="lineCov">    5839743 : node * circuit::getNode (int i) {</span>
+<span class="lineNum">     308 </span>                :<span class="lineCov">    5839743 :   return &amp;nodes[i];</span>
+<span class="lineNum">     309 </span>                :            : }
+<a name="310"><span class="lineNum">     310 </span>                :            : </a>
+<span class="lineNum">     311 </span>                :            : // Sets the subcircuit reference for the circuit object.
+<span class="lineNum">     312 </span>                :<span class="lineCov">        830 : void circuit::setSubcircuit (char * n) {</span>
+<span class="lineNum">     313 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 830 times"> + </span>]:<span class="lineCov">        830 :   if (subcircuit) free (subcircuit);</span>
+<span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 111 times"> + </span><span class="branchCov" title="Branch 1 was taken 719 times"> + </span>]:<span class="lineCov">        830 :   subcircuit = n ? strdup (n) : NULL;</span>
+<span class="lineNum">     315 </span>                :<span class="lineCov">        830 : }</span>
+<span class="lineNum">     316 </span>                :            : 
+<a name="317"><span class="lineNum">     317 </span>                :            : #if DEBUG</a>
+<span class="lineNum">     318 </span>                :            : // DEBUG function:  Prints the S parameters of this circuit object.
+<span class="lineNum">     319 </span>                :<span class="lineNoCov">          0 : void circuit::print (void) {</span>
+<span class="lineNum">     320 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; getSize (); i++) {</span>
+<span class="lineNum">     321 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int j = 0; j &lt; getSize (); j++) {</span>
+<span class="lineNum">     322 </span>                :            :       logprint (LOG_STATUS, &quot;%s S%d%d(%+.3e,%+.3e) &quot;, getName (), i, j,
+<span class="lineNum">     323 </span>        [<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :                 (double) real (getS (i, j)), (double) imag (getS (i, j)));</span>
+<span class="lineNum">     324 </span>                :            :     }
+<span class="lineNum">     325 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_STATUS, &quot;\n&quot;);</span>
+<span class="lineNum">     326 </span>                :            :   }
+<span class="lineNum">     327 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     328 </span>                :            : #endif /* DEBUG */
+<span class="lineNum">     329 </span>                :            : 
+<a name="330"><span class="lineNum">     330 </span>                :            : /* Returns the current substrate of the circuit object.  Used for</a>
+<span class="lineNum">     331 </span>                :            :    microstrip components only. */
+<span class="lineNum">     332 </span>                :<span class="lineCov">       3344 : substrate * circuit::getSubstrate (void) {</span>
+<span class="lineNum">     333 </span>                :<span class="lineCov">       3344 :   return subst;</span>
+<span class="lineNum">     334 </span>                :            : }
+<a name="335"><span class="lineNum">     335 </span>                :            : </a>
+<span class="lineNum">     336 </span>                :            : // Sets the substrate of the circuit object.
+<span class="lineNum">     337 </span>                :<span class="lineCov">         27 : void circuit::setSubstrate (substrate * s) {</span>
+<span class="lineNum">     338 </span>                :<span class="lineCov">         27 :   subst = s;</span>
+<span class="lineNum">     339 </span>                :<span class="lineCov">         27 : }</span>
+<span class="lineNum">     340 </span>                :            : 
+<a name="341"><span class="lineNum">     341 </span>                :            : /* Returns the circuits B-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     342 </span>                :            :    built in the circuit depending on the port number. */
+<span class="lineNum">     343 </span>                :<span class="lineCov">    3020703 : nr_complex_t circuit::getB (int port, int nr) {</span>
+<span class="lineNum">     344 </span>                :<span class="lineCov">    3020703 :   return MatrixB[(nr - vsource) * size + port];</span>
+<span class="lineNum">     345 </span>                :            : }
+<span class="lineNum">     346 </span>                :            : 
+<a name="347"><span class="lineNum">     347 </span>                :            : /* Sets the circuits B-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     348 </span>                :            :    built in the circuit depending on the port number. */
+<span class="lineNum">     349 </span>                :<span class="lineCov">      48308 : void circuit::setB (int port, int nr, nr_complex_t z) {</span>
+<span class="lineNum">     350 </span>                :<span class="lineCov">      48308 :   MatrixB[nr * size + port] = z;</span>
+<span class="lineNum">     351 </span>                :<span class="lineCov">      48308 : }</span>
+<span class="lineNum">     352 </span>                :            : 
+<a name="353"><span class="lineNum">     353 </span>                :            : /* Returns the circuits C-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     354 </span>                :            :    built in the circuit depending on the port number. */
+<span class="lineNum">     355 </span>                :<span class="lineCov">    3020703 : nr_complex_t circuit::getC (int nr, int port) {</span>
+<span class="lineNum">     356 </span>                :<span class="lineCov">    3020703 :   return MatrixC[(nr - vsource) * size + port];</span>
+<span class="lineNum">     357 </span>                :            : }
+<span class="lineNum">     358 </span>                :            : 
+<a name="359"><span class="lineNum">     359 </span>                :            : /* Sets the circuits C-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     360 </span>                :            :    built in the circuit depending on the port number. */
+<span class="lineNum">     361 </span>                :<span class="lineCov">     208818 : void circuit::setC (int nr, int port, nr_complex_t z) {</span>
+<span class="lineNum">     362 </span>                :<span class="lineCov">     208818 :   MatrixC[nr * size + port] = z;</span>
+<span class="lineNum">     363 </span>                :<span class="lineCov">     208818 : }</span>
+<span class="lineNum">     364 </span>                :            : 
+<a name="365"><span class="lineNum">     365 </span>                :            : /* Returns the circuits D-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     366 </span>                :            :    built in the circuit. */
+<span class="lineNum">     367 </span>                :<span class="lineCov">    1956463 : nr_complex_t circuit::getD (int r, int c) {</span>
+<span class="lineNum">     368 </span>                :<span class="lineCov">    1956463 :   return MatrixD[(r - vsource) * vsources + c - vsource];</span>
+<span class="lineNum">     369 </span>                :            : }
+<span class="lineNum">     370 </span>                :            : 
+<a name="371"><span class="lineNum">     371 </span>                :            : /* Sets the circuits D-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     372 </span>                :            :    built in the circuit. */
+<span class="lineNum">     373 </span>                :<span class="lineCov">     359124 : void circuit::setD (int r, int c, nr_complex_t z) {</span>
+<span class="lineNum">     374 </span>                :<span class="lineCov">     359124 :   MatrixD[r * vsources + c] = z;</span>
+<span class="lineNum">     375 </span>                :<span class="lineCov">     359124 : }</span>
+<span class="lineNum">     376 </span>                :            : 
+<a name="377"><span class="lineNum">     377 </span>                :            : /* Returns the circuits E-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     378 </span>                :            :    built in the circuit. */
+<span class="lineNum">     379 </span>                :<span class="lineCov">    1704602 : nr_complex_t circuit::getE (int nr) {</span>
+<span class="lineNum">     380 </span>                :<span class="lineCov">    1704602 :   return VectorE[nr - vsource];</span>
+<span class="lineNum">     381 </span>                :            : }
+<span class="lineNum">     382 </span>                :            : 
+<a name="383"><span class="lineNum">     383 </span>                :            : /* Sets the circuits E-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     384 </span>                :            :    built in the circuit. */
+<span class="lineNum">     385 </span>                :<span class="lineCov">     758805 : void circuit::setE (int nr, nr_complex_t z) {</span>
+<span class="lineNum">     386 </span>                :<span class="lineCov">     758805 :   VectorE[nr] = z;</span>
+<span class="lineNum">     387 </span>                :<span class="lineCov">     758805 : }</span>
+<span class="lineNum">     388 </span>                :            : 
+<a name="389"><span class="lineNum">     389 </span>                :            : /* Returns the circuits I-MNA matrix value of the current source built</a>
+<span class="lineNum">     390 </span>                :            :    in the circuit. */
+<span class="lineNum">     391 </span>                :<span class="lineCov">    3056448 : nr_complex_t circuit::getI (int port) {</span>
+<span class="lineNum">     392 </span>                :<span class="lineCov">    3056448 :   return VectorI[port];</span>
+<span class="lineNum">     393 </span>                :            : }
+<span class="lineNum">     394 </span>                :            : 
+<a name="395"><span class="lineNum">     395 </span>                :            : /* Sets the circuits I-MNA matrix value of the current source built in</a>
+<span class="lineNum">     396 </span>                :            :    the circuit depending on the port number. */
+<span class="lineNum">     397 </span>                :<span class="lineCov">    2715262 : void circuit::setI (int port, nr_complex_t z) {</span>
+<span class="lineNum">     398 </span>                :<span class="lineCov">    2715262 :   VectorI[port] = z;</span>
+<span class="lineNum">     399 </span>                :<span class="lineCov">    2715262 : }</span>
+<span class="lineNum">     400 </span>                :            : 
+<a name="401"><span class="lineNum">     401 </span>                :            : /* Modifies the circuits I-MNA matrix value of the current source</a>
+<span class="lineNum">     402 </span>                :            :    built in the circuit depending on the port number. */
+<span class="lineNum">     403 </span>                :<span class="lineNoCov">          0 : void circuit::addI (int port, nr_complex_t i) {</span>
+<span class="lineNum">     404 </span>                :<span class="lineNoCov">          0 :   VectorI[port] += i;</span>
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="406"><span class="lineNum">     406 </span>                :            : </a>
+<span class="lineNum">     407 </span>                :            : /* Same as above with different argument type. */
+<span class="lineNum">     408 </span>                :<span class="lineCov">    1953778 : void circuit::addI (int port, nr_double_t i) {</span>
+<span class="lineNum">     409 </span>                :<span class="lineCov">    1953778 :   VectorI[port] += i;</span>
+<span class="lineNum">     410 </span>                :<span class="lineCov">    1953778 : }</span>
+<a name="411"><span class="lineNum">     411 </span>                :            : </a>
+<span class="lineNum">     412 </span>                :            : /* Returns the circuits Q-HB vector value. */
+<span class="lineNum">     413 </span>                :<span class="lineCov">        352 : nr_complex_t circuit::getQ (int port) {</span>
+<span class="lineNum">     414 </span>                :<span class="lineCov">        352 :   return VectorQ[port];</span>
+<span class="lineNum">     415 </span>                :            : }
+<a name="416"><span class="lineNum">     416 </span>                :            : </a>
+<span class="lineNum">     417 </span>                :            : /* Sets the circuits Q-HB vector value. */
+<span class="lineNum">     418 </span>                :<span class="lineCov">        352 : void circuit::setQ (int port, nr_complex_t q) {</span>
+<span class="lineNum">     419 </span>                :<span class="lineCov">        352 :   VectorQ[port] = q;</span>
+<span class="lineNum">     420 </span>                :<span class="lineCov">        352 : }</span>
+<span class="lineNum">     421 </span>                :            : 
+<a name="422"><span class="lineNum">     422 </span>                :            : /* Returns the circuits J-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     423 </span>                :            :    built in the circuit. */
+<span class="lineNum">     424 </span>                :<span class="lineCov">     199972 : nr_complex_t circuit::getJ (int nr) {</span>
+<span class="lineNum">     425 </span>                :<span class="lineCov">     199972 :   return VectorJ[nr];</span>
+<span class="lineNum">     426 </span>                :            : }
+<span class="lineNum">     427 </span>                :            : 
+<a name="428"><span class="lineNum">     428 </span>                :            : /* Sets the circuits J-MNA matrix value of the given voltage source</a>
+<span class="lineNum">     429 </span>                :            :    built in the circuit. */
+<span class="lineNum">     430 </span>                :<span class="lineCov">    2373466 : void circuit::setJ (int nr, nr_complex_t z) {</span>
+<span class="lineNum">     431 </span>                :<span class="lineCov">    2373466 :   VectorJ[nr - vsource] = z;</span>
+<span class="lineNum">     432 </span>                :<span class="lineCov">    2373466 : }</span>
+<a name="433"><span class="lineNum">     433 </span>                :            : </a>
+<span class="lineNum">     434 </span>                :            : // Returns the circuits voltage value at the given port.
+<span class="lineNum">     435 </span>                :<span class="lineCov">    6663098 : nr_complex_t circuit::getV (int port) {</span>
+<span class="lineNum">     436 </span>                :<span class="lineCov">    6663098 :   return VectorV[port];</span>
+<span class="lineNum">     437 </span>                :            : }
+<a name="438"><span class="lineNum">     438 </span>                :            : </a>
+<span class="lineNum">     439 </span>                :            : // Sets the circuits voltage value at the given port.
+<span class="lineNum">     440 </span>                :<span class="lineCov">   14036821 : void circuit::setV (int port, nr_complex_t z) {</span>
+<span class="lineNum">     441 </span>                :<span class="lineCov">   14036821 :   VectorV[port] = z;</span>
+<span class="lineNum">     442 </span>                :<span class="lineCov">   14036821 : }</span>
+<span class="lineNum">     443 </span>                :            : 
+<a name="444"><span class="lineNum">     444 </span>                :            : /* Returns the circuits G-MNA matrix value depending on the port</a>
+<span class="lineNum">     445 </span>                :            :    numbers. */
+<span class="lineNum">     446 </span>                :<span class="lineCov">   15630312 : nr_complex_t circuit::getY (int r, int c) {</span>
+<span class="lineNum">     447 </span>                :<span class="lineCov">   15630312 :   return MatrixY[r * size + c];</span>
+<span class="lineNum">     448 </span>                :            : }
+<span class="lineNum">     449 </span>                :            : 
+<a name="450"><span class="lineNum">     450 </span>                :            : /* Sets the circuits G-MNA matrix value depending on the port</a>
+<span class="lineNum">     451 </span>                :            :    numbers. */
+<span class="lineNum">     452 </span>                :<span class="lineCov">   13694496 : void circuit::setY (int r, int c, nr_complex_t y) {</span>
+<span class="lineNum">     453 </span>                :<span class="lineCov">   13694496 :   MatrixY[r * size + c] = y;</span>
+<span class="lineNum">     454 </span>                :<span class="lineCov">   13694496 : }</span>
+<span class="lineNum">     455 </span>                :            : 
+<a name="456"><span class="lineNum">     456 </span>                :            : /* Modifies the circuits G-MNA matrix value depending on the port</a>
+<span class="lineNum">     457 </span>                :            :    numbers. */
+<span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 : void circuit::addY (int r, int c, nr_complex_t y) {</span>
+<span class="lineNum">     459 </span>                :<span class="lineNoCov">          0 :   MatrixY[r * size + c] += y;</span>
+<span class="lineNum">     460 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="461"><span class="lineNum">     461 </span>                :            : </a>
+<span class="lineNum">     462 </span>                :            : /* Same as above with different argument type. */
+<span class="lineNum">     463 </span>                :<span class="lineCov">    3907556 : void circuit::addY (int r, int c, nr_double_t y) {</span>
+<span class="lineNum">     464 </span>                :<span class="lineCov">    3907556 :   MatrixY[r * size + c] += y;</span>
+<span class="lineNum">     465 </span>                :<span class="lineCov">    3907556 : }</span>
+<span class="lineNum">     466 </span>                :            : 
+<a name="467"><span class="lineNum">     467 </span>                :            : /* Returns the circuits G-MNA matrix value depending on the port</a>
+<span class="lineNum">     468 </span>                :            :    numbers. */
+<span class="lineNum">     469 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getG (int r, int c) {</span>
+<span class="lineNum">     470 </span>                :<span class="lineNoCov">          0 :   return real (MatrixY[r * size + c]);</span>
+<span class="lineNum">     471 </span>                :            : }
+<span class="lineNum">     472 </span>                :            : 
+<a name="473"><span class="lineNum">     473 </span>                :            : /* Sets the circuits G-MNA matrix value depending on the port</a>
+<span class="lineNum">     474 </span>                :            :    numbers. */
+<span class="lineNum">     475 </span>                :<span class="lineNoCov">          0 : void circuit::setG (int r, int c, nr_double_t y) {</span>
+<span class="lineNum">     476 </span>                :<span class="lineNoCov">          0 :   MatrixY[r * size + c] = y;</span>
+<span class="lineNum">     477 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     478 </span>                :            : 
+<a name="479"><span class="lineNum">     479 </span>                :            : /* Returns the circuits C-HB matrix value depending on the port</a>
+<span class="lineNum">     480 </span>                :            :    numbers. */
+<span class="lineNum">     481 </span>                :<span class="lineCov">        176 : nr_complex_t circuit::getQV (int r, int c) {</span>
+<span class="lineNum">     482 </span>                :<span class="lineCov">        176 :   return MatrixQV[r * size + c];</span>
+<span class="lineNum">     483 </span>                :            : }
+<span class="lineNum">     484 </span>                :            : 
+<a name="485"><span class="lineNum">     485 </span>                :            : /* Sets the circuits C-HB matrix value depending on the port</a>
+<span class="lineNum">     486 </span>                :            :    numbers. */
+<span class="lineNum">     487 </span>                :<span class="lineCov">        704 : void circuit::setQV (int r, int c, nr_complex_t qv) {</span>
+<span class="lineNum">     488 </span>                :<span class="lineCov">        704 :   MatrixQV[r * size + c] = qv;</span>
+<span class="lineNum">     489 </span>                :<span class="lineCov">        704 : }</span>
+<span class="lineNum">     490 </span>                :            : 
+<a name="491"><span class="lineNum">     491 </span>                :            : /* Returns the circuits GV-HB vector value depending on the port</a>
+<span class="lineNum">     492 </span>                :            :    number. */
+<span class="lineNum">     493 </span>                :<span class="lineCov">        176 : nr_complex_t circuit::getGV (int port) {</span>
+<span class="lineNum">     494 </span>                :<span class="lineCov">        176 :   return VectorGV[port];</span>
+<span class="lineNum">     495 </span>                :            : }
+<span class="lineNum">     496 </span>                :            : 
+<a name="497"><span class="lineNum">     497 </span>                :            : /* Sets the circuits GV-HB matrix value depending on the port</a>
+<span class="lineNum">     498 </span>                :            :    number. */
+<span class="lineNum">     499 </span>                :<span class="lineCov">        352 : void circuit::setGV (int port, nr_complex_t gv) {</span>
+<span class="lineNum">     500 </span>                :<span class="lineCov">        352 :   VectorGV[port] = gv;</span>
+<span class="lineNum">     501 </span>                :<span class="lineCov">        352 : }</span>
+<span class="lineNum">     502 </span>                :            : 
+<a name="503"><span class="lineNum">     503 </span>                :            : /* Returns the circuits CV-HB vector value depending on the port</a>
+<span class="lineNum">     504 </span>                :            :    number. */
+<span class="lineNum">     505 </span>                :<span class="lineCov">        176 : nr_complex_t circuit::getCV (int port) {</span>
+<span class="lineNum">     506 </span>                :<span class="lineCov">        176 :   return VectorCV[port];</span>
+<span class="lineNum">     507 </span>                :            : }
+<span class="lineNum">     508 </span>                :            : 
+<a name="509"><span class="lineNum">     509 </span>                :            : /* Sets the circuits CV-HB matrix value depending on the port</a>
+<span class="lineNum">     510 </span>                :            :    number. */
+<span class="lineNum">     511 </span>                :<span class="lineCov">        352 : void circuit::setCV (int port, nr_complex_t cv) {</span>
+<span class="lineNum">     512 </span>                :<span class="lineCov">        352 :   VectorCV[port] = cv;</span>
+<span class="lineNum">     513 </span>                :<span class="lineCov">        352 : }</span>
+<span class="lineNum">     514 </span>                :            : 
+<a name="515"><span class="lineNum">     515 </span>                :            : /* This function adds a operating point consisting of a key and a</a>
+<span class="lineNum">     516 </span>                :            :    value to the circuit. */
+<span class="lineNum">     517 </span>                :<span class="lineCov">       1156 : void circuit::addOperatingPoint (const char * n, nr_double_t val) {</span>
+<span class="lineNum">     518 </span>        [<span class="branchCov" title="Branch 1 was taken 1156 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">       1156 :   operatingpoint * p = new operatingpoint (n, val);</span>
+<span class="lineNum">     519 </span>                :<span class="lineCov">       1156 :   oper.add (n, p);</span>
+<span class="lineNum">     520 </span>                :<span class="lineCov">       1156 : }</span>
+<span class="lineNum">     521 </span>                :            : 
+<span class="lineNum">     522 </span>                :            : /* Returns the requested operating point value which has been
+<a name="523"><span class="lineNum">     523 </span>                :            :    previously added as its double representation.  If there is no such</a>
+<span class="lineNum">     524 </span>                :            :    operating point the function returns zero. */
+<span class="lineNum">     525 </span>                :<span class="lineCov">    2116020 : nr_double_t circuit::getOperatingPoint (const char * n) {</span>
+<span class="lineNum">     526 </span>                :<span class="lineCov">    2116020 :   operatingpoint * p = oper.get (n);</span>
+<span class="lineNum">     527 </span>        [<span class="branchCov" title="Branch 0 was taken 2116020 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">    2116020 :   if (p != NULL) return p-&gt;getValue ();</span>
+<span class="lineNum">     528 </span>                :<span class="lineCov">    2116020 :   return 0.0;</span>
+<span class="lineNum">     529 </span>                :            : }
+<span class="lineNum">     530 </span>                :            : 
+<a name="531"><span class="lineNum">     531 </span>                :            : /* This function sets the operating point specified by the given name</a>
+<span class="lineNum">     532 </span>                :            :    to the value passed to the function. */
+<span class="lineNum">     533 </span>                :<span class="lineCov">    4092633 : void circuit::setOperatingPoint (const char * n, nr_double_t val) {</span>
+<span class="lineNum">     534 </span>                :<span class="lineCov">    4092633 :   operatingpoint * p = oper.get (n);</span>
+<span class="lineNum">     535 </span>        [<span class="branchCov" title="Branch 0 was taken 4091477 times"> + </span><span class="branchCov" title="Branch 1 was taken 1156 times"> + </span>]:<span class="lineCov">    4092633 :   if (p != NULL)</span>
+<span class="lineNum">     536 </span>                :<span class="lineCov">    4091477 :     p-&gt;setValue (val);</span>
+<span class="lineNum">     537 </span>                :            :   else
+<span class="lineNum">     538 </span>                :<span class="lineCov">       1156 :     addOperatingPoint (n, val);</span>
+<span class="lineNum">     539 </span>                :<span class="lineCov">    4092633 : }</span>
+<span class="lineNum">     540 </span>                :            : 
+<span class="lineNum">     541 </span>                :            : /* The function checks whether the circuit has got a certain operating
+<a name="542"><span class="lineNum">     542 </span>                :            :    point value.  If so it returns non-zero, otherwise it returns</a>
+<span class="lineNum">     543 </span>                :            :    zero. */
+<span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 : int circuit::hasOperatingPoint (char * n) {</span>
+<span class="lineNum">     545 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return (oper.get (n)) ? 1 : 0;</span>
+<span class="lineNum">     546 </span>                :            : }
+<span class="lineNum">     547 </span>                :            : 
+<a name="548"><span class="lineNum">     548 </span>                :            : /* This function adds a characteristic point consisting of a key and a</a>
+<span class="lineNum">     549 </span>                :            :    value to the circuit. */
+<span class="lineNum">     550 </span>                :<span class="lineNoCov">          0 : void circuit::addCharacteristic (const char * n, nr_double_t val) {</span>
+<span class="lineNum">     551 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   characteristic * p = new characteristic (n, val);</span>
+<span class="lineNum">     552 </span>                :<span class="lineNoCov">          0 :   charac.add (n, p);</span>
+<span class="lineNum">     553 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     554 </span>                :            : 
+<span class="lineNum">     555 </span>                :            : /* Returns the requested characteristic value which has been
+<a name="556"><span class="lineNum">     556 </span>                :            :    previously added as its double representation.  If there is no such</a>
+<span class="lineNum">     557 </span>                :            :    characteristic value the function returns zero. */
+<span class="lineNum">     558 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getCharacteristic (char * n) {</span>
+<span class="lineNum">     559 </span>                :<span class="lineNoCov">          0 :   characteristic * p = charac.get (n);</span>
+<span class="lineNum">     560 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (p != NULL) return p-&gt;getValue ();</span>
+<span class="lineNum">     561 </span>                :<span class="lineNoCov">          0 :   return 0.0;</span>
+<span class="lineNum">     562 </span>                :            : }
+<span class="lineNum">     563 </span>                :            : 
+<a name="564"><span class="lineNum">     564 </span>                :            : /* This function sets the characteristic value specified by the given</a>
+<span class="lineNum">     565 </span>                :            :    name to the value passed to the function. */
+<span class="lineNum">     566 </span>                :<span class="lineNoCov">          0 : void circuit::setCharacteristic (const char * n, nr_double_t val) {</span>
+<span class="lineNum">     567 </span>                :<span class="lineNoCov">          0 :   characteristic * p = charac.get (n);</span>
+<span class="lineNum">     568 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (p != NULL)</span>
+<span class="lineNum">     569 </span>                :<span class="lineNoCov">          0 :     p-&gt;setValue (val);</span>
+<span class="lineNum">     570 </span>                :            :   else
+<span class="lineNum">     571 </span>                :<span class="lineNoCov">          0 :     addCharacteristic (n, val);</span>
+<span class="lineNum">     572 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     573 </span>                :            : 
+<span class="lineNum">     574 </span>                :            : /* The function checks whether the circuit has got a certain
+<a name="575"><span class="lineNum">     575 </span>                :            :    characteristic value.  If so it returns non-zero, otherwise it</a>
+<span class="lineNum">     576 </span>                :            :    returns zero. */
+<span class="lineNum">     577 </span>                :<span class="lineNoCov">          0 : int circuit::hasCharacteristic (char * n) {</span>
+<span class="lineNum">     578 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return (charac.get (n)) ? 1 : 0;</span>
+<span class="lineNum">     579 </span>                :            : }
+<a name="580"><span class="lineNum">     580 </span>                :            : </a>
+<span class="lineNum">     581 </span>                :            : // Returns the S-parameter at the given matrix position.
+<span class="lineNum">     582 </span>                :<span class="lineCov">    6876468 : nr_complex_t circuit::getS (int x, int y) {</span>
+<span class="lineNum">     583 </span>                :<span class="lineCov">    6876468 :   return MatrixS[y + x * size];</span>
+<span class="lineNum">     584 </span>                :            : }
+<a name="585"><span class="lineNum">     585 </span>                :            : </a>
+<span class="lineNum">     586 </span>                :            : // Sets the S-parameter at the given matrix position.
+<span class="lineNum">     587 </span>                :<span class="lineCov">    1395118 : void circuit::setS (int x, int y, nr_complex_t z) {</span>
+<span class="lineNum">     588 </span>                :<span class="lineCov">    1395118 :   MatrixS[y + x * size] = z;</span>
+<span class="lineNum">     589 </span>                :<span class="lineCov">    1395118 : }</span>
+<a name="590"><span class="lineNum">     590 </span>                :            : </a>
+<span class="lineNum">     591 </span>                :            : // Returns the noise-correlation-parameter at the given matrix position.
+<span class="lineNum">     592 </span>                :<span class="lineCov">     669925 : nr_complex_t circuit::getN (int r, int c) {</span>
+<span class="lineNum">     593 </span>                :<span class="lineCov">     669925 :   return MatrixN[c + r * (size + nsources)];</span>
+<span class="lineNum">     594 </span>                :            : }
+<a name="595"><span class="lineNum">     595 </span>                :            : </a>
+<span class="lineNum">     596 </span>                :            : // Sets the noise-correlation-parameter at the given matrix position.
+<span class="lineNum">     597 </span>                :<span class="lineCov">     201592 : void circuit::setN (int r, int c, nr_complex_t z) {</span>
+<span class="lineNum">     598 </span>                :<span class="lineCov">     201592 :   MatrixN[c + r * (size + nsources)] = z;</span>
+<span class="lineNum">     599 </span>                :<span class="lineCov">     201592 : }</span>
+<a name="600"><span class="lineNum">     600 </span>                :            : </a>
+<span class="lineNum">     601 </span>                :            : // Returns the number of internal voltage sources for DC analysis.
+<span class="lineNum">     602 </span>                :<span class="lineCov">  130252913 : int circuit::getVoltageSources (void) {</span>
+<span class="lineNum">     603 </span>                :<span class="lineCov">  130252913 :   return vsources;</span>
+<span class="lineNum">     604 </span>                :            : }
+<a name="605"><span class="lineNum">     605 </span>                :            : </a>
+<span class="lineNum">     606 </span>                :            : // Sets the number of internal voltage sources for DC analysis.
+<span class="lineNum">     607 </span>                :<span class="lineCov">      27496 : void circuit::setVoltageSources (int s) {</span>
+<span class="lineNum">     608 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 27496 times"> + </span>]:<span class="lineCov">      27496 :   assert (s &gt;= 0);</span>
+<span class="lineNum">     609 </span>                :<span class="lineCov">      27496 :   vsources = s;</span>
+<span class="lineNum">     610 </span>                :<span class="lineCov">      27496 : }</span>
+<a name="611"><span class="lineNum">     611 </span>                :            : </a>
+<span class="lineNum">     612 </span>                :            : // Returns the number of internal noise sources for AC analysis.
+<span class="lineNum">     613 </span>                :<span class="lineNoCov">          0 : int circuit::getNoiseSources (void) {</span>
+<span class="lineNum">     614 </span>                :<span class="lineNoCov">          0 :   return nsources;</span>
+<span class="lineNum">     615 </span>                :            : }
+<a name="616"><span class="lineNum">     616 </span>                :            : </a>
+<span class="lineNum">     617 </span>                :            : // Sets the number of internal noise voltage sources for AC analysis.
+<span class="lineNum">     618 </span>                :<span class="lineNoCov">          0 : void circuit::setNoiseSources (int s) {</span>
+<span class="lineNum">     619 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   assert (s &gt;= 0);</span>
+<span class="lineNum">     620 </span>                :<span class="lineNoCov">          0 :   nsources = s;</span>
+<span class="lineNum">     621 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     622 </span>                :            : 
+<span class="lineNum">     623 </span>                :            : /* The function returns an internal node or circuit name with the
+<a name="624"><span class="lineNum">     624 </span>                :            :    given prefix and based on the given circuits name.  The caller is</a>
+<span class="lineNum">     625 </span>                :            :    responsible to free() the returned string. */
+<span class="lineNum">     626 </span>                :<span class="lineCov">      21131 : char * circuit::createInternal (const char * prefix, const char * obj) {</span>
+<span class="lineNum">     627 </span>                :<span class="lineCov">      21131 :   char * n = (char *) malloc (strlen (prefix) + strlen (obj) + 3);</span>
+<span class="lineNum">     628 </span>                :<span class="lineCov">      21131 :   sprintf (n, &quot;_%s#%s&quot;, prefix, obj);</span>
+<span class="lineNum">     629 </span>                :<span class="lineCov">      21131 :   return n;</span>
+<span class="lineNum">     630 </span>                :            : }
+<span class="lineNum">     631 </span>                :            : 
+<span class="lineNum">     632 </span>                :            : /* Creates an internal node given the node number as well as the name
+<a name="633"><span class="lineNum">     633 </span>                :            :    suffix.  An appropriate node name is constructed from the circuits</a>
+<span class="lineNum">     634 </span>                :            :    name and the suffix. */
+<span class="lineNum">     635 </span>                :<span class="lineCov">      21005 : void circuit::setInternalNode (int node, const char * suffix) {</span>
+<span class="lineNum">     636 </span>                :<span class="lineCov">      21005 :   char * n = createInternal (getName (), suffix);</span>
+<span class="lineNum">     637 </span>                :<span class="lineCov">      21005 :   setNode (node, n, 1);</span>
+<span class="lineNum">     638 </span>                :<span class="lineCov">      21005 :   free (n);</span>
+<span class="lineNum">     639 </span>                :<span class="lineCov">      21005 : }</span>
+<span class="lineNum">     640 </span>                :            : 
+<a name="641"><span class="lineNum">     641 </span>                :            : /* This function copies the matrix elements inside the given matrix to</a>
+<span class="lineNum">     642 </span>                :            :    the internal S-parameter matrix of the circuit. */
+<span class="lineNum">     643 </span>                :<span class="lineCov">       1070 : void circuit::setMatrixS (matrix s) {</span>
+<span class="lineNum">     644 </span>                :<span class="lineCov">       1070 :   int r = s.getRows ();</span>
+<span class="lineNum">     645 </span>                :<span class="lineCov">       1070 :   int c = s.getCols ();</span>
+<span class="lineNum">     646 </span>                :            :   // copy matrix elements
+<span class="lineNum">     647 </span>[<span class="branchCov" title="Branch 0 was taken 1070 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 1070 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       1070 :   if (r &gt; 0 &amp;&amp; c &gt; 0 &amp;&amp; r * c == size * size) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 1070 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<span class="lineNum">     648 </span>                :<span class="lineCov">       1070 :     memcpy (MatrixS, s.getData (), sizeof (nr_complex_t) * r * c);</span>
+<span class="lineNum">     649 </span>                :            :   }
+<span class="lineNum">     650 </span>                :<span class="lineCov">       1070 : }</span>
+<span class="lineNum">     651 </span>                :            : 
+<a name="652"><span class="lineNum">     652 </span>                :            : /* The function return a matrix containing the S-parameters of the</a>
+<span class="lineNum">     653 </span>                :            :    circuit. */
+<span class="lineNum">     654 </span>                :<span class="lineCov">         70 : matrix circuit::getMatrixS (void) {</span>
+<span class="lineNum">     655 </span>                :<span class="lineCov">         70 :   matrix res (size);</span>
+<span class="lineNum">     656 </span>        [<span class="branchCov" title="Branch 0 was taken 700 times"> + </span><span class="branchCov" title="Branch 1 was taken 70 times"> + </span>]:<span class="lineCov">        770 :   for(unsigned int i=0; i &lt; size; ++i)</span>
+<span class="lineNum">     657 </span>        [<span class="branchCov" title="Branch 0 was taken 7000 times"> + </span><span class="branchCov" title="Branch 1 was taken 700 times"> + </span>]:<span class="lineCov">       7700 :     for(unsigned int j=0; j &lt; size; ++j)</span>
+<span class="lineNum">     658 </span>                :<span class="lineCov">       7000 :       res(i,j) = MatrixS[i*size + j];</span>
+<span class="lineNum">     659 </span>                :<span class="lineCov">         70 :   return res;</span>
+<span class="lineNum">     660 </span>                :            : }
+<span class="lineNum">     661 </span>                :            : 
+<a name="662"><span class="lineNum">     662 </span>                :            : /* This function copies the matrix elements inside the given matrix to</a>
+<span class="lineNum">     663 </span>                :            :    the internal noise correlation matrix of the circuit. */
+<span class="lineNum">     664 </span>                :<span class="lineCov">         70 : void circuit::setMatrixN (matrix n) {</span>
+<span class="lineNum">     665 </span>                :<span class="lineCov">         70 :   int r = n.getRows ();</span>
+<span class="lineNum">     666 </span>                :<span class="lineCov">         70 :   int c = n.getCols ();</span>
+<span class="lineNum">     667 </span>                :            :   // copy matrix elements
+<span class="lineNum">     668 </span>[<span class="branchCov" title="Branch 0 was taken 70 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 70 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         70 :   if (r &gt; 0 &amp;&amp; c &gt; 0 &amp;&amp; r * c == size * size) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 70 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<span class="lineNum">     669 </span>                :<span class="lineCov">         70 :     memcpy (MatrixN, n.getData (), sizeof (nr_complex_t) * r * c);</span>
+<span class="lineNum">     670 </span>                :            :   }
+<span class="lineNum">     671 </span>                :<span class="lineCov">         70 : }</span>
+<span class="lineNum">     672 </span>                :            : 
+<a name="673"><span class="lineNum">     673 </span>                :            : /* The function return a matrix containing the noise correlation</a>
+<span class="lineNum">     674 </span>                :            :    matrix of the circuit. */
+<span class="lineNum">     675 </span>                :<span class="lineNoCov">          0 : matrix circuit::getMatrixN (void) {</span>
+<span class="lineNum">     676 </span>                :<span class="lineNoCov">          0 :   matrix res (size);</span>
+<span class="lineNum">     677 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for(unsigned int i=0; i &lt; size; ++i)</span>
+<span class="lineNum">     678 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(unsigned int j=0; j &lt; size; ++j)</span>
+<span class="lineNum">     679 </span>                :<span class="lineNoCov">          0 :       res(i,j) = MatrixN[i*size + j];</span>
+<span class="lineNum">     680 </span>                :<span class="lineNoCov">          0 :   return res;</span>
+<span class="lineNum">     681 </span>                :            : }
+<span class="lineNum">     682 </span>                :            : 
+<a name="683"><span class="lineNum">     683 </span>                :            : /* This function copies the matrix elements inside the given matrix to</a>
+<span class="lineNum">     684 </span>                :            :    the internal G-MNA matrix of the circuit. */
+<span class="lineNum">     685 </span>                :<span class="lineCov">       2600 : void circuit::setMatrixY (matrix y) {</span>
+<span class="lineNum">     686 </span>                :<span class="lineCov">       2600 :   int r = y.getRows ();</span>
+<span class="lineNum">     687 </span>                :<span class="lineCov">       2600 :   int c = y.getCols ();</span>
+<span class="lineNum">     688 </span>                :            :   // copy matrix elements
+<span class="lineNum">     689 </span>[<span class="branchCov" title="Branch 0 was taken 2600 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 2600 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">       2600 :   if (r &gt; 0 &amp;&amp; c &gt; 0 &amp;&amp; r * c == size * size) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 2600 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<span class="lineNum">     690 </span>                :<span class="lineCov">       2600 :     memcpy (MatrixY, y.getData (), sizeof (nr_complex_t) * r * c);</span>
+<span class="lineNum">     691 </span>                :            :   }
+<span class="lineNum">     692 </span>                :<span class="lineCov">       2600 : }</span>
+<span class="lineNum">     693 </span>                :            : 
+<a name="694"><span class="lineNum">     694 </span>                :            : /* The function return a matrix containing the G-MNA matrix of the</a>
+<span class="lineNum">     695 </span>                :            :    circuit. */
+<span class="lineNum">     696 </span>                :<span class="lineNoCov">          0 : matrix circuit::getMatrixY (void) {</span>
+<span class="lineNum">     697 </span>                :<span class="lineNoCov">          0 :   matrix res (size);</span>
+<span class="lineNum">     698 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for(unsigned int i=0; i &lt; size; ++i)</span>
+<span class="lineNum">     699 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for(unsigned int j=0; j &lt; size; ++j)</span>
+<span class="lineNum">     700 </span>                :<span class="lineNoCov">          0 :       res(i,j) = MatrixY[i*size + j];</span>
+<span class="lineNum">     701 </span>                :<span class="lineNoCov">          0 :   return res;</span>
+<span class="lineNum">     702 </span>                :            : }
+<a name="703"><span class="lineNum">     703 </span>                :            : </a>
+<span class="lineNum">     704 </span>                :            : // The function cleans up the B-MNA matrix entries.
+<span class="lineNum">     705 </span>                :<span class="lineCov">          2 : void circuit::clearB (void) {</span>
+<span class="lineNum">     706 </span>                :<span class="lineCov">          2 :   memset (MatrixB, 0, sizeof (nr_complex_t) * size * vsources);</span>
+<span class="lineNum">     707 </span>                :<span class="lineCov">          2 : }</span>
+<a name="708"><span class="lineNum">     708 </span>                :            : </a>
+<span class="lineNum">     709 </span>                :            : // The function cleans up the C-MNA matrix entries.
+<span class="lineNum">     710 </span>                :<span class="lineCov">          2 : void circuit::clearC (void) {</span>
+<span class="lineNum">     711 </span>                :<span class="lineCov">          2 :   memset (MatrixC, 0, sizeof (nr_complex_t) * size * vsources);</span>
+<span class="lineNum">     712 </span>                :<span class="lineCov">          2 : }</span>
+<a name="713"><span class="lineNum">     713 </span>                :            : </a>
+<span class="lineNum">     714 </span>                :            : // The function cleans up the D-MNA matrix entries.
+<span class="lineNum">     715 </span>                :<span class="lineNoCov">          0 : void circuit::clearD (void) {</span>
+<span class="lineNum">     716 </span>                :<span class="lineNoCov">          0 :   memset (MatrixD, 0, sizeof (nr_complex_t) * vsources * vsources);</span>
+<span class="lineNum">     717 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="718"><span class="lineNum">     718 </span>                :            : </a>
+<span class="lineNum">     719 </span>                :            : // The function cleans up the E-MNA matrix entries.
+<span class="lineNum">     720 </span>                :<span class="lineNoCov">          0 : void circuit::clearE (void) {</span>
+<span class="lineNum">     721 </span>                :<span class="lineNoCov">          0 :   memset (VectorE, 0, sizeof (nr_complex_t) * vsources);</span>
+<span class="lineNum">     722 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="723"><span class="lineNum">     723 </span>                :            : </a>
+<span class="lineNum">     724 </span>                :            : // The function cleans up the J-MNA matrix entries.
+<span class="lineNum">     725 </span>                :<span class="lineNoCov">          0 : void circuit::clearJ (void) {</span>
+<span class="lineNum">     726 </span>                :<span class="lineNoCov">          0 :   memset (VectorJ, 0, sizeof (nr_complex_t) * vsources);</span>
+<span class="lineNum">     727 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="728"><span class="lineNum">     728 </span>                :            : </a>
+<span class="lineNum">     729 </span>                :            : // The function cleans up the I-MNA matrix entries.
+<span class="lineNum">     730 </span>                :<span class="lineCov">        258 : void circuit::clearI (void) {</span>
+<span class="lineNum">     731 </span>                :<span class="lineCov">        258 :   memset (VectorI, 0, sizeof (nr_complex_t) * size);</span>
+<span class="lineNum">     732 </span>                :<span class="lineCov">        258 : }</span>
+<a name="733"><span class="lineNum">     733 </span>                :            : </a>
+<span class="lineNum">     734 </span>                :            : // The function cleans up the V-MNA matrix entries.
+<span class="lineNum">     735 </span>                :<span class="lineNoCov">          0 : void circuit::clearV (void) {</span>
+<span class="lineNum">     736 </span>                :<span class="lineNoCov">          0 :   memset (VectorV, 0, sizeof (nr_complex_t) * size);</span>
+<span class="lineNum">     737 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="738"><span class="lineNum">     738 </span>                :            : </a>
+<span class="lineNum">     739 </span>                :            : // The function cleans up the G-MNA matrix entries.
+<span class="lineNum">     740 </span>                :<span class="lineCov">       3906 : void circuit::clearY (void) {</span>
+<span class="lineNum">     741 </span>                :<span class="lineCov">       3906 :   memset (MatrixY, 0, sizeof (nr_complex_t) * size * size);</span>
+<span class="lineNum">     742 </span>                :<span class="lineCov">       3906 : }</span>
+<span class="lineNum">     743 </span>                :            : 
+<span class="lineNum">     744 </span>                :            : /* This function can be used by several components in order to place
+<span class="lineNum">     745 </span>                :            :    the n-th voltage source between node 'pos' and node 'neg' with the
+<a name="746"><span class="lineNum">     746 </span>                :            :    given value.  Remember to indicate this voltage source using the</a>
+<span class="lineNum">     747 </span>                :            :    function setVoltageSources(). */
+<span class="lineNum">     748 </span>                :<span class="lineCov">      23372 : void circuit::voltageSource (int n, int pos, int neg, nr_double_t value) {</span>
+<span class="lineNum">     749 </span>                :<span class="lineCov">      23372 :   setC (n, pos, +1.0); setC (n, neg, -1.0);</span>
+<span class="lineNum">     750 </span>                :<span class="lineCov">      23372 :   setB (pos, n, +1.0); setB (neg, n, -1.0);</span>
+<span class="lineNum">     751 </span>                :<span class="lineCov">      23372 :   setD (n, n, 0.0);</span>
+<span class="lineNum">     752 </span>                :<span class="lineCov">      23372 :   setE (n, value);</span>
+<span class="lineNum">     753 </span>                :<span class="lineCov">      23372 : }</span>
+<span class="lineNum">     754 </span>                :            : 
+<span class="lineNum">     755 </span>                :            : /* The function runs the necessary calculation in order to perform a
+<span class="lineNum">     756 </span>                :            :    single integration step of a voltage controlled capacitance placed
+<a name="757"><span class="lineNum">     757 </span>                :            :    in between the given nodes.  It is assumed that the appropiate</a>
+<span class="lineNum">     758 </span>                :            :    charge only depends on the voltage between these nodes. */
+<span class="lineNum">     759 </span>                :<span class="lineCov">     905785 : void circuit::transientCapacitance (int qstate, int pos, int neg,</span>
+<span class="lineNum">     760 </span>                :            :                                     nr_double_t cap, nr_double_t voltage,
+<span class="lineNum">     761 </span>                :            :                                     nr_double_t charge) {
+<span class="lineNum">     762 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     763 </span>                :<span class="lineCov">     905785 :   int cstate = qstate + 1;</span>
+<span class="lineNum">     764 </span>                :<span class="lineCov">     905785 :   setState (qstate, charge);</span>
+<span class="lineNum">     765 </span>        [<span class="branchCov" title="Branch 0 was taken 905785 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     905785 :   integrate (qstate, cap, g, i);</span>
+<span class="lineNum">     766 </span>                :<span class="lineCov">     905785 :   addY (pos, pos, +g); addY (neg, neg, +g);</span>
+<span class="lineNum">     767 </span>                :<span class="lineCov">     905785 :   addY (pos, neg, -g); addY (neg, pos, -g);</span>
+<span class="lineNum">     768 </span>                :<span class="lineCov">     905785 :   i = pol * (getState (cstate) - g * voltage);</span>
+<span class="lineNum">     769 </span>                :<span class="lineCov">     905785 :   addI (pos , -i);</span>
+<span class="lineNum">     770 </span>                :<span class="lineCov">     905785 :   addI (neg , +i);</span>
+<span class="lineNum">     771 </span>                :<span class="lineCov">     905785 : }</span>
+<span class="lineNum">     772 </span>                :            : 
+<a name="773"><span class="lineNum">     773 </span>                :            : /* This is the one-node variant of the above function.  It performs</a>
+<span class="lineNum">     774 </span>                :            :    the same steps for a single node related to ground. */
+<span class="lineNum">     775 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitance (int qstate, int node, nr_double_t cap,</span>
+<span class="lineNum">     776 </span>                :            :                                     nr_double_t voltage, nr_double_t charge) {
+<span class="lineNum">     777 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     778 </span>                :<span class="lineNoCov">          0 :   int cstate = qstate + 1;</span>
+<span class="lineNum">     779 </span>                :<span class="lineNoCov">          0 :   setState (qstate, charge);</span>
+<span class="lineNum">     780 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   integrate (qstate, cap, g, i);</span>
+<span class="lineNum">     781 </span>                :<span class="lineNoCov">          0 :   addY (node, node, +g);</span>
+<span class="lineNum">     782 </span>                :<span class="lineNoCov">          0 :   i = pol * (getState (cstate) - g * voltage);</span>
+<span class="lineNum">     783 </span>                :<span class="lineNoCov">          0 :   addI (node , -i);</span>
+<span class="lineNum">     784 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     785 </span>                :            : 
+<span class="lineNum">     786 </span>                :            : /* The function performs a single integration step of the given charge
+<span class="lineNum">     787 </span>                :            :    located between the given nodes.  It saves the current
+<a name="788"><span class="lineNum">     788 </span>                :            :    contributions of the charge itself and considers the polarity of</a>
+<span class="lineNum">     789 </span>                :            :    the circuit. */
+<span class="lineNum">     790 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitanceQ (int qstate, int qpos, int qneg,</span>
+<span class="lineNum">     791 </span>                :            :                                      nr_double_t charge) {
+<span class="lineNum">     792 </span>                :            :   nr_double_t unused, i;
+<span class="lineNum">     793 </span>                :<span class="lineNoCov">          0 :   int cstate = qstate + 1;</span>
+<span class="lineNum">     794 </span>                :<span class="lineNoCov">          0 :   setState (qstate, charge);</span>
+<span class="lineNum">     795 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   integrate (qstate, 0, unused, unused);</span>
+<span class="lineNum">     796 </span>                :<span class="lineNoCov">          0 :   i = pol * getState (cstate);</span>
+<span class="lineNum">     797 </span>                :<span class="lineNoCov">          0 :   addI (qpos , -i);</span>
+<span class="lineNum">     798 </span>                :<span class="lineNoCov">          0 :   addI (qneg , +i);</span>
+<span class="lineNum">     799 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     800 </span>                :            : 
+<a name="801"><span class="lineNum">     801 </span>                :            : /* This is the one-node variant of the above function.  It performs</a>
+<span class="lineNum">     802 </span>                :            :    the same steps for a single node related to ground. */
+<span class="lineNum">     803 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitanceQ (int qstate, int qpos,</span>
+<span class="lineNum">     804 </span>                :            :                                      nr_double_t charge) {
+<span class="lineNum">     805 </span>                :            :   nr_double_t unused, i;
+<span class="lineNum">     806 </span>                :<span class="lineNoCov">          0 :   int cstate = qstate + 1;</span>
+<span class="lineNum">     807 </span>                :<span class="lineNoCov">          0 :   setState (qstate, charge);</span>
+<span class="lineNum">     808 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   integrate (qstate, 0, unused, unused);</span>
+<span class="lineNum">     809 </span>                :<span class="lineNoCov">          0 :   i = pol * getState (cstate);</span>
+<span class="lineNum">     810 </span>                :<span class="lineNoCov">          0 :   addI (qpos , -i);</span>
+<span class="lineNum">     811 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     812 </span>                :            : 
+<span class="lineNum">     813 </span>                :            : /* This function stores the Jacobian entries due to the C = dQ/dV
+<span class="lineNum">     814 </span>                :            :    value.  The nodes where the charge is located as well as those of
+<span class="lineNum">     815 </span>                :            :    the voltage dependency, the appropiate capacitance value and the
+<span class="lineNum">     816 </span>                :            :    voltage across the the controlling branch must be given.  It also
+<a name="817"><span class="lineNum">     817 </span>                :            :    saves the current contributions which are necessary for the NR</a>
+<span class="lineNum">     818 </span>                :            :    iteration and considers the polarity of the circuit. */
+<span class="lineNum">     819 </span>                :<span class="lineCov">      71104 : void circuit::transientCapacitanceC (int qpos, int qneg, int vpos, int vneg,</span>
+<span class="lineNum">     820 </span>                :            :                                      nr_double_t cap, nr_double_t voltage) {
+<span class="lineNum">     821 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     822 </span>        [<span class="branchCov" title="Branch 0 was taken 71104 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">      71104 :   conductor (cap, g);</span>
+<span class="lineNum">     823 </span>                :<span class="lineCov">      71104 :   addY (qpos, vpos, +g); addY (qneg, vneg, +g);</span>
+<span class="lineNum">     824 </span>                :<span class="lineCov">      71104 :   addY (qpos, vneg, -g); addY (qneg, vpos, -g);</span>
+<span class="lineNum">     825 </span>                :<span class="lineCov">      71104 :   i = pol * (g * voltage);</span>
+<span class="lineNum">     826 </span>                :<span class="lineCov">      71104 :   addI (qpos , +i);</span>
+<span class="lineNum">     827 </span>                :<span class="lineCov">      71104 :   addI (qneg , -i);</span>
+<span class="lineNum">     828 </span>                :<span class="lineCov">      71104 : }</span>
+<span class="lineNum">     829 </span>                :            : 
+<span class="lineNum">     830 </span>                :            : /* This is the one-node variant of the transientCapacitanceC()
+<a name="831"><span class="lineNum">     831 </span>                :            :    function.  It performs the same steps for a single charge node</a>
+<span class="lineNum">     832 </span>                :            :    related to ground. */
+<span class="lineNum">     833 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitanceC2V (int qpos, int vpos, int vneg,</span>
+<span class="lineNum">     834 </span>                :            :                                        nr_double_t cap, nr_double_t voltage) {
+<span class="lineNum">     835 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     836 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   conductor (cap, g);</span>
+<span class="lineNum">     837 </span>                :<span class="lineNoCov">          0 :   addY (qpos, vpos, +g);</span>
+<span class="lineNum">     838 </span>                :<span class="lineNoCov">          0 :   addY (qpos, vneg, -g);</span>
+<span class="lineNum">     839 </span>                :<span class="lineNoCov">          0 :   i = pol * (g * voltage);</span>
+<span class="lineNum">     840 </span>                :<span class="lineNoCov">          0 :   addI (qpos , +i);</span>
+<span class="lineNum">     841 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     842 </span>                :            : 
+<span class="lineNum">     843 </span>                :            : /* This is the one-node variant of the transientCapacitanceC()
+<a name="844"><span class="lineNum">     844 </span>                :            :    function.  It performs the same steps for a single voltage node</a>
+<span class="lineNum">     845 </span>                :            :    related to ground. */
+<span class="lineNum">     846 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitanceC2Q (int qpos, int qneg, int vpos,</span>
+<span class="lineNum">     847 </span>                :            :                                        nr_double_t cap, nr_double_t voltage) {
+<span class="lineNum">     848 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     849 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   conductor (cap, g);</span>
+<span class="lineNum">     850 </span>                :<span class="lineNoCov">          0 :   addY (qpos, vpos, +g); addY (qneg, vpos, -g);</span>
+<span class="lineNum">     851 </span>                :<span class="lineNoCov">          0 :   i = pol * (g * voltage);</span>
+<span class="lineNum">     852 </span>                :<span class="lineNoCov">          0 :   addI (qpos , +i);</span>
+<span class="lineNum">     853 </span>                :<span class="lineNoCov">          0 :   addI (qneg , -i);</span>
+<span class="lineNum">     854 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     855 </span>                :            : 
+<span class="lineNum">     856 </span>                :            : /* This is the one-node variant of the transientCapacitanceC()
+<a name="857"><span class="lineNum">     857 </span>                :            :    function.  It performs the same steps for a single voltage node and</a>
+<span class="lineNum">     858 </span>                :            :    charge node related to ground. */
+<span class="lineNum">     859 </span>                :<span class="lineNoCov">          0 : void circuit::transientCapacitanceC (int qpos, int vpos,</span>
+<span class="lineNum">     860 </span>                :            :                                      nr_double_t cap, nr_double_t voltage) {
+<span class="lineNum">     861 </span>                :            :   nr_double_t g, i;
+<span class="lineNum">     862 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   conductor (cap, g);</span>
+<span class="lineNum">     863 </span>                :<span class="lineNoCov">          0 :   addY (qpos, vpos, +g);</span>
+<span class="lineNum">     864 </span>                :<span class="lineNoCov">          0 :   i = pol * (g * voltage);</span>
+<span class="lineNum">     865 </span>                :<span class="lineNoCov">          0 :   addI (qpos , +i);</span>
+<span class="lineNum">     866 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="867"><span class="lineNum">     867 </span>                :            : </a>
+<span class="lineNum">     868 </span>                :            : // The function initializes the histories of a circuit having the given age.
+<span class="lineNum">     869 </span>                :<span class="lineNoCov">          0 : void circuit::initHistory (nr_double_t age) {</span>
+<span class="lineNum">     870 </span>                :<span class="lineNoCov">          0 :   nHistories = getSize () + getVoltageSources ();</span>
+<span class="lineNum">     871 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span> :<span class="lineNoCov">          0 :   histories = new history[nHistories];</span>
+<span class="lineNum">         </span>   <span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">     872 </span>                :<span class="lineNoCov">          0 :   setHistoryAge (age);</span>
+<span class="lineNum">     873 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="874"><span class="lineNum">     874 </span>                :            : </a>
+<span class="lineNum">     875 </span>                :            : // Sets the age of all circuit histories
+<span class="lineNum">     876 </span>                :<span class="lineNoCov">          0 : void circuit::setHistoryAge (nr_double_t age) {</span>
+<span class="lineNum">     877 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; nHistories; i++)</span>
+<span class="lineNum">     878 </span>                :            :   {
+<span class="lineNum">     879 </span>                :<span class="lineNoCov">          0 :     histories[i].setAge (age);</span>
+<span class="lineNum">     880 </span>                :            :   }
+<span class="lineNum">     881 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     882 </span>                :            : 
+<span class="lineNum">     883 </span>                :            : 
+<a name="884"><span class="lineNum">     884 </span>                :            : </a>
+<span class="lineNum">     885 </span>                :            : // The function deletes the histories for the transient analysis.
+<span class="lineNum">     886 </span>                :<span class="lineCov">     125882 : void circuit::deleteHistory (void) {</span>
+<span class="lineNum">     887 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 125882 times"> + </span>]:<span class="lineCov">     125882 :   if (histories != NULL) {</span>
+<span class="lineNum">     888 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     delete[] histories;</span>
+<span class="lineNum">     889 </span>                :<span class="lineNoCov">          0 :     histories = NULL;</span>
+<span class="lineNum">     890 </span>                :            :   }
+<span class="lineNum">     891 </span>                :<span class="lineCov">     125882 :   setHistory (false);</span>
+<span class="lineNum">     892 </span>                :<span class="lineCov">     125882 : }</span>
+<span class="lineNum">     893 </span>                :            : 
+<a name="894"><span class="lineNum">     894 </span>                :            : // Truncates the transient analysis history (i.e. removes values newer</a>
+<span class="lineNum">     895 </span>                :            : // newer than time tcut).
+<span class="lineNum">     896 </span>                :<span class="lineNoCov">          0 : void circuit::truncateHistory (nr_double_t tcut) {</span>
+<span class="lineNum">     897 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (histories != NULL) {</span>
+<span class="lineNum">     898 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i = 0; i &lt; nHistories; i++)</span>
+<span class="lineNum">     899 </span>                :            :     {
+<span class="lineNum">     900 </span>                :<span class="lineNoCov">          0 :       histories[i].truncate (tcut);</span>
+<span class="lineNum">     901 </span>                :            :     }
+<span class="lineNum">     902 </span>                :            :   }
+<span class="lineNum">     903 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="904"><span class="lineNum">     904 </span>                :            : </a>
+<span class="lineNum">     905 </span>                :            : // Appends a history value.
+<span class="lineNum">     906 </span>                :<span class="lineNoCov">          0 : void circuit::appendHistory (int n, nr_double_t val) {</span>
+<span class="lineNum">     907 </span>                :<span class="lineNoCov">          0 :   histories[n].append (val);</span>
+<span class="lineNum">     908 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="909"><span class="lineNum">     909 </span>                :            : </a>
+<span class="lineNum">     910 </span>                :            : // Returns the required age of the history.
+<span class="lineNum">     911 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getHistoryAge (void) {</span>
+<span class="lineNum">     912 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (histories) return histories[0].getAge ();</span>
+<span class="lineNum">     913 </span>                :<span class="lineNoCov">          0 :   return 0.0;</span>
+<span class="lineNum">     914 </span>                :            : }
+<a name="915"><span class="lineNum">     915 </span>                :            : </a>
+<span class="lineNum">     916 </span>                :            : // Returns size of the history
+<span class="lineNum">     917 </span>                :<span class="lineNoCov">          0 : int circuit::getHistorySize (void) {</span>
+<span class="lineNum">     918 </span>                :<span class="lineNoCov">          0 :   return histories[0].getSize ();</span>
+<span class="lineNum">     919 </span>                :            : }
+<a name="920"><span class="lineNum">     920 </span>                :            : </a>
+<span class="lineNum">     921 </span>                :            : // Returns the time with the specified index
+<span class="lineNum">     922 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getHistoryTFromIndex (int idx)</span>
+<span class="lineNum">     923 </span>                :            : {
+<span class="lineNum">     924 </span>                :<span class="lineNoCov">          0 :   return histories[0].getTfromidx (idx);</span>
+<span class="lineNum">     925 </span>                :            : }
+<span class="lineNum">     926 </span>                :            : 
+<a name="927"><span class="lineNum">     927 </span>                :            : /* This function should be used to apply the time vector history to</a>
+<span class="lineNum">     928 </span>                :            :    the value histories of a circuit. */
+<span class="lineNum">     929 </span>                :<span class="lineNoCov">          0 : void circuit::applyHistory (history * h) {</span>
+<span class="lineNum">     930 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = 0; i &lt; nHistories; i++)</span>
+<span class="lineNum">     931 </span>                :            :   {
+<span class="lineNum">     932 </span>                :<span class="lineNoCov">          0 :     histories[i].apply(*h);</span>
+<span class="lineNum">     933 </span>                :            :   }
+<span class="lineNum">     934 </span>                :            : 
+<span class="lineNum">     935 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="936"><span class="lineNum">     936 </span>                :            : </a>
+<span class="lineNum">     937 </span>                :            : // Returns voltage at the given time for the given node.
+<span class="lineNum">     938 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getV (int port, nr_double_t t) {</span>
+<span class="lineNum">     939 </span>                :<span class="lineNoCov">          0 :   return histories[port].nearest (t);</span>
+<span class="lineNum">     940 </span>                :            : }
+<a name="941"><span class="lineNum">     941 </span>                :            : </a>
+<span class="lineNum">     942 </span>                :            : // Returns voltage at the given index from the history for the given node.
+<span class="lineNum">     943 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getV (int port, int idx) {</span>
+<span class="lineNum">     944 </span>                :<span class="lineNoCov">          0 :   return histories[port].getValfromidx (idx);</span>
+<span class="lineNum">     945 </span>                :            : }
+<a name="946"><span class="lineNum">     946 </span>                :            : </a>
+<span class="lineNum">     947 </span>                :            : // Returns current at the given time for the given voltage source.
+<span class="lineNum">     948 </span>                :<span class="lineNoCov">          0 : nr_double_t circuit::getJ (int nr, nr_double_t t) {</span>
+<span class="lineNum">     949 </span>                :<span class="lineNoCov">          0 :   return histories[nr + getSize ()].nearest (t);</span>
+<span class="lineNum">     950 </span>                :            : }
+<span class="lineNum">     951 </span>                :            : 
+<span class="lineNum">     952 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

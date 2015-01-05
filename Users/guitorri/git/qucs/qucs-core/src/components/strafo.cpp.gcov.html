@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/components/strafo.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/components</a> - strafo.cpp<span style="font-size: 80%;"> (source / <a href="strafo.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryMed">83.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">66</td>
+            <td class="headerCovTableEntry">132</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * strafo.cpp - symmetrical trafo class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2005, 2008, 2011 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;strafo.h&quot;
+<span class="lineNum">      31 </span>                :            : 
+<a name="32"><span class="lineNum">      32 </span>                :            : using namespace qucs;</a>
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :<span class="lineCov">          7 : strafo::strafo () : circuit (6) {</span>
+<span class="lineNum">      35 </span>                :<span class="lineCov">          7 :   type = CIR_STRAFO;</span>
+<a name="36"><span class="lineNum">      36 </span>                :<span class="lineCov">          7 : }</span></a>
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :<span class="lineCov">          4 : void strafo::initSP (void) {</span>
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :<span class="lineCov">          4 :   nr_double_t t1 = getPropertyDouble (&quot;T1&quot;);</span>
+<span class="lineNum">      41 </span>                :<span class="lineCov">          4 :   nr_double_t t2 = getPropertyDouble (&quot;T2&quot;);</span>
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :<span class="lineCov">          4 :   nr_double_t  d = t1 * t1 + t2 * t2 + 1.0;</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">          4 :   nr_double_t z1 = t1 * t1 / d;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">          4 :   nr_double_t z2 = t2 * t2 / d;</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">          4 :   nr_double_t z3 = 1.0 / d;</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">          4 :   nr_double_t z4 = t1 / d;</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">          4 :   nr_double_t z5 = t2 / d;</span>
+<span class="lineNum">      49 </span>                :<span class="lineCov">          4 :   nr_double_t z6 = t1 * t2 / d;</span>
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :<span class="lineCov">          4 :   allocMatrixS ();</span>
+<span class="lineNum">      52 </span>                :            : 
+<span class="lineNum">      53 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_1, NODE_1,  z1);    setS (NODE_1, NODE_2, z4);</span>
+<span class="lineNum">      54 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_1, NODE_3, -z4);    setS (NODE_1, NODE_4, -z6);</span>
+<span class="lineNum">      55 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_1, NODE_5, z6);     setS (NODE_1, NODE_6, 1 - z1);</span>
+<span class="lineNum">      56 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_2, NODE_1,  z4);    setS (NODE_2, NODE_2, z3);</span>
+<span class="lineNum">      57 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_2, NODE_3, 1 - z3); setS (NODE_2, NODE_4, -z5);</span>
+<span class="lineNum">      58 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_2, NODE_5, z5);     setS (NODE_2, NODE_6, -z4);</span>
+<span class="lineNum">      59 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_3, NODE_1, -z4);    setS (NODE_3, NODE_2, 1 - z3);</span>
+<span class="lineNum">      60 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_3, NODE_3, z3);     setS (NODE_3, NODE_4,  z5);</span>
+<span class="lineNum">      61 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_3, NODE_5, -z5);    setS (NODE_3, NODE_6, z4);</span>
+<span class="lineNum">      62 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_4, NODE_1, -z6);    setS (NODE_4, NODE_2, -z5);</span>
+<span class="lineNum">      63 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_4, NODE_3, z5);     setS (NODE_4, NODE_4,  z2);</span>
+<span class="lineNum">      64 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_4, NODE_5, 1 - z2); setS (NODE_4, NODE_6, z6);</span>
+<span class="lineNum">      65 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_5, NODE_1,  z6);    setS (NODE_5, NODE_2, z5);</span>
+<span class="lineNum">      66 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_5, NODE_3, -z5);    setS (NODE_5, NODE_4, 1 - z2);</span>
+<span class="lineNum">      67 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_5, NODE_5, z2);     setS (NODE_5, NODE_6, -z6);</span>
+<span class="lineNum">      68 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_6, NODE_1, 1 - z1); setS (NODE_6, NODE_2, -z4);</span>
+<span class="lineNum">      69 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_6, NODE_3, z4);     setS (NODE_6, NODE_4, z6);</span>
+<span class="lineNum">      70 </span>[<span class="branchCov" title="Branch 1 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 4 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          4 :   setS (NODE_6, NODE_5, -z6);    setS (NODE_6, NODE_6, z1);</span>
+<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          4 : }</span></a>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :<span class="lineCov">          7 : void strafo::initDC (void) {</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">          7 :   setVoltageSources (3);</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">          7 :   allocMatrixMNA ();</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">          7 :   voltageSource (VSRC_1, NODE_1, NODE_6);</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">          7 :   voltageSource (VSRC_2, NODE_5, NODE_4);</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">          7 :   voltageSource (VSRC_3, NODE_2, NODE_3);</span>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          7 : }</span></a>
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>                :<span class="lineCov">          3 : void strafo::initAC (void) {</span>
+<span class="lineNum">      82 </span>                :<span class="lineCov">          3 :   nr_double_t t1 = getPropertyDouble (&quot;T1&quot;);</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">          3 :   nr_double_t t2 = getPropertyDouble (&quot;T2&quot;);</span>
+<span class="lineNum">      84 </span>                :            : 
+<span class="lineNum">      85 </span>                :<span class="lineCov">          3 :   setVoltageSources (2);</span>
+<span class="lineNum">      86 </span>                :<span class="lineCov">          3 :   allocMatrixMNA ();</span>
+<span class="lineNum">      87 </span>                :            : 
+<span class="lineNum">      88 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_1, VSRC_1, -1.0); setB (NODE_2, VSRC_1, + t1);</span>
+<span class="lineNum">      89 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_3, VSRC_1, - t1); setB (NODE_4, VSRC_1, +0.0);</span>
+<span class="lineNum">      90 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_5, VSRC_1, +0.0); setB (NODE_6, VSRC_1, +1.0);</span>
+<span class="lineNum">      91 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_1, VSRC_2, +0.0); setB (NODE_2, VSRC_2, + t2);</span>
+<span class="lineNum">      92 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_3, VSRC_2, - t2); setB (NODE_4, VSRC_2, +1.0);</span>
+<span class="lineNum">      93 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setB (NODE_5, VSRC_2, -1.0); setB (NODE_6, VSRC_2, +0.0);</span>
+<span class="lineNum">      94 </span>                :            : 
+<span class="lineNum">      95 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_1, NODE_1, +1.0); setC (VSRC_1, NODE_2, - t1);</span>
+<span class="lineNum">      96 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_1, NODE_3, + t1); setC (VSRC_1, NODE_4, +0.0);</span>
+<span class="lineNum">      97 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_1, NODE_5, +0.0); setC (VSRC_1, NODE_6, -1.0);</span>
+<span class="lineNum">      98 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_2, NODE_1, +0.0); setC (VSRC_2, NODE_2, - t2);</span>
+<span class="lineNum">      99 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_2, NODE_3, + t2); setC (VSRC_2, NODE_4, -1.0);</span>
+<span class="lineNum">     100 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setC (VSRC_2, NODE_5, +1.0); setC (VSRC_2, NODE_6, +0.0);</span>
+<span class="lineNum">     101 </span>                :            : 
+<span class="lineNum">     102 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setD (VSRC_1, VSRC_1, 0); setD (VSRC_2, VSRC_2, 0);</span>
+<span class="lineNum">     103 </span>[<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">          3 :   setD (VSRC_1, VSRC_2, 0); setD (VSRC_2, VSRC_1, 0);</span>
+<span class="lineNum">     104 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :   setE (VSRC_1, 0.0);</span>
+<span class="lineNum">     105 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :   setE (VSRC_2, 0.0);</span>
+<a name="106"><span class="lineNum">     106 </span>                :<span class="lineCov">          3 : }</span></a>
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineCov">          3 : void strafo::initTR (void) {</span>
+<span class="lineNum">     109 </span>                :<span class="lineCov">          3 :   initAC ();</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">          3 : }</span>
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            : // properties
+<span class="lineNum">     113 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     114 </span>                :            :   { &quot;T1&quot;, PROP_REAL, { 1, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     115 </span>                :            :   { &quot;T2&quot;, PROP_REAL, { 1, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     116 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     117 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     118 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     119 </span>                :            : struct define_t strafo::cirdef =
+<span class="lineNum">     120 </span>                :            :   { &quot;sTr&quot;, 6, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/math/fspecial.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/math</a> - fspecial.cpp<span style="font-size: 80%;"> (source / <a href="fspecial.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">102</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * fspecial.cpp - special functions implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2006, 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;float.h&gt;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &quot;compat.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;constants.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;fspecial.h&quot;
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            : /* The function computes the complete elliptic integral of first kind
+<a name="42"><span class="lineNum">      42 </span>                :            :    K() and the second kind E() using the arithmetic-geometric mean</a>
+<span class="lineNum">      43 </span>                :            :    algorithm (AGM) by Abramowitz and Stegun. */
+<span class="lineNum">      44 </span>                :<span class="lineNoCov">          0 : void fspecial::ellip_ke (nr_double_t arg, nr_double_t &amp;k, nr_double_t &amp;e) {</span>
+<span class="lineNum">      45 </span>                :<span class="lineNoCov">          0 :   int iMax = 16;</span>
+<span class="lineNum">      46 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (arg == 1.0) {</span>
+<span class="lineNum">      47 </span>                :<span class="lineNoCov">          0 :     k = std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">      48 </span>                :<span class="lineNoCov">          0 :     e = 0;</span>
+<span class="lineNum">      49 </span>                :            :   }
+<span class="lineNum">      50 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (std::isinf (arg) &amp;&amp; arg &lt; 0) {</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">      51 </span>                :<span class="lineNoCov">          0 :     k = 0;</span>
+<span class="lineNum">      52 </span>                :<span class="lineNoCov">          0 :     e = std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">      53 </span>                :            :   }
+<span class="lineNum">      54 </span>                :            :   else {
+<span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 :     nr_double_t a, b, c, f, s, fk = 1, fe = 1, t, da = arg;</span>
+<span class="lineNum">      56 </span>                :            :     int i;
+<span class="lineNum">      57 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (arg &lt; 0) {</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 :       fk = 1 / sqrt (1 - arg);</span>
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :       fe = sqrt (1 - arg);</span>
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 :       da = -arg / (1 - arg);</span>
+<span class="lineNum">      61 </span>                :            :     }
+<span class="lineNum">      62 </span>                :<span class="lineNoCov">          0 :     a = 1;</span>
+<span class="lineNum">      63 </span>                :<span class="lineNoCov">          0 :     b = sqrt (1 - da);</span>
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 :     c = sqrt (da);</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :     f = 0.5;</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :     s = f * c * c;</span>
+<span class="lineNum">      67 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (i = 0; i &lt; iMax; i++) {</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :       t = (a + b) / 2;</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :       c = (a - b) / 2;</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :       b = sqrt (a * b);</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :       a = t;</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :       f *= 2;</span>
+<span class="lineNum">      73 </span>                :<span class="lineNoCov">          0 :       s += f * c * c;</span>
+<span class="lineNum">      74 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (c / a &lt; std::numeric_limits&lt;nr_double_t&gt;::epsilon()) break;</span>
+<span class="lineNum">      75 </span>                :            :     }
+<span class="lineNum">      76 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (i &gt;= iMax) {</span>
+<span class="lineNum">      77 </span>                :<span class="lineNoCov">          0 :       k = 0; e = 0;</span>
+<span class="lineNum">      78 </span>                :            :     }
+<span class="lineNum">      79 </span>                :            :     else {
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :       k = M_PI_2 / a;</span>
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 :       e = M_PI_2 * (1 - s) / a;</span>
+<span class="lineNum">      82 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (arg &lt; 0) {</span>
+<span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 :         k *= fk;</span>
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :         e *= fe;</span>
+<span class="lineNum">      85 </span>                :            :       }
+<span class="lineNum">      86 </span>                :            :     }
+<span class="lineNum">      87 </span>                :            :   }
+<span class="lineNum">      88 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      89 </span>                :            : 
+<span class="lineNum">      90 </span>                :            : const nr_double_t SN_ACC = 1e-5;        // Accuracy of sn(x) is SN_ACC^2
+<span class="lineNum">      91 </span>                :            : const nr_double_t K_ERR  = 1e-8;        // Accuracy of K(k)
+<a name="92"><span class="lineNum">      92 </span>                :            : </a>
+<span class="lineNum">      93 </span>                :            : // Computes Carlson's elliptic integral of the first kind.
+<span class="lineNum">      94 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::ellip_rf (nr_double_t x, nr_double_t y, nr_double_t z) {</span>
+<span class="lineNum">      95 </span>                :            :   nr_double_t al, av, dx, dy, dz, e2, e3;
+<span class="lineNum">      96 </span>                :            :   nr_double_t sx, sy, sz, xt, yt, zt;
+<span class="lineNum">      97 </span>                :            : 
+<span class="lineNum">      98 </span>                :            :   // constants
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :   const nr_double_t c1 = 1.0 / 24.0;</span>
+<span class="lineNum">     100 </span>                :<span class="lineNoCov">          0 :   const nr_double_t c2 = 0.1;</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :   const nr_double_t c3 = 3.0 / 44.0;</span>
+<span class="lineNum">     102 </span>                :<span class="lineNoCov">          0 :   const nr_double_t c4 = 1.0 / 14.0;</span>
+<span class="lineNum">     103 </span>                :            : 
+<span class="lineNum">     104 </span>                :<span class="lineNoCov">          0 :   xt = x;</span>
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :   yt = y;</span>
+<span class="lineNum">     106 </span>                :<span class="lineNoCov">          0 :   zt = z;</span>
+<span class="lineNum">     107 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   do {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>][<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>]
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 :     sx = sqrt (xt);</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :     sy = sqrt (yt);</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :     sz = sqrt (zt);</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :     al = sx * (sy + sz) + sy * sz;</span>
+<span class="lineNum">     112 </span>                :<span class="lineNoCov">          0 :     xt = 0.25 * (xt + al);</span>
+<span class="lineNum">     113 </span>                :<span class="lineNoCov">          0 :     yt = 0.25 * (yt + al);</span>
+<span class="lineNum">     114 </span>                :<span class="lineNoCov">          0 :     zt = 0.25 * (zt + al);</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 :     av = (xt + yt + zt) / 3.0;</span>
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 :     dx = (av - xt) / av;</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :     dy = (av - yt) / av;</span>
+<span class="lineNum">     118 </span>                :<span class="lineNoCov">          0 :     dz = (av - zt) / av;</span>
+<span class="lineNum">     119 </span>                :            :   }
+<span class="lineNum">     120 </span>                :<span class="lineNoCov">          0 :   while (MAX (MAX (fabs (dx), fabs (dy)), fabs (dz)) &gt; K_ERR);</span>
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :   e2 = dx * dy - dz * dz;</span>
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 :   e3 = dx * dy * dz;</span>
+<span class="lineNum">     124 </span>                :<span class="lineNoCov">          0 :   return (1 + (c1 * e2 - c2 - c3 * e3) * e2 + c4 * e3) / sqrt (av);</span>
+<span class="lineNum">     125 </span>                :            : }
+<a name="126"><span class="lineNum">     126 </span>                :            : </a>
+<span class="lineNum">     127 </span>                :            : // Compute the Jacobian elliptic functions sn (u,k), cn (u,k) and dn (u,k).
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::ellip_sncndn (nr_double_t u, nr_double_t k,</span>
+<span class="lineNum">     129 </span>                :            :                       nr_double_t&amp; sn, nr_double_t&amp; cn, nr_double_t&amp; dn) {
+<span class="lineNum">     130 </span>                :            :   nr_double_t a, b, c, d;
+<span class="lineNum">     131 </span>                :            :   nr_double_t fn[14], en[14];
+<span class="lineNum">     132 </span>                :            :   int l;
+<span class="lineNum">     133 </span>                :            :   bool bo;
+<span class="lineNum">     134 </span>                :            : 
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :   d = 1 - k;</span>
+<span class="lineNum">     136 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (k) {</span>
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :     bo = (k &lt; 0);</span>
+<span class="lineNum">     138 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (bo) {</span>
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :       k /= -1 / d;</span>
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 :       u *= (d = sqrt (d));</span>
+<span class="lineNum">     141 </span>                :            :     }
+<span class="lineNum">     142 </span>                :<span class="lineNoCov">          0 :     a = 1;</span>
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :     dn = 1;</span>
+<span class="lineNum">     144 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (int i = 1; i &lt; 14; i++) {</span>
+<span class="lineNum">     145 </span>                :<span class="lineNoCov">          0 :       l = i;</span>
+<span class="lineNum">     146 </span>                :<span class="lineNoCov">          0 :       fn[i] = a;</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :       en[i] = (k = sqrt (k));</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :       c = 0.5 * (a + k);</span>
+<span class="lineNum">     149 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (fabs (a - k) &lt;= SN_ACC * a)</span>
+<span class="lineNum">     150 </span>                :<span class="lineNoCov">          0 :         break;</span>
+<span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 :       k *= a;</span>
+<span class="lineNum">     152 </span>                :<span class="lineNoCov">          0 :       a = c;</span>
+<span class="lineNum">     153 </span>                :            :     }
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 :     u *= c;</span>
+<span class="lineNum">     155 </span>                :<span class="lineNoCov">          0 :     sn = sin (u);</span>
+<span class="lineNum">     156 </span>                :<span class="lineNoCov">          0 :     cn = cos (u);</span>
+<span class="lineNum">     157 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (sn) {</span>
+<span class="lineNum">     158 </span>                :<span class="lineNoCov">          0 :       a = cn / sn;</span>
+<span class="lineNum">     159 </span>                :<span class="lineNoCov">          0 :       c *= a;</span>
+<span class="lineNum">     160 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       for (int ii = l; ii &gt; 0; ii--) {</span>
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 :         b = fn[ii];</span>
+<span class="lineNum">     162 </span>                :<span class="lineNoCov">          0 :         a *= c;</span>
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :         c *= dn;</span>
+<span class="lineNum">     164 </span>                :<span class="lineNoCov">          0 :         dn = (en[ii] + a) / (b + a);</span>
+<span class="lineNum">     165 </span>                :<span class="lineNoCov">          0 :         a = c / b;</span>
+<span class="lineNum">     166 </span>                :            :       }
+<span class="lineNum">     167 </span>                :<span class="lineNoCov">          0 :       a = 1 / sqrt (c * c + 1);</span>
+<span class="lineNum">     168 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       sn = (sn &gt;= 0 ? a : -a);</span>
+<span class="lineNum">     169 </span>                :<span class="lineNoCov">          0 :       cn = sn * c;</span>
+<span class="lineNum">     170 </span>                :            :     }
+<span class="lineNum">     171 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (bo) {</span>
+<span class="lineNum">     172 </span>                :<span class="lineNoCov">          0 :       a = dn;</span>
+<span class="lineNum">     173 </span>                :<span class="lineNoCov">          0 :       dn = cn;</span>
+<span class="lineNum">     174 </span>                :<span class="lineNoCov">          0 :       cn = a;</span>
+<span class="lineNum">     175 </span>                :<span class="lineNoCov">          0 :       sn /= d;</span>
+<span class="lineNum">     176 </span>                :            :     }
+<span class="lineNum">     177 </span>                :            :   }
+<span class="lineNum">     178 </span>                :            :   else {
+<span class="lineNum">     179 </span>                :<span class="lineNoCov">          0 :     cn = 1 / cosh (u);</span>
+<span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 :     dn = cn;</span>
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :     sn = tanh (u);</span>
+<span class="lineNum">     182 </span>                :            :   }
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 :   return sn;</span>
+<span class="lineNum">     184 </span>                :            : }
+<span class="lineNum">     185 </span>                :            : 
+<span class="lineNum">     186 </span>                :            : /* data for a Chebyshev series over a given interval */
+<span class="lineNum">     187 </span>                :            : struct cheb_series_t {
+<span class="lineNum">     188 </span>                :            :   nr_double_t * c;   /* coefficients                */
+<span class="lineNum">     189 </span>                :            :   int order;         /* order of expansion          */
+<span class="lineNum">     190 </span>                :            :   nr_double_t a;     /* lower interval point        */
+<span class="lineNum">     191 </span>                :            :   nr_double_t b;     /* upper interval point        */
+<span class="lineNum">     192 </span>                :            : };
+<a name="193"><span class="lineNum">     193 </span>                :            : typedef struct cheb_series_t cheb_series;</a>
+<span class="lineNum">     194 </span>                :            : 
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 : static nr_double_t cheb_eval (const cheb_series * cs, const nr_double_t x) {</span>
+<span class="lineNum">     196 </span>                :<span class="lineNoCov">          0 :   nr_double_t d  = 0.0;</span>
+<span class="lineNum">     197 </span>                :<span class="lineNoCov">          0 :   nr_double_t dd = 0.0;</span>
+<span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 :   nr_double_t y  = (2.0 * x - cs-&gt;a - cs-&gt;b) / (cs-&gt;b - cs-&gt;a);</span>
+<span class="lineNum">     199 </span>                :<span class="lineNoCov">          0 :   nr_double_t y2 = 2.0 * y;</span>
+<span class="lineNum">     200 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (int i = cs-&gt;order; i &gt;= 1; i--) {</span>
+<span class="lineNum">     201 </span>                :<span class="lineNoCov">          0 :     nr_double_t t = d;</span>
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 :     d = y2 * d - dd + cs-&gt;c[i];</span>
+<span class="lineNum">     203 </span>                :<span class="lineNoCov">          0 :     dd = t;</span>
+<span class="lineNum">     204 </span>                :            :   }
+<span class="lineNum">     205 </span>                :<span class="lineNoCov">          0 :   d = y * d - dd + 0.5 * cs-&gt;c[0];</span>
+<span class="lineNum">     206 </span>                :<span class="lineNoCov">          0 :   return d;</span>
+<span class="lineNum">     207 </span>                :            : }
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :            : #if !defined (HAVE_ERF) || !defined (HAVE_ERFC)
+<span class="lineNum">     210 </span>                :            : 
+<span class="lineNum">     211 </span>                :            : /* Chebyshev fit for erfc ((t+1)/2), -1 &lt; t &lt; 1 */
+<span class="lineNum">     212 </span>                :            : static nr_double_t erfc_xlt1_data[20] = {
+<span class="lineNum">     213 </span>                :            :   1.06073416421769980345174155056,
+<span class="lineNum">     214 </span>                :            :  -0.42582445804381043569204735291,
+<span class="lineNum">     215 </span>                :            :   0.04955262679620434040357683080,
+<span class="lineNum">     216 </span>                :            :   0.00449293488768382749558001242,
+<span class="lineNum">     217 </span>                :            :  -0.00129194104658496953494224761,
+<span class="lineNum">     218 </span>                :            :  -0.00001836389292149396270416979,
+<span class="lineNum">     219 </span>                :            :   0.00002211114704099526291538556,
+<span class="lineNum">     220 </span>                :            :  -5.23337485234257134673693179020e-7,
+<span class="lineNum">     221 </span>                :            :  -2.78184788833537885382530989578e-7,
+<span class="lineNum">     222 </span>                :            :   1.41158092748813114560316684249e-8,
+<span class="lineNum">     223 </span>                :            :   2.72571296330561699984539141865e-9,
+<span class="lineNum">     224 </span>                :            :  -2.06343904872070629406401492476e-10,
+<span class="lineNum">     225 </span>                :            :  -2.14273991996785367924201401812e-11,
+<span class="lineNum">     226 </span>                :            :   2.22990255539358204580285098119e-12,
+<span class="lineNum">     227 </span>                :            :   1.36250074650698280575807934155e-13,
+<span class="lineNum">     228 </span>                :            :  -1.95144010922293091898995913038e-14,
+<span class="lineNum">     229 </span>                :            :  -6.85627169231704599442806370690e-16,
+<span class="lineNum">     230 </span>                :            :   1.44506492869699938239521607493e-16,
+<span class="lineNum">     231 </span>                :            :   2.45935306460536488037576200030e-18,
+<span class="lineNum">     232 </span>                :            :  -9.29599561220523396007359328540e-19
+<span class="lineNum">     233 </span>                :            : };
+<span class="lineNum">     234 </span>                :            : static cheb_series erfc_xlt1_cs = {
+<span class="lineNum">     235 </span>                :            :   erfc_xlt1_data, 19, -1, 1
+<span class="lineNum">     236 </span>                :            : };
+<span class="lineNum">     237 </span>                :            : 
+<span class="lineNum">     238 </span>                :            : /* Chebyshev fit for erfc (x) * exp (x^2), 1 &lt; x &lt; 5, x = 2t + 3, -1 &lt; t &lt; 1 */
+<span class="lineNum">     239 </span>                :            : static nr_double_t erfc_x15_data[25] = {
+<span class="lineNum">     240 </span>                :            :   0.44045832024338111077637466616,
+<span class="lineNum">     241 </span>                :            :  -0.143958836762168335790826895326,
+<span class="lineNum">     242 </span>                :            :   0.044786499817939267247056666937,
+<span class="lineNum">     243 </span>                :            :  -0.013343124200271211203618353102,
+<span class="lineNum">     244 </span>                :            :   0.003824682739750469767692372556,
+<span class="lineNum">     245 </span>                :            :  -0.001058699227195126547306482530,
+<span class="lineNum">     246 </span>                :            :   0.000283859419210073742736310108,
+<span class="lineNum">     247 </span>                :            :  -0.000073906170662206760483959432,
+<span class="lineNum">     248 </span>                :            :   0.000018725312521489179015872934,
+<span class="lineNum">     249 </span>                :            :  -4.62530981164919445131297264430e-6,
+<span class="lineNum">     250 </span>                :            :   1.11558657244432857487884006422e-6,
+<span class="lineNum">     251 </span>                :            :  -2.63098662650834130067808832725e-7,
+<span class="lineNum">     252 </span>                :            :   6.07462122724551777372119408710e-8,
+<span class="lineNum">     253 </span>                :            :  -1.37460865539865444777251011793e-8,
+<span class="lineNum">     254 </span>                :            :   3.05157051905475145520096717210e-9,
+<span class="lineNum">     255 </span>                :            :  -6.65174789720310713757307724790e-10,
+<span class="lineNum">     256 </span>                :            :   1.42483346273207784489792999706e-10,
+<span class="lineNum">     257 </span>                :            :  -3.00141127395323902092018744545e-11,
+<span class="lineNum">     258 </span>                :            :   6.22171792645348091472914001250e-12,
+<span class="lineNum">     259 </span>                :            :  -1.26994639225668496876152836555e-12,
+<span class="lineNum">     260 </span>                :            :   2.55385883033257575402681845385e-13,
+<span class="lineNum">     261 </span>                :            :  -5.06258237507038698392265499770e-14,
+<span class="lineNum">     262 </span>                :            :   9.89705409478327321641264227110e-15,
+<span class="lineNum">     263 </span>                :            :  -1.90685978789192181051961024995e-15,
+<span class="lineNum">     264 </span>                :            :   3.50826648032737849245113757340e-16
+<span class="lineNum">     265 </span>                :            : };
+<span class="lineNum">     266 </span>                :            : static cheb_series erfc_x15_cs = {
+<span class="lineNum">     267 </span>                :            :   erfc_x15_data, 24, -1, 1
+<span class="lineNum">     268 </span>                :            : };
+<span class="lineNum">     269 </span>                :            : 
+<span class="lineNum">     270 </span>                :            : /* Chebyshev fit for erfc(x) * exp(x^2),
+<span class="lineNum">     271 </span>                :            :    5 &lt; x &lt; 10, x = (5t + 15)/2, -1 &lt; t &lt;  */
+<span class="lineNum">     272 </span>                :            : static nr_double_t erfc_x510_data[20] = {
+<span class="lineNum">     273 </span>                :            :   1.11684990123545698684297865808,
+<span class="lineNum">     274 </span>                :            :   0.003736240359381998520654927536,
+<span class="lineNum">     275 </span>                :            :  -0.000916623948045470238763619870,
+<span class="lineNum">     276 </span>                :            :   0.000199094325044940833965078819,
+<span class="lineNum">     277 </span>                :            :  -0.000040276384918650072591781859,
+<span class="lineNum">     278 </span>                :            :   7.76515264697061049477127605790e-6,
+<span class="lineNum">     279 </span>                :            :  -1.44464794206689070402099225301e-6,
+<span class="lineNum">     280 </span>                :            :   2.61311930343463958393485241947e-7,
+<span class="lineNum">     281 </span>                :            :  -4.61833026634844152345304095560e-8,
+<span class="lineNum">     282 </span>                :            :   8.00253111512943601598732144340e-9,
+<span class="lineNum">     283 </span>                :            :  -1.36291114862793031395712122089e-9,
+<span class="lineNum">     284 </span>                :            :   2.28570483090160869607683087722e-10,
+<span class="lineNum">     285 </span>                :            :  -3.78022521563251805044056974560e-11,
+<span class="lineNum">     286 </span>                :            :   6.17253683874528285729910462130e-12,
+<span class="lineNum">     287 </span>                :            :  -9.96019290955316888445830597430e-13,
+<span class="lineNum">     288 </span>                :            :   1.58953143706980770269506726000e-13,
+<span class="lineNum">     289 </span>                :            :  -2.51045971047162509999527428316e-14,
+<span class="lineNum">     290 </span>                :            :   3.92607828989125810013581287560e-15,
+<span class="lineNum">     291 </span>                :            :  -6.07970619384160374392535453420e-16,
+<span class="lineNum">     292 </span>                :            :   9.12600607264794717315507477670e-17
+<span class="lineNum">     293 </span>                :            : };
+<span class="lineNum">     294 </span>                :            : static cheb_series erfc_x510_cs = {
+<span class="lineNum">     295 </span>                :            :   erfc_x510_data, 19, -1, 1
+<span class="lineNum">     296 </span>                :            : };
+<span class="lineNum">     297 </span>                :            : 
+<span class="lineNum">     298 </span>                :            : /* Estimates erfc (x) valid for 8 &lt; x &lt; 100, this is based on index 5725
+<span class="lineNum">     299 </span>                :            :    in Hart et al. */
+<span class="lineNum">     300 </span>                :            : static nr_double_t erfc8 (nr_double_t x) {
+<span class="lineNum">     301 </span>                :            :   static nr_double_t p[] = {
+<span class="lineNum">     302 </span>                :            :     2.97886562639399288862,
+<span class="lineNum">     303 </span>                :            :     7.409740605964741794425,
+<span class="lineNum">     304 </span>                :            :     6.1602098531096305440906,
+<span class="lineNum">     305 </span>                :            :     5.019049726784267463450058,
+<span class="lineNum">     306 </span>                :            :     1.275366644729965952479585264,
+<span class="lineNum">     307 </span>                :            :     0.5641895835477550741253201704
+<span class="lineNum">     308 </span>                :            :   };
+<span class="lineNum">     309 </span>                :            :   static nr_double_t q[] = {
+<span class="lineNum">     310 </span>                :            :     3.3690752069827527677,
+<span class="lineNum">     311 </span>                :            :     9.608965327192787870698,
+<span class="lineNum">     312 </span>                :            :     17.08144074746600431571095,
+<span class="lineNum">     313 </span>                :            :     12.0489519278551290360340491,
+<span class="lineNum">     314 </span>                :            :     9.396034016235054150430579648,
+<span class="lineNum">     315 </span>                :            :     2.260528520767326969591866945,
+<span class="lineNum">     316 </span>                :            :     1.0
+<span class="lineNum">     317 </span>                :            :   };
+<span class="lineNum">     318 </span>                :            :   nr_double_t n = 0.0, d = 0.0;
+<span class="lineNum">     319 </span>                :            :   int i;
+<span class="lineNum">     320 </span>                :            :   n = p[5];
+<span class="lineNum">     321 </span>                :            :   for (i = 4; i &gt;= 0; --i) n = x * n + p[i];
+<span class="lineNum">     322 </span>                :            :   d = q[6];
+<span class="lineNum">     323 </span>                :            :   for (i = 5; i &gt;= 0; --i) d = x * d + q[i];
+<span class="lineNum">     324 </span>                :            : 
+<span class="lineNum">     325 </span>                :            :   return exp (-x * x) * (n / d);
+<span class="lineNum">     326 </span>                :            : }
+<span class="lineNum">     327 </span>                :            : 
+<span class="lineNum">     328 </span>                :            : #endif /* !HAVE_ERF || !HAVE_ERFC */
+<span class="lineNum">     329 </span>                :            : 
+<span class="lineNum">     330 </span>                :            : #ifndef HAVE_ERFC
+<span class="lineNum">     331 </span>                :            : 
+<span class="lineNum">     332 </span>                :            : nr_double_t fspecial::erfc (nr_double_t x) {
+<span class="lineNum">     333 </span>                :            :   const nr_double_t ax = fabs (x);
+<span class="lineNum">     334 </span>                :            :   nr_double_t val;
+<span class="lineNum">     335 </span>                :            : 
+<span class="lineNum">     336 </span>                :            :   if (ax &lt;= 1.0) {
+<span class="lineNum">     337 </span>                :            :     nr_double_t t = 2.0 * ax - 1.0;
+<span class="lineNum">     338 </span>                :            :     val = cheb_eval (&amp;erfc_xlt1_cs, t);
+<span class="lineNum">     339 </span>                :            :   }
+<span class="lineNum">     340 </span>                :            :   else if (ax &lt;= 5.0) {
+<span class="lineNum">     341 </span>                :            :     nr_double_t ex2 = exp (-x * x);
+<span class="lineNum">     342 </span>                :            :     nr_double_t t = 0.5 * (ax - 3.0);
+<span class="lineNum">     343 </span>                :            :     val = ex2 * cheb_eval (&amp;erfc_x15_cs, t);
+<span class="lineNum">     344 </span>                :            :   }
+<span class="lineNum">     345 </span>                :            :   else if (ax &lt; 10.0) {
+<span class="lineNum">     346 </span>                :            :     nr_double_t ex = exp(-x * x) / ax;
+<span class="lineNum">     347 </span>                :            :     nr_double_t t = (2.0 * ax - 15.0) / 5.0;
+<span class="lineNum">     348 </span>                :            :     val = ex * cheb_eval (&amp;erfc_x510_cs, t);
+<span class="lineNum">     349 </span>                :            :   }
+<span class="lineNum">     350 </span>                :            :   else {
+<span class="lineNum">     351 </span>                :            :     val = erfc8 (ax);
+<span class="lineNum">     352 </span>                :            :   }
+<span class="lineNum">     353 </span>                :            :   return (x &lt; 0.0) ? 2.0 - val : val;
+<a name="354"><span class="lineNum">     354 </span>                :            : }</a>
+<span class="lineNum">     355 </span>                :            : #else
+<span class="lineNum">     356 </span>                :<span class="lineNoCov">          0 : nr_double_t  fspecial::erfc (nr_double_t d) {</span>
+<span class="lineNum">     357 </span>                :<span class="lineNoCov">          0 :   return ::erfc (d);</span>
+<span class="lineNum">     358 </span>                :            : }
+<span class="lineNum">     359 </span>                :            : #endif /* HAVE_ERFC */
+<span class="lineNum">     360 </span>                :            : 
+<span class="lineNum">     361 </span>                :            : #ifndef HAVE_ERF
+<span class="lineNum">     362 </span>                :            : 
+<span class="lineNum">     363 </span>                :            : /* Abramowitz + Stegun, 7.1.5 */
+<span class="lineNum">     364 </span>                :            : static nr_double_t erfseries (nr_double_t x) {
+<span class="lineNum">     365 </span>                :            :   nr_double_t c = x;
+<span class="lineNum">     366 </span>                :            :   nr_double_t e = c;
+<span class="lineNum">     367 </span>                :            :   nr_double_t d;
+<span class="lineNum">     368 </span>                :            :   for (int k = 1; k &lt; 30; ++k) {
+<span class="lineNum">     369 </span>                :            :     c *= -x * x / k;
+<span class="lineNum">     370 </span>                :            :     d  = c / (2.0 * k + 1.0);
+<span class="lineNum">     371 </span>                :            :     e += d;
+<span class="lineNum">     372 </span>                :            :   }
+<span class="lineNum">     373 </span>                :            :   return 2.0 / M_SQRTPI * e;
+<span class="lineNum">     374 </span>                :            : }
+<span class="lineNum">     375 </span>                :            : 
+<span class="lineNum">     376 </span>                :            : nr_double_t fspecial::erf (nr_double_t x) {
+<span class="lineNum">     377 </span>                :            :   if (fabs (x) &lt; 1.0) {
+<span class="lineNum">     378 </span>                :            :     return erfseries (x);
+<span class="lineNum">     379 </span>                :            :   }
+<span class="lineNum">     380 </span>                :            :   return 1.0 - erfc (x);
+<span class="lineNum">     381 </span>                :            : }
+<a name="382"><span class="lineNum">     382 </span>                :            : </a>
+<span class="lineNum">     383 </span>                :            : #else
+<span class="lineNum">     384 </span>                :<span class="lineNoCov">          0 : nr_double_t  fspecial::erf (nr_double_t d) {</span>
+<span class="lineNum">     385 </span>                :<span class="lineNoCov">          0 :   return ::erf (d);</span>
+<span class="lineNum">     386 </span>                :            : }
+<span class="lineNum">     387 </span>                :            : #endif /* HAVE_ERF */
+<a name="388"><span class="lineNum">     388 </span>                :            : </a>
+<span class="lineNum">     389 </span>                :            : // Inverse of the error function erf().
+<span class="lineNum">     390 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::erfinv (nr_double_t y) {</span>
+<span class="lineNum">     391 </span>                :<span class="lineNoCov">          0 :   nr_double_t x = 0.0;  // The output</span>
+<span class="lineNum">     392 </span>                :<span class="lineNoCov">          0 :   nr_double_t z = 0.0;  // Intermediate variable</span>
+<span class="lineNum">     393 </span>                :<span class="lineNoCov">          0 :   nr_double_t y0 = 0.7; // Central range variable</span>
+<span class="lineNum">     394 </span>                :            : 
+<span class="lineNum">     395 </span>                :            :   // Coefficients in rational approximations.
+<span class="lineNum">     396 </span>                :<span class="lineNoCov">          0 :   nr_double_t a[4] = { 0.886226899, -1.645349621,  0.914624893, -0.140543331};</span>
+<span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 :   nr_double_t b[4] = {-2.118377725,  1.442710462, -0.329097515,  0.012229801};</span>
+<span class="lineNum">     398 </span>                :<span class="lineNoCov">          0 :   nr_double_t c[4] = {-1.970840454, -1.624906493,  3.429567803,  1.641345311};</span>
+<span class="lineNum">     399 </span>                :<span class="lineNoCov">          0 :   nr_double_t d[2] = { 3.543889200,  1.637067800};</span>
+<span class="lineNum">     400 </span>                :            : 
+<span class="lineNum">     401 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (y &lt; -1.0 || 1.0 &lt; y) {</span>
+<span class="lineNum">     402 </span>                :<span class="lineNoCov">          0 :     x = log (-1.0);</span>
+<span class="lineNum">     403 </span>                :            :   }
+<span class="lineNum">     404 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (y == -1.0 || 1.0 == y) {</span>
+<span class="lineNum">     405 </span>                :<span class="lineNoCov">          0 :     x = -y * log(0.0);</span>
+<span class="lineNum">     406 </span>                :            :   }
+<span class="lineNum">     407 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (-1.0 &lt; y &amp;&amp; y &lt; -y0) {</span>
+<span class="lineNum">     408 </span>                :<span class="lineNoCov">          0 :     z = sqrt(-log((1.0+y)/2.0));</span>
+<span class="lineNum">     409 </span>                :<span class="lineNoCov">          0 :     x = -(((c[3]*z+c[2])*z+c[1])*z+c[0])/((d[1]*z+d[0])*z+1.0);</span>
+<span class="lineNum">     410 </span>                :            :   }
+<span class="lineNum">     411 </span>                :            :   else {
+<span class="lineNum">     412 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (-y0 &lt; y &amp;&amp; y &lt; y0) {</span>
+<span class="lineNum">     413 </span>                :<span class="lineNoCov">          0 :       z = y * y;</span>
+<span class="lineNum">     414 </span>                :<span class="lineNoCov">          0 :       x = y*(((a[3]*z+a[2])*z+a[1])*z+a[0]) /</span>
+<span class="lineNum">     415 </span>                :<span class="lineNoCov">          0 :            ((((b[3]*z+b[3])*z+b[1])*z+b[0])*z+1.0);</span>
+<span class="lineNum">     416 </span>                :            :     }
+<span class="lineNum">     417 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     else if (y0 &lt; y &amp;&amp; y &lt; 1.0) {</span>
+<span class="lineNum">     418 </span>                :<span class="lineNoCov">          0 :       z = sqrt(-log((1.0-y)/2.0));</span>
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 :       x = (((c[3]*z+c[2])*z+c[1])*z+c[0])/((d[1]*z+d[0])*z+1.0);</span>
+<span class="lineNum">     420 </span>                :            :     }
+<span class="lineNum">     421 </span>                :            : 
+<span class="lineNum">     422 </span>                :            :     // Two steps of Newton-Raphson correction to full accuracy.
+<span class="lineNum">     423 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     x = x - (erf (x) - y) / (2.0 / M_SQRTPI * exp (-x * x));</span>
+<span class="lineNum">     424 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     x = x - (erf (x) - y) / (2.0 / M_SQRTPI * exp (-x * x));</span>
+<span class="lineNum">     425 </span>                :            :   }
+<span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 :   return x;</span>
+<span class="lineNum">     427 </span>                :            : }
+<span class="lineNum">     428 </span>                :            : 
+<span class="lineNum">     429 </span>                :            : static nr_double_t bi0_data[12] = {
+<span class="lineNum">     430 </span>                :            :   -.07660547252839144951,
+<span class="lineNum">     431 </span>                :            :   1.92733795399380827000,
+<span class="lineNum">     432 </span>                :            :    .22826445869203013390,
+<span class="lineNum">     433 </span>                :            :    .01304891466707290428,
+<span class="lineNum">     434 </span>                :            :    .00043442709008164874,
+<span class="lineNum">     435 </span>                :            :    .00000942265768600193,
+<span class="lineNum">     436 </span>                :            :    .00000014340062895106,
+<span class="lineNum">     437 </span>                :            :    .00000000161384906966,
+<span class="lineNum">     438 </span>                :            :    .00000000001396650044,
+<span class="lineNum">     439 </span>                :            :    .00000000000009579451,
+<span class="lineNum">     440 </span>                :            :    .00000000000000053339,
+<span class="lineNum">     441 </span>                :            :    .00000000000000000245
+<span class="lineNum">     442 </span>                :            : };
+<span class="lineNum">     443 </span>                :            : static cheb_series bi0_cs = {
+<span class="lineNum">     444 </span>                :            :   bi0_data, 11, -1, 1
+<span class="lineNum">     445 </span>                :            : };
+<span class="lineNum">     446 </span>                :            : 
+<span class="lineNum">     447 </span>                :            : static nr_double_t ai0_data[21] = {
+<span class="lineNum">     448 </span>                :            :    .07575994494023796,
+<span class="lineNum">     449 </span>                :            :    .00759138081082334,
+<span class="lineNum">     450 </span>                :            :    .00041531313389237,
+<span class="lineNum">     451 </span>                :            :    .00001070076463439,
+<span class="lineNum">     452 </span>                :            :   -.00000790117997921,
+<span class="lineNum">     453 </span>                :            :   -.00000078261435014,
+<span class="lineNum">     454 </span>                :            :    .00000027838499429,
+<span class="lineNum">     455 </span>                :            :    .00000000825247260,
+<span class="lineNum">     456 </span>                :            :   -.00000001204463945,
+<span class="lineNum">     457 </span>                :            :    .00000000155964859,
+<span class="lineNum">     458 </span>                :            :    .00000000022925563,
+<span class="lineNum">     459 </span>                :            :   -.00000000011916228,
+<span class="lineNum">     460 </span>                :            :    .00000000001757854,
+<span class="lineNum">     461 </span>                :            :    .00000000000112822,
+<span class="lineNum">     462 </span>                :            :   -.00000000000114684,
+<span class="lineNum">     463 </span>                :            :    .00000000000027155,
+<span class="lineNum">     464 </span>                :            :   -.00000000000002415,
+<span class="lineNum">     465 </span>                :            :   -.00000000000000608,
+<span class="lineNum">     466 </span>                :            :    .00000000000000314,
+<span class="lineNum">     467 </span>                :            :   -.00000000000000071,
+<span class="lineNum">     468 </span>                :            :    .00000000000000007
+<span class="lineNum">     469 </span>                :            : };
+<span class="lineNum">     470 </span>                :            : static cheb_series ai0_cs = {
+<span class="lineNum">     471 </span>                :            :   ai0_data, 20, -1, 1
+<span class="lineNum">     472 </span>                :            : };
+<span class="lineNum">     473 </span>                :            : 
+<span class="lineNum">     474 </span>                :            : static nr_double_t ai02_data[22] = {
+<span class="lineNum">     475 </span>                :            :    .05449041101410882,
+<span class="lineNum">     476 </span>                :            :    .00336911647825569,
+<span class="lineNum">     477 </span>                :            :    .00006889758346918,
+<span class="lineNum">     478 </span>                :            :    .00000289137052082,
+<span class="lineNum">     479 </span>                :            :    .00000020489185893,
+<span class="lineNum">     480 </span>                :            :    .00000002266668991,
+<span class="lineNum">     481 </span>                :            :    .00000000339623203,
+<span class="lineNum">     482 </span>                :            :    .00000000049406022,
+<span class="lineNum">     483 </span>                :            :    .00000000001188914,
+<span class="lineNum">     484 </span>                :            :   -.00000000003149915,
+<span class="lineNum">     485 </span>                :            :   -.00000000001321580,
+<span class="lineNum">     486 </span>                :            :   -.00000000000179419,
+<span class="lineNum">     487 </span>                :            :    .00000000000071801,
+<span class="lineNum">     488 </span>                :            :    .00000000000038529,
+<span class="lineNum">     489 </span>                :            :    .00000000000001539,
+<span class="lineNum">     490 </span>                :            :   -.00000000000004151,
+<span class="lineNum">     491 </span>                :            :   -.00000000000000954,
+<span class="lineNum">     492 </span>                :            :    .00000000000000382,
+<span class="lineNum">     493 </span>                :            :    .00000000000000176,
+<span class="lineNum">     494 </span>                :            :   -.00000000000000034,
+<span class="lineNum">     495 </span>                :            :   -.00000000000000027,
+<span class="lineNum">     496 </span>                :            :    .00000000000000003
+<span class="lineNum">     497 </span>                :            : };
+<span class="lineNum">     498 </span>                :            : static cheb_series ai02_cs = {
+<span class="lineNum">     499 </span>                :            :   ai02_data, 21, -1, 1
+<span class="lineNum">     500 </span>                :            : };
+<a name="501"><span class="lineNum">     501 </span>                :            : </a>
+<span class="lineNum">     502 </span>                :            : // Modified Bessel function of order zero.
+<span class="lineNum">     503 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::i0 (nr_double_t x) {</span>
+<span class="lineNum">     504 </span>                :<span class="lineNoCov">          0 :   nr_double_t y = fabs (x);</span>
+<span class="lineNum">     505 </span>                :            :   nr_double_t val;
+<span class="lineNum">     506 </span>                :            : 
+<span class="lineNum">     507 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (y &lt; 2.0 * sqrt (std::numeric_limits&lt;nr_double_t&gt;::epsilon())) {</span>
+<span class="lineNum">     508 </span>                :<span class="lineNoCov">          0 :     val = 1.0;</span>
+<span class="lineNum">     509 </span>                :            :   }
+<span class="lineNum">     510 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (y &lt;= 3.0) {</span>
+<span class="lineNum">     511 </span>                :<span class="lineNoCov">          0 :     val = 2.75 + cheb_eval (&amp;bi0_cs, y * y / 4.5 - 1.0);</span>
+<span class="lineNum">     512 </span>                :            :   }
+<span class="lineNum">     513 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (y &lt;= 8.0) {</span>
+<span class="lineNum">     514 </span>                :<span class="lineNoCov">          0 :     val = cheb_eval (&amp;ai0_cs, (48.0 / y - 11.0) / 5.0);</span>
+<span class="lineNum">     515 </span>                :<span class="lineNoCov">          0 :     val = exp (y) * (0.375 + val) / sqrt (y);</span>
+<span class="lineNum">     516 </span>                :            :   }
+<span class="lineNum">     517 </span>                :            :   else {
+<span class="lineNum">     518 </span>                :<span class="lineNoCov">          0 :     val = cheb_eval (&amp;ai02_cs, 16.0 / y - 1.0);</span>
+<span class="lineNum">     519 </span>                :<span class="lineNoCov">          0 :     val = exp (y) * (0.375 + val) / sqrt (y);</span>
+<span class="lineNum">     520 </span>                :            :   }
+<span class="lineNum">     521 </span>                :<span class="lineNoCov">          0 :   return val;</span>
+<span class="lineNum">     522 </span>                :            : }
+<a name="523"><span class="lineNum">     523 </span>                :            : </a>
+<span class="lineNum">     524 </span>                :            : // Lower tail quantile for the standard normal distribution function.
+<span class="lineNum">     525 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::ltqnorm (nr_double_t x) {</span>
+<span class="lineNum">     526 </span>                :<span class="lineNoCov">          0 :   nr_double_t q, r, e, u, z = 0.0;</span>
+<span class="lineNum">     527 </span>                :            :   static nr_double_t a[] = {
+<span class="lineNum">     528 </span>                :            :     -3.969683028665376e+01,  2.209460984245205e+02,
+<span class="lineNum">     529 </span>                :            :     -2.759285104469687e+02,  1.383577518672690e+02,
+<span class="lineNum">     530 </span>                :            :     -3.066479806614716e+01,  2.506628277459239e+00 };
+<span class="lineNum">     531 </span>                :            :   static nr_double_t b[] = {
+<span class="lineNum">     532 </span>                :            :     -5.447609879822406e+01,  1.615858368580409e+02,
+<span class="lineNum">     533 </span>                :            :     -1.556989798598866e+02,  6.680131188771972e+01,
+<span class="lineNum">     534 </span>                :            :     -1.328068155288572e+01 };
+<span class="lineNum">     535 </span>                :            :   static nr_double_t c[] = {
+<span class="lineNum">     536 </span>                :            :     -7.784894002430293e-03, -3.223964580411365e-01,
+<span class="lineNum">     537 </span>                :            :     -2.400758277161838e+00, -2.549732539343734e+00,
+<span class="lineNum">     538 </span>                :            :      4.374664141464968e+00,  2.938163982698783e+00 };
+<span class="lineNum">     539 </span>                :            :   static nr_double_t d[] = {
+<span class="lineNum">     540 </span>                :            :      7.784695709041462e-03,  3.224671290700398e-01,
+<span class="lineNum">     541 </span>                :            :      2.445134137142996e+00,  3.754408661907416e+00 };
+<span class="lineNum">     542 </span>                :            : 
+<span class="lineNum">     543 </span>                :            :   // Define break-points.
+<span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 :   nr_double_t pl = 0.02425;</span>
+<span class="lineNum">     545 </span>                :<span class="lineNoCov">          0 :   nr_double_t ph = 1.0 - pl;</span>
+<span class="lineNum">     546 </span>                :            : 
+<span class="lineNum">     547 </span>                :            :   // Rational approximation for central region:
+<span class="lineNum">     548 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (pl &lt;= x &amp;&amp; x &lt;= ph) {</span>
+<span class="lineNum">     549 </span>                :<span class="lineNoCov">          0 :     q = x - 0.5;</span>
+<span class="lineNum">     550 </span>                :<span class="lineNoCov">          0 :     r = q * q;</span>
+<span class="lineNum">     551 </span>                :<span class="lineNoCov">          0 :     z = (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/</span>
+<span class="lineNum">     552 </span>                :<span class="lineNoCov">          0 :         (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);</span>
+<span class="lineNum">     553 </span>                :            :   }
+<span class="lineNum">     554 </span>                :            :   // Rational approximation for lower region:
+<span class="lineNum">     555 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (0.0 &lt; x &amp;&amp; x &lt; pl) {</span>
+<span class="lineNum">     556 </span>                :<span class="lineNoCov">          0 :     q = sqrt(-2*log(x));</span>
+<span class="lineNum">     557 </span>                :<span class="lineNoCov">          0 :     z = (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/</span>
+<span class="lineNum">     558 </span>                :<span class="lineNoCov">          0 :          ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);</span>
+<span class="lineNum">     559 </span>                :            :   }
+<span class="lineNum">     560 </span>                :            :   // Rational approximation for upper region:
+<span class="lineNum">     561 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (ph &lt; x &amp;&amp; x &lt; 1.0) {</span>
+<span class="lineNum">     562 </span>                :<span class="lineNoCov">          0 :     q = sqrt(-2*log(1-x));</span>
+<span class="lineNum">     563 </span>                :<span class="lineNoCov">          0 :     z = -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/</span>
+<span class="lineNum">     564 </span>                :<span class="lineNoCov">          0 :           ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);</span>
+<span class="lineNum">     565 </span>                :            :   }
+<span class="lineNum">     566 </span>                :            :   // Case when X = 0:
+<span class="lineNum">     567 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (x == 0.0) {</span>
+<span class="lineNum">     568 </span>                :<span class="lineNoCov">          0 :     z = -std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">     569 </span>                :            :   }
+<span class="lineNum">     570 </span>                :            :   // Case when X = 1:
+<span class="lineNum">     571 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (x == 1.0) {</span>
+<span class="lineNum">     572 </span>                :<span class="lineNoCov">          0 :     z = +std::numeric_limits&lt;nr_double_t&gt;::infinity();</span>
+<span class="lineNum">     573 </span>                :            :   }
+<span class="lineNum">     574 </span>                :            :   // Cases when output will be NaN:
+<span class="lineNum">     575 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (x &lt; 0.0 || x &gt; 1.0 || std::isnan (x)) {</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">     576 </span>                :<span class="lineNoCov">          0 :     z = +std::numeric_limits&lt;nr_double_t&gt;::quiet_NaN();</span>
+<span class="lineNum">     577 </span>                :            :   }
+<span class="lineNum">     578 </span>                :            : 
+<span class="lineNum">     579 </span>                :            :   // The relative error of the approximation has absolute value less
+<span class="lineNum">     580 </span>                :            :   // than 1.15e-9.  One iteration of Halley's rational method (third
+<span class="lineNum">     581 </span>                :            :   // order) gives full machine precision.
+<span class="lineNum">     582 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (0.0 &lt; x &amp;&amp; x &lt; 1.0) {</span>
+<span class="lineNum">     583 </span>                :<span class="lineNoCov">          0 :     e = 0.5 * erfc (-z / M_SQRT2) - x;            // error</span>
+<span class="lineNum">     584 </span>                :<span class="lineNoCov">          0 :     u = e * M_SQRT2 * M_SQRTPI * exp (z * z / 2); // f(z)/df(z)</span>
+<span class="lineNum">     585 </span>                :<span class="lineNoCov">          0 :     z = z - u / (1 + z * u / 2);                  // Halley's method</span>
+<span class="lineNum">     586 </span>                :            :   }
+<span class="lineNum">     587 </span>                :<span class="lineNoCov">          0 :   return z;</span>
+<span class="lineNum">     588 </span>                :            : }
+<a name="589"><span class="lineNum">     589 </span>                :            : </a>
+<span class="lineNum">     590 </span>                :            : // Inverse of the error function erfc().
+<span class="lineNum">     591 </span>                :<span class="lineNoCov">          0 : nr_double_t fspecial::erfcinv (nr_double_t x) {</span>
+<span class="lineNum">     592 </span>                :<span class="lineNoCov">          0 :   return -ltqnorm (x / 2.0) / M_SQRT2;</span>
+<span class="lineNum">     593 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

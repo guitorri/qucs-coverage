@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/analysis.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - analysis.cpp<span style="font-size: 80%;"> (source / <a href="analysis.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">53</td>
+            <td class="headerCovTableEntry">76</td>
+            <td class="headerCovTableEntryLo">69.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryLo">69.2 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntry">62</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * analysis.cpp - analysis class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  *
+<span class="lineNum">       5 </span>                :            :  * Copyright (C) 2003-2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id: analysis.cpp 1869 2013-03-06 12:50:21Z crobarcro $
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            :  /*! \file analysis.cpp
+<span class="lineNum">      27 </span>                :            :   * \brief Implementation of the analysis class.
+<span class="lineNum">      28 </span>                :            :   *
+<span class="lineNum">      29 </span>                :            :   * Contains the implementation of the analysis class.
+<span class="lineNum">      30 </span>                :            :   *
+<span class="lineNum">      31 </span>                :            :   */
+<span class="lineNum">      32 </span>                :            : 
+<span class="lineNum">      33 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      34 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      35 </span>                :            : #endif
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : //#include &lt;stdio.h&gt;
+<span class="lineNum">      38 </span>                :            : //#include &lt;stdlib.h&gt;
+<span class="lineNum">      39 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;sweep.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;vector.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;strlist.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;dataset.h&quot;
+<span class="lineNum">      47 </span>                :            : #include &quot;ptrlist.h&quot;
+<span class="lineNum">      48 </span>                :            : #include &quot;analysis.h&quot;
+<span class="lineNum">      49 </span>                :            : 
+<span class="lineNum">      50 </span>                :            : namespace qucs {
+<a name="51"><span class="lineNum">      51 </span>                :            : </a>
+<span class="lineNum">      52 </span>                :            : //Constructor. Creates an unnamed instance of the analysis class.
+<span class="lineNum">      53 </span>                :<span class="lineCov">        243 : analysis::analysis () : object () {</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">        243 :   data = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">        243 :   subnet = NULL;</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">        243 :   env = NULL;</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">        243 :   actions = NULL;</span>
+<span class="lineNum">      58 </span>                :<span class="lineCov">        243 :   type = ANALYSIS_UNKNOWN;</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">        243 :   runs = 0;</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">        243 :   progress = true;</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">        243 : }</span>
+<a name="62"><span class="lineNum">      62 </span>                :            : </a>
+<span class="lineNum">      63 </span>                :            : // Constructor creates a named instance of the analysis class.
+<span class="lineNum">      64 </span>                :<span class="lineNoCov">          0 : analysis::analysis (char * n) : object (n) {</span>
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :   data = NULL;</span>
+<span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 :   subnet = NULL;</span>
+<span class="lineNum">      67 </span>                :<span class="lineNoCov">          0 :   env = NULL;</span>
+<span class="lineNum">      68 </span>                :<span class="lineNoCov">          0 :   actions = NULL;</span>
+<span class="lineNum">      69 </span>                :<span class="lineNoCov">          0 :   type = ANALYSIS_UNKNOWN;</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :   runs = 0;</span>
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 :   progress = true;</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="73"><span class="lineNum">      73 </span>                :            : </a>
+<span class="lineNum">      74 </span>                :            : // Destructor deletes the analysis class object.
+<span class="lineNum">      75 </span>                :<span class="lineCov">        243 : analysis::~analysis () {</span>
+<span class="lineNum">      76 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        243 :   if (actions) delete actions;</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 45 times"> + </span><span class="branchCov" title="Branch 7 was taken 108 times"> + </span>][<span class="branchCov" title="Branch 8 was taken 45 times"> + </span><span class="branchNoCov" title="Branch 9 was not taken"> - </span>]
+<span class="lineNum">      77 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>][<span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 153 times"> + </span>]:<span class="lineCov">        333 : }</span>
+<span class="lineNum">      78 </span>                :            : 
+<a name="79"><span class="lineNum">      79 </span>                :            : /* The copy constructor creates a new instance of the analysis class</a>
+<span class="lineNum">      80 </span>                :            :    based on the given analysis object. */
+<span class="lineNum">      81 </span>                :<span class="lineNoCov">          0 : analysis::analysis (analysis &amp; a) : object (a) {</span>
+<span class="lineNum">      82 </span>                :<span class="lineNoCov">          0 :   data = a.data;</span>
+<span class="lineNum">      83 </span>                :<span class="lineNoCov">          0 :   subnet = a.subnet;</span>
+<span class="lineNum">      84 </span>                :<span class="lineNoCov">          0 :   env = a.env;</span>
+<span class="lineNum">      85 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   actions = a.actions ? new ptrlist&lt;analysis&gt; (*a.actions) : NULL;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>][<span class="branchNoExec" title="Branch 14 was not executed"> # </span><span class="branchNoExec" title="Branch 15 was not executed"> # </span>]
+<span class="lineNum">      86 </span>                :<span class="lineNoCov">          0 :   type = a.type;</span>
+<span class="lineNum">      87 </span>                :<span class="lineNoCov">          0 :   runs = a.runs;</span>
+<span class="lineNum">      88 </span>                :<span class="lineNoCov">          0 :   progress = a.progress;</span>
+<span class="lineNum">      89 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      90 </span>                :            : 
+<a name="91"><span class="lineNum">      91 </span>                :            : /* This function adds the given analysis to the actions being</a>
+<span class="lineNum">      92 </span>                :            :    associated with the current analysis object. */
+<span class="lineNum">      93 </span>                :<span class="lineCov">        123 : void analysis::addAnalysis (analysis * a) {</span>
+<span class="lineNum">      94 </span>[<span class="branchCov" title="Branch 0 was taken 45 times"> + </span><span class="branchCov" title="Branch 1 was taken 78 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 45 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">        123 :   if (!actions) actions = new ptrlist&lt;analysis&gt; ();</span>
+<span class="lineNum">      95 </span>                :<span class="lineCov">        123 :   actions-&gt;push_front (a);</span>
+<span class="lineNum">      96 </span>                :<span class="lineCov">        123 : }</span>
+<span class="lineNum">      97 </span>                :            : 
+<a name="98"><span class="lineNum">      98 </span>                :            : /* This function deletes the given analysis from the actions being</a>
+<span class="lineNum">      99 </span>                :            :    associated with the current analysis object. */
+<span class="lineNum">     100 </span>                :<span class="lineCov">         78 : void analysis::delAnalysis (analysis * a) {</span>
+<span class="lineNum">     101 </span>        [<span class="branchCov" title="Branch 0 was taken 78 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         78 :   if (actions != nullptr) {</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">         78 :     actions-&gt;remove (a);</span>
+<span class="lineNum">     103 </span>                :            :   }
+<span class="lineNum">     104 </span>                :<span class="lineCov">         78 : }</span>
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :            : /* The following function creates a sweep object depending on the
+<a name="107"><span class="lineNum">     107 </span>                :            :    analysis's properties.  Supported sweep types are: linear,</a>
+<span class="lineNum">     108 </span>                :            :    logarithmic, lists and constants. */
+<span class="lineNum">     109 </span>                :<span class="lineCov">        131 : sweep * analysis::createSweep (const char * n) {</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">        131 :   sweep * swp = NULL;</span>
+<span class="lineNum">     111 </span>                :            :   // get type of sweep
+<span class="lineNum">     112 </span>                :<span class="lineCov">        131 :   const char * const type = getPropertyString (&quot;Type&quot;);</span>
+<span class="lineNum">     113 </span>                :            : 
+<span class="lineNum">     114 </span>                :            :   // linearly or logarithmically stepped sweeps
+<span class="lineNum">     115 </span>[<span class="branchCov" title="Branch 0 was taken 26 times"> + </span><span class="branchCov" title="Branch 1 was taken 105 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 23 times"> + </span><span class="branchCov" title="Branch 3 was taken 3 times"> + </span>]:<span class="lineCov">        131 :   if (!strcmp (type, &quot;lin&quot;) || !strcmp (type, &quot;log&quot;)) {</span>
+<span class="lineNum">     116 </span>                :<span class="lineCov">        128 :     nr_double_t start = getPropertyDouble (&quot;Start&quot;);</span>
+<span class="lineNum">     117 </span>                :<span class="lineCov">        128 :     nr_double_t stop = getPropertyDouble (&quot;Stop&quot;);</span>
+<span class="lineNum">     118 </span>                :<span class="lineCov">        128 :     int points = getPropertyInteger (&quot;Points&quot;);</span>
+<span class="lineNum">     119 </span>        [<span class="branchCov" title="Branch 0 was taken 105 times"> + </span><span class="branchCov" title="Branch 1 was taken 23 times"> + </span>]:<span class="lineCov">        128 :     if (!strcmp (type, &quot;lin&quot;)) {</span>
+<span class="lineNum">     120 </span>        [<span class="branchCov" title="Branch 1 was taken 105 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        105 :       swp = new linsweep (n);</span>
+<span class="lineNum">     121 </span>                :<span class="lineCov">        105 :       ((linsweep *) swp)-&gt;create (start, stop, points);</span>
+<span class="lineNum">     122 </span>                :            :     }
+<span class="lineNum">     123 </span>        [<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         23 :     else if (!strcmp (type, &quot;log&quot;)) {</span>
+<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 1 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         23 :       swp = new logsweep (n);</span>
+<span class="lineNum">     125 </span>                :<span class="lineCov">         23 :       ((logsweep *) swp)-&gt;create (start, stop, points);</span>
+<span class="lineNum">     126 </span>                :<span class="lineCov">        128 :     }</span>
+<span class="lineNum">     127 </span>                :            :   }
+<span class="lineNum">     128 </span>                :            : 
+<span class="lineNum">     129 </span>                :            :   // lists of values
+<span class="lineNum">     130 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :   else if (!strcmp (type, &quot;list&quot;)) {</span>
+<span class="lineNum">     131 </span>                :<span class="lineCov">          3 :     vector * values = getPropertyVector (&quot;Values&quot;);</span>
+<span class="lineNum">     132 </span>                :<span class="lineCov">          3 :     int points = values-&gt;getSize ();</span>
+<span class="lineNum">     133 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :     swp = new lstsweep (n);</span>
+<span class="lineNum">     134 </span>                :<span class="lineCov">          3 :     ((lstsweep *) swp)-&gt;create (points);</span>
+<span class="lineNum">     135 </span>        [<span class="branchCov" title="Branch 1 was taken 12 times"> + </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>]:<span class="lineCov">         15 :     for (int i = 0; i &lt; values-&gt;getSize (); i++)</span>
+<span class="lineNum">     136 </span>        [<span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         12 :       swp-&gt;set (i, real (values-&gt;get (i)));</span>
+<span class="lineNum">     137 </span>                :            :   }
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>                :            :   // constant value
+<span class="lineNum">     140 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (!strcmp (type, &quot;const&quot;)) {</span>
+<span class="lineNum">     141 </span>                :<span class="lineNoCov">          0 :     nr_double_t val = getPropertyDouble (&quot;Values&quot;);</span>
+<span class="lineNum">     142 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     swp = new consweep (n);</span>
+<span class="lineNum">     143 </span>                :<span class="lineNoCov">          0 :     ((consweep *) swp)-&gt;create (1);</span>
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 :     swp-&gt;set (0, val);</span>
+<span class="lineNum">     145 </span>                :            :   }
+<span class="lineNum">     146 </span>                :            : 
+<span class="lineNum">     147 </span>                :<span class="lineCov">        131 :   swp-&gt;setParent (this);</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">        131 :   return swp;</span>
+<span class="lineNum">     149 </span>                :            : }
+<span class="lineNum">     150 </span>                :            : 
+<a name="151"><span class="lineNum">     151 </span>                :            : /* Saves the given variable into the dataset.  Creates the dataset</a>
+<span class="lineNum">     152 </span>                :            :    vector if necessary. */
+<span class="lineNum">     153 </span>                :<span class="lineCov">     394919 : void analysis::saveVariable (const char * n, nr_complex_t z, vector * f) {</span>
+<span class="lineNum">     154 </span>                :            :   vector * d;
+<span class="lineNum">     155 </span>        [<span class="branchCov" title="Branch 1 was taken 867 times"> + </span><span class="branchCov" title="Branch 2 was taken 394052 times"> + </span>]:<span class="lineCov">     394919 :   if ((d = data-&gt;findVariable (n)) == NULL) {</span>
+<span class="lineNum">     156 </span>        [<span class="branchCov" title="Branch 1 was taken 867 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        867 :     d = new vector (n);</span>
+<span class="lineNum">     157 </span>        [<span class="branchCov" title="Branch 0 was taken 527 times"> + </span><span class="branchCov" title="Branch 1 was taken 340 times"> + </span>]:<span class="lineCov">        867 :     if (f != NULL) {</span>
+<span class="lineNum">     158 </span>        [<span class="branchCov" title="Branch 1 was taken 527 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        527 :       d-&gt;setDependencies (new strlist ());</span>
+<span class="lineNum">     159 </span>                :<span class="lineCov">        527 :       d-&gt;getDependencies()-&gt;add (f-&gt;getName ());</span>
+<span class="lineNum">     160 </span>                :            :     }
+<span class="lineNum">     161 </span>                :<span class="lineCov">        867 :     d-&gt;setOrigin (getName ());</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">        867 :     data-&gt;addVariable (d);</span>
+<span class="lineNum">     163 </span>                :            :   }
+<span class="lineNum">     164 </span>                :<span class="lineCov">     394919 :   d-&gt;add (z);</span>
+<span class="lineNum">     165 </span>                :<span class="lineCov">     394919 : }</span>
+<span class="lineNum">     166 </span>                :            : 
+<span class="lineNum">     167 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

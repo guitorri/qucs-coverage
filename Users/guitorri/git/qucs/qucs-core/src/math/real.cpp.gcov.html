@@ -1,0 +1,603 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/math/real.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src/math</a> - real.cpp<span style="font-size: 80%;"> (source / <a href="real.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">108</td>
+            <td class="headerCovTableEntryLo">31.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntryLo">39.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * real.cpp - some real valued function implementations
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  * Copyright (C) 2014 Guilheme Brondani Torri &lt;guitorri@gmail.com&gt;
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id$
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      27 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      28 </span>                :            : #endif
+<span class="lineNum">      29 </span>                :            : 
+<span class="lineNum">      30 </span>                :            : //#include &lt;cstdlib&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;cassert&gt;
+<span class="lineNum">      33 </span>                :            : 
+<span class="lineNum">      34 </span>                :            : #include &quot;consts.h&quot;
+<span class="lineNum">      35 </span>                :            : #include &quot;real.h&quot;
+<span class="lineNum">      36 </span>                :            : 
+<span class="lineNum">      37 </span>                :            : namespace qucs {
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : //
+<span class="lineNum">      40 </span>                :            : // trigonometric
+<span class="lineNum">      41 </span>                :            : //
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :            : /*! \brief Compute cosine of an angle
+<span class="lineNum">      44 </span>                :            :     \param[in] z angle in radians
+<a name="45"><span class="lineNum">      45 </span>                :            :     \return cosine of z</a>
+<span class="lineNum">      46 </span>                :            : */
+<span class="lineNum">      47 </span>                :<span class="lineCov">       7959 : nr_double_t cos (const nr_double_t arg) {</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">       7959 :   return std::cos (arg);</span>
+<span class="lineNum">      49 </span>                :            : }
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :            : /*! \brief Compute sine of an angle
+<span class="lineNum">      52 </span>                :            :     \param[in] z angle in radians
+<a name="53"><span class="lineNum">      53 </span>                :            :     \return sine of z</a>
+<span class="lineNum">      54 </span>                :            : */
+<span class="lineNum">      55 </span>                :<span class="lineCov">       8551 : nr_double_t sin (const nr_double_t arg) {</span>
+<span class="lineNum">      56 </span>                :<span class="lineCov">       8551 :   return std::sin (arg);</span>
+<span class="lineNum">      57 </span>                :            : }
+<span class="lineNum">      58 </span>                :            : 
+<span class="lineNum">      59 </span>                :            : /*! \brief Compute tangent of an angle
+<span class="lineNum">      60 </span>                :            :     \param[in] z angle in radians
+<a name="61"><span class="lineNum">      61 </span>                :            :     \return tangent of z</a>
+<span class="lineNum">      62 </span>                :            : */
+<span class="lineNum">      63 </span>                :<span class="lineCov">       7392 : nr_double_t  tan (const nr_double_t arg) {</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">       7392 :   return std::tan (arg);</span>
+<span class="lineNum">      65 </span>                :            : }
+<span class="lineNum">      66 </span>                :            : 
+<span class="lineNum">      67 </span>                :            : /*! \brief Compute arc cosine
+<span class="lineNum">      68 </span>                :            :     \param[in] z arc
+<a name="69"><span class="lineNum">      69 </span>                :            :     \return arc cosine of z</a>
+<span class="lineNum">      70 </span>                :            : */
+<span class="lineNum">      71 </span>                :<span class="lineNoCov">          0 : nr_double_t  acos (const nr_double_t arg) {</span>
+<span class="lineNum">      72 </span>                :<span class="lineNoCov">          0 :   return std::acos (arg);</span>
+<span class="lineNum">      73 </span>                :            : }
+<span class="lineNum">      74 </span>                :            : 
+<span class="lineNum">      75 </span>                :            : /*! \brief Compute arc sine
+<span class="lineNum">      76 </span>                :            :     \param[in] z arc
+<a name="77"><span class="lineNum">      77 </span>                :            :     \return arc sine of z</a>
+<span class="lineNum">      78 </span>                :            : */
+<span class="lineNum">      79 </span>                :<span class="lineNoCov">          0 : nr_double_t  asin (const nr_double_t arg) {</span>
+<span class="lineNum">      80 </span>                :<span class="lineNoCov">          0 :   return std::asin (arg);</span>
+<span class="lineNum">      81 </span>                :            : }
+<span class="lineNum">      82 </span>                :            : 
+<span class="lineNum">      83 </span>                :            : /*! \brief Compute arc tangent
+<span class="lineNum">      84 </span>                :            :     \param[in] z arc
+<a name="85"><span class="lineNum">      85 </span>                :            :     \return arc tangent of z</a>
+<span class="lineNum">      86 </span>                :            : */
+<span class="lineNum">      87 </span>                :<span class="lineCov">      83020 : nr_double_t  atan (const nr_double_t arg) {</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">      83020 :   return std::atan (arg);</span>
+<span class="lineNum">      89 </span>                :            : }
+<span class="lineNum">      90 </span>                :            : 
+<span class="lineNum">      91 </span>                :            : /*! \brief Compute arc tangent with two parameters (fortran like function)
+<span class="lineNum">      92 </span>                :            :     \param[in] x proportion of x-coordinate
+<span class="lineNum">      93 </span>                :            :     \param[in] y proportion of y-coordinate
+<a name="94"><span class="lineNum">      94 </span>                :            :     \return principal value of the arc tangent of y/x, expressed in radians.</a>
+<span class="lineNum">      95 </span>                :            : */
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 : nr_double_t  atan2 (const nr_double_t x, const nr_double_t y) {</span>
+<span class="lineNum">      97 </span>                :<span class="lineNoCov">          0 :   return std::atan2 (x,y);</span>
+<span class="lineNum">      98 </span>                :            : }
+<span class="lineNum">      99 </span>                :            : 
+<span class="lineNum">     100 </span>                :            : //
+<span class="lineNum">     101 </span>                :            : // hyperbolic
+<span class="lineNum">     102 </span>                :            : //
+<span class="lineNum">     103 </span>                :            : 
+<span class="lineNum">     104 </span>                :            : /*! \brief Compute hyperbolic cosine
+<span class="lineNum">     105 </span>                :            :     \param[in] z arc
+<a name="106"><span class="lineNum">     106 </span>                :            :     \return hyperbolic cosine of z</a>
+<span class="lineNum">     107 </span>                :            : */
+<span class="lineNum">     108 </span>                :<span class="lineNoCov">          0 : nr_double_t  cosh (const nr_double_t arg) {</span>
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :   return std::cosh (arg);</span>
+<span class="lineNum">     110 </span>                :            : }
+<span class="lineNum">     111 </span>                :            : 
+<span class="lineNum">     112 </span>                :            : /*! \brief Compute hyperbolic sine
+<span class="lineNum">     113 </span>                :            :     \param[in] z arc
+<a name="114"><span class="lineNum">     114 </span>                :            :     \return hyperbolic sine of z</a>
+<span class="lineNum">     115 </span>                :            : */
+<span class="lineNum">     116 </span>                :<span class="lineNoCov">          0 : nr_double_t  sinh (const nr_double_t arg) {</span>
+<span class="lineNum">     117 </span>                :<span class="lineNoCov">          0 :   return std::sinh (arg);</span>
+<span class="lineNum">     118 </span>                :            : }
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :            : /*! \brief Compute hyperbolic tangent
+<span class="lineNum">     121 </span>                :            :     \param[in] z arc
+<a name="122"><span class="lineNum">     122 </span>                :            :     \return hyperbolic tangent of z</a>
+<span class="lineNum">     123 </span>                :            : */
+<span class="lineNum">     124 </span>                :<span class="lineNoCov">          0 : nr_double_t  tanh (const nr_double_t arg) {</span>
+<span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 :   return std::tanh (arg);</span>
+<span class="lineNum">     126 </span>                :            : }
+<span class="lineNum">     127 </span>                :            : 
+<span class="lineNum">     128 </span>                :            : /*! \brief Compute arc hyperbolic cosine
+<span class="lineNum">     129 </span>                :            :     \param[in] z arc
+<a name="130"><span class="lineNum">     130 </span>                :            :     \return arc hyperbolic cosine of z</a>
+<span class="lineNum">     131 </span>                :            : */
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 : nr_double_t  acosh (const nr_double_t arg) {</span>
+<span class="lineNum">     133 </span>                :            : #ifdef HAVE_STD_ACOSH
+<span class="lineNum">     134 </span>                :            :   // c++11
+<span class="lineNum">     135 </span>                :<span class="lineNoCov">          0 :   return std::acosh (arg);</span>
+<span class="lineNum">     136 </span>                :            : #elif HAVE_ACOSH
+<span class="lineNum">     137 </span>                :            :   return ::acosh (arg);
+<span class="lineNum">     138 </span>                :            : #else
+<span class="lineNum">     139 </span>                :            :   return log (arg + sqrt (arg * arg - 1.0));
+<span class="lineNum">     140 </span>                :            : #endif
+<span class="lineNum">     141 </span>                :            : }
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            : /*! \brief Compute arc hyperbolic sine
+<span class="lineNum">     144 </span>                :            :     \param[in] z arc
+<a name="145"><span class="lineNum">     145 </span>                :            :     \return arc hyperbolic sine of z</a>
+<span class="lineNum">     146 </span>                :            : */
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 : nr_double_t asinh (const nr_double_t arg)</span>
+<span class="lineNum">     148 </span>                :            : {
+<span class="lineNum">     149 </span>                :            : #ifdef HAVE_STD_ASINH
+<span class="lineNum">     150 </span>                :            :   // c++11
+<span class="lineNum">     151 </span>                :<span class="lineNoCov">          0 :   return std::asinh (arg);</span>
+<span class="lineNum">     152 </span>                :            : #elif HAVE_ASINH
+<span class="lineNum">     153 </span>                :            :   return ::asinh (arg);
+<span class="lineNum">     154 </span>                :            : #else
+<span class="lineNum">     155 </span>                :            :   return log (arg + sqrt (arg * arg + 1.0));
+<span class="lineNum">     156 </span>                :            : #endif
+<span class="lineNum">     157 </span>                :            : }
+<span class="lineNum">     158 </span>                :            : 
+<span class="lineNum">     159 </span>                :            : /*! \brief Compute arc hyperbolic tangent
+<span class="lineNum">     160 </span>                :            :     \param[in] z arc
+<a name="161"><span class="lineNum">     161 </span>                :            :     \return arc hyperbolic tangent of z</a>
+<span class="lineNum">     162 </span>                :            : */
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 : nr_double_t atanh (const nr_double_t arg)</span>
+<span class="lineNum">     164 </span>                :            : {
+<span class="lineNum">     165 </span>                :            : #ifdef HAVE_STD_ATANH
+<span class="lineNum">     166 </span>                :            :   // c++11
+<span class="lineNum">     167 </span>                :<span class="lineNoCov">          0 :   return std::atanh (arg);</span>
+<span class="lineNum">     168 </span>                :            : #elif HAVE_ATANH
+<span class="lineNum">     169 </span>                :            :   return ::atanh (arg);
+<span class="lineNum">     170 </span>                :            : #else
+<span class="lineNum">     171 </span>                :            :   return 0.5 * log ( 2.0 / (1.0 - arg) - 1.0);
+<span class="lineNum">     172 </span>                :            : #endif
+<span class="lineNum">     173 </span>                :            : }
+<span class="lineNum">     174 </span>                :            : 
+<span class="lineNum">     175 </span>                :            : 
+<span class="lineNum">     176 </span>                :            : //
+<a name="177"><span class="lineNum">     177 </span>                :            : // exponential and logarithmic functions</a>
+<span class="lineNum">     178 </span>                :            : //
+<span class="lineNum">     179 </span>                :<span class="lineCov">    4287071 : nr_double_t exp (const nr_double_t arg) {</span>
+<a name="180"><span class="lineNum">     180 </span>                :<span class="lineCov">    4287071 :   return std::exp (arg);</span></a>
+<span class="lineNum">     181 </span>                :            : }
+<span class="lineNum">     182 </span>                :<span class="lineCov">    3664010 : nr_double_t log (const nr_double_t arg) {</span>
+<a name="183"><span class="lineNum">     183 </span>                :<span class="lineCov">    3664010 :   return std::log (arg);</span></a>
+<span class="lineNum">     184 </span>                :            : }
+<span class="lineNum">     185 </span>                :<span class="lineCov">        140 : nr_double_t log10 (const nr_double_t arg) {</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">        140 :   return std::log10 (arg);</span>
+<span class="lineNum">     187 </span>                :            : }
+<span class="lineNum">     188 </span>                :            : 
+<span class="lineNum">     189 </span>                :            : //
+<span class="lineNum">     190 </span>                :            : // power functions
+<a name="191"><span class="lineNum">     191 </span>                :            : //</a>
+<span class="lineNum">     192 </span>                :            : 
+<span class="lineNum">     193 </span>                :<span class="lineCov">     220513 : nr_double_t pow (const nr_double_t a, const nr_double_t b)</span>
+<span class="lineNum">     194 </span>                :            : {
+<span class="lineNum">     195 </span>                :<span class="lineCov">     220513 :   return std::pow (a,b);</span>
+<a name="196"><span class="lineNum">     196 </span>                :            : }</a>
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :<span class="lineCov">     365556 : nr_double_t sqrt (const nr_double_t d) {</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">     365556 :   return std::sqrt (d);</span>
+<span class="lineNum">     200 </span>                :            : }
+<span class="lineNum">     201 </span>                :            : 
+<span class="lineNum">     202 </span>                :            : /*!\brief Euclidean distance function
+<span class="lineNum">     203 </span>                :            : 
+<span class="lineNum">     204 </span>                :            :    The xhypot() function returns \f$\sqrt{a^2+b^2}\f$.
+<span class="lineNum">     205 </span>                :            :    This is the length of the hypotenuse of a right-angle triangle with sides
+<span class="lineNum">     206 </span>                :            :    of length a and b, or the distance
+<span class="lineNum">     207 </span>                :            :    of the point (a,b) from the origin.
+<span class="lineNum">     208 </span>                :            : 
+<span class="lineNum">     209 </span>                :            :    \param[in] a first length
+<span class="lineNum">     210 </span>                :            :    \param[in] b second length
+<a name="211"><span class="lineNum">     211 </span>                :            :    \return Euclidean distance from (0,0) to (a,b): \f$\sqrt{a^2+b^2}\f$</a>
+<span class="lineNum">     212 </span>                :            : */
+<span class="lineNum">     213 </span>                :<span class="lineNoCov">          0 : nr_double_t xhypot (const nr_double_t a, const nr_double_t b) {</span>
+<span class="lineNum">     214 </span>                :            : #ifdef HAVE_STD_HYPOT
+<span class="lineNum">     215 </span>                :            :   return std::hypot(a,b) // c++11
+<span class="lineNum">     216 </span>                :            : #else
+<span class="lineNum">     217 </span>                :<span class="lineNoCov">          0 :   nr_double_t c = fabs (a);</span>
+<span class="lineNum">     218 </span>                :<span class="lineNoCov">          0 :   nr_double_t d = fabs (b);</span>
+<span class="lineNum">     219 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (c &gt; d) {</span>
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 :     nr_double_t e = d / c;</span>
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 :     return c * sqrt (1 + e * e);</span>
+<span class="lineNum">     222 </span>                :            :   }
+<span class="lineNum">     223 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (d == 0)</span>
+<span class="lineNum">     224 </span>                :<span class="lineNoCov">          0 :     return 0;</span>
+<span class="lineNum">     225 </span>                :            :   else {
+<span class="lineNum">     226 </span>                :<span class="lineNoCov">          0 :     nr_double_t e = c / d;</span>
+<span class="lineNum">     227 </span>                :<span class="lineNoCov">          0 :     return d * sqrt (1 + e * e);</span>
+<span class="lineNum">     228 </span>                :            :   }
+<span class="lineNum">     229 </span>                :            : #endif
+<span class="lineNum">     230 </span>                :            : }
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            : //
+<span class="lineNum">     233 </span>                :            : // error functions
+<a name="234"><span class="lineNum">     234 </span>                :            : //</a>
+<span class="lineNum">     235 </span>                :            : 
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 : nr_double_t erf( nr_double_t arg) {</span>
+<span class="lineNum">     237 </span>                :            : #ifdef HAVE_STD_ERF
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 :   return std::erf (arg); // c++11</span>
+<span class="lineNum">     239 </span>                :            : #elif HAVE_ERF
+<span class="lineNum">     240 </span>                :            :   return ::erf (arg);
+<span class="lineNum">     241 </span>                :            : #endif
+<span class="lineNum">     242 </span>                :            : }
+<span class="lineNum">     243 </span>                :            : 
+<span class="lineNum">     244 </span>                :            : 
+<span class="lineNum">     245 </span>                :            : //
+<a name="246"><span class="lineNum">     246 </span>                :            : // rounding and remainder functions</a>
+<span class="lineNum">     247 </span>                :            : //
+<span class="lineNum">     248 </span>                :<span class="lineNoCov">          0 : nr_double_t ceil( nr_double_t arg) {</span>
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 :   return std::ceil(arg);</span>
+<a name="250"><span class="lineNum">     250 </span>                :            : }</a>
+<span class="lineNum">     251 </span>                :            : 
+<span class="lineNum">     252 </span>                :<span class="lineCov">     126104 : nr_double_t floor( nr_double_t arg) {</span>
+<span class="lineNum">     253 </span>                :<span class="lineCov">     126104 :   return std::floor(arg);</span>
+<a name="254"><span class="lineNum">     254 </span>                :            : }</a>
+<span class="lineNum">     255 </span>                :            : 
+<span class="lineNum">     256 </span>                :<span class="lineNoCov">          0 : nr_double_t fmod( nr_double_t arg) {</span>
+<span class="lineNum">     257 </span>                :            : #ifdef HAVE_STD_TRUNC
+<span class="lineNum">     258 </span>                :            :   return std::fmod(arg);
+<span class="lineNum">     259 </span>                :            : #else
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 :   return fmod(arg);</span>
+<span class="lineNum">     261 </span>                :            : #endif
+<a name="262"><span class="lineNum">     262 </span>                :            : }</a>
+<span class="lineNum">     263 </span>                :            : 
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 : nr_double_t trunc( nr_double_t arg) {</span>
+<span class="lineNum">     265 </span>                :            : #ifdef HAVE_STD_TRUNC
+<span class="lineNum">     266 </span>                :            :   return qucs::trunc(arg);
+<span class="lineNum">     267 </span>                :            : #elif HAVE_TRUNC
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 :   return ::trunc (arg);</span>
+<span class="lineNum">     269 </span>                :            : #else
+<span class="lineNum">     270 </span>                :            :   return arg &gt; 0 ? floor (arg) : floor (arg + 1);
+<a name="271"><span class="lineNum">     271 </span>                :            : #endif</a>
+<span class="lineNum">     272 </span>                :            : }
+<span class="lineNum">     273 </span>                :<span class="lineNoCov">          0 : nr_double_t round( nr_double_t arg) {</span>
+<span class="lineNum">     274 </span>                :            : #ifdef HAVE_STD_ROUND
+<span class="lineNum">     275 </span>                :<span class="lineNoCov">          0 :   return qucs::round(arg);</span>
+<span class="lineNum">     276 </span>                :            : #elif HAVE_ROUND
+<span class="lineNum">     277 </span>                :            :   return ::round (arg);
+<span class="lineNum">     278 </span>                :            : #else
+<span class="lineNum">     279 </span>                :            :   return (arg &gt; 0) ? floor (arg + 0.5) : ceil (arg - 0.5);
+<span class="lineNum">     280 </span>                :            : #endif
+<span class="lineNum">     281 </span>                :            : }
+<span class="lineNum">     282 </span>                :            : 
+<span class="lineNum">     283 </span>                :            : 
+<span class="lineNum">     284 </span>                :            : //
+<a name="285"><span class="lineNum">     285 </span>                :            : // Qucs extra trigonometric helper</a>
+<span class="lineNum">     286 </span>                :            : //
+<span class="lineNum">     287 </span>                :<span class="lineCov">       3168 : nr_double_t coth (const nr_double_t d) {</span>
+<span class="lineNum">     288 </span>                :<span class="lineCov">       3168 :   return 1.0 / std::tanh (d);</span>
+<a name="289"><span class="lineNum">     289 </span>                :            : }</a>
+<span class="lineNum">     290 </span>                :            : 
+<span class="lineNum">     291 </span>                :<span class="lineCov">       3168 : nr_double_t sech (const nr_double_t d) {</span>
+<span class="lineNum">     292 </span>                :<span class="lineCov">       3168 :   return  (1.0 / std::cosh (d));</span>
+<a name="293"><span class="lineNum">     293 </span>                :            : }</a>
+<span class="lineNum">     294 </span>                :            : 
+<span class="lineNum">     295 </span>                :<span class="lineNoCov">          0 : nr_double_t cosech (const nr_double_t d) {</span>
+<span class="lineNum">     296 </span>                :<span class="lineNoCov">          0 :   return  (1.0 / std::sinh (d));</span>
+<span class="lineNum">     297 </span>                :            : }
+<span class="lineNum">     298 </span>                :            : 
+<span class="lineNum">     299 </span>                :            : 
+<span class="lineNum">     300 </span>                :            : //
+<span class="lineNum">     301 </span>                :            : // Qucs extra math functions
+<span class="lineNum">     302 </span>                :            : //
+<span class="lineNum">     303 </span>                :            : 
+<span class="lineNum">     304 </span>                :            : /*!\brief Square a value
+<span class="lineNum">     305 </span>                :            : 
+<span class="lineNum">     306 </span>                :            :    \param[in] r Real number
+<a name="307"><span class="lineNum">     307 </span>                :            :    \return \f$x^2\f$</a>
+<span class="lineNum">     308 </span>                :            : */
+<span class="lineNum">     309 </span>                :<span class="lineCov">     453493 : nr_double_t  sqr (const nr_double_t r) {</span>
+<span class="lineNum">     310 </span>                :<span class="lineCov">     453493 :   return r * r;</span>
+<a name="311"><span class="lineNum">     311 </span>                :            : }</a>
+<span class="lineNum">     312 </span>                :            : 
+<span class="lineNum">     313 </span>                :<span class="lineNoCov">          0 : unsigned int sqr (unsigned int r) {</span>
+<span class="lineNum">     314 </span>                :<span class="lineNoCov">          0 :   return r * r;</span>
+<span class="lineNum">     315 </span>                :            : }
+<span class="lineNum">     316 </span>                :            : 
+<span class="lineNum">     317 </span>                :            : 
+<span class="lineNum">     318 </span>                :            : 
+<span class="lineNum">     319 </span>                :            : /*!\brief Quartic function
+<span class="lineNum">     320 </span>                :            : 
+<span class="lineNum">     321 </span>                :            :    \param[in] r Real number
+<a name="322"><span class="lineNum">     322 </span>                :            :    \return \f$x^4\f$</a>
+<span class="lineNum">     323 </span>                :            : */
+<span class="lineNum">     324 </span>                :<span class="lineCov">      11442 : nr_double_t  quadr (const nr_double_t r) {</span>
+<span class="lineNum">     325 </span>                :<span class="lineCov">      11442 :   return r * r * r * r;</span>
+<span class="lineNum">     326 </span>                :            : }
+<span class="lineNum">     327 </span>                :            : 
+<span class="lineNum">     328 </span>                :            : 
+<span class="lineNum">     329 </span>                :            : //
+<span class="lineNum">     330 </span>                :            : //  extra math functions
+<span class="lineNum">     331 </span>                :            : //
+<span class="lineNum">     332 </span>                :            : 
+<span class="lineNum">     333 </span>                :            : /*!\brief Compute limited exponential
+<span class="lineNum">     334 </span>                :            : 
+<span class="lineNum">     335 </span>                :            :    Compute limited exponential:
+<span class="lineNum">     336 </span>                :            :    \f[
+<span class="lineNum">     337 </span>                :            :    \begin{cases}
+<span class="lineNum">     338 </span>                :            :    \exp r &amp; \text{if } r &lt; \text{M\_LIMEXP} \\
+<span class="lineNum">     339 </span>                :            :    \exp (\text{M\_LIMEXP})\left[1.0 + (r - \text{M\_LIMEXP})\right] &amp;
+<span class="lineNum">     340 </span>                :            :         \text{else}
+<span class="lineNum">     341 </span>                :            :    \end{cases}
+<span class="lineNum">     342 </span>                :            :    \f]
+<span class="lineNum">     343 </span>                :            : 
+<span class="lineNum">     344 </span>                :            :    #M_LIMEXP is a constant
+<span class="lineNum">     345 </span>                :            :    \param[in] r real number
+<span class="lineNum">     346 </span>                :            :    \return limited exponential of r
+<span class="lineNum">     347 </span>                :            :    \todo Change limexp(real) limexp(complex) file order
+<a name="348"><span class="lineNum">     348 </span>                :            :    \todo Document #M_LIMEXP</a>
+<span class="lineNum">     349 </span>                :            : */
+<span class="lineNum">     350 </span>                :<span class="lineNoCov">          0 : nr_double_t limexp (const nr_double_t r) {</span>
+<span class="lineNum">     351 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return r &lt; M_LIMEXP ? exp (r) : exp (M_LIMEXP) * (1.0 + (r - M_LIMEXP));</span>
+<span class="lineNum">     352 </span>                :            : }
+<span class="lineNum">     353 </span>                :            : 
+<span class="lineNum">     354 </span>                :            : /*!\brief real signum function
+<span class="lineNum">     355 </span>                :            : 
+<span class="lineNum">     356 </span>                :            :     compute \f[
+<span class="lineNum">     357 </span>                :            :     \mathrm{signum}\;d=
+<span class="lineNum">     358 </span>                :            :                      = \begin{cases}
+<span class="lineNum">     359 </span>                :            :                        O &amp; \text{if } d=0 \\
+<span class="lineNum">     360 </span>                :            :                        1 &amp; \text{if } d&gt;0 \\
+<span class="lineNum">     361 </span>                :            :                        -1 &amp; \text{if } d&lt;0
+<span class="lineNum">     362 </span>                :            :                        \end{cases}
+<span class="lineNum">     363 </span>                :            :             \f]
+<span class="lineNum">     364 </span>                :            :    \param[in] d real number
+<span class="lineNum">     365 </span>                :            :    \return signum of d
+<a name="366"><span class="lineNum">     366 </span>                :            :    \todo Move near complex signum</a>
+<span class="lineNum">     367 </span>                :            : */
+<span class="lineNum">     368 </span>                :<span class="lineNoCov">          0 : nr_double_t signum (const nr_double_t d) {</span>
+<span class="lineNum">     369 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d == 0) return 0;</span>
+<span class="lineNum">     370 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return d &lt; 0 ? -1 : 1;</span>
+<span class="lineNum">     371 </span>                :            : }
+<span class="lineNum">     372 </span>                :            : 
+<span class="lineNum">     373 </span>                :            : /*!\brief real sign function
+<span class="lineNum">     374 </span>                :            : 
+<span class="lineNum">     375 </span>                :            :     compute \f[
+<span class="lineNum">     376 </span>                :            :     \mathrm{sign}\;d=
+<span class="lineNum">     377 </span>                :            :                      = \begin{cases}
+<span class="lineNum">     378 </span>                :            :                        1 &amp; \text{if } d\ge 0 \\
+<span class="lineNum">     379 </span>                :            :                        -1 &amp; \text{if } d&lt;0
+<span class="lineNum">     380 </span>                :            :                        \end{cases}
+<span class="lineNum">     381 </span>                :            :             \f]
+<span class="lineNum">     382 </span>                :            :    \param[in] d real number
+<span class="lineNum">     383 </span>                :            :    \return sign of d
+<a name="384"><span class="lineNum">     384 </span>                :            :    \todo Move near complex sign</a>
+<span class="lineNum">     385 </span>                :            : */
+<span class="lineNum">     386 </span>                :<span class="lineNoCov">          0 : nr_double_t sign (const nr_double_t d) {</span>
+<span class="lineNum">     387 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return d &lt; 0 ? -1 : 1;</span>
+<span class="lineNum">     388 </span>                :            : }
+<span class="lineNum">     389 </span>                :            : 
+<span class="lineNum">     390 </span>                :            : /*!\brief Real cardinal sinus
+<span class="lineNum">     391 </span>                :            : 
+<span class="lineNum">     392 </span>                :            :    Compute \f$\mathrm{sinc}\;d=\frac{\sin d}{d}\f$
+<span class="lineNum">     393 </span>                :            :    \param[in] d real number
+<span class="lineNum">     394 </span>                :            :    \return cardianal sinus of s
+<a name="395"><span class="lineNum">     395 </span>                :            :    \todo Why not inline</a>
+<span class="lineNum">     396 </span>                :            : */
+<span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 : nr_double_t sinc (const nr_double_t d) {</span>
+<span class="lineNum">     398 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (d == 0) return 1;</span>
+<span class="lineNum">     399 </span>                :<span class="lineNoCov">          0 :   return sin (d) / d;</span>
+<span class="lineNum">     400 </span>                :            : }
+<span class="lineNum">     401 </span>                :            : 
+<span class="lineNum">     402 </span>                :            : /*!\brief Fix function
+<span class="lineNum">     403 </span>                :            : 
+<span class="lineNum">     404 </span>                :            :     Fix is nearest integral value in direction of 0,
+<span class="lineNum">     405 </span>                :            :     \f[
+<span class="lineNum">     406 </span>                :            :     \operatorname{fix} d=\begin{cases}
+<span class="lineNum">     407 </span>                :            :     \operatorname{floor} d &amp; \text{if } d &gt; 0 \\
+<span class="lineNum">     408 </span>                :            :     \operatorname{ceil} d  &amp; \text{else}
+<span class="lineNum">     409 </span>                :            :     \end{cases}
+<span class="lineNum">     410 </span>                :            :     \f]
+<span class="lineNum">     411 </span>                :            : 
+<span class="lineNum">     412 </span>                :            :     \param[in] d real number
+<span class="lineNum">     413 </span>                :            :     \return fixed complex number
+<a name="414"><span class="lineNum">     414 </span>                :            :     \todo Why not inline?</a>
+<span class="lineNum">     415 </span>                :            : */
+<span class="lineNum">     416 </span>                :<span class="lineNoCov">          0 : nr_double_t fix (const nr_double_t d) {</span>
+<span class="lineNum">     417 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   return (d &gt; 0) ? floor (d) : ceil (d);</span>
+<span class="lineNum">     418 </span>                :            : }
+<span class="lineNum">     419 </span>                :            : 
+<span class="lineNum">     420 </span>                :            : /*!\brief Heaviside step function
+<span class="lineNum">     421 </span>                :            : 
+<span class="lineNum">     422 </span>                :            :    The Heaviside step function, H, also called unit step function,
+<span class="lineNum">     423 </span>                :            :    is a discontinuous function whose value is zero for negative argument and
+<span class="lineNum">     424 </span>                :            :    one for positive argument. For zero by convention, H(0)=0.5
+<span class="lineNum">     425 </span>                :            :    \param[in] d Heaviside argument
+<span class="lineNum">     426 </span>                :            :    \return Heaviside step
+<a name="427"><span class="lineNum">     427 </span>                :            :    \todo Create Heaviside alias</a>
+<span class="lineNum">     428 </span>                :            : */
+<span class="lineNum">     429 </span>                :<span class="lineNoCov">          0 : nr_double_t step (const nr_double_t d) {</span>
+<span class="lineNum">     430 </span>                :<span class="lineNoCov">          0 :   nr_double_t x = d;</span>
+<span class="lineNum">     431 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (x &lt; 0.0)</span>
+<span class="lineNum">     432 </span>                :<span class="lineNoCov">          0 :     x = 0.0;</span>
+<span class="lineNum">     433 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   else if (x &gt; 0.0)</span>
+<span class="lineNum">     434 </span>                :<span class="lineNoCov">          0 :     x = 1.0;</span>
+<span class="lineNum">     435 </span>                :            :   else
+<span class="lineNum">     436 </span>                :<span class="lineNoCov">          0 :     x = 0.5;</span>
+<span class="lineNum">     437 </span>                :<span class="lineNoCov">          0 :   return x;</span>
+<span class="lineNum">     438 </span>                :            : }
+<span class="lineNum">     439 </span>                :            : 
+<span class="lineNum">     440 </span>                :            : /*!\brief Compute factorial n ie \$n!\$
+<span class="lineNum">     441 </span>                :            : 
+<a name="442"><span class="lineNum">     442 </span>                :            : */</a>
+<span class="lineNum">     443 </span>                :            : unsigned int
+<span class="lineNum">     444 </span>                :<span class="lineNoCov">          0 : factorial (unsigned int n) {</span>
+<span class="lineNum">     445 </span>                :<span class="lineNoCov">          0 :   unsigned int result = 1;</span>
+<span class="lineNum">     446 </span>                :            : 
+<span class="lineNum">     447 </span>                :            :   /* 13! &gt; 2^32 */
+<span class="lineNum">     448 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   assert (n &lt; 13);</span>
+<span class="lineNum">     449 </span>                :            : 
+<span class="lineNum">     450 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (n == 0)</span>
+<span class="lineNum">     451 </span>                :<span class="lineNoCov">          0 :     return 1;</span>
+<span class="lineNum">     452 </span>                :            : 
+<span class="lineNum">     453 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (; n &gt; 1; n--)</span>
+<span class="lineNum">     454 </span>                :<span class="lineNoCov">          0 :     result = result * n;</span>
+<span class="lineNum">     455 </span>                :            : 
+<span class="lineNum">     456 </span>                :<span class="lineNoCov">          0 :   return result;</span>
+<span class="lineNum">     457 </span>                :            : }
+<span class="lineNum">     458 </span>                :            : 
+<span class="lineNum">     459 </span>                :            : 
+<span class="lineNum">     460 </span>                :            : //
+<span class="lineNum">     461 </span>                :            : // overload complex manipulations on reals
+<span class="lineNum">     462 </span>                :            : //
+<span class="lineNum">     463 </span>                :            : 
+<span class="lineNum">     464 </span>                :            : 
+<span class="lineNum">     465 </span>                :            : /*!\brief Real part of real number
+<span class="lineNum">     466 </span>                :            : 
+<span class="lineNum">     467 </span>                :            :    \param[in] r Real number
+<a name="468"><span class="lineNum">     468 </span>                :            :    \return Real part of r ie r</a>
+<span class="lineNum">     469 </span>                :            : */
+<span class="lineNum">     470 </span>                :<span class="lineCov">   17009844 : nr_double_t real (const nr_double_t r) {</span>
+<span class="lineNum">     471 </span>                :<span class="lineCov">   17009844 :   return r;</span>
+<span class="lineNum">     472 </span>                :            : }
+<span class="lineNum">     473 </span>                :            : 
+<span class="lineNum">     474 </span>                :            : /*!\brief Imaginary part of complex number
+<span class="lineNum">     475 </span>                :            : 
+<span class="lineNum">     476 </span>                :            :    \param[in] r Real number
+<a name="477"><span class="lineNum">     477 </span>                :            :    \return Imaginary part of r</a>
+<span class="lineNum">     478 </span>                :            : */
+<span class="lineNum">     479 </span>                :<span class="lineCov">     136130 : nr_double_t imag (const nr_double_t r) {</span>
+<span class="lineNum">     480 </span>                :<span class="lineCov">     136130 :   return 0.0;</span>
+<span class="lineNum">     481 </span>                :            : }
+<span class="lineNum">     482 </span>                :            : 
+<span class="lineNum">     483 </span>                :            : /*!\brief Compute euclidian norm of real number
+<span class="lineNum">     484 </span>                :            : 
+<span class="lineNum">     485 </span>                :            :    Compute \f$r^2\f$
+<span class="lineNum">     486 </span>                :            :    \param[in] r Real number
+<a name="487"><span class="lineNum">     487 </span>                :            :    \return Euclidian norm of r</a>
+<span class="lineNum">     488 </span>                :            : */
+<span class="lineNum">     489 </span>                :<span class="lineNoCov">          0 : nr_double_t norm (const nr_double_t r) {</span>
+<span class="lineNum">     490 </span>                :<span class="lineNoCov">          0 :   return r * r;</span>
+<span class="lineNum">     491 </span>                :            : }
+<span class="lineNum">     492 </span>                :            : 
+<span class="lineNum">     493 </span>                :            : /*!\brief Compute complex modulus of real number
+<span class="lineNum">     494 </span>                :            : 
+<span class="lineNum">     495 </span>                :            :    \param[in] r Real number
+<a name="496"><span class="lineNum">     496 </span>                :            :    \return Modulus of r</a>
+<span class="lineNum">     497 </span>                :            : */
+<span class="lineNum">     498 </span>                :<span class="lineCov">   83422159 : nr_double_t abs (const nr_double_t r) {</span>
+<span class="lineNum">     499 </span>                :<span class="lineCov">   83422159 :   return std::abs (r);</span>
+<span class="lineNum">     500 </span>                :            : }
+<span class="lineNum">     501 </span>                :            : 
+<span class="lineNum">     502 </span>                :            : /*!\brief Conjugate of real number
+<span class="lineNum">     503 </span>                :            : 
+<span class="lineNum">     504 </span>                :            :    \param[in] r Real number
+<a name="505"><span class="lineNum">     505 </span>                :            :    \return Conjugate of real r ie r</a>
+<span class="lineNum">     506 </span>                :            : */
+<span class="lineNum">     507 </span>                :<span class="lineNoCov">          0 : nr_double_t conj (const nr_double_t r) {</span>
+<span class="lineNum">     508 </span>                :<span class="lineNoCov">          0 :   return r;</span>
+<span class="lineNum">     509 </span>                :            : }
+<span class="lineNum">     510 </span>                :            : 
+<span class="lineNum">     511 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

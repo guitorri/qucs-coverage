@@ -1,0 +1,667 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/dataset.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - dataset.cpp<span style="font-size: 80%;"> (source / <a href="dataset.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">85</td>
+            <td class="headerCovTableEntry">291</td>
+            <td class="headerCovTableEntryLo">29.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntryLo">32.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">66</td>
+            <td class="headerCovTableEntry">248</td>
+            <td class="headerCovTableEntryLo">26.6 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * dataset.cpp - dataset class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2005, 2006, 2007 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;errno.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      34 </span>                :            : #include &lt;cmath&gt;
+<span class="lineNum">      35 </span>                :            : 
+<span class="lineNum">      36 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;object.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;strlist.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;vector.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;dataset.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;check_dataset.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;check_touchstone.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;check_csv.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;check_citi.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;check_zvr.h&quot;
+<span class="lineNum">      47 </span>                :            : #include &quot;check_mdl.h&quot;
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : namespace qucs {
+<a name="50"><span class="lineNum">      50 </span>                :            : </a>
+<span class="lineNum">      51 </span>                :            : // Constructor creates an unnamed instance of the dataset class.
+<span class="lineNum">      52 </span>                :<span class="lineCov">         90 : dataset::dataset () : object () {</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">         90 :   variables = dependencies = NULL;</span>
+<span class="lineNum">      54 </span>                :<span class="lineCov">         90 :   file = NULL;</span>
+<span class="lineNum">      55 </span>                :<span class="lineCov">         90 : }</span>
+<a name="56"><span class="lineNum">      56 </span>                :            : </a>
+<span class="lineNum">      57 </span>                :            : // Constructor creates an named instance of the dataset class.
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 : dataset::dataset (char * n) : object (n) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineNoCov">          0 :   variables = dependencies = NULL;</span>
+<span class="lineNum">      60 </span>                :<span class="lineNoCov">          0 :   file = NULL;</span>
+<span class="lineNum">      61 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      62 </span>                :            : 
+<a name="63"><span class="lineNum">      63 </span>                :            : /* The copy constructor creates a new instance based on the given</a>
+<span class="lineNum">      64 </span>                :            :    dataset object. */
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 : dataset::dataset (const dataset &amp; d) : object (d) {</span>
+<span class="lineNum">      66 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :   file = d.file ? strdup (d.file) : NULL;</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      67 </span>                :            :   vector * v;
+<span class="lineNum">      68 </span>                :            :   // copy dependency vectors
+<span class="lineNum">      69 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = d.dependencies; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">      70 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     addDependency (new vector (*v));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">      71 </span>                :            :   }
+<span class="lineNum">      72 </span>                :            :   // copy variable vectors
+<span class="lineNum">      73 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = variables; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">      74 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :     addVariable (new vector (*v));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>][<span class="branchNoExec" title="Branch 11 was not executed"> # </span><span class="branchNoExec" title="Branch 12 was not executed"> # </span>]
+<span class="lineNum">      75 </span>                :            :   }
+<span class="lineNum">      76 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="77"><span class="lineNum">      77 </span>                :            : </a>
+<span class="lineNum">      78 </span>                :            : // Destructor deletes a dataset object.
+<span class="lineNum">      79 </span>                :<span class="lineCov">         90 : dataset::~dataset () {</span>
+<span class="lineNum">      80 </span>                :            :   vector * n, * v;
+<span class="lineNum">      81 </span>                :            :   // delete dependency vectors
+<span class="lineNum">      82 </span>[<span class="branchCov" title="Branch 0 was taken 167 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">        257 :   for (v = dependencies; v != NULL; v = n) {</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">        167 :     n = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">      84 </span>        [<span class="branchCov" title="Branch 0 was taken 167 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        167 :     delete v;</span>
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 2 was taken 167 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      85 </span>                :            :   }
+<span class="lineNum">      86 </span>                :            :   // delete variable vectors
+<span class="lineNum">      87 </span>[<span class="branchCov" title="Branch 0 was taken 946 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">       1036 :   for (v = variables; v != NULL; v = n) {</span>
+<span class="lineNum">      88 </span>                :<span class="lineCov">        946 :     n = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">      89 </span>        [<span class="branchCov" title="Branch 0 was taken 946 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        946 :     delete v;</span>
+<span class="lineNum">         </span>  [<span class="branchCov" title="Branch 2 was taken 946 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      90 </span>                :            :   }
+<span class="lineNum">      91 </span>[<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineCov">         90 :   if (file) free (file);</span>
+<span class="lineNum">      92 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        180 : }</span>
+<a name="93"><span class="lineNum">      93 </span>                :            : </a>
+<span class="lineNum">      94 </span>                :            : // This function adds a dependency vector to the current dataset.
+<span class="lineNum">      95 </span>                :<span class="lineCov">        167 : void dataset::addDependency (vector * v) {</span>
+<span class="lineNum">      96 </span>        [<span class="branchCov" title="Branch 0 was taken 77 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        167 :   if (dependencies) dependencies-&gt;setPrev (v);</span>
+<span class="lineNum">      97 </span>                :<span class="lineCov">        167 :   v-&gt;setNext (dependencies);</span>
+<span class="lineNum">      98 </span>                :<span class="lineCov">        167 :   v-&gt;setPrev (NULL);</span>
+<span class="lineNum">      99 </span>                :<span class="lineCov">        167 :   dependencies = v;</span>
+<span class="lineNum">     100 </span>                :<span class="lineCov">        167 : }</span>
+<a name="101"><span class="lineNum">     101 </span>                :            : </a>
+<span class="lineNum">     102 </span>                :            : // This function removes a dependency vector from the current dataset.
+<span class="lineNum">     103 </span>                :<span class="lineNoCov">          0 : void dataset::delDependency (vector * v) {</span>
+<span class="lineNum">     104 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (dependencies == v) {</span>
+<span class="lineNum">     105 </span>                :<span class="lineNoCov">          0 :     dependencies = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">     106 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (dependencies) dependencies-&gt;setPrev (NULL);</span>
+<span class="lineNum">     107 </span>                :            :   }
+<span class="lineNum">     108 </span>                :            :   else {
+<span class="lineNum">     109 </span>                :<span class="lineNoCov">          0 :     vector * next = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">     110 </span>                :<span class="lineNoCov">          0 :     vector * prev = (vector *) v-&gt;getPrev ();</span>
+<span class="lineNum">     111 </span>                :<span class="lineNoCov">          0 :     prev-&gt;setNext (next);</span>
+<span class="lineNum">     112 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (next) next-&gt;setPrev (prev);</span>
+<span class="lineNum">     113 </span>                :            :   }
+<span class="lineNum">     114 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete v;</span>
+<span class="lineNum">     115 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     116 </span>                :            : 
+<a name="117"><span class="lineNum">     117 </span>                :            : /* The function adds the given list of vectors to the dependency set</a>
+<span class="lineNum">     118 </span>                :            :    of the current dataset. */
+<span class="lineNum">     119 </span>                :<span class="lineNoCov">          0 : void dataset::addDependencies (vector * v) {</span>
+<span class="lineNum">     120 </span>                :            :   vector * next;
+<span class="lineNum">     121 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * t = v; t != NULL; t = next) {</span>
+<span class="lineNum">     122 </span>                :<span class="lineNoCov">          0 :     next = (vector *) t-&gt;getNext ();</span>
+<span class="lineNum">     123 </span>                :<span class="lineNoCov">          0 :     addDependency (t);</span>
+<span class="lineNum">     124 </span>                :            :   }
+<span class="lineNum">     125 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="126"><span class="lineNum">     126 </span>                :            : </a>
+<span class="lineNum">     127 </span>                :            : // This function appends a dependency vector to the current dataset.
+<span class="lineNum">     128 </span>                :<span class="lineNoCov">          0 : void dataset::appendDependency (vector * v) {</span>
+<span class="lineNum">     129 </span>                :            :   vector * e;
+<span class="lineNum">     130 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (dependencies) {</span>
+<span class="lineNum">     131 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (e = dependencies; e-&gt;getNext (); e = (vector *) e-&gt;getNext ()) ;</span>
+<span class="lineNum">     132 </span>                :<span class="lineNoCov">          0 :     v-&gt;setPrev (e);</span>
+<span class="lineNum">     133 </span>                :<span class="lineNoCov">          0 :     e-&gt;setNext (v);</span>
+<span class="lineNum">     134 </span>                :            :   }
+<span class="lineNum">     135 </span>                :            :   else {
+<span class="lineNum">     136 </span>                :<span class="lineNoCov">          0 :     v-&gt;setPrev (NULL);</span>
+<span class="lineNum">     137 </span>                :<span class="lineNoCov">          0 :     dependencies= v;</span>
+<span class="lineNum">     138 </span>                :            :   }
+<span class="lineNum">     139 </span>                :<span class="lineNoCov">          0 :   v-&gt;setNext (NULL);</span>
+<span class="lineNum">     140 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     141 </span>                :            : 
+<a name="142"><span class="lineNum">     142 </span>                :            : /* The function appends the given list of vectors to the dependency</a>
+<span class="lineNum">     143 </span>                :            :    set of the current dataset. */
+<span class="lineNum">     144 </span>                :<span class="lineNoCov">          0 : void dataset::appendDependencies (vector * v) {</span>
+<span class="lineNum">     145 </span>                :            :   vector * next;
+<span class="lineNum">     146 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * t = v; t != NULL; t = next) {</span>
+<span class="lineNum">     147 </span>                :<span class="lineNoCov">          0 :     next = (vector *) t-&gt;getNext ();</span>
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :     appendDependency (t);</span>
+<span class="lineNum">     149 </span>                :            :   }
+<span class="lineNum">     150 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="151"><span class="lineNum">     151 </span>                :            : </a>
+<span class="lineNum">     152 </span>                :            : // This function adds a variable vector to the current dataset.
+<span class="lineNum">     153 </span>                :<span class="lineCov">        946 : void dataset::addVariable (vector * v) {</span>
+<span class="lineNum">     154 </span>        [<span class="branchCov" title="Branch 0 was taken 856 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        946 :   if (variables) variables-&gt;setPrev (v);</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">        946 :   v-&gt;setNext (variables);</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">        946 :   v-&gt;setPrev (NULL);</span>
+<span class="lineNum">     157 </span>                :<span class="lineCov">        946 :   variables = v;</span>
+<span class="lineNum">     158 </span>                :<span class="lineCov">        946 : }</span>
+<a name="159"><span class="lineNum">     159 </span>                :            : </a>
+<span class="lineNum">     160 </span>                :            : // This function removes a variable vector from the current dataset.
+<span class="lineNum">     161 </span>                :<span class="lineNoCov">          0 : void dataset::delVariable (vector * v) {</span>
+<span class="lineNum">     162 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (variables == v) {</span>
+<span class="lineNum">     163 </span>                :<span class="lineNoCov">          0 :     variables = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">     164 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (variables) variables-&gt;setPrev (NULL);</span>
+<span class="lineNum">     165 </span>                :            :   }
+<span class="lineNum">     166 </span>                :            :   else {
+<span class="lineNum">     167 </span>                :<span class="lineNoCov">          0 :     vector * next = (vector *) v-&gt;getNext ();</span>
+<span class="lineNum">     168 </span>                :<span class="lineNoCov">          0 :     vector * prev = (vector *) v-&gt;getPrev ();</span>
+<span class="lineNum">     169 </span>                :<span class="lineNoCov">          0 :     prev-&gt;setNext (next);</span>
+<span class="lineNum">     170 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (next) next-&gt;setPrev (prev);</span>
+<span class="lineNum">     171 </span>                :            :   }
+<span class="lineNum">     172 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   delete v;</span>
+<span class="lineNum">     173 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     174 </span>                :            : 
+<a name="175"><span class="lineNum">     175 </span>                :            : /* The function adds the given list of vectors to the variable set of</a>
+<span class="lineNum">     176 </span>                :            :    the current dataset. */
+<span class="lineNum">     177 </span>                :<span class="lineNoCov">          0 : void dataset::addVariables (vector * v) {</span>
+<span class="lineNum">     178 </span>                :            :   vector * next;
+<span class="lineNum">     179 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * t = v; t != NULL; t = next) {</span>
+<span class="lineNum">     180 </span>                :<span class="lineNoCov">          0 :     next = (vector *) t-&gt;getNext ();</span>
+<span class="lineNum">     181 </span>                :<span class="lineNoCov">          0 :     addVariable (t);</span>
+<span class="lineNum">     182 </span>                :            :   }
+<span class="lineNum">     183 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="184"><span class="lineNum">     184 </span>                :            : </a>
+<span class="lineNum">     185 </span>                :            : // This function appends a variable vector to the current dataset.
+<span class="lineNum">     186 </span>                :<span class="lineNoCov">          0 : void dataset::appendVariable (vector * v) {</span>
+<span class="lineNum">     187 </span>                :            :   vector * e;
+<span class="lineNum">     188 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (variables) {</span>
+<span class="lineNum">     189 </span>        [<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (e = variables; e-&gt;getNext (); e = (vector *) e-&gt;getNext ()) ;</span>
+<span class="lineNum">     190 </span>                :<span class="lineNoCov">          0 :     v-&gt;setPrev (e);</span>
+<span class="lineNum">     191 </span>                :<span class="lineNoCov">          0 :     e-&gt;setNext (v);</span>
+<span class="lineNum">     192 </span>                :            :   }
+<span class="lineNum">     193 </span>                :            :   else {
+<span class="lineNum">     194 </span>                :<span class="lineNoCov">          0 :     v-&gt;setPrev (NULL);</span>
+<span class="lineNum">     195 </span>                :<span class="lineNoCov">          0 :     variables = v;</span>
+<span class="lineNum">     196 </span>                :            :   }
+<span class="lineNum">     197 </span>                :<span class="lineNoCov">          0 :   v-&gt;setNext (NULL);</span>
+<span class="lineNum">     198 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     199 </span>                :            : 
+<a name="200"><span class="lineNum">     200 </span>                :            : /* The function appends the given list of vectors to the variable set</a>
+<span class="lineNum">     201 </span>                :            :    of the current dataset. */
+<span class="lineNum">     202 </span>                :<span class="lineNoCov">          0 : void dataset::appendVariables (vector * v) {</span>
+<span class="lineNum">     203 </span>                :            :   vector * next;
+<span class="lineNum">     204 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * t = v; t != NULL; t = next) {</span>
+<span class="lineNum">     205 </span>                :<span class="lineNoCov">          0 :     next = (vector *) t-&gt;getNext ();</span>
+<span class="lineNum">     206 </span>                :<span class="lineNoCov">          0 :     appendVariable (t);</span>
+<span class="lineNum">     207 </span>                :            :   }
+<span class="lineNum">     208 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     209 </span>                :            : 
+<a name="210"><span class="lineNum">     210 </span>                :            : /* This function applies the dependency string list of the given</a>
+<span class="lineNum">     211 </span>                :            :    vector to the list of vectors appended to this vector. */
+<span class="lineNum">     212 </span>                :<span class="lineNoCov">          0 : void dataset::applyDependencies (vector * v) {</span>
+<span class="lineNum">     213 </span>                :<span class="lineNoCov">          0 :   strlist * deps = v-&gt;getDependencies ();</span>
+<span class="lineNum">     214 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (deps != NULL) {</span>
+<span class="lineNum">     215 </span>                :            :     vector * next;
+<span class="lineNum">     216 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     for (vector * t = (vector *) v-&gt;getNext (); t != NULL; t = next) {</span>
+<span class="lineNum">     217 </span>                :<span class="lineNoCov">          0 :       next = (vector *) t-&gt;getNext ();</span>
+<span class="lineNum">     218 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :       if (t-&gt;getDependencies () == NULL) {</span>
+<span class="lineNum">     219 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :         t-&gt;setDependencies (new strlist (*deps));</span>
+<span class="lineNum">     220 </span>                :            :       }
+<span class="lineNum">     221 </span>                :            :     }
+<span class="lineNum">     222 </span>                :            :   }
+<span class="lineNum">     223 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     224 </span>                :            : 
+<span class="lineNum">     225 </span>                :            : /* This function returns the dataset vector (both independent and
+<a name="226"><span class="lineNum">     226 </span>                :            :    dependent) with the given origin.  It returns NULL if there is no</a>
+<span class="lineNum">     227 </span>                :            :    such vector. */
+<span class="lineNum">     228 </span>                :<span class="lineNoCov">          0 : vector * dataset::findOrigin (char * n) {</span>
+<span class="lineNum">     229 </span>                :            :   vector * v;
+<span class="lineNum">     230 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = variables; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :     char * origin = v-&gt;getOrigin ();</span>
+<span class="lineNum">     232 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (origin != NULL &amp;&amp; n != NULL &amp;&amp; !strcmp (n, origin))</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     233 </span>                :<span class="lineNoCov">          0 :       return v;</span>
+<span class="lineNum">     234 </span>                :            :   }
+<span class="lineNum">     235 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (v = dependencies; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :     char * origin = v-&gt;getOrigin ();</span>
+<span class="lineNum">     237 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 2 was not executed"> # </span><span class="branchNoExec" title="Branch 3 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (origin != NULL &amp;&amp; n != NULL &amp;&amp; !strcmp (n, origin))</span>
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 4 was not executed"> # </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span>]
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 :       return v;</span>
+<span class="lineNum">     239 </span>                :            :   }
+<span class="lineNum">     240 </span>                :<span class="lineNoCov">          0 :   return NULL;</span>
+<span class="lineNum">     241 </span>                :            : }
+<span class="lineNum">     242 </span>                :            : 
+<a name="243"><span class="lineNum">     243 </span>                :            : /* This function assigns dependency entries to variable vectors which</a>
+<span class="lineNum">     244 </span>                :            :    do have the specified origin. */
+<span class="lineNum">     245 </span>                :<span class="lineCov">      20155 : void dataset::assignDependency (const char * const origin, const char * const depvar) {</span>
+<span class="lineNum">     246 </span>        [<span class="branchCov" title="Branch 1 was taken 68180 times"> + </span><span class="branchCov" title="Branch 2 was taken 20155 times"> + </span>]:<span class="lineCov">      88335 :   for (vector * v = variables; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     247 </span>                :<span class="lineCov">      68180 :     char * n = v-&gt;getOrigin ();</span>
+<span class="lineNum">     248 </span>[<span class="branchCov" title="Branch 0 was taken 68180 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 68180 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">      68180 :     if (n != NULL &amp;&amp; origin != NULL &amp;&amp; !strcmp (origin, n)) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 68180 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<span class="lineNum">     249 </span>                :<span class="lineCov">      68180 :       strlist * deplist = v-&gt;getDependencies ();</span>
+<span class="lineNum">     250 </span>        [<span class="branchCov" title="Branch 0 was taken 67984 times"> + </span><span class="branchCov" title="Branch 1 was taken 196 times"> + </span>]:<span class="lineCov">      68180 :       if (deplist != NULL) {</span>
+<span class="lineNum">     251 </span>        [<span class="branchCov" title="Branch 1 was taken 166 times"> + </span><span class="branchCov" title="Branch 2 was taken 67818 times"> + </span>]:<span class="lineCov">      67984 :         if (!deplist-&gt;contains (depvar)) {</span>
+<span class="lineNum">     252 </span>                :<span class="lineCov">        166 :           deplist-&gt;append (depvar);</span>
+<span class="lineNum">     253 </span>                :            :         }
+<span class="lineNum">     254 </span>                :            :       }
+<span class="lineNum">     255 </span>                :            :       else {
+<span class="lineNum">     256 </span>        [<span class="branchCov" title="Branch 1 was taken 196 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        196 :         deplist = new strlist ();</span>
+<span class="lineNum">     257 </span>                :<span class="lineCov">        196 :         deplist-&gt;add (depvar);</span>
+<span class="lineNum">     258 </span>                :<span class="lineCov">        196 :         v-&gt;setDependencies (deplist);</span>
+<span class="lineNum">     259 </span>                :            :       }
+<span class="lineNum">     260 </span>                :            :     }
+<span class="lineNum">     261 </span>                :            :   }
+<span class="lineNum">     262 </span>                :<span class="lineCov">      20155 : }</span>
+<a name="263"><span class="lineNum">     263 </span>                :            : </a>
+<span class="lineNum">     264 </span>                :            : // Return non-zero if the given vector is an independent variable vector.
+<span class="lineNum">     265 </span>                :<span class="lineNoCov">          0 : int dataset::isDependency (vector * dep) {</span>
+<span class="lineNum">     266 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * v = dependencies; v != NULL; v = (vector *) v-&gt;getNext ())</span>
+<span class="lineNum">     267 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (v == dep) return 1;</span>
+<span class="lineNum">     268 </span>                :<span class="lineNoCov">          0 :   return 0;</span>
+<span class="lineNum">     269 </span>                :            : }
+<a name="270"><span class="lineNum">     270 </span>                :            : </a>
+<span class="lineNum">     271 </span>                :            : // Return non-zero if the given vector is a dependent variable vector.
+<span class="lineNum">     272 </span>                :<span class="lineNoCov">          0 : int dataset::isVariable (vector * var) {</span>
+<span class="lineNum">     273 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * v = variables; v != NULL; v = (vector *) v-&gt;getNext ())</span>
+<span class="lineNum">     274 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (v == var) return 1;</span>
+<span class="lineNum">     275 </span>                :<span class="lineNoCov">          0 :   return 0;</span>
+<span class="lineNum">     276 </span>                :            : }
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :            : /* The function goes through the list of dependencies in the dataset
+<a name="279"><span class="lineNum">     279 </span>                :            :    and returns the vector specified by the given name.  Otherwise the</a>
+<span class="lineNum">     280 </span>                :            :    function returns NULL. */
+<span class="lineNum">     281 </span>                :<span class="lineCov">      57433 : vector * dataset::findDependency (const char * n) {</span>
+<span class="lineNum">     282 </span>        [<span class="branchCov" title="Branch 1 was taken 57711 times"> + </span><span class="branchCov" title="Branch 2 was taken 246 times"> + </span>]:<span class="lineCov">      57957 :   for (vector * v = dependencies; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     283 </span>        [<span class="branchCov" title="Branch 1 was taken 57187 times"> + </span><span class="branchCov" title="Branch 2 was taken 524 times"> + </span>]:<span class="lineCov">      57711 :     if (!strcmp (v-&gt;getName (), n))</span>
+<span class="lineNum">     284 </span>                :<span class="lineCov">      57187 :       return v;</span>
+<span class="lineNum">     285 </span>                :            :   }
+<span class="lineNum">     286 </span>                :<span class="lineCov">      57433 :   return NULL;</span>
+<span class="lineNum">     287 </span>                :            : }
+<span class="lineNum">     288 </span>                :            : 
+<span class="lineNum">     289 </span>                :            : /* The function goes through the list of variables in the dataset and
+<a name="290"><span class="lineNum">     290 </span>                :            :    returns the vector specified by the given name.  If there is no</a>
+<span class="lineNum">     291 </span>                :            :    such variable registered the function returns NULL. */
+<span class="lineNum">     292 </span>                :<span class="lineCov">     395067 : vector * dataset::findVariable (const char * n) {</span>
+<span class="lineNum">     293 </span>        [<span class="branchCov" title="Branch 1 was taken 1880232 times"> + </span><span class="branchCov" title="Branch 2 was taken 1015 times"> + </span>]:<span class="lineCov">    1881247 :   for (vector * v = variables; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     294 </span>        [<span class="branchCov" title="Branch 1 was taken 394052 times"> + </span><span class="branchCov" title="Branch 2 was taken 1486180 times"> + </span>]:<span class="lineCov">    1880232 :     if (!strcmp (v-&gt;getName (), n))</span>
+<span class="lineNum">     295 </span>                :<span class="lineCov">     394052 :       return v;</span>
+<span class="lineNum">     296 </span>                :            :   }
+<span class="lineNum">     297 </span>                :<span class="lineCov">     395067 :   return NULL;</span>
+<span class="lineNum">     298 </span>                :            : }
+<a name="299"><span class="lineNum">     299 </span>                :            : </a>
+<span class="lineNum">     300 </span>                :            : // Returns the number of variable vectors.
+<span class="lineNum">     301 </span>                :<span class="lineNoCov">          0 : int dataset::countVariables (void) {</span>
+<span class="lineNum">     302 </span>                :<span class="lineNoCov">          0 :   int count = 0;</span>
+<span class="lineNum">     303 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * v = variables; v != NULL; v = (vector *) v-&gt;getNext ())</span>
+<span class="lineNum">     304 </span>                :<span class="lineNoCov">          0 :     count++;</span>
+<span class="lineNum">     305 </span>                :<span class="lineNoCov">          0 :   return count;</span>
+<span class="lineNum">     306 </span>                :            : }
+<a name="307"><span class="lineNum">     307 </span>                :            : </a>
+<span class="lineNum">     308 </span>                :            : // Returns the number of dependency vectors.
+<span class="lineNum">     309 </span>                :<span class="lineNoCov">          0 : int dataset::countDependencies (void) {</span>
+<span class="lineNum">     310 </span>                :<span class="lineNoCov">          0 :   int count = 0;</span>
+<span class="lineNum">     311 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   for (vector * v = dependencies; v != NULL; v = (vector *) v-&gt;getNext ())</span>
+<span class="lineNum">     312 </span>                :<span class="lineNoCov">          0 :     count++;</span>
+<span class="lineNum">     313 </span>                :<span class="lineNoCov">          0 :   return count;</span>
+<span class="lineNum">     314 </span>                :            : }
+<a name="315"><span class="lineNum">     315 </span>                :            : </a>
+<span class="lineNum">     316 </span>                :            : // Returns the current output file name.
+<span class="lineNum">     317 </span>                :<span class="lineNoCov">          0 : char * dataset::getFile (void) {</span>
+<span class="lineNum">     318 </span>                :<span class="lineNoCov">          0 :   return file;</span>
+<span class="lineNum">     319 </span>                :            : }
+<span class="lineNum">     320 </span>                :            : 
+<a name="321"><span class="lineNum">     321 </span>                :            : /* Sets the current output file name.  The file name is used during</a>
+<span class="lineNum">     322 </span>                :            :    the print functionality of the dataset class. */
+<span class="lineNum">     323 </span>                :<span class="lineCov">         90 : void dataset::setFile (const char * f) {</span>
+<span class="lineNum">     324 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (file) free (file);</span>
+<span class="lineNum">     325 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>]:<span class="lineCov">         90 :   file = f ? strdup (f) : NULL;</span>
+<span class="lineNum">     326 </span>                :<span class="lineCov">         90 : }</span>
+<span class="lineNum">     327 </span>                :            : 
+<span class="lineNum">     328 </span>                :            : /* This function prints the current dataset representation either to
+<a name="329"><span class="lineNum">     329 </span>                :            :    the specified file name (given by the function setFile()) or to</a>
+<span class="lineNum">     330 </span>                :            :    stdout if there is no such file name given. */
+<span class="lineNum">     331 </span>                :<span class="lineCov">         90 : void dataset::print (void) {</span>
+<span class="lineNum">     332 </span>                :            : 
+<span class="lineNum">     333 </span>                :<span class="lineCov">         90 :   FILE * f = stdout;</span>
+<span class="lineNum">     334 </span>                :            : 
+<span class="lineNum">     335 </span>                :            :   // open file for writing
+<span class="lineNum">     336 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>]:<span class="lineCov">         90 :   if (file) {</span>
+<span class="lineNum">     337 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 64 times"> + </span>]:<span class="lineCov">         64 :     if ((f = fopen (file, &quot;w&quot;)) == NULL) {</span>
+<span class="lineNum">     338 </span>                :            :       logprint (LOG_ERROR, &quot;cannot create file `%s': %s\n&quot;,
+<span class="lineNum">     339 </span>                :<span class="lineNoCov">          0 :                 file, strerror (errno));</span>
+<span class="lineNum">     340 </span>                :<span class="lineCov">         90 :       return;</span>
+<span class="lineNum">     341 </span>                :            :     }
+<span class="lineNum">     342 </span>                :            :   }
+<span class="lineNum">     343 </span>                :            : 
+<span class="lineNum">     344 </span>                :            :   // print header
+<span class="lineNum">     345 </span>                :<span class="lineCov">         90 :   fprintf (f, &quot;&lt;Qucs Dataset &quot; PACKAGE_VERSION &quot;&gt;\n&quot;);</span>
+<span class="lineNum">     346 </span>                :            : 
+<span class="lineNum">     347 </span>                :            :   // print dependencies
+<span class="lineNum">     348 </span>        [<span class="branchCov" title="Branch 1 was taken 167 times"> + </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span>]:<span class="lineCov">        257 :   for (vector * d = dependencies; d != NULL; d = (vector *) d-&gt;getNext ()) {</span>
+<span class="lineNum">     349 </span>                :<span class="lineCov">        167 :     printDependency (d, f);</span>
+<span class="lineNum">     350 </span>                :            :   }
+<span class="lineNum">     351 </span>                :            : 
+<span class="lineNum">     352 </span>                :            :   // print variables
+<span class="lineNum">     353 </span>        [<span class="branchCov" title="Branch 1 was taken 946 times"> + </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span>]:<span class="lineCov">       1036 :   for (vector * v = variables; v != NULL; v = (vector *) v-&gt;getNext ()) {</span>
+<span class="lineNum">     354 </span>        [<span class="branchCov" title="Branch 1 was taken 802 times"> + </span><span class="branchCov" title="Branch 2 was taken 144 times"> + </span>]:<span class="lineCov">        946 :     if (v-&gt;getDependencies () != NULL)</span>
+<span class="lineNum">     355 </span>                :<span class="lineCov">        802 :       printVariable (v, f);</span>
+<span class="lineNum">     356 </span>                :            :     else
+<span class="lineNum">     357 </span>                :<span class="lineCov">        144 :       printDependency (v, f);</span>
+<span class="lineNum">     358 </span>                :            :   }
+<span class="lineNum">     359 </span>                :            : 
+<span class="lineNum">     360 </span>                :            :   // close file if necessary
+<span class="lineNum">     361 </span>        [<span class="branchCov" title="Branch 0 was taken 64 times"> + </span><span class="branchCov" title="Branch 1 was taken 26 times"> + </span>]:<span class="lineCov">         90 :   if (file) fclose (f);</span>
+<span class="lineNum">     362 </span>                :            : }
+<span class="lineNum">     363 </span>                :            : 
+<a name="364"><span class="lineNum">     364 </span>                :            : /* Prints the given vector as independent dataset vector into the</a>
+<span class="lineNum">     365 </span>                :            :    given file descriptor. */
+<span class="lineNum">     366 </span>                :<span class="lineCov">        311 : void dataset::printDependency (vector * v, FILE * f) {</span>
+<span class="lineNum">     367 </span>                :            :   // print data header
+<span class="lineNum">     368 </span>                :<span class="lineCov">        311 :   fprintf (f, &quot;&lt;indep %s %d&gt;\n&quot;, v-&gt;getName (), v-&gt;getSize ());</span>
+<span class="lineNum">     369 </span>                :            :   // print data itself
+<span class="lineNum">     370 </span>                :<span class="lineCov">        311 :   printData (v, f);</span>
+<span class="lineNum">     371 </span>                :            :   // print data footer
+<span class="lineNum">     372 </span>                :<span class="lineCov">        311 :   fprintf (f, &quot;&lt;/indep&gt;\n&quot;);</span>
+<span class="lineNum">     373 </span>                :<span class="lineCov">        311 : }</span>
+<span class="lineNum">     374 </span>                :            : 
+<a name="375"><span class="lineNum">     375 </span>                :            : /* Prints the given vector as dependent dataset vector into the given</a>
+<span class="lineNum">     376 </span>                :            :    file descriptor. */
+<span class="lineNum">     377 </span>                :<span class="lineCov">        802 : void dataset::printVariable (vector * v, FILE * f) {</span>
+<span class="lineNum">     378 </span>                :            :   // print data header
+<span class="lineNum">     379 </span>                :<span class="lineCov">        802 :   fprintf (f, &quot;&lt;dep %s&quot;, v-&gt;getName ());</span>
+<span class="lineNum">     380 </span>        [<span class="branchCov" title="Branch 1 was taken 802 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        802 :   if (v-&gt;getDependencies () != NULL) {</span>
+<span class="lineNum">     381 </span>[<span class="branchCov" title="Branch 0 was taken 802 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 802 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1779 :     for (strlistiterator it (v-&gt;getDependencies ()); *it; ++it)</span>
+<span class="lineNum">         </span>[<span class="branchCov" title="Branch 6 was taken 977 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>][<span class="branchCov" title="Branch 9 was taken 1779 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span>]
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 12 was taken 977 times"> + </span><span class="branchCov" title="Branch 13 was taken 802 times"> + </span>]
+<span class="lineNum">     382 </span>[<span class="branchCov" title="Branch 0 was taken 977 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 977 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">       1779 :       fprintf (f, &quot; %s&quot;, *it);</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 6 was taken 802 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]
+<span class="lineNum">     383 </span>                :            :   }
+<span class="lineNum">     384 </span>                :<span class="lineCov">        802 :   fprintf (f, &quot;&gt;\n&quot;);</span>
+<span class="lineNum">     385 </span>                :            : 
+<span class="lineNum">     386 </span>                :            :   // print data itself
+<span class="lineNum">     387 </span>                :<span class="lineCov">        802 :   printData (v, f);</span>
+<span class="lineNum">     388 </span>                :            : 
+<span class="lineNum">     389 </span>                :            :   // print data footer
+<span class="lineNum">     390 </span>                :<span class="lineCov">        802 :   fprintf (f, &quot;&lt;/dep&gt;\n&quot;);</span>
+<span class="lineNum">     391 </span>                :<span class="lineCov">        802 : }</span>
+<span class="lineNum">     392 </span>                :            : 
+<span class="lineNum">     393 </span>                :            : /* This function is a helper routine for the print() functionality of
+<a name="394"><span class="lineNum">     394 </span>                :            :    the dataset class.  It prints the data items of the given vector</a>
+<span class="lineNum">     395 </span>                :            :    object to the given output stream. */
+<span class="lineNum">     396 </span>                :<span class="lineCov">       1113 : void dataset::printData (vector * v, FILE * f) {</span>
+<span class="lineNum">     397 </span>        [<span class="branchCov" title="Branch 1 was taken 459820 times"> + </span><span class="branchCov" title="Branch 2 was taken 1113 times"> + </span>]:<span class="lineCov">     460933 :   for (int i = 0; i &lt; v-&gt;getSize (); i++) {</span>
+<span class="lineNum">     398 </span>        [<span class="branchCov" title="Branch 0 was taken 459820 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     459820 :     nr_complex_t c = v-&gt;get (i);</span>
+<span class="lineNum">     399 </span>        [<span class="branchCov" title="Branch 1 was taken 412131 times"> + </span><span class="branchCov" title="Branch 2 was taken 47689 times"> + </span>]:<span class="lineCov">     459820 :     if (imag (c) == 0.0) {</span>
+<span class="lineNum">     400 </span>        [<span class="branchCov" title="Branch 1 was taken 412131 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">     412131 :       fprintf (f, &quot;  %+.&quot; &quot;20&quot; &quot;e\n&quot;, (double) real (c));</span>
+<span class="lineNum">     401 </span>                :            :     }
+<span class="lineNum">     402 </span>                :            :     else {
+<span class="lineNum">     403 </span>                :            :       fprintf (f, &quot;  %+.&quot; &quot;20&quot; &quot;e%cj%.&quot; &quot;20&quot; &quot;e\n&quot;, (double) real (c), 
+<span class="lineNum">     404 </span>[<span class="branchCov" title="Branch 2 was taken 19583 times"> + </span><span class="branchCov" title="Branch 3 was taken 28106 times"> + </span>][<span class="branchCov" title="Branch 5 was taken 47689 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">      47689 :                imag (c) &gt;= 0.0 ? '+' : '-', (double) fabs (imag (c)));</span>
+<span class="lineNum">     405 </span>                :            :     }
+<span class="lineNum">     406 </span>                :            :   }
+<span class="lineNum">     407 </span>                :<span class="lineCov">       1113 : }</span>
+<span class="lineNum">     408 </span>                :            : 
+<span class="lineNum">     409 </span>                :            : /* This static function read a full dataset from the given file and
+<a name="410"><span class="lineNum">     410 </span>                :            :    returns it.  On failure the function emits appropriate error</a>
+<span class="lineNum">     411 </span>                :            :    messages and returns NULL. */
+<span class="lineNum">     412 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load (const char * file) {</span>
+<span class="lineNum">     413 </span>                :            :   FILE * f;
+<span class="lineNum">     414 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     415 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     416 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     417 </span>                :            :   }
+<span class="lineNum">     418 </span>                :<span class="lineNoCov">          0 :   dataset_in = f;</span>
+<span class="lineNum">     419 </span>                :<span class="lineNoCov">          0 :   dataset_restart (dataset_in);</span>
+<span class="lineNum">     420 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (dataset_parse () != 0) {</span>
+<span class="lineNum">     421 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     422 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     423 </span>                :            :   }
+<span class="lineNum">     424 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (dataset_result != NULL) {</span>
+<span class="lineNum">     425 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :     if (dataset_check (dataset_result) != 0) {</span>
+<span class="lineNum">     426 </span>                :<span class="lineNoCov">          0 :       fclose (f);</span>
+<span class="lineNum">     427 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :       delete dataset_result;</span>
+<span class="lineNum">     428 </span>                :<span class="lineNoCov">          0 :       return NULL;</span>
+<span class="lineNum">     429 </span>                :            :     }
+<span class="lineNum">     430 </span>                :            :   }
+<span class="lineNum">     431 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     432 </span>                :<span class="lineNoCov">          0 :   dataset_lex_destroy ();</span>
+<span class="lineNum">     433 </span>                :<span class="lineNoCov">          0 :   dataset_result-&gt;setFile (file);</span>
+<span class="lineNum">     434 </span>                :<span class="lineNoCov">          0 :   return dataset_result;</span>
+<span class="lineNum">     435 </span>                :            : }
+<span class="lineNum">     436 </span>                :            : 
+<span class="lineNum">     437 </span>                :            : /* This static function read a full dataset from the given touchstone
+<a name="438"><span class="lineNum">     438 </span>                :            :    file and returns it.  On failure the function emits appropriate</a>
+<span class="lineNum">     439 </span>                :            :    error messages and returns NULL. */
+<span class="lineNum">     440 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load_touchstone (const char * file) {</span>
+<span class="lineNum">     441 </span>                :            :   FILE * f;
+<span class="lineNum">     442 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     443 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     444 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     445 </span>                :            :   }
+<span class="lineNum">     446 </span>                :<span class="lineNoCov">          0 :   touchstone_in = f;</span>
+<span class="lineNum">     447 </span>                :<span class="lineNoCov">          0 :   touchstone_restart (touchstone_in);</span>
+<span class="lineNum">     448 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (touchstone_parse () != 0) {</span>
+<span class="lineNum">     449 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     450 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     451 </span>                :            :   }
+<span class="lineNum">     452 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (touchstone_check () != 0) {</span>
+<span class="lineNum">     453 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     454 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     455 </span>                :            :   }
+<span class="lineNum">     456 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     457 </span>                :<span class="lineNoCov">          0 :   touchstone_lex_destroy ();</span>
+<span class="lineNum">     458 </span>                :<span class="lineNoCov">          0 :   touchstone_result-&gt;setFile (file);</span>
+<span class="lineNum">     459 </span>                :<span class="lineNoCov">          0 :   return touchstone_result;</span>
+<span class="lineNum">     460 </span>                :            : }
+<span class="lineNum">     461 </span>                :            : 
+<span class="lineNum">     462 </span>                :            : /* This static function read a full dataset from the given CSV file
+<a name="463"><span class="lineNum">     463 </span>                :            :    and returns it.  On failure the function emits appropriate error</a>
+<span class="lineNum">     464 </span>                :            :    messages and returns NULL. */
+<span class="lineNum">     465 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load_csv (const char * file) {</span>
+<span class="lineNum">     466 </span>                :            :   FILE * f;
+<span class="lineNum">     467 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     468 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     469 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     470 </span>                :            :   }
+<span class="lineNum">     471 </span>                :<span class="lineNoCov">          0 :   csv_in = f;</span>
+<span class="lineNum">     472 </span>                :<span class="lineNoCov">          0 :   csv_restart (csv_in);</span>
+<span class="lineNum">     473 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (csv_parse () != 0) {</span>
+<span class="lineNum">     474 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     475 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     476 </span>                :            :   }
+<span class="lineNum">     477 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (csv_check () != 0) {</span>
+<span class="lineNum">     478 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     479 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     480 </span>                :            :   }
+<span class="lineNum">     481 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     482 </span>                :<span class="lineNoCov">          0 :   csv_lex_destroy ();</span>
+<span class="lineNum">     483 </span>                :<span class="lineNoCov">          0 :   csv_result-&gt;setFile (file);</span>
+<span class="lineNum">     484 </span>                :<span class="lineNoCov">          0 :   return csv_result;</span>
+<span class="lineNum">     485 </span>                :            : }
+<span class="lineNum">     486 </span>                :            : 
+<span class="lineNum">     487 </span>                :            : /* The function read a full dataset from the given CITIfile and
+<a name="488"><span class="lineNum">     488 </span>                :            :    returns it.  On failure the function emits appropriate error</a>
+<span class="lineNum">     489 </span>                :            :    messages and returns NULL. */
+<span class="lineNum">     490 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load_citi (const char * file) {</span>
+<span class="lineNum">     491 </span>                :            :   FILE * f;
+<span class="lineNum">     492 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     493 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     494 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     495 </span>                :            :   }
+<span class="lineNum">     496 </span>                :<span class="lineNoCov">          0 :   citi_in = f;</span>
+<span class="lineNum">     497 </span>                :<span class="lineNoCov">          0 :   citi_restart (citi_in);</span>
+<span class="lineNum">     498 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (citi_parse () != 0) {</span>
+<span class="lineNum">     499 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     500 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     501 </span>                :            :   }
+<span class="lineNum">     502 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (citi_check () != 0) {</span>
+<span class="lineNum">     503 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     504 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     505 </span>                :            :   }
+<span class="lineNum">     506 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     507 </span>                :<span class="lineNoCov">          0 :   citi_lex_destroy ();</span>
+<span class="lineNum">     508 </span>                :<span class="lineNoCov">          0 :   citi_result-&gt;setFile (file);</span>
+<span class="lineNum">     509 </span>                :<span class="lineNoCov">          0 :   return citi_result;</span>
+<span class="lineNum">     510 </span>                :            : }
+<span class="lineNum">     511 </span>                :            : 
+<span class="lineNum">     512 </span>                :            : /* The function read a full dataset from the given ZVR file and
+<a name="513"><span class="lineNum">     513 </span>                :            :    returns it.  On failure the function emits appropriate error</a>
+<span class="lineNum">     514 </span>                :            :    messages and returns NULL. */
+<span class="lineNum">     515 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load_zvr (const char * file) {</span>
+<span class="lineNum">     516 </span>                :            :   FILE * f;
+<span class="lineNum">     517 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     518 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     519 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     520 </span>                :            :   }
+<span class="lineNum">     521 </span>                :<span class="lineNoCov">          0 :   zvr_in = f;</span>
+<span class="lineNum">     522 </span>                :<span class="lineNoCov">          0 :   zvr_restart (zvr_in);</span>
+<span class="lineNum">     523 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (zvr_parse () != 0) {</span>
+<span class="lineNum">     524 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     525 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     526 </span>                :            :   }
+<span class="lineNum">     527 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (zvr_check () != 0) {</span>
+<span class="lineNum">     528 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     529 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     530 </span>                :            :   }
+<span class="lineNum">     531 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     532 </span>                :<span class="lineNoCov">          0 :   zvr_lex_destroy ();</span>
+<span class="lineNum">     533 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (zvr_result) zvr_result-&gt;setFile (file);</span>
+<span class="lineNum">     534 </span>                :<span class="lineNoCov">          0 :   return zvr_result;</span>
+<span class="lineNum">     535 </span>                :            : }
+<span class="lineNum">     536 </span>                :            : 
+<span class="lineNum">     537 </span>                :            : /* The function read a full dataset from the given MDL file and
+<a name="538"><span class="lineNum">     538 </span>                :            :    returns it.  On failure the function emits appropriate error</a>
+<span class="lineNum">     539 </span>                :            :    messages and returns NULL. */
+<span class="lineNum">     540 </span>                :<span class="lineNoCov">          0 : dataset * dataset::load_mdl (const char * file) {</span>
+<span class="lineNum">     541 </span>                :            :   FILE * f;
+<span class="lineNum">     542 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if ((f = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">     543 </span>                :<span class="lineNoCov">          0 :     logprint (LOG_ERROR, &quot;error loading `%s': %s\n&quot;, file, strerror (errno));</span>
+<span class="lineNum">     544 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     545 </span>                :            :   }
+<span class="lineNum">     546 </span>                :<span class="lineNoCov">          0 :   mdl_in = f;</span>
+<span class="lineNum">     547 </span>                :<span class="lineNoCov">          0 :   mdl_restart (mdl_in);</span>
+<span class="lineNum">     548 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_parse () != 0) {</span>
+<span class="lineNum">     549 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     550 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     551 </span>                :            :   }
+<span class="lineNum">     552 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_check () != 0) {</span>
+<span class="lineNum">     553 </span>                :<span class="lineNoCov">          0 :     fclose (f);</span>
+<span class="lineNum">     554 </span>                :<span class="lineNoCov">          0 :     return NULL;</span>
+<span class="lineNum">     555 </span>                :            :   }
+<span class="lineNum">     556 </span>                :<span class="lineNoCov">          0 :   fclose (f);</span>
+<span class="lineNum">     557 </span>                :<span class="lineNoCov">          0 :   mdl_lex_destroy ();</span>
+<span class="lineNum">     558 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (mdl_result) mdl_result-&gt;setFile (file);</span>
+<span class="lineNum">     559 </span>                :<span class="lineNoCov">          0 :   return mdl_result;</span>
+<span class="lineNum">     560 </span>                :            : }
+<span class="lineNum">     561 </span>                :            : 
+<span class="lineNum">     562 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

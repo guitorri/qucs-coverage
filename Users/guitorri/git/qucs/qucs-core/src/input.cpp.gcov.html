@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19 Code Coverage - /Users/guitorri/git/qucs/qucs-core/src/input.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/guitorri/git/qucs/qucs-core/src</a> - input.cpp<span style="font-size: 80%;"> (source / <a href="input.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19 Code Coverage</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">125</td>
+            <td class="headerCovTableEntry">152</td>
+            <td class="headerCovTableEntryMed">82.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:18:18</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryLo">71.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">77</td>
+            <td class="headerCovTableEntry">142</td>
+            <td class="headerCovTableEntryLo">54.2 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * input.cpp - input netlist class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003-2008 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;stdio.h&gt;
+<span class="lineNum">      30 </span>                :            : #include &lt;stdlib.h&gt;
+<span class="lineNum">      31 </span>                :            : #include &lt;string.h&gt;
+<span class="lineNum">      32 </span>                :            : #include &lt;errno.h&gt;
+<span class="lineNum">      33 </span>                :            : #include &lt;assert.h&gt;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #include &quot;logging.h&quot;
+<span class="lineNum">      36 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      37 </span>                :            : #include &quot;components.h&quot;
+<span class="lineNum">      38 </span>                :            : #include &quot;net.h&quot;
+<span class="lineNum">      39 </span>                :            : #include &quot;variable.h&quot;
+<span class="lineNum">      40 </span>                :            : #include &quot;property.h&quot;
+<span class="lineNum">      41 </span>                :            : #include &quot;environment.h&quot;
+<span class="lineNum">      42 </span>                :            : #include &quot;nodeset.h&quot;
+<span class="lineNum">      43 </span>                :            : #include &quot;input.h&quot;
+<span class="lineNum">      44 </span>                :            : #include &quot;check_netlist.h&quot;
+<span class="lineNum">      45 </span>                :            : #include &quot;equation.h&quot;
+<span class="lineNum">      46 </span>                :            : #include &quot;module.h&quot;
+<span class="lineNum">      47 </span>                :            : 
+<span class="lineNum">      48 </span>                :            : namespace qucs {
+<span class="lineNum">      49 </span>                :            : 
+<span class="lineNum">      50 </span>                :            : // Global variables.
+<span class="lineNum">      51 </span>                :            : int netlist_check = 0;
+<a name="52"><span class="lineNum">      52 </span>                :            : </a>
+<span class="lineNum">      53 </span>                :            : // Constructor creates an unnamed instance of the input class.
+<span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 : input::input () : object () {</span>
+<span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 :   fd = stdin;</span>
+<span class="lineNum">      56 </span>                :<span class="lineNoCov">          0 :   subnet = NULL;</span>
+<span class="lineNum">      57 </span>                :<span class="lineNoCov">          0 :   env = NULL;</span>
+<span class="lineNum">      58 </span>                :<span class="lineNoCov">          0 : }</span>
+<a name="59"><span class="lineNum">      59 </span>                :            : </a>
+<span class="lineNum">      60 </span>                :            : // Constructor creates an named instance of the input class.
+<span class="lineNum">      61 </span>                :<span class="lineCov">         90 : input::input (char * file) : object (file) {</span>
+<span class="lineNum">      62 </span>        [<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         90 :   if ((fd = fopen (file, &quot;r&quot;)) == NULL) {</span>
+<span class="lineNum">         </span>  [<span class="branchNoCov" title="Branch 3 was not taken"> - </span><span class="branchCov" title="Branch 4 was taken 90 times"> + </span><span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]
+<span class="lineNum">         </span>        [<span class="branchNoExec" title="Branch 8 was not executed"> # </span><span class="branchNoExec" title="Branch 9 was not executed"> # </span>]
+<span class="lineNum">      63 </span>                :            :     logprint (LOG_ERROR, &quot;cannot open file `%s': %s, using stdin instead\n&quot;,
+<span class="lineNum">      64 </span>[<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>][<span class="branchNoExec" title="Branch 3 was not executed"> # </span><span class="branchNoExec" title="Branch 4 was not executed"> # </span>]:<span class="lineNoCov">          0 :               file, strerror (errno));</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 6 was not executed"> # </span><span class="branchNoExec" title="Branch 7 was not executed"> # </span>][<span class="branchNoExec" title="Branch 9 was not executed"> # </span><span class="branchNoExec" title="Branch 10 was not executed"> # </span>]
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 12 was not executed"> # </span><span class="branchNoExec" title="Branch 13 was not executed"> # </span>][<span class="branchNoExec" title="Branch 15 was not executed"> # </span><span class="branchNoExec" title="Branch 16 was not executed"> # </span>]
+<span class="lineNum">      65 </span>                :<span class="lineNoCov">          0 :     fd = stdin;</span>
+<span class="lineNum">      66 </span>                :            :   }
+<span class="lineNum">      67 </span>                :<span class="lineCov">         90 :   subnet = NULL;</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">         90 :   env = NULL;</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">         90 : }</span>
+<a name="70"><span class="lineNum">      70 </span>                :            : </a>
+<span class="lineNum">      71 </span>                :            : // Destructor deletes an input object.
+<span class="lineNum">      72 </span>                :<span class="lineCov">         90 : input::~input () {</span>
+<span class="lineNum">      73 </span>[<span class="branchCov" title="Branch 0 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 90 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         90 :   if (fd != stdin) fclose (fd);</span>
+<span class="lineNum">         </span>[<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>][<span class="branchNoExec" title="Branch 7 was not executed"> # </span><span class="branchNoExec" title="Branch 8 was not executed"> # </span>]
+<span class="lineNum">      74 </span>[<span class="branchNoCov" title="Branch 2 was not taken"> - </span><span class="branchCov" title="Branch 3 was taken 90 times"> + </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineCov">        180 : }</span>
+<span class="lineNum">      75 </span>                :            : 
+<span class="lineNum">      76 </span>                :            : /* This function scans, parses and checks a netlist from the input
+<span class="lineNum">      77 </span>                :            :    file (specified by the constructor call) or stdin if there is no
+<span class="lineNum">      78 </span>                :            :    such file.  Afterwards the function builds the netlist
+<a name="79"><span class="lineNum">      79 </span>                :            :    representation and stores it into the given netlist object.  The</a>
+<span class="lineNum">      80 </span>                :            :    function returns zero on success and non-zero otherwise. */
+<span class="lineNum">      81 </span>                :<span class="lineCov">         90 : int input::netlist (net * netlist) {</span>
+<span class="lineNum">      82 </span>                :            : 
+<span class="lineNum">      83 </span>                :            :   // tell the scanner to use the specified file
+<span class="lineNum">      84 </span>                :<span class="lineCov">         90 :   netlist_in = getFile ();</span>
+<span class="lineNum">      85 </span>                :            : 
+<span class="lineNum">      86 </span>                :            :   // save the netlist object
+<span class="lineNum">      87 </span>                :<span class="lineCov">         90 :   subnet = netlist;</span>
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :<span class="lineCov">         90 :   logprint (LOG_STATUS, &quot;parsing netlist...\n&quot;);</span>
+<span class="lineNum">      90 </span>                :            : 
+<span class="lineNum">      91 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (netlist_parse () != 0)</span>
+<span class="lineNum">      92 </span>                :<span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :<span class="lineCov">         90 :   logprint (LOG_STATUS, &quot;checking netlist...\n&quot;);</span>
+<span class="lineNum">      95 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (netlist_checker (env) != 0)</span>
+<span class="lineNum">      96 </span>                :<span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">      97 </span>                :            : 
+<span class="lineNum">      98 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 90 times"> + </span>]:<span class="lineCov">         90 :   if (netlist_checker_variables (env) != 0)</span>
+<span class="lineNum">      99 </span>                :<span class="lineNoCov">          0 :     return -1;</span>
+<span class="lineNum">     100 </span>                :            : 
+<span class="lineNum">     101 </span>                :            : #if DEBUG
+<span class="lineNum">     102 </span>                :<span class="lineCov">         90 :   netlist_list ();</span>
+<span class="lineNum">     103 </span>                :            : #endif /* DEBUG */
+<span class="lineNum">     104 </span>                :<span class="lineCov">         90 :   netlist_status ();</span>
+<span class="lineNum">     105 </span>                :            : 
+<span class="lineNum">     106 </span>                :<span class="lineCov">         90 :   logprint (LOG_STATUS, &quot;creating netlist...\n&quot;);</span>
+<span class="lineNum">     107 </span>                :<span class="lineCov">         90 :   factory ();</span>
+<span class="lineNum">     108 </span>                :            : 
+<span class="lineNum">     109 </span>                :<span class="lineCov">         90 :   netlist_destroy ();</span>
+<span class="lineNum">     110 </span>                :<span class="lineCov">         90 :   return 0;</span>
+<span class="lineNum">     111 </span>                :            : }
+<span class="lineNum">     112 </span>                :            : 
+<a name="113"><span class="lineNum">     113 </span>                :            : /* The little helper function creates a vector given by the list of</a>
+<span class="lineNum">     114 </span>                :            :    values. */
+<span class="lineNum">     115 </span>                :<span class="lineCov">          5 : qucs::vector * input::createVector (struct value_t * values) {</span>
+<span class="lineNum">     116 </span>        [<span class="branchCov" title="Branch 1 was taken 5 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          5 :   qucs::vector * v = new qucs::vector ();</span>
+<span class="lineNum">     117 </span>[<span class="branchCov" title="Branch 1 was taken 14 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 14 times"> + </span><span class="branchCov" title="Branch 5 was taken 5 times"> + </span>]:<span class="lineCov">         19 :   for (; values != NULL; values = values-&gt;next) v-&gt;add (values-&gt;value);</span>
+<span class="lineNum">     118 </span>                :<span class="lineCov">          5 :   return v;</span>
+<span class="lineNum">     119 </span>                :            : }
+<span class="lineNum">     120 </span>                :            : 
+<a name="121"><span class="lineNum">     121 </span>                :            : /* This function builds up the netlist representation from the checked</a>
+<span class="lineNum">     122 </span>                :            :    netlist input.  It creates circuit components as necessary. */
+<span class="lineNum">     123 </span>                :<span class="lineCov">         90 : void input::factory (void) {</span>
+<span class="lineNum">     124 </span>                :            : 
+<span class="lineNum">     125 </span>                :            :   struct definition_t * def, * next;
+<span class="lineNum">     126 </span>                :            :   struct node_t * nodes;
+<span class="lineNum">     127 </span>                :            :   struct pair_t * pairs;
+<span class="lineNum">     128 </span>                :            :   circuit * c;
+<span class="lineNum">     129 </span>                :            :   object * o;
+<span class="lineNum">     130 </span>                :            :   analysis * a;
+<span class="lineNum">     131 </span>                :            :   substrate * s;
+<span class="lineNum">     132 </span>                :            :   nodeset * n;
+<span class="lineNum">     133 </span>                :            :   int i;
+<span class="lineNum">     134 </span>                :            : 
+<span class="lineNum">     135 </span>                :            :   // go through the list of input definitions
+<span class="lineNum">     136 </span>        [<span class="branchCov" title="Branch 0 was taken 988 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">       1078 :   for (def = definition_root; def != NULL; def = next) {</span>
+<span class="lineNum">     137 </span>                :<span class="lineCov">        988 :     next = def-&gt;next;</span>
+<span class="lineNum">     138 </span>                :            :     // handle actions
+<span class="lineNum">     139 </span>        [<span class="branchCov" title="Branch 0 was taken 153 times"> + </span><span class="branchCov" title="Branch 1 was taken 835 times"> + </span>]:<span class="lineCov">        988 :     if (def-&gt;action) {</span>
+<span class="lineNum">     140 </span>        [<span class="branchCov" title="Branch 1 was taken 153 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        153 :       if ((a = createAnalysis (def-&gt;type)) != NULL) {</span>
+<span class="lineNum">     141 </span>                :<span class="lineCov">        153 :         a-&gt;setName (def-&gt;instance);</span>
+<span class="lineNum">     142 </span>                :            : 
+<span class="lineNum">     143 </span>                :            :         // add the properties to analysis
+<span class="lineNum">     144 </span>        [<span class="branchCov" title="Branch 0 was taken 1543 times"> + </span><span class="branchCov" title="Branch 1 was taken 153 times"> + </span>]:<span class="lineCov">       1696 :         for (pairs = def-&gt;pairs; pairs != NULL; pairs = pairs-&gt;next)</span>
+<span class="lineNum">     145 </span>        [<span class="branchCov" title="Branch 0 was taken 576 times"> + </span><span class="branchCov" title="Branch 1 was taken 967 times"> + </span>]:<span class="lineCov">       1543 :           if (pairs-&gt;value-&gt;ident) {</span>
+<span class="lineNum">     146 </span>[<span class="branchCov" title="Branch 0 was taken 56 times"> + </span><span class="branchCov" title="Branch 1 was taken 520 times"> + </span>][<span class="branchCov" title="Branch 2 was taken 11 times"> + </span><span class="branchCov" title="Branch 3 was taken 45 times"> + </span>]:<span class="lineCov">        576 :             if (pairs-&gt;value-&gt;var &amp;&amp; strcmp (pairs-&gt;key, &quot;Param&quot;)) {</span>
+<span class="lineNum">     147 </span>                :            :               variable * v;
+<span class="lineNum">     148 </span>        [<span class="branchCov" title="Branch 1 was taken 11 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         11 :               if ((v = def-&gt;env-&gt;getVariable (pairs-&gt;value-&gt;ident)) != NULL) {</span>
+<span class="lineNum">     149 </span>                :            :                 // equation variable reference in analysis property
+<span class="lineNum">     150 </span>                :<span class="lineCov">         11 :                 a-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     151 </span>                :            :               }
+<span class="lineNum">     152 </span>                :            :               else {
+<span class="lineNum">     153 </span>                :            :                 // should not be reached!
+<span class="lineNum">     154 </span>                :<span class="lineNoCov">          0 :                 a-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     155 </span>                :<span class="lineCov">         11 :               }</span>
+<span class="lineNum">     156 </span>                :            :             }
+<span class="lineNum">     157 </span>                :            :             else {
+<span class="lineNum">     158 </span>                :            :               // ususal string property
+<span class="lineNum">     159 </span>                :<span class="lineCov">        576 :               a-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     160 </span>                :            :             }
+<span class="lineNum">     161 </span>                :            :           } else {
+<span class="lineNum">     162 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 964 times"> + </span>]:<span class="lineCov">        967 :             if (pairs-&gt;value-&gt;var) {</span>
+<span class="lineNum">     163 </span>                :            :               // add list sweeps and constants to the properties
+<span class="lineNum">     164 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :               variable * v = new variable (pairs-&gt;key);</span>
+<span class="lineNum">     165 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :               eqn::constant * c = new eqn::constant (eqn::TAG_VECTOR);</span>
+<span class="lineNum">     166 </span>                :<span class="lineCov">          3 :               c-&gt;v = createVector (pairs-&gt;value);</span>
+<span class="lineNum">     167 </span>                :<span class="lineCov">          3 :               v-&gt;setConstant (c);</span>
+<span class="lineNum">     168 </span>                :<span class="lineCov">          3 :               a-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     169 </span>                :            :             }
+<span class="lineNum">     170 </span>                :            :             else {
+<span class="lineNum">     171 </span>                :<span class="lineCov">        964 :               a-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;value);</span>
+<span class="lineNum">     172 </span>                :            :             }
+<span class="lineNum">     173 </span>                :            :           }
+<span class="lineNum">     174 </span>                :            :         // additionally add missing optional properties
+<span class="lineNum">     175 </span>                :<span class="lineCov">        153 :         assignDefaultProperties (a, def-&gt;define);</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">        153 :         a-&gt;setEnv (def-&gt;env);</span>
+<span class="lineNum">     177 </span>                :<span class="lineCov">        153 :         subnet-&gt;insertAnalysis (a);</span>
+<span class="lineNum">     178 </span>                :            :       }
+<span class="lineNum">     179 </span>                :            :       // remove this definition from the list
+<span class="lineNum">     180 </span>                :<span class="lineCov">        153 :       definition_root = netlist_unchain_definition (definition_root, def);</span>
+<span class="lineNum">     181 </span>                :            :     }
+<span class="lineNum">     182 </span>                :            :   }
+<span class="lineNum">     183 </span>                :            : 
+<span class="lineNum">     184 </span>                :            :   // go through the list of input definitions
+<span class="lineNum">     185 </span>        [<span class="branchCov" title="Branch 0 was taken 835 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        925 :   for (def = definition_root; def != NULL; def = next) {</span>
+<span class="lineNum">     186 </span>                :<span class="lineCov">        835 :     next = def-&gt;next;</span>
+<span class="lineNum">     187 </span>                :            :     // handle substrate definitions
+<span class="lineNum">     188 </span>[<span class="branchCov" title="Branch 0 was taken 835 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchCov" title="Branch 3 was taken 832 times"> + </span>]:<span class="lineCov">        835 :     if (!def-&gt;action &amp;&amp; def-&gt;substrate) {</span>
+<span class="lineNum">     189 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :       if ((s = createSubstrate (def-&gt;type)) != NULL) {</span>
+<span class="lineNum">     190 </span>                :<span class="lineCov">          3 :         s-&gt;setName (def-&gt;instance);</span>
+<span class="lineNum">     191 </span>                :            : 
+<span class="lineNum">     192 </span>                :            :         // add the properties to substrate
+<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 0 was taken 18 times"> + </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">         21 :         for (pairs = def-&gt;pairs; pairs != NULL; pairs = pairs-&gt;next)</span>
+<span class="lineNum">     194 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 18 times"> + </span>]:<span class="lineCov">         18 :           if (pairs-&gt;value-&gt;ident) {</span>
+<span class="lineNum">     195 </span>                :            :             // a variable
+<span class="lineNum">     196 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :             if (pairs-&gt;value-&gt;var) {</span>
+<span class="lineNum">     197 </span>                :            :               // at this stage it should be ensured that the variable is
+<span class="lineNum">     198 </span>                :            :               // already in the root environment
+<span class="lineNum">     199 </span>                :<span class="lineNoCov">          0 :               variable * v = def-&gt;env-&gt;getVariable (pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     200 </span>                :<span class="lineNoCov">          0 :               s-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     201 </span>                :            :             }
+<span class="lineNum">     202 </span>                :            :             // a usual string property
+<span class="lineNum">     203 </span>                :            :             else {
+<span class="lineNum">     204 </span>                :<span class="lineNoCov">          0 :               s-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     205 </span>                :            :             }
+<span class="lineNum">     206 </span>                :            :           } else {
+<span class="lineNum">     207 </span>                :<span class="lineCov">         18 :             s-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;value);</span>
+<span class="lineNum">     208 </span>                :            :           }
+<span class="lineNum">     209 </span>                :            :         // additionally add missing optional properties
+<span class="lineNum">     210 </span>                :<span class="lineCov">          3 :         assignDefaultProperties (s, def-&gt;define);</span>
+<span class="lineNum">     211 </span>                :            : 
+<span class="lineNum">     212 </span>                :            :         // put new substrate definition into environment
+<span class="lineNum">     213 </span>                :<span class="lineCov">          3 :         char * n = strrchr (def-&gt;instance, '.');</span>
+<span class="lineNum">     214 </span>[<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span>][<span class="branchCov" title="Branch 3 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">          3 :         variable * v = new variable (n ? n + 1 : def-&gt;instance);</span>
+<span class="lineNum">     215 </span>                :<span class="lineCov">          3 :         v-&gt;setSubstrate (s);</span>
+<span class="lineNum">     216 </span>                :<span class="lineCov">          3 :         def-&gt;env-&gt;addVariable (v);</span>
+<span class="lineNum">     217 </span>                :            :       }
+<span class="lineNum">     218 </span>                :            :       // remove this definition from the list
+<span class="lineNum">     219 </span>                :<span class="lineCov">          3 :       definition_root = netlist_unchain_definition (definition_root, def);</span>
+<span class="lineNum">     220 </span>                :            :     }
+<span class="lineNum">     221 </span>                :            :     // handle nodeset definitions
+<span class="lineNum">     222 </span>[<span class="branchCov" title="Branch 0 was taken 832 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 2 times"> + </span><span class="branchCov" title="Branch 3 was taken 830 times"> + </span>]:<span class="lineCov">        832 :     else if (!def-&gt;action &amp;&amp; def-&gt;nodeset) {</span>
+<span class="lineNum">     223 </span>        [<span class="branchCov" title="Branch 1 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          2 :       n = new nodeset ();</span>
+<span class="lineNum">     224 </span>                :<span class="lineCov">          2 :       n-&gt;setName (def-&gt;nodes-&gt;node);</span>
+<span class="lineNum">     225 </span>                :<span class="lineCov">          2 :       n-&gt;setValue (def-&gt;pairs-&gt;value-&gt;value);</span>
+<span class="lineNum">     226 </span>                :<span class="lineCov">          2 :       subnet-&gt;addNodeset (n);</span>
+<span class="lineNum">     227 </span>                :            :       // remove this definition from the list
+<span class="lineNum">     228 </span>                :<span class="lineCov">          2 :       definition_root = netlist_unchain_definition (definition_root, def);</span>
+<span class="lineNum">     229 </span>                :            :     }
+<span class="lineNum">     230 </span>                :            :   }
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            :   // go through the list of input definitions
+<span class="lineNum">     233 </span>        [<span class="branchCov" title="Branch 0 was taken 830 times"> + </span><span class="branchCov" title="Branch 1 was taken 90 times"> + </span>]:<span class="lineCov">        920 :   for (def = definition_root; def != NULL; def = next) {</span>
+<span class="lineNum">     234 </span>                :<span class="lineCov">        830 :     next = def-&gt;next;</span>
+<span class="lineNum">     235 </span>                :            :     // handle component definitions
+<span class="lineNum">     236 </span>[<span class="branchCov" title="Branch 0 was taken 830 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 830 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        830 :     if (!def-&gt;action &amp;&amp; !def-&gt;substrate &amp;&amp; !def-&gt;nodeset) {</span>
+<span class="lineNum">         </span>        [<span class="branchCov" title="Branch 4 was taken 830 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<span class="lineNum">     237 </span>                :<span class="lineCov">        830 :       c = createCircuit (def-&gt;type);</span>
+<span class="lineNum">     238 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 830 times"> + </span>]:<span class="lineCov">        830 :       assert (c != NULL);</span>
+<span class="lineNum">     239 </span>                :<span class="lineCov">        830 :       o = (object *) c;</span>
+<span class="lineNum">     240 </span>                :<span class="lineCov">        830 :       c-&gt;setName (def-&gt;instance);</span>
+<span class="lineNum">     241 </span>                :<span class="lineCov">        830 :       c-&gt;setNonLinear (def-&gt;nonlinear != 0);</span>
+<span class="lineNum">     242 </span>                :<span class="lineCov">        830 :       c-&gt;setSubcircuit (def-&gt;subcircuit);</span>
+<span class="lineNum">     243 </span>                :            : 
+<span class="lineNum">     244 </span>                :            :       // change size (number of ports) of variable sized components
+<span class="lineNum">     245 </span>        [<span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 830 times"> + </span>]:<span class="lineCov">        830 :       if (c-&gt;isVariableSized ()) {</span>
+<span class="lineNum">     246 </span>                :<span class="lineNoCov">          0 :         c-&gt;setSize (def-&gt;ncount);</span>
+<span class="lineNum">     247 </span>                :            :       }
+<span class="lineNum">     248 </span>                :            :       // add appropriate nodes to circuit
+<span class="lineNum">     249 </span>        [<span class="branchCov" title="Branch 0 was taken 1897 times"> + </span><span class="branchCov" title="Branch 1 was taken 830 times"> + </span>]:<span class="lineCov">       2727 :       for (i = 0, nodes = def-&gt;nodes; nodes; nodes = nodes-&gt;next, i++)</span>
+<span class="lineNum">     250 </span>        [<span class="branchCov" title="Branch 1 was taken 1897 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">       1897 :         if (i &lt; c-&gt;getSize ())</span>
+<span class="lineNum">     251 </span>                :<span class="lineCov">       1897 :           c-&gt;setNode (i, nodes-&gt;node);</span>
+<span class="lineNum">     252 </span>                :            : 
+<span class="lineNum">     253 </span>                :            :       // add the properties to circuit
+<span class="lineNum">     254 </span>        [<span class="branchCov" title="Branch 0 was taken 7541 times"> + </span><span class="branchCov" title="Branch 1 was taken 830 times"> + </span>]:<span class="lineCov">       8371 :       for (pairs = def-&gt;pairs; pairs != NULL; pairs = pairs-&gt;next) {</span>
+<span class="lineNum">     255 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 7541 times"> + </span>]:<span class="lineCov">       7541 :         if (pairs-&gt;value == NULL) {</span>
+<span class="lineNum">     256 </span>                :            :           // zero-length value lists
+<span class="lineNum">     257 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :           variable * v = new variable (pairs-&gt;key);</span>
+<span class="lineNum">     258 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :           eqn::constant * c = new eqn::constant (eqn::TAG_VECTOR);</span>
+<span class="lineNum">     259 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :           c-&gt;v = new qucs::vector ();</span>
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 :           v-&gt;setConstant (c);</span>
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 :           o-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     262 </span>                :            :         }
+<span class="lineNum">     263 </span>        [<span class="branchCov" title="Branch 0 was taken 225 times"> + </span><span class="branchCov" title="Branch 1 was taken 7316 times"> + </span>]:<span class="lineCov">       7541 :         else if (pairs-&gt;value-&gt;ident) {</span>
+<span class="lineNum">     264 </span>        [<span class="branchCov" title="Branch 0 was taken 75 times"> + </span><span class="branchCov" title="Branch 1 was taken 150 times"> + </span>]:<span class="lineCov">        225 :           if (pairs-&gt;value-&gt;var) {</span>
+<span class="lineNum">     265 </span>                :            :             // at this stage it should be ensured that the variable is
+<span class="lineNum">     266 </span>                :            :             // already in the root environment
+<span class="lineNum">     267 </span>                :<span class="lineCov">         75 :             variable * v = def-&gt;env-&gt;getVariable (pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     268 </span>                :<span class="lineCov">         75 :             o-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     269 </span>                :            :           } else {
+<span class="lineNum">     270 </span>        [<span class="branchCov" title="Branch 0 was taken 24 times"> + </span><span class="branchCov" title="Branch 1 was taken 126 times"> + </span>]:<span class="lineCov">        150 :             if (pairs-&gt;value-&gt;subst) {</span>
+<span class="lineNum">     271 </span>                :<span class="lineCov">         24 :               variable * v = def-&gt;env-&gt;getVariable (pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     272 </span>                :<span class="lineCov">         24 :               c-&gt;setSubstrate (v-&gt;getSubstrate ());</span>
+<span class="lineNum">     273 </span>                :            :             }
+<span class="lineNum">     274 </span>                :<span class="lineCov">        150 :             o-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;ident);</span>
+<span class="lineNum">     275 </span>                :            :           }
+<span class="lineNum">     276 </span>                :            :         } else {
+<span class="lineNum">     277 </span>        [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span><span class="branchCov" title="Branch 1 was taken 7314 times"> + </span>]:<span class="lineCov">       7316 :           if (pairs-&gt;value-&gt;var) {</span>
+<span class="lineNum">     278 </span>                :            :             // add value lists to the properties
+<span class="lineNum">     279 </span>        [<span class="branchCov" title="Branch 1 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          2 :             variable * v = new variable (pairs-&gt;key);</span>
+<span class="lineNum">     280 </span>        [<span class="branchCov" title="Branch 1 was taken 2 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          2 :             eqn::constant * c = new eqn::constant (eqn::TAG_VECTOR);</span>
+<span class="lineNum">     281 </span>                :<span class="lineCov">          2 :             c-&gt;v = createVector (pairs-&gt;value);</span>
+<span class="lineNum">     282 </span>                :<span class="lineCov">          2 :             v-&gt;setConstant (c);</span>
+<span class="lineNum">     283 </span>                :<span class="lineCov">          2 :             o-&gt;addProperty (pairs-&gt;key, v);</span>
+<span class="lineNum">     284 </span>                :            :           } else {
+<span class="lineNum">     285 </span>                :<span class="lineCov">       7314 :             o-&gt;addProperty (pairs-&gt;key, pairs-&gt;value-&gt;value);</span>
+<span class="lineNum">     286 </span>                :            :           }
+<span class="lineNum">     287 </span>                :            :         }
+<span class="lineNum">     288 </span>                :            :       }
+<span class="lineNum">     289 </span>                :            :       // set local circuit environment
+<span class="lineNum">     290 </span>                :<span class="lineCov">        830 :       c-&gt;setEnv (def-&gt;env);</span>
+<span class="lineNum">     291 </span>                :            : 
+<span class="lineNum">     292 </span>                :            :       // additionally add missing optional properties
+<span class="lineNum">     293 </span>                :<span class="lineCov">        830 :       assignDefaultProperties (c, def-&gt;define);</span>
+<span class="lineNum">     294 </span>                :            : 
+<span class="lineNum">     295 </span>                :            :       // insert the circuit into the netlist object
+<span class="lineNum">     296 </span>                :<span class="lineCov">        830 :       subnet-&gt;insertCircuit (c);</span>
+<span class="lineNum">     297 </span>                :            : 
+<span class="lineNum">     298 </span>                :            :       // remove this definition from the list
+<span class="lineNum">     299 </span>                :<span class="lineCov">        830 :       definition_root = netlist_unchain_definition (definition_root, def);</span>
+<span class="lineNum">     300 </span>                :            :     }
+<span class="lineNum">     301 </span>                :            :   }
+<span class="lineNum">     302 </span>                :<span class="lineCov">         90 : }</span>
+<span class="lineNum">     303 </span>                :            : 
+<a name="304"><span class="lineNum">     304 </span>                :            : /* This static function applies the optional missing properties's</a>
+<span class="lineNum">     305 </span>                :            :    default values to the given object. */
+<span class="lineNum">     306 </span>                :<span class="lineCov">        986 : void input::assignDefaultProperties (object * obj, struct define_t * def) {</span>
+<span class="lineNum">     307 </span>                :            :   // go through optional properties
+<span class="lineNum">     308 </span>        [<span class="branchCov" title="Branch 0 was taken 4882 times"> + </span><span class="branchCov" title="Branch 1 was taken 986 times"> + </span>]:<span class="lineCov">       5868 :   for (int i = 0; PROP_IS_PROP (def-&gt;optional[i]); i++) {</span>
+<span class="lineNum">     309 </span>                :            :     // is the property already assigned ?
+<span class="lineNum">     310 </span>        [<span class="branchCov" title="Branch 1 was taken 467 times"> + </span><span class="branchCov" title="Branch 2 was taken 4415 times"> + </span>]:<span class="lineCov">       4882 :     if (!obj-&gt;hasProperty (def-&gt;optional[i].key)) {</span>
+<span class="lineNum">     311 </span>                :            :       property * p;
+<span class="lineNum">     312 </span>        [<span class="branchCov" title="Branch 0 was taken 467 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        467 :       if (PROP_IS_VAL (def-&gt;optional[i])) {</span>
+<span class="lineNum">     313 </span>                :            :         // add double property
+<span class="lineNum">     314 </span>                :<span class="lineCov">        467 :         p = obj-&gt;addProperty (def-&gt;optional[i].key,</span>
+<span class="lineNum">     315 </span>                :<span class="lineCov">        467 :                               def-&gt;optional[i].defaultval.d);</span>
+<span class="lineNum">     316 </span>                :<span class="lineCov">        467 :         p-&gt;setDefault (true);</span>
+<span class="lineNum">     317 </span>                :            :       }
+<span class="lineNum">     318 </span>                :            :       else {
+<span class="lineNum">     319 </span>                :            :         // add string property
+<span class="lineNum">     320 </span>                :<span class="lineNoCov">          0 :         p = obj-&gt;addProperty (def-&gt;optional[i].key,</span>
+<span class="lineNum">     321 </span>                :<span class="lineNoCov">          0 :                               def-&gt;optional[i].defaultval.s);</span>
+<span class="lineNum">     322 </span>                :<span class="lineNoCov">          0 :         p-&gt;setDefault (true);</span>
+<span class="lineNum">     323 </span>                :            :       }
+<span class="lineNum">     324 </span>                :            :     }
+<span class="lineNum">     325 </span>                :            :   }
+<span class="lineNum">     326 </span>                :<span class="lineCov">        986 : }</span>
+<a name="327"><span class="lineNum">     327 </span>                :            : </a>
+<span class="lineNum">     328 </span>                :            : // The function creates components specified by the type of component.
+<span class="lineNum">     329 </span>                :<span class="lineCov">        830 : circuit * input::createCircuit (char * type) {</span>
+<span class="lineNum">     330 </span>                :            :   module * m;
+<span class="lineNum">     331 </span>        [<span class="branchCov" title="Branch 1 was taken 830 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        830 :   if ((m = module::modules.get (type)) != NULL)</span>
+<span class="lineNum">     332 </span>                :<span class="lineCov">        830 :     return m-&gt;circreate ();</span>
+<span class="lineNum">     333 </span>                :            : 
+<span class="lineNum">     334 </span>                :<span class="lineNoCov">          0 :   logprint (LOG_ERROR, &quot;no such circuit type `%s'\n&quot;, type);</span>
+<span class="lineNum">     335 </span>                :<span class="lineCov">        830 :   return NULL;</span>
+<span class="lineNum">     336 </span>                :            : }
+<a name="337"><span class="lineNum">     337 </span>                :            : </a>
+<span class="lineNum">     338 </span>                :            : // The function creates an analysis specified by the type of analysis.
+<span class="lineNum">     339 </span>                :<span class="lineCov">        153 : analysis * input::createAnalysis (char * type) {</span>
+<span class="lineNum">     340 </span>                :            :   module * m;
+<span class="lineNum">     341 </span>        [<span class="branchCov" title="Branch 1 was taken 153 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">        153 :   if ((m = module::modules.get (type)) != NULL)</span>
+<span class="lineNum">     342 </span>                :<span class="lineCov">        153 :     return m-&gt;anacreate ();</span>
+<span class="lineNum">     343 </span>                :            : 
+<span class="lineNum">     344 </span>                :<span class="lineNoCov">          0 :   logprint (LOG_ERROR, &quot;no such analysis type `%s'\n&quot;, type);</span>
+<span class="lineNum">     345 </span>                :<span class="lineCov">        153 :   return NULL;</span>
+<span class="lineNum">     346 </span>                :            : }
+<a name="347"><span class="lineNum">     347 </span>                :            : </a>
+<span class="lineNum">     348 </span>                :            : // The function creates a substrate specified by the type of substrate.
+<span class="lineNum">     349 </span>                :<span class="lineCov">          3 : substrate * input::createSubstrate (char * type) {</span>
+<span class="lineNum">     350 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :   if (!strcmp (type, &quot;SUBST&quot;))</span>
+<span class="lineNum">     351 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :     return new substrate ();</span>
+<span class="lineNum">     352 </span>                :            : 
+<span class="lineNum">     353 </span>                :<span class="lineNoCov">          0 :   logprint (LOG_ERROR, &quot;no such substrate type `%s'\n&quot;, type);</span>
+<span class="lineNum">     354 </span>                :<span class="lineCov">          3 :   return NULL;</span>
+<span class="lineNum">     355 </span>                :            : }
+<span class="lineNum">     356 </span>                :            : 
+<span class="lineNum">     357 </span>                :            : } // namespace qucs
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

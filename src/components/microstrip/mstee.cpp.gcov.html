@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/components/microstrip/mstee.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/components/microstrip</a> - mstee.cpp<span style="font-size: 80%;"> (source / <a href="mstee.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">110</td>
+            <td class="headerCovTableEntry">174</td>
+            <td class="headerCovTableEntryLo">63.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryLo">42.9 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">55</td>
+            <td class="headerCovTableEntry">148</td>
+            <td class="headerCovTableEntryLo">37.2 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * mstee.cpp - microstrip t-junction class implementation
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2004, 2005, 2006 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  *
+<span class="lineNum">       6 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       7 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       8 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">       9 </span>                :            :  * any later version.
+<span class="lineNum">      10 </span>                :            :  *
+<span class="lineNum">      11 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      12 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      13 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      14 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      15 </span>                :            :  *
+<span class="lineNum">      16 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      17 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      18 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      19 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      20 </span>                :            :  *
+<span class="lineNum">      21 </span>                :            :  * $Id$
+<span class="lineNum">      22 </span>                :            :  *
+<span class="lineNum">      23 </span>                :            :  */
+<span class="lineNum">      24 </span>                :            : 
+<span class="lineNum">      25 </span>                :            : #if HAVE_CONFIG_H
+<span class="lineNum">      26 </span>                :            : # include &lt;config.h&gt;
+<span class="lineNum">      27 </span>                :            : #endif
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &quot;component.h&quot;
+<span class="lineNum">      30 </span>                :            : #include &quot;substrate.h&quot;
+<span class="lineNum">      31 </span>                :            : #include &quot;device.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;msline.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;mstee.h&quot;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : using namespace qucs;
+<a name="36"><span class="lineNum">      36 </span>                :            : using namespace qucs::device;</a>
+<span class="lineNum">      37 </span>                :            : 
+<span class="lineNum">      38 </span>                :<span class="lineCov">          1 : mstee::mstee () : circuit (3) {</span>
+<span class="lineNum">      39 </span>                :<span class="lineCov">          1 :   lineA = lineB = line2 = NULL;</span>
+<span class="lineNum">      40 </span>                :<span class="lineCov">          1 :   type = CIR_MSTEE;</span>
+<a name="41"><span class="lineNum">      41 </span>                :<span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      42 </span>                :            : 
+<span class="lineNum">      43 </span>                :<span class="lineCov">          1 : void mstee::initSP (void) {</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">          1 :   allocMatrixS ();</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">          1 :   initLines ();</span>
+<span class="lineNum">      46 </span>                :<span class="lineCov">          1 :   lineA-&gt;initSP ();</span>
+<span class="lineNum">      47 </span>                :<span class="lineCov">          1 :   lineB-&gt;initSP ();</span>
+<span class="lineNum">      48 </span>                :<span class="lineCov">          1 :   line2-&gt;initSP ();</span>
+<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      50 </span>                :            : 
+<span class="lineNum">      51 </span>                :<span class="lineNoCov">          0 : void mstee::initNoiseSP (void) {</span>
+<span class="lineNum">      52 </span>                :<span class="lineNoCov">          0 :   allocMatrixN ();</span>
+<span class="lineNum">      53 </span>                :<span class="lineNoCov">          0 :   lineA-&gt;initNoiseSP ();</span>
+<span class="lineNum">      54 </span>                :<span class="lineNoCov">          0 :   lineB-&gt;initNoiseSP ();</span>
+<span class="lineNum">      55 </span>                :<span class="lineNoCov">          0 :   line2-&gt;initNoiseSP ();</span>
+<a name="56"><span class="lineNum">      56 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      57 </span>                :            : 
+<span class="lineNum">      58 </span>                :<span class="lineCov">          1 : void mstee::initLines (void) {</span>
+<span class="lineNum">      59 </span>                :<span class="lineCov">          1 :   lineA = splitMicrostrip (this, lineA, getNet (), &quot;LineA&quot;, &quot;NodeA&quot;, NODE_1);</span>
+<span class="lineNum">      60 </span>                :<span class="lineCov">          1 :   lineA-&gt;setProperty (&quot;W&quot;, getPropertyDouble (&quot;W1&quot;));</span>
+<span class="lineNum">      61 </span>                :<span class="lineCov">          1 :   lineA-&gt;setProperty (&quot;Temp&quot;, getPropertyDouble (&quot;Temp&quot;));</span>
+<span class="lineNum">      62 </span>                :<span class="lineCov">          1 :   lineA-&gt;setProperty (&quot;Model&quot;, getPropertyString (&quot;MSModel&quot;));</span>
+<span class="lineNum">      63 </span>                :<span class="lineCov">          1 :   lineA-&gt;setProperty (&quot;DispModel&quot;, getPropertyString (&quot;MSDispModel&quot;));</span>
+<span class="lineNum">      64 </span>                :<span class="lineCov">          1 :   lineA-&gt;setSubstrate (getSubstrate ());</span>
+<span class="lineNum">      65 </span>                :            : 
+<span class="lineNum">      66 </span>                :<span class="lineCov">          1 :   lineB = splitMicrostrip (this, lineB, getNet (), &quot;LineB&quot;, &quot;NodeB&quot;, NODE_2);</span>
+<span class="lineNum">      67 </span>                :<span class="lineCov">          1 :   lineB-&gt;setProperty (&quot;W&quot;, getPropertyDouble (&quot;W2&quot;));</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">          1 :   lineB-&gt;setProperty (&quot;Temp&quot;, getPropertyDouble (&quot;Temp&quot;));</span>
+<span class="lineNum">      69 </span>                :<span class="lineCov">          1 :   lineB-&gt;setProperty (&quot;Model&quot;, getPropertyString (&quot;MSModel&quot;));</span>
+<span class="lineNum">      70 </span>                :<span class="lineCov">          1 :   lineB-&gt;setProperty (&quot;DispModel&quot;, getPropertyString (&quot;MSDispModel&quot;));</span>
+<span class="lineNum">      71 </span>                :<span class="lineCov">          1 :   lineB-&gt;setSubstrate (getSubstrate ());</span>
+<span class="lineNum">      72 </span>                :            : 
+<span class="lineNum">      73 </span>                :<span class="lineCov">          1 :   line2 = splitMicrostrip (this, line2, getNet (), &quot;Line2&quot;, &quot;Node2&quot;, NODE_3);</span>
+<span class="lineNum">      74 </span>                :<span class="lineCov">          1 :   line2-&gt;setProperty (&quot;W&quot;, getPropertyDouble (&quot;W3&quot;));</span>
+<span class="lineNum">      75 </span>                :<span class="lineCov">          1 :   line2-&gt;setProperty (&quot;Temp&quot;, getPropertyDouble (&quot;Temp&quot;));</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">          1 :   line2-&gt;setProperty (&quot;Model&quot;, getPropertyString (&quot;MSModel&quot;));</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">          1 :   line2-&gt;setProperty (&quot;DispModel&quot;, getPropertyString (&quot;MSDispModel&quot;));</span>
+<span class="lineNum">      78 </span>                :<span class="lineCov">          1 :   line2-&gt;setSubstrate (getSubstrate ());</span>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      80 </span>                :            : 
+<span class="lineNum">      81 </span>                :<span class="lineCov">         39 : void mstee::calcSP (nr_double_t frequency) {</span>
+<span class="lineNum">      82 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   calcPropagation (frequency);</span>
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   lineA-&gt;setProperty (&quot;L&quot;, La);</span>
+<span class="lineNum">      85 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   lineB-&gt;setProperty (&quot;L&quot;, Lb);</span>
+<span class="lineNum">      86 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   line2-&gt;setProperty (&quot;L&quot;, L2);</span>
+<span class="lineNum">      87 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   lineA-&gt;calcSP (frequency);</span>
+<span class="lineNum">      88 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   lineB-&gt;calcSP (frequency);</span>
+<span class="lineNum">      89 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   line2-&gt;calcSP (frequency);</span>
+<span class="lineNum">      90 </span>                :            : 
+<span class="lineNum">      91 </span>                :            :   // calculate S-parameters
+<span class="lineNum">      92 </span>                :<span class="lineCov">         39 :   nr_complex_t n1 = Ta2 * nr_complex_t (1 + 1 / Tb2, Bt * z0);</span>
+<span class="lineNum">      93 </span>                :<span class="lineCov">         39 :   nr_complex_t n2 = Tb2 * nr_complex_t (1 + 1 / Ta2, Bt * z0);</span>
+<span class="lineNum">      94 </span>                :<span class="lineCov">         39 :   nr_complex_t n3 = nr_complex_t (1 / Ta2 + 1 / Tb2, Bt * z0);</span>
+<span class="lineNum">      95 </span>[<span class="branchCov" title="Branch 2 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_1, NODE_1, (1.0 - n1) / (1.0 + n1));</span>
+<span class="lineNum">      96 </span>[<span class="branchCov" title="Branch 2 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_2, NODE_2, (1.0 - n2) / (1.0 + n2));</span>
+<span class="lineNum">      97 </span>[<span class="branchCov" title="Branch 2 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>][<span class="branchCov" title="Branch 5 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 6 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_3, NODE_3, (1.0 - n3) / (1.0 + n3));</span>
+<span class="lineNum">      98 </span>[<span class="branchCov" title="Branch 1 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_1, NODE_3, 2.0 * std::sqrt (Ta2) / (1.0 + n1));</span>
+<span class="lineNum">      99 </span>[<span class="branchCov" title="Branch 1 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_3, NODE_1, 2.0 * std::sqrt (Ta2) / (1.0 + n1));</span>
+<span class="lineNum">     100 </span>[<span class="branchCov" title="Branch 1 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_2, NODE_3, 2.0 * std::sqrt (Tb2) / (1.0 + n2));</span>
+<span class="lineNum">     101 </span>[<span class="branchCov" title="Branch 1 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>][<span class="branchCov" title="Branch 4 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]:<span class="lineCov">         39 :   setS (NODE_3, NODE_2, 2.0 * std::sqrt (Tb2) / (1.0 + n2));</span>
+<span class="lineNum">     102 </span>                :<span class="lineCov">         39 :   setS (NODE_1, NODE_2, 2.0 / (std::sqrt (Ta2 * Tb2) * nr_complex_t (1, Bt * z0) +</span>
+<span class="lineNum">     103 </span>[<span class="branchCov" title="Branch 3 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">         39 :                                std::sqrt (Ta2 / Tb2) + std::sqrt (Tb2 / Ta2)));</span>
+<span class="lineNum">     104 </span>                :<span class="lineCov">         39 :   setS (NODE_2, NODE_1, 2.0 / (std::sqrt (Ta2 * Tb2) * nr_complex_t (1, Bt * z0) +</span>
+<span class="lineNum">     105 </span>[<span class="branchCov" title="Branch 3 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>][<span class="branchCov" title="Branch 6 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span>]:<span class="lineCov">         39 :                                std::sqrt (Ta2 / Tb2) + std::sqrt (Tb2 / Ta2)));</span>
+<a name="106"><span class="lineNum">     106 </span>                :<span class="lineCov">         39 : }</span></a>
+<span class="lineNum">     107 </span>                :            : 
+<span class="lineNum">     108 </span>                :<span class="lineCov">         39 : void mstee::calcPropagation (nr_double_t f) {</span>
+<span class="lineNum">     109 </span>                :            : 
+<span class="lineNum">     110 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   const char * SModel = getPropertyString (&quot;MSModel&quot;);</span>
+<span class="lineNum">     111 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   const char * DModel = getPropertyString (&quot;MSDispModel&quot;);</span>
+<span class="lineNum">     112 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   substrate * subst = getSubstrate ();</span>
+<span class="lineNum">     113 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t er = subst-&gt;getPropertyDouble (&quot;er&quot;);</span>
+<span class="lineNum">     114 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t h  = subst-&gt;getPropertyDouble (&quot;h&quot;);</span>
+<span class="lineNum">     115 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t t  = subst-&gt;getPropertyDouble (&quot;t&quot;);</span>
+<span class="lineNum">     116 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t Wa = getPropertyDouble (&quot;W1&quot;);</span>
+<span class="lineNum">     117 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t Wb = getPropertyDouble (&quot;W2&quot;);</span>
+<span class="lineNum">     118 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   nr_double_t W2 = getPropertyDouble (&quot;W3&quot;);</span>
+<span class="lineNum">     119 </span>                :            : 
+<span class="lineNum">     120 </span>                :            :   nr_double_t Zla, Zlb, Zl2, Era, Erb, Er2;
+<span class="lineNum">     121 </span>                :            : 
+<span class="lineNum">     122 </span>                :            :   // computation of impedances and effective dielectric constants
+<span class="lineNum">     123 </span>                :            :   nr_double_t ZlEff, ErEff, WEff;
+<span class="lineNum">     124 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   msline::analyseQuasiStatic (Wa, h, t, er, SModel, ZlEff, ErEff, WEff);</span>
+<span class="lineNum">     125 </span>                :            :   msline::analyseDispersion  (Wa, h, er, ZlEff, ErEff, f, DModel,
+<span class="lineNum">     126 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :                               Zla, Era);</span>
+<span class="lineNum">     127 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   msline::analyseQuasiStatic (Wb, h, t, er, SModel, ZlEff, ErEff, WEff);</span>
+<span class="lineNum">     128 </span>                :            :   msline::analyseDispersion  (Wb, h, er, ZlEff, ErEff, f, DModel,
+<span class="lineNum">     129 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :                               Zlb, Erb);</span>
+<span class="lineNum">     130 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   msline::analyseQuasiStatic (W2, h, t, er, SModel, ZlEff, ErEff, WEff);</span>
+<span class="lineNum">     131 </span>                :            :   msline::analyseDispersion  (W2, h, er, ZlEff, ErEff, f, DModel,
+<span class="lineNum">     132 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :                               Zl2, Er2);</span>
+<span class="lineNum">     133 </span>                :            : 
+<span class="lineNum">     134 </span>                :            :   // local variables
+<span class="lineNum">     135 </span>                :            :   nr_double_t Da, Db, D2, fpa, fpb, lda, ldb, da, db, d2, r, q;
+<span class="lineNum">     136 </span>                :            : 
+<span class="lineNum">     137 </span>                :            :   // equivalent parallel plate line widths
+<span class="lineNum">     138 </span>                :<span class="lineCov">         39 :   Da = Z0 / Zla * h / std::sqrt (Era);</span>
+<span class="lineNum">     139 </span>                :<span class="lineCov">         39 :   Db = Z0 / Zlb * h / std::sqrt (Erb);</span>
+<span class="lineNum">     140 </span>                :<span class="lineCov">         39 :   D2 = Z0 / Zl2 * h / std::sqrt (Er2);</span>
+<span class="lineNum">     141 </span>                :            : 
+<span class="lineNum">     142 </span>                :            :   // first higher order mode cut-off frequencies
+<span class="lineNum">     143 </span>                :<span class="lineCov">         39 :   fpa = 0.4e6 * Zla / h;</span>
+<span class="lineNum">     144 </span>                :<span class="lineCov">         39 :   fpb = 0.4e6 * Zlb / h;</span>
+<span class="lineNum">     145 </span>                :            : 
+<span class="lineNum">     146 </span>                :            :   // effective wavelengths of quasi-TEM mode
+<span class="lineNum">     147 </span>                :<span class="lineCov">         39 :   lda = C0 / std::sqrt (Era) / f;</span>
+<span class="lineNum">     148 </span>                :<span class="lineCov">         39 :   ldb = C0 / std::sqrt (Erb) / f;</span>
+<span class="lineNum">     149 </span>                :            : 
+<span class="lineNum">     150 </span>                :            :   // main arm displacements
+<span class="lineNum">     151 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   da = 0.055 * D2 * Zla / Zl2 * (1 - 2 * Zla / Zl2 * sqr (f / fpa));</span>
+<span class="lineNum">     152 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   db = 0.055 * D2 * Zlb / Zl2 * (1 - 2 * Zlb / Zl2 * sqr (f / fpb));</span>
+<span class="lineNum">     153 </span>                :            : 
+<span class="lineNum">     154 </span>                :            :   // length of lines in the main arms
+<span class="lineNum">     155 </span>                :<span class="lineCov">         39 :   La = 0.5 * W2 - da;</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">         39 :   Lb = 0.5 * W2 - db;</span>
+<span class="lineNum">     157 </span>                :            : 
+<span class="lineNum">     158 </span>                :            :   // displacement and length of line in the side arm
+<span class="lineNum">     159 </span>                :<span class="lineCov">         39 :   r = std::sqrt (Zla * Zlb) / Zl2;</span>
+<span class="lineNum">     160 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   q = sqr (f) / fpa / fpb;</span>
+<span class="lineNum">     161 </span>                :<span class="lineCov">         39 :   d2 = std::sqrt (Da * Db) * (0.5 - r * (0.05 + 0.7 * std::exp (-1.6 * r) +</span>
+<span class="lineNum">     162 </span>                :<span class="lineCov">         39 :                                     0.25 * r * q - 0.17 * std::log (r)));</span>
+<span class="lineNum">     163 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 39 times"> + </span>]:<span class="lineCov">         39 :   L2 = 0.5 * MAX (Wa, Wb) - d2;</span>
+<span class="lineNum">     164 </span>                :            : 
+<span class="lineNum">     165 </span>                :            :   // turn ratio of transformers in main arms
+<span class="lineNum">     166 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   Ta2 = 1 - M_PI * sqr (f / fpa) *</span>
+<span class="lineNum">     167 </span>[<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         39 :         (sqr (Zla / Zl2) / 12 + sqr (0.5 - d2 / Da));</span>
+<span class="lineNum">     168 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   Tb2 = 1 - M_PI * sqr (f / fpb) *</span>
+<span class="lineNum">     169 </span>[<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 3 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 4 was not taken"> - </span>]:<span class="lineCov">         39 :         (sqr (Zlb / Zl2) / 12 + sqr (0.5 - d2 / Db));</span>
+<span class="lineNum">     170 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   Ta2 = MAX (Ta2, NR_TINY);</span>
+<span class="lineNum">     171 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :   Tb2 = MAX (Tb2, NR_TINY);</span>
+<span class="lineNum">     172 </span>                :            : 
+<span class="lineNum">     173 </span>                :            :   // shunt susceptance
+<span class="lineNum">     174 </span>                :<span class="lineCov">         39 :   Bt = 5.5 * std::sqrt (Da * Db / lda / ldb) * (er + 2) / er /</span>
+<span class="lineNum">     175 </span>                :<span class="lineCov">         78 :     Zl2 / std::sqrt (Ta2 * Tb2) * std::sqrt (da * db) / D2 *</span>
+<span class="lineNum">     176 </span>                :<span class="lineCov">         78 :     (1 + 0.9 * std::log (r) + 4.5 * r * q - 4.4 * std::exp (-1.3 * r) -</span>
+<span class="lineNum">     177 </span>        [<span class="branchCov" title="Branch 0 was taken 39 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         39 :      20 * sqr (Zl2 / Z0));</span>
+<span class="lineNum">     178 </span>                :<span class="lineCov">         39 : }</span>
+<span class="lineNum">     179 </span>                :            : 
+<span class="lineNum">     180 </span>                :            : /* This function can be used to create an extra microstrip circuit.
+<span class="lineNum">     181 </span>                :            :    If the 'line' argument is NULL then the new circuit is created, the
+<span class="lineNum">     182 </span>                :            :    nodes get re-arranged and it is inserted into the given
+<span class="lineNum">     183 </span>                :            :    netlist. The given arguments can be explained as follows.
+<span class="lineNum">     184 </span>                :            :    base:     calling circuit (this)
+<span class="lineNum">     185 </span>                :            :    line:     additional microstrip line circuit (can be NULL)
+<span class="lineNum">     186 </span>                :            :    subnet:   the netlist object
+<span class="lineNum">     187 </span>                :            :    c:        name of the additional circuit
+<a name="188"><span class="lineNum">     188 </span>                :            :    n:        name of the inserted (internal) node</a>
+<span class="lineNum">     189 </span>                :            :    internal: number of new internal node (the original external node) */
+<span class="lineNum">     190 </span>                :<span class="lineCov">          3 : circuit * splitMicrostrip (circuit * base, circuit * line, net * subnet,</span>
+<span class="lineNum">     191 </span>                :            :                            const char * c, const char * n, int internal) {
+<span class="lineNum">     192 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :   if (line == NULL) {</span>
+<span class="lineNum">     193 </span>        [<span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">          3 :     line = new msline ();</span>
+<span class="lineNum">     194 </span>                :<span class="lineCov">          3 :     char * name = circuit::createInternal (c, base-&gt;getName ());</span>
+<span class="lineNum">     195 </span>                :<span class="lineCov">          3 :     char * node = circuit::createInternal (n, base-&gt;getName ());</span>
+<span class="lineNum">     196 </span>                :<span class="lineCov">          3 :     line-&gt;setName (name);</span>
+<span class="lineNum">     197 </span>                :<span class="lineCov">          3 :     line-&gt;setNode (0, base-&gt;getNode(internal)-&gt;getName ());</span>
+<span class="lineNum">     198 </span>                :<span class="lineCov">          3 :     line-&gt;setNode (1, node, 1);</span>
+<span class="lineNum">     199 </span>                :<span class="lineCov">          3 :     subnet-&gt;insertCircuit (line);</span>
+<span class="lineNum">     200 </span>                :<span class="lineCov">          3 :     free (name);</span>
+<span class="lineNum">     201 </span>                :<span class="lineCov">          3 :     free (node);</span>
+<span class="lineNum">     202 </span>                :            :   }
+<span class="lineNum">     203 </span>                :<span class="lineCov">          3 :   base-&gt;setNode (internal, line-&gt;getNode(1)-&gt;getName (), 1);</span>
+<span class="lineNum">     204 </span>                :<span class="lineCov">          3 :   return line;</span>
+<span class="lineNum">     205 </span>                :            : }
+<span class="lineNum">     206 </span>                :            : 
+<span class="lineNum">     207 </span>                :            : /* This function is the counterpart of the above routine.  It removes
+<a name="208"><span class="lineNum">     208 </span>                :            :    the microstrip circuit from the netlist and re-assigns the original</a>
+<span class="lineNum">     209 </span>                :            :    node. */
+<span class="lineNum">     210 </span>                :<span class="lineNoCov">          0 : void disableMicrostrip (circuit * base, circuit * line, net * subnet,</span>
+<span class="lineNum">     211 </span>                :            :                         int internal) {
+<span class="lineNum">     212 </span>        [<span class="branchNoExec" title="Branch 0 was not executed"> # </span><span class="branchNoExec" title="Branch 1 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (line != NULL) {</span>
+<span class="lineNum">     213 </span>                :<span class="lineNoCov">          0 :     subnet-&gt;removeCircuit (line, 0);</span>
+<span class="lineNum">     214 </span>                :<span class="lineNoCov">          0 :     base-&gt;setNode (internal, line-&gt;getNode(1)-&gt;getName (), 0);</span>
+<span class="lineNum">     215 </span>                :            :   }
+<a name="216"><span class="lineNum">     216 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     217 </span>                :            : 
+<span class="lineNum">     218 </span>                :<span class="lineNoCov">          0 : void mstee::initDC (void) {</span>
+<span class="lineNum">     219 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (2);</span>
+<span class="lineNum">     220 </span>                :<span class="lineNoCov">          0 :   setInternalVoltageSource (1);</span>
+<span class="lineNum">     221 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     222 </span>                :<span class="lineNoCov">          0 :   voltageSource (VSRC_1, NODE_1, NODE_2);</span>
+<span class="lineNum">     223 </span>                :<span class="lineNoCov">          0 :   voltageSource (VSRC_2, NODE_1, NODE_3);</span>
+<span class="lineNum">     224 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (deviceEnabled (lineA)) {</span>
+<span class="lineNum">     225 </span>                :<span class="lineNoCov">          0 :     disableMicrostrip (this, lineA, getNet (), NODE_1);</span>
+<span class="lineNum">     226 </span>                :            :   }
+<span class="lineNum">     227 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (deviceEnabled (lineB)) {</span>
+<span class="lineNum">     228 </span>                :<span class="lineNoCov">          0 :     disableMicrostrip (this, lineB, getNet (), NODE_2);</span>
+<span class="lineNum">     229 </span>                :            :   }
+<span class="lineNum">     230 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   if (deviceEnabled (line2)) {</span>
+<span class="lineNum">     231 </span>                :<span class="lineNoCov">          0 :     disableMicrostrip (this, line2, getNet (), NODE_3);</span>
+<span class="lineNum">     232 </span>                :            :   }
+<a name="233"><span class="lineNum">     233 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     234 </span>                :            : 
+<span class="lineNum">     235 </span>                :<span class="lineNoCov">          0 : void mstee::initAC (void) {</span>
+<span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :   setVoltageSources (3);</span>
+<span class="lineNum">     237 </span>                :<span class="lineNoCov">          0 :   setInternalVoltageSource (1);</span>
+<span class="lineNum">     238 </span>                :<span class="lineNoCov">          0 :   allocMatrixMNA ();</span>
+<span class="lineNum">     239 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setB (NODE_1, VSRC_1, +1); setB (NODE_2, VSRC_2, +1);</span>
+<span class="lineNum">     240 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setB (NODE_3, VSRC_3, +1);</span>
+<span class="lineNum">     241 </span>[<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>][<span class="branchNoExec" title="Branch 5 was not executed"> # </span><span class="branchNoExec" title="Branch 6 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setC (VSRC_1, NODE_1, -1); setC (VSRC_2, NODE_2, -1);</span>
+<span class="lineNum">     242 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setC (VSRC_3, NODE_3, -1);</span>
+<span class="lineNum">     243 </span>                :<span class="lineNoCov">          0 :   initLines ();</span>
+<span class="lineNum">     244 </span>                :<span class="lineNoCov">          0 :   lineA-&gt;initAC ();</span>
+<span class="lineNum">     245 </span>                :<span class="lineNoCov">          0 :   lineB-&gt;initAC ();</span>
+<span class="lineNum">     246 </span>                :<span class="lineNoCov">          0 :   line2-&gt;initAC ();</span>
+<a name="247"><span class="lineNum">     247 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     248 </span>                :            : 
+<span class="lineNum">     249 </span>                :<span class="lineNoCov">          0 : void mstee::initNoiseAC (void) {</span>
+<span class="lineNum">     250 </span>                :<span class="lineNoCov">          0 :   allocMatrixN (getVoltageSources ());</span>
+<span class="lineNum">     251 </span>                :<span class="lineNoCov">          0 :   lineA-&gt;initNoiseAC ();</span>
+<span class="lineNum">     252 </span>                :<span class="lineNoCov">          0 :   lineB-&gt;initNoiseAC ();</span>
+<span class="lineNum">     253 </span>                :<span class="lineNoCov">          0 :   line2-&gt;initNoiseAC ();</span>
+<a name="254"><span class="lineNum">     254 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     255 </span>                :            : 
+<span class="lineNum">     256 </span>                :<span class="lineNoCov">          0 : void mstee::calcAC (nr_double_t frequency) {</span>
+<span class="lineNum">     257 </span>                :<span class="lineNoCov">          0 :   calcPropagation (frequency);</span>
+<span class="lineNum">     258 </span>                :            : 
+<span class="lineNum">     259 </span>                :<span class="lineNoCov">          0 :   lineA-&gt;setProperty (&quot;L&quot;, La);</span>
+<span class="lineNum">     260 </span>                :<span class="lineNoCov">          0 :   lineB-&gt;setProperty (&quot;L&quot;, Lb);</span>
+<span class="lineNum">     261 </span>                :<span class="lineNoCov">          0 :   line2-&gt;setProperty (&quot;L&quot;, L2);</span>
+<span class="lineNum">     262 </span>                :<span class="lineNoCov">          0 :   lineA-&gt;calcAC (frequency);</span>
+<span class="lineNum">     263 </span>                :<span class="lineNoCov">          0 :   lineB-&gt;calcAC (frequency);</span>
+<span class="lineNum">     264 </span>                :<span class="lineNoCov">          0 :   line2-&gt;calcAC (frequency);</span>
+<span class="lineNum">     265 </span>                :            : 
+<span class="lineNum">     266 </span>                :            :   // calculate Z-parameters
+<span class="lineNum">     267 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_1, VSRC_1, nr_complex_t (0, -1 / Ta2 / Bt));</span>
+<span class="lineNum">     268 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_1, VSRC_2, nr_complex_t (0, -1 / std::sqrt (Ta2 * Tb2) / Bt));</span>
+<span class="lineNum">     269 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_1, VSRC_3, nr_complex_t (0, -1 / std::sqrt (Ta2) / Bt));</span>
+<span class="lineNum">     270 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_2, VSRC_1, nr_complex_t (0, -1 / std::sqrt (Ta2 * Tb2) / Bt));</span>
+<span class="lineNum">     271 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_2, VSRC_2, nr_complex_t (0, -1 / Tb2 / Bt));</span>
+<span class="lineNum">     272 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_2, VSRC_3, nr_complex_t (0, -1 / std::sqrt (Tb2) / Bt));</span>
+<span class="lineNum">     273 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_3, VSRC_1, nr_complex_t (0, -1 / std::sqrt (Ta2) / Bt));</span>
+<span class="lineNum">     274 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_3, VSRC_2, nr_complex_t (0, -1 / std::sqrt (Tb2) / Bt));</span>
+<span class="lineNum">     275 </span>        [<span class="branchNoExec" title="Branch 1 was not executed"> # </span><span class="branchNoExec" title="Branch 2 was not executed"> # </span>]:<span class="lineNoCov">          0 :   setD (VSRC_3, VSRC_3, nr_complex_t (0, -1 / Bt));</span>
+<a name="276"><span class="lineNum">     276 </span>                :<span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     277 </span>                :            : 
+<span class="lineNum">     278 </span>                :<span class="lineNoCov">          0 : void mstee::initTR (void) {</span>
+<span class="lineNum">     279 </span>                :<span class="lineNoCov">          0 :   initDC ();</span>
+<span class="lineNum">     280 </span>                :<span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     281 </span>                :            : 
+<span class="lineNum">     282 </span>                :            : // properties
+<span class="lineNum">     283 </span>                :            : PROP_REQ [] = {
+<span class="lineNum">     284 </span>                :            :   { &quot;W1&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     285 </span>                :            :   { &quot;W2&quot;, PROP_REAL, { 1e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     286 </span>                :            :   { &quot;W3&quot;, PROP_REAL, { 2e-3, PROP_NO_STR }, PROP_POS_RANGE },
+<span class="lineNum">     287 </span>                :            :   { &quot;Subst&quot;, PROP_STR, { PROP_NO_VAL, &quot;Subst1&quot; }, PROP_NO_RANGE },
+<span class="lineNum">     288 </span>                :            :   { &quot;MSDispModel&quot;, PROP_STR, { PROP_NO_VAL, &quot;Kirschning&quot; }, PROP_RNG_DIS },
+<span class="lineNum">     289 </span>                :            :   { &quot;MSModel&quot;, PROP_STR, { PROP_NO_VAL, &quot;Hammerstad&quot; }, PROP_RNG_MOD },
+<span class="lineNum">     290 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     291 </span>                :            : PROP_OPT [] = {
+<span class="lineNum">     292 </span>                :            :   { &quot;Temp&quot;, PROP_REAL, { 26.85, PROP_NO_STR }, PROP_MIN_VAL (K) },
+<span class="lineNum">     293 </span>                :            :   PROP_NO_PROP };
+<span class="lineNum">     294 </span>                :            : struct define_t mstee::cirdef =
+<span class="lineNum">     295 </span>                :            :   { &quot;MTEE&quot;, 3, PROP_COMPONENT, PROP_NO_SUBSTRATE, PROP_LINEAR, PROP_DEF };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

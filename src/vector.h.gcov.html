@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/vector.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - vector.h<span style="font-size: 80%;"> (source / <a href="vector.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*</a>
+<span class="lineNum">       2 </span>                :            :  * vector.h - vector class definitions
+<span class="lineNum">       3 </span>                :            :  *
+<span class="lineNum">       4 </span>                :            :  * Copyright (C) 2003, 2004, 2005, 2006, 2007 Stefan Jahn &lt;stefan@lkcc.org&gt;
+<span class="lineNum">       5 </span>                :            :  * Copyright (C) 2006 Gunther Kraut &lt;gn.kraut@t-online.de&gt;
+<span class="lineNum">       6 </span>                :            :  *
+<span class="lineNum">       7 </span>                :            :  * This is free software; you can redistribute it and/or modify
+<span class="lineNum">       8 </span>                :            :  * it under the terms of the GNU General Public License as published by
+<span class="lineNum">       9 </span>                :            :  * the Free Software Foundation; either version 2, or (at your option)
+<span class="lineNum">      10 </span>                :            :  * any later version.
+<span class="lineNum">      11 </span>                :            :  *
+<span class="lineNum">      12 </span>                :            :  * This software is distributed in the hope that it will be useful,
+<span class="lineNum">      13 </span>                :            :  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="lineNum">      14 </span>                :            :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class="lineNum">      15 </span>                :            :  * GNU General Public License for more details.
+<span class="lineNum">      16 </span>                :            :  *
+<span class="lineNum">      17 </span>                :            :  * You should have received a copy of the GNU General Public License
+<span class="lineNum">      18 </span>                :            :  * along with this package; see the file COPYING.  If not, write to
+<span class="lineNum">      19 </span>                :            :  * the Free Software Foundation, Inc., 51 Franklin Street - Fifth Floor,
+<span class="lineNum">      20 </span>                :            :  * Boston, MA 02110-1301, USA.
+<span class="lineNum">      21 </span>                :            :  *
+<span class="lineNum">      22 </span>                :            :  * $Id$
+<span class="lineNum">      23 </span>                :            :  *
+<span class="lineNum">      24 </span>                :            :  */
+<span class="lineNum">      25 </span>                :            : 
+<span class="lineNum">      26 </span>                :            : #ifndef __VECTOR_H__
+<span class="lineNum">      27 </span>                :            : #define __VECTOR_H__
+<span class="lineNum">      28 </span>                :            : 
+<span class="lineNum">      29 </span>                :            : #include &lt;limits&gt;
+<span class="lineNum">      30 </span>                :            : 
+<span class="lineNum">      31 </span>                :            : #include &quot;consts.h&quot;
+<span class="lineNum">      32 </span>                :            : #include &quot;precision.h&quot;
+<span class="lineNum">      33 </span>                :            : #include &quot;complex.h&quot;
+<span class="lineNum">      34 </span>                :            : 
+<span class="lineNum">      35 </span>                :            : #ifdef log2
+<span class="lineNum">      36 </span>                :            : #undef log2
+<span class="lineNum">      37 </span>                :            : #endif
+<span class="lineNum">      38 </span>                :            : 
+<span class="lineNum">      39 </span>                :            : namespace qucs {
+<span class="lineNum">      40 </span>                :            : 
+<span class="lineNum">      41 </span>                :            : class strlist;
+<span class="lineNum">      42 </span>                :            : class vector;
+<span class="lineNum">      43 </span>                :            : 
+<span class="lineNum">      44 </span>                :            : qucs::vector linspace (nr_double_t, nr_double_t, int);
+<span class="lineNum">      45 </span>                :            : qucs::vector logspace (nr_double_t, nr_double_t, int);
+<span class="lineNum">      46 </span>                :            : qucs::vector runavg (qucs::vector, const int);
+<span class="lineNum">      47 </span>                :            : qucs::vector runavg (const nr_complex_t, const int);
+<span class="lineNum">      48 </span>                :            : 
+<span class="lineNum">      49 </span>                :            : class vector : public object
+<span class="lineNum">      50 </span>                :            : {
+<span class="lineNum">      51 </span>                :            :  public:
+<span class="lineNum">      52 </span>                :            :   vector ();
+<span class="lineNum">      53 </span>                :            :   vector (const char *);
+<span class="lineNum">      54 </span>                :            :   vector (int);
+<span class="lineNum">      55 </span>                :            :   vector (int, nr_complex_t);
+<span class="lineNum">      56 </span>                :            :   vector (const char *, int);
+<span class="lineNum">      57 </span>                :            :   vector (const vector &amp;);
+<span class="lineNum">      58 </span>                :            :   const vector&amp; operator = (const vector &amp;);
+<span class="lineNum">      59 </span>                :            :   ~vector ();
+<span class="lineNum">      60 </span>                :            :   void add (nr_complex_t);
+<span class="lineNum">      61 </span>                :            :   void add (vector *);
+<span class="lineNum">      62 </span>                :            :   nr_complex_t get (int);
+<span class="lineNum">      63 </span>                :            :   void set (nr_double_t, int);
+<span class="lineNum">      64 </span>                :            :   void set (const nr_complex_t, int);
+<a name="65"><span class="lineNum">      65 </span>                :            :   int getSize (void) const;</a>
+<a name="66"><span class="lineNum">      66 </span>                :            :   int checkSizes (vector, vector);</a>
+<span class="lineNum">      67 </span>                :<span class="lineCov">       2146 :   int getRequested (void) { return requested; }</span>
+<span class="lineNum">      68 </span>                :<span class="lineCov">       1165 :   void setRequested (int n) { requested = n; }</span>
+<span class="lineNum">      69 </span>                :            :   void reverse (void);
+<span class="lineNum">      70 </span>                :            :   strlist * getDependencies (void);
+<span class="lineNum">      71 </span>                :            :   void setDependencies (strlist *);
+<span class="lineNum">      72 </span>                :            :   void setOrigin (char *);
+<span class="lineNum">      73 </span>                :            :   char * getOrigin (void);
+<span class="lineNum">      74 </span>                :            :   int contains (nr_complex_t, nr_double_t eps = std::numeric_limits&lt;nr_double_t&gt;::epsilon());
+<span class="lineNum">      75 </span>                :            :   void sort (bool ascending = true);
+<span class="lineNum">      76 </span>                :            :   void print (void);
+<span class="lineNum">      77 </span>                :            : 
+<span class="lineNum">      78 </span>                :            :   nr_double_t maximum  (void);
+<span class="lineNum">      79 </span>                :            :   nr_double_t minimum  (void);
+<span class="lineNum">      80 </span>                :            :   nr_double_t rms      (void);
+<span class="lineNum">      81 </span>                :            :   nr_double_t variance (void);
+<span class="lineNum">      82 </span>                :            :   nr_double_t stddev   (void);
+<span class="lineNum">      83 </span>                :            : 
+<span class="lineNum">      84 </span>                :            :   friend nr_complex_t sum     (vector);
+<span class="lineNum">      85 </span>                :            :   friend nr_complex_t prod    (vector);
+<span class="lineNum">      86 </span>                :            :   friend nr_complex_t avg     (vector);
+<span class="lineNum">      87 </span>                :            :   friend vector  cumsum  (vector);
+<span class="lineNum">      88 </span>                :            :   friend vector  cumprod (vector);
+<span class="lineNum">      89 </span>                :            :   friend vector  cumavg  (vector);
+<span class="lineNum">      90 </span>                :            :   friend vector  dbm     (vector, const nr_complex_t);
+<span class="lineNum">      91 </span>                :            :   friend nr_complex_t integrate (vector v, const nr_complex_t);
+<span class="lineNum">      92 </span>                :            :   friend nr_double_t integrate (vector v, const nr_double_t);
+<span class="lineNum">      93 </span>                :            : 
+<span class="lineNum">      94 </span>                :            :   // vector manipulations
+<span class="lineNum">      95 </span>                :            :   friend vector real   (vector);  // the real part
+<span class="lineNum">      96 </span>                :            :   friend vector imag   (vector);  // the imaginary part
+<span class="lineNum">      97 </span>                :            :   friend vector conj   (vector);  // the complex conjugate
+<span class="lineNum">      98 </span>                :            :   friend vector norm   (vector);  // the square of the magnitude
+<span class="lineNum">      99 </span>                :            :   friend vector arg    (vector);  // the angle in the plane
+<span class="lineNum">     100 </span>                :            :   friend vector dB     (vector);
+<span class="lineNum">     101 </span>                :            :   friend vector log    (vector);
+<span class="lineNum">     102 </span>                :            :   friend vector log2   (vector);
+<span class="lineNum">     103 </span>                :            :   friend vector pow    (vector, const nr_complex_t);
+<span class="lineNum">     104 </span>                :            :   friend vector pow    (vector, const nr_double_t);
+<span class="lineNum">     105 </span>                :            :   friend vector pow    (const nr_complex_t, vector);
+<span class="lineNum">     106 </span>                :            :   friend vector pow    (const nr_double_t, vector);
+<span class="lineNum">     107 </span>                :            :   friend vector pow    (vector, vector);
+<span class="lineNum">     108 </span>                :            :   friend vector ztor   (vector, nr_complex_t);
+<span class="lineNum">     109 </span>                :            :   friend vector rtoz   (vector, nr_complex_t);
+<span class="lineNum">     110 </span>                :            :   friend vector ytor   (vector, nr_complex_t);
+<span class="lineNum">     111 </span>                :            :   friend vector rtoy   (vector, nr_complex_t);
+<span class="lineNum">     112 </span>                :            :   friend vector diff   (vector, vector, int);
+<span class="lineNum">     113 </span>                :            :   friend vector unwrap (vector, nr_double_t, nr_double_t);
+<span class="lineNum">     114 </span>                :            : 
+<span class="lineNum">     115 </span>                :            :   friend vector polar   (vector, const nr_complex_t);
+<span class="lineNum">     116 </span>                :            :   friend vector polar   (const nr_complex_t, vector);
+<span class="lineNum">     117 </span>                :            :   friend vector polar   (vector, vector);
+<span class="lineNum">     118 </span>                :            :   friend vector atan2   (vector, const nr_double_t);
+<span class="lineNum">     119 </span>                :            :   friend vector atan2   (const nr_double_t, vector);
+<span class="lineNum">     120 </span>                :            :   friend vector atan2   (vector, vector);
+<span class="lineNum">     121 </span>                :            :   friend vector dbm2w   (vector);
+<span class="lineNum">     122 </span>                :            :   friend vector w2dbm   (vector);
+<span class="lineNum">     123 </span>                :            :   friend vector xhypot  (vector, vector);
+<span class="lineNum">     124 </span>                :            :   friend vector xhypot  (vector, const nr_complex_t);
+<span class="lineNum">     125 </span>                :            :   friend vector xhypot  (vector, const nr_double_t);
+<span class="lineNum">     126 </span>                :            :   friend vector xhypot  (const nr_complex_t, vector);
+<span class="lineNum">     127 </span>                :            :   friend vector xhypot  (const nr_double_t, vector);
+<span class="lineNum">     128 </span>                :            : 
+<span class="lineNum">     129 </span>                :            :   // overloaded math functions
+<span class="lineNum">     130 </span>                :            :   friend vector abs     (vector);
+<span class="lineNum">     131 </span>                :            :   friend vector log10   (vector);
+<span class="lineNum">     132 </span>                :            :   friend vector exp     (vector);
+<span class="lineNum">     133 </span>                :            :   friend vector limexp  (vector);
+<span class="lineNum">     134 </span>                :            :   friend vector sqrt    (vector);
+<span class="lineNum">     135 </span>                :            :   friend vector sin     (vector);
+<span class="lineNum">     136 </span>                :            :   friend vector asin    (vector);
+<span class="lineNum">     137 </span>                :            :   friend vector cos     (vector);
+<span class="lineNum">     138 </span>                :            :   friend vector acos    (vector);
+<span class="lineNum">     139 </span>                :            :   friend vector tan     (vector);
+<span class="lineNum">     140 </span>                :            :   friend vector atan    (vector);
+<span class="lineNum">     141 </span>                :            :   friend vector cot     (vector);
+<span class="lineNum">     142 </span>                :            :   friend vector acot    (vector);
+<span class="lineNum">     143 </span>                :            :   friend vector sinh    (vector);
+<span class="lineNum">     144 </span>                :            :   friend vector asinh   (vector);
+<span class="lineNum">     145 </span>                :            :   friend vector cosh    (vector);
+<span class="lineNum">     146 </span>                :            :   friend vector sech    (vector);
+<span class="lineNum">     147 </span>                :            :   friend vector cosech  (vector);
+<span class="lineNum">     148 </span>                :            :   friend vector acosh   (vector);
+<span class="lineNum">     149 </span>                :            :   friend vector asech   (vector);
+<span class="lineNum">     150 </span>                :            :   friend vector tanh    (vector);
+<span class="lineNum">     151 </span>                :            :   friend vector atanh   (vector);
+<span class="lineNum">     152 </span>                :            :   friend vector coth    (vector);
+<span class="lineNum">     153 </span>                :            :   friend vector acoth   (vector);
+<span class="lineNum">     154 </span>                :            :   friend vector signum  (vector);
+<span class="lineNum">     155 </span>                :            :   friend vector sign    (vector);
+<span class="lineNum">     156 </span>                :            :   friend vector sinc    (vector);
+<span class="lineNum">     157 </span>                :            :   friend vector ceil    (vector);
+<span class="lineNum">     158 </span>                :            :   friend vector floor   (vector);
+<span class="lineNum">     159 </span>                :            :   friend vector fix     (vector);
+<span class="lineNum">     160 </span>                :            :   friend vector round   (vector);
+<span class="lineNum">     161 </span>                :            :   friend vector sqr     (vector);
+<span class="lineNum">     162 </span>                :            :   friend vector step    (vector);
+<span class="lineNum">     163 </span>                :            :   friend vector jn      (const int, vector);
+<span class="lineNum">     164 </span>                :            :   friend vector yn      (const int, vector);
+<span class="lineNum">     165 </span>                :            :   friend vector i0      (vector);
+<span class="lineNum">     166 </span>                :            :   friend vector erf     (vector);
+<span class="lineNum">     167 </span>                :            :   friend vector erfc    (vector);
+<span class="lineNum">     168 </span>                :            :   friend vector erfinv  (vector);
+<span class="lineNum">     169 </span>                :            :   friend vector erfcinv (vector);
+<span class="lineNum">     170 </span>                :            : 
+<span class="lineNum">     171 </span>                :            :   // operator functions
+<span class="lineNum">     172 </span>                :            :   friend vector operator + (vector, vector);
+<span class="lineNum">     173 </span>                :            :   friend vector operator + (vector, const nr_complex_t);
+<span class="lineNum">     174 </span>                :            :   friend vector operator + (vector, const nr_double_t);
+<span class="lineNum">     175 </span>                :            :   friend vector operator + (const nr_complex_t, vector);
+<span class="lineNum">     176 </span>                :            :   friend vector operator + (const nr_double_t, vector);
+<span class="lineNum">     177 </span>                :            :   friend vector operator - (vector, vector);
+<span class="lineNum">     178 </span>                :            :   friend vector operator - (vector, const nr_complex_t);
+<span class="lineNum">     179 </span>                :            :   friend vector operator - (vector, const nr_double_t);
+<span class="lineNum">     180 </span>                :            :   friend vector operator - (const nr_complex_t, vector);
+<span class="lineNum">     181 </span>                :            :   friend vector operator - (const nr_double_t, vector);
+<span class="lineNum">     182 </span>                :            :   friend vector operator * (vector, vector);
+<span class="lineNum">     183 </span>                :            :   friend vector operator * (vector, const nr_complex_t);
+<span class="lineNum">     184 </span>                :            :   friend vector operator * (vector, const nr_double_t);
+<span class="lineNum">     185 </span>                :            :   friend vector operator * (const nr_complex_t, vector);
+<span class="lineNum">     186 </span>                :            :   friend vector operator * (const nr_double_t, vector);
+<span class="lineNum">     187 </span>                :            :   friend vector operator / (vector, vector);
+<span class="lineNum">     188 </span>                :            :   friend vector operator / (vector, const nr_complex_t);
+<span class="lineNum">     189 </span>                :            :   friend vector operator / (vector, const nr_double_t);
+<span class="lineNum">     190 </span>                :            :   friend vector operator / (const nr_complex_t, vector);
+<span class="lineNum">     191 </span>                :            :   friend vector operator / (const nr_double_t, vector);
+<span class="lineNum">     192 </span>                :            :   friend vector operator % (vector, vector);
+<span class="lineNum">     193 </span>                :            :   friend vector operator % (vector, const nr_complex_t);
+<span class="lineNum">     194 </span>                :            :   friend vector operator % (vector, const nr_double_t);
+<span class="lineNum">     195 </span>                :            :   friend vector operator % (const nr_complex_t, vector);
+<span class="lineNum">     196 </span>                :            :   friend vector operator % (const nr_double_t, vector);
+<span class="lineNum">     197 </span>                :            : 
+<span class="lineNum">     198 </span>                :            :   // comparisons
+<span class="lineNum">     199 </span>                :            :   //  friend int      operator == (const vector *, const vector *);
+<span class="lineNum">     200 </span>                :            :   //  friend int      operator != (const vector *, const vector *);
+<span class="lineNum">     201 </span>                :            : 
+<span class="lineNum">     202 </span>                :            :   // assignment operations
+<span class="lineNum">     203 </span>                :            :   vector operator  - ();
+<span class="lineNum">     204 </span>                :            :   vector operator  = (const nr_complex_t);
+<span class="lineNum">     205 </span>                :            :   vector operator  = (const nr_double_t);
+<span class="lineNum">     206 </span>                :            :   vector operator += (vector);
+<span class="lineNum">     207 </span>                :            :   vector operator += (const nr_complex_t);
+<span class="lineNum">     208 </span>                :            :   vector operator += (const nr_double_t);
+<span class="lineNum">     209 </span>                :            :   vector operator -= (vector);
+<span class="lineNum">     210 </span>                :            :   vector operator -= (const nr_complex_t);
+<span class="lineNum">     211 </span>                :            :   vector operator -= (const nr_double_t);
+<span class="lineNum">     212 </span>                :            :   vector operator *= (vector);
+<span class="lineNum">     213 </span>                :            :   vector operator *= (const nr_complex_t);
+<span class="lineNum">     214 </span>                :            :   vector operator *= (const nr_double_t);
+<span class="lineNum">     215 </span>                :            :   vector operator /= (vector);
+<span class="lineNum">     216 </span>                :            :   vector operator /= (const nr_complex_t);
+<span class="lineNum">     217 </span>                :            :   vector operator /= (const nr_double_t);
+<span class="lineNum">     218 </span>                :            : 
+<a name="219"><span class="lineNum">     219 </span>                :            :   // easy accessor operators</a>
+<span class="lineNum">     220 </span>                :            :   nr_complex_t  operator () (int i) const { return data[i]; }
+<span class="lineNum">     221 </span>                :<span class="lineCov">     314984 :   nr_complex_t&amp; operator () (int i) { return data[i]; }</span>
+<span class="lineNum">     222 </span>                :            : 
+<span class="lineNum">     223 </span>                :            :  private:
+<span class="lineNum">     224 </span>                :            :   int requested;
+<span class="lineNum">     225 </span>                :            :   int size;
+<span class="lineNum">     226 </span>                :            :   int capacity;
+<span class="lineNum">     227 </span>                :            :   strlist * dependencies;
+<span class="lineNum">     228 </span>                :            :   nr_complex_t * data;
+<span class="lineNum">     229 </span>                :            :   char * origin;
+<span class="lineNum">     230 </span>                :            : };
+<span class="lineNum">     231 </span>                :            : 
+<span class="lineNum">     232 </span>                :            : /* declarations of friend functions to make them available in the
+<span class="lineNum">     233 </span>                :            :    qucs namespace without argument-dependent lookup, see
+<span class="lineNum">     234 </span>                :            : 
+<span class="lineNum">     235 </span>                :            :    http://stackoverflow.com/questions/7785886/access-friend-function-defined-in-class
+<span class="lineNum">     236 </span>                :            : 
+<span class="lineNum">     237 </span>                :            :    for more info
+<span class="lineNum">     238 </span>                :            : */
+<span class="lineNum">     239 </span>                :            : nr_complex_t sum     (vector);
+<span class="lineNum">     240 </span>                :            : nr_complex_t prod    (vector);
+<span class="lineNum">     241 </span>                :            : nr_complex_t avg     (vector);
+<span class="lineNum">     242 </span>                :            : vector  cumsum  (vector);
+<span class="lineNum">     243 </span>                :            : vector  cumprod (vector);
+<span class="lineNum">     244 </span>                :            : vector  cumavg  (vector);
+<span class="lineNum">     245 </span>                :            : vector  dbm     (vector, const nr_complex_t z = 50.0);
+<span class="lineNum">     246 </span>                :            : nr_complex_t integrate (vector v, const nr_complex_t);
+<span class="lineNum">     247 </span>                :            : nr_double_t integrate (vector v, const nr_double_t);
+<span class="lineNum">     248 </span>                :            : vector real   (vector);  // the real part
+<span class="lineNum">     249 </span>                :            : vector imag   (vector);  // the imaginary part
+<span class="lineNum">     250 </span>                :            : vector conj   (vector);  // the complex conjugate
+<span class="lineNum">     251 </span>                :            : vector norm   (vector);  // the square of the magnitude
+<span class="lineNum">     252 </span>                :            : vector arg    (vector);  // the angle in the plane
+<span class="lineNum">     253 </span>                :            : vector dB     (vector);
+<span class="lineNum">     254 </span>                :            : vector log    (vector);
+<span class="lineNum">     255 </span>                :            : vector log2   (vector);
+<span class="lineNum">     256 </span>                :            : vector pow    (vector, const nr_complex_t);
+<span class="lineNum">     257 </span>                :            : vector pow    (vector, const nr_double_t);
+<span class="lineNum">     258 </span>                :            : vector pow    (const nr_complex_t, vector);
+<span class="lineNum">     259 </span>                :            : vector pow    (const nr_double_t, vector);
+<span class="lineNum">     260 </span>                :            : vector pow    (vector, vector);
+<span class="lineNum">     261 </span>                :            : vector ztor   (vector, nr_complex_t zref = 50.0);
+<span class="lineNum">     262 </span>                :            : vector rtoz   (vector, nr_complex_t zref = 50.0);
+<span class="lineNum">     263 </span>                :            : vector ytor   (vector, nr_complex_t zref = 50.0);
+<span class="lineNum">     264 </span>                :            : vector rtoy   (vector, nr_complex_t zref = 50.0);
+<span class="lineNum">     265 </span>                :            : vector diff   (vector, vector, int n = 1);
+<span class="lineNum">     266 </span>                :            : vector unwrap (vector, nr_double_t tol = M_PI, nr_double_t step = 2 * M_PI);
+<span class="lineNum">     267 </span>                :            : vector polar   (vector, const nr_complex_t);
+<span class="lineNum">     268 </span>                :            : vector polar   (const nr_complex_t, vector);
+<span class="lineNum">     269 </span>                :            : vector polar   (vector, vector);
+<span class="lineNum">     270 </span>                :            : vector atan2   (vector, const nr_double_t);
+<span class="lineNum">     271 </span>                :            : vector atan2   (const nr_double_t, vector);
+<span class="lineNum">     272 </span>                :            : vector atan2   (vector, vector);
+<span class="lineNum">     273 </span>                :            : vector dbm2w   (vector);
+<span class="lineNum">     274 </span>                :            : vector w2dbm   (vector);
+<span class="lineNum">     275 </span>                :            : vector xhypot  (vector, vector);
+<span class="lineNum">     276 </span>                :            : vector xhypot  (vector, const nr_complex_t);
+<span class="lineNum">     277 </span>                :            : vector xhypot  (vector, const nr_double_t);
+<span class="lineNum">     278 </span>                :            : vector xhypot  (const nr_complex_t, vector);
+<span class="lineNum">     279 </span>                :            : vector xhypot  (const nr_double_t, vector);
+<span class="lineNum">     280 </span>                :            : vector abs     (vector);
+<span class="lineNum">     281 </span>                :            : vector log10   (vector);
+<span class="lineNum">     282 </span>                :            : vector exp     (vector);
+<span class="lineNum">     283 </span>                :            : vector limexp  (vector);
+<span class="lineNum">     284 </span>                :            : vector sqrt    (vector);
+<span class="lineNum">     285 </span>                :            : vector sin     (vector);
+<span class="lineNum">     286 </span>                :            : vector asin    (vector);
+<span class="lineNum">     287 </span>                :            : vector cos     (vector);
+<span class="lineNum">     288 </span>                :            : vector acos    (vector);
+<span class="lineNum">     289 </span>                :            : vector tan     (vector);
+<span class="lineNum">     290 </span>                :            : vector atan    (vector);
+<span class="lineNum">     291 </span>                :            : vector cot     (vector);
+<span class="lineNum">     292 </span>                :            : vector acot    (vector);
+<span class="lineNum">     293 </span>                :            : vector sinh    (vector);
+<span class="lineNum">     294 </span>                :            : vector asinh   (vector);
+<span class="lineNum">     295 </span>                :            : vector cosh    (vector);
+<span class="lineNum">     296 </span>                :            : vector sech    (vector);
+<span class="lineNum">     297 </span>                :            : vector cosech  (vector);
+<span class="lineNum">     298 </span>                :            : vector acosh   (vector);
+<span class="lineNum">     299 </span>                :            : vector asech   (vector);
+<span class="lineNum">     300 </span>                :            : vector tanh    (vector);
+<span class="lineNum">     301 </span>                :            : vector atanh   (vector);
+<span class="lineNum">     302 </span>                :            : vector coth    (vector);
+<span class="lineNum">     303 </span>                :            : vector acoth   (vector);
+<span class="lineNum">     304 </span>                :            : vector signum  (vector);
+<span class="lineNum">     305 </span>                :            : vector sign    (vector);
+<span class="lineNum">     306 </span>                :            : vector sinc    (vector);
+<span class="lineNum">     307 </span>                :            : vector ceil    (vector);
+<span class="lineNum">     308 </span>                :            : vector floor   (vector);
+<span class="lineNum">     309 </span>                :            : vector fix     (vector);
+<span class="lineNum">     310 </span>                :            : vector round   (vector);
+<span class="lineNum">     311 </span>                :            : vector sqr     (vector);
+<span class="lineNum">     312 </span>                :            : vector step    (vector);
+<span class="lineNum">     313 </span>                :            : vector jn      (const int, vector);
+<span class="lineNum">     314 </span>                :            : vector yn      (const int, vector);
+<span class="lineNum">     315 </span>                :            : vector i0      (vector);
+<span class="lineNum">     316 </span>                :            : vector erf     (vector);
+<span class="lineNum">     317 </span>                :            : vector erfc    (vector);
+<span class="lineNum">     318 </span>                :            : vector erfinv  (vector);
+<span class="lineNum">     319 </span>                :            : vector erfcinv (vector);
+<span class="lineNum">     320 </span>                :            : 
+<span class="lineNum">     321 </span>                :            : } // namespace qucs
+<span class="lineNum">     322 </span>                :            : 
+<span class="lineNum">     323 </span>                :            : #endif /* __VECTOR_H__ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

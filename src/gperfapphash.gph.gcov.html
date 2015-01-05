@@ -1,0 +1,798 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - qucs-core-0.0.19-coverage.info - src/gperfapphash.gph</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - gperfapphash.gph<span style="font-size: 80%;"> (source / <a href="gperfapphash.gph.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">qucs-core-0.0.19-coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryHi">96.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-05 15:47:40</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryLo">63.6 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : %language=C++</a>
+<span class="lineNum">       2 </span>                :            : %define class-name gperfapphash
+<span class="lineNum">       3 </span>                :            : %define lookup-function-name get
+<span class="lineNum">       4 </span>                :            : %define slot-name key
+<span class="lineNum">       5 </span>                :            : %define word-array-name applist
+<span class="lineNum">       6 </span>                :            : %struct-type
+<span class="lineNum">       7 </span>                :            : struct appindex { const char * key; int index; };
+<span class="lineNum">       8 </span>                :            : %%
+<span class="lineNum">       9 </span>                :            : &quot;+_D&quot;,                0
+<span class="lineNum">      10 </span>                :            : &quot;+_C&quot;,                1
+<span class="lineNum">      11 </span>                :            : &quot;+_V&quot;,                2
+<span class="lineNum">      12 </span>                :            : &quot;+_M&quot;,                3
+<span class="lineNum">      13 </span>                :            : &quot;+_MV&quot;,               4
+<span class="lineNum">      14 </span>                :            : &quot;+_D_D&quot;,              5
+<span class="lineNum">      15 </span>                :            : &quot;+_C_C&quot;,              6
+<span class="lineNum">      16 </span>                :            : &quot;+_C_D&quot;,              7
+<span class="lineNum">      17 </span>                :            : &quot;+_D_C&quot;,              8
+<span class="lineNum">      18 </span>                :            : &quot;+_V_D&quot;,              9
+<span class="lineNum">      19 </span>                :            : &quot;+_D_V&quot;,              10
+<span class="lineNum">      20 </span>                :            : &quot;+_V_C&quot;,              11
+<span class="lineNum">      21 </span>                :            : &quot;+_C_V&quot;,              12
+<span class="lineNum">      22 </span>                :            : &quot;+_V_V&quot;,              13
+<span class="lineNum">      23 </span>                :            : &quot;+_M_M&quot;,              14
+<a name="24"><span class="lineNum">      24 </span>                :            : &quot;+_M_D&quot;,              15</a>
+<span class="lineNum">      25 </span>                :            : &quot;+_D_M&quot;,              16
+<span class="lineNum">      26 </span>                :<span class="lineCov">        963 : &quot;+_M_C&quot;,              17</span>
+<span class="lineNum">      27 </span>                :            : &quot;+_C_M&quot;,              18
+<span class="lineNum">      28 </span>                :            : &quot;+_STR_STR&quot;,          19
+<span class="lineNum">      29 </span>                :            : &quot;+_CHR_STR&quot;,          20
+<span class="lineNum">      30 </span>                :            : &quot;+_STR_CHR&quot;,          21
+<span class="lineNum">      31 </span>                :            : &quot;+_MV_MV&quot;,            22
+<span class="lineNum">      32 </span>                :            : &quot;+_MV_M&quot;,             23
+<span class="lineNum">      33 </span>                :            : &quot;+_M_MV&quot;,             24
+<span class="lineNum">      34 </span>                :            : &quot;+_MV_D&quot;,             25
+<span class="lineNum">      35 </span>                :            : &quot;+_D_MV&quot;,             26
+<span class="lineNum">      36 </span>                :            : &quot;+_MV_C&quot;,             27
+<span class="lineNum">      37 </span>                :            : &quot;+_C_MV&quot;,             28
+<span class="lineNum">      38 </span>                :            : &quot;+_MV_V&quot;,             29
+<span class="lineNum">      39 </span>                :            : &quot;+_V_MV&quot;,             30
+<span class="lineNum">      40 </span>                :            : &quot;-_D&quot;,                31
+<span class="lineNum">      41 </span>                :            : &quot;-_C&quot;,                32
+<span class="lineNum">      42 </span>                :            : &quot;-_V&quot;,                33
+<span class="lineNum">      43 </span>                :            : &quot;-_M&quot;,                34
+<span class="lineNum">      44 </span>                :            : &quot;-_MV&quot;,               35
+<span class="lineNum">      45 </span>                :            : &quot;-_D_D&quot;,              36
+<span class="lineNum">      46 </span>                :            : &quot;-_C_C&quot;,              37
+<span class="lineNum">      47 </span>                :            : &quot;-_C_D&quot;,              38
+<span class="lineNum">      48 </span>                :            : &quot;-_D_C&quot;,              39
+<span class="lineNum">      49 </span>                :            : &quot;-_V_D&quot;,              40
+<span class="lineNum">      50 </span>                :            : &quot;-_D_V&quot;,              41
+<span class="lineNum">      51 </span>                :            : &quot;-_V_C&quot;,              42
+<span class="lineNum">      52 </span>                :            : &quot;-_C_V&quot;,              43
+<span class="lineNum">      53 </span>                :            : &quot;-_V_V&quot;,              44
+<span class="lineNum">      54 </span>                :            : &quot;-_M_M&quot;,              45
+<span class="lineNum">      55 </span>                :            : &quot;-_M_D&quot;,              46
+<span class="lineNum">      56 </span>                :            : &quot;-_D_M&quot;,              47
+<span class="lineNum">      57 </span>                :<span class="lineCov">        963 : &quot;-_M_C&quot;,              48</span>
+<span class="lineNum">      58 </span>                :            : &quot;-_C_M&quot;,              49
+<span class="lineNum">      59 </span>  [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span><span class="branchCov" title="Branch 2 was taken 27 times"> + </span><span class="branchCov" title="Branch 3 was taken 7 times"> + </span> :<span class="lineCov">        963 : &quot;-_MV_MV&quot;,            50</span>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 4 was taken 20 times"> + </span><span class="branchCov" title="Branch 5 was taken 10 times"> + </span><span class="branchCov" title="Branch 6 was taken 24 times"> + </span><span class="branchCov" title="Branch 7 was taken 609 times"> + </span><span class="branchCov" title="Branch 8 was taken 32 times"> + </span> 
+<span class="lineNum">         </span>      <span class="branchCov" title="Branch 9 was taken 231 times"> + </span><span class="branchNoCov" title="Branch 10 was not taken"> - </span><span class="branchNoCov" title="Branch 11 was not taken"> - </span>]
+<span class="lineNum">      60 </span>                :            : &quot;-_MV_M&quot;,             51
+<span class="lineNum">      61 </span>                :            : &quot;-_M_MV&quot;,             52
+<span class="lineNum">      62 </span>                :<span class="lineNoCov">          0 : &quot;-_MV_D&quot;,             53</span>
+<span class="lineNum">      63 </span>                :            : &quot;-_D_MV&quot;,             54
+<span class="lineNum">      64 </span>                :            : &quot;-_MV_C&quot;,             55
+<span class="lineNum">      65 </span>                :            : &quot;-_C_MV&quot;,             56
+<span class="lineNum">      66 </span>                :            : &quot;-_MV_V&quot;,             57
+<span class="lineNum">      67 </span>                :            : &quot;-_V_MV&quot;,             58
+<span class="lineNum">      68 </span>                :            : &quot;*_D_D&quot;,              59
+<span class="lineNum">      69 </span>                :            : &quot;*_C_C&quot;,              60
+<span class="lineNum">      70 </span>                :<span class="lineCov">          3 : &quot;*_C_D&quot;,              61</span>
+<span class="lineNum">      71 </span>                :            : &quot;*_D_C&quot;,              62
+<span class="lineNum">      72 </span>                :            : &quot;*_V_D&quot;,              63
+<span class="lineNum">      73 </span>                :            : &quot;*_D_V&quot;,              64
+<span class="lineNum">      74 </span>                :<span class="lineCov">         30 : &quot;*_V_C&quot;,              65</span>
+<span class="lineNum">      75 </span>                :            : &quot;*_C_V&quot;,              66
+<span class="lineNum">      76 </span>                :            : &quot;*_V_V&quot;,              67
+<span class="lineNum">      77 </span>                :            : &quot;*_M_M&quot;,              68
+<span class="lineNum">      78 </span>                :<span class="lineCov">         37 : &quot;*_M_C&quot;,              69</span>
+<span class="lineNum">      79 </span>                :            : &quot;*_C_M&quot;,              70
+<span class="lineNum">      80 </span>                :            : &quot;*_M_D&quot;,              71
+<span class="lineNum">      81 </span>                :<span class="lineCov">         57 : &quot;*_D_M&quot;,              72</span>
+<span class="lineNum">      82 </span>                :            : &quot;*_MV_MV&quot;,            73
+<span class="lineNum">      83 </span>                :            : &quot;*_MV_M&quot;,             74
+<span class="lineNum">      84 </span>                :<span class="lineCov">         67 : &quot;*_M_MV&quot;,             75</span>
+<span class="lineNum">      85 </span>                :            : &quot;*_MV_C&quot;,             76
+<span class="lineNum">      86 </span>                :            : &quot;*_C_MV&quot;,             77
+<span class="lineNum">      87 </span>                :<span class="lineCov">         91 : &quot;*_MV_D&quot;,             78</span>
+<span class="lineNum">      88 </span>                :            : &quot;*_D_MV&quot;,             79
+<span class="lineNum">      89 </span>                :            : &quot;*_MV_V&quot;,             80
+<span class="lineNum">      90 </span>                :<span class="lineCov">        700 : &quot;*_V_MV&quot;,             81</span>
+<span class="lineNum">      91 </span>                :            : &quot;/_D_D&quot;,              82
+<span class="lineNum">      92 </span>                :            : &quot;/_C_C&quot;,              83
+<span class="lineNum">      93 </span>                :<span class="lineCov">        732 : &quot;/_C_D&quot;,              84</span>
+<span class="lineNum">      94 </span>                :            : &quot;/_D_C&quot;,              85
+<span class="lineNum">      95 </span>                :            : &quot;/_V_D&quot;,              86
+<span class="lineNum">      96 </span>                :<span class="lineCov">        963 : &quot;/_D_V&quot;,              87</span>
+<span class="lineNum">      97 </span>                :            : &quot;/_V_C&quot;,              88
+<span class="lineNum">      98 </span>                :            : &quot;/_C_V&quot;,              89
+<span class="lineNum">      99 </span>                :<span class="lineCov">        963 : &quot;/_V_V&quot;,              90</span>
+<span class="lineNum">     100 </span>                :            : &quot;/_M_C&quot;,              91
+<span class="lineNum">     101 </span>                :            : &quot;/_M_D&quot;,              92
+<span class="lineNum">     102 </span>                :<span class="lineCov">        963 : &quot;/_MV_C&quot;,             93</span>
+<span class="lineNum">     103 </span>                :<span class="lineCov">        963 : &quot;/_MV_D&quot;,             94</span>
+<span class="lineNum">     104 </span>                :            : &quot;/_MV_V&quot;,             95
+<span class="lineNum">     105 </span>                :<span class="lineCov">        963 : &quot;%_D_D&quot;,              96</span>
+<span class="lineNum">     106 </span>                :            : &quot;%_C_C&quot;,              97
+<a name="107"><span class="lineNum">     107 </span>                :            : &quot;%_C_D&quot;,              98</a>
+<span class="lineNum">     108 </span>                :            : &quot;%_D_C&quot;,              99
+<span class="lineNum">     109 </span>                :<span class="lineCov">        963 : &quot;%_V_D&quot;,              100</span>
+<span class="lineNum">     110 </span>                :            : &quot;%_D_V&quot;,              101
+<span class="lineNum">     111 </span>                :            : &quot;%_V_C&quot;,              102
+<span class="lineNum">     112 </span>                :            : &quot;%_C_V&quot;,              103
+<span class="lineNum">     113 </span>                :            : &quot;%_V_V&quot;,              104
+<span class="lineNum">     114 </span>                :            : &quot;^_D_D&quot;,              105
+<span class="lineNum">     115 </span>                :            : &quot;^_C_C&quot;,              106
+<span class="lineNum">     116 </span>                :            : &quot;^_C_D&quot;,              107
+<span class="lineNum">     117 </span>                :            : &quot;^_D_C&quot;,              108
+<span class="lineNum">     118 </span>                :            : &quot;^_V_D&quot;,              109
+<span class="lineNum">     119 </span>                :            : &quot;^_D_V&quot;,              110
+<span class="lineNum">     120 </span>                :            : &quot;^_V_C&quot;,              111
+<span class="lineNum">     121 </span>                :            : &quot;^_C_V&quot;,              112
+<span class="lineNum">     122 </span>                :            : &quot;^_V_V&quot;,              113
+<span class="lineNum">     123 </span>                :            : &quot;^_M_D&quot;,              114
+<span class="lineNum">     124 </span>                :            : &quot;^_M_C&quot;,              115
+<span class="lineNum">     125 </span>                :            : &quot;^_MV_D&quot;,             116
+<span class="lineNum">     126 </span>                :            : &quot;^_MV_C&quot;,             117
+<span class="lineNum">     127 </span>                :            : &quot;^_MV_V&quot;,             118
+<span class="lineNum">     128 </span>                :            : &quot;hypot_D_D&quot;,          119
+<span class="lineNum">     129 </span>                :            : &quot;hypot_C_C&quot;,          120
+<span class="lineNum">     130 </span>                :            : &quot;hypot_C_D&quot;,          121
+<span class="lineNum">     131 </span>                :            : &quot;hypot_D_C&quot;,          122
+<span class="lineNum">     132 </span>                :            : &quot;hypot_V_D&quot;,          123
+<span class="lineNum">     133 </span>                :            : &quot;hypot_D_V&quot;,          124
+<span class="lineNum">     134 </span>                :            : &quot;hypot_V_C&quot;,          125
+<span class="lineNum">     135 </span>                :            : &quot;hypot_C_V&quot;,          126
+<span class="lineNum">     136 </span>                :            : &quot;hypot_V_V&quot;,          127
+<span class="lineNum">     137 </span>                :            : &quot;real_D&quot;,             128
+<span class="lineNum">     138 </span>                :            : &quot;real_C&quot;,             129
+<span class="lineNum">     139 </span>                :            : &quot;real_V&quot;,             130
+<span class="lineNum">     140 </span>                :            : &quot;real_M&quot;,             131
+<span class="lineNum">     141 </span>                :            : &quot;real_MV&quot;,            132
+<span class="lineNum">     142 </span>                :            : &quot;imag_D&quot;,             133
+<span class="lineNum">     143 </span>                :            : &quot;imag_C&quot;,             134
+<span class="lineNum">     144 </span>                :            : &quot;imag_V&quot;,             135
+<span class="lineNum">     145 </span>                :            : &quot;imag_M&quot;,             136
+<span class="lineNum">     146 </span>                :            : &quot;imag_MV&quot;,            137
+<span class="lineNum">     147 </span>                :            : &quot;abs_D&quot;,              138
+<span class="lineNum">     148 </span>                :            : &quot;abs_C&quot;,              139
+<span class="lineNum">     149 </span>                :            : &quot;abs_V&quot;,              140
+<span class="lineNum">     150 </span>                :            : &quot;abs_M&quot;,              141
+<span class="lineNum">     151 </span>                :            : &quot;abs_MV&quot;,             142
+<span class="lineNum">     152 </span>                :            : &quot;mag_D&quot;,              143
+<span class="lineNum">     153 </span>                :            : &quot;mag_C&quot;,              144
+<span class="lineNum">     154 </span>                :            : &quot;mag_V&quot;,              145
+<span class="lineNum">     155 </span>                :            : &quot;mag_M&quot;,              146
+<span class="lineNum">     156 </span>                :            : &quot;mag_MV&quot;,             147
+<span class="lineNum">     157 </span>                :            : &quot;conj_D&quot;,             148
+<span class="lineNum">     158 </span>                :            : &quot;conj_C&quot;,             149
+<span class="lineNum">     159 </span>                :            : &quot;conj_V&quot;,             150
+<span class="lineNum">     160 </span>                :            : &quot;conj_M&quot;,             151
+<span class="lineNum">     161 </span>                :            : &quot;conj_MV&quot;,            152
+<span class="lineNum">     162 </span>                :            : &quot;norm_D&quot;,             153
+<span class="lineNum">     163 </span>                :            : &quot;norm_C&quot;,             154
+<span class="lineNum">     164 </span>                :            : &quot;norm_V&quot;,             155
+<span class="lineNum">     165 </span>                :            : &quot;phase_D&quot;,            156
+<span class="lineNum">     166 </span>                :            : &quot;phase_C&quot;,            157
+<span class="lineNum">     167 </span>                :            : &quot;phase_V&quot;,            158
+<span class="lineNum">     168 </span>                :            : &quot;phase_M&quot;,            159
+<span class="lineNum">     169 </span>                :            : &quot;phase_MV&quot;,           160
+<span class="lineNum">     170 </span>                :            : &quot;angle_D&quot;,            161
+<span class="lineNum">     171 </span>                :            : &quot;angle_C&quot;,            162
+<span class="lineNum">     172 </span>                :            : &quot;angle_V&quot;,            163
+<span class="lineNum">     173 </span>                :            : &quot;angle_M&quot;,            164
+<span class="lineNum">     174 </span>                :            : &quot;angle_MV&quot;,           165
+<span class="lineNum">     175 </span>                :            : &quot;arg_D&quot;,              166
+<span class="lineNum">     176 </span>                :            : &quot;arg_C&quot;,              167
+<span class="lineNum">     177 </span>                :            : &quot;arg_V&quot;,              168
+<span class="lineNum">     178 </span>                :            : &quot;arg_M&quot;,              169
+<span class="lineNum">     179 </span>                :            : &quot;arg_MV&quot;,             170
+<span class="lineNum">     180 </span>                :            : &quot;unwrap_V&quot;,           171
+<span class="lineNum">     181 </span>                :            : &quot;unwrap_V_D&quot;,                 172
+<span class="lineNum">     182 </span>                :            : &quot;unwrap_V_D_D&quot;,       173
+<span class="lineNum">     183 </span>                :            : &quot;deg2rad_D&quot;,          174
+<span class="lineNum">     184 </span>                :            : &quot;deg2rad_C&quot;,          175
+<span class="lineNum">     185 </span>                :            : &quot;deg2rad_V&quot;,          176
+<span class="lineNum">     186 </span>                :            : &quot;rad2deg_D&quot;,          177
+<span class="lineNum">     187 </span>                :            : &quot;rad2deg_C&quot;,          178
+<span class="lineNum">     188 </span>                :            : &quot;rad2deg_V&quot;,          179
+<span class="lineNum">     189 </span>                :            : &quot;dB_D&quot;,               180
+<span class="lineNum">     190 </span>                :            : &quot;dB_C&quot;,               181
+<span class="lineNum">     191 </span>                :            : &quot;dB_V&quot;,               182
+<span class="lineNum">     192 </span>                :            : &quot;dB_M&quot;,               183
+<span class="lineNum">     193 </span>                :            : &quot;dB_MV&quot;,              184
+<span class="lineNum">     194 </span>                :            : &quot;sqrt_D&quot;,             185
+<span class="lineNum">     195 </span>                :            : &quot;sqrt_C&quot;,             186
+<span class="lineNum">     196 </span>                :            : &quot;sqrt_V&quot;,             187
+<span class="lineNum">     197 </span>                :            : &quot;exp_D&quot;,              188
+<span class="lineNum">     198 </span>                :            : &quot;exp_C&quot;,              189
+<span class="lineNum">     199 </span>                :            : &quot;exp_V&quot;,              190
+<span class="lineNum">     200 </span>                :            : &quot;limexp_D&quot;,           191
+<span class="lineNum">     201 </span>                :            : &quot;limexp_C&quot;,           192
+<span class="lineNum">     202 </span>                :            : &quot;limexp_V&quot;,           193
+<span class="lineNum">     203 </span>                :            : &quot;ln_D&quot;,               194
+<span class="lineNum">     204 </span>                :            : &quot;ln_C&quot;,               195
+<span class="lineNum">     205 </span>                :            : &quot;ln_V&quot;,               196
+<span class="lineNum">     206 </span>                :            : &quot;log10_D&quot;,            197
+<span class="lineNum">     207 </span>                :            : &quot;log10_C&quot;,            198
+<span class="lineNum">     208 </span>                :            : &quot;log10_V&quot;,            199
+<span class="lineNum">     209 </span>                :            : &quot;log2_D&quot;,             200
+<span class="lineNum">     210 </span>                :            : &quot;log2_C&quot;,             201
+<span class="lineNum">     211 </span>                :            : &quot;log2_V&quot;,             202
+<span class="lineNum">     212 </span>                :            : &quot;sin_D&quot;,              203
+<span class="lineNum">     213 </span>                :            : &quot;sin_C&quot;,              204
+<span class="lineNum">     214 </span>                :            : &quot;sin_V&quot;,              205
+<span class="lineNum">     215 </span>                :            : &quot;arcsin_D&quot;,           206
+<span class="lineNum">     216 </span>                :            : &quot;arcsin_C&quot;,           207
+<span class="lineNum">     217 </span>                :            : &quot;arcsin_V&quot;,           208
+<span class="lineNum">     218 </span>                :            : &quot;cos_D&quot;,              209
+<span class="lineNum">     219 </span>                :            : &quot;cos_C&quot;,              210
+<span class="lineNum">     220 </span>                :            : &quot;cos_V&quot;,              211
+<span class="lineNum">     221 </span>                :            : &quot;arccos_D&quot;,           212
+<span class="lineNum">     222 </span>                :            : &quot;arccos_C&quot;,           213
+<span class="lineNum">     223 </span>                :            : &quot;arccos_V&quot;,           214
+<span class="lineNum">     224 </span>                :            : &quot;tan_D&quot;,              215
+<span class="lineNum">     225 </span>                :            : &quot;tan_C&quot;,              216
+<span class="lineNum">     226 </span>                :            : &quot;tan_V&quot;,              217
+<span class="lineNum">     227 </span>                :            : &quot;arctan_D&quot;,           218
+<span class="lineNum">     228 </span>                :            : &quot;arctan_C&quot;,           219
+<span class="lineNum">     229 </span>                :            : &quot;arctan_V&quot;,           220
+<span class="lineNum">     230 </span>                :            : &quot;cot_D&quot;,              221
+<span class="lineNum">     231 </span>                :            : &quot;cot_C&quot;,              222
+<span class="lineNum">     232 </span>                :            : &quot;cot_V&quot;,              223
+<span class="lineNum">     233 </span>                :            : &quot;arccot_D&quot;,           224
+<span class="lineNum">     234 </span>                :            : &quot;arccot_C&quot;,           225
+<span class="lineNum">     235 </span>                :            : &quot;arccot_V&quot;,           226
+<span class="lineNum">     236 </span>                :            : &quot;sec_D&quot;,              227
+<span class="lineNum">     237 </span>                :            : &quot;sec_C&quot;,              228
+<span class="lineNum">     238 </span>                :            : &quot;sec_V&quot;,              229
+<span class="lineNum">     239 </span>                :            : &quot;arcsec_D&quot;,           230
+<span class="lineNum">     240 </span>                :            : &quot;arcsec_C&quot;,           231
+<span class="lineNum">     241 </span>                :            : &quot;arcsec_V&quot;,           232
+<span class="lineNum">     242 </span>                :            : &quot;cosec_D&quot;,            233
+<span class="lineNum">     243 </span>                :            : &quot;cosec_C&quot;,            234
+<span class="lineNum">     244 </span>                :            : &quot;cosec_V&quot;,            235
+<span class="lineNum">     245 </span>                :            : &quot;arccosec_D&quot;,                 236
+<span class="lineNum">     246 </span>                :            : &quot;arccosec_C&quot;,                 237
+<span class="lineNum">     247 </span>                :            : &quot;arccosec_V&quot;,                 238
+<span class="lineNum">     248 </span>                :            : &quot;sinh_D&quot;,             239
+<span class="lineNum">     249 </span>                :            : &quot;sinh_C&quot;,             240
+<span class="lineNum">     250 </span>                :            : &quot;sinh_V&quot;,             241
+<span class="lineNum">     251 </span>                :            : &quot;arsinh_D&quot;,           242
+<span class="lineNum">     252 </span>                :            : &quot;arsinh_C&quot;,           243
+<span class="lineNum">     253 </span>                :            : &quot;arsinh_V&quot;,           244
+<span class="lineNum">     254 </span>                :            : &quot;cosh_D&quot;,             245
+<span class="lineNum">     255 </span>                :            : &quot;cosh_C&quot;,             246
+<span class="lineNum">     256 </span>                :            : &quot;cosh_V&quot;,             247
+<span class="lineNum">     257 </span>                :            : &quot;arcosh_D&quot;,           248
+<span class="lineNum">     258 </span>                :            : &quot;arcosh_C&quot;,           249
+<span class="lineNum">     259 </span>                :            : &quot;arcosh_V&quot;,           250
+<span class="lineNum">     260 </span>                :            : &quot;tanh_D&quot;,             251
+<span class="lineNum">     261 </span>                :            : &quot;tanh_C&quot;,             252
+<span class="lineNum">     262 </span>                :            : &quot;tanh_V&quot;,             253
+<span class="lineNum">     263 </span>                :            : &quot;artanh_D&quot;,           254
+<span class="lineNum">     264 </span>                :            : &quot;artanh_C&quot;,           255
+<span class="lineNum">     265 </span>                :            : &quot;artanh_V&quot;,           256
+<span class="lineNum">     266 </span>                :            : &quot;coth_D&quot;,             257
+<span class="lineNum">     267 </span>                :            : &quot;coth_C&quot;,             258
+<span class="lineNum">     268 </span>                :            : &quot;coth_V&quot;,             259
+<span class="lineNum">     269 </span>                :            : &quot;arcoth_D&quot;,           260
+<span class="lineNum">     270 </span>                :            : &quot;arcoth_C&quot;,           261
+<span class="lineNum">     271 </span>                :            : &quot;arcoth_V&quot;,           262
+<span class="lineNum">     272 </span>                :            : &quot;sech_D&quot;,             263
+<span class="lineNum">     273 </span>                :            : &quot;sech_C&quot;,             264
+<span class="lineNum">     274 </span>                :            : &quot;sech_V&quot;,             265
+<span class="lineNum">     275 </span>                :            : &quot;arsech_D&quot;,           266
+<span class="lineNum">     276 </span>                :            : &quot;arsech_C&quot;,           267
+<span class="lineNum">     277 </span>                :            : &quot;arsech_V&quot;,           268
+<span class="lineNum">     278 </span>                :            : &quot;cosech_D&quot;,           269
+<span class="lineNum">     279 </span>                :            : &quot;cosech_C&quot;,           270
+<span class="lineNum">     280 </span>                :            : &quot;cosech_V&quot;,           271
+<span class="lineNum">     281 </span>                :            : &quot;arcosech_D&quot;,                 272
+<span class="lineNum">     282 </span>                :            : &quot;arcosech_C&quot;,                 273
+<span class="lineNum">     283 </span>                :            : &quot;arcosech_V&quot;,                 274
+<span class="lineNum">     284 </span>                :            : &quot;ztor_D&quot;,             275
+<span class="lineNum">     285 </span>                :            : &quot;ztor_D_D&quot;,           276
+<span class="lineNum">     286 </span>                :            : &quot;ztor_D_C&quot;,           277
+<span class="lineNum">     287 </span>                :            : &quot;ztor_C&quot;,             278
+<span class="lineNum">     288 </span>                :            : &quot;ztor_C_D&quot;,           279
+<span class="lineNum">     289 </span>                :            : &quot;ztor_C_C&quot;,           280
+<span class="lineNum">     290 </span>                :            : &quot;ztor_V&quot;,             281
+<span class="lineNum">     291 </span>                :            : &quot;ztor_V_D&quot;,           282
+<span class="lineNum">     292 </span>                :            : &quot;ztor_V_C&quot;,           283
+<span class="lineNum">     293 </span>                :            : &quot;rtoz_D&quot;,             284
+<span class="lineNum">     294 </span>                :            : &quot;rtoz_D_D&quot;,           285
+<span class="lineNum">     295 </span>                :            : &quot;rtoz_D_C&quot;,           286
+<span class="lineNum">     296 </span>                :            : &quot;rtoz_C&quot;,             287
+<span class="lineNum">     297 </span>                :            : &quot;rtoz_C_D&quot;,           288
+<span class="lineNum">     298 </span>                :            : &quot;rtoz_C_C&quot;,           289
+<span class="lineNum">     299 </span>                :            : &quot;rtoz_V&quot;,             290
+<span class="lineNum">     300 </span>                :            : &quot;rtoz_V_D&quot;,           291
+<span class="lineNum">     301 </span>                :            : &quot;rtoz_V_C&quot;,           292
+<span class="lineNum">     302 </span>                :            : &quot;ytor_D&quot;,             293
+<span class="lineNum">     303 </span>                :            : &quot;ytor_D_D&quot;,           294
+<span class="lineNum">     304 </span>                :            : &quot;ytor_D_C&quot;,           295
+<span class="lineNum">     305 </span>                :            : &quot;ytor_C&quot;,             296
+<span class="lineNum">     306 </span>                :            : &quot;ytor_C_D&quot;,           297
+<span class="lineNum">     307 </span>                :            : &quot;ytor_C_C&quot;,           298
+<span class="lineNum">     308 </span>                :            : &quot;ytor_V&quot;,             299
+<span class="lineNum">     309 </span>                :            : &quot;ytor_V_D&quot;,           300
+<span class="lineNum">     310 </span>                :            : &quot;ytor_V_C&quot;,           301
+<span class="lineNum">     311 </span>                :            : &quot;rtoy_D&quot;,             302
+<span class="lineNum">     312 </span>                :            : &quot;rtoy_D_D&quot;,           303
+<span class="lineNum">     313 </span>                :            : &quot;rtoy_D_C&quot;,           304
+<span class="lineNum">     314 </span>                :            : &quot;rtoy_C&quot;,             305
+<span class="lineNum">     315 </span>                :            : &quot;rtoy_C_D&quot;,           306
+<span class="lineNum">     316 </span>                :            : &quot;rtoy_C_C&quot;,           307
+<span class="lineNum">     317 </span>                :            : &quot;rtoy_V&quot;,             308
+<span class="lineNum">     318 </span>                :            : &quot;rtoy_V_D&quot;,           309
+<span class="lineNum">     319 </span>                :            : &quot;rtoy_V_C&quot;,           310
+<span class="lineNum">     320 </span>                :            : &quot;rtoswr_D&quot;,           311
+<span class="lineNum">     321 </span>                :            : &quot;rtoswr_C&quot;,           312
+<span class="lineNum">     322 </span>                :            : &quot;rtoswr_V&quot;,           313
+<span class="lineNum">     323 </span>                :            : &quot;diff_V_V&quot;,           314
+<span class="lineNum">     324 </span>                :            : &quot;diff_V_V_D&quot;,                 315
+<span class="lineNum">     325 </span>                :            : &quot;max_D&quot;,              316
+<span class="lineNum">     326 </span>                :            : &quot;max_C&quot;,              317
+<span class="lineNum">     327 </span>                :            : &quot;max_V&quot;,              318
+<span class="lineNum">     328 </span>                :            : &quot;max_V_R&quot;,            319
+<span class="lineNum">     329 </span>                :            : &quot;max_D_D&quot;,            320
+<span class="lineNum">     330 </span>                :            : &quot;max_C_D&quot;,            321
+<span class="lineNum">     331 </span>                :            : &quot;max_D_C&quot;,            322
+<span class="lineNum">     332 </span>                :            : &quot;max_C_C&quot;,            323
+<span class="lineNum">     333 </span>                :            : &quot;min_D&quot;,              324
+<span class="lineNum">     334 </span>                :            : &quot;min_C&quot;,              325
+<span class="lineNum">     335 </span>                :            : &quot;min_V&quot;,              326
+<span class="lineNum">     336 </span>                :            : &quot;min_V_R&quot;,            327
+<span class="lineNum">     337 </span>                :            : &quot;min_D_D&quot;,            328
+<span class="lineNum">     338 </span>                :            : &quot;min_C_D&quot;,            329
+<span class="lineNum">     339 </span>                :            : &quot;min_D_C&quot;,            330
+<span class="lineNum">     340 </span>                :            : &quot;min_C_C&quot;,            331
+<span class="lineNum">     341 </span>                :            : &quot;sum_D&quot;,              332
+<span class="lineNum">     342 </span>                :            : &quot;sum_C&quot;,              333
+<span class="lineNum">     343 </span>                :            : &quot;sum_V&quot;,              334
+<span class="lineNum">     344 </span>                :            : &quot;prod_D&quot;,             335
+<span class="lineNum">     345 </span>                :            : &quot;prod_C&quot;,             336
+<span class="lineNum">     346 </span>                :            : &quot;prod_V&quot;,             337
+<span class="lineNum">     347 </span>                :            : &quot;avg_D&quot;,              338
+<span class="lineNum">     348 </span>                :            : &quot;avg_C&quot;,              339
+<span class="lineNum">     349 </span>                :            : &quot;avg_V&quot;,              340
+<span class="lineNum">     350 </span>                :            : &quot;avg_V_R&quot;,            341
+<span class="lineNum">     351 </span>                :            : &quot;length_D&quot;,           342
+<span class="lineNum">     352 </span>                :            : &quot;length_C&quot;,           343
+<span class="lineNum">     353 </span>                :            : &quot;length_V&quot;,           344
+<span class="lineNum">     354 </span>                :            : &quot;length_M&quot;,           345
+<span class="lineNum">     355 </span>                :            : &quot;length_MV&quot;,          346
+<span class="lineNum">     356 </span>                :            : &quot;array_MV_D_D&quot;,       347
+<span class="lineNum">     357 </span>                :            : &quot;array_MV_D&quot;,                 348
+<span class="lineNum">     358 </span>                :            : &quot;array_V_D&quot;,          349
+<span class="lineNum">     359 </span>[<span class="branchCov" title="Branch 0 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        963 : &quot;array_V_D_D&quot;,                350</span>
+<span class="lineNum">     360 </span>                :            : &quot;array_M_D_D&quot;,                351
+<span class="lineNum">     361 </span>                :<span class="lineCov">        963 : &quot;array_STR_D&quot;,                352</span>
+<span class="lineNum">     362 </span>                :            : &quot;stos_M_D&quot;,           353
+<span class="lineNum">     363 </span>        [<span class="branchCov" title="Branch 0 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">        963 : &quot;stos_M_D_D&quot;,                 354</span>
+<span class="lineNum">     364 </span>                :            : &quot;stos_M_D_C&quot;,                 355
+<span class="lineNum">     365 </span>                :<span class="lineCov">        963 : &quot;stos_M_D_V&quot;,                 356</span>
+<span class="lineNum">     366 </span>                :            : &quot;stos_M_C&quot;,           357
+<span class="lineNum">     367 </span>[<span class="branchCov" title="Branch 0 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>][<span class="branchCov" title="Branch 2 was taken 963 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">        963 : &quot;stos_M_C_D&quot;,                 358</span>
+<span class="lineNum">     368 </span>                :<span class="lineCov">        963 : &quot;stos_M_C_C&quot;,                 359</span>
+<span class="lineNum">     369 </span>                :            : &quot;stos_M_C_V&quot;,                 360
+<span class="lineNum">     370 </span>                :            : &quot;stos_M_V&quot;,           361
+<span class="lineNum">     371 </span>                :<span class="lineCov">        963 : &quot;stos_M_V_D&quot;,                 362</span>
+<span class="lineNum">     372 </span>                :            : &quot;stos_M_V_C&quot;,                 363
+<span class="lineNum">     373 </span>                :            : &quot;stos_M_V_V&quot;,                 364
+<span class="lineNum">     374 </span>                :            : &quot;stos_MV_D&quot;,          365
+<span class="lineNum">     375 </span>                :            : &quot;stos_MV_D_D&quot;,                366
+<span class="lineNum">     376 </span>                :            : &quot;stos_MV_D_C&quot;,                367
+<span class="lineNum">     377 </span>                :            : &quot;stos_MV_D_V&quot;,                368
+<span class="lineNum">     378 </span>                :            : &quot;stos_MV_C&quot;,          369
+<span class="lineNum">     379 </span>                :            : &quot;stos_MV_C_D&quot;,                370
+<span class="lineNum">     380 </span>                :            : &quot;stos_MV_C_C&quot;,                371
+<span class="lineNum">     381 </span>                :            : &quot;stos_MV_C_V&quot;,                372
+<span class="lineNum">     382 </span>                :            : &quot;stos_MV_V&quot;,          373
+<span class="lineNum">     383 </span>                :            : &quot;stos_MV_V_D&quot;,                374
+<span class="lineNum">     384 </span>                :            : &quot;stos_MV_V_C&quot;,                375
+<span class="lineNum">     385 </span>                :            : &quot;stos_MV_V_V&quot;,                376
+<span class="lineNum">     386 </span>                :            : &quot;stoy_M&quot;,             377
+<span class="lineNum">     387 </span>                :            : &quot;stoy_M_D&quot;,           378
+<span class="lineNum">     388 </span>                :            : &quot;stoy_M_C&quot;,           379
+<span class="lineNum">     389 </span>                :            : &quot;stoy_M_V&quot;,           380
+<span class="lineNum">     390 </span>                :            : &quot;stoy_MV&quot;,            381
+<span class="lineNum">     391 </span>                :            : &quot;stoy_MV_D&quot;,          382
+<span class="lineNum">     392 </span>                :            : &quot;stoy_MV_C&quot;,          383
+<span class="lineNum">     393 </span>                :            : &quot;stoy_MV_V&quot;,          384
+<span class="lineNum">     394 </span>                :            : &quot;stoz_M&quot;,             385
+<span class="lineNum">     395 </span>                :            : &quot;stoz_M_D&quot;,           386
+<span class="lineNum">     396 </span>                :            : &quot;stoz_M_C&quot;,           387
+<span class="lineNum">     397 </span>                :            : &quot;stoz_M_V&quot;,           388
+<span class="lineNum">     398 </span>                :            : &quot;stoz_MV&quot;,            389
+<span class="lineNum">     399 </span>                :            : &quot;stoz_MV_D&quot;,          390
+<span class="lineNum">     400 </span>                :            : &quot;stoz_MV_C&quot;,          391
+<span class="lineNum">     401 </span>                :            : &quot;stoz_MV_V&quot;,          392
+<span class="lineNum">     402 </span>                :            : &quot;ytos_M&quot;,             393
+<span class="lineNum">     403 </span>                :            : &quot;ytos_M_D&quot;,           394
+<span class="lineNum">     404 </span>                :            : &quot;ytos_M_C&quot;,           395
+<span class="lineNum">     405 </span>                :            : &quot;ytos_M_V&quot;,           396
+<span class="lineNum">     406 </span>                :            : &quot;ytos_MV&quot;,            397
+<span class="lineNum">     407 </span>                :            : &quot;ytos_MV_D&quot;,          398
+<span class="lineNum">     408 </span>                :            : &quot;ytos_MV_C&quot;,          399
+<span class="lineNum">     409 </span>                :            : &quot;ytos_MV_V&quot;,          400
+<span class="lineNum">     410 </span>                :            : &quot;ztos_M&quot;,             401
+<span class="lineNum">     411 </span>                :            : &quot;ztos_M_D&quot;,           402
+<span class="lineNum">     412 </span>                :            : &quot;ztos_M_C&quot;,           403
+<span class="lineNum">     413 </span>                :            : &quot;ztos_M_V&quot;,           404
+<span class="lineNum">     414 </span>                :            : &quot;ztos_MV&quot;,            405
+<span class="lineNum">     415 </span>                :            : &quot;ztos_MV_D&quot;,          406
+<span class="lineNum">     416 </span>                :            : &quot;ztos_MV_C&quot;,          407
+<span class="lineNum">     417 </span>                :            : &quot;ztos_MV_V&quot;,          408
+<span class="lineNum">     418 </span>                :            : &quot;ytoz_M&quot;,             409
+<span class="lineNum">     419 </span>                :            : &quot;ytoz_MV&quot;,            410
+<span class="lineNum">     420 </span>                :            : &quot;ztoy_M&quot;,             411
+<span class="lineNum">     421 </span>                :            : &quot;ztoy_MV&quot;,            412
+<span class="lineNum">     422 </span>                :            : &quot;twoport_M_CHR_CHR&quot;,  413
+<span class="lineNum">     423 </span>                :            : &quot;twoport_MV_CHR_CHR&quot;,         414
+<span class="lineNum">     424 </span>                :            : &quot;inverse_M&quot;,          415
+<span class="lineNum">     425 </span>                :            : &quot;inverse_MV&quot;,                 416
+<span class="lineNum">     426 </span>                :            : &quot;transpose_M&quot;,                417
+<span class="lineNum">     427 </span>                :            : &quot;transpose_MV&quot;,       418
+<span class="lineNum">     428 </span>                :            : &quot;det_M&quot;,              419
+<span class="lineNum">     429 </span>                :            : &quot;det_MV&quot;,             420
+<span class="lineNum">     430 </span>                :            : &quot;eye_D&quot;,              421
+<span class="lineNum">     431 </span>                :            : &quot;adjoint_M&quot;,          422
+<span class="lineNum">     432 </span>                :            : &quot;adjoint_MV&quot;,                 423
+<span class="lineNum">     433 </span>                :            : &quot;signum_D&quot;,           424
+<span class="lineNum">     434 </span>                :            : &quot;signum_C&quot;,           425
+<span class="lineNum">     435 </span>                :            : &quot;signum_V&quot;,           426
+<span class="lineNum">     436 </span>                :            : &quot;sign_D&quot;,             427
+<span class="lineNum">     437 </span>                :            : &quot;sign_C&quot;,             428
+<span class="lineNum">     438 </span>                :            : &quot;sign_V&quot;,             429
+<span class="lineNum">     439 </span>                :            : &quot;sinc_D&quot;,             430
+<span class="lineNum">     440 </span>                :            : &quot;sinc_C&quot;,             431
+<span class="lineNum">     441 </span>                :            : &quot;sinc_V&quot;,             432
+<span class="lineNum">     442 </span>                :            : &quot;Rollet_M&quot;,           433
+<span class="lineNum">     443 </span>                :            : &quot;Rollet_MV&quot;,          434
+<span class="lineNum">     444 </span>                :            : &quot;Mu_M&quot;,               435
+<span class="lineNum">     445 </span>                :            : &quot;Mu_MV&quot;,              436
+<span class="lineNum">     446 </span>                :            : &quot;Mu2_M&quot;,              437
+<span class="lineNum">     447 </span>                :            : &quot;Mu2_MV&quot;,             438
+<span class="lineNum">     448 </span>                :            : &quot;StabFactor_M&quot;,       439
+<span class="lineNum">     449 </span>                :            : &quot;StabFactor_MV&quot;,      440
+<span class="lineNum">     450 </span>                :            : &quot;StabMeasure_M&quot;,      441
+<span class="lineNum">     451 </span>                :            : &quot;StabMeasure_MV&quot;,     442
+<span class="lineNum">     452 </span>                :            : &quot;linspace_D_D_D&quot;,     443
+<span class="lineNum">     453 </span>                :            : &quot;logspace_D_D_D&quot;,     444
+<span class="lineNum">     454 </span>                :            : &quot;NoiseCircle_V_V_V_D_V&quot;, 445
+<span class="lineNum">     455 </span>                :            : &quot;NoiseCircle_V_V_V_D_D&quot;, 446
+<span class="lineNum">     456 </span>                :            : &quot;NoiseCircle_V_V_V_D&quot;,        447
+<span class="lineNum">     457 </span>                :            : &quot;NoiseCircle_V_V_V_V_V&quot;, 448
+<span class="lineNum">     458 </span>                :            : &quot;NoiseCircle_V_V_V_V_D&quot;, 449
+<span class="lineNum">     459 </span>                :            : &quot;NoiseCircle_V_V_V_V&quot;,        450
+<span class="lineNum">     460 </span>                :            : &quot;StabCircleL_MV_V&quot;,   451
+<span class="lineNum">     461 </span>                :            : &quot;StabCircleL_MV_D&quot;,   452
+<span class="lineNum">     462 </span>                :            : &quot;StabCircleL_MV&quot;,     453
+<span class="lineNum">     463 </span>                :            : &quot;StabCircleS_MV_V&quot;,   454
+<span class="lineNum">     464 </span>                :            : &quot;StabCircleS_MV_D&quot;,   455
+<span class="lineNum">     465 </span>                :            : &quot;StabCircleS_MV&quot;,     456
+<span class="lineNum">     466 </span>                :            : &quot;GaCircle_MV_D_V&quot;,    457
+<span class="lineNum">     467 </span>                :            : &quot;GaCircle_MV_D_D&quot;,    458
+<span class="lineNum">     468 </span>                :            : &quot;GaCircle_MV_D&quot;,      459
+<span class="lineNum">     469 </span>                :            : &quot;GaCircle_MV_V_V&quot;,    460
+<span class="lineNum">     470 </span>                :            : &quot;GaCircle_MV_V_D&quot;,    461
+<span class="lineNum">     471 </span>                :            : &quot;GaCircle_MV_V&quot;,      462
+<span class="lineNum">     472 </span>                :            : &quot;GpCircle_MV_D_V&quot;,    463
+<span class="lineNum">     473 </span>                :            : &quot;GpCircle_MV_D_D&quot;,    464
+<span class="lineNum">     474 </span>                :            : &quot;GpCircle_MV_D&quot;,      465
+<span class="lineNum">     475 </span>                :            : &quot;GpCircle_MV_V_V&quot;,    466
+<span class="lineNum">     476 </span>                :            : &quot;GpCircle_MV_V_D&quot;,    467
+<span class="lineNum">     477 </span>                :            : &quot;GpCircle_MV_V&quot;,      468
+<span class="lineNum">     478 </span>                :            : &quot;PlotVs_V_V&quot;,                 469
+<span class="lineNum">     479 </span>                :            : &quot;PlotVs_V_V_V&quot;,       470
+<span class="lineNum">     480 </span>                :            : &quot;PlotVs_V_V_V_V&quot;,     471
+<span class="lineNum">     481 </span>                :            : &quot;PlotVs_V_V_V_V_V&quot;,   472
+<span class="lineNum">     482 </span>                :            : &quot;PlotVs_MV_V&quot;,                473
+<span class="lineNum">     483 </span>                :            : &quot;PlotVs_MV_V_V&quot;,      474
+<span class="lineNum">     484 </span>                :            : &quot;PlotVs_MV_V_V_V&quot;,    475
+<span class="lineNum">     485 </span>                :            : &quot;PlotVs_MV_V_V_V_V&quot;,  476
+<span class="lineNum">     486 </span>                :            : &quot;interpolate_V_V_D&quot;,  477
+<span class="lineNum">     487 </span>                :            : &quot;interpolate_V_V&quot;,    478
+<span class="lineNum">     488 </span>                :            : &quot;fft_V&quot;,              479
+<span class="lineNum">     489 </span>                :            : &quot;ifft_V&quot;,             480
+<span class="lineNum">     490 </span>                :            : &quot;dft_V&quot;,              481
+<span class="lineNum">     491 </span>                :            : &quot;idft_V&quot;,             482
+<span class="lineNum">     492 </span>                :            : &quot;Time2Freq_V_V&quot;,      483
+<span class="lineNum">     493 </span>                :            : &quot;Freq2Time_V_V&quot;,      484
+<span class="lineNum">     494 </span>                :            : &quot;receiver_V_V&quot;,       485
+<span class="lineNum">     495 </span>                :            : &quot;receiver_V_V_D&quot;,     486
+<span class="lineNum">     496 </span>                :            : &quot;fftshift_V&quot;,                 487
+<span class="lineNum">     497 </span>                :            : &quot;xvalue_V_D&quot;,                 488
+<span class="lineNum">     498 </span>                :            : &quot;xvalue_V_C&quot;,                 489
+<span class="lineNum">     499 </span>                :            : &quot;yvalue_V_D&quot;,                 490
+<span class="lineNum">     500 </span>                :            : &quot;yvalue_V_C&quot;,                 491
+<span class="lineNum">     501 </span>                :            : &quot;range_D_D&quot;,          492
+<span class="lineNum">     502 </span>                :            : &quot;range_CHR_D&quot;,                493
+<span class="lineNum">     503 </span>                :            : &quot;range_D_CHR&quot;,                494
+<span class="lineNum">     504 </span>                :            : &quot;range_CHR_CHR&quot;,      495
+<span class="lineNum">     505 </span>                :            : &quot;ceil_D&quot;,             496
+<span class="lineNum">     506 </span>                :            : &quot;ceil_C&quot;,             497
+<span class="lineNum">     507 </span>                :            : &quot;ceil_V&quot;,             498
+<span class="lineNum">     508 </span>                :            : &quot;fix_D&quot;,              499
+<span class="lineNum">     509 </span>                :            : &quot;fix_C&quot;,              500
+<span class="lineNum">     510 </span>                :            : &quot;fix_V&quot;,              501
+<span class="lineNum">     511 </span>                :            : &quot;step_D&quot;,             502
+<span class="lineNum">     512 </span>                :            : &quot;step_C&quot;,             503
+<span class="lineNum">     513 </span>                :            : &quot;step_V&quot;,             504
+<span class="lineNum">     514 </span>                :            : &quot;floor_D&quot;,            505
+<span class="lineNum">     515 </span>                :            : &quot;floor_C&quot;,            506
+<span class="lineNum">     516 </span>                :            : &quot;floor_V&quot;,            507
+<span class="lineNum">     517 </span>                :            : &quot;round_D&quot;,            508
+<span class="lineNum">     518 </span>                :            : &quot;round_C&quot;,            509
+<span class="lineNum">     519 </span>                :            : &quot;round_V&quot;,            510
+<span class="lineNum">     520 </span>                :            : &quot;erf_D&quot;,              511
+<span class="lineNum">     521 </span>                :            : &quot;erf_C&quot;,              512
+<span class="lineNum">     522 </span>                :            : &quot;erf_V&quot;,              513
+<span class="lineNum">     523 </span>                :            : &quot;erfc_D&quot;,             514
+<span class="lineNum">     524 </span>                :            : &quot;erfc_C&quot;,             515
+<span class="lineNum">     525 </span>                :            : &quot;erfc_V&quot;,             516
+<span class="lineNum">     526 </span>                :            : &quot;erfinv_D&quot;,           517
+<span class="lineNum">     527 </span>                :            : &quot;erfinv_C&quot;,           518
+<span class="lineNum">     528 </span>                :            : &quot;erfinv_V&quot;,           519
+<span class="lineNum">     529 </span>                :            : &quot;erfcinv_D&quot;,          520
+<span class="lineNum">     530 </span>                :            : &quot;erfcinv_C&quot;,          521
+<span class="lineNum">     531 </span>                :            : &quot;erfcinv_V&quot;,          522
+<span class="lineNum">     532 </span>                :            : &quot;cumsum_D&quot;,           523
+<span class="lineNum">     533 </span>                :            : &quot;cumsum_C&quot;,           524
+<span class="lineNum">     534 </span>                :            : &quot;cumsum_V&quot;,           525
+<span class="lineNum">     535 </span>                :            : &quot;cumavg_D&quot;,           526
+<span class="lineNum">     536 </span>                :            : &quot;cumavg_C&quot;,           527
+<span class="lineNum">     537 </span>                :            : &quot;cumavg_V&quot;,           528
+<span class="lineNum">     538 </span>                :            : &quot;cumprod_D&quot;,          529
+<span class="lineNum">     539 </span>                :            : &quot;cumprod_C&quot;,          530
+<span class="lineNum">     540 </span>                :            : &quot;cumprod_V&quot;,          531
+<span class="lineNum">     541 </span>                :            : &quot;rms_D&quot;,              532
+<span class="lineNum">     542 </span>                :            : &quot;rms_C&quot;,              533
+<span class="lineNum">     543 </span>                :            : &quot;rms_V&quot;,              534
+<span class="lineNum">     544 </span>                :            : &quot;variance_D&quot;,                 535
+<span class="lineNum">     545 </span>                :            : &quot;variance_C&quot;,                 536
+<span class="lineNum">     546 </span>                :            : &quot;variance_V&quot;,                 537
+<span class="lineNum">     547 </span>                :            : &quot;stddev_D&quot;,           538
+<span class="lineNum">     548 </span>                :            : &quot;stddev_C&quot;,           539
+<span class="lineNum">     549 </span>                :            : &quot;stddev_V&quot;,           540
+<span class="lineNum">     550 </span>                :            : &quot;besseli0_D&quot;,                 541
+<span class="lineNum">     551 </span>                :            : &quot;besseli0_C&quot;,                 542
+<span class="lineNum">     552 </span>                :            : &quot;besseli0_V&quot;,                 543
+<span class="lineNum">     553 </span>                :            : &quot;besselj_D_D&quot;,                544
+<span class="lineNum">     554 </span>                :            : &quot;besselj_D_C&quot;,                545
+<span class="lineNum">     555 </span>                :            : &quot;besselj_D_V&quot;,                546
+<span class="lineNum">     556 </span>                :            : &quot;bessely_D_D&quot;,                547
+<span class="lineNum">     557 </span>                :            : &quot;bessely_D_C&quot;,                548
+<span class="lineNum">     558 </span>                :            : &quot;bessely_D_V&quot;,                549
+<span class="lineNum">     559 </span>                :            : &quot;sqr_D&quot;,              550
+<span class="lineNum">     560 </span>                :            : &quot;sqr_C&quot;,              551
+<span class="lineNum">     561 </span>                :            : &quot;sqr_V&quot;,              552
+<span class="lineNum">     562 </span>                :            : &quot;sqr_M&quot;,              553
+<span class="lineNum">     563 </span>                :            : &quot;sqr_MV&quot;,             554
+<span class="lineNum">     564 </span>                :            : &quot;polar_D_D&quot;,          555
+<span class="lineNum">     565 </span>                :            : &quot;polar_D_C&quot;,          556
+<span class="lineNum">     566 </span>                :            : &quot;polar_C_D&quot;,          557
+<span class="lineNum">     567 </span>                :            : &quot;polar_C_C&quot;,          558
+<span class="lineNum">     568 </span>                :            : &quot;polar_D_V&quot;,          559
+<span class="lineNum">     569 </span>                :            : &quot;polar_C_V&quot;,          560
+<span class="lineNum">     570 </span>                :            : &quot;polar_V_D&quot;,          561
+<span class="lineNum">     571 </span>                :            : &quot;polar_V_C&quot;,          562
+<span class="lineNum">     572 </span>                :            : &quot;polar_V_V&quot;,          563
+<span class="lineNum">     573 </span>                :            : &quot;arctan_D_D&quot;,                 564
+<span class="lineNum">     574 </span>                :            : &quot;arctan_D_V&quot;,                 565
+<span class="lineNum">     575 </span>                :            : &quot;arctan_V_D&quot;,                 566
+<span class="lineNum">     576 </span>                :            : &quot;arctan_V_V&quot;,                 567
+<span class="lineNum">     577 </span>                :            : &quot;dbm2w_D&quot;,            568
+<span class="lineNum">     578 </span>                :            : &quot;dbm2w_C&quot;,            569
+<span class="lineNum">     579 </span>                :            : &quot;dbm2w_V&quot;,            570
+<span class="lineNum">     580 </span>                :            : &quot;w2dbm_D&quot;,            571
+<span class="lineNum">     581 </span>                :            : &quot;w2dbm_C&quot;,            572
+<span class="lineNum">     582 </span>                :            : &quot;w2dbm_V&quot;,            573
+<span class="lineNum">     583 </span>                :            : &quot;integrate_D_D&quot;,      574
+<span class="lineNum">     584 </span>                :            : &quot;integrate_C_C&quot;,      575
+<span class="lineNum">     585 </span>                :            : &quot;integrate_V_D&quot;,      576
+<span class="lineNum">     586 </span>                :            : &quot;integrate_V_C&quot;,      577
+<span class="lineNum">     587 </span>                :            : &quot;dbm_D&quot;,              578
+<span class="lineNum">     588 </span>                :            : &quot;dbm_D_D&quot;,            579
+<span class="lineNum">     589 </span>                :            : &quot;dbm_C&quot;,              580
+<span class="lineNum">     590 </span>                :            : &quot;dbm_C_D&quot;,            581
+<span class="lineNum">     591 </span>                :            : &quot;dbm_V&quot;,              582
+<span class="lineNum">     592 </span>                :            : &quot;dbm_V_D&quot;,            583
+<span class="lineNum">     593 </span>                :            : &quot;dbm_D_C&quot;,            584
+<span class="lineNum">     594 </span>                :            : &quot;dbm_C_C&quot;,            585
+<span class="lineNum">     595 </span>                :            : &quot;dbm_V_C&quot;,            586
+<span class="lineNum">     596 </span>                :            : &quot;runavg_D_D&quot;,                 587
+<span class="lineNum">     597 </span>                :            : &quot;runavg_C_D&quot;,                 588
+<span class="lineNum">     598 </span>                :            : &quot;runavg_V_D&quot;,                 589
+<span class="lineNum">     599 </span>                :            : &quot;vt_D&quot;,               590
+<span class="lineNum">     600 </span>                :            : &quot;vt_C&quot;,               591
+<span class="lineNum">     601 </span>                :            : &quot;vt_V&quot;,               592
+<span class="lineNum">     602 </span>                :            : &quot;kbd_D_D&quot;,            593
+<span class="lineNum">     603 </span>                :            : &quot;kbd_D&quot;,              594
+<span class="lineNum">     604 </span>                :            : &quot;?:_B_B_B&quot;,           595
+<span class="lineNum">     605 </span>                :            : &quot;?:_B_D_D&quot;,           596
+<span class="lineNum">     606 </span>                :            : &quot;?:_B_D_B&quot;,           597
+<span class="lineNum">     607 </span>                :            : &quot;?:_B_B_D&quot;,           598
+<span class="lineNum">     608 </span>                :            : &quot;?:_B_D_C&quot;,           599
+<span class="lineNum">     609 </span>                :            : &quot;?:_B_B_C&quot;,           600
+<span class="lineNum">     610 </span>                :            : &quot;?:_B_C_D&quot;,           601
+<span class="lineNum">     611 </span>                :            : &quot;?:_B_C_B&quot;,           602
+<span class="lineNum">     612 </span>                :            : &quot;?:_B_C_C&quot;,           603
+<span class="lineNum">     613 </span>                :            : &quot;?:_B_M_M&quot;,           604
+<span class="lineNum">     614 </span>                :            : &quot;?:_B_B_M&quot;,           605
+<span class="lineNum">     615 </span>                :            : &quot;?:_B_D_M&quot;,           606
+<span class="lineNum">     616 </span>                :            : &quot;?:_B_C_M&quot;,           607
+<span class="lineNum">     617 </span>                :            : &quot;?:_B_M_B&quot;,           608
+<span class="lineNum">     618 </span>                :            : &quot;?:_B_M_D&quot;,           609
+<span class="lineNum">     619 </span>                :            : &quot;?:_B_M_C&quot;,           610
+<span class="lineNum">     620 </span>                :            : &quot;?:_B_V_V&quot;,           611
+<span class="lineNum">     621 </span>                :            : &quot;?:_B_B_V&quot;,           612
+<span class="lineNum">     622 </span>                :            : &quot;?:_B_D_V&quot;,           613
+<span class="lineNum">     623 </span>                :            : &quot;?:_B_C_V&quot;,           614
+<span class="lineNum">     624 </span>                :            : &quot;?:_B_V_B&quot;,           615
+<span class="lineNum">     625 </span>                :            : &quot;?:_B_V_D&quot;,           616
+<span class="lineNum">     626 </span>                :            : &quot;?:_B_V_C&quot;,           617
+<span class="lineNum">     627 </span>                :            : &quot;?:_V_V_V&quot;,           618
+<span class="lineNum">     628 </span>                :            : &quot;?:_V_B_V&quot;,           619
+<span class="lineNum">     629 </span>                :            : &quot;?:_V_D_V&quot;,           620
+<span class="lineNum">     630 </span>                :            : &quot;?:_V_C_V&quot;,           621
+<span class="lineNum">     631 </span>                :            : &quot;?:_V_B_B&quot;,           622
+<span class="lineNum">     632 </span>                :            : &quot;?:_V_D_B&quot;,           623
+<span class="lineNum">     633 </span>                :            : &quot;?:_V_C_B&quot;,           624
+<span class="lineNum">     634 </span>                :            : &quot;?:_V_V_B&quot;,           625
+<span class="lineNum">     635 </span>                :            : &quot;?:_V_B_D&quot;,           626
+<span class="lineNum">     636 </span>                :            : &quot;?:_V_D_D&quot;,           627
+<span class="lineNum">     637 </span>                :            : &quot;?:_V_C_D&quot;,           628
+<span class="lineNum">     638 </span>                :            : &quot;?:_V_V_D&quot;,           629
+<span class="lineNum">     639 </span>                :            : &quot;?:_V_B_C&quot;,           630
+<span class="lineNum">     640 </span>                :            : &quot;?:_V_D_C&quot;,           631
+<span class="lineNum">     641 </span>                :            : &quot;?:_V_C_C&quot;,           632
+<span class="lineNum">     642 </span>                :            : &quot;?:_V_V_C&quot;,           633
+<span class="lineNum">     643 </span>                :            : &quot;&lt;=_D_D&quot;,          634
+<span class="lineNum">     644 </span>                :            : &quot;&lt;=_D_C&quot;,          635
+<span class="lineNum">     645 </span>                :            : &quot;&lt;=_D_V&quot;,          636
+<span class="lineNum">     646 </span>                :            : &quot;&lt;=_C_D&quot;,          637
+<span class="lineNum">     647 </span>                :            : &quot;&lt;=_C_C&quot;,          638
+<span class="lineNum">     648 </span>                :            : &quot;&lt;=_C_V&quot;,          639
+<span class="lineNum">     649 </span>                :            : &quot;&lt;=_V_D&quot;,          640
+<span class="lineNum">     650 </span>                :            : &quot;&lt;=_V_C&quot;,          641
+<span class="lineNum">     651 </span>                :            : &quot;&lt;=_V_V&quot;,          642
+<span class="lineNum">     652 </span>                :            : &quot;&gt;=_D_D&quot;,          643
+<span class="lineNum">     653 </span>                :            : &quot;&gt;=_D_C&quot;,          644
+<span class="lineNum">     654 </span>                :            : &quot;&gt;=_D_V&quot;,          645
+<span class="lineNum">     655 </span>                :            : &quot;&gt;=_C_D&quot;,          646
+<span class="lineNum">     656 </span>                :            : &quot;&gt;=_C_C&quot;,          647
+<span class="lineNum">     657 </span>                :            : &quot;&gt;=_C_V&quot;,          648
+<span class="lineNum">     658 </span>                :            : &quot;&gt;=_V_D&quot;,          649
+<span class="lineNum">     659 </span>                :            : &quot;&gt;=_V_C&quot;,          650
+<span class="lineNum">     660 </span>                :            : &quot;&gt;=_V_V&quot;,          651
+<span class="lineNum">     661 </span>                :            : &quot;&lt;_D_D&quot;,           652
+<span class="lineNum">     662 </span>                :            : &quot;&lt;_D_C&quot;,           653
+<span class="lineNum">     663 </span>                :            : &quot;&lt;_D_V&quot;,           654
+<span class="lineNum">     664 </span>                :            : &quot;&lt;_C_D&quot;,           655
+<span class="lineNum">     665 </span>                :            : &quot;&lt;_C_C&quot;,           656
+<span class="lineNum">     666 </span>                :            : &quot;&lt;_C_V&quot;,           657
+<span class="lineNum">     667 </span>                :            : &quot;&lt;_V_D&quot;,           658
+<span class="lineNum">     668 </span>                :            : &quot;&lt;_V_C&quot;,           659
+<span class="lineNum">     669 </span>                :            : &quot;&lt;_V_V&quot;,           660
+<span class="lineNum">     670 </span>                :            : &quot;&gt;_D_D&quot;,           661
+<span class="lineNum">     671 </span>                :            : &quot;&gt;_D_C&quot;,           662
+<span class="lineNum">     672 </span>                :            : &quot;&gt;_D_V&quot;,           663
+<span class="lineNum">     673 </span>                :            : &quot;&gt;_C_D&quot;,           664
+<span class="lineNum">     674 </span>                :            : &quot;&gt;_C_C&quot;,           665
+<span class="lineNum">     675 </span>                :            : &quot;&gt;_C_V&quot;,           666
+<span class="lineNum">     676 </span>                :            : &quot;&gt;_V_D&quot;,           667
+<span class="lineNum">     677 </span>                :            : &quot;&gt;_V_C&quot;,           668
+<span class="lineNum">     678 </span>                :            : &quot;&gt;_V_V&quot;,           669
+<span class="lineNum">     679 </span>                :            : &quot;==_D_D&quot;,             670
+<span class="lineNum">     680 </span>                :            : &quot;==_D_C&quot;,             671
+<span class="lineNum">     681 </span>                :            : &quot;==_D_V&quot;,             672
+<span class="lineNum">     682 </span>                :            : &quot;==_C_D&quot;,             673
+<span class="lineNum">     683 </span>                :            : &quot;==_C_C&quot;,             674
+<span class="lineNum">     684 </span>                :            : &quot;==_C_V&quot;,             675
+<span class="lineNum">     685 </span>                :            : &quot;==_V_D&quot;,             676
+<span class="lineNum">     686 </span>                :            : &quot;==_V_C&quot;,             677
+<span class="lineNum">     687 </span>                :            : &quot;==_V_V&quot;,             678
+<span class="lineNum">     688 </span>                :            : &quot;!=_D_D&quot;,             679
+<span class="lineNum">     689 </span>                :            : &quot;!=_D_C&quot;,             680
+<span class="lineNum">     690 </span>                :            : &quot;!=_D_V&quot;,             681
+<span class="lineNum">     691 </span>                :            : &quot;!=_C_D&quot;,             682
+<span class="lineNum">     692 </span>                :            : &quot;!=_C_C&quot;,             683
+<span class="lineNum">     693 </span>                :            : &quot;!=_C_V&quot;,             684
+<span class="lineNum">     694 </span>                :            : &quot;!=_V_D&quot;,             685
+<span class="lineNum">     695 </span>                :            : &quot;!=_V_C&quot;,             686
+<span class="lineNum">     696 </span>                :            : &quot;!=_V_V&quot;,             687
+<span class="lineNum">     697 </span>                :            : &quot;!_B&quot;,                688
+<span class="lineNum">     698 </span>                :            : &quot;||_B_B&quot;,             689
+<span class="lineNum">     699 </span>                :            : &quot;&amp;&amp;_B_B&quot;,             690
+<span class="lineNum">     700 </span>                :            : &quot;==_B_B&quot;,             691
+<span class="lineNum">     701 </span>                :            : &quot;!=_B_B&quot;,             692
+<span class="lineNum">     702 </span>                :            : &quot;random&quot;,             693
+<span class="lineNum">     703 </span>                :            : &quot;srandom_D&quot;,          694
+<span class="lineNum">     704 </span>                :            : &quot;vector&quot;,             695
+<span class="lineNum">     705 </span>                :            : &quot;matrix&quot;,             696
+<span class="lineNum">     706 </span>                :            : &quot;assert_B&quot;,           697
+<span class="lineNum">     707 </span>                :            : &quot;assert_D&quot;,           698
+<span class="lineNum">     708 </span>                :            : &quot;assert_V&quot;,           699
+<span class="lineNum">     709 </span>                :            : &quot;bugon_B&quot;,            700
+<span class="lineNum">     710 </span>                :            : &quot;bugon_D&quot;,            701
+<span class="lineNum">     711 </span>                :            : &quot;bugon_V&quot;,            702
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
